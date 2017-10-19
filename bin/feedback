@@ -10,11 +10,8 @@ device_manager = DeviceManager()
 device_manager.sync_effects = True
 
 
-def run(interval):
-	if len(sys.argv) == 1:
-		sys.exit(0)
-
-	response = requests.get('https://api.travis-ci.org/repos/' + sys.argv[1])
+def run(repository, interval):
+	response = requests.get('https://api.travis-ci.org/repos/' + repository)
 
 	# handle response
 
@@ -34,7 +31,14 @@ def run(interval):
 			device.fx.breath_single(255, 0, 0)
 
 	if interval > 0:
-		threading.Timer(interval, run).start()
+		threading.Timer(interval, run, args=[repository, interval]).start()
 
 
-run(sys.argv[2])
+# run as needed
+
+if len(sys.argv) == 2:
+	run(sys.argv[1], 0)
+elif len(sys.argv) == 3:
+	run(sys.argv[1], int(sys.argv[2]))
+else:
+	sys.exit(0)

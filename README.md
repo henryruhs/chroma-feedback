@@ -28,8 +28,6 @@ cd razer-chroma-feedback
 Usage
 -----
 
-Validate a Travis CI user or repository:
-
 ```
 bin/feedback.py {user-or-repository} {interval}
 ```
