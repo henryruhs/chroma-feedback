@@ -9,29 +9,44 @@ from openrazer.client import DeviceManager
 device_manager = DeviceManager()
 device_manager.sync_effects = True
 
-def timer():
-	if len(sys.argv) == 1:
+
+def run(repository, interval):
+	data = requests.get('https://api.travis-ci.org/repos/' + repository).json()
+	status = 'passed'
+
+	# handle data
+
+	if len(data) == 0:
 		sys.exit(0)
+	if type(data) == dict:
+		data = [data]
 
-	response = requests.get('https://api.travis-ci.org/repos/' + sys.argv[1])
+	# process data
 
-	# handle response
-
-	try:
-		data = response.json()
-	except:
-		sys.exit(0)
+	for item in data:
+		if item['last_build_status'] == 1:
+			print('Build of {} failed'.format(item['slug']))
+			status = 'failed'
 
 	# process device
 
 	for device in device_manager.devices:
-		if data['last_build_status'] == 0:
-			print("Setting {} to build passed".format(device.name))
+		if status == 'passed':
+			print('Setting {} to build passed'.format(device.name))
 			device.fx.static(0, 255, 0)
-		elif data['last_build_status'] == 1:
-			print("Setting {} to build failed".format(device.name))
+		elif status == 'failed':
+			print('Setting {} to build failed'.format(device.name))
 			device.fx.breath_single(255, 0, 0)
 
-	threading.Timer(60, timer).start()
+	if interval > 0:
+		threading.Timer(interval, run, args=[repository, interval]).start()
 
-timer()
+
+# run as needed
+
+if len(sys.argv) == 2:
+	run(sys.argv[1], 0)
+elif len(sys.argv) == 3:
+	run(sys.argv[1], int(sys.argv[2]))
+else:
+	sys.exit(0)

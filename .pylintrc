@@ -1,6 +1,6 @@
 [GENERAL]
 
-disable=bare-except,import-error,invalid-name,missing-docstring,superfluous-parens
+disable=bare-except,import-error,invalid-name,len-as-condition,missing-docstring,superfluous-parens,unidiomatic-typecheck
 
 [FORMAT]
 
