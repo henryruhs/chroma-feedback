@@ -28,20 +28,24 @@ cd razer-chroma-feedback
 Usage
 -----
 
-Pass your Travis CI repository `id` or `slug`:
+Validate a Travis CI user or repository:
 
 ```
-bin/feedback.py {repository.id}
-```
-
-```
-bin/feedback.py {repository.slug}
+bin/feedback.py {user-or-repository} {interval}
 ```
 
 
 Examples
 --------
 
+Validate each repositories of `redaxmedia` one time:
+
 ```
-bin/feedback redaxmedia/razer-chroma-feedback
+bin/feedback redaxmedia
+```
+
+Validate the `razer-chroma-feedback` repository of `redaxmedia` every minute:
+
+```
+bin/feedback redaxmedia/razer-chroma-feedback 60
 ```

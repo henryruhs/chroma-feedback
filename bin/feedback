@@ -9,7 +9,8 @@ from openrazer.client import DeviceManager
 device_manager = DeviceManager()
 device_manager.sync_effects = True
 
-def timer():
+
+def run(interval):
 	if len(sys.argv) == 1:
 		sys.exit(0)
 
@@ -32,6 +33,8 @@ def timer():
 			print("Setting {} to build failed".format(device.name))
 			device.fx.breath_single(255, 0, 0)
 
-	threading.Timer(60, timer).start()
+	if interval > 0:
+		threading.Timer(interval, run).start()
 
-timer()
+
+run(sys.argv[2])
