@@ -11,15 +11,8 @@ device_manager.sync_effects = True
 
 
 def run(repository, interval):
-	response = requests.get('https://api.travis-ci.org/repos/' + repository)
+	data = requests.get('https://api.travis-ci.org/repos/' + repository).json()
 	status = 'passed'
-
-	# parse response
-
-	try:
-		data = response.json()
-	except:
-		sys.exit(0)
 
 	# handle data
 
@@ -32,7 +25,7 @@ def run(repository, interval):
 
 	for item in data:
 		if item['last_build_status'] == 1:
-			print("Build of {} failed".format(item['slug']))
+			print('Build of {} failed'.format(item['slug']))
 			status = 'failed'
 
 	# process device
