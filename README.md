@@ -1,7 +1,7 @@
 Razer Chroma Feedback
 =====================
 
-> Continuous Integration feedback for Razer Chroma devices
+> Continuous Integration feedback for Razer Chroma devices.
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/razer-chroma-feedback.svg)](https://travis-ci.org/redaxmedia/razer-chroma-feedback)
 
@@ -35,4 +35,3 @@ Examples
 ```
 bin/feedback redaxmedia/razer-chroma-feedback
 ```
-
