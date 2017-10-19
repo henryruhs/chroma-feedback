@@ -29,7 +29,7 @@ Usage
 -----
 
 ```
-bin/feedback.py {user-or-repository} {interval}
+bin/feedback.py [repository] [interval]
 ```
 
 
