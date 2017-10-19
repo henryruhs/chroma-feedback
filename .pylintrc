@@ -1,0 +1,7 @@
+[GENERAL]
+
+disable=bare-except,import-error,invalid-name,missing-docstring,superfluous-parens
+
+[FORMAT]
+
+indent-string='\t'

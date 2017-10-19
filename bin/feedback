@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+import sys
+import threading
+import requests
+
+from openrazer.client import DeviceManager
+
+device_manager = DeviceManager()
+device_manager.sync_effects = True
+
+def timer():
+	if len(sys.argv) == 1:
+		sys.exit(0)
+
+	response = requests.get('https://api.travis-ci.org/repos/' + sys.argv[1])
+
+	# handle response
+
+	try:
+		data = response.json()
+	except:
+		sys.exit(0)
+
+	# process device
+
+	for device in device_manager.devices:
+		if data['last_build_status'] == 0:
+			print("Setting {} to build passed".format(device.name))
+			device.fx.static(0, 255, 0)
+		elif data['last_build_status'] == 1:
+			print("Setting {} to build failed".format(device.name))
+			device.fx.breath_single(255, 0, 0)
+
+	threading.Timer(60, timer).start()
+
+timer()
