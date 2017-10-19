@@ -9,11 +9,15 @@ Razer Chroma Feedback
 Installation
 ------------
 
+Install the Open Razer driver:
+
 ```
 add-apt-repository ppa:openrazer/stable
 apt update
 apt install openrazer-meta
 ```
+
+Clone the repository:
 
 ```
 git clone https://github.com/redaxmedia/razer-chroma-feedback.git
@@ -24,8 +28,10 @@ cd razer-chroma-feedback
 Usage
 -----
 
+Pass your Travis CI ower and repository:
+
 ```
-bin/feedback.py {travis-repository}
+bin/feedback.py :owner/:repository
 ```
 
 
