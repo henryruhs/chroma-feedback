@@ -28,10 +28,14 @@ cd razer-chroma-feedback
 Usage
 -----
 
-Pass your Travis CI owner and repository:
+Pass your Travis CI repository `id` or `slug`:
 
 ```
-bin/feedback.py :owner/:repository
+bin/feedback.py {repository.id}
+```
+
+```
+bin/feedback.py {repository.slug}
 ```
 
 
