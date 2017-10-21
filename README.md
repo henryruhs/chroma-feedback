@@ -11,11 +11,12 @@ Installation
 
 Install the Open Razer driver:
 
-```
-add-apt-repository ppa:openrazer/stable
-apt update
-apt install openrazer-meta
-```
+* [Ubuntu / Linux Mint](https://openrazer.github.io/#ubuntu)
+* [Debian](https://openrazer.github.io/#debian)
+* [Arch Linux](https://openrazer.github.io/#arch)
+* [Fedora](https://openrazer.github.io/#fedora)
+* [openSUSE](https://openrazer.github.io/#opensuse)
+* [Gentoo](https://openrazer.github.io/#gentoo)
 
 Clone the repository:
 
