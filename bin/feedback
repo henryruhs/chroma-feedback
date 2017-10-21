@@ -35,15 +35,12 @@ def run(repository, interval):
 	# process device
 
 	for device in device_manager.devices:
-		if status == 'passed':
+		if status == 'passed' and device.fx.static(0, 255, 0):
 			print('Setting {} to build passed'.format(device.name))
-			device.fx.static(0, 255, 0)
-		if status == 'errored':
+		if status == 'errored' and device.fx.static(255, 255, 255):
 			print('Setting {} to build errored'.format(device.name))
-			device.fx.static(255, 255, 255)
-		if status == 'failed':
+		if status == 'failed' and device.fx.breath_single(255, 0, 0):
 			print('Setting {} to build failed'.format(device.name))
-			device.fx.breath_single(255, 0, 0)
 
 	if interval > 0:
 		threading.Timer(interval, run, args=[repository, interval]).start()
