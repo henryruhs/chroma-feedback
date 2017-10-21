@@ -36,10 +36,10 @@ bin/feedback.py [repository] [interval]
 Examples
 --------
 
-Validate each repositories of `redaxmedia` every minute as background process:
+Validate each repositories of `redaxmedia` every minute:
 
 ```
-nohup bin/feedback redaxmedia 60
+bin/feedback redaxmedia 60
 ```
 
 Validate the `razer-chroma-feedback` repository of `redaxmedia` one time:

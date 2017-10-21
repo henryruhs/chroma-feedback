@@ -17,16 +17,20 @@ def run(repository, interval):
 	# handle data
 
 	if len(data) == 0:
-		sys.exit(0)
+		sys.exit(1)
 	if type(data) == dict:
 		data = [data]
 
 	# process data
 
 	for item in data:
-		if item['last_build_status'] == 1:
-			print('Build of {} failed'.format(item['slug']))
-			status = 'failed'
+		if item['active'] is True:
+			if item['last_build_status'] is None:
+				print('Build of {} errored'.format(item['slug']))
+				status = 'errored'
+			if item['last_build_status'] == 1:
+				print('Build of {} failed'.format(item['slug']))
+				status = 'failed'
 
 	# process device
 
@@ -34,7 +38,10 @@ def run(repository, interval):
 		if status == 'passed':
 			print('Setting {} to build passed'.format(device.name))
 			device.fx.static(0, 255, 0)
-		elif status == 'failed':
+		if status == 'errored':
+			print('Setting {} to build errored'.format(device.name))
+			device.fx.static(255, 255, 255)
+		if status == 'failed':
 			print('Setting {} to build failed'.format(device.name))
 			device.fx.breath_single(255, 0, 0)
 
@@ -49,4 +56,4 @@ if len(sys.argv) == 2:
 elif len(sys.argv) == 3:
 	run(sys.argv[1], int(sys.argv[2]))
 else:
-	sys.exit(0)
+	sys.exit(1)
