@@ -26,8 +26,8 @@ def run(repository, interval):
 	for item in data:
 		if item['active'] is True:
 			if item['last_build_status'] is None:
-				print('Build of {} errored'.format(item['slug']))
-				status = 'errored'
+				print('Build of {} in process'.format(item['slug']))
+				status = 'process'
 			if item['last_build_status'] == 1:
 				print('Build of {} failed'.format(item['slug']))
 				status = 'failed'
@@ -35,15 +35,12 @@ def run(repository, interval):
 	# process device
 
 	for device in device_manager.devices:
-		if status == 'passed':
+		if status == 'passed' and device.fx.static(0, 255, 0):
 			print('Setting {} to build passed'.format(device.name))
-			device.fx.static(0, 255, 0)
-		if status == 'errored':
-			print('Setting {} to build errored'.format(device.name))
-			device.fx.static(255, 255, 255)
-		if status == 'failed':
+		if status == 'process' and device.fx.static(255, 255, 255):
+			print('Setting {} to build in process'.format(device.name))
+		if status == 'failed' and device.fx.breath_single(255, 0, 0):
 			print('Setting {} to build failed'.format(device.name))
-			device.fx.breath_single(255, 0, 0)
 
 	if interval > 0:
 		threading.Timer(interval, run, args=[repository, interval]).start()
