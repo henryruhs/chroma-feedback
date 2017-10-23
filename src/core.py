@@ -1,7 +1,7 @@
+from __future__ import print_function
 import sys
 import threading
 import requests
-
 from openrazer.client import DeviceManager
 
 device_manager = DeviceManager()
