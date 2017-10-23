@@ -47,12 +47,10 @@ def run(repository, interval):
 def static(device, rgb):
 	if device.fx.has('logo') and device.fx.has('scroll'):
 		return device.fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
-	else:
-		return device.fx.static(rgb[0], rgb[1], rgb[2])
+	return device.fx.static(rgb[0], rgb[1], rgb[2])
 
 
 def pulsate(device, rgb):
 	if device.fx.has('logo') and device.fx.has('scroll'):
 		return device.fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
-	else:
-		return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
+	return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
