@@ -37,7 +37,7 @@ def run(repository, interval):
 			print('Setting {} to build passed'.format(device.name))
 		if status == 'process' and static(device, [255, 255, 255]):
 			print('Setting {} to build in process'.format(device.name))
-		if status == 'failed' and breath_single(device, [255, 0, 0]):
+		if status == 'failed' and pulsate(device, [255, 0, 0]):
 			print('Setting {} to build failed'.format(device.name))
 
 	if interval > 0:
@@ -51,8 +51,8 @@ def static(device, rgb):
 		return device.fx.static(rgb[0], rgb[1], rgb[2])
 
 
-def breath_single(device, rgb):
+def pulsate(device, rgb):
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.breath_single(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.breath_single(rgb[0], rgb[1], rgb[2])
+		return device.fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
 	else:
 		return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
