@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 import sys
-from ..src.core import run
+sys.path.append('./src')
+from core import run
 
 # run as needed
 

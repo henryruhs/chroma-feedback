@@ -45,14 +45,14 @@ def run(repository, interval):
 
 
 def static(device, rgb):
-	if device.fx.has('logo_static') and device.fx.has('scroll_static'):
-		return device.fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll.static(rgb[0], rgb[1], rgb[2])
+	if device.fx.has('logo') and device.fx.has('scroll'):
+		return device.fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
 	else:
 		return device.fx.static(rgb[0], rgb[1], rgb[2])
 
 
 def breath_single(device, rgb):
-	if device.fx.has('logo_breath_single') and device.fx.has('scroll_breath_single'):
-		return device.fx.misc.logo.breath_single(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll.breath_single(rgb[0], rgb[1], rgb[2])
+	if device.fx.has('logo') and device.fx.has('scroll'):
+		return device.fx.misc.logo.breath_single(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.breath_single(rgb[0], rgb[1], rgb[2])
 	else:
 		return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
