@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
-
+from __future__ import print_function
 import sys
 import threading
 import requests
-
 from openrazer.client import DeviceManager
 
 device_manager = DeviceManager()
@@ -35,22 +33,24 @@ def run(repository, interval):
 	# process device
 
 	for device in device_manager.devices:
-		if status == 'passed' and device.fx.static(0, 255, 0):
+		if status == 'passed' and static(device, [0, 255, 0]):
 			print('Setting {} to build passed'.format(device.name))
-		if status == 'process' and device.fx.static(255, 255, 255):
+		if status == 'process' and static(device, [255, 255, 255]):
 			print('Setting {} to build in process'.format(device.name))
-		if status == 'failed' and device.fx.breath_single(255, 0, 0):
+		if status == 'failed' and pulsate(device, [255, 0, 0]):
 			print('Setting {} to build failed'.format(device.name))
 
 	if interval > 0:
 		threading.Timer(interval, run, args=[repository, interval]).start()
 
 
-# run as needed
+def static(device, rgb):
+	if device.fx.has('logo') and device.fx.has('scroll'):
+		return device.fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
+	return device.fx.static(rgb[0], rgb[1], rgb[2])
 
-if len(sys.argv) == 2:
-	run(sys.argv[1], 0)
-elif len(sys.argv) == 3:
-	run(sys.argv[1], int(sys.argv[2]))
-else:
-	sys.exit(1)
+
+def pulsate(device, rgb):
+	if device.fx.has('logo') and device.fx.has('scroll'):
+		return device.fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
+	return device.fx.breath_single(rgb[0], rgb[1], rgb[2])

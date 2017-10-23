@@ -9,4 +9,4 @@ install:
 - pip install pylint
 
 script:
-- pylint bin/feedback
+- pylint feedback src

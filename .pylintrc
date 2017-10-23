@@ -1,7 +1,7 @@
 [GENERAL]
 
-disable=bare-except,import-error,invalid-name,len-as-condition,missing-docstring,superfluous-parens,unidiomatic-typecheck
+disable = import-error, invalid-name, len-as-condition, line-too-long, missing-docstring, unidiomatic-typecheck
 
 [FORMAT]
 
-indent-string='\t'
+indent-string = '\t'
