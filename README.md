@@ -1,7 +1,7 @@
 Razer Chroma Feedback
 =====================
 
-> Continuous Integration feedback for Razer Chroma devices.
+> Turn your Razer keyboard, mouse or headphone into a extreme feedback device for Travis CI.
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/razer-chroma-feedback.svg)](https://travis-ci.org/redaxmedia/razer-chroma-feedback)
 

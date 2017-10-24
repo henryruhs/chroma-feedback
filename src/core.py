@@ -35,7 +35,7 @@ def run(repository, interval):
 	for device in device_manager.devices:
 		if status == 'passed' and static(device, [0, 255, 0]):
 			print('Setting {} to build passed'.format(device.name))
-		if status == 'process' and static(device, [255, 255, 255]):
+		if status == 'process' and static(device, [255, 255, 0]):
 			print('Setting {} to build in process'.format(device.name))
 		if status == 'failed' and pulsate(device, [255, 0, 0]):
 			print('Setting {} to build failed'.format(device.name))
