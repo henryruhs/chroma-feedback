@@ -1,7 +1,6 @@
 from __future__ import print_function
 import sys
 import os
-import signal
 import threading
 import requests
 from openrazer.client import DeviceManager
@@ -43,7 +42,6 @@ def run(repository, interval):
 			print('Setting {} to build failed'.format(device.name))
 
 	if interval > 0:
-		signal.signal(signal.SIGINT, goodbye)
 		threading.Timer(interval, run, args=[repository, interval]).start()
 
 

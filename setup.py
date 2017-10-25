@@ -7,7 +7,7 @@ setup(
 	name = 'chroma-feedback',
 	description = 'Turn your Razer keyboard, mouse or headphone into a extreme feedback device for Travis CI',
 	long_description = convert('README.md', 'rst'),
-	version = '1.0.1',
+	version = '1.0.2',
 	license = 'GPL-3.0',
 	url = 'https://github.com/redaxmedia/chroma-feedback',
 	author = 'Henry Ruhs',
