@@ -1,5 +1,5 @@
-Razer Chroma Feedback
-=====================
+Chroma Feedback
+===============
 
 > Turn your Razer keyboard, mouse or headphone into a extreme feedback device for Travis CI.
 
@@ -18,11 +18,10 @@ Install the Open Razer driver:
 * [openSUSE](https://openrazer.github.io/#opensuse)
 * [Gentoo](https://openrazer.github.io/#gentoo)
 
-Clone the repository:
+Install the Razer Chroma Feedback:
 
 ```
-git clone https://github.com/redaxmedia/razer-chroma-feedback.git
-cd razer-chroma-feedback
+pip install razer-chroma-feedback
 ```
 
 
@@ -30,7 +29,7 @@ Usage
 -----
 
 ```
-./feedback.py [repository] [interval]
+razer-chroma-feedback [repository] [interval]
 ```
 
 
@@ -40,11 +39,11 @@ Examples
 Validate each repositories of `redaxmedia` every minute:
 
 ```
-./feedback redaxmedia 60
+razer-chroma-feedback redaxmedia 60
 ```
 
 Validate the `razer-chroma-feedback` repository of `redaxmedia` one time:
 
 ```
-./feedback redaxmedia/razer-chroma-feedback
+razer-chroma-feedback redaxmedia/razer-chroma-feedback
 ```

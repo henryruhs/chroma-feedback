@@ -9,4 +9,4 @@ install:
 - pip install pylint
 
 script:
-- pylint feedback src
+- pylint bin/razer-chroma-feedback src
