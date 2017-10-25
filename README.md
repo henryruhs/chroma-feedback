@@ -18,10 +18,20 @@ Install the OpenRazer driver:
 * [openSUSE](https://openrazer.github.io/#opensuse)
 * [Gentoo](https://openrazer.github.io/#gentoo)
 
-Install the Chroma Feedback:
+Install the Chroma Feedback with PyPI:
 
 ```
 pip install chroma-feedback
+```
+
+Build and install the Chroma Feedback using the `setup.py` file:
+
+```
+./setup.py build
+```
+
+```
+./setup.py install
 ```
 
 
