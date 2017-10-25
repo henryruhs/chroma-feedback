@@ -16,7 +16,7 @@ def run(repository, interval):
 
 	if len(data) == 0:
 		sys.exit(1)
-	if type(data) == dict:
+	if isinstance(data, dict):
 		data = [data]
 
 	# process data

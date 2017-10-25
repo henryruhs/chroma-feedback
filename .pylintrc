@@ -1,7 +1,7 @@
-[GENERAL]
+[disable]
 
-disable = import-error, invalid-name, len-as-condition, line-too-long, missing-docstring, unidiomatic-typecheck
+disable = import-error, invalid-name, len-as-condition, line-too-long, missing-docstring
 
-[FORMAT]
+[format]
 
 indent-string = '\t'
