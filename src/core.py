@@ -1,5 +1,7 @@
 from __future__ import print_function
 import sys
+import os
+import signal
 import threading
 import requests
 from openrazer.client import DeviceManager
@@ -41,6 +43,7 @@ def run(repository, interval):
 			print('Setting {} to build failed'.format(device.name))
 
 	if interval > 0:
+		signal.signal(signal.SIGINT, goodbye)
 		threading.Timer(interval, run, args=[repository, interval]).start()
 
 
@@ -54,3 +57,8 @@ def pulsate(device, rgb):
 	if device.fx.has('logo') and device.fx.has('scroll'):
 		return device.fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
 	return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
+
+
+def goodbye(number, frame):
+	print('\rGoodbye!')
+	os._exit(0)
