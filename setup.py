@@ -22,6 +22,10 @@ setup(
 	[
 		'src'
 	],
+	install_requires =
+	[
+		'pypandoc'
+	],
 	scripts =
 	[
 		'bin/chroma-feedback'
