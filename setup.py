@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 
 from setuptools import setup
-from pypandoc import convert
+
+try:
+	from pypandoc import convert
+	long_description = convert('README.md', 'rst')
+except ImportError:
+	long_description = open('README.md').read()
 
 setup(
 	name = 'chroma-feedback',
 	description = 'Turn your Razer keyboard, mouse or headphone into a extreme feedback device for Travis CI',
-	long_description = convert('README.md', 'rst'),
-	version = '1.0.2',
+	long_description = long_description,
+	version = '1.0.3',
 	license = 'GPL-3.0',
 	url = 'https://github.com/redaxmedia/chroma-feedback',
 	author = 'Henry Ruhs',
@@ -21,10 +26,6 @@ setup(
 	packages =
 	[
 		'src'
-	],
-	install_requires =
-	[
-		'pypandoc'
 	],
 	scripts =
 	[
