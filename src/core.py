@@ -3,12 +3,16 @@ import sys
 import os
 import threading
 import requests
+import src.color as color
 import src.wording as wording
 from openrazer.client import DeviceManager, DaemonNotFound
+
+device_manager = None
 
 
 def init():
 	try:
+		global device_manager
 		device_manager = DeviceManager()
 		device_manager.sync_effects = True
 	except DaemonNotFound:
@@ -32,19 +36,22 @@ def run(repository, interval):
 	for item in data:
 		if item['active'] is True:
 			if item['last_build_status'] is None:
-				print(wording.get('build_process').format(item['slug']))
+				print(wording.get('point') + ' ' + color.get('process') + wording.get('build_process').format(item['slug']) + color.get('end'))
 				status = 'process'
+			if item['last_build_status'] == 0:
+				print(wording.get('tick') + ' ' + color.get('passed') + wording.get('build_passed').format(item['slug']) + color.get('end'))
+				status = 'failed'
 			if item['last_build_status'] == 1:
-				print(wording.get('build_failed').format(item['slug']))
+				print(wording.get('cross') + ' ' + color.get('failed') + wording.get('build_failed').format(item['slug']) + color.get('end'))
 				status = 'failed'
 
 	# process device
 
 	for device in device_manager.devices:
-		if status == 'passed' and static(device, [0, 255, 0]):
-			print(wording.get('setting_passed').format(device.name))
 		if status == 'process' and static(device, [255, 255, 0]):
 			print(wording.get('setting_process').format(device.name))
+		if status == 'passed' and static(device, [0, 255, 0]):
+			print(wording.get('setting_passed').format(device.name))
 		if status == 'failed' and pulsate(device, [255, 0, 0]):
 			print(wording.get('setting_failed').format(device.name))
 

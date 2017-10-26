@@ -1,12 +1,15 @@
-wording =\
+wordingArray =\
 {
 				'daemon_no': 'Daemon not found',
+				'build_passed': 'Build of {} passed',
 				'build_process': 'Build of {} in process',
 				'build_failed': 'Build of {} failed',
 				'setting_passed': 'Setting {} to build passed',
 				'setting_process': 'Setting {} to build in process',
 				'setting_failed': 'Setting {} to build failed',
 				'goodbye': 'Goodbye',
+				'tick': u'\u2713',
+				'cross': u'\u2715',
 				'point': '.',
 				'comma': ',',
 				'colon': ':',
@@ -16,4 +19,4 @@ wording =\
 
 
 def get(key):
-	return wording[key]
+	return wordingArray[key]
