@@ -3,10 +3,17 @@ import sys
 import os
 import threading
 import requests
-from openrazer.client import DeviceManager
+import src.wording as wording
+from openrazer.client import DeviceManager, DaemonNotFound
 
-device_manager = DeviceManager()
-device_manager.sync_effects = True
+
+def init():
+	try:
+		device_manager = DeviceManager()
+		device_manager.sync_effects = True
+	except DaemonNotFound:
+		print(wording.get('daemon_no') + wording.get('exclamation_mark'))
+		exit(1)
 
 
 def run(repository, interval):
@@ -25,21 +32,21 @@ def run(repository, interval):
 	for item in data:
 		if item['active'] is True:
 			if item['last_build_status'] is None:
-				print('Build of {} in process'.format(item['slug']))
+				print(wording.get('build_process').format(item['slug']))
 				status = 'process'
 			if item['last_build_status'] == 1:
-				print('Build of {} failed'.format(item['slug']))
+				print(wording.get('build_failed').format(item['slug']))
 				status = 'failed'
 
 	# process device
 
 	for device in device_manager.devices:
 		if status == 'passed' and static(device, [0, 255, 0]):
-			print('Setting {} to build passed'.format(device.name))
+			print(wording.get('setting_passed').format(device.name))
 		if status == 'process' and static(device, [255, 255, 0]):
-			print('Setting {} to build in process'.format(device.name))
+			print(wording.get('setting_process').format(device.name))
 		if status == 'failed' and pulsate(device, [255, 0, 0]):
-			print('Setting {} to build failed'.format(device.name))
+			print(wording.get('setting_failed').format(device.name))
 
 	if interval > 0:
 		threading.Timer(interval, run, args=[repository, interval]).start()
@@ -57,6 +64,6 @@ def pulsate(device, rgb):
 	return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
 
 
-def goodbye(number, frame):
-	print('\rGoodbye!')
+def destroy(number, frame):
+	print('\r' + wording.get('goodbye') + wording.get('exclamation_mark'))
 	os._exit(0)
