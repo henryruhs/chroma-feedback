@@ -7,17 +7,12 @@ import src.color as color
 import src.wording as wording
 from openrazer.client import DeviceManager, DaemonNotFound
 
-device_manager = None
-
-
-def init():
-	try:
-		global device_manager
-		device_manager = DeviceManager()
-		device_manager.sync_effects = True
-	except DaemonNotFound:
-		print(wording.get('daemon_no') + wording.get('exclamation_mark'))
-		exit(1)
+try:
+	device_manager = DeviceManager()
+	device_manager.sync_effects = True
+except DaemonNotFound:
+	print(wording.get('daemon_no') + wording.get('exclamation_mark'))
+	exit(1)
 
 
 def run(repository, interval):
