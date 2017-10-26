@@ -1,4 +1,4 @@
-wordingArray =\
+wording =\
 {
 				'driver_no': 'Driver not found',
 				'daemon_no': 'Daemon not found',
@@ -21,4 +21,4 @@ wordingArray =\
 
 
 def get(key):
-	return wordingArray[key]
+	return wording[key]

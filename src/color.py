@@ -1,4 +1,4 @@
-colorArray =\
+color =\
 {
 				'yellow': '\033[0;33m',
 				'green': '\033[0;32m',
@@ -8,4 +8,4 @@ colorArray =\
 
 
 def get(key):
-	return colorArray[key]
+	return color[key]
