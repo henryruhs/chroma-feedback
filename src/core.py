@@ -36,7 +36,7 @@ def run(repository, interval):
 	for item in data:
 		if item['active'] is True:
 			if item['last_build_status'] is None:
-				print(wording.get('point') + ' ' + color.get('process') + wording.get('build_process').format(item['slug']) + color.get('end'))
+				print(wording.get('divider') + ' ' + color.get('process') + wording.get('build_process').format(item['slug']) + color.get('end'))
 				if status != 'failed':
 					status = 'process'
 			if item['last_build_status'] == 0:
