@@ -37,10 +37,10 @@ def run(repository, interval):
 		if item['active'] is True:
 			if item['last_build_status'] is None:
 				print(wording.get('point') + ' ' + color.get('process') + wording.get('build_process').format(item['slug']) + color.get('end'))
-				status = 'process'
+				if status != 'failed':
+					status = 'process'
 			if item['last_build_status'] == 0:
 				print(wording.get('tick') + ' ' + color.get('passed') + wording.get('build_passed').format(item['slug']) + color.get('end'))
-				status = 'failed'
 			if item['last_build_status'] == 1:
 				print(wording.get('cross') + ' ' + color.get('failed') + wording.get('build_failed').format(item['slug']) + color.get('end'))
 				status = 'failed'
