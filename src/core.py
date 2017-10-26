@@ -36,13 +36,13 @@ def run(repository, interval):
 	for item in data:
 		if item['active'] is True:
 			if item['last_build_status'] is None:
-				print(wording.get('divider') + ' ' + color.get('process') + wording.get('build_process').format(item['slug']) + color.get('end'))
+				print(wording.get('divider') + ' ' + color.get('yellow') + wording.get('build_process').format(item['slug']) + color.get('end'))
 				if status != 'failed':
 					status = 'process'
 			if item['last_build_status'] == 0:
-				print(wording.get('tick') + ' ' + color.get('passed') + wording.get('build_passed').format(item['slug']) + color.get('end'))
+				print(wording.get('tick') + ' ' + color.get('green') + wording.get('build_passed').format(item['slug']) + color.get('end'))
 			if item['last_build_status'] == 1:
-				print(wording.get('cross') + ' ' + color.get('failed') + wording.get('build_failed').format(item['slug']) + color.get('end'))
+				print(wording.get('cross') + ' ' + color.get('red') + wording.get('build_failed').format(item['slug']) + color.get('end'))
 				status = 'failed'
 
 	# process device
