@@ -1,5 +1,6 @@
 wordingArray =\
 {
+				'driver_no': 'Driver not found',
 				'daemon_no': 'Daemon not found',
 				'build_process': 'Build of {} in process',
 				'build_passed': 'Build of {} passed',

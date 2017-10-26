@@ -5,7 +5,12 @@ import threading
 import requests
 import src.color as color
 import src.wording as wording
-from openrazer.client import DeviceManager, DaemonNotFound
+
+try:
+	from openrazer.client import DeviceManager, DaemonNotFound
+except ImportError:
+	print(wording.get('driver_no') + wording.get('exclamation_mark'))
+	exit(1)
 
 try:
 	device_manager = DeviceManager()
