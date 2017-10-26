@@ -2,14 +2,16 @@
 
 import sys
 import signal
-from src.core import run, goodbye
+from src.core import init, run, destroy
 
 # run as needed
 
-signal.signal(signal.SIGINT, goodbye)
+signal.signal(signal.SIGINT, destroy)
 if len(sys.argv) == 2:
+	init()
 	run(sys.argv[1], 0)
 elif len(sys.argv) == 3:
+	init()
 	run(sys.argv[1], int(sys.argv[2]))
 else:
 	sys.exit(1)
