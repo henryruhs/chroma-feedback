@@ -43,13 +43,13 @@ chroma-feedback [repository] [interval]
 Examples
 --------
 
-Validate each repositories of `redaxmedia` every minute:
+Monitor each repositories of `redaxmedia` every minute:
 
 ```
 chroma-feedback redaxmedia 60
 ```
 
-Validate the `chroma-feedback` repository of `redaxmedia` one time:
+Monitor the `chroma-feedback` repository of `redaxmedia` one time:
 
 ```
 chroma-feedback redaxmedia/chroma-feedback
