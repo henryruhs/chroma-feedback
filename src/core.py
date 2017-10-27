@@ -20,8 +20,8 @@ except DaemonNotFound:
 	exit(1)
 
 
-def run(repository, interval):
-	data = requests.get('https://api.travis-ci.org/repos/' + repository).json()
+def run(slug, interval):
+	data = requests.get('https://api.travis-ci.org/repos/' + slug).json()
 	status = 'passed'
 
 	# handle data
@@ -36,27 +36,27 @@ def run(repository, interval):
 	for item in data:
 		if item['active'] is True:
 			if item['last_build_status'] is None:
-				print(wording.get('divider') + ' ' + color.get('yellow') + wording.get('build_process').format(item['slug']) + color.get('end'))
+				print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item['slug']))
 				if status != 'failed':
 					status = 'process'
 			if item['last_build_status'] == 0:
-				print(wording.get('tick') + ' ' + color.get('green') + wording.get('build_passed').format(item['slug']) + color.get('end'))
+				print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item['slug']))
 			if item['last_build_status'] == 1:
-				print(wording.get('cross') + ' ' + color.get('red') + wording.get('build_failed').format(item['slug']) + color.get('end'))
+				print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
 				status = 'failed'
 
 	# process device
 
 	for device in device_manager.devices:
 		if status == 'process' and static(device, [255, 255, 0]):
-			print(wording.get('setting_process').format(device.name))
+			print(wording.get('setting_process').format(device.name) + wording.get('point'))
 		if status == 'passed' and static(device, [0, 255, 0]):
-			print(wording.get('setting_passed').format(device.name))
+			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
 		if status == 'failed' and pulsate(device, [255, 0, 0]):
-			print(wording.get('setting_failed').format(device.name))
+			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
 
 	if interval > 0:
-		threading.Timer(interval, run, args=[repository, interval]).start()
+		threading.Timer(interval, run, args=[slug, interval]).start()
 
 
 def static(device, rgb):

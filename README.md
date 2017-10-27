@@ -36,7 +36,11 @@ Usage
 -----
 
 ```
-chroma-feedback [repository] [interval]
+chroma-feedback [user] [interval]
+```
+
+```
+chroma-feedback [user/repository] [interval]
 ```
 
 
@@ -54,3 +58,13 @@ Monitor the `chroma-feedback` repository of `redaxmedia` one time:
 ```
 chroma-feedback redaxmedia/chroma-feedback
 ```
+
+
+Indicators
+----------
+
+| Status  | Color  | Effect  |
+|---------|--------|---------|
+| Process | Yellow | Static  |
+| Passed  | Green  | Static  |
+| Failed  | Red    | Pulsate |
