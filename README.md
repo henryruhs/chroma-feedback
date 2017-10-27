@@ -63,8 +63,8 @@ chroma-feedback redaxmedia/chroma-feedback
 Indicators
 ----------
 
-|Status|Color|Effect|
-|-|-|-|
-|Process|Yellow|Static|
-|Passed|Green|Static|
-|Failed|Red|Pulsate|
+| Status  | Color  | Effect  |
+|---------|--------|---------|
+| Process | Yellow | Static  |
+| Passed  | Green  | Static  |
+| Failed  | Red    | Pulsate |
