@@ -36,7 +36,11 @@ Usage
 -----
 
 ```
-chroma-feedback [repository] [interval]
+chroma-feedback [user] [interval]
+```
+
+```
+chroma-feedback [user/repository] [interval]
 ```
 
 

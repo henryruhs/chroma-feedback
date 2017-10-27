@@ -20,8 +20,8 @@ except DaemonNotFound:
 	exit(1)
 
 
-def run(repository, interval):
-	data = requests.get('https://api.travis-ci.org/repos/' + repository).json()
+def run(slug, interval):
+	data = requests.get('https://api.travis-ci.org/repos/' + slug).json()
 	status = 'passed'
 
 	# handle data
@@ -56,7 +56,7 @@ def run(repository, interval):
 			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
 
 	if interval > 0:
-		threading.Timer(interval, run, args=[repository, interval]).start()
+		threading.Timer(interval, run, args=[slug, interval]).start()
 
 
 def static(device, rgb):
