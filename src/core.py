@@ -36,13 +36,13 @@ def run(slug, interval):
 	for item in data:
 		if item['active'] is True:
 			if item['last_build_status'] is None:
-				print(wording.get('divider') + ' ' + color.get('yellow') + wording.get('build_process').format(item['slug']) + color.get('end'))
+				print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item['slug']))
 				if status != 'failed':
 					status = 'process'
 			if item['last_build_status'] == 0:
-				print(wording.get('tick') + ' ' + color.get('green') + wording.get('build_passed').format(item['slug']) + color.get('end'))
+				print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item['slug']))
 			if item['last_build_status'] == 1:
-				print(wording.get('cross') + ' ' + color.get('red') + wording.get('build_failed').format(item['slug']) + color.get('end'))
+				print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
 				status = 'failed'
 
 	# process device
