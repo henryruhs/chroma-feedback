@@ -28,6 +28,8 @@ pip install chroma-feedback
 Install Chroma Feedback using the `setup.py` file:
 
 ```
+git clone https://github.com/redaxmedia/chroma-feedback.git
+cd chroma-feedback
 ./setup.py install
 ```
 
