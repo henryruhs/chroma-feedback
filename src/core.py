@@ -45,6 +45,12 @@ def run(slug, interval):
 				print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
 				status = 'failed'
 
+	# handle device
+
+	if len(device_manager.devices) == 0:
+		print(wording.get('device_no') + wording.get('exclamation_mark'))
+		exit(1)
+
 	# process device
 
 	for device in device_manager.devices:
@@ -54,6 +60,8 @@ def run(slug, interval):
 			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
 		if status == 'failed' and pulsate(device, [255, 0, 0]):
 			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
+
+	# handle thread
 
 	if interval > 0:
 		threading.Timer(interval, run, args=[slug, interval]).start()
