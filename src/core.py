@@ -49,11 +49,11 @@ def run(repository, interval):
 
 	for device in device_manager.devices:
 		if status == 'process' and static(device, [255, 255, 0]):
-			print(wording.get('setting_process').format(device.name))
+			print(wording.get('setting_process').format(device.name) + wording.get('point'))
 		if status == 'passed' and static(device, [0, 255, 0]):
-			print(wording.get('setting_passed').format(device.name))
+			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
 		if status == 'failed' and pulsate(device, [255, 0, 0]):
-			print(wording.get('setting_failed').format(device.name))
+			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
 
 	if interval > 0:
 		threading.Timer(interval, run, args=[repository, interval]).start()
