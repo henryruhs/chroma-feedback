@@ -19,12 +19,15 @@ except DaemonNotFound:
 
 def run(args):
 	data = mine_data(args)
+
+	# handle data
+
 	if len(data) == 0:
 		exit(wording.get('data_no') + wording.get('exclamation_mark'))
 
-	# process data
+	# process status
 
-	status = process_data(data)
+	status = process_status(data)
 
 	# handle device
 
@@ -61,18 +64,16 @@ def fetch_data(slug):
 	# handle data
 
 	if 'repos' in data:
-		data = data['repos']
-	elif 'repo' in data:
-		data =\
+		return data['repos']
+	if 'repo' in data:
+		return\
 		[
 			data['repo']
 		]
-	else:
-		data = []
-	return data
+	return []
 
 
-def process_data(data):
+def process_status(data):
 	status = 'passed'
 
 	# process data
