@@ -12,4 +12,4 @@ if len(sys.argv) == 2:
 elif len(sys.argv) == 3:
 	run(sys.argv[1], int(sys.argv[2]))
 else:
-	sys.exit(1)
+	exit(1)

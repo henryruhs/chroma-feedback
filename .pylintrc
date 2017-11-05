@@ -1,6 +1,6 @@
 [disable]
 
-disable = import-error, invalid-name, len-as-condition, line-too-long, missing-docstring, protected-access, too-many-branches, unused-argument
+disable = bad-continuation, bad-whitespace, import-error, invalid-name, len-as-condition, line-too-long, missing-docstring, protected-access, too-many-branches, unused-argument
 
 [format]
 
