@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from setuptools import setup
+from src.version import __version__
 
 try:
 	from pypandoc import convert
@@ -12,7 +13,7 @@ setup(
 	name = 'chroma-feedback',
 	description = 'Turn your Razer keyboard, mouse or headphone into a extreme feedback device for Travis CI',
 	long_description = long_description,
-	version = open('.version').read(),
+	version = __version__,
 	license = 'GPL-3.0',
 	url = 'https://github.com/redaxmedia/chroma-feedback',
 	author = 'Henry Ruhs',
