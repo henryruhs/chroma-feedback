@@ -18,11 +18,10 @@ except DaemonNotFound:
 
 
 def run(slug, interval):
-	response = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
+	data = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
 	{
 		'accept': 'application/vnd.travis-ci.2+json'
-	})
-	data = response.json()
+	}).json()
 	status = 'passed'
 
 	# handle data
