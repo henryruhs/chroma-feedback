@@ -1,5 +1,4 @@
 from __future__ import print_function
-from xml.etree import ElementTree
 import os
 import threading
 import requests
