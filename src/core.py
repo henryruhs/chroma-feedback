@@ -41,7 +41,7 @@ def run(slug, interval):
 	for item in data:
 		if item['last_build_state'] == 'unknown':
 			print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item['slug']))
-			if status != 'failed' and status != 'errored':
+			if status != 'errored' and status != 'failed':
 				status = 'process'
 		if item['last_build_state'] == 'errored':
 			print(color.get('white') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_errored').format(item['slug']))
