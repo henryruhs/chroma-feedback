@@ -17,8 +17,8 @@ except DaemonNotFound:
 	exit(wording.get('daemon_no') + wording.get('exclamation_mark'))
 
 
-def run(slug, interval):
-	data = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
+def run(args):
+	data = requests.get('https://api.travis-ci.org/repos/' + args.slug, headers =
 	{
 		'accept': 'application/vnd.travis-ci.2+json'
 	}).json()
@@ -61,23 +61,23 @@ def run(slug, interval):
 
 	# process device
 
-	for device in device_manager.devices:
-		if status == 'process' and static(device, [255, 255, 0]):
-			print(wording.get('setting_process').format(device.name) + wording.get('point'))
-		if status == 'passed' and static(device, [0, 255, 0]):
-			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
-		if status == 'errored' and pulsate(device, [255, 255, 255]):
-			print(wording.get('setting_errored').format(device.name) + wording.get('point'))
-		if status == 'failed' and pulsate(device, [255, 0, 0]):
-			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
+	if args.dry_run is False:
+		for device in device_manager.devices:
+			if status == 'process' and static(device, [255, 255, 0]):
+				print(wording.get('setting_process').format(device.name) + wording.get('point'))
+			if status == 'passed' and static(device, [0, 255, 0]):
+				print(wording.get('setting_passed').format(device.name) + wording.get('point'))
+			if status == 'errored' and pulsate(device, [255, 255, 255]):
+				print(wording.get('setting_errored').format(device.name) + wording.get('point'))
+			if status == 'failed' and pulsate(device, [255, 0, 0]):
+				print(wording.get('setting_failed').format(device.name) + wording.get('point'))
 
 	# handle thread
 
-	if interval > 0:
-		threading.Timer(interval, run, args =
+	if args.background_run is True:
+		threading.Timer(args.background_interval, run, args =
 		[
-			slug,
-			interval
+			args
 		]).start()
 
 

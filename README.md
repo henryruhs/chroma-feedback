@@ -38,11 +38,13 @@ Usage
 -----
 
 ```
-chroma-feedback [user] [interval]
-```
+chroma-feedback [slug] [options]
 
-```
-chroma-feedback [user/repository] [interval]
+--version
+--background-interval <background-interval>
+--background-run
+--dry-run
+--help
 ```
 
 
@@ -52,7 +54,7 @@ Examples
 Monitor each repositories of `redaxmedia` every minute:
 
 ```
-chroma-feedback redaxmedia 60
+chroma-feedback redaxmedia --background-run --background-interval 60
 ```
 
 Monitor the `chroma-feedback` repository of `redaxmedia` one time:
