@@ -69,4 +69,5 @@ Indicators
 |---------|--------|---------|
 | Process | Yellow | Static  |
 | Passed  | Green  | Static  |
+| Errored | White  | Pulsate |
 | Failed  | Red    | Pulsate |
