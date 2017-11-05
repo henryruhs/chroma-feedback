@@ -71,17 +71,17 @@ def process_data(data):
 	for item in data:
 		if item['active'] is True:
 			if item['last_build_finished_at'] is None:
-				print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item['slug']))
+				print(color.get('yellow') + wording.get('hourglass') + color.end() + ' ' + wording.get('build_process').format(item['slug']))
 				if status != 'errored' and status != 'failed':
 					status = 'process'
 			if item['last_build_state'] == 'passed':
-				print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item['slug']))
+				print(color.get('green') + wording.get('tick') + color.end() + ' ' + wording.get('build_passed').format(item['slug']))
 			if item['last_build_state'] == 'errored':
-				print(color.get('white') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_errored').format(item['slug']))
+				print(color.get('white') + wording.get('cross') + color.end() + ' ' + wording.get('build_errored').format(item['slug']))
 				if status != 'failed':
 					status = 'errored'
 			if item['last_build_state'] == 'failed':
-				print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
+				print(color.get('red') + wording.get('cross') + color.end() + ' ' + wording.get('build_failed').format(item['slug']))
 				status = 'failed'
 	return status
 

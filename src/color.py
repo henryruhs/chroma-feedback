@@ -10,3 +10,7 @@ color =\
 
 def get(key):
 	return color[key]
+
+
+def end():
+	return color['end']
