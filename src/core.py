@@ -9,50 +9,56 @@ import src.wording as wording
 try:
 	from openrazer.client import DeviceManager, DaemonNotFound
 except ImportError:
-	print(wording.get('driver_no') + wording.get('exclamation_mark'))
-	exit(1)
+	exit(wording.get('driver_no') + wording.get('exclamation_mark'))
 
 try:
 	device_manager = DeviceManager()
 	device_manager.sync_effects = True
 except DaemonNotFound:
-	print(wording.get('daemon_no') + wording.get('exclamation_mark'))
-	exit(1)
+	exit(wording.get('daemon_no') + wording.get('exclamation_mark'))
 
 
 def run(slug, interval):
 	response = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
 	{
-		'accept': 'application/xml'
+		'accept': 'application/vnd.travis-ci.2+json'
 	})
-	try:
-		data = ElementTree.XML(response.content)
-		status = 'passed'
-	except ElementTree.ParseError:
-		exit(1)
+	data = response.json()
+	status = 'passed'
+
+	# handle data
+
+	if 'repos' in data:
+		data = data['repos']
+	if 'repo' in data:
+		data =\
+		[
+			data['repo']
+		]
+	if len(data) == 0:
+		exit(wording.get('data_no') + wording.get('exclamation_mark'))
 
 	# process data
 
 	for item in data:
-		if item.attrib['lastBuildStatus'] == 'Unknown':
-			print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item.attrib['name']))
+		if item['last_build_state'] == 'unknown':
+			print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item['slug']))
 			if status != 'failed' and status != 'errored':
 				status = 'process'
-		if item.attrib['lastBuildStatus'] == 'Error':
-			print(color.get('white') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_errored').format(item.attrib['name']))
+		if item['last_build_state'] == 'errored':
+			print(color.get('white') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_errored').format(item['slug']))
 			if status != 'failed':
 				status = 'errored'
-		if item.attrib['lastBuildStatus'] == 'Success':
-			print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item.attrib['name']))
-		if item.attrib['lastBuildStatus'] == 'Failure':
-			print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item.attrib['name']))
+		if item['last_build_state'] == 'passed':
+			print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item['slug']))
+		if item['last_build_state'] == 'failed':
+			print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
 			status = 'failed'
 
 	# handle device
 
 	if len(device_manager.devices) == 0:
-		print(wording.get('device_no') + wording.get('exclamation_mark'))
-		exit(1)
+		exit(wording.get('device_no') + wording.get('exclamation_mark'))
 
 	# process device
 

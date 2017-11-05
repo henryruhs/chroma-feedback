@@ -3,6 +3,7 @@ wording =\
 	'driver_no': 'Driver not found',
 	'daemon_no': 'Daemon not found',
 	'device_no': 'Device not found',
+	'data_no': 'Data not found',
 	'build_process': 'Build of {} in process',
 	'build_errored': 'Build of {} errored',
 	'build_passed': 'Build of {} passed',
