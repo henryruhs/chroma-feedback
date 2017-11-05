@@ -8,9 +8,17 @@ color =\
 }
 
 
-def get(key):
-	return color[key]
+def yellow(text):
+	return color['yellow'] + text + color['end']
 
 
-def end():
-	return color['end']
+def green(text):
+	return color['green'] + text + color['end']
+
+
+def red(text):
+	return color['red'] + text + color['end']
+
+
+def white(text):
+	return color['white'] + text + color['end']
