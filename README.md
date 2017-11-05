@@ -41,6 +41,7 @@ Usage
 chroma-feedback [slug] [options]
 
 -V, --version
+-S, --slug <slug>
 -I, --background-interval <background-interval>
 -B, --background-run
 -D, --dry-run
@@ -54,13 +55,19 @@ Examples
 Monitor each repositories of `redaxmedia` every minute:
 
 ```
-chroma-feedback redaxmedia --background-run --background-interval 60
+chroma-feedback --slug=redaxmedia --background-run --background-interval=60
+```
+
+Monitor each repositories of `redaxmedia` and `redaxscript` one time:
+
+```
+chroma-feedback --slug=redaxmedia --slug=redaxmedia
 ```
 
 Monitor the `chroma-feedback` repository of `redaxmedia` one time:
 
 ```
-chroma-feedback redaxmedia/chroma-feedback
+chroma-feedback --slug=redaxmedia/chroma-feedback
 ```
 
 

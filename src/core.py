@@ -18,7 +18,7 @@ except DaemonNotFound:
 
 
 def run(args):
-	data = fetch_data(args)
+	data = mine_data(args)
 	if len(data) == 0:
 		exit(wording.get('data_no') + wording.get('exclamation_mark'))
 
@@ -45,8 +45,15 @@ def run(args):
 		]).start()
 
 
-def fetch_data(args):
-	data = requests.get('https://api.travis-ci.org/repos/' + args.slug, headers =
+def mine_data(args):
+	data = []
+	for slug in args.slug:
+		data.extend(fetch_data(slug))
+	return data
+
+
+def fetch_data(slug):
+	data = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
 	{
 		'accept': 'application/vnd.travis-ci.2+json'
 	}).json()
@@ -55,11 +62,13 @@ def fetch_data(args):
 
 	if 'repos' in data:
 		data = data['repos']
-	if 'repo' in data:
+	elif 'repo' in data:
 		data =\
 		[
 			data['repo']
 		]
+	else:
+		data = []
 	return data
 
 

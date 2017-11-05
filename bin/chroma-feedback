@@ -7,7 +7,7 @@ from src.core import run, destroy
 signal.signal(signal.SIGINT, destroy)
 
 program = argparse.ArgumentParser()
-program.add_argument('slug')
+program.add_argument('-S', '--slug', action='append')
 program.add_argument('-I', '--background-interval', default=60, type=int)
 program.add_argument('-B', '--background-run', action='store_true')
 program.add_argument('-D', '--dry-run', action='store_true')
