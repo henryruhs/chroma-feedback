@@ -40,11 +40,11 @@ Usage
 ```
 chroma-feedback [slug] [options]
 
---version
---background-interval <background-interval>
---background-run
---dry-run
---help
+-V, --version
+-I, --background-interval <background-interval>
+-B, --background-run
+-D, --dry-run
+-h, --help
 ```
 
 

@@ -8,9 +8,9 @@ signal.signal(signal.SIGINT, destroy)
 
 program = argparse.ArgumentParser()
 program.add_argument('slug')
-program.add_argument('--background-interval', default=60, type=int)
-program.add_argument('--background-run', action='store_true')
-program.add_argument('--dry-run', action='store_true')
-program.add_argument('--version', action='version', version='Chroma Feedback 2.0.0')
+program.add_argument('-I', '--background-interval', default=60, type=int)
+program.add_argument('-B', '--background-run', action='store_true')
+program.add_argument('-D', '--dry-run', action='store_true')
+program.add_argument('-V', '--version', action='version', version='Chroma Feedback ' + open('.version').read())
 
 run(program.parse_args())
