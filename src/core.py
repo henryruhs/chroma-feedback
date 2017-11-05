@@ -1,5 +1,5 @@
 from __future__ import print_function
-import sys
+from xml.etree import ElementTree
 import os
 import threading
 import requests
@@ -21,29 +21,32 @@ except DaemonNotFound:
 
 
 def run(slug, interval):
-	data = requests.get('https://api.travis-ci.org/repos/' + slug).json()
-	status = 'passed'
-
-	# handle data
-
-	if len(data) == 0:
-		sys.exit(1)
-	if isinstance(data, dict):
-		data = [data]
+	response = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
+	{
+		'accept': 'application/xml'
+	})
+	try:
+		data = ElementTree.XML(response.content)
+		status = 'passed'
+	except ElementTree.ParseError:
+		exit(1)
 
 	# process data
 
 	for item in data:
-		if item['active'] is True:
-			if item['last_build_status'] is None:
-				print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item['slug']))
-				if status != 'failed':
-					status = 'process'
-			if item['last_build_status'] == 0:
-				print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item['slug']))
-			if item['last_build_status'] == 1:
-				print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
-				status = 'failed'
+		if item.attrib['lastBuildStatus'] == 'Unknown':
+			print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item.attrib['name']))
+			if status != 'failed' and status != 'errored':
+				status = 'process'
+		if item.attrib['lastBuildStatus'] == 'Error':
+			print(color.get('white') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_errored').format(item.attrib['name']))
+			if status != 'failed':
+				status = 'errored'
+		if item.attrib['lastBuildStatus'] == 'Success':
+			print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item.attrib['name']))
+		if item.attrib['lastBuildStatus'] == 'Failure':
+			print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item.attrib['name']))
+			status = 'failed'
 
 	# handle device
 
@@ -56,6 +59,8 @@ def run(slug, interval):
 	for device in device_manager.devices:
 		if status == 'process' and static(device, [255, 255, 0]):
 			print(wording.get('setting_process').format(device.name) + wording.get('point'))
+		if status == 'errored' and pulsate(device, [255, 255, 255]):
+			print(wording.get('setting_errored').format(device.name) + wording.get('point'))
 		if status == 'passed' and static(device, [0, 255, 0]):
 			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
 		if status == 'failed' and pulsate(device, [255, 0, 0]):
@@ -64,7 +69,11 @@ def run(slug, interval):
 	# handle thread
 
 	if interval > 0:
-		threading.Timer(interval, run, args=[slug, interval]).start()
+		threading.Timer(interval, run, args =
+		[
+			slug,
+			interval
+		]).start()
 
 
 def static(device, rgb):
