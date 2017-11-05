@@ -17,42 +17,17 @@ except DaemonNotFound:
 	exit(wording.get('daemon_no') + wording.get('exclamation_mark'))
 
 
-def run(slug, interval):
-	data = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
-	{
-		'accept': 'application/vnd.travis-ci.2+json'
-	}).json()
-	status = 'passed'
+def run(args):
+	data = mine_data(args)
 
 	# handle data
 
-	if 'repos' in data:
-		data = data['repos']
-	if 'repo' in data:
-		data =\
-		[
-			data['repo']
-		]
 	if len(data) == 0:
 		exit(wording.get('data_no') + wording.get('exclamation_mark'))
 
-	# process data
+	# process status
 
-	for item in data:
-		if item['active'] is True:
-			if item['last_build_finished_at'] is None:
-				print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item['slug']))
-				if status != 'errored' and status != 'failed':
-					status = 'process'
-			if item['last_build_state'] == 'passed':
-				print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item['slug']))
-			if item['last_build_state'] == 'errored':
-				print(color.get('white') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_errored').format(item['slug']))
-				if status != 'failed':
-					status = 'errored'
-			if item['last_build_state'] == 'failed':
-				print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
-				status = 'failed'
+	status = process_status(data)
 
 	# handle device
 
@@ -61,36 +36,88 @@ def run(slug, interval):
 
 	# process device
 
-	for device in device_manager.devices:
-		if status == 'process' and static(device, [255, 255, 0]):
-			print(wording.get('setting_process').format(device.name) + wording.get('point'))
-		if status == 'passed' and static(device, [0, 255, 0]):
-			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
-		if status == 'errored' and pulsate(device, [255, 255, 255]):
-			print(wording.get('setting_errored').format(device.name) + wording.get('point'))
-		if status == 'failed' and pulsate(device, [255, 0, 0]):
-			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
+	if args.dry_run is False:
+		process_device(status)
 
 	# handle thread
 
-	if interval > 0:
-		threading.Timer(interval, run, args =
+	if args.background_run is True:
+		threading.Timer(args.background_interval, run, args =
 		[
-			slug,
-			interval
+			args
 		]).start()
 
 
-def static(device, rgb):
-	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
-	return device.fx.static(rgb[0], rgb[1], rgb[2])
+def mine_data(args):
+	data = []
+	for slug in args.slug:
+		data.extend(fetch_data(slug))
+	return data
 
 
-def pulsate(device, rgb):
-	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
-	return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
+def fetch_data(slug):
+	data = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
+	{
+		'accept': 'application/vnd.travis-ci.2+json'
+	}).json()
+
+	# handle data
+
+	if 'repos' in data:
+		return data['repos']
+	if 'repo' in data:
+		return\
+		[
+			data['repo']
+		]
+	return []
+
+
+def process_status(data):
+	status = 'passed'
+
+	# process data
+
+	for item in data:
+		if item['active'] is True:
+			if item['last_build_finished_at'] is None:
+				print(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(item['slug']))
+				if status != 'errored' and status != 'failed':
+					status = 'process'
+			if item['last_build_state'] == 'passed':
+				print(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(item['slug']))
+			if item['last_build_state'] == 'errored':
+				print(color.white(wording.get('cross')) + ' ' + wording.get('build_errored').format(item['slug']))
+				if status != 'failed':
+					status = 'errored'
+			if item['last_build_state'] == 'failed':
+				print(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug']))
+				status = 'failed'
+	return status
+
+
+def process_device(status):
+	for device in device_manager.devices:
+		if status == 'process' and static(device.fx, [255, 255, 0]):
+			print(wording.get('setting_process').format(device.name) + wording.get('point'))
+		if status == 'passed' and static(device.fx, [0, 255, 0]):
+			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
+		if status == 'errored' and pulsate(device.fx, [255, 255, 255]):
+			print(wording.get('setting_errored').format(device.name) + wording.get('point'))
+		if status == 'failed' and pulsate(device.fx, [255, 0, 0]):
+			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
+
+
+def static(fx, rgb):
+	if fx.has('logo') and fx.has('scroll'):
+		return fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
+	return fx.static(rgb[0], rgb[1], rgb[2])
+
+
+def pulsate(fx, rgb):
+	if fx.has('logo') and fx.has('scroll'):
+		return fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
+	return fx.breath_single(rgb[0], rgb[1], rgb[2])
 
 
 def destroy(number, frame):

@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
-import sys
 import signal
+import argparse
 from src.core import run, destroy
 
-# run as needed
-
 signal.signal(signal.SIGINT, destroy)
-if len(sys.argv) == 2:
-	run(sys.argv[1], 0)
-elif len(sys.argv) == 3:
-	run(sys.argv[1], int(sys.argv[2]))
-else:
-	exit(1)
+
+program = argparse.ArgumentParser()
+program.add_argument('-S', '--slug', action='append')
+program.add_argument('-I', '--background-interval', default=60, type=int)
+program.add_argument('-B', '--background-run', action='store_true')
+program.add_argument('-D', '--dry-run', action='store_true')
+program.add_argument('-V', '--version', action='version', version='Chroma Feedback ' + open('.version').read())
+
+run(program.parse_args())
