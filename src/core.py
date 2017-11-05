@@ -18,11 +18,38 @@ except DaemonNotFound:
 
 
 def run(args):
+	data = fetch_data(args)
+	if len(data) == 0:
+		exit(wording.get('data_no') + wording.get('exclamation_mark'))
+
+	# process data
+
+	status = process_data(data)
+
+	# handle device
+
+	if len(device_manager.devices) == 0:
+		exit(wording.get('device_no') + wording.get('exclamation_mark'))
+
+	# process device
+
+	if args.dry_run is False:
+		process_device(status)
+
+	# handle thread
+
+	if args.background_run is True:
+		threading.Timer(args.background_interval, run, args =
+		[
+			args
+		]).start()
+
+
+def fetch_data(args):
 	data = requests.get('https://api.travis-ci.org/repos/' + args.slug, headers =
 	{
 		'accept': 'application/vnd.travis-ci.2+json'
 	}).json()
-	status = 'passed'
 
 	# handle data
 
@@ -33,8 +60,11 @@ def run(args):
 		[
 			data['repo']
 		]
-	if len(data) == 0:
-		exit(wording.get('data_no') + wording.get('exclamation_mark'))
+	return data
+
+
+def process_data(data):
+	status = 'passed'
 
 	# process data
 
@@ -53,44 +83,31 @@ def run(args):
 			if item['last_build_state'] == 'failed':
 				print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
 				status = 'failed'
-
-	# handle device
-
-	if len(device_manager.devices) == 0:
-		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-
-	# process device
-
-	if args.dry_run is False:
-		for device in device_manager.devices:
-			if status == 'process' and static(device, [255, 255, 0]):
-				print(wording.get('setting_process').format(device.name) + wording.get('point'))
-			if status == 'passed' and static(device, [0, 255, 0]):
-				print(wording.get('setting_passed').format(device.name) + wording.get('point'))
-			if status == 'errored' and pulsate(device, [255, 255, 255]):
-				print(wording.get('setting_errored').format(device.name) + wording.get('point'))
-			if status == 'failed' and pulsate(device, [255, 0, 0]):
-				print(wording.get('setting_failed').format(device.name) + wording.get('point'))
-
-	# handle thread
-
-	if args.background_run is True:
-		threading.Timer(args.background_interval, run, args =
-		[
-			args
-		]).start()
+	return status
 
 
-def static(device, rgb):
-	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
-	return device.fx.static(rgb[0], rgb[1], rgb[2])
+def process_device(status):
+	for device in device_manager.devices:
+		if status == 'process' and static(device.fx, [255, 255, 0]):
+			print(wording.get('setting_process').format(device.name) + wording.get('point'))
+		if status == 'passed' and static(device.fx, [0, 255, 0]):
+			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
+		if status == 'errored' and pulsate(device.fx, [255, 255, 255]):
+			print(wording.get('setting_errored').format(device.name) + wording.get('point'))
+		if status == 'failed' and pulsate(device.fx, [255, 0, 0]):
+			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
 
 
-def pulsate(device, rgb):
-	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
-	return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
+def static(fx, rgb):
+	if fx.has('logo') and fx.has('scroll'):
+		return fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
+	return fx.static(rgb[0], rgb[1], rgb[2])
+
+
+def pulsate(fx, rgb):
+	if fx.has('logo') and fx.has('scroll'):
+		return fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
+	return fx.breath_single(rgb[0], rgb[1], rgb[2])
 
 
 def destroy(number, frame):
