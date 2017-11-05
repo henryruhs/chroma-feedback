@@ -44,12 +44,12 @@ def run(slug, interval):
 				print(color.get('yellow') + wording.get('hourglass') + color.get('end') + ' ' + wording.get('build_process').format(item['slug']))
 				if status != 'errored' and status != 'failed':
 					status = 'process'
+			if item['last_build_state'] == 'passed':
+				print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item['slug']))
 			if item['last_build_state'] == 'errored':
 				print(color.get('white') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_errored').format(item['slug']))
 				if status != 'failed':
 					status = 'errored'
-			if item['last_build_state'] == 'passed':
-				print(color.get('green') + wording.get('tick') + color.get('end') + ' ' + wording.get('build_passed').format(item['slug']))
 			if item['last_build_state'] == 'failed':
 				print(color.get('red') + wording.get('cross') + color.get('end') + ' ' + wording.get('build_failed').format(item['slug']))
 				status = 'failed'
@@ -64,10 +64,10 @@ def run(slug, interval):
 	for device in device_manager.devices:
 		if status == 'process' and static(device, [255, 255, 0]):
 			print(wording.get('setting_process').format(device.name) + wording.get('point'))
-		if status == 'errored' and pulsate(device, [255, 255, 255]):
-			print(wording.get('setting_errored').format(device.name) + wording.get('point'))
 		if status == 'passed' and static(device, [0, 255, 0]):
 			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
+		if status == 'errored' and pulsate(device, [255, 255, 255]):
+			print(wording.get('setting_errored').format(device.name) + wording.get('point'))
 		if status == 'failed' and pulsate(device, [255, 0, 0]):
 			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
 
