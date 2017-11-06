@@ -61,7 +61,7 @@ chroma-feedback --slug=redaxmedia --background-run --background-interval=60
 Monitor each repositories of `redaxmedia` and `redaxscript` one time:
 
 ```
-chroma-feedback --slug=redaxmedia --slug=redaxmedia
+chroma-feedback --slug=redaxmedia --slug=redaxscript
 ```
 
 Monitor the `chroma-feedback` repository of `redaxmedia` one time:
