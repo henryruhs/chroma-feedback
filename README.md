@@ -71,6 +71,17 @@ chroma-feedback --slug=redaxmedia/chroma-feedback
 ```
 
 
+Errors
+------
+
+| Message          | Type        | Description                                     |
+|------------------|-------------|-------------------------------------------------|
+| Driver not found | ImportError | Module `openrazer.client` could not be imported |
+| Daemon not found | Exception   | The `DeviceManager` throwed a `DaemonNotFound`  |
+| Device not found | General     | There is no supported device connected          |
+| Data not found   | General     | There is no data available for your request     |
+
+
 Indicators
 ----------
 
