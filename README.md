@@ -39,7 +39,7 @@ Usage
 -----
 
 ```
-chroma-feedback [slug] [options]
+chroma-feedback [options]
 
 -V, --version
 -S, --slug <slug>
