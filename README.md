@@ -1,3 +1,6 @@
+![Terminal Session](https://cdn.rawgit.com/redaxmedia/media/master/chroma-feedback/terminal-session.svg)
+
+
 Chroma Feedback
 ===============
 
