@@ -1,9 +1,9 @@
 from __future__ import print_function
 import os
 import threading
-import requests
 import src.color as color
 import src.wording as wording
+import src.provider as provider
 
 try:
 	from openrazer.client import DeviceManager, DaemonNotFound
@@ -18,7 +18,7 @@ except DaemonNotFound:
 
 
 def run(args):
-	data = mine_data(args)
+	data = provider.mine_data(args)
 
 	# handle data
 
@@ -46,31 +46,6 @@ def run(args):
 		[
 			args
 		]).start()
-
-
-def mine_data(args):
-	data = []
-	for slug in args.slug:
-		data.extend(fetch_data(slug))
-	return data
-
-
-def fetch_data(slug):
-	data = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
-	{
-		'accept': 'application/vnd.travis-ci.2+json'
-	}).json()
-
-	# handle data
-
-	if 'repos' in data:
-		return data['repos']
-	if 'repo' in data:
-		return\
-		[
-			data['repo']
-		]
-	return []
 
 
 def process_status(data):

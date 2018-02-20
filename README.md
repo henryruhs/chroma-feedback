@@ -1,7 +1,7 @@
 Chroma Feedback
 ===============
 
-> Turn your Razer keyboard, mouse or headphone into a extreme feedback device for Travis CI.
+> Turn your Razer keyboard, mouse or headphone into a extreme feedback device.
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/chroma-feedback.svg)](https://travis-ci.org/redaxmedia/chroma-feedback)
 [![PyPI](https://img.shields.io/pypi/v/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
@@ -48,6 +48,7 @@ Usage
 chroma-feedback [options]
 
 -V, --version
+-P, --provider <provider>
 -S, --slug <slug>
 -I, --background-interval <background-interval>
 -B, --background-run
@@ -59,23 +60,32 @@ chroma-feedback [options]
 Examples
 --------
 
-Monitor each repositories of `redaxmedia` every minute:
+Monitor each repositories of `redaxmedia` on `Travis CI` every minute:
 
 ```
-chroma-feedback --slug=redaxmedia --background-run --background-interval=60
+chroma-feedback --provider=travis --slug=redaxmedia --background-run --background-interval=60
 ```
 
-Monitor each repositories of `redaxmedia` and `redaxscript` one time:
+Monitor each repositories of `redaxmedia` and `redaxscript` on `Travis CI` one time:
 
 ```
-chroma-feedback --slug=redaxmedia --slug=redaxscript
+chroma-feedback --provider=travis --slug=redaxmedia --slug=redaxscript
 ```
 
-Monitor the `chroma-feedback` repository of `redaxmedia` one time:
+Monitor the `redaxscript` repository of `redaxmedia` on `AppVeyor` one time:
 
 ```
-chroma-feedback --slug=redaxmedia/chroma-feedback
+chroma-feedback --provider=appveyor --slug=redaxmedia/redaxscript
 ```
+
+
+Providers
+---------
+
+| Name        | Value    |
+|-------------|----------|
+| AppVeyor    | appveyor |
+| Travis CI   | travis   |
 
 
 Errors
