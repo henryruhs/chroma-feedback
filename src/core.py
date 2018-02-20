@@ -56,22 +56,23 @@ def process_status(data):
 	for item in data:
 		if item['active'] is True:
 			if item['process'] is True:
-				print(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(item['slug']))
+				print(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(item['slug'], item['provider']))
 				if status != 'errored' and status != 'failed':
 					status = 'process'
 			if item['status'] == 'passed':
-				print(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(item['slug']))
+				print(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(item['slug'], item['provider']))
 			if item['status'] == 'errored':
-				print(color.white(wording.get('cross')) + ' ' + wording.get('build_errored').format(item['slug']))
+				print(wording.get('cross') + ' ' + wording.get('build_errored').format(item['slug'], item['provider']))
 				if status != 'failed':
 					status = 'errored'
 			if item['status'] == 'failed':
-				print(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug']))
+				print(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug'], item['provider']))
 				status = 'failed'
 	return status
 
 
 def process_device(status):
+	print()
 	for device in device_manager.devices:
 		if status == 'process' and static(device.fx, [255, 255, 0]):
 			print(wording.get('setting_process').format(device.name) + wording.get('point'))

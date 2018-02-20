@@ -17,26 +17,33 @@ def fetch_data(provider, slug):
 	return []
 
 
+def normalize_status(status):
+	if status == 'success':
+		return 'passed'
+	return status
+
+
 def fetch_appveyor(slug):
-	data = requests.get('https://ci.appveyor.com/api/projects/' + slug, headers =
-	{
-		'Accept': 'application/json'
-	}).json()
+	data = requests.get('https://ci.appveyor.com/api/projects/' + slug).json()
 
 	# handle data
 
-	if 'build' in data:
-		return normalize_appveyor(data['build'])
+	if 'project' and 'build' in data:
+		return normalize_appveyor(data)
 	return []
 
 
 def normalize_appveyor(data):
 	return\
-	{
-		'active': True,
-		'process': data['finished'] is None,
-		'status': data['status']
-	}
+	[
+		{
+			'provider': 'AppVeyor',
+			'slug': data['project']['accountName'] + '/' + data['project']['slug'],
+			'active': True,
+			'process': data['build']['finished'] is None,
+			'status': normalize_status(data['build']['status'])
+		}
+	]
 
 
 def fetch_travis(slug):
@@ -58,9 +65,13 @@ def fetch_travis(slug):
 
 
 def normalize_travis(data):
-	return\
-	{
-		'active': data['active'],
-		'process': data['last_build_finished_at'] is None,
-		'status': data['last_build_state']
-	}
+	return \
+	[
+		{
+			'provider': 'Travis CI',
+			'slug': data['slug'],
+			'active': data['active'],
+			'process': data['last_build_finished_at'] is None,
+			'status': data['last_build_state']
+		}
+	]
