@@ -27,6 +27,7 @@ def fetch_appveyor(slug):
 
 	if 'build' in data:
 		return normalize_appveyor(data['build'])
+	return []
 
 
 def normalize_appveyor(data):
@@ -49,10 +50,11 @@ def fetch_travis(slug):
 	if 'repos' in data:
 		result = []
 		for repo in data['repos']:
-			result.append(normalize_travis(repo))
+			result.extend(normalize_travis(repo))
 		return result
 	if 'repo' in data:
 		return normalize_travis(data['repo'])
+	return []
 
 
 def normalize_travis(data):
