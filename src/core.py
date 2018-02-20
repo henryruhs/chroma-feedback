@@ -1,9 +1,9 @@
 from __future__ import print_function
 import os
 import threading
+import src.provider as provider
 import src.color as color
 import src.wording as wording
-import src.provider as provider
 
 try:
 	from openrazer.client import DeviceManager, DaemonNotFound
