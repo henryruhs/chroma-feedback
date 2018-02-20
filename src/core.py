@@ -55,17 +55,17 @@ def process_status(data):
 
 	for item in data:
 		if item['active'] is True:
-			if item['last_build_finished_at'] is None:
+			if item['process'] is True:
 				print(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(item['slug']))
 				if status != 'errored' and status != 'failed':
 					status = 'process'
-			if item['last_build_state'] == 'passed':
+			if item['status'] == 'passed':
 				print(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(item['slug']))
-			if item['last_build_state'] == 'errored':
+			if item['status'] == 'errored':
 				print(color.white(wording.get('cross')) + ' ' + wording.get('build_errored').format(item['slug']))
 				if status != 'failed':
 					status = 'errored'
-			if item['last_build_state'] == 'failed':
+			if item['status'] == 'failed':
 				print(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug']))
 				status = 'failed'
 	return status

@@ -26,12 +26,16 @@ def fetch_appveyor(slug):
 	# handle data
 
 	if 'build' in data:
-		return\
-		{
-			'active': True,
-			'last_build_finished_at': data['build']['finished'],
-			'last_build_state': data['build']['status']
-		}
+		return normalize_appveyor(data['build'])
+
+
+def normalize_appveyor(data):
+	return\
+	{
+		'active': True,
+		'process': data['finished'] is None,
+		'status': data['status']
+	}
 
 
 def fetch_travis(slug):
@@ -43,9 +47,18 @@ def fetch_travis(slug):
 	# handle data
 
 	if 'repos' in data:
-		return data['repos']
+		result = []
+		for repo in data['repos']:
+			result.append(normalize_travis(repo))
+		return result
 	if 'repo' in data:
-		return\
-		[
-			data['repo']
-		]
+		return normalize_travis(data['repo'])
+
+
+def normalize_travis(data):
+	return\
+	{
+		'active': data['active'],
+		'process': data['last_build_finished_at'] is None,
+		'status': data['last_build_state']
+	}
