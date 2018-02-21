@@ -27,19 +27,26 @@ def run(args):
 	if len(data) == 0:
 		exit(wording.get('data_no') + wording.get('exclamation_mark'))
 
-	# process status
+	# print status
 
-	status = process_status(data)
+	result = process_data(data)
+	if 'message' in result:
+		for message in result['message']:
+			print(message)
+		print()
 
 	# handle device
 
 	if len(device_manager.devices) == 0:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
 
-	# process device
+	# print device
 
 	if args.dry_run is False:
-		process_device(status)
+		result = process_device(result['status'])
+		if 'message' in result:
+			for message in result:
+				print(message)
 
 	# handle thread
 
@@ -68,7 +75,8 @@ def fetch_data(provider, slug):
 	return []
 
 
-def process_status(data):
+def process_data(data):
+	message = []
 	status = 'passed'
 
 	# process data
@@ -76,31 +84,44 @@ def process_status(data):
 	for item in data:
 		if item['active'] is True:
 			if item['status'] == 'process':
-				print(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(item['slug'], item['provider']))
+				message.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(item['slug'], item['provider']))
 				if status != 'errored' and status != 'failed':
 					status = 'process'
 			if item['status'] == 'passed':
-				print(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(item['slug'], item['provider']))
+				message.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(item['slug'], item['provider']))
 			if item['status'] == 'errored':
-				print(wording.get('cross') + ' ' + wording.get('build_errored').format(item['slug'], item['provider']))
+				message.append(wording.get('cross') + ' ' + wording.get('build_errored').format(item['slug'], item['provider']))
 				if status != 'failed':
 					status = 'errored'
 			if item['status'] == 'failed':
-				print(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug'], item['provider']))
+				message.extend(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug'], item['provider']))
 				status = 'failed'
-	return status
+	return\
+	{
+		'message': message,
+		'status': status
+	}
 
 
 def process_device(status):
+	message = []
+
+	# process device
+
 	for device in device_manager.devices:
 		if status == 'process' and static(device.fx, [255, 255, 0]):
-			print(wording.get('setting_process').format(device.name) + wording.get('point'))
+			message.append(wording.get('setting_process').format(device.name) + wording.get('point'))
 		if status == 'passed' and static(device.fx, [0, 255, 0]):
-			print(wording.get('setting_passed').format(device.name) + wording.get('point'))
+			message.append(wording.get('setting_passed').format(device.name) + wording.get('point'))
 		if status == 'errored' and pulsate(device.fx, [255, 255, 255]):
-			print(wording.get('setting_errored').format(device.name) + wording.get('point'))
+			message.append(wording.get('setting_errored').format(device.name) + wording.get('point'))
 		if status == 'failed' and pulsate(device.fx, [255, 0, 0]):
-			print(wording.get('setting_failed').format(device.name) + wording.get('point'))
+			message.append(wording.get('setting_failed').format(device.name) + wording.get('point'))
+	return\
+	{
+		'message': message,
+		'status': status
+	}
 
 
 def static(fx, rgb):
