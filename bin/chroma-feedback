@@ -9,6 +9,7 @@ signal.signal(signal.SIGINT, destroy)
 
 program = argparse.ArgumentParser()
 program.add_argument('-P', '--provider', action='append', required=True)
+program.add_argument('-H', '--host')
 program.add_argument('-S', '--slug', action='append', required=True)
 program.add_argument('-I', '--background-interval', default=60, type=int)
 program.add_argument('-B', '--background-run', action='store_true')

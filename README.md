@@ -72,6 +72,12 @@ Monitor the `redaxscript` repository of `redaxscript` on `Circle CI` one time:
 chroma-feedback --provider=circle --slug=github/redaxscript/redaxscript
 ```
 
+Monitor the `redaxscript` on `Jenkins CI` one time:
+
+```
+chroma-feedback --provider=jenkins --host=https://jenkins:8080 --slug=redaxscript
+```
+
 Monitor each repositories of `redaxmedia` on `Travis CI` every minute:
 
 ```
@@ -88,11 +94,12 @@ chroma-feedback --provider=travis --slug=redaxmedia --slug=redaxscript
 Providers
 ---------
 
-| Name        | Value    |
-|-------------|----------|
-| AppVeyor    | appveyor | 
-| Circle CI   | circle   |
-| Travis CI   | travis   |
+| Name     | Value    |
+|----------|----------|
+| AppVeyor | appveyor | 
+| Circle   | circle   |
+| Jenkins  | jenkins  |
+| Travis   | travis   |
 
 
 Errors
