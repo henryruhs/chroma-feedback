@@ -6,6 +6,7 @@ python:
 - 3.6
 
 install:
+- pip install requests
 - pip install pylint
 - pip install pytest
 
