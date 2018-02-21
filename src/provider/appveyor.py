@@ -13,10 +13,11 @@ def fetch_data(slug, token):
 		data = response.json()
 		if 'project' and 'build' in data:
 			return normalize_data(data['project'], data['build'])
-		result = []
-		for project in data:
-			result.extend(normalize_data(project, project['builds'][0]))
-		return result
+		if 'builds' in data[0]:
+			result = []
+			for project in data:
+				result.extend(normalize_data(project, project['builds'][0]))
+			return result
 	return []
 
 

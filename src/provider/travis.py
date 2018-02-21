@@ -12,8 +12,8 @@ def fetch_data(slug):
 			return normalize_data(data['repo'])
 		if 'repos' in data:
 			result = []
-			for repo in data['repos']:
-				result.extend(normalize_data(repo))
+			for project in data['repos']:
+				result.extend(normalize_data(project))
 			return result
 	return []
 
