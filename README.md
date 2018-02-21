@@ -66,25 +66,25 @@ Monitor the `redaxscript` repository of `redaxmedia` on `AppVeyor` one time:
 chroma-feedback --provider=appveyor --slug=redaxmedia/redaxscript
 ```
 
-Monitor the `redaxscript` repository of `redaxscript` on `Circle CI` one time:
+Monitor the `redaxscript` repository of `redaxscript` on `Circle` one time:
 
 ```
 chroma-feedback --provider=circle --slug=github/redaxscript/redaxscript
 ```
 
-Monitor the `redaxscript` on `Jenkins CI` one time:
+Monitor the `redaxscript` on `Jenkins` one time:
 
 ```
-chroma-feedback --provider=jenkins --host=https://jenkins:8080 --slug=redaxscript
+chroma-feedback --provider=jenkins --host=https://localhost:8080 --slug=redaxscript
 ```
 
-Monitor each repositories of `redaxmedia` on `Travis CI` every minute:
+Monitor each repositories of `redaxmedia` on `Travis` every minute:
 
 ```
 chroma-feedback --provider=travis --slug=redaxmedia --background-run --background-interval=60
 ```
 
-Monitor each repositories of `redaxmedia` and `redaxscript` on `Travis CI` one time:
+Monitor each repositories of `redaxmedia` and `redaxscript` on `Travis` one time:
 
 ```
 chroma-feedback --provider=travis --slug=redaxmedia --slug=redaxscript
