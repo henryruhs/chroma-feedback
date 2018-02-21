@@ -75,19 +75,19 @@ chroma-feedback --provider=circle --slug=github/redaxscript/redaxscript
 Monitor the `redaxscript` on `Jenkins` one time:
 
 ```
-chroma-feedback --provider=jenkins --host=https://localhost:8080 --slug=redaxscript
-```
-
-Monitor each repositories of `redaxmedia` on `Travis` every minute:
-
-```
-chroma-feedback --provider=travis --slug=redaxmedia --background-run --background-interval=60
+chroma-feedback --provider=jenkins --host=http://localhost:8080 --slug=redaxscript
 ```
 
 Monitor each repositories of `redaxmedia` and `redaxscript` on `Travis` one time:
 
 ```
 chroma-feedback --provider=travis --slug=redaxmedia --slug=redaxscript
+```
+
+Monitor each repositories of `redaxmedia` on `Travis` every minute:
+
+```
+chroma-feedback --provider=travis --slug=redaxmedia --background-run --background-interval=60
 ```
 
 
