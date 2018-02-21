@@ -19,7 +19,7 @@ def fetch_data(slug):
 
 
 def normalize_data(project):
-	return \
+	return\
 	[
 		{
 			'provider': 'Travis CI',
