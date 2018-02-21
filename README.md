@@ -60,6 +60,18 @@ chroma-feedback [options]
 Examples
 --------
 
+Monitor the `redaxscript` repository of `redaxmedia` on `AppVeyor` one time:
+
+```
+chroma-feedback --provider=appveyor --slug=redaxmedia/redaxscript
+```
+
+Monitor the `redaxscript` repository of `redaxscript` on `Circle CI` one time:
+
+```
+chroma-feedback --provider=circle --slug=github/redaxscript/redaxscript
+```
+
 Monitor each repositories of `redaxmedia` on `Travis CI` every minute:
 
 ```
@@ -72,19 +84,14 @@ Monitor each repositories of `redaxmedia` and `redaxscript` on `Travis CI` one t
 chroma-feedback --provider=travis --slug=redaxmedia --slug=redaxscript
 ```
 
-Monitor the `redaxscript` repository of `redaxmedia` on `AppVeyor` one time:
-
-```
-chroma-feedback --provider=appveyor --slug=redaxmedia/redaxscript
-```
-
 
 Providers
 ---------
 
 | Name        | Value    |
 |-------------|----------|
-| AppVeyor    | appveyor |
+| AppVeyor    | appveyor | 
+| Circle CI   | circle   |
 | Travis CI   | travis   |
 
 

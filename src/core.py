@@ -1,8 +1,10 @@
 from __future__ import print_function
 import os
 import threading
-import src.provider as provider
 import src.color as color
+import src.provider.appveyor as appveyor
+import src.provider.circle as circle
+import src.provider.travis as travis
 import src.wording as wording
 
 try:
@@ -18,7 +20,7 @@ except DaemonNotFound:
 
 
 def run(args):
-	data = provider.mine_data(args)
+	data = mine_data(args)
 
 	# handle data
 
@@ -48,6 +50,24 @@ def run(args):
 		]).start()
 
 
+def mine_data(args):
+	data = []
+	for provider in args.provider:
+		for slug in args.slug:
+			data.extend(fetch_data(provider, slug))
+	return data
+
+
+def fetch_data(provider, slug):
+	if provider == 'appveyor':
+		return appveyor.fetch_data(slug)
+	if provider == 'circle':
+		return circle.fetch_data(slug)
+	if provider == 'travis':
+		return travis.fetch_data(slug)
+	return []
+
+
 def process_status(data):
 	status = 'passed'
 
@@ -55,7 +75,7 @@ def process_status(data):
 
 	for item in data:
 		if item['active'] is True:
-			if item['process'] is True:
+			if item['status'] == 'process':
 				print(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(item['slug'], item['provider']))
 				if status != 'errored' and status != 'failed':
 					status = 'process'
@@ -72,7 +92,6 @@ def process_status(data):
 
 
 def process_device(status):
-	print()
 	for device in device_manager.devices:
 		if status == 'process' and static(device.fx, [255, 255, 0]):
 			print(wording.get('setting_process').format(device.name) + wording.get('point'))
