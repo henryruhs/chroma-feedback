@@ -25,4 +25,3 @@ def normalize_status(data):
 	if data['color'] == 'red':
 		return 'failed'
 	return 'passed'
-
