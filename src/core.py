@@ -97,7 +97,7 @@ def process_data(data):
 				if status != 'failed':
 					status = 'errored'
 			if item['status'] == 'failed':
-				message.extend(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug'], item['provider']))
+				message.append(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug'], item['provider']))
 				status = 'failed'
 	return\
 	{

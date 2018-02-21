@@ -22,6 +22,10 @@ def normalize_data(data):
 
 
 def normalize_status(data):
+	if 'anime' in data['color']:
+		return 'process'
+	if data['color'] == 'grey':
+		return 'errored'
 	if data['color'] == 'red':
 		return 'failed'
 	return 'passed'
