@@ -9,23 +9,23 @@ def fetch_data(host, slug):
 	return []
 
 
-def normalize_data(data):
+def normalize_data(project):
 	return\
 	[
 		{
 			'provider': 'Jenkins',
-			'slug': data['displayName'],
+			'slug': project['displayName'],
 			'active': True,
-			'status': normalize_status(data)
+			'status': normalize_status(project)
 		}
 	]
 
 
-def normalize_status(data):
-	if 'anime' in data['color']:
+def normalize_status(project):
+	if 'anime' in project['color']:
 		return 'process'
-	if data['color'] == 'grey':
+	if project['color'] == 'grey':
 		return 'errored'
-	if data['color'] == 'red':
+	if project['color'] == 'red':
 		return 'failed'
 	return 'passed'

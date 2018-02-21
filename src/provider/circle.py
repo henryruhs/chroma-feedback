@@ -1,29 +1,35 @@
 import requests
 
 
-def fetch_data(slug):
-	response = requests.get('https://circleci.com/api/v1.1/project/' + slug)
+def fetch_data(slug, token):
+	if slug:
+		response = requests.get('https://circleci.com/api/v1.1/project/' + slug)
+	if token:
+		response = requests.get('https://circleci.com/api/v1.1/recent-builds?circle-token=' + token)
 	if response.status_code == 200:
 		data = response.json()
-		return normalize_data(data[0])
+		for project in data:
+			return normalize_data(project)
 	return []
 
 
-def normalize_data(data):
+def normalize_data(project):
 	return\
 	[
 		{
 			'provider': 'Circle CI',
-			'slug': data['username'] + '/' + data['reponame'],
+			'slug': project['username'] + '/' + project['reponame'],
 			'active': True,
-			'status': normalize_status(data)
+			'status': normalize_status(project)
 		}
 	]
 
 
-def normalize_status(data):
-	if data['lifecycle'] == 'running':
+def normalize_status(project):
+	if project['lifecycle'] == 'running':
 		return 'process'
-	if data['status'] == 'fixed':
+	if project['status'] == 'success' or project['status'] == 'fixed':
 		return 'passed'
-	return data['status']
+	if project['status'] == 'no_tests':
+		return 'errored'
+	return project['status']

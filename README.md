@@ -49,7 +49,9 @@ chroma-feedback [options]
 
 -V, --version
 -P, --provider <provider>
+-H, --host <host>
 -S, --slug <slug>
+-T, --token <token>
 -I, --background-interval <background-interval>
 -B, --background-run
 -D, --dry-run
@@ -57,37 +59,67 @@ chroma-feedback [options]
 ```
 
 
-Examples
+AppVeyor
 --------
 
-Monitor the `redaxscript` repository of `redaxmedia` on `AppVeyor` one time:
+Monitor a single project by slug:
 
 ```
 chroma-feedback --provider=appveyor --slug=redaxmedia/redaxscript
 ```
 
-Monitor the `redaxscript` repository of `redaxscript` on `Circle` one time:
+Monitor multiple projects by authentication:
+
+```
+chroma-feedback --provider=appveyor --token={TOKEN}
+```
+
+
+Circle
+------
+
+Monitor a single project by slug:
 
 ```
 chroma-feedback --provider=circle --slug=github/redaxscript/redaxscript
 ```
 
-Monitor the `redaxscript` on `Jenkins` one time:
+Monitor multiple projects by authentication:
 
 ```
-chroma-feedback --provider=jenkins --host=http://localhost:8080 --slug=redaxscript
+chroma-feedback --provider=circle --token={TOKEN}
 ```
 
-Monitor each repositories of `redaxmedia` and `redaxscript` on `Travis` one time:
+
+Jenkins
+-------
+
+Monitor a single project by slug:
 
 ```
-chroma-feedback --provider=travis --slug=redaxmedia --slug=redaxscript
+chroma-feedback --provider=jenkins --host={HOST} --slug=redaxscript
 ```
 
-Monitor each repositories of `redaxmedia` on `Travis` every minute:
+Monitor multiple projects by slug:
 
 ```
-chroma-feedback --provider=travis --slug=redaxmedia --background-run --background-interval=60
+chroma-feedback --provider=jenkins --host={HOST} --slug=redaxscript --slug=wordpress
+```
+
+
+Travis
+------
+
+Monitor a single project by slug:
+
+```
+chroma-feedback --provider=travis --slug=redaxscript/redaxscript
+```
+
+Monitor multiple projects by user:
+
+```
+chroma-feedback --provider=travis --slug=redaxmedia
 ```
 
 
@@ -96,7 +128,7 @@ Providers
 
 | Name     | Value    |
 |----------|----------|
-| AppVeyor | appveyor | 
+| AppVeyor | appveyor |
 | Circle   | circle   |
 | Jenkins  | jenkins  |
 | Travis   | travis   |
