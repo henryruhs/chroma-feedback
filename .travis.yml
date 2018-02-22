@@ -6,7 +6,10 @@ python:
 - 3.6
 
 install:
+- pip install requests
 - pip install pylint
+- pip install pytest
 
 script:
-- pylint bin/chroma-feedback src
+- pylint bin/chroma-feedback src tests
+- pytest tests

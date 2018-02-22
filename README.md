@@ -1,7 +1,7 @@
 Chroma Feedback
 ===============
 
-> Turn your Razer keyboard, mouse or headphone into a extreme feedback device for Travis CI.
+> Turn your Razer keyboard, mouse or headphone into a extreme feedback device.
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/chroma-feedback.svg)](https://travis-ci.org/redaxmedia/chroma-feedback)
 [![PyPI](https://img.shields.io/pypi/v/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
@@ -48,7 +48,10 @@ Usage
 chroma-feedback [options]
 
 -V, --version
+-P, --provider <provider>
+-H, --host <host>
 -S, --slug <slug>
+-T, --token <token>
 -I, --background-interval <background-interval>
 -B, --background-run
 -D, --dry-run
@@ -56,26 +59,79 @@ chroma-feedback [options]
 ```
 
 
-Examples
+AppVeyor
 --------
 
-Monitor each repositories of `redaxmedia` every minute:
+Monitor a single project by slug:
 
 ```
-chroma-feedback --slug=redaxmedia --background-run --background-interval=60
+chroma-feedback --provider=appveyor --slug=redaxmedia/redaxscript
 ```
 
-Monitor each repositories of `redaxmedia` and `redaxscript` one time:
+Monitor multiple projects by authentication:
 
 ```
-chroma-feedback --slug=redaxmedia --slug=redaxscript
+chroma-feedback --provider=appveyor --token={TOKEN}
 ```
 
-Monitor the `chroma-feedback` repository of `redaxmedia` one time:
+
+Circle
+------
+
+Monitor a single project by slug:
 
 ```
-chroma-feedback --slug=redaxmedia/chroma-feedback
+chroma-feedback --provider=circle --slug=github/redaxscript/redaxscript
 ```
+
+Monitor multiple projects by authentication:
+
+```
+chroma-feedback --provider=circle --token={TOKEN}
+```
+
+
+Jenkins
+-------
+
+Monitor a single project by slug:
+
+```
+chroma-feedback --provider=jenkins --host={HOST} --slug=redaxscript
+```
+
+Monitor multiple projects by slug:
+
+```
+chroma-feedback --provider=jenkins --host={HOST} --slug=redaxscript --slug=wordpress
+```
+
+
+Travis
+------
+
+Monitor a single project by slug:
+
+```
+chroma-feedback --provider=travis --slug=redaxscript/redaxscript
+```
+
+Monitor multiple projects by user:
+
+```
+chroma-feedback --provider=travis --slug=redaxmedia
+```
+
+
+Providers
+---------
+
+| Name     | Value    |
+|----------|----------|
+| AppVeyor | appveyor |
+| Circle   | circle   |
+| Jenkins  | jenkins  |
+| Travis   | travis   |
 
 
 Errors
