@@ -35,7 +35,7 @@ def normalize_data(project, build):
 
 
 def normalize_status(build):
-	if 'finished' in build and build['finished'] is None:
+	if build['status'] == 'running':
 		return 'process'
 	if build['status'] == 'success':
 		return 'passed'
