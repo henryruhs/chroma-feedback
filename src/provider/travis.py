@@ -2,7 +2,7 @@ import requests
 
 
 def fetch_data(slug):
-	response = requests.get('https://api.travis-ci.org/repos/' + slug,
+	response = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
 	{
 		'Accept': 'application/vnd.travis-ci.2+json'
 	})

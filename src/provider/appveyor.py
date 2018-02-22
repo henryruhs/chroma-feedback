@@ -5,7 +5,7 @@ def fetch_data(slug, token):
 	if slug:
 		response = requests.get('https://ci.appveyor.com/api/projects/' + slug)
 	if token:
-		response = requests.get('https://ci.appveyor.com/api/projects',
+		response = requests.get('https://ci.appveyor.com/api/projects', headers =
 		{
 			'Authorization': 'Bearer ' + token
 		})

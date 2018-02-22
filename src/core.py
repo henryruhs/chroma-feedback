@@ -20,22 +20,12 @@ except DaemonNotFound:
 def run(args):
 	data = miner.mine_data(args)
 
-	# handle data
-
-	if len(data) == 0:
-		exit(wording.get('data_no') + wording.get('exclamation_mark'))
-
-	# print status
+	# process data
 
 	result = process_data(data)
 	print_message(result)
 
-	# handle device
-
-	if len(device_manager.devices) == 0:
-		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-
-	# print device
+	# process device
 
 	if args.dry_run is False:
 		result = process_device(result['status'])
@@ -44,7 +34,7 @@ def run(args):
 	# handle thread
 
 	if args.background_run is True:
-		threading.Timer(args.background_interval, run,
+		threading.Timer(args.background_interval, run, args =
 		[
 			args
 		]).start()
@@ -53,6 +43,11 @@ def run(args):
 def process_data(data):
 	message = []
 	status = 'passed'
+
+	# handle data
+
+	if len(data) == 0:
+		exit(wording.get('data_no') + wording.get('exclamation_mark'))
 
 	# process data
 
@@ -80,6 +75,11 @@ def process_data(data):
 
 def process_device(status):
 	message = []
+
+	# handle device
+
+	if len(device_manager.devices) == 0:
+		exit(wording.get('device_no') + wording.get('exclamation_mark'))
 
 	# process device
 
