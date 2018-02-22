@@ -18,7 +18,7 @@ setup(
 	url = 'https://github.com/redaxmedia/chroma-feedback',
 	author = 'Henry Ruhs',
 	author_email = 'info@redaxmedia.com',
-	keywords = 'razer chroma appveyor travis ci',
+	keywords = 'razer chroma appveyor circle jenkins travis ci',
 	packages =
 	[
 		'src'

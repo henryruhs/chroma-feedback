@@ -8,4 +8,4 @@ def test_fetch_data_slug():
 
 def test_fetch_data_user():
 	data = travis.fetch_data('redaxmedia')
-	assert len(data) > 1
+	assert len(data) > 0
