@@ -16,7 +16,8 @@ def fetch_data(slug, token):
 		if 'builds' in data[0]:
 			result = []
 			for project in data:
-				result.extend(normalize_data(project, project['builds'][0]))
+				if project['builds']:
+					result.extend(normalize_data(project, project['builds'][0]))
 			return result
 	return []
 
