@@ -1,0 +1,15 @@
+build: false
+
+matrix:
+ - PYTHON: C:\\Python36-x64
+   PYTHON_VERSION: 3.6.0
+   PYTHON_ARCH: 64
+
+install:
+- pip install requests
+- pip install pylint
+- pip install pytest
+
+test_script:
+- pylint bin/chroma-feedback src tests
+- pytest tests

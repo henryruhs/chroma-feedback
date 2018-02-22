@@ -4,7 +4,7 @@ from src.provider import appveyor
 
 
 def test_fetch_data_slug():
-	data = appveyor.fetch_data('redaxmedia/redaxscript', None)
+	data = appveyor.fetch_data('redaxmedia/chroma-feedback', None)
 	assert len(data) == 1
 
 
