@@ -1,0 +1,14 @@
+machine:
+	python:
+		version: 3.5.1
+
+dependencies:
+	post:
+	- pip install requests
+	- pip install pylint
+	- pip install pytest
+
+test:
+	override:
+	- pylint bin/chroma-feedback src tests
+	- pytest tests

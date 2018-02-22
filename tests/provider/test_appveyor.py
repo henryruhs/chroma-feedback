@@ -10,8 +10,7 @@ def test_fetch_data_slug():
 
 def test_fetch_data_user():
 	if 'APPVEYOR_TOKEN' in os.environ:
-		token = os.environ['APPVEYOR_TOKEN']
-		data = appveyor.fetch_data(None, token)
+		data = appveyor.fetch_data(None, os.environ['APPVEYOR_TOKEN'])
 		assert len(data) > 0
 	else:
 		pytest.skip('APPVEYOR_TOKEN not defined')

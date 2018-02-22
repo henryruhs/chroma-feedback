@@ -4,6 +4,7 @@ Chroma Feedback
 > Turn your Razer keyboard, mouse or headphone into a extreme feedback device.
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/chroma-feedback.svg)](https://travis-ci.org/redaxmedia/chroma-feedback)
+[![Build Status](https://img.shields.io/circleci/project/github/redaxmedia/chroma-feedback)](https://circleci.com/gh/redaxmedia/chroma-feedback)
 [![PyPI](https://img.shields.io/pypi/v/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
 [![License](https://img.shields.io/pypi/l/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
 
@@ -81,7 +82,7 @@ Circle
 Monitor a single project by slug:
 
 ```
-chroma-feedback --provider=circle --slug=github/redaxscript/redaxscript
+chroma-feedback --provider=circle --slug=github/redaxmedia/chrome-feedback
 ```
 
 Monitor multiple projects by authentication:
@@ -113,7 +114,7 @@ Travis
 Monitor a single project by slug:
 
 ```
-chroma-feedback --provider=travis --slug=redaxscript/redaxscript
+chroma-feedback --provider=travis --slug=redaxmedia/chrome-feedback
 ```
 
 Monitor multiple projects by user:
