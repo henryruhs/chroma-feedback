@@ -2,10 +2,7 @@ from __future__ import print_function
 import os
 import threading
 import src.color as color
-import src.provider.appveyor as appveyor
-import src.provider.circle as circle
-import src.provider.jenkins as jenkins
-import src.provider.travis as travis
+import src.miner as miner
 import src.wording as wording
 
 try:
@@ -21,7 +18,7 @@ except DaemonNotFound:
 
 
 def run(args):
-	data = mine_data(args)
+	data = miner.mine_data(args)
 
 	# handle data
 
@@ -56,29 +53,6 @@ def run(args):
 		[
 			args
 		]).start()
-
-
-def mine_data(args):
-	data = []
-	for provider in args.provider:
-		if args.slug:
-			for slug in args.slug:
-				data.extend(fetch_data(provider, args.host, slug, None))
-		if args.token:
-			data.extend(fetch_data(provider, args.host, None, args.token))
-	return data
-
-
-def fetch_data(provider, host, slug, token):
-	if provider == 'appveyor':
-		return appveyor.fetch_data(slug, token)
-	if provider == 'circle':
-		return circle.fetch_data(slug, token)
-	if provider == 'jenkins':
-		return jenkins.fetch_data(host, slug)
-	if provider == 'travis':
-		return travis.fetch_data(slug)
-	return []
 
 
 def process_data(data):
