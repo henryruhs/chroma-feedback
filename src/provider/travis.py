@@ -2,7 +2,7 @@ import requests
 
 
 def fetch_data(slug):
-	response = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
+	response = requests.get('https://api.travis-ci.org/repos/' + slug,
 	{
 		'Accept': 'application/vnd.travis-ci.2+json'
 	})
@@ -22,7 +22,7 @@ def normalize_data(project):
 	return\
 	[
 		{
-			'provider': 'Travis CI',
+			'provider': 'Travis',
 			'slug': project['slug'],
 			'active': project['active'],
 			'status': normalize_status(project)

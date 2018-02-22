@@ -28,10 +28,7 @@ def run(args):
 	# print status
 
 	result = process_data(data)
-	if 'message' in result:
-		for message in result['message']:
-			print(message)
-		print()
+	print_message(result)
 
 	# handle device
 
@@ -42,14 +39,12 @@ def run(args):
 
 	if args.dry_run is False:
 		result = process_device(result['status'])
-		if 'message' in result:
-			for message in result['message']:
-				print(message)
+		print_message(result)
 
 	# handle thread
 
 	if args.background_run is True:
-		threading.Timer(args.background_interval, run, args =
+		threading.Timer(args.background_interval, run,
 		[
 			args
 		]).start()
@@ -114,6 +109,12 @@ def pulsate(fx, rgb):
 	if fx.has('logo') and fx.has('scroll'):
 		return fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
 	return fx.breath_single(rgb[0], rgb[1], rgb[2])
+
+
+def print_message(result):
+	if 'message' in result:
+		for message in result['message']:
+			print(message)
 
 
 def destroy(number, frame):
