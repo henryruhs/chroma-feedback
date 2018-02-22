@@ -46,7 +46,7 @@ def run(args):
 	if args.dry_run is False:
 		result = process_device(result['status'])
 		if 'message' in result:
-			for message in result:
+			for message in result['message']:
 				print(message)
 
 	# handle thread
