@@ -26,7 +26,7 @@ def normalize_data(project, build):
 	return\
 	[
 		{
-			'provider': 'appVeyor',
+			'provider': 'appveyor',
 			'slug': project['accountName'] + '/' + project['slug'],
 			'active': True,
 			'status': normalize_status(build)
