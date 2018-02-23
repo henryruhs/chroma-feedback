@@ -64,57 +64,49 @@ chroma-feedback [options]
 Examples
 --------
 
-**AppVeyor**
-
-Monitor a single project by slug:
+Monitor a single project by slug on AppVeyor:
 
 ```
 chroma-feedback --provider=appveyor --slug=redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by authentication:
+Monitor multiple projects by authentication on AppVeyor:
 
 ```
 chroma-feedback --provider=appveyor --token={TOKEN}
 ```
 
-**Circle**
-
-Monitor a single project by slug:
+Monitor a single project by slug on Circle:
 
 ```
 chroma-feedback --provider=circle --slug=github/redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by authentication:
+Monitor multiple projects by authentication on Circle:
 
 ```
 chroma-feedback --provider=circle --token={TOKEN}
 ```
 
-**Jenkins**
-
-Monitor a single project by slug:
+Monitor a single project by slug on Jenkins:
 
 ```
 chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG}
 ```
 
-Monitor multiple projects by slug:
+Monitor multiple projects by slug on Jenkins:
 
 ```
 chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG} --slug={SLUG}
 ```
 
-**Travis**
-
-Monitor a single project by slug:
+Monitor a single project by slug on Travis:
 
 ```
 chroma-feedback --provider=travis --slug=redaxmedia/chrome-feedback
 ```
 
-Monitor multiple projects by user:
+Monitor multiple projects by user on Travis:
 
 ```
 chroma-feedback --provider=travis --slug=redaxmedia
