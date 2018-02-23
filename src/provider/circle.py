@@ -17,7 +17,7 @@ def normalize_data(project):
 	return\
 	[
 		{
-			'provider': 'Circle',
+			'provider': 'circle',
 			'slug': project['username'] + '/' + project['reponame'],
 			'active': True,
 			'status': normalize_status(project)

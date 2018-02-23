@@ -13,7 +13,7 @@ def normalize_data(project):
 	return\
 	[
 		{
-			'provider': 'Jenkins',
+			'provider': 'jenkins',
 			'slug': project['displayName'],
 			'active': True,
 			'status': normalize_status(project)

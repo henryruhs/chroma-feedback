@@ -22,7 +22,7 @@ def normalize_data(project):
 	return\
 	[
 		{
-			'provider': 'Travis',
+			'provider': 'travis',
 			'slug': project['slug'],
 			'active': project['active'],
 			'status': normalize_status(project)
