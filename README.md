@@ -61,8 +61,10 @@ chroma-feedback [options]
 ```
 
 
-AppVeyor
+Examples
 --------
+
+**AppVeyor**
 
 Monitor a single project by slug:
 
@@ -76,9 +78,7 @@ Monitor multiple projects by authentication:
 chroma-feedback --provider=appveyor --token={TOKEN}
 ```
 
-
-Circle
-------
+**Circle**
 
 Monitor a single project by slug:
 
@@ -92,9 +92,7 @@ Monitor multiple projects by authentication:
 chroma-feedback --provider=circle --token={TOKEN}
 ```
 
-
-Jenkins
--------
+**Jenkins**
 
 Monitor a single project by slug:
 
@@ -108,9 +106,7 @@ Monitor multiple projects by slug:
 chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG} --slug={SLUG}
 ```
 
-
-Travis
-------
+**Travis**
 
 Monitor a single project by slug:
 
