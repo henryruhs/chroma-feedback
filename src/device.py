@@ -7,7 +7,7 @@ def process_device(data, status):
 	# process data
 
 	for device in data:
-		if status == 'passed': # and static(device.fx, [0, 255, 0]):
+		if status == 'passed' and static(device.fx, [0, 255, 0]):
 			message.append(wording.get('setting_passed').format(device.name) + wording.get('point'))
 		if status == 'process' and static(device.fx, [255, 255, 0]):
 			message.append(wording.get('setting_process').format(device.name) + wording.get('point'))
