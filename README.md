@@ -125,17 +125,6 @@ chroma-feedback --provider=travis --slug=redaxmedia
 ```
 
 
-Providers
----------
-
-| Name     | Value    |
-|----------|----------|
-| AppVeyor | appveyor |
-| Circle   | circle   |
-| Jenkins  | jenkins  |
-| Travis   | travis   |
-
-
 Errors
 ------
 
