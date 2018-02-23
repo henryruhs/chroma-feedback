@@ -1,8 +1,8 @@
 from __future__ import print_function
 import os
 import threading
-import src.color as color
 import src.miner as miner
+import src.reporter as reporter
 import src.wording as wording
 
 try:
@@ -27,9 +27,9 @@ def run(args):
 
 	# process data
 
-	result = process_data(data)
+	result = reporter.process_data(data)
 	if result:
-		print_message(result)
+		reporter.print_result(result)
 		print()
 
 	# handle device
@@ -42,7 +42,7 @@ def run(args):
 	if args.dry_run is False:
 		result = process_device(result['status'])
 		if result:
-			print_message(result)
+			reporter.print_result(result)
 			print()
 
 	# handle thread
@@ -54,44 +54,16 @@ def run(args):
 		]).start()
 
 
-def process_data(data):
-	message = []
-	status = 'passed'
-
-	# process data
-
-	for item in data:
-		if item['active'] is True:
-			if item['status'] == 'process':
-				message.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(item['slug'], item['provider']))
-				if status != 'errored' and status != 'failed':
-					status = 'process'
-			if item['status'] == 'passed':
-				message.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(item['slug'], item['provider']))
-			if item['status'] == 'errored':
-				message.append(wording.get('cross') + ' ' + wording.get('build_errored').format(item['slug'], item['provider']))
-				if status != 'failed':
-					status = 'errored'
-			if item['status'] == 'failed':
-				message.append(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(item['slug'], item['provider']))
-				status = 'failed'
-	return\
-	{
-		'message': message,
-		'status': status
-	}
-
-
 def process_device(status):
 	message = []
 
 	# process device
 
 	for device in device_manager.devices:
-		if status == 'process' and static(device.fx, [255, 255, 0]):
-			message.append(wording.get('setting_process').format(device.name) + wording.get('point'))
 		if status == 'passed' and static(device.fx, [0, 255, 0]):
 			message.append(wording.get('setting_passed').format(device.name) + wording.get('point'))
+		if status == 'process' and static(device.fx, [255, 255, 0]):
+			message.append(wording.get('setting_process').format(device.name) + wording.get('point'))
 		if status == 'errored' and pulsate(device.fx, [255, 255, 255]):
 			message.append(wording.get('setting_errored').format(device.name) + wording.get('point'))
 		if status == 'failed' and pulsate(device.fx, [255, 0, 0]):
@@ -113,12 +85,6 @@ def pulsate(fx, rgb):
 	if fx.has('logo') and fx.has('scroll'):
 		return fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
 	return fx.breath_single(rgb[0], rgb[1], rgb[2])
-
-
-def print_message(result):
-	if 'message' in result:
-		for message in result['message']:
-			print(message)
 
 
 def destroy(number, frame):
