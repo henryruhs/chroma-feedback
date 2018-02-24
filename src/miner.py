@@ -1,7 +1,4 @@
-import src.provider.appveyor as appveyor
-import src.provider.circle as circle
-import src.provider.jenkins as jenkins
-import src.provider.travis as travis
+from src.provider import appveyor, circle, jenkins, travis
 
 
 def process(args):

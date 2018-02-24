@@ -1,4 +1,4 @@
-import src.wording as wording
+from src import wording
 
 
 def process(data, status):

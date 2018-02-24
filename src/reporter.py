@@ -1,7 +1,5 @@
 from __future__ import print_function
-from src.metadata import metadata
-import src.color as color
-import src.wording as wording
+from src import color, metadata, wording
 
 
 def process(data):
@@ -33,7 +31,7 @@ def process(data):
 
 
 def header():
-	print(metadata['name'] + ' ' + metadata['version'] + ' ' + wording.get('by') + ' ' + metadata['author'])
+	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
 
 
 def log(result):

@@ -9,3 +9,7 @@ metadata =\
 	'author_email': 'info@redaxmedia.com',
 	'url': 'https://github.com/redaxmedia/chroma-feedback'
 }
+
+
+def get(key):
+	return metadata[key]

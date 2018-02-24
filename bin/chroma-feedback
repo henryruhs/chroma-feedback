@@ -3,12 +3,12 @@
 import signal
 from argparse import ArgumentParser
 from src.core import run, destroy
-from src.metadata import metadata
+from src import metadata
 
 signal.signal(signal.SIGINT, destroy)
 
 program = ArgumentParser()
-program.add_argument('-V', '--version', action = 'version', version = metadata['name'] + ' ' + metadata['version'])
+program.add_argument('-V', '--version', action = 'version', version = metadata.get('name') + ' ' + metadata.get('version'))
 program.add_argument('-P', '--provider', action = 'append', required = True)
 program.add_argument('-H', '--host')
 program.add_argument('-S', '--slug', action = 'append')

@@ -1,4 +1,4 @@
-import src.color as color
+from src import color
 
 
 def test_red():

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from setuptools import setup
-from src.metadata import metadata
+from src import metadata
 
 try:
 	from pypandoc import convert
@@ -10,18 +10,19 @@ except ImportError:
 	long_description = open('README.md').read()
 
 setup(
-	name = metadata['name'],
-	description =  metadata['description'],
+	name = metadata.get('name'),
+	description =  metadata.get('description'),
 	long_description = long_description,
-	version = metadata['version'],
-	license = metadata['license'],
-	keywords = metadata['keywords'],
-	author = metadata['author'],
-	author_email = metadata['author_email'],
-	url = metadata['url'],
+	version = metadata.get('version'),
+	license = metadata.get('license'),
+	keywords = metadata.get('keywords'),
+	author = metadata.get('author'),
+	author_email = metadata.get('author_email'),
+	url = metadata.get('url'),
 	packages =
 	[
-		'src'
+		'src',
+		'src/provider'
 	],
 	scripts =
 	[

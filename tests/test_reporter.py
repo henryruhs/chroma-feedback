@@ -1,4 +1,4 @@
-import src.reporter as reporter
+from src import reporter
 
 
 def test_process_passed():
