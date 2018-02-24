@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
 import signal
-import argparse
+from argparse import ArgumentParser
 from src.version import __version__
 from src.core import run, destroy
 
 signal.signal(signal.SIGINT, destroy)
 
-program = argparse.ArgumentParser()
+program = ArgumentParser()
 program.add_argument('-P', '--provider', action='append', required=True)
 program.add_argument('-H', '--host')
 program.add_argument('-S', '--slug', action='append')

@@ -4,7 +4,7 @@ import src.provider.jenkins as jenkins
 import src.provider.travis as travis
 
 
-def mine_data(args):
+def process_data(args):
 	data = []
 	for provider in args.provider:
 		if args.slug:

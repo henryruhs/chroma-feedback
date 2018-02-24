@@ -19,7 +19,7 @@ except DaemonNotFound:
 
 
 def run(args):
-	data = miner.mine_data(args)
+	data = miner.process_data(args)
 
 	# handle data
 
