@@ -1,7 +1,7 @@
 from __future__ import print_function
-from src import device, miner, reporter, wording
 import os
 import threading
+from src import device, miner, reporter, wording
 
 try:
 	from openrazer.client import DeviceManager, DaemonNotFound
@@ -36,14 +36,17 @@ def run(args):
 		reporter.log(result)
 		print()
 
-	# handle device
-
-	if len(device_manager.devices) == 0:
-		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-
-	# process device
+	# handle dry run
 
 	if args.dry_run is False:
+
+		# handle device
+
+		if len(device_manager.devices) == 0:
+			exit(wording.get('device_no') + wording.get('exclamation_mark'))
+
+		# process device
+
 		result = device.process(device_manager.devices, result['status'])
 		if result:
 			reporter.log(result)

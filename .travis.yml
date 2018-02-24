@@ -15,4 +15,4 @@ install:
 script:
 - pylint bin/chroma-feedback src tests
 - pytest tests
-- chroma-feedback --provider=travis --slug=chroma-feedback
+- chroma-feedback --version
