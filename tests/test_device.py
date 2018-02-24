@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock
+from mock import MagicMock
 import src.device as device
 
 mock = MagicMock()
