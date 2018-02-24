@@ -1,8 +1,8 @@
 import src.reporter as reporter
 
 
-def test_process_data_passed():
-	data = reporter.process_data(data =
+def test_process_passed():
+	data = reporter.process(data =
 	[
 		{
 			'provider': 'travis',
@@ -15,8 +15,8 @@ def test_process_data_passed():
 	assert data['status'] == 'passed'
 
 
-def test_process_data_process():
-	data = reporter.process_data(data =
+def test_process_process():
+	data = reporter.process(data =
 	[
 		{
 			'provider': 'appveyor',
@@ -36,8 +36,8 @@ def test_process_data_process():
 	assert data['status'] == 'process'
 
 
-def test_process_data_errored():
-	data = reporter.process_data(data =
+def test_process_errored():
+	data = reporter.process(data =
 	[
 		{
 			'provider': 'appveyor',
@@ -57,8 +57,8 @@ def test_process_data_errored():
 	assert data['status'] == 'errored'
 
 
-def test_process_data_failed():
-	data = reporter.process_data(data =
+def test_process_failed():
+	data = reporter.process(data =
 	[
 		{
 			'provider': 'appveyor',

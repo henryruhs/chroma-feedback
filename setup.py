@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from setuptools import setup
-from src.version import __version__
+from src.metadata import metadata
 
 try:
 	from pypandoc import convert
@@ -10,15 +10,15 @@ except ImportError:
 	long_description = open('README.md').read()
 
 setup(
-	name = 'chroma-feedback',
-	description = 'Turn your Razer keyboard, mouse or headphone into a extreme feedback device',
+	name = metadata['name'],
+	description =  metadata['description'],
 	long_description = long_description,
-	version = __version__,
-	license = 'GPL-3.0',
-	url = 'https://github.com/redaxmedia/chroma-feedback',
-	author = 'Henry Ruhs',
-	author_email = 'info@redaxmedia.com',
-	keywords = 'razer chroma appveyor circle jenkins travis ci',
+	version = metadata['version'],
+	license = metadata['license'],
+	keywords = metadata['keywords'],
+	author = metadata['author'],
+	author_email = metadata['author_email'],
+	url = metadata['url'],
 	packages =
 	[
 		'src'
@@ -26,5 +26,9 @@ setup(
 	scripts =
 	[
 		'bin/chroma-feedback'
+	],
+	install_requires =
+	[
+		'requests'
 	]
 )

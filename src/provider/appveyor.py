@@ -1,7 +1,7 @@
 import requests
 
 
-def fetch_data(slug, token):
+def fetch(slug, token):
 	if slug:
 		response = requests.get('https://ci.appveyor.com/api/projects/' + slug)
 	if token:
@@ -9,6 +9,9 @@ def fetch_data(slug, token):
 		{
 			'Authorization': 'Bearer ' + token
 		})
+
+	# process response
+
 	if response.status_code == 200:
 		data = response.json()
 		if 'project' and 'build' in data:

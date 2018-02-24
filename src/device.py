@@ -1,7 +1,7 @@
 import src.wording as wording
 
 
-def process_device(data, status):
+def process(data, status):
 	message = []
 
 	# process data
