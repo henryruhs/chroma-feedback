@@ -1,5 +1,5 @@
 from mock import MagicMock
-import src.device as device
+from src import device
 
 mock = MagicMock()
 mock.name = 'Razer Chroma'

@@ -1,10 +1,7 @@
 from __future__ import print_function
+from src import device, miner, reporter, wording
 import os
 import threading
-import src.device as device
-import src.miner as miner
-import src.reporter as reporter
-import src.wording as wording
 
 try:
 	from openrazer.client import DeviceManager, DaemonNotFound

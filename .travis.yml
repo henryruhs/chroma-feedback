@@ -10,7 +10,9 @@ install:
 - pip install pylint
 - pip install pytest
 - pip install mock
+- ./setup.py install
 
 script:
 - pylint bin/chroma-feedback src tests
 - pytest tests
+- chroma-feedback --provider=travis --slug=chroma-feedback

@@ -21,7 +21,8 @@ setup(
 	url = metadata['url'],
 	packages =
 	[
-		'src'
+		'src',
+		'src/provider'
 	],
 	scripts =
 	[

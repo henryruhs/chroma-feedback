@@ -1,7 +1,5 @@
 from __future__ import print_function
-from src.metadata import metadata
-import src.color as color
-import src.wording as wording
+from src import color, metadata, wording
 
 
 def process(data):
