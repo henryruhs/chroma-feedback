@@ -1,9 +1,10 @@
 from __future__ import print_function
+from src.metadata import metadata
 import src.color as color
 import src.wording as wording
 
 
-def process_data(data):
+def process(data):
 	message = []
 	status = 'passed'
 
@@ -31,7 +32,11 @@ def process_data(data):
 	}
 
 
-def print_result(result):
+def header():
+	print(metadata['name'] + ' ' + metadata['version'] + ' ' + wording.get('by') + ' ' + metadata['author'])
+
+
+def log(result):
 	if 'message' in result:
 		for message in result['message']:
 			print(message)

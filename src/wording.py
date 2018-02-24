@@ -13,6 +13,7 @@ wording =\
 	'setting_errored': 'Setting {} to build errored',
 	'setting_failed': 'Setting {} to build failed',
 	'goodbye': 'Goodbye',
+	'by': 'by',
 	'hourglass': u'\u29d7',
 	'tick': u'\u2714',
 	'cross': u'\u2716',

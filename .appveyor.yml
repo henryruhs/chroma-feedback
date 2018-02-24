@@ -10,7 +10,6 @@ environment:
    PYTHON_ARCH: 64
 
 install:
-- pip install requests
 - pip install pylint
 - pip install pytest
 - pip install mock

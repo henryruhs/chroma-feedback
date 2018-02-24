@@ -1,11 +1,14 @@
 import requests
 
 
-def fetch_data(slug):
+def fetch(slug):
 	response = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
 	{
 		'Accept': 'application/vnd.travis-ci.2+json'
 	})
+
+	# process response
+
 	if response.status_code == 200:
 		data = response.json()
 		if 'repo' in data:

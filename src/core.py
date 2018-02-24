@@ -19,7 +19,13 @@ except DaemonNotFound:
 
 
 def run(args):
-	data = miner.process_data(args)
+	if threading.active_count() == 1:
+		reporter.header()
+		print()
+
+	# process miner
+
+	data = miner.process(args)
 
 	# handle data
 
@@ -28,9 +34,9 @@ def run(args):
 
 	# process data
 
-	result = reporter.process_data(data)
+	result = reporter.process(data)
 	if result:
-		reporter.print_result(result)
+		reporter.log(result)
 		print()
 
 	# handle device
@@ -41,9 +47,9 @@ def run(args):
 	# process device
 
 	if args.dry_run is False:
-		result = device.process_device(device_manager.devices, result['status'])
+		result = device.process(device_manager.devices, result['status'])
 		if result:
-			reporter.print_result(result)
+			reporter.log(result)
 			print()
 
 	# handle thread

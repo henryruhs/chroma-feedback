@@ -1,8 +1,11 @@
 import requests
 
 
-def fetch_data(host, slug):
+def fetch(host, slug):
 	response = requests.get(host + '/job/' + slug + '/api/json')
+
+	# process response
+
 	if response.status_code == 200:
 		data = response.json()
 		return normalize_data(data)
