@@ -2,6 +2,7 @@ import requests
 
 
 def fetch(slug, token):
+	response = None
 	if slug:
 		response = requests.get('https://circleci.com/api/v1.1/project/' + slug)
 	if token:
@@ -9,7 +10,7 @@ def fetch(slug, token):
 
 	# process response
 
-	if response.status_code == 200:
+	if response and response.status_code == 200:
 		data = response.json()
 		for project in data:
 			return normalize_data(project)

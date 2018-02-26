@@ -2,6 +2,7 @@ import requests
 
 
 def fetch(slug, token):
+	response = None
 	if slug:
 		response = requests.get('https://ci.appveyor.com/api/projects/' + slug)
 	if token:
@@ -12,7 +13,7 @@ def fetch(slug, token):
 
 	# process response
 
-	if response.status_code == 200:
+	if response and response.status_code == 200:
 		data = response.json()
 		if 'project' and 'build' in data:
 			return normalize_data(data['project'], data['build'])

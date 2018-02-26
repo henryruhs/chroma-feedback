@@ -6,7 +6,7 @@ def fetch(host, slug):
 
 	# process response
 
-	if response.status_code == 200:
+	if response and response.status_code == 200:
 		data = response.json()
 		return normalize_data(data)
 	return []
