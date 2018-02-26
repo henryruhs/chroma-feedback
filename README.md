@@ -64,12 +64,13 @@ chroma-feedback [options]
 Providers
 ---------
 
-| Name     | Project by slug | Projects by user | Projects by token |
-|----------|-----------------|------------------|-------------------|
-| AppVeyor |        ✔        |         ✖        |         ✔         |
-| Circle   |        ✔        |         ✖        |         ✔         |
-| Jenkins  |        ✔        |         ✖        |         ✖         |
-| Travis   |        ✔        |         ✔        |         ✖         |
+| Name     | Key      | Slug | User | Token |
+|----------|----------|------|------|-------|
+| AppVeyor | appveyor | ✔    | ✖    | ✔     |
+| Circle   | circle   | ✔    | ✖    | ✔     |
+| Jenkins  | jenkins  | ✔    | ✖    | ✖     |
+| Travis   | travis   | ✔    | ✔    | ✖     |
+
 
 
 Examples
