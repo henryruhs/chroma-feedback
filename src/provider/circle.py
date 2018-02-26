@@ -24,16 +24,16 @@ def normalize_data(project):
 			'provider': 'circle',
 			'slug': project['username'] + '/' + project['reponame'],
 			'active': True,
-			'status': normalize_status(project)
+			'status': normalize_status(project['status'])
 		}
 	]
 
 
-def normalize_status(project):
-	if project['lifecycle'] == 'running':
-		return 'process'
-	if project['status'] == 'success' or project['status'] == 'fixed':
+def normalize_status(status):
+	if status == 'success' or status == 'fixed':
 		return 'passed'
-	if project['status'] == 'no_tests':
+	if status == 'queued' or status == 'running' or status == 'scheduled':
+		return 'process'
+	if status == 'canceled' or status == 'no_tests':
 		return 'errored'
-	return project['status']
+	return 'failed'

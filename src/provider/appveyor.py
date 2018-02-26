@@ -33,14 +33,16 @@ def normalize_data(project, build):
 			'provider': 'appveyor',
 			'slug': project['accountName'] + '/' + project['slug'],
 			'active': True,
-			'status': normalize_status(build)
+			'status': normalize_status(build['status'])
 		}
 	]
 
 
-def normalize_status(build):
-	if build['status'] == 'running':
-		return 'process'
-	if build['status'] == 'success':
+def normalize_status(status):
+	if status == 'success':
 		return 'passed'
-	return build['status']
+	if status == 'queued' or status == 'running':
+		return 'process'
+	if status == 'canceled':
+		return 'errored'
+	return 'failed'

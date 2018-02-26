@@ -28,12 +28,16 @@ def normalize_data(project):
 			'provider': 'travis',
 			'slug': project['slug'],
 			'active': project['active'],
-			'status': normalize_status(project)
+			'status': normalize_status(project['last_build_state'])
 		}
 	]
 
 
-def normalize_status(project):
-	if project['last_build_finished_at'] is None:
+def normalize_status(status):
+	if status == 'passed':
+		return 'passed'
+	if status == 'started' or status == 'created':
 		return 'process'
-	return project['last_build_state']
+	if status == 'cancelled' or status == 'errored':
+		return 'errored'
+	return 'failed'
