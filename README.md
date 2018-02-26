@@ -127,7 +127,7 @@ chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG} --slug={SLUG}
 Monitor a single project by slug on Travis:
 
 ```
-chroma-feedback --provider=travis --slug=redaxmedia/chrome-feedback
+chroma-feedback --provider=travis --slug=redaxmedia/chroma-feedback
 ```
 
 Monitor multiple projects by user on Travis:

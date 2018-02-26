@@ -34,7 +34,7 @@ def normalize_data(project):
 
 
 def normalize_status(status):
-	if status == 'started' or status == 'created':
+	if status == 'created' or status == 'started':
 		return 'process'
 	if status == 'cancelled' or status == 'errored':
 		return 'errored'
