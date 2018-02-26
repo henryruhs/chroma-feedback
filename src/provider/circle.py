@@ -2,6 +2,7 @@ import requests
 
 
 def fetch(slug, token):
+	response = None
 	if slug:
 		response = requests.get('https://circleci.com/api/v1.1/project/' + slug)
 	if token:
@@ -9,7 +10,7 @@ def fetch(slug, token):
 
 	# process response
 
-	if response.status_code == 200:
+	if response and response.status_code == 200:
 		data = response.json()
 		for project in data:
 			return normalize_data(project)
@@ -23,16 +24,16 @@ def normalize_data(project):
 			'provider': 'circle',
 			'slug': project['username'] + '/' + project['reponame'],
 			'active': True,
-			'status': normalize_status(project)
+			'status': normalize_status(project['status'])
 		}
 	]
 
 
-def normalize_status(project):
-	if project['lifecycle'] == 'running':
+def normalize_status(status):
+	if status == 'queued' or status == 'running' or status == 'scheduled':
 		return 'process'
-	if project['status'] == 'success' or project['status'] == 'fixed':
-		return 'passed'
-	if project['status'] == 'no_tests':
+	if status == 'canceled' or status == 'no_tests':
 		return 'errored'
-	return project['status']
+	if status == 'failed':
+		return 'failed'
+	return 'passed'

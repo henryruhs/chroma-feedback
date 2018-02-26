@@ -2,11 +2,16 @@ import requests
 
 
 def fetch(host, slug):
-	response = requests.get(host + '/job/' + slug + '/api/json')
+	response = None
+	if host and slug:
+		try:
+			response = requests.get(host + '/job/' + slug + '/api/json')
+		except requests.exceptions.ConnectionError:
+			pass
 
 	# process response
 
-	if response.status_code == 200:
+	if response and response.status_code == 200:
 		data = response.json()
 		return normalize_data(data)
 	return []
@@ -19,16 +24,16 @@ def normalize_data(project):
 			'provider': 'jenkins',
 			'slug': project['displayName'],
 			'active': True,
-			'status': normalize_status(project)
+			'status': normalize_status(project['color'])
 		}
 	]
 
 
-def normalize_status(project):
-	if 'anime' in project['color']:
+def normalize_status(color):
+	if 'anime' in color:
 		return 'process'
-	if project['color'] == 'grey':
+	if color == 'grey':
 		return 'errored'
-	if project['color'] == 'red':
+	if color == 'red':
 		return 'failed'
 	return 'passed'

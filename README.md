@@ -64,13 +64,13 @@ chroma-feedback [options]
 Providers
 ---------
 
-| Name     | Key      | Slug | User | Token |
-|----------|----------|------|------|-------|
-| AppVeyor | appveyor | ✔    | ✖    | ✔     |
-| Circle   | circle   | ✔    | ✖    | ✔     |
-| Jenkins  | jenkins  | ✔    | ✖    | ✖     |
-| Travis   | travis   | ✔    | ✔    | ✖     |
-
+| Name     | Host | Slug | Token |
+|----------|------|------|-------|
+| AppVeyor | ✖    | ✔    | ✔     |
+| Circle   | ✖    | ✔    | ✔     |
+| GitLab   | ✔    | ✔    | ✔     |
+| Jenkins  | ✔    | ✔    | ✖     |
+| Travis   | ✖    | ✔    | ✖     |
 
 
 Examples
@@ -82,7 +82,7 @@ Monitor a single project by slug on AppVeyor:
 chroma-feedback --provider=appveyor --slug=redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by authentication on AppVeyor:
+Monitor multiple projects by token on AppVeyor:
 
 ```
 chroma-feedback --provider=appveyor --token={TOKEN}
@@ -94,10 +94,22 @@ Monitor a single project by slug on Circle:
 chroma-feedback --provider=circle --slug=github/redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by authentication on Circle:
+Monitor multiple projects by token on Circle:
 
 ```
 chroma-feedback --provider=circle --token={TOKEN}
+```
+
+Monitor a single project by slug and token on GitLab:
+
+```
+chroma-feedback --provider=gitlab --host={HOST} --slug={SLUG} --token={TOKEN}
+```
+
+Monitor multiple projects by slug and token on GitLab:
+
+```
+chroma-feedback --provider=gitlab --host={HOST} --slug={SLUG} --slug={SLUG} --token={TOKEN}
 ```
 
 Monitor a single project by slug on Jenkins:

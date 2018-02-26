@@ -2,6 +2,7 @@ import requests
 
 
 def fetch(slug, token):
+	response = None
 	if slug:
 		response = requests.get('https://ci.appveyor.com/api/projects/' + slug)
 	if token:
@@ -12,7 +13,7 @@ def fetch(slug, token):
 
 	# process response
 
-	if response.status_code == 200:
+	if response and response.status_code == 200:
 		data = response.json()
 		if 'project' and 'build' in data:
 			return normalize_data(data['project'], data['build'])
@@ -32,14 +33,16 @@ def normalize_data(project, build):
 			'provider': 'appveyor',
 			'slug': project['accountName'] + '/' + project['slug'],
 			'active': True,
-			'status': normalize_status(build)
+			'status': normalize_status(build['status'])
 		}
 	]
 
 
-def normalize_status(build):
-	if build['status'] == 'running':
+def normalize_status(status):
+	if status == 'queued' or status == 'running':
 		return 'process'
-	if build['status'] == 'success':
-		return 'passed'
-	return build['status']
+	if status == 'canceled':
+		return 'errored'
+	if status == 'failed':
+		return 'failed'
+	return 'passed'
