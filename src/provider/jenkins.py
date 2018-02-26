@@ -30,10 +30,10 @@ def normalize_data(project):
 
 
 def normalize_status(color):
-	if color == 'green':
-		return 'passed'
 	if 'anime' in color:
 		return 'process'
 	if color == 'grey':
 		return 'errored'
-	return 'failed'
+	if color == 'red':
+		return 'failed'
+	return 'passed'

@@ -30,10 +30,10 @@ def normalize_data(project):
 
 
 def normalize_status(status):
-	if status == 'success' or status == 'fixed':
-		return 'passed'
 	if status == 'queued' or status == 'running' or status == 'scheduled':
 		return 'process'
 	if status == 'canceled' or status == 'no_tests':
 		return 'errored'
-	return 'failed'
+	if status == 'failed':
+		return 'failed'
+	return 'passed'

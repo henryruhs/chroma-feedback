@@ -39,10 +39,10 @@ def normalize_data(project, build):
 
 
 def normalize_status(status):
-	if status == 'success':
-		return 'passed'
 	if status == 'queued' or status == 'running':
 		return 'process'
 	if status == 'canceled':
 		return 'errored'
-	return 'failed'
+	if status == 'failed':
+		return 'failed'
+	return 'passed'
