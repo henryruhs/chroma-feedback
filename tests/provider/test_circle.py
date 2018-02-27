@@ -19,3 +19,8 @@ def test_fetch_user():
 		assert data[0]['status']
 	else:
 		pytest.skip('CIRCLE_TOKEN not defined')
+
+
+def test_fetch_invalid():
+	data = circle.fetch(None, None, None)
+	assert data == []

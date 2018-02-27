@@ -14,3 +14,8 @@ def test_fetch_user():
 	assert data[0]['provider'] == 'travis'
 	assert data[0]['active'] is True
 	assert data[0]['status']
+
+
+def test_fetch_invalid():
+	data = travis.fetch(None, None)
+	assert data == []
