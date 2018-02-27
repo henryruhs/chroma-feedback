@@ -90,11 +90,11 @@ chroma-feedback --provider=appveyor --token={TOKEN}
 Circle Options
 --------------
 
-| Name  | Type   | Default                 | Mandatory | Support |
-|-------|--------|-------------------------|-----------|---------|
-| Host  | string | https://circleci.com    | optional  | ✔       |
-| Slug  | string |                         | optional  | ✔       |
-| Token | string |                         | optional  | ✔       |
+| Name  | Type   | Default              | Mandatory | Support |
+|-------|--------|----------------------|-----------|---------|
+| Host  | string | https://circleci.com | optional  | ✔       |
+| Slug  | string |                      | optional  | ✔       |
+| Token | string |                      | optional  | ✔       |
 
 
 Circle Examples
@@ -116,11 +116,11 @@ chroma-feedback --provider=circle --token={TOKEN}
 GitLab Options
 --------------
 
-| Name  | Type   | Default                 | Mandatory | Support |
-|-------|--------|-------------------------|-----------|---------|
-| Host  | string | https://gitlab.com      | optional  | ✔       |
-| Slug  | string |                         | required  | ✔       |
-| Token | string |                         | required  | ✔       |
+| Name  | Type   | Default            | Mandatory | Support |
+|-------|--------|--------------------|-----------|---------|
+| Host  | string | https://gitlab.com | optional  | ✔       |
+| Slug  | string |                    | required  | ✔       |
+| Token | string |                    | required  | ✔       |
 
 
 GitLab Examples
