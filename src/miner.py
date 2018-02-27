@@ -1,3 +1,4 @@
+import requests
 from src.provider import appveyor, circle, gitlab, jenkins, travis
 
 
@@ -13,14 +14,17 @@ def process(args):
 
 
 def fetch(provider, host, slug, token):
-	if provider == 'appveyor':
-		return appveyor.fetch(slug, token)
-	if provider == 'circle':
-		return circle.fetch(slug, token)
-	if provider == 'gitlab':
-		return gitlab.fetch(host, slug, token)
-	if provider == 'jenkins':
-		return jenkins.fetch(host, slug)
-	if provider == 'travis':
-		return travis.fetch(slug)
+	try:
+		if provider == 'appveyor':
+			return appveyor.fetch(host, slug, token)
+		if provider == 'circle':
+			return circle.fetch(host, slug, token)
+		if provider == 'gitlab':
+			return gitlab.fetch(host, slug, token)
+		if provider == 'jenkins':
+			return jenkins.fetch(host, slug)
+		if provider == 'travis':
+			return travis.fetch(host, slug)
+	except (requests.exceptions.ConnectionError, requests.exceptions.MissingSchema):
+		pass
 	return []

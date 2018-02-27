@@ -3,14 +3,13 @@ import requests
 
 def fetch(host, slug, token):
 	response = None
-	if host and slug and token:
-		try:
-			response = requests.get(host + '/api/v4/projects/' + slug + '/jobs', headers =
-			{
-				'Private-Token': token
-			})
-		except requests.exceptions.ConnectionError:
-			pass
+	if host is None:
+		host = 'https://gitlab.com'
+	if slug and token:
+		response = requests.get(host + '/api/v4/projects/' + slug + '/jobs', headers =
+		{
+			'Private-Token': token
+		})
 
 	# process response
 

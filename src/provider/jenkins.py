@@ -4,16 +4,14 @@ import requests
 def fetch(host, slug):
 	response = None
 	if host and slug:
-		try:
-			response = requests.get(host + '/job/' + slug + '/api/json')
-		except requests.exceptions.ConnectionError:
-			pass
+		response = requests.get(host + '/job/' + slug + '/api/json')
 
 	# process response
 
 	if response and response.status_code == 200:
 		data = response.json()
-		return normalize_data(data)
+		if data:
+			return normalize_data(data)
 	return []
 
 
