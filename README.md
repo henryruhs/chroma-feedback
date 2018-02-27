@@ -61,76 +61,130 @@ chroma-feedback [options]
 ```
 
 
-Providers
----------
+AppVeyor Options
+----------------
 
-| Name     | Default Host              | Slug | Token | Mandatory         |
-|----------|---------------------------|------|-------|-------------------|
-| AppVeyor | https://ci.appveyor.com   | ✔    | ✔     | Slug or Token     |
-| Circle   | https://circleci.com      | ✔    | ✔     | Slug or Token     |
-| GitLab   | https://gitlab.com        | ✔    | ✔     | Slug and Token    |
-| Jenkins  |                           | ✔    | ✖     | Host and Slug     |
-| Travis   | https://api.travis-ci.org | ✔    | ✖     | Slug              |
+| Name  | Type   | Default                 | Mandatory | Support |
+|-------|--------|-------------------------|-----------|---------|
+| Host  | string | https://ci.appveyor.com | optional  | ✔       |
+| Slug  | string |                         | optional  | ✔       |
+| Token | string |                         | optional  | ✔       |
 
 
-Examples
---------
+AppVeyor Examples
+-----------------
 
-Monitor a single project by slug on AppVeyor:
+Monitor a single project by slug:
 
 ```
 chroma-feedback --provider=appveyor --slug=redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by token on AppVeyor:
+Monitor multiple projects by token:
 
 ```
 chroma-feedback --provider=appveyor --token={TOKEN}
 ```
 
-Monitor a single project by slug on Circle:
+
+Circle Options
+--------------
+
+| Name  | Type   | Default                 | Mandatory | Support |
+|-------|--------|-------------------------|-----------|---------|
+| Host  | string | https://circleci.com    | optional  | ✔       |
+| Slug  | string |                         | optional  | ✔       |
+| Token | string |                         | optional  | ✔       |
+
+
+Circle Examples
+---------------
+
+Monitor a single project by slug:
 
 ```
 chroma-feedback --provider=circle --slug=github/redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by token on Circle:
+Monitor multiple projects by token:
 
 ```
 chroma-feedback --provider=circle --token={TOKEN}
 ```
 
-Monitor a single project by slug and token on GitLab:
+
+GitLab Options
+--------------
+
+| Name  | Type   | Default                 | Mandatory | Support |
+|-------|--------|-------------------------|-----------|---------|
+| Host  | string | https://gitlab.com      | optional  | ✔       |
+| Slug  | string |                         | required  | ✔       |
+| Token | string |                         | required  | ✔       |
+
+
+GitLab Examples
+---------------
+
+Monitor a single project by slug and token:
 
 ```
 chroma-feedback --provider=gitlab --slug={SLUG} --token={TOKEN}
 ```
 
-Monitor multiple projects by slug and token on GitLab:
+Monitor multiple projects by slug and token:
 
 ```
 chroma-feedback --provider=gitlab --slug={SLUG} --slug={SLUG} --token={TOKEN}
 ```
 
-Monitor a single project by slug on Jenkins:
+
+Jenkins Options
+---------------
+
+| Name  | Type   | Default | Mandatory | Support |
+|-------|--------|---------|-----------|---------|
+| Host  | string |         | required  | ✔       |
+| Slug  | string |         | required  | ✔       |
+| Token | string |         |           | ✖       |
+
+
+Jenkins Examples
+----------------
+
+Monitor a single project by slug:
 
 ```
 chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG}
 ```
 
-Monitor multiple projects by slug on Jenkins:
+Monitor multiple projects by slug:
 
 ```
 chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG} --slug={SLUG}
 ```
 
-Monitor a single project by slug on Travis:
+
+Travis Options
+--------------
+
+| Name  | Type   | Default                   | Mandatory | Support |
+|-------|--------|---------------------------|-----------|---------|
+| Host  | string | https://api.travis-ci.org | optional  | ✔       |
+| Slug  | string |                           | required  | ✔       |
+| Token | string |                           |           | ✖       |
+
+
+Travis Examples
+---------------
+
+Monitor a single project by slug:
 
 ```
 chroma-feedback --provider=travis --slug=redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by slug on Travis:
+Monitor multiple projects by slug:
 
 ```
 chroma-feedback --provider=travis --slug=redaxmedia
