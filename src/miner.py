@@ -1,5 +1,5 @@
 import requests
-from src.provider import appveyor, circle, gitlab, jenkins, travis
+from src.provider import appveyor, circle, github, gitlab, jenkins, travis
 
 
 def process(args):
@@ -19,6 +19,8 @@ def fetch(provider, host, slug, token):
 			return appveyor.fetch(host, slug, token)
 		if provider == 'circle':
 			return circle.fetch(host, slug, token)
+		if provider == 'github':
+			return github.fetch(host, slug)
 		if provider == 'gitlab':
 			return gitlab.fetch(host, slug, token)
 		if provider == 'jenkins':
