@@ -1,12 +1,14 @@
 import requests
 
 
-def fetch(slug, token):
+def fetch(host, slug, token):
 	response = None
+	if host is None:
+		host = 'https://ci.appveyor.com'
 	if slug:
-		response = requests.get('https://ci.appveyor.com/api/projects/' + slug)
+		response = requests.get(host + '/api/projects/' + slug)
 	if token:
-		response = requests.get('https://ci.appveyor.com/api/projects', headers =
+		response = requests.get(host + '/api/projects', headers =
 		{
 			'Authorization': 'Bearer ' + token
 		})

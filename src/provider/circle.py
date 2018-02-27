@@ -1,12 +1,14 @@
 import requests
 
 
-def fetch(slug, token):
+def fetch(host, slug, token):
 	response = None
+	if host is None:
+		host = 'https://circleci.com'
 	if slug:
-		response = requests.get('https://circleci.com/api/v1.1/project/' + slug)
+		response = requests.get(host + '/api/v1.1/project/' + slug)
 	if token:
-		response = requests.get('https://circleci.com/api/v1.1/recent-builds?circle-token=' + token)
+		response = requests.get(host + '/api/v1.1/recent-builds?circle-token=' + token)
 
 	# process response
 

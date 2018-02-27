@@ -1,8 +1,10 @@
 import requests
 
 
-def fetch(slug):
-	response = requests.get('https://api.travis-ci.org/repos/' + slug, headers =
+def fetch(host, slug):
+	if host is None:
+		host = 'https://api.travis-ci.org'
+	response = requests.get(host + '/repos/' + slug, headers =
 	{
 		'Accept': 'application/vnd.travis-ci.2+json'
 	})

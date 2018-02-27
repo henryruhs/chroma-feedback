@@ -64,13 +64,13 @@ chroma-feedback [options]
 Providers
 ---------
 
-| Name     | Host | Slug | Token |
-|----------|------|------|-------|
-| AppVeyor | ✖    | ✔    | ✔     |
-| Circle   | ✖    | ✔    | ✔     |
-| GitLab   | ✔    | ✔    | ✔     |
-| Jenkins  | ✔    | ✔    | ✖     |
-| Travis   | ✖    | ✔    | ✖     |
+| Name     | Default Host              | Slug | Token | Mandatory         |
+|----------|---------------------------|------|-------|-------------------|
+| AppVeyor | https://ci.appveyor.com   | ✔    | ✔     | Slug or Token     |
+| Circle   | https://circleci.com      | ✔    | ✔     | Slug or Token     |
+| GitLab   | https://gitlab.com        | ✔    | ✔     | Slug and Token    |
+| Jenkins  |                           | ✔    | ✖     | Host and Slug     |
+| Travis   | https://api.travis-ci.org | ✔    | ✖     | Slug              |
 
 
 Examples
@@ -103,13 +103,13 @@ chroma-feedback --provider=circle --token={TOKEN}
 Monitor a single project by slug and token on GitLab:
 
 ```
-chroma-feedback --provider=gitlab --host={HOST} --slug={SLUG} --token={TOKEN}
+chroma-feedback --provider=gitlab --slug={SLUG} --token={TOKEN}
 ```
 
 Monitor multiple projects by slug and token on GitLab:
 
 ```
-chroma-feedback --provider=gitlab --host={HOST} --slug={SLUG} --slug={SLUG} --token={TOKEN}
+chroma-feedback --provider=gitlab --slug={SLUG} --slug={SLUG} --token={TOKEN}
 ```
 
 Monitor a single project by slug on Jenkins:
