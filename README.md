@@ -130,7 +130,7 @@ Monitor a single project by slug on Travis:
 chroma-feedback --provider=travis --slug=redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by user on Travis:
+Monitor multiple projects by slug on Travis:
 
 ```
 chroma-feedback --provider=travis --slug=redaxmedia
