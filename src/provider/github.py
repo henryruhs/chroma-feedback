@@ -6,7 +6,8 @@ def fetch(host, slug):
 	if host is None:
 		host = 'https://api.github.com'
 	if slug:
-		response = requests.get(host + '/repos/' + slug + '/status/master')
+		reference = fetch_reference(host, slug)
+		response = requests.get(host + '/repos/' + slug + '/status/' + reference)
 
 	# process response
 
@@ -15,6 +16,15 @@ def fetch(host, slug):
 		if data:
 			return normalize_data(data)
 	return []
+
+
+def fetch_reference(host, slug):
+	response = requests.get(host + '/repos/' + slug + '/git/refs')
+	if response and response.status_code == 200:
+		data = response.json()
+		if 'object' in data[0]:
+			return data[0]['object']['sha']
+	return 'master'
 
 
 def normalize_data(project):
@@ -34,6 +44,6 @@ def normalize_status(status):
 		return 'process'
 	if status == 'error':
 		return 'errored'
-	if status == 'failed':
+	if status == 'failure':
 		return 'failed'
 	return 'passed'
