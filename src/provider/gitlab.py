@@ -5,7 +5,7 @@ def fetch(host, slug, token):
 	response = None
 	if host is None:
 		host = 'https://gitlab.com'
-	if slug:
+	if slug and token:
 		response = requests.get(host + '/api/v4/projects/' + slug + '/jobs', headers =
 		{
 			'Private-Token': token
