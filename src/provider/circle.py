@@ -1,3 +1,4 @@
+import base64
 import requests
 
 
@@ -8,7 +9,10 @@ def fetch(host, slug, token):
 	if slug:
 		response = requests.get(host + '/api/v1.1/project/' + slug)
 	if token:
-		response = requests.get(host + '/api/v1.1/recent-builds?circle-token=' + token)
+		response = requests.get(host + '/api/v1.1/recent-builds', headers =
+		{
+			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
+		})
 
 	# process response
 
