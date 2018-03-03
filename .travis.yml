@@ -9,8 +9,13 @@ install:
 - pip install requests
 - pip install pylint
 - pip install pytest
+- pip install pytest-cov
+- pip install python-coveralls
 - pip install mock
 
 script:
 - pylint bin/chroma-feedback src tests
-- pytest tests
+- pytest tests --cov=src
+
+after_success:
+- coveralls
