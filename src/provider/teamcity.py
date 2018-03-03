@@ -9,10 +9,11 @@ def fetch(host, slug, token):
 		'Accept': 'application/json',
 		'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
 	}
-	if host and slug and token:
-		response = requests.get(host + '/app/rest/buildTypes?locator=affectedProject:(id:' + slug + ')&fields=buildType(builds($locator(running:any),build(id,running,status,buildType(id,projectName))))', headers = headers)
-	elif host and token:
-		response = requests.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(user:current,running:any),build(id,running,status,buildType(id,projectName))))', headers = headers)
+	if host and token:
+		if slug:
+			response = requests.get(host + '/app/rest/buildTypes?locator=affectedProject:(id:' + slug + ')&fields=buildType(builds($locator(running:any),build(id,running,status,buildType(id,projectName))))', headers = headers)
+		else:
+			response = requests.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(user:current,running:any),build(id,running,status,buildType(id,projectName))))', headers = headers)
 
 	# process response
 
