@@ -4,6 +4,8 @@ import requests
 
 def fetch(host, slug, token):
 	response = None
+	if host is None:
+		host = 'https://teamcity.jetbrains.com'
 	headers =\
 	{
 		'Accept': 'application/json',
