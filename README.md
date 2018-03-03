@@ -149,6 +149,28 @@ chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG} --slug={SLUG}
 ```
 
 
+TeamCity
+--------
+
+| Name  | Type   | Default                        | Mandatory | Support |
+|-------|--------|--------------------------------|-----------|---------|
+| Host  | string | https://teamcity.jetbrains.com | optional  | ✔       |
+| Slug  | string |                                | required  | ✔       |
+| Token | string |                                | required  | ✔       |
+
+Monitor a single project by slug and token:
+
+```
+chroma-feedback --provider=teamcity --slug={SLUG} --token={USERNAME:PASSWORD}
+```
+
+Monitor multiple projects by token:
+
+```
+chroma-feedback --provider=teamcity --token={USERNAME:PASSWORD}
+```
+
+
 Travis
 ------
 

@@ -2,7 +2,7 @@ metadata =\
 {
 	'name': 'chroma-feedback',
 	'description': 'Turn your Razer keyboard, mouse or headphone into a extreme feedback device',
-	'version': '3.2.1',
+	'version': '3.3.0',
 	'license': 'GPL-3.0',
 	'keywords': 'razer chroma appveyor circle gitlab jenkins travis ci',
 	'author': 'Henry Ruhs',
