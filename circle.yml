@@ -8,7 +8,6 @@ dependencies:
  - pip install pylint
  - pip install pytest
  - pip install pytest-mock
- - pip install mock
 
 test:
  override:
