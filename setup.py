@@ -34,10 +34,10 @@ setup(
 	],
 	tests_require =
 	[
-		'coveralls',
 		'pylint',
 		'pytest',
 		'pytest-cov',
+		'python-coveralls',
 		'mock'
 	]
 )

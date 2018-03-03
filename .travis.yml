@@ -10,8 +10,8 @@ install:
 - pip install pylint
 - pip install pytest
 - pip install pytest-cov
-- pip install mock
 - pip install python-coveralls
+- pip install mock
 
 script:
 - pylint bin/chroma-feedback src tests
