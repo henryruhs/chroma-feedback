@@ -37,6 +37,7 @@ setup(
 		'coveralls',
 		'pylint',
 		'pytest',
+		'pytest-cov',
 		'mock'
 	]
 )

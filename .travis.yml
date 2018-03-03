@@ -9,6 +9,7 @@ install:
 - pip install requests
 - pip install pylint
 - pip install pytest
+- pip install pytest-cov
 - pip install mock
 - pip install python-coveralls
 
