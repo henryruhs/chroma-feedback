@@ -117,13 +117,13 @@ GitLab
 Monitor a single project by slug and token:
 
 ```
-chroma-feedback --provider=gitlab --slug={SLUG} --token={TOKEN}
+chroma-feedback --provider=gitlab --slug={JOB} --token={TOKEN}
 ```
 
 Monitor multiple projects by slug and token:
 
 ```
-chroma-feedback --provider=gitlab --slug={SLUG} --slug={SLUG} --token={TOKEN}
+chroma-feedback --provider=gitlab --slug={JOB} --slug={JOB} --token={TOKEN}
 ```
 
 
@@ -139,13 +139,35 @@ Jenkins
 Monitor a single project by slug:
 
 ```
-chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG}
+chroma-feedback --provider=jenkins --host={HOST} --slug={JOB}
 ```
 
 Monitor multiple projects by slug:
 
 ```
-chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG} --slug={SLUG}
+chroma-feedback --provider=jenkins --host={HOST} --slug={JOB} --slug={JOB-ID}
+```
+
+
+TeamCity
+--------
+
+| Name  | Type   | Default | Mandatory | Support |
+|-------|--------|---------|-----------|---------|
+| Host  | string |         | required  | ✔       |
+| Slug  | string |         | required  | ✔       |
+| Token | string |         | required  | ✔       |
+
+Monitor a single project by slug:
+
+```
+chroma-feedback --provider=teamcity --slug={BUILDTYPEID} --token={USERNAME:PASSWORD}
+```
+
+Monitor multiple projects by slug:
+
+```
+chroma-feedback --provider=teamcity --slug={BUILDTYPEID} --slug={BUILDTYPEID} --token={USERNAME:PASSWORD}
 ```
 
 
