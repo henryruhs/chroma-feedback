@@ -8,7 +8,7 @@ def process(args):
 		if args.slug:
 			for slug in args.slug:
 				data.extend(fetch(provider, args.host, slug, args.token))
-		if args.token:
+		elif args.token:
 			data.extend(fetch(provider, args.host, None, args.token))
 	return data
 

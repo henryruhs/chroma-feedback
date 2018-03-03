@@ -145,7 +145,7 @@ chroma-feedback --provider=jenkins --host={HOST} --slug={JOB}
 Monitor multiple projects by slug:
 
 ```
-chroma-feedback --provider=jenkins --host={HOST} --slug={JOB} --slug={JOB-ID}
+chroma-feedback --provider=jenkins --host={HOST} --slug={JOB} --slug={JOB}
 ```
 
 
@@ -158,16 +158,16 @@ TeamCity
 | Slug  | string |         | required  | ✔       |
 | Token | string |         | required  | ✔       |
 
-Monitor a single project by slug:
+Monitor a single project by slug and token:
 
 ```
 chroma-feedback --provider=teamcity --slug={BUILDTYPEID} --token={USERNAME:PASSWORD}
 ```
 
-Monitor multiple projects by slug:
+Monitor multiple projects by token:
 
 ```
-chroma-feedback --provider=teamcity --slug={BUILDTYPEID} --slug={BUILDTYPEID} --token={USERNAME:PASSWORD}
+chroma-feedback --provider=teamcity --token={USERNAME:PASSWORD}
 ```
 
 
