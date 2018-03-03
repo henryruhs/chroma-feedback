@@ -4,25 +4,20 @@ import requests
 
 def fetch(host, slug, token):
 	response = None
+	headers =\
+	{
+		'Accept': 'application/json',
+		'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
+	}
 	if host and slug and token:
-		response = requests.get(host + '/httpAuth/app/rest/buildTypes/id:' + slug + '/builds?fields=build(id,running,status,buildType(id,projectName))', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
-		})
+		response = requests.get(host + '/app/rest/buildTypes?locator=affectedProject:(id:' + slug + ')&fields=buildType(builds($locator(running:any),build(id,running,status,buildType(id,projectName))))', headers = headers)
 	elif host and token:
-		response = requests.get(host + '/httpAuth/app/rest/buildTypes/?fields=buildType(builds($locator(user:current),build(id,running,status,buildType(id,projectName))))', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
-		})
+		response = requests.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(user:current,running:any),build(id,running,status,buildType(id,projectName))))', headers = headers)
 
 	# process response
 
 	if response and response.status_code == 200:
 		data = response.json()
-		if 'build' in data:
-			return normalize_data(data['build'][0])
 		if 'buildType' in data:
 			result = []
 			for project in data['buildType']:
