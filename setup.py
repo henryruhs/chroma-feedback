@@ -38,6 +38,7 @@ setup(
 		'pytest',
 		'pytest-cov',
 		'pytest-mock',
-		'python-coveralls'
+		'python-coveralls',
+		'mock'
 	]
 )
