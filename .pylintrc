@@ -9,7 +9,6 @@ disable =
 	len-as-condition,
 	line-too-long,
 	missing-docstring,
-	no-name-in-module,
 	protected-access,
 	too-many-return-statements,
 	unused-argument
