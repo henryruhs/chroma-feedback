@@ -10,7 +10,11 @@ install:
 - pip install pylint
 - pip install pytest
 - pip install mock
+- pip install python-coveralls
 
 script:
 - pylint bin/chroma-feedback src tests
-- pytest tests
+- pytest tests --cov=src
+
+after_success:
+- coveralls

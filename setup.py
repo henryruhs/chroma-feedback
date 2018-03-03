@@ -34,6 +34,7 @@ setup(
 	],
 	tests_require =
 	[
+		'coveralls',
 		'pylint',
 		'pytest',
 		'mock'
