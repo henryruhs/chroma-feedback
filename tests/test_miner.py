@@ -15,7 +15,7 @@ def test_progress(mocker):
 	args.slug = []
 	args.slug.append('one')
 	args.slug.append('two')
-	args.token = None
+	args.auth = None
 	fetch = mocker.spy(miner, 'fetch')
 	miner.process(args)
 	assert fetch.call_count == 12

@@ -2,15 +2,15 @@ import base64
 import requests
 
 
-def fetch(host, slug, token):
+def fetch(host, slug, auth):
 	response = None
 	if host is None:
 		host = 'https://teamcity.jetbrains.com'
-	if token:
+	if auth:
 		headers =\
 		{
 			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
+			'Authorization': 'Basic ' + base64.b64encode(auth.encode('utf-8')).decode('ascii')
 		}
 		if slug:
 			response = requests.get(host + '/app/rest/buildTypes?locator=affectedProject:(id:' + slug + ')&fields=buildType(builds($locator(running:any),build(id,running,status,buildType(id,projectName))))', headers = headers)

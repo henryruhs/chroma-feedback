@@ -54,7 +54,7 @@ chroma-feedback [options]
 -P, --provider <provider>
 -H, --host <host>
 -S, --slug <slug>
--T, --token <token>
+-A, --auth <auth>
 -I, --background-interval <background-interval>
 -B, --background-run
 -D, --dry-run
@@ -69,7 +69,7 @@ AppVeyor
 |-------|--------|-------------------------|-----------|---------|
 | Host  | string | https://ci.appveyor.com | optional  | ✔       |
 | Slug  | string |                         | optional  | ✔       |
-| Token | string |                         | optional  | ✔       |
+| Auth  | string |                         | optional  | ✔       |
 
 Monitor a single project by slug:
 
@@ -77,10 +77,10 @@ Monitor a single project by slug:
 chroma-feedback --provider=appveyor --slug=redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by token:
+Monitor multiple projects by auth:
 
 ```
-chroma-feedback --provider=appveyor --token={TOKEN}
+chroma-feedback --provider=appveyor --auth={TOKEN}
 ```
 
 
@@ -91,7 +91,7 @@ Circle
 |-------|--------|----------------------|-----------|---------|
 | Host  | string | https://circleci.com | optional  | ✔       |
 | Slug  | string |                      | optional  | ✔       |
-| Token | string |                      | optional  | ✔       |
+| Auth  | string |                      | optional  | ✔       |
 
 Monitor a single project by slug:
 
@@ -99,10 +99,10 @@ Monitor a single project by slug:
 chroma-feedback --provider=circle --slug=github/redaxmedia/chroma-feedback
 ```
 
-Monitor multiple projects by token:
+Monitor multiple projects by auth:
 
 ```
-chroma-feedback --provider=circle --token={TOKEN}
+chroma-feedback --provider=circle --auth={TOKEN}
 ```
 
 
@@ -113,18 +113,18 @@ GitLab
 |-------|--------|--------------------|-----------|---------|
 | Host  | string | https://gitlab.com | optional  | ✔       |
 | Slug  | string |                    | required  | ✔       |
-| Token | string |                    | required  | ✔       |
+| Auth  | string |                    | required  | ✔       |
 
-Monitor a single project by slug and token:
-
-```
-chroma-feedback --provider=gitlab --slug={SLUG} --token={TOKEN}
-```
-
-Monitor multiple projects by slug and token:
+Monitor a single project by slug and auth:
 
 ```
-chroma-feedback --provider=gitlab --slug={SLUG} --slug={SLUG} --token={TOKEN}
+chroma-feedback --provider=gitlab --slug={SLUG} --auth={TOKEN}
+```
+
+Monitor multiple projects by slug and auth:
+
+```
+chroma-feedback --provider=gitlab --slug={SLUG} --slug={SLUG} --auth={TOKEN}
 ```
 
 
@@ -135,7 +135,7 @@ Jenkins
 |-------|--------|---------|-----------|---------|
 | Host  | string |         | required  | ✔       |
 | Slug  | string |         | required  | ✔       |
-| Token | string |         |           | ✖       |
+| Auth  | string |         |           | ✖       |
 
 Monitor a single project by slug:
 
@@ -157,18 +157,18 @@ TeamCity
 |-------|--------|--------------------------------|-----------|---------|
 | Host  | string | https://teamcity.jetbrains.com | optional  | ✔       |
 | Slug  | string |                                | required  | ✔       |
-| Token | string |                                | required  | ✔       |
+| Auth  | string |                                | required  | ✔       |
 
-Monitor a single project by slug and token:
-
-```
-chroma-feedback --provider=teamcity --slug={SLUG} --token={USERNAME:PASSWORD}
-```
-
-Monitor multiple projects by token:
+Monitor a single project by slug and auth:
 
 ```
-chroma-feedback --provider=teamcity --token={USERNAME:PASSWORD}
+chroma-feedback --provider=teamcity --slug={SLUG} --auth={USERNAME:PASSWORD}
+```
+
+Monitor multiple projects by auth:
+
+```
+chroma-feedback --provider=teamcity --auth={USERNAME:PASSWORD}
 ```
 
 
@@ -179,7 +179,7 @@ Travis
 |-------|--------|---------------------------|-----------|---------|
 | Host  | string | https://api.travis-ci.org | optional  | ✔       |
 | Slug  | string |                           | required  | ✔       |
-| Token | string |                           |           | ✖       |
+| Auth  | string |                           |           | ✖       |
 
 Monitor a single project by slug:
 
