@@ -65,11 +65,11 @@ chroma-feedback [options]
 AppVeyor
 --------
 
-| Name  | Type   | Default                 | Mandatory | Support |
-|-------|--------|-------------------------|-----------|---------|
-| Host  | string | https://ci.appveyor.com | optional  | ✔       |
-| Slug  | string |                         | optional  | ✔       |
-| Auth  | string |                         | optional  | ✔       |
+| Name | Type   | Default                 | Mandatory | Support |
+|------|--------|-------------------------|-----------|---------|
+| Host | string | https://ci.appveyor.com | optional  | ✔       |
+| Slug | string |                         | optional  | ✔       |
+| Auth | string |                         | optional  | ✔       |
 
 Monitor a single project by slug:
 
@@ -87,11 +87,11 @@ chroma-feedback --provider=appveyor --auth={TOKEN}
 Circle
 ------
 
-| Name  | Type   | Default              | Mandatory | Support |
-|-------|--------|----------------------|-----------|---------|
-| Host  | string | https://circleci.com | optional  | ✔       |
-| Slug  | string |                      | optional  | ✔       |
-| Auth  | string |                      | optional  | ✔       |
+| Name | Type   | Default              | Mandatory | Support |
+|------|--------|----------------------|-----------|---------|
+| Host | string | https://circleci.com | optional  | ✔       |
+| Slug | string |                      | optional  | ✔       |
+| Auth | string |                      | optional  | ✔       |
 
 Monitor a single project by slug:
 
@@ -109,11 +109,11 @@ chroma-feedback --provider=circle --auth={TOKEN}
 GitHub
 ------
 
-| Name  | Type   | Default                | Mandatory | Support |
-|-------|--------|------------------------|-----------|---------|
-| Host  | string | https://api.github.com | optional  | ✔       |
-| Slug  | string |                        | required  | ✔       |
-| Auth  | string |                        | required  | ✔       |
+| Name | Type   | Default                | Mandatory | Support |
+|------|--------|------------------------|-----------|---------|
+| Host | string | https://api.github.com | optional  | ✔       |
+| Slug | string |                        | required  | ✔       |
+| Auth | string |                        | required  | ✔       |
 
 Monitor a single project by slug and auth:
 
@@ -131,11 +131,11 @@ chroma-feedback --provider=github --slug={SLUG} --slug={SLUG} --auth={USERNAME:P
 GitLab
 ------
 
-| Name  | Type   | Default            | Mandatory | Support |
-|-------|--------|--------------------|-----------|---------|
-| Host  | string | https://gitlab.com | optional  | ✔       |
-| Slug  | string |                    | required  | ✔       |
-| Auth  | string |                    | required  | ✔       |
+| Name | Type   | Default            | Mandatory | Support |
+|------|--------|--------------------|-----------|---------|
+| Host | string | https://gitlab.com | optional  | ✔       |
+| Slug | string |                    | required  | ✔       |
+| Auth | string |                    | required  | ✔       |
 
 Monitor a single project by slug and auth:
 
@@ -153,11 +153,11 @@ chroma-feedback --provider=gitlab --slug={SLUG} --slug={SLUG} --auth={TOKEN}
 Jenkins
 -------
 
-| Name  | Type   | Default | Mandatory | Support |
-|-------|--------|---------|-----------|---------|
-| Host  | string |         | required  | ✔       |
-| Slug  | string |         | required  | ✔       |
-| Auth  | string |         |           | ✖       |
+| Name | Type   | Default | Mandatory | Support |
+|------|--------|---------|-----------|---------|
+| Host | string |         | required  | ✔       |
+| Slug | string |         | required  | ✔       |
+| Auth | string |         |           | ✖       |
 
 Monitor a single project by slug:
 
@@ -175,11 +175,11 @@ chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG} --slug={SLUG}
 TeamCity
 --------
 
-| Name  | Type   | Default                        | Mandatory | Support |
-|-------|--------|--------------------------------|-----------|---------|
-| Host  | string | https://teamcity.jetbrains.com | optional  | ✔       |
-| Slug  | string |                                | required  | ✔       |
-| Auth  | string |                                | required  | ✔       |
+| Name | Type   | Default                        | Mandatory | Support |
+|------|--------|--------------------------------|-----------|---------|
+| Host | string | https://teamcity.jetbrains.com | optional  | ✔       |
+| Slug | string |                                | required  | ✔       |
+| Auth | string |                                | required  | ✔       |
 
 Monitor a single project by slug and auth:
 
@@ -197,11 +197,11 @@ chroma-feedback --provider=teamcity --auth={USERNAME:PASSWORD}
 Travis
 ------
 
-| Name  | Type   | Default                   | Mandatory | Support |
-|-------|--------|---------------------------|-----------|---------|
-| Host  | string | https://api.travis-ci.org | optional  | ✔       |
-| Slug  | string |                           | required  | ✔       |
-| Auth  | string |                           |           | ✖       |
+| Name | Type   | Default                   | Mandatory | Support |
+|------|--------|---------------------------|-----------|---------|
+| Host | string | https://api.travis-ci.org | optional  | ✔       |
+| Slug | string |                           | required  | ✔       |
+| Auth | string |                           |           | ✖       |
 
 Monitor a single project by slug:
 
