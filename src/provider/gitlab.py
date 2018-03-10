@@ -1,14 +1,14 @@
 import requests
 
 
-def fetch(host, slug, token):
+def fetch(host, slug, auth):
 	response = None
 	if host is None:
 		host = 'https://gitlab.com'
-	if slug and token:
+	if slug and auth:
 		response = requests.get(host + '/api/v4/projects/' + slug + '/jobs', headers =
 		{
-			'Private-Token': token
+			'Private-Token': auth
 		})
 
 	# process response

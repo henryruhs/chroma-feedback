@@ -2,16 +2,16 @@ import base64
 import requests
 
 
-def fetch(host, slug, token):
+def fetch(host, slug, auth):
 	response = None
 	if host is None:
 		host = 'https://circleci.com'
 	if slug:
 		response = requests.get(host + '/api/v1.1/project/' + slug)
-	if token:
+	if auth:
 		response = requests.get(host + '/api/v1.1/recent-builds', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
+			'Authorization': 'Basic ' + base64.b64encode(auth.encode('utf-8')).decode('ascii')
 		})
 
 	# process response

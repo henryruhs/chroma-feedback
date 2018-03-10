@@ -1,6 +1,17 @@
 [disable]
 
-disable = bad-continuation, bad-whitespace, duplicate-code, import-error, invalid-name, len-as-condition, missing-docstring, protected-access, too-many-return-statements, unused-argument
+disable =
+	bad-continuation,
+	bad-whitespace,
+	duplicate-code,
+	import-error,
+	invalid-name,
+	len-as-condition,
+	line-too-long,
+	missing-docstring,
+	protected-access,
+	too-many-return-statements,
+	unused-argument
 
 [format]
 

@@ -7,6 +7,7 @@ dependencies:
  - pip install requests
  - pip install pylint
  - pip install pytest
+ - pip install pytest-mock
  - pip install mock
 
 test:
