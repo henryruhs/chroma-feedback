@@ -106,6 +106,28 @@ chroma-feedback --provider=circle --auth={TOKEN}
 ```
 
 
+GitHub
+------
+
+| Name  | Type   | Default                | Mandatory | Support |
+|-------|--------|------------------------|-----------|---------|
+| Host  | string | https://api.github.com | optional  | ✔       |
+| Slug  | string |                        | required  | ✔       |
+| Auth  | string |                        | required  | ✔       |
+
+Monitor a single project by slug and auth:
+
+```
+chroma-feedback --provider=github --slug=redaxmedia/chroma-feedback --auth={USERNAME:PASSWORD}
+```
+
+Monitor multiple projects by slug and auth:
+
+```
+chroma-feedback --provider=github --slug={SLUG} --slug={SLUG} --auth={USERNAME:PASSWORD}
+```
+
+
 GitLab
 ------
 
