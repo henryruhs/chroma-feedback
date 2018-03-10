@@ -8,6 +8,7 @@ def test_progress_slug(mocker):
 	args.provider = []
 	args.provider.append('appveyor')
 	args.provider.append('circle')
+	args.provider.append('github')
 	args.provider.append('gitlab')
 	args.provider.append('jenkins')
 	args.provider.append('teamcity')
@@ -18,7 +19,7 @@ def test_progress_slug(mocker):
 	args.auth = None
 	fetch = mocker.spy(miner, 'fetch')
 	miner.process(args)
-	assert fetch.call_count == 12
+	assert fetch.call_count == 14
 
 
 def test_progress_auth(mocker):
@@ -27,6 +28,7 @@ def test_progress_auth(mocker):
 	args.provider = []
 	args.provider.append('appveyor')
 	args.provider.append('circle')
+	args.provider.append('github')
 	args.provider.append('gitlab')
 	args.provider.append('jenkins')
 	args.provider.append('teamcity')
@@ -35,4 +37,4 @@ def test_progress_auth(mocker):
 	args.auth = 'test'
 	fetch = mocker.spy(miner, 'fetch')
 	miner.process(args)
-	assert fetch.call_count == 6
+	assert fetch.call_count == 7

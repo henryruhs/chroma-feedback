@@ -1,13 +1,16 @@
+import base64
 import requests
 
 
-def fetch(host, slug):
+def fetch(host, slug, auth):
 	response = None
 	if host is None:
 		host = 'https://api.github.com'
-	if slug:
-		reference = fetch_reference(host, slug)
-		response = requests.get(host + '/repos/' + slug + '/status/' + reference)
+	if slug and auth:
+		response = requests.get(host + '/repos/' + slug + '/status/master', headers =
+		{
+			'Authorization': 'Basic ' + base64.b64encode(auth.encode('utf-8')).decode('ascii')
+		})
 
 	# process response
 
@@ -16,15 +19,6 @@ def fetch(host, slug):
 		if data:
 			return normalize_data(data)
 	return []
-
-
-def fetch_reference(host, slug):
-	response = requests.get(host + '/repos/' + slug + '/git/refs')
-	if response and response.status_code == 200:
-		data = response.json()
-		if 'object' in data[0]:
-			return data[0]['object']['sha']
-	return 'master'
 
 
 def normalize_data(project):
