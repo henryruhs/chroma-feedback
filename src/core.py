@@ -1,7 +1,11 @@
 from __future__ import print_function
 import os
+import sys
 import threading
 from src import device, miner, reporter, wording
+
+if sys.version_info < (3, 4):
+	exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
 try:
 	from openrazer.client import DeviceManager, DaemonNotFound

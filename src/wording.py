@@ -1,5 +1,6 @@
 wording =\
 {
+	'version_no': 'Python {}.{} not supported',
 	'driver_no': 'Driver not found',
 	'daemon_no': 'Daemon not found',
 	'device_no': 'Device not found',
