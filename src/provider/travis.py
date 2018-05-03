@@ -8,7 +8,7 @@ def fetch(host, slug):
 	if slug:
 		response = requests.get(host + '/repos/' + slug, headers =
 		{
-			'Accept': 'application/vnd.travis-ci.2+json'
+			'Accept': 'application/vnd.travis-ci.2.1+json'
 		})
 
 	# process response
@@ -31,7 +31,7 @@ def normalize_data(project):
 		{
 			'provider': 'travis',
 			'slug': project['slug'],
-			'active': project['active'],
+			'active': project['active'] is True,
 			'status': normalize_status(project['last_build_state'])
 		}
 	]

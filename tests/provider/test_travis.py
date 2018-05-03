@@ -11,9 +11,9 @@ def test_fetch_slug():
 
 def test_fetch_user():
 	data = travis.fetch(None, 'redaxmedia')
-	assert data[0]['provider'] == 'travis'
-	assert data[0]['active'] is True
-	assert data[0]['status']
+	assert data[1]['provider'] == 'travis'
+	assert data[1]['active'] is True
+	assert data[1]['status']
 
 
 def test_fetch_invalid():
