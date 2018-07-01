@@ -1,16 +1,24 @@
-machine:
- python:
-  version: 3.6.0
+version: 2
 
-dependencies:
- post:
- - pip install requests
- - pip install pylint
- - pip install pytest
- - pip install pytest-mock
- - pip install mock
+jobs:
+ lint:
+  docker:
+  - image: circleci/python:3.6.6-stretch-browsers
+  steps:
+  - checkout
+  - run: sudo pip install requests pylint pytest pytest-mock mock
+  - run: pylint bin/chroma-feedback src tests
+ test:
+  docker:
+  - image: circleci/python:3.6.6-stretch-browsers
+  steps:
+  - checkout
+  - run: sudo pip install requests pylint pytest pytest-mock mock
+  - run: pytest tests
 
-test:
- override:
- - pylint bin/chroma-feedback src tests
- - pytest tests
+workflows:
+ version: 2
+ lint-and-test:
+  jobs:
+  - lint
+  - test
