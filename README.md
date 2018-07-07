@@ -35,14 +35,6 @@ Install Chroma Feedback using PyPI:
 pip3 install chroma-feedback
 ```
 
-Install Chroma Feedback using GitHub:
-
-```
-git clone https://github.com/redaxmedia/chroma-feedback.git
-cd chroma-feedback
-./setup.py install
-```
-
 
 Usage
 -----
