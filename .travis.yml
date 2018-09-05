@@ -6,7 +6,7 @@ python:
 - 3.6
 
 install:
-- pip install coverage
+- pip install coverage==4.5
 - pip install requests
 - pip install pylint
 - pip install pytest
