@@ -3,6 +3,7 @@
 disable =
 	bad-continuation,
 	bad-whitespace,
+	consider-using-in,
 	duplicate-code,
 	import-error,
 	invalid-name,
