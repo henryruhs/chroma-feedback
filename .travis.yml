@@ -16,7 +16,7 @@ install:
 
 script:
 - pylint bin/chroma-feedback src tests
-- pytest tests --cov=src
+- pytest tests
 
 after_success:
 - coveralls
