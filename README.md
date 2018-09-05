@@ -54,6 +54,33 @@ chroma-feedback [options]
 ```
 
 
+Errors
+------
+
+| Message                  | Type        | Description                                     |
+|--------------------------|-------------|-------------------------------------------------|
+| Python x.x not supported | System      | Unsupported Python version is called            |
+| Driver not found         | ImportError | Module `openrazer.client` could not be imported |
+| Daemon not found         | Exception   | The `DeviceManager` throwed a `DaemonNotFound`  |
+| Device not found         | General     | There is no supported device connected          |
+| Data not found           | General     | There is no data available for your request     |
+
+
+Indicators
+----------
+
+| Status  | Color  | Effect  |
+|---------|--------|---------|
+| Passed  | Green  | Static  |
+| Process | Yellow | Static  |
+| Errored | White  | Pulsate |
+| Failed  | Red    | Pulsate |
+
+
+Providers
+=========
+
+
 AppVeyor
 --------
 
@@ -206,26 +233,3 @@ Monitor multiple projects by slug:
 ```
 chroma-feedback --provider=travis --slug=redaxmedia
 ```
-
-
-Errors
-------
-
-| Message                  | Type        | Description                                     |
-|--------------------------|-------------|-------------------------------------------------|
-| Python x.x not supported | System      | Unsupported Python version is called            |
-| Driver not found         | ImportError | Module `openrazer.client` could not be imported |
-| Daemon not found         | Exception   | The `DeviceManager` throwed a `DaemonNotFound`  |
-| Device not found         | General     | There is no supported device connected          |
-| Data not found           | General     | There is no data available for your request     |
-
-
-Indicators
-----------
-
-| Status  | Color  | Effect  |
-|---------|--------|---------|
-| Passed  | Green  | Static  |
-| Process | Yellow | Static  |
-| Errored | White  | Pulsate |
-| Failed  | Red    | Pulsate |
