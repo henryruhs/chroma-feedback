@@ -6,6 +6,7 @@ python:
 - 3.6
 
 install:
+- pip install coverage
 - pip install requests
 - pip install pylint
 - pip install pytest
@@ -16,7 +17,7 @@ install:
 
 script:
 - pylint bin/chroma-feedback src tests
-- pytest tests
+- pytest tests --cov=src
 
 after_success:
 - coveralls
