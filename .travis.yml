@@ -6,18 +6,16 @@ python:
 - 3.6
 
 install:
-- pip install coverage==4.5
 - pip install requests
 - pip install pylint
 - pip install pytest
-- pip install pytest-cov
 - pip install pytest-mock
 - pip install python-coveralls
 - pip install mock
 
 script:
 - pylint bin/chroma-feedback src tests
-- pytest tests --cov=src
+- pytest tests
 
 after_success:
 - coveralls
