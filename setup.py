@@ -31,5 +31,13 @@ setup(
 	install_requires =
 	[
 		'requests'
+	],
+	tests_require=
+	[
+		'pylint',
+		'pytest',
+		'pytest-cov',
+		'pytest-mock',
+		'mock'
 	]
 )
