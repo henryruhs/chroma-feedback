@@ -1,9 +1,8 @@
-from mock import MagicMock
 from src import miner
 
 
 def test_progress_slug(mocker):
-	args = MagicMock()
+	args = mocker.MagicMock()
 	args.host = None
 	args.provider = []
 	args.provider.append('appveyor')
@@ -23,7 +22,7 @@ def test_progress_slug(mocker):
 
 
 def test_progress_auth(mocker):
-	args = MagicMock()
+	args = mocker.MagicMock()
 	args.host = None
 	args.provider = []
 	args.provider.append('appveyor')

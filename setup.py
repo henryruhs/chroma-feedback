@@ -32,13 +32,12 @@ setup(
 	[
 		'requests'
 	],
-	tests_require =
+	tests_require=
 	[
 		'pylint',
 		'pytest',
 		'pytest-cov',
 		'pytest-mock',
-		'python-coveralls',
 		'mock'
 	]
 )
