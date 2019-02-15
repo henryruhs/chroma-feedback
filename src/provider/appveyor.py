@@ -19,7 +19,7 @@ def fetch(host, slug, auth):
 		data = response.json()
 		if 'project' and 'build' in data:
 			return normalize_data(data['project'], data['build'])
-		if 'builds' in data[0]:
+		if data and 'builds' in data[0]:
 			result = []
 			for project in data:
 				if project['builds']:

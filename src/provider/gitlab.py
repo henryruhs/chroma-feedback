@@ -15,9 +15,10 @@ def fetch(host, slug, auth):
 
 	if response and response.status_code == 200:
 		data = response.json()
-		pipeline = str(data[0]['id'])
-		if pipeline:
-			return fetch_jobs(host, slug, pipeline, auth)
+		if data and 'id' in data[0]:
+			pipeline = str(data[0]['id'])
+			if pipeline:
+				return fetch_jobs(host, slug, pipeline, auth)
 	return []
 
 
