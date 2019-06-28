@@ -1,9 +1,8 @@
 import requests
-
 from .normalize import normalize_data
 
 
-def fetch(host, slug):
+def fetch(host, slug, auth):
 	response = None
 	if host and slug:
 		response = requests.get(host + '/job/' + slug + '/api/json')

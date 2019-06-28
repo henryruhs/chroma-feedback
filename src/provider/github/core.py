@@ -1,6 +1,5 @@
 import base64
 import requests
-
 from .normalize import normalize_data
 
 

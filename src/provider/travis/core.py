@@ -1,9 +1,8 @@
 import requests
-
 from .normalize import normalize_data
 
 
-def fetch(host, slug):
+def fetch(host, slug, auth):
 	response = None
 	if host is None:
 		host = 'https://api.travis-ci.org'

@@ -13,8 +13,7 @@ disable =
 	protected-access,
 	too-many-return-statements,
 	undefined-variable,
-	unused-argument,
-	wildcard-import
+	unused-argument
 
 [format]
 

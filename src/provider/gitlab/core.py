@@ -1,5 +1,4 @@
 import requests
-
 from .normalize import normalize_data
 
 
