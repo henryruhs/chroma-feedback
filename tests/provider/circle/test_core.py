@@ -1,6 +1,6 @@
 import os
 import pytest
-import src.provider.circle.core as circle
+from src.provider import circle
 
 
 def test_fetch_slug():

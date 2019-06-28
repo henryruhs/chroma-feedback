@@ -1,6 +1,6 @@
 import os
 import pytest
-import src.provider.appveyor.core as appveyor
+from src.provider import appveyor
 
 
 def test_fetch_slug():

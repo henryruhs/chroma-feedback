@@ -1,11 +1,5 @@
 import requests
-import src.provider.appveyor.core as appveyor
-import src.provider.circle.core as circle
-import src.provider.github.core as github
-import src.provider.gitlab.core as gitlab
-import src.provider.jenkins.core as jenkins
-import src.provider.teamcity.core as teamcity
-import src.provider.travis.core as travis
+from .provider import *
 
 
 def process(args):

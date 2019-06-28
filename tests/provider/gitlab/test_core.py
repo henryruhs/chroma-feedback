@@ -1,6 +1,6 @@
 import os
 import pytest
-import src.provider.gitlab.core as gitlab
+from src.provider import gitlab
 
 
 def test_fetch_user():

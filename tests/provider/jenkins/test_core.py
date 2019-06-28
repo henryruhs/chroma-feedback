@@ -1,4 +1,4 @@
-import src.provider.jenkins.core as jenkins
+from src.provider import jenkins
 
 
 def test_fetch_invalid():

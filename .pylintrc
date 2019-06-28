@@ -12,7 +12,9 @@ disable =
 	missing-docstring,
 	protected-access,
 	too-many-return-statements,
-	unused-argument
+	undefined-variable,
+	unused-argument,
+	wildcard-import
 
 [format]
 

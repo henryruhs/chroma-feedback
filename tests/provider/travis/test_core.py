@@ -1,4 +1,4 @@
-import src.provider.travis.core as travis
+from src.provider import travis
 
 
 def test_fetch_slug():

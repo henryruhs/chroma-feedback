@@ -1,4 +1,4 @@
-import src.provider.teamcity.core as teamcity
+from src.provider import teamcity
 
 
 def test_fetch_invalid():

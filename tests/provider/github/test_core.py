@@ -1,6 +1,6 @@
 import os
 import pytest
-import src.provider.github.core as github
+from src.provider import github
 
 def test_fetch_slug():
 	if 'GITHUB_TOKEN' in os.environ:
