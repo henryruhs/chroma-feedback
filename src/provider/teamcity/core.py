@@ -1,6 +1,8 @@
 import base64
 import requests
 
+from .normalize import normalize_data
+
 
 def fetch(host, slug, auth):
 	response = None
@@ -28,25 +30,3 @@ def fetch(host, slug, auth):
 					result.extend(normalize_data(project['builds']['build'][0]))
 			return result
 	return []
-
-
-def normalize_data(build):
-	return\
-	[
-		{
-			'provider': 'teamcity',
-			'slug': build['buildType']['projectName'],
-			'active': True,
-			'status': normalize_status(build['running'], build['status'].lower())
-		}
-	]
-
-
-def normalize_status(running, status):
-	if running is True:
-		return 'process'
-	if status == 'error':
-		return 'errored'
-	if status == 'failure':
-		return 'failed'
-	return 'passed'

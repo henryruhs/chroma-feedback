@@ -1,8 +1,11 @@
 import requests
 
+from .normalize import normalize_data
+
 
 def fetch(host, slug, auth):
 	response = None
+
 	if host is None:
 		host = 'https://ci.appveyor.com'
 	if slug:
@@ -26,25 +29,3 @@ def fetch(host, slug, auth):
 					result.extend(normalize_data(project, project['builds'][0]))
 			return result
 	return []
-
-
-def normalize_data(project, build):
-	return\
-	[
-		{
-			'provider': 'appveyor',
-			'slug': project['accountName'] + '/' + project['slug'],
-			'active': True,
-			'status': normalize_status(build['status'])
-		}
-	]
-
-
-def normalize_status(status):
-	if status == 'queued' or status == 'running':
-		return 'process'
-	if status == 'canceled':
-		return 'errored'
-	if status == 'failed':
-		return 'failed'
-	return 'passed'

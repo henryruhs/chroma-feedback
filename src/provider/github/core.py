@@ -1,6 +1,8 @@
 import base64
 import requests
 
+from .normalize import normalize_data
+
 
 def fetch(host, slug, auth):
 	response = None
@@ -19,25 +21,3 @@ def fetch(host, slug, auth):
 		if data:
 			return normalize_data(data)
 	return []
-
-
-def normalize_data(project):
-	return\
-	[
-		{
-			'provider': 'github',
-			'slug': project['repository']['full_name'],
-			'active': True,
-			'status': normalize_status(project['state'])
-		}
-	]
-
-
-def normalize_status(status):
-	if status == 'pending':
-		return 'process'
-	if status == 'error':
-		return 'errored'
-	if status == 'failure':
-		return 'failed'
-	return 'passed'
