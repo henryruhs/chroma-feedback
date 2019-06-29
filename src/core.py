@@ -60,14 +60,17 @@ def run(args):
 	# handle thread
 
 	if args.background_run is True:
-		threading.Timer(args.background_interval, run, args =
-		[
-			args
-		]).start()
+		if threading.active_count() == 1:
+			threading.Timer(args.background_interval, run, args =
+			[
+				args
+			]).start()
 
-		# handle system tray
+			# handle system tray
 
-		system_tray.run()
+			system_tray.run()
+		if threading.active_count() > 1:
+			system_tray.update(result['status'])
 
 
 def destroy():

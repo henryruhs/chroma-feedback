@@ -1,6 +1,7 @@
-from .core import run
+from .core import run, update
 
 __all__ =\
 [
-    'run'
+	'run',
+	'update'
 ]
