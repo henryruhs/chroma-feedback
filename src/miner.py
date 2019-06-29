@@ -1,5 +1,5 @@
-import requests
 import importlib
+import requests
 
 
 def process(args):
