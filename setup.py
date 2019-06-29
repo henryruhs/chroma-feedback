@@ -30,6 +30,7 @@ setup(
 	],
 	install_requires =
 	[
+		'pystray',
 		'requests'
 	],
 	tests_require=

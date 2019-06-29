@@ -3,6 +3,7 @@ import os
 import sys
 import threading
 from src import device, miner, reporter, wording
+import src.consumer.system_tray.core as system_tray
 
 if sys.version_info < (3, 4):
 	exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
@@ -64,7 +65,11 @@ def run(args):
 			args
 		]).start()
 
+		# handle system tray
 
-def destroy(number, frame):
+		system_tray.run()
+
+
+def destroy():
 	print('\r' + wording.get('goodbye') + wording.get('exclamation_mark'))
 	os._exit(0)

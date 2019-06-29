@@ -1,10 +1,11 @@
 wording =\
 {
 	'version_no': 'Python {}.{} not supported',
-	'driver_no': 'Driver not found',
-	'daemon_no': 'Daemon not found',
-	'device_no': 'Device not found',
-	'data_no': 'Data not found',
+	'package_no': 'Package {} not found',
+	'driver_no': 'Driver {} not found',
+	'daemon_no': 'Daemon {} not found',
+	'device_no': 'Device {} not found',
+	'data_no': 'Data {} not found',
 	'build_passed': 'Build of {} on {} passed',
 	'build_process': 'Build of {} on {} in process',
 	'build_errored': 'Build of {} on {} errored',
@@ -14,6 +15,7 @@ wording =\
 	'setting_errored': 'Setting {} to build errored',
 	'setting_failed': 'Setting {} to build failed',
 	'goodbye': 'Goodbye',
+	'stop': 'Stop',
 	'by': 'by',
 	'hourglass': u'\u29d7',
 	'tick': u'\u2714',
