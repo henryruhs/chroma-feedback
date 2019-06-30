@@ -3,7 +3,7 @@ import os
 import sys
 import threading
 from src import provider, reporter, wording
-from src.consumer import razer_chroma, system_tray
+from src.consumer import philips_hue, razer_chroma, system_tray
 
 if sys.version_info < (3, 4):
 	exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
@@ -36,6 +36,10 @@ def run(args):
 
 		# process consumer
 
+		consumer_result = philips_hue.run(reporter_result['status'])
+		if consumer_result:
+			reporter.log(consumer_result)
+			print()
 		consumer_result = razer_chroma.run(reporter_result['status'])
 		if consumer_result:
 			reporter.log(consumer_result)
