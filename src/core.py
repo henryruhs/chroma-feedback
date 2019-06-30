@@ -2,22 +2,11 @@ from __future__ import print_function
 import os
 import sys
 import threading
-from src import device, provider, reporter, wording
-import src.consumer.system_tray.core as system_tray
+from src import provider, reporter, wording
+from src.consumer import razer_chroma, system_tray
 
 if sys.version_info < (3, 4):
 	exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
-
-try:
-	from openrazer.client import DeviceManager, DaemonNotFound
-except ImportError:
-	exit(wording.get('driver_no') + wording.get('exclamation_mark'))
-
-try:
-	device_manager = DeviceManager()
-	device_manager.sync_effects = True
-except DaemonNotFound:
-	exit(wording.get('daemon_no') + wording.get('exclamation_mark'))
 
 
 def run(args):
@@ -27,34 +16,29 @@ def run(args):
 
 	# process provider
 
-	data = provider.process(args)
+	provider_result = provider.process(args)
 
-	# handle data
+	# handle exit
 
-	if len(data) == 0:
-		exit(wording.get('data_no') + wording.get('exclamation_mark'))
+	if len(provider_result) == 0:
+		exit(wording.get('provider_no') + wording.get('exclamation_mark'))
 
-	# process data
+	# process reporter
 
-	result = reporter.process(data)
-	if result:
-		reporter.log(result)
+	reporter_result = reporter.process(provider_result)
+	if reporter_result:
+		reporter.log(reporter_result)
 		print()
 
 	# handle dry run
 
 	if args.dry_run is False:
 
-		# handle device
+		# process consumer
 
-		if len(device_manager.devices) == 0:
-			exit(wording.get('device_no') + wording.get('exclamation_mark'))
-
-		# process device
-
-		result = device.process(device_manager.devices, result['status'])
-		if result:
-			reporter.log(result)
+		consumer_result = razer_chroma.run(reporter_result['status'])
+		if consumer_result:
+			reporter.log(consumer_result)
 			print()
 
 	# handle thread
@@ -70,7 +54,7 @@ def run(args):
 
 			system_tray.run()
 		if threading.active_count() > 1:
-			system_tray.update(result['status'])
+			system_tray.update(reporter_result['status'])
 
 
 def destroy():

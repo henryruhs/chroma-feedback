@@ -5,7 +5,7 @@ wording =\
 	'driver_no': 'Driver {} not found',
 	'daemon_no': 'Daemon {} not found',
 	'device_no': 'Device {} not found',
-	'data_no': 'Data {} not found',
+	'provider_no': 'Provider {} not found',
 	'build_passed': 'Build of {} on {} passed',
 	'build_process': 'Build of {} on {} in process',
 	'build_errored': 'Build of {} on {} errored',

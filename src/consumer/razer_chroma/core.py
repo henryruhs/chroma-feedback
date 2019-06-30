@@ -1,12 +1,28 @@
 from src import wording
 
+try:
+	from openrazer.client import DeviceManager, DaemonNotFound
+except ImportError:
+	exit(wording.get('driver_no') + wording.get('exclamation_mark'))
+try:
+	device_manager = DeviceManager()
+	device_manager.sync_effects = True
+except DaemonNotFound:
+	exit(wording.get('daemon_no') + wording.get('exclamation_mark'))
 
-def process(data, status):
+
+def run(status):
+	if len(device_manager.devices) == 0:
+		exit(wording.get('device_no') + wording.get('exclamation_mark'))
+	return process(device_manager.devices, status)
+
+
+def process(devices, status):
 	message = []
 
-	# process data
+	# process devices
 
-	for device in data:
+	for device in devices:
 		if status == 'passed' and static(device.fx, [0, 255, 0]):
 			message.append(wording.get('setting_passed').format(device.name) + wording.get('point'))
 		if status == 'process' and static(device.fx, [255, 255, 0]):

@@ -2,13 +2,13 @@ from __future__ import print_function
 from src import color, metadata, wording
 
 
-def process(data):
+def process(provider_result):
 	message = []
 	status = 'passed'
 
 	# process data
 
-	for project in data:
+	for project in provider_result:
 		if project['active'] is True:
 			if project['status'] == 'passed':
 				message.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(project['slug'], project['provider']))

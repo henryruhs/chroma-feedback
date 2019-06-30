@@ -6,6 +6,8 @@ try:
 except ImportError:
 	exit(wording.get('package_no').format('pystray') + wording.get('exclamation_mark'))
 
+instance = None
+
 
 def create_icon():
 	global instance

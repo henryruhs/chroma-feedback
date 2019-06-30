@@ -5,6 +5,7 @@ disable =
 	bad-whitespace,
 	consider-using-in,
 	duplicate-code,
+	global-statement,
 	import-error,
 	invalid-name,
 	len-as-condition,

@@ -2,7 +2,7 @@ from src import reporter
 
 
 def test_process_passed():
-	data = reporter.process(data =
+	reporter_result = reporter.process(provider_result =
 	[
 		{
 			'provider': 'travis',
@@ -11,12 +11,12 @@ def test_process_passed():
 			'status': 'passed'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in data['message'][0]
-	assert data['status'] == 'passed'
+	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][0]
+	assert reporter_result['status'] == 'passed'
 
 
 def test_process_process():
-	data = reporter.process(data =
+	reporter_result = reporter.process(provider_result =
 	[
 		{
 			'provider': 'appveyor',
@@ -31,13 +31,13 @@ def test_process_process():
 			'status': 'passed'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on appveyor in process' in data['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in data['message'][1]
-	assert data['status'] == 'process'
+	assert 'Build of redaxmedia/chroma-feedback on appveyor in process' in reporter_result['message'][0]
+	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][1]
+	assert reporter_result['status'] == 'process'
 
 
 def test_process_errored():
-	data = reporter.process(data =
+	reporter_result = reporter.process(provider_result =
 	[
 		{
 			'provider': 'appveyor',
@@ -52,13 +52,13 @@ def test_process_errored():
 			'status': 'passed'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on appveyor errored' in data['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in data['message'][1]
-	assert data['status'] == 'errored'
+	assert 'Build of redaxmedia/chroma-feedback on appveyor errored' in reporter_result['message'][0]
+	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][1]
+	assert reporter_result['status'] == 'errored'
 
 
 def test_process_failed():
-	data = reporter.process(data =
+	reporter_result = reporter.process(provider_result =
 	[
 		{
 			'provider': 'appveyor',
@@ -79,7 +79,7 @@ def test_process_failed():
 			'status': 'passed'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on appveyor failed' in data['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on circle errored' in data['message'][1]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in data['message'][2]
-	assert data['status'] == 'failed'
+	assert 'Build of redaxmedia/chroma-feedback on appveyor failed' in reporter_result['message'][0]
+	assert 'Build of redaxmedia/chroma-feedback on circle errored' in reporter_result['message'][1]
+	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][2]
+	assert reporter_result['status'] == 'failed'
