@@ -6,13 +6,7 @@ from src import wording
 def run(status):
 	devices =\
 	[
-		'1',
-		'2',
-		'3',
-		'4',
-		'5',
-		'6',
-		'7'
+		'1'
 	]
 
 	# process
@@ -28,7 +22,7 @@ def process(devices, status):
 	for device in devices:
 		if status == 'passed' and static(device, 25500):
 			message.append(wording.get('setting_passed').format(device) + wording.get('point'))
-		if status == 'process' and static(device, 17000):
+		if status == 'process' and static(device, 12500):
 			message.append(wording.get('setting_process').format(device) + wording.get('point'))
 		if status == 'errored' and pulsate(device, 34000):
 			message.append(wording.get('setting_errored').format(device) + wording.get('point'))
@@ -61,10 +55,10 @@ def pulsate(light, hue):
 	})
 
 
-def update(host, user, light, data):
+def update(host, user, group, data):
 	response = None
 	if host and user:
-		response = requests.put(host + '/api/' + user + '/lights/' + light + '/state', data = json.dumps(data))
+		response = requests.put(host + '/api/' + user + '/groups/' + group + '/action', data = json.dumps(data))
 
 	# process response
 
