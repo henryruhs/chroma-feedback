@@ -4,6 +4,7 @@ disable =
 	bad-continuation,
 	bad-whitespace,
 	consider-using-in,
+	cyclic-import,
 	duplicate-code,
 	global-statement,
 	import-error,
