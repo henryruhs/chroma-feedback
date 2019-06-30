@@ -2,7 +2,7 @@ from __future__ import print_function
 import os
 import sys
 import threading
-from src import device, miner, reporter, wording
+from src import device, provider, reporter, wording
 import src.consumer.system_tray.core as system_tray
 
 if sys.version_info < (3, 4):
@@ -25,9 +25,9 @@ def run(args):
 		reporter.header()
 		print()
 
-	# process miner
+	# process provider
 
-	data = miner.process(args)
+	data = provider.process(args)
 
 	# handle data
 
