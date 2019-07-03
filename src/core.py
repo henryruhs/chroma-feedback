@@ -61,6 +61,6 @@ def run(args):
 			system_tray.update(reporter_result['status'])
 
 
-def destroy():
+def destroy(number, frame):
 	print('\r' + wording.get('goodbye') + wording.get('exclamation_mark'))
 	os._exit(0)
