@@ -36,6 +36,7 @@ def run(args):
 
 		# process consumer
 
+		philips_hue.init(args)
 		consumer_result = philips_hue.run(reporter_result['status'])
 		if consumer_result:
 			reporter.log(consumer_result)
