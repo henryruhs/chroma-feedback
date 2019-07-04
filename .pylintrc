@@ -3,11 +3,11 @@
 disable =
 	bad-continuation,
 	bad-whitespace,
+	cyclic-import,
 	consider-using-in,
 	duplicate-code,
 	global-statement,
 	invalid-name,
-	len-as-condition,
 	missing-docstring,
 	protected-access,
 	unexpected-keyword-arg,

@@ -20,8 +20,8 @@ def run(args):
 
 	# handle exit
 
-	if len(provider_result) == 0:
-		exit(wording.get('provider_no') + wording.get('exclamation_mark'))
+	if not provider_result:
+		exit(wording.get('result_no') + wording.get('exclamation_mark'))
 
 	# process reporter
 

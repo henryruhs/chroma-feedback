@@ -7,7 +7,7 @@ def run(status):
 
 	# process
 
-	if len(device_manager.devices) == 0:
+	if not device_manager.devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
 	return process(device_manager.devices, status)
 
