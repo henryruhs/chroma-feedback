@@ -22,18 +22,18 @@ def test_process_process():
 			'provider': 'appveyor',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
-			'status': 'process'
+			'status': 'errored'
 		},
 		{
 			'provider': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
-			'status': 'passed'
+			'status': 'process'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on appveyor in process' in reporter_result['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][1]
-	assert reporter_result['status'] == 'process'
+	assert 'Build of redaxmedia/chroma-feedback on appveyor errored' in reporter_result['message'][0]
+	assert 'Build of redaxmedia/chroma-feedback on travis in process' in reporter_result['message'][1]
+	assert reporter_result['status'] == 'errored'
 
 
 def test_process_errored():
@@ -43,18 +43,18 @@ def test_process_errored():
 			'provider': 'appveyor',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
-			'status': 'errored'
+			'status': 'failed'
 		},
 		{
 			'provider': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
-			'status': 'passed'
+			'status': 'errored'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on appveyor errored' in reporter_result['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][1]
-	assert reporter_result['status'] == 'errored'
+	assert 'Build of redaxmedia/chroma-feedback on appveyor failed' in reporter_result['message'][0]
+	assert 'Build of redaxmedia/chroma-feedback on travis errored' in reporter_result['message'][1]
+	assert reporter_result['status'] == 'failed'
 
 
 def test_process_failed():
@@ -67,12 +67,6 @@ def test_process_failed():
 			'status': 'failed'
 		},
 		{
-			'provider': 'circle',
-			'slug': 'redaxmedia/chroma-feedback',
-			'active': True,
-			'status': 'errored'
-		},
-		{
 			'provider': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
@@ -80,6 +74,5 @@ def test_process_failed():
 		}
 	])
 	assert 'Build of redaxmedia/chroma-feedback on appveyor failed' in reporter_result['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on circle errored' in reporter_result['message'][1]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][2]
+	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][1]
 	assert reporter_result['status'] == 'failed'

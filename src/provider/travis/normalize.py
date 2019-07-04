@@ -11,9 +11,9 @@ def normalize_data(project):
 
 
 def normalize_status(status):
-	if status == 'created' or status == 'started':
+	if status in ['created', 'started']:
 		return 'process'
-	if status == 'cancelled' or status == 'errored':
+	if status in ['cancelled', 'errored']:
 		return 'errored'
 	if status == 'failed':
 		return 'failed'

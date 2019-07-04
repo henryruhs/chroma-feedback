@@ -11,9 +11,9 @@ def normalize_data(project):
 
 
 def normalize_status(status):
-	if status == 'queued' or status == 'running' or status == 'scheduled':
+	if status in ['queued', 'running', 'scheduled']:
 		return 'process'
-	if status == 'canceled' or status == 'no_tests':
+	if status in ['canceled', 'no_tests']:
 		return 'errored'
 	if status == 'failed':
 		return 'failed'

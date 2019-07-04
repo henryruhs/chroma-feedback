@@ -14,7 +14,7 @@ def process(provider_result):
 				message.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(project['slug'], project['provider']))
 			if project['status'] == 'process':
 				message.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(project['slug'], project['provider']))
-				if status != 'errored' and status != 'failed':
+				if status not in ['errored', 'failed']:
 					status = 'process'
 			if project['status'] == 'errored':
 				message.append(wording.get('cross') + ' ' + wording.get('build_errored').format(project['slug'], project['provider']))
