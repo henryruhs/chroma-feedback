@@ -10,6 +10,6 @@ def process(program):
 			PROVIDER = importlib.import_module('src.provider.' + provider)
 			PROVIDER.init(program)
 			result.extend(PROVIDER.run())
-		except ModuleNotFoundError:
+		except ImportError:
 			pass
 	return result

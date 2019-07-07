@@ -10,6 +10,6 @@ def process(reporter_result, program):
 			CONSUMER = importlib.import_module('src.consumer.' + consumer)
 			CONSUMER.init(program)
 			result.append(CONSUMER.run(reporter_result['status']))
-		except ModuleNotFoundError:
+		except ImportError:
 			pass
 	return result
