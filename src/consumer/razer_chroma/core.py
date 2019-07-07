@@ -17,10 +17,10 @@ def run(status):
 
 	if not device_manager.devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-	return process(device_manager.devices, status)
+	return process(status, device_manager.devices)
 
 
-def process(devices, status):
+def process(status, devices):
 	message = []
 
 	# process devices
@@ -36,8 +36,7 @@ def process(devices, status):
 			message.append(wording.get('setting_failed').format(device.name) + wording.get('point'))
 	return\
 	{
-		'message': message,
-		'status': status
+		'message': message
 	}
 
 

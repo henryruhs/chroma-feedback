@@ -4,7 +4,6 @@ from src import color, metadata, wording
 
 def process(provider_result):
 	message = []
-	status = 'passed'
 
 	# process data
 
@@ -14,19 +13,13 @@ def process(provider_result):
 				message.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(project['slug'], project['provider']))
 			if project['status'] == 'process':
 				message.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(project['slug'], project['provider']))
-				if status not in ['errored', 'failed']:
-					status = 'process'
 			if project['status'] == 'errored':
 				message.append(wording.get('cross') + ' ' + wording.get('build_errored').format(project['slug'], project['provider']))
-				if status != 'failed':
-					status = 'errored'
 			if project['status'] == 'failed':
 				message.append(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(project['slug'], project['provider']))
-				status = 'failed'
 	return\
 	{
-		'message': message,
-		'status': status
+		'message': message
 	}
 
 

@@ -2,7 +2,7 @@ from __future__ import print_function
 import os
 import sys
 import threading
-from src import consumer, provider, reporter, wording
+from src import consumer, helper, provider, reporter, wording
 
 
 def run(program):
@@ -38,7 +38,8 @@ def run(program):
 
 		# process consumer
 
-		consumer_result = consumer.process(reporter_result, program)
+		status = helper.get_status(provider_result)
+		consumer_result = consumer.process(status, program)
 
 		# print summary
 

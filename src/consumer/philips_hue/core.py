@@ -17,10 +17,10 @@ def init(program):
 def run(status):
 	groups = args.philips_hue_group
 
-	return process(groups, status)
+	return process(status, groups)
 
 
-def process(groups, status):
+def process(status, groups):
 	message = []
 
 	# process groups
@@ -36,8 +36,7 @@ def process(groups, status):
 			message.append(wording.get('setting_failed').format(group) + wording.get('point'))
 	return\
 	{
-		'message': message,
-		'status': status
+		'message': message
 	}
 
 

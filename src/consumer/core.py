@@ -1,7 +1,7 @@
 import importlib
 
 
-def process(reporter_result, program):
+def process(status, program):
 	args = program.parse_known_args()[0]
 	result = []
 
@@ -9,7 +9,7 @@ def process(reporter_result, program):
 		try:
 			CONSUMER = importlib.import_module('src.consumer.' + consumer)
 			CONSUMER.init(program)
-			result.append(CONSUMER.run(reporter_result['status']))
+			result.append(CONSUMER.run(status))
 		except ImportError:
 			pass
 	return result
