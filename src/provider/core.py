@@ -1,5 +1,4 @@
 import importlib
-import requests
 
 
 def process(program):
@@ -7,15 +6,10 @@ def process(program):
 	result = []
 
 	for provider in args.provider:
-		result.extend(load(provider, program))
+		try:
+			PROVIDER = importlib.import_module('src.provider.' + provider)
+			PROVIDER.init(program)
+			result.extend(PROVIDER.run())
+		except ModuleNotFoundError:
+			pass
 	return result
-
-
-def load(provider, program):
-	try:
-		PROVIDER = importlib.import_module('src.provider.' + provider)
-		PROVIDER.init(program)
-		return PROVIDER.run()
-	except (requests.exceptions.ConnectionError, requests.exceptions.MissingSchema):
-		pass
-	return []

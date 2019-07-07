@@ -2,15 +2,14 @@ from __future__ import print_function
 import os
 import sys
 import threading
-from src import provider, reporter, wording
-from src.consumer import philips_hue, razer_chroma, system_tray
+from src import consumer, provider, reporter, wording
 
 
 def run(program):
 	if sys.version_info < (3, 4):
 		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
-	# show header
+	# print header
 
 	if threading.active_count() == 1:
 		reporter.header()
@@ -25,11 +24,11 @@ def run(program):
 	if not provider_result:
 		exit(wording.get('result_no') + wording.get('exclamation_mark'))
 
-	# process reporter
+	# print summary
 
 	reporter_result = reporter.process(provider_result)
 	if reporter_result:
-		reporter.log(reporter_result)
+		reporter.summary(reporter_result)
 		print()
 
 	# handle dry run
@@ -39,14 +38,13 @@ def run(program):
 
 		# process consumer
 
-		philips_hue.init(program)
-		consumer_result = philips_hue.run(reporter_result['status'])
+		consumer_result = consumer.process(reporter_result, program)
+
+		# print summary
+
 		if consumer_result:
-			reporter.log(consumer_result)
-			print()
-		consumer_result = razer_chroma.run(reporter_result['status'])
-		if consumer_result:
-			reporter.log(consumer_result)
+			print(consumer_result)
+			reporter.summary(consumer_result)
 			print()
 
 	# handle thread
@@ -57,12 +55,6 @@ def run(program):
 			[
 				args
 			]).start()
-
-			# handle system tray
-
-			system_tray.run()
-		if threading.active_count() > 1:
-			system_tray.update(reporter_result['status'])
 
 
 def destroy(number, frame):

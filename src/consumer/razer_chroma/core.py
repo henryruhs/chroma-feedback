@@ -1,6 +1,14 @@
 from src import wording
 from .factory import device_manager_factory
 
+args = None
+
+
+def init(program):
+	global args
+
+	args = program.parse_known_args()[0]
+
 
 def run(status):
 	device_manager = device_manager_factory()

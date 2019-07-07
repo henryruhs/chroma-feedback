@@ -34,7 +34,7 @@ def header():
 	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
 
 
-def log(result):
+def summary(result):
 	if 'message' in result:
 		for message in result['message']:
 			print(message)

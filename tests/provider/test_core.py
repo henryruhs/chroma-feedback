@@ -9,6 +9,6 @@ def test_progress(mocker):
 	sys.argv.append('travis')
 	sys.argv.append('--travis-slug')
 	sys.argv.append('redaxmedia')
-	load = mocker.spy(provider.core, 'load')
+	process = mocker.spy(provider.travis, 'run')
 	provider.process(program)
-	assert load.call_count == 1
+	assert process.call_count == 1
