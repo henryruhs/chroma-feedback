@@ -1,4 +1,4 @@
-from .core import process, fetch
+from .core import process, load
 
 __all__ =\
 [

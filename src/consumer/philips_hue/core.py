@@ -2,17 +2,22 @@ import json
 import requests
 from src import wording
 
-ARGS = None
+args = None
 
 
-def init(args):
-	global ARGS
+def init(program):
+	global args
 
-	ARGS = args
+	program.add_argument('--philips-hue-host', required = True)
+	program.add_argument('--philips-hue-user', required = True)
+	program.add_argument('--philips-hue-group', action = 'append', required = True)
+	args = program.parse_known_args()[0]
 
 
 def run(status):
-	return process(ARGS.philips_hue_group, status)
+	groups = args.philips_hue_group
+
+	return process(groups, status)
 
 
 def process(groups, status):
@@ -58,8 +63,8 @@ def pulsate(group, hue):
 
 def update(group, data):
 	response = None
-	host = ARGS.philips_hue_host
-	user = ARGS.philips_hue_user
+	host = args.philips_hue_host
+	user = args.philips_hue_user
 	if host and user:
 		response = requests.put(host + '/api/' + user + '/groups/' + group + '/action', data = json.dumps(data))
 

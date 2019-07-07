@@ -5,18 +5,20 @@ import threading
 from src import provider, reporter, wording
 from src.consumer import philips_hue, razer_chroma, system_tray
 
-if sys.version_info < (3, 4):
-	exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
+def run(program):
+	if sys.version_info < (3, 4):
+		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
-def run(args):
+	# show header
+
 	if threading.active_count() == 1:
 		reporter.header()
 		print()
 
 	# process provider
 
-	provider_result = provider.process(args)
+	provider_result = provider.process(program)
 
 	# handle exit
 
@@ -32,11 +34,12 @@ def run(args):
 
 	# handle dry run
 
+	args = program.parse_known_args()[0]
 	if args.dry_run is False:
 
 		# process consumer
 
-		philips_hue.init(args)
+		philips_hue.init(program)
 		consumer_result = philips_hue.run(reporter_result['status'])
 		if consumer_result:
 			reporter.log(consumer_result)

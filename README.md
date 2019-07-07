@@ -20,15 +20,6 @@ Preview
 Installation
 ------------
 
-Install the required OpenRazer driver:
-
-* [Ubuntu / Linux Mint](https://openrazer.github.io/#ubuntu)
-* [Debian](https://openrazer.github.io/#debian)
-* [Arch Linux](https://openrazer.github.io/#arch)
-* [Fedora](https://openrazer.github.io/#fedora)
-* [openSUSE](https://openrazer.github.io/#opensuse)
-* [Gentoo](https://openrazer.github.io/#gentoo)
-
 Install Chroma Feedback using PyPI:
 
 ```
@@ -44,37 +35,12 @@ chroma-feedback [options]
 
 -V, --version
 -P, --provider <provider>
--H, --host <host>
--S, --slug <slug>
--A, --auth <auth>
+-C, --consumer <consumer>
 -I, --background-interval <background-interval>
 -B, --background-run
 -D, --dry-run
 -h, --help
 ```
-
-
-Errors
-------
-
-| Message                  | Type        | Description                                     |
-|--------------------------|-------------|-------------------------------------------------|
-| Python x.x not supported | System      | Unsupported Python version is called            |
-| Driver not found         | ImportError | Module `openrazer.client` could not be imported |
-| Daemon not found         | Exception   | The `DeviceManager` throwed a `DaemonNotFound`  |
-| Device not found         | General     | There is no supported device connected          |
-| Data not found           | General     | There is no data available for your request     |
-
-
-Indicators
-----------
-
-| Status  | Color  | Effect  |
-|---------|--------|---------|
-| Passed  | Green  | Static  |
-| Process | Yellow | Static  |
-| Errored | White  | Pulsate |
-| Failed  | Red    | Pulsate |
 
 
 Providers
