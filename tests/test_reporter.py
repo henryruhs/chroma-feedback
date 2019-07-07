@@ -1,8 +1,8 @@
 from src import reporter
 
 
-def test_process_passed():
-	reporter_result = reporter.process(provider_result =
+def test_create_provider_report_passed():
+	reporter_result = reporter.create_provider_report(provider_result =
 	[
 		{
 			'provider': 'travis',
@@ -14,8 +14,8 @@ def test_process_passed():
 	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][0]
 
 
-def test_process_process():
-	reporter_result = reporter.process(provider_result =
+def test_create_provider_report_process():
+	reporter_result = reporter.create_provider_report(provider_result =
 	[
 		{
 			'provider': 'appveyor',
@@ -34,8 +34,8 @@ def test_process_process():
 	assert 'Build of redaxmedia/chroma-feedback on travis in process' in reporter_result['message'][1]
 
 
-def test_process_errored():
-	reporter_result = reporter.process(provider_result =
+def test_create_provider_report_errored():
+	reporter_result = reporter.create_provider_report(provider_result =
 	[
 		{
 			'provider': 'appveyor',
@@ -54,8 +54,8 @@ def test_process_errored():
 	assert 'Build of redaxmedia/chroma-feedback on travis errored' in reporter_result['message'][1]
 
 
-def test_process_failed():
-	reporter_result = reporter.process(provider_result =
+def test_create_provider_report_failed():
+	reporter_result = reporter.create_provider_report(provider_result =
 	[
 		{
 			'provider': 'appveyor',

@@ -7,8 +7,9 @@ args = None
 def init(program):
 	global args
 
-	program.add_argument('--travis-host', default = 'https://api.travis-ci.org')
-	program.add_argument('--travis-slug', action = 'append', required = True)
+	if not args:
+		program.add_argument('--travis-host', default = 'https://api.travis-ci.org')
+		program.add_argument('--travis-slug', action = 'append', required = True)
 	args = program.parse_known_args()[0]
 
 

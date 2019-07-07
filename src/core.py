@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import sys
 import threading
@@ -9,10 +8,10 @@ def run(program):
 	if sys.version_info < (3, 4):
 		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
-	# print header
+	# report header
 
 	if threading.active_count() == 1:
-		reporter.header()
+		reporter.print_header()
 		print()
 
 	# process provider
@@ -24,11 +23,11 @@ def run(program):
 	if not provider_result:
 		exit(wording.get('result_no') + wording.get('exclamation_mark'))
 
-	# print summary
+	# report provider
 
-	reporter_result = reporter.process(provider_result)
-	if reporter_result:
-		reporter.summary(reporter_result)
+	provider_report = reporter.create_provider_report(provider_result)
+	if provider_report:
+		reporter.print_provider_report(provider_report)
 		print()
 
 	# handle dry run
@@ -38,14 +37,14 @@ def run(program):
 
 		# process consumer
 
-		status = helper.get_status(provider_result)
+		status = helper.get_provider_status(provider_result)
 		consumer_result = consumer.process(status, program)
 
-		# print summary
+		# report consumer
 
-		if consumer_result:
-			print(consumer_result)
-			reporter.summary(consumer_result)
+		consumer_report = reporter.create_consumer_report(consumer_result)
+		if consumer_report:
+			reporter.print_consumer_report(consumer_report)
 			print()
 
 	# handle thread

@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 import sys
 from src import provider
 
-def test_progress(mocker):
+def test_process(mocker):
 	program = ArgumentParser()
 	program.add_argument('-P', '--provider', action = 'append', required = True)
 	sys.argv.append('--provider')

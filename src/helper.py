@@ -1,4 +1,4 @@
-def get_status(provider_result):
+def get_provider_status(provider_result):
 	status = 'passed'
 
 	# process provider

@@ -1,8 +1,7 @@
-from __future__ import print_function
 from src import color, metadata, wording
 
 
-def process(provider_result):
+def create_provider_report(provider_result):
 	message = []
 
 	# process data
@@ -23,11 +22,19 @@ def process(provider_result):
 	}
 
 
-def header():
+def create_consumer_report(consumer_result):
+	return consumer_result
+
+
+def print_header():
 	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
 
 
-def summary(result):
-	if 'message' in result:
-		for message in result['message']:
+def print_provider_report(provider_result):
+	if 'message' in provider_result:
+		for message in provider_result['message']:
 			print(message)
+
+
+def print_consumer_report(consumer_result):
+	print(consumer_result)
