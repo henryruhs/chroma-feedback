@@ -16,4 +16,5 @@ def test_fetch_slug():
 
 def test_fetch_invalid():
 	result = github.fetch(None, None, None, None)
+
 	assert result == []
