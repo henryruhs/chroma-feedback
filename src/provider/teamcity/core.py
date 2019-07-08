@@ -2,16 +2,41 @@ import base64
 import requests
 from .normalize import normalize_data
 
+args = None
 
-def fetch(host, slug, auth):
+
+def init(program):
+	global args
+
+	if not args:
+		program.add_argument('--teamcity-host', default = 'https://teamcity.jetbrains.com')
+		program.add_argument('--teamcity-slug', action = 'append')
+		program.add_argument('--teamcity-username', required = True)
+		program.add_argument('--teamcity-password', required = True)
+	args = program.parse_known_args()[0]
+
+
+def run():
+	host = args.teamcity_host
+	slugs = args.teamcity_slug
+	username = args.teamcity_usernmae
+	password = args.teamcity_password
+	result = []
+
+	for slug in slugs:
+		result.extend(fetch(host, slug, username, password))
+	return result
+
+
+def fetch(host, slug, username, password):
 	response = None
-	if host is None:
-		host = 'https://teamcity.jetbrains.com'
-	if auth:
+
+	if host and username and password:
+		username_password = username + ':' + password
 		headers =\
 		{
 			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(auth.encode('utf-8')).decode('ascii')
+			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
 		}
 		if slug:
 			response = requests.get(host + '/app/rest/buildTypes?locator=affectedProject:(id:' + slug + ')&fields=buildType(builds($locator(running:any),build(id,running,status,buildType(id,projectName))))', headers = headers)
@@ -22,8 +47,10 @@ def fetch(host, slug, auth):
 
 	if response and response.status_code == 200:
 		data = response.json()
+
 		if 'buildType' in data:
 			result = []
+
 			for project in data['buildType']:
 				if project['builds']['build']:
 					result.extend(normalize_data(project['builds']['build'][0]))

@@ -12,7 +12,7 @@ def init(program):
 		program.add_argument('--github-host', default = 'https://api.github.com')
 		program.add_argument('--github-slug', action = 'append', required = True)
 		program.add_argument('--github-username', required = True)
-		program.add_argument('--github-password', required = True)
+		program.add_argument('--github-token', required = True)
 	args = program.parse_known_args()[0]
 
 
@@ -20,22 +20,22 @@ def run():
 	host = args.github_host
 	slugs = args.github_slug
 	username = args.github_username
-	password = args.github_password
+	token = args.github_token
 	result = []
 
 	for slug in slugs:
-		result.extend(fetch(host, slug, username, password))
+		result.extend(fetch(host, slug, username, token))
 	return result
 
 
-def fetch(host, slug, username, password):
+def fetch(host, slug, username, token):
 	response = None
 
-	if host and slug and username and password:
-		username_password = username + ':' + password
+	if host and slug and username and token:
+		username_token = username + ':' + token
 		response = requests.get(host + '/repos/' + slug + '/status/master', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
+			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})
 
 	# process response
