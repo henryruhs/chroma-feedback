@@ -61,7 +61,11 @@ Philips Hue
 Update by group:
 
 ```
-chroma-feedback --consumer=philips_hue --philips-hue-host={HOST} --philips-hue-username={USERNAME} --philips-hue-group={GROUP}
+chroma-feedback --consumer=philips_hue [options]
+
+--philips-hue-host <host>
+--philips-hue-username <username>
+--philips-hue-group <group-id>
 ```
 
 
@@ -101,13 +105,17 @@ AppVeyor
 Monitor a single project:
 
 ```
-chroma-feedback --provider=appveyor --appveyor-slug={USERNAME/REPOSITORY}
+chroma-feedback --provider=appveyor [options]
+
+--appveyor-slug <username/repository>
 ```
 
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=appveyor --appveyor-token={TOKEN}
+chroma-feedback --provider=appveyor [options]
+
+--appveyor-token <token>
 ```
 
 
@@ -123,13 +131,17 @@ Circle
 Monitor a single project:
 
 ```
-chroma-feedback --provider=circle --circle-slug={USERNAME/REPOSITORY}
+chroma-feedback --provider=circle [options]
+
+--circle-slug <username/repository>
 ```
 
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=circle --circle-token={TOKEN}
+chroma-feedback --provider=circle [options]
+
+--circle-token <token>
 ```
 
 
@@ -146,13 +158,22 @@ GitHub
 Monitor a single project:
 
 ```
-chroma-feedback --provider=github --github-slug={USERNAME/REPOSITORY} --github-username={USERNAME} --github-token={TOKEN}
+chroma-feedback --provider=github [options]
+
+--github-slug <username/repository>
+--github-username <username>
+--github-token <token>
 ```
 
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=github --github-slug={USERNAME/REPOSITORY} --github-slug={USERNAME/REPOSITORY} --github-username={USERNAME} --github-token={TOKEN}
+chroma-feedback --provider=github [options]
+
+--github-slug <username/repository>
+--github-slug <username/repository>
+--github-username <username>
+--github-token <token>
 ```
 
 
@@ -168,13 +189,20 @@ GitLab
 Monitor a single project:
 
 ```
-chroma-feedback --provider=gitlab --gitlab-slug={PROJECT-ID}--gitlab-token={TOKEN}
+chroma-feedback --provider=gitlab [options]
+
+--gitlab-slug <project-id>
+--gitlab-token <token>
 ```
 
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=gitlab --gitlab-slug={PROJECT-ID} --gitlab-slug={PROJECT-ID} --gitlab-token={TOKEN}
+chroma-feedback --provider=gitlab [options]
+
+--gitlab-slug <project-id>
+--gitlab-slug <project-id>
+--gitlab-token <token>
 ```
 
 
@@ -189,13 +217,20 @@ Jenkins
 Monitor a single project:
 
 ```
-chroma-feedback --provider=jenkins --jenkins-host={HOST} --jenkins-slug={JOB-NAME}
+chroma-feedback --provider=jenkins [options]
+
+--jenkins-host <host>
+--jenkins-slug <job>
 ```
 
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=jenkins --jenkins-host={HOST} --jenkins-slug={JOB-NAME} --jenkins-slug={JOB-NAME}
+chroma-feedback --provider=jenkins [options]
+
+--jenkins-host <host>
+--jenkins-slug <job-name>
+--jenkins-slug <job-name>
 ```
 
 
@@ -212,13 +247,20 @@ TeamCity
 Monitor a single project:
 
 ```
-chroma-feedback --provider=teamcity --teamcity-slug={SLUG} --teamcity-username={USERNAME} --teamcity-password={PASSWORD}
+chroma-feedback --provider=teamcity [options]
+
+--teamcity-slug <project-id>
+--teamcity-username <username>
+--teamcity-password <password>
 ```
 
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=teamcity --teamcity-username={USERNAME} --teamcity-password={PASSWORD}
+chroma-feedback --provider=teamcity [options]
+
+--teamcity-username <username>
+--teamcity-password <password>
 ```
 
 
@@ -233,11 +275,15 @@ Travis
 Monitor a single project:
 
 ```
-chroma-feedback --provider=travis --travis-slug={USERNAME/REPOSITORY}
+chroma-feedback --provider=travis [options]
+
+--travis-slug <username/repository>
 ```
 
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=travis --travis-slug={USERNAME}
+chroma-feedback --provider=travis [options]
+
+--travis-slug <username>
 ```
