@@ -1,6 +1,5 @@
 import json
 import requests
-from src import wording
 
 args = None
 
