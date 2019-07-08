@@ -50,152 +50,152 @@ Providers
 AppVeyor
 --------
 
-| Name | Type   | Default                 | Mandatory | Support |
-|------|--------|-------------------------|-----------|---------|
-| Host | string | https://ci.appveyor.com | optional  | ✔       |
-| Slug | string |                         | optional  | ✔       |
-| Auth | string |                         | optional  | ✔       |
+| Name  | Default                 | Mandatory |
+|-------|-------------------------|-----------|
+| Host  | https://ci.appveyor.com | optional  |
+| Slug  |                         | optional  |
+| Token |                         | optional  |
 
-Monitor a single project by slug:
-
-```
-chroma-feedback --provider=appveyor --slug=redaxmedia/chroma-feedback
-```
-
-Monitor multiple projects by auth:
+Monitor a single project:
 
 ```
-chroma-feedback --provider=appveyor --auth={TOKEN}
+chroma-feedback --provider=appveyor --appveyor-slug={USERNAME/REPOSITORY}
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=appveyor --appveyor-token={TOKEN}
 ```
 
 
 Circle
 ------
 
-| Name | Type   | Default              | Mandatory | Support |
-|------|--------|----------------------|-----------|---------|
-| Host | string | https://circleci.com | optional  | ✔       |
-| Slug | string |                      | optional  | ✔       |
-| Auth | string |                      | optional  | ✔       |
+| Name  | Default              | Mandatory |
+|-------|----------------------|-----------|
+| Host  | https://circleci.com | optional  |
+| Slug  |                      | optional  |
+| Token |                      | optional  |
 
-Monitor a single project by slug:
-
-```
-chroma-feedback --provider=circle --slug=github/redaxmedia/chroma-feedback
-```
-
-Monitor multiple projects by auth:
+Monitor a single project:
 
 ```
-chroma-feedback --provider=circle --auth={TOKEN}
+chroma-feedback --provider=circle --circle-slug={USERNAME/REPOSITORY}
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=circle --circle-token={TOKEN}
 ```
 
 
 GitHub
 ------
 
-| Name | Type   | Default                | Mandatory | Support |
-|------|--------|------------------------|-----------|---------|
-| Host | string | https://api.github.com | optional  | ✔       |
-| Slug | string |                        | required  | ✔       |
-| Auth | string |                        | required  | ✔       |
+| Name     | Default                | Mandatory |
+|----------|------------------------|-----------|
+| Host     | https://api.github.com | optional  |
+| Slug     |                        | required  |
+| Username |                        | required  |
+| Token    |                        | required  |
 
-Monitor a single project by slug and auth:
-
-```
-chroma-feedback --provider=github --slug=redaxmedia/chroma-feedback --auth={USERNAME:PASSWORD}
-```
-
-Monitor multiple projects by slug and auth:
+Monitor a single project:
 
 ```
-chroma-feedback --provider=github --slug={SLUG} --slug={SLUG} --auth={USERNAME:PASSWORD}
+chroma-feedback --provider=github --github-slug={USERNAME/REPOSITORY} --github-username={USERNAME} --github-token={TOKEN}
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=github --github-slug={USERNAME/REPOSITORY} --github-slug={USERNAME/REPOSITORY} --github-username={USERNAME} --github-token={TOKEN}
 ```
 
 
 GitLab
 ------
 
-| Name | Type   | Default            | Mandatory | Support |
-|------|--------|--------------------|-----------|---------|
-| Host | string | https://gitlab.com | optional  | ✔       |
-| Slug | string |                    | required  | ✔       |
-| Auth | string |                    | required  | ✔       |
+| Name  | Default            | Mandatory |
+|-------|--------------------|-----------|
+| Host  | https://gitlab.com | optional  |
+| Slug  |                    | required  |
+| Token |                    | required  |
 
-Monitor a single project by slug and auth:
-
-```
-chroma-feedback --provider=gitlab --slug={SLUG} --auth={TOKEN}
-```
-
-Monitor multiple projects by slug and auth:
+Monitor a single project:
 
 ```
-chroma-feedback --provider=gitlab --slug={SLUG} --slug={SLUG} --auth={TOKEN}
+chroma-feedback --provider=gitlab --gitlab-slug={PROJECT-ID}--gitlab-token={TOKEN}
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=gitlab --gitlab-slug={PROJECT-ID} --gitlab-slug={PROJECT-ID} --gitlab-token={TOKEN}
 ```
 
 
 Jenkins
 -------
 
-| Name | Type   | Default | Mandatory | Support |
-|------|--------|---------|-----------|---------|
-| Host | string |         | required  | ✔       |
-| Slug | string |         | required  | ✔       |
-| Auth | string |         |           | ✖       |
+| Name | Default | Mandatory |
+|------|---------|-----------|
+| Host |         | required  |
+| Slug |         | required  |
 
-Monitor a single project by slug:
-
-```
-chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG}
-```
-
-Monitor multiple projects by slug:
+Monitor a single project:
 
 ```
-chroma-feedback --provider=jenkins --host={HOST} --slug={SLUG} --slug={SLUG}
+chroma-feedback --provider=jenkins --jenkins-host={HOST} --jenkins-slug={JOB-NAME}
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=jenkins --jenkins-host={HOST} --jenkins-slug={JOB-NAME} --jenkins-slug={JOB-NAME}
 ```
 
 
 TeamCity
 --------
 
-| Name | Type   | Default                        | Mandatory | Support |
-|------|--------|--------------------------------|-----------|---------|
-| Host | string | https://teamcity.jetbrains.com | optional  | ✔       |
-| Slug | string |                                | required  | ✔       |
-| Auth | string |                                | required  | ✔       |
+| Name     | Default                        | Mandatory |   |
+|----------|--------------------------------|-----------|---|
+| Host     | https://teamcity.jetbrains.com | optional  |   |
+| Slug     |                                | optional  |   |
+| Username |                                | required  |   |
+| Password |                                | required  |   |
 
-Monitor a single project by slug and auth:
-
-```
-chroma-feedback --provider=teamcity --slug={SLUG} --auth={USERNAME:PASSWORD}
-```
-
-Monitor multiple projects by auth:
+Monitor a single project:
 
 ```
-chroma-feedback --provider=teamcity --auth={USERNAME:PASSWORD}
+chroma-feedback --provider=teamcity --teamcity-slug={SLUG} --teamcity-username={USERNAME} --teamcity-password={PASSWORD}
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=teamcity --teamcity-username={USERNAME} --teamcity-password={PASSWORD}
 ```
 
 
 Travis
 ------
 
-| Name | Type   | Default                   | Mandatory | Support |
-|------|--------|---------------------------|-----------|---------|
-| Host | string | https://api.travis-ci.org | optional  | ✔       |
-| Slug | string |                           | required  | ✔       |
-| Auth | string |                           |           | ✖       |
+| Name | Default                   | Mandatory |
+|------|---------------------------|-----------|
+| Host | https://api.travis-ci.org | optional  |
+| Slug |                           | required  |
 
-Monitor a single project by slug:
-
-```
-chroma-feedback --provider=travis --slug=redaxmedia/chroma-feedback
-```
-
-Monitor multiple projects by slug:
+Monitor a single project:
 
 ```
-chroma-feedback --provider=travis --slug=redaxmedia
+chroma-feedback --provider=travis --travis-slug={USERNAME/REPOSITORY}
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=travis --travis-slug={USERNAME}
 ```
