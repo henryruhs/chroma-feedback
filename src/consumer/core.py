@@ -1,5 +1,5 @@
 import importlib
-
+from src import wording
 
 def process(status, program):
 	args = program.parse_known_args()[0]
@@ -11,5 +11,5 @@ def process(status, program):
 			CONSUMER.init(program)
 			result.extend(CONSUMER.run(status))
 		except ImportError:
-			pass
+			exit(wording.get('consumer_no') + wording.get('exclamation_mark'))
 	return result

@@ -1,4 +1,5 @@
 import importlib
+from src import wording
 
 
 def process(program):
@@ -11,5 +12,5 @@ def process(program):
 			PROVIDER.init(program)
 			result.extend(PROVIDER.run())
 		except ImportError:
-			pass
+			exit(wording.get('provider_no') + wording.get('exclamation_mark'))
 	return result

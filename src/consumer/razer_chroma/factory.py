@@ -9,7 +9,7 @@ def device_manager_factory():
 	try:
 		from openrazer.client import DeviceManager, DaemonNotFound
 	except ImportError:
-		exit(wording.get('driver_no').format('OPENRAZER') + wording.get('exclamation_mark'))
+		exit(wording.get('package_no').format('OPENRAZER') + wording.get('exclamation_mark'))
 
 	# build daemon
 
