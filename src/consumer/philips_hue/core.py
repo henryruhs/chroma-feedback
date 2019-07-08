@@ -80,10 +80,10 @@ def pulsate(group, hue):
 def update(group, data):
 	response = None
 	host = args.philips_hue_host
-	user = args.philips_hue_user
+	username = args.philips_hue_username
 
-	if host and user:
-		response = requests.put(host + '/api/' + user + '/groups/' + group + '/action', data = json.dumps(data))
+	if host and username:
+		response = requests.put(host + '/api/' + username + '/groups/' + group + '/action', data = json.dumps(data))
 
 	# process response
 
