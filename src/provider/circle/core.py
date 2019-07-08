@@ -2,23 +2,46 @@ import base64
 import requests
 from .normalize import normalize_data
 
+args = None
 
-def fetch(host, slug, auth):
+
+def init(program):
+	global args
+
+	if not args:
+		program.add_argument('--circle-host', default = 'https://circleci.com')
+		program.add_argument('--circle-slug', action = 'append')
+		program.add_argument('--circle-token')
+	args = program.parse_known_args()[0]
+
+
+def run():
+	host = args.circle_host
+	slugs = args.circle_slug
+	token = args.circle_token
+	result = []
+
+	for slug in slugs:
+		result.extend(fetch(host, slug, token))
+	return result
+
+
+def fetch(host, slug, token):
 	response = None
-	if host is None:
-		host = 'https://circleci.com'
-	if slug:
+
+	if host and slug:
 		response = requests.get(host + '/api/v1.1/project/' + slug)
-	if auth:
+	elif host and token:
 		response = requests.get(host + '/api/v1.1/recent-builds', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(auth.encode('utf-8')).decode('ascii')
+			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
 		})
 
 	# process response
 
 	if response and response.status_code == 200:
 		data = response.json()
+
 		for project in data:
 			return normalize_data(project)
 	return []
