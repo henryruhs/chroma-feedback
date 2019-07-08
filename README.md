@@ -160,12 +160,12 @@ chroma-feedback --provider=jenkins --jenkins-host={HOST} --jenkins-slug={JOB-NAM
 TeamCity
 --------
 
-| Name     | Default                        | Mandatory |   |
-|----------|--------------------------------|-----------|---|
-| Host     | https://teamcity.jetbrains.com | optional  |   |
-| Slug     |                                | optional  |   |
-| Username |                                | required  |   |
-| Password |                                | required  |   |
+| Name     | Default                        | Mandatory |
+|----------|--------------------------------|-----------|
+| Host     | https://teamcity.jetbrains.com | optional  |
+| Slug     |                                | optional  |
+| Username |                                | required  |
+| Password |                                | required  |
 
 Monitor a single project:
 
