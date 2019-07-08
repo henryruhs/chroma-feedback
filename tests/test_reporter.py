@@ -11,6 +11,7 @@ def test_create_provider_report_passed():
 			'status': 'passed'
 		}
 	])
+
 	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][0]
 
 
@@ -30,6 +31,7 @@ def test_create_provider_report_process():
 			'status': 'process'
 		}
 	])
+
 	assert 'Build of redaxmedia/chroma-feedback on appveyor errored' in reporter_result['message'][0]
 	assert 'Build of redaxmedia/chroma-feedback on travis in process' in reporter_result['message'][1]
 
@@ -50,6 +52,7 @@ def test_create_provider_report_errored():
 			'status': 'errored'
 		}
 	])
+
 	assert 'Build of redaxmedia/chroma-feedback on appveyor failed' in reporter_result['message'][0]
 	assert 'Build of redaxmedia/chroma-feedback on travis errored' in reporter_result['message'][1]
 
@@ -70,5 +73,6 @@ def test_create_provider_report_failed():
 			'status': 'passed'
 		}
 	])
+
 	assert 'Build of redaxmedia/chroma-feedback on appveyor failed' in reporter_result['message'][0]
 	assert 'Build of redaxmedia/chroma-feedback on travis passed' in reporter_result['message'][1]

@@ -10,28 +10,28 @@ def init(program):
 	if not args:
 		program.add_argument('--gitlab-host', default = 'https://gitlab.com')
 		program.add_argument('--gitlab-slug', action = 'append', required = True)
-		program.add_argument('--gitlab-auth', required=True)
+		program.add_argument('--gitlab-token', required = True)
 	args = program.parse_known_args()[0]
 
 
 def run():
 	host = args.gitlab_host
 	slugs = args.gitlab_slug
-	auth = args.gitlab_auth
+	token = args.gitlab_token
 	result = []
 
 	for slug in slugs:
-		result.extend(fetch(host, slug, auth))
+		result.extend(fetch(host, slug, token))
 	return result
 
 
-def fetch(host, slug, auth):
+def fetch(host, slug, token):
 	response = None
 
-	if host and slug and auth:
+	if host and slug and token:
 		response = requests.get(host + '/api/v4/projects/' + slug + '/pipelines', headers =
 		{
-			'Private-Token': auth
+			'Private-Token': token
 		})
 
 	# process response
@@ -41,17 +41,17 @@ def fetch(host, slug, auth):
 		pipeline = str(data[0]['id'])
 
 		if pipeline:
-			return fetch_jobs(host, slug, pipeline, auth)
+			return fetch_jobs(host, slug, pipeline, token)
 	return []
 
 
-def fetch_jobs(host, slug, pipeline, auth):
+def fetch_jobs(host, slug, pipeline, token):
 	response = None
 
-	if host and slug and pipeline and auth:
+	if host and slug and pipeline and token:
 		response = requests.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline + '/jobs', headers =
 		{
-			'Private-Token': auth
+			'Private-Token': token
 		})
 
 	# process response
