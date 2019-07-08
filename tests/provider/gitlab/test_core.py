@@ -3,7 +3,7 @@ import pytest
 from src.provider import gitlab
 
 
-def test_fetch_user():
+def test_fetch_slug():
 	if 'GITLAB_TOKEN' in os.environ:
 		result = gitlab.fetch('https://gitlab.com', '7311836', os.environ['GITLAB_TOKEN'])
 

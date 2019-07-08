@@ -12,7 +12,7 @@ def test_fetch_slug():
 	assert result[0]['status']
 
 
-def test_fetch_token():
+def test_fetch_user():
 	if 'CIRCLE_TOKEN' in os.environ:
 		result = circle.fetch('https://circleci.com', None, os.environ['CIRCLE_TOKEN'])
 

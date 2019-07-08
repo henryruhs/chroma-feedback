@@ -12,7 +12,7 @@ def test_fetch_slug():
 	assert result[0]['status']
 
 
-def test_fetch_token():
+def test_fetch_user():
 	if 'APPVEYOR_TOKEN' in os.environ:
 		result = appveyor.fetch('https://ci.appveyor.com', None, os.environ['APPVEYOR_TOKEN'])
 
