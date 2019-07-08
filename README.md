@@ -58,7 +58,7 @@ Philips Hue
 | Username | required  |
 | Group    | required  |
 
-Update by group:
+Indicate via `Philips Hue` lights:
 
 ```
 chroma-feedback --consumer=philips_hue
@@ -72,21 +72,12 @@ chroma-feedback --consumer=philips_hue
 Razer Chroma
 ------------
 
-Update connected devices:
+Indicate via `Razer Chroma` devices:
 
 ```
 chroma-feedback --consumer=razer_chroma
 ```
 
-
-System Tray
------------
-
-Show interactive system tray:
-
-```
-chroma-feedback --consumer=system_tray
-```
 
 
 Providers
