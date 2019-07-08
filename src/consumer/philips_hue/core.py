@@ -9,7 +9,7 @@ def init(program):
 	global args
 
 	program.add_argument('--philips-hue-host', required = True)
-	program.add_argument('--philips-hue-user', required = True)
+	program.add_argument('--philips-hue-username', required = True)
 	program.add_argument('--philips-hue-group', action = 'append', required = True)
 	args = program.parse_known_args()[0]
 
