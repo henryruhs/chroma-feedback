@@ -21,23 +21,40 @@ def run(status):
 
 
 def process(status, groups):
-	message = []
+	result = []
 
 	# process groups
 
 	for group in groups:
-		if status == 'passed' and static(group, 25500):
-			message.append(wording.get('setting_passed').format(group) + wording.get('point'))
-		if status == 'process' and static(group, 12500):
-			message.append(wording.get('setting_process').format(group) + wording.get('point'))
-		if status == 'errored' and pulsate(group, 34000):
-			message.append(wording.get('setting_errored').format(group) + wording.get('point'))
-		if status == 'failed' and pulsate(group, 0):
-			message.append(wording.get('setting_failed').format(group) + wording.get('point'))
-	return\
-	{
-		'message': message
-	}
+		if status == 'passed':
+			result.append({
+				'consumer': 'philips_hue',
+				'name': group,
+				'active': static(group, 25500),
+				'status': status
+			})
+		if status == 'process':
+			result.append({
+				'consumer': 'philips_hue',
+				'name': group,
+				'active': static(group, 12500),
+				'status': status
+			})
+		if status == 'errored':
+			result.append({
+				'consumer': 'philips_hue',
+				'name': group,
+				'active': pulsate(group, 34000),
+				'status': status
+			})
+		if status == 'failed':
+			result.append({
+				'consumer': 'philips_hue',
+				'name': group,
+				'active': pulsate(group, 0),
+				'status': status
+			})
+	return result
 
 
 def static(group, hue):

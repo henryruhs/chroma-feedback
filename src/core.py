@@ -28,7 +28,7 @@ def run(program):
 
 	provider_report = reporter.create_provider_report(provider_result)
 	if provider_report:
-		reporter.print_provider_report(provider_report)
+		reporter.print_report(provider_report)
 		print()
 
 	# handle dry run
@@ -45,7 +45,7 @@ def run(program):
 
 		consumer_report = reporter.create_consumer_report(consumer_result)
 		if consumer_report:
-			reporter.print_consumer_report(consumer_report)
+			reporter.print_report(consumer_report)
 			print()
 
 	# handle thread

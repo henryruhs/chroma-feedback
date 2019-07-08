@@ -9,7 +9,7 @@ def process(status, program):
 		try:
 			CONSUMER = importlib.import_module('src.consumer.' + consumer)
 			CONSUMER.init(program)
-			result.append(CONSUMER.run(status))
+			result.extend(CONSUMER.run(status))
 		except ImportError:
 			pass
 	return result
