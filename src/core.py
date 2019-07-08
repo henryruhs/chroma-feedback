@@ -51,11 +51,10 @@ def run(program):
 	# handle thread
 
 	if args.background_run is True:
-		if threading.active_count() == 1:
-			threading.Timer(args.background_interval, run, args =
-			[
-				args
-			]).start()
+		threading.Timer(args.background_interval, run, args =
+		[
+			program
+		]).start()
 
 
 def destroy(number, frame):
