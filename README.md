@@ -30,6 +30,8 @@ pip3 install chroma-feedback
 Usage
 -----
 
+Combine providers and consumers as needed:
+
 ```
 chroma-feedback [options]
 
@@ -40,6 +42,46 @@ chroma-feedback [options]
 -B, --background-run
 -D, --dry-run
 -h, --help
+```
+
+
+Consumers
+=========
+
+
+Philips Hue
+-----------
+
+| Name     | Mandatory |
+|----------|-----------|
+| Host     | required  |
+| Username | required  |
+| Group    | required  |
+
+Update by group:
+
+```
+chroma-feedback --consumer=philips_hue --philips-hue-host={HOST} --philips-hue-username={USERNAME} --philips-hue-group={GROUP}
+```
+
+
+Razer Chroma
+------------
+
+Update connected devices:
+
+```
+chroma-feedback --consumer=razer_chroma
+```
+
+
+System Tray
+-----------
+
+Show interactive system tray:
+
+```
+chroma-feedback --consumer=system_tray
 ```
 
 
@@ -139,10 +181,10 @@ chroma-feedback --provider=gitlab --gitlab-slug={PROJECT-ID} --gitlab-slug={PROJ
 Jenkins
 -------
 
-| Name | Default | Mandatory |
-|------|---------|-----------|
-| Host |         | required  |
-| Slug |         | required  |
+| Name | Mandatory |
+|------|-----------|
+| Host | required  |
+| Slug | required  |
 
 Monitor a single project:
 

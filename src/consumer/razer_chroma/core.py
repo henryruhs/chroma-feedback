@@ -13,8 +13,6 @@ def init(program):
 def run(status):
 	device_manager = device_manager_factory()
 
-	# process
-
 	if not device_manager.devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
 	return process(status, device_manager.devices)

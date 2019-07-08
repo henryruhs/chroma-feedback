@@ -64,6 +64,7 @@ def update(group, data):
 	response = None
 	host = args.philips_hue_host
 	user = args.philips_hue_user
+
 	if host and user:
 		response = requests.put(host + '/api/' + user + '/groups/' + group + '/action', data = json.dumps(data))
 
