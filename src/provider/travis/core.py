@@ -36,6 +36,7 @@ def fetch(host, slug):
 
 	if response and response.status_code == 200:
 		data = response.json()
+
 		if 'repo' in data:
 			return normalize_data(data['repo'])
 		if 'repos' in data:
