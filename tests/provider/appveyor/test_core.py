@@ -4,16 +4,18 @@ from src.provider import appveyor
 
 
 def test_fetch_slug():
-	result = appveyor.fetch(None, 'redaxmedia/chroma-feedback', None)
+	result = appveyor.fetch('https://ci.appveyor.com', 'redaxmedia/chroma-feedback', None)
+
 	assert result[0]['provider'] == 'appveyor'
 	assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
 	assert result[0]['active'] is True
 	assert result[0]['status']
 
 
-def test_fetch_user():
+def test_fetch_token():
 	if 'APPVEYOR_TOKEN' in os.environ:
-		result = appveyor.fetch(None, None, os.environ['APPVEYOR_TOKEN'])
+		result = appveyor.fetch('https://ci.appveyor.com', None, os.environ['APPVEYOR_TOKEN'])
+
 		assert result[0]['provider'] == 'appveyor'
 		assert result[0]['active'] is True
 		assert result[0]['status']
@@ -23,4 +25,5 @@ def test_fetch_user():
 
 def test_fetch_invalid():
 	result = appveyor.fetch(None, None, None)
+
 	assert result == []
