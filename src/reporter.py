@@ -7,16 +7,16 @@ def create_provider_report(provider_result):
 
 	# process result
 
-	for project in provider_result:
-		if project['active'] is True:
-			if project['status'] == 'passed':
-				report.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(project['slug'], project['provider']))
-			if project['status'] == 'process':
-				report.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(project['slug'], project['provider']))
-			if project['status'] == 'errored':
-				report.append(wording.get('cross') + ' ' + wording.get('build_errored').format(project['slug'], project['provider']))
-			if project['status'] == 'failed':
-				report.append(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(project['slug'], project['provider']))
+	for provider in provider_result:
+		if provider['active'] is True:
+			if provider['status'] == 'passed':
+				report.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(provider['slug'], provider['provider']))
+			if provider['status'] == 'process':
+				report.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(provider['slug'], provider['provider']))
+			if provider['status'] == 'errored':
+				report.append(wording.get('cross') + ' ' + wording.get('build_errored').format(provider['slug'], provider['provider']))
+			if provider['status'] == 'failed':
+				report.append(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(provider['slug'], provider['provider']))
 	return report
 
 
@@ -25,16 +25,16 @@ def create_consumer_report(consumer_result):
 
 	# process result
 
-	for device in consumer_result:
-		if device['active'] is True:
-			if device['status'] == 'passed':
-				report.append(color.green(wording.get('tick')) + ' ' + wording.get('setting_passed').format(device['name']) + wording.get('point'))
-			if device['status'] == 'process':
-				report.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('setting_process').format(device['name']) + wording.get('point'))
-			if device['status'] == 'errored':
-				report.append(wording.get('cross') + ' ' + wording.get('setting_errored').format(device['name']) + wording.get('point'))
-			if device['status'] == 'failed':
-				report.append(color.red(wording.get('cross')) + ' ' + wording.get('setting_failed').format(device['name']) + wording.get('point'))
+	for consumer in consumer_result:
+		if consumer['active'] is True:
+			if consumer['status'] == 'passed':
+				report.append(color.green(wording.get('tick')) + ' ' + wording.get('setting_passed').format(consumer['name']) + wording.get('point'))
+			if consumer['status'] == 'process':
+				report.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('setting_process').format(consumer['name']) + wording.get('point'))
+			if consumer['status'] == 'errored':
+				report.append(wording.get('cross') + ' ' + wording.get('setting_errored').format(consumer['name']) + wording.get('point'))
+			if consumer['status'] == 'failed':
+				report.append(color.red(wording.get('cross')) + ' ' + wording.get('setting_failed').format(consumer['name']) + wording.get('point'))
 	return report
 
 
