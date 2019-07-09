@@ -26,6 +26,29 @@ Install Chroma Feedback using PyPI:
 pip3 install chroma-feedback
 ```
 
+Optional install `phue` for Philips Hue:
+
+```
+pip3 install phue
+```
+
+Optional install `openrazer-meta` for Razer Chroma:
+
+```
+add-apt-repository ppa:openrazer/stable
+apt-get update
+```
+
+```
+apt install openrazer-meta
+```
+
+Optional install `blink1` for ThingM Blink:
+
+```
+pip3 install pip install blink1
+```
+
 
 Usage
 -----
@@ -57,7 +80,7 @@ Philips Hue
 | IP       | optional  |
 | Group    | optional  |
 
-Indicate via `Philips Hue` lights:
+Indicate via Philips Hue lights:
 
 ```
 chroma-feedback --consumer=philips_hue
@@ -73,7 +96,7 @@ Razer Chroma
 |--------|-----------|
 | Device | optional  |
 
-Indicate via `Razer Chroma` devices:
+Indicate via Razer Chroma devices:
 
 ```
 chroma-feedback --consumer=razer_chroma
@@ -85,7 +108,7 @@ chroma-feedback --consumer=razer_chroma
 ThingM Blink
 ------------
 
-Indicate via `ThingM Blink` lights:
+Indicate via ThingM Blink lights:
 
 ```
 chroma-feedback --consumer=thingm_blink
