@@ -2,58 +2,50 @@ from __future__ import print_function
 import os
 import sys
 import threading
-from src import device, miner, reporter, wording
-
-if sys.version_info < (3, 4):
-	exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
-
-try:
-	from openrazer.client import DeviceManager, DaemonNotFound
-except ImportError:
-	exit(wording.get('driver_no') + wording.get('exclamation_mark'))
-
-try:
-	device_manager = DeviceManager()
-	device_manager.sync_effects = True
-except DaemonNotFound:
-	exit(wording.get('daemon_no') + wording.get('exclamation_mark'))
+from src import consumer, helper, provider, reporter, wording
 
 
-def run(args):
+def run(program):
+	if sys.version_info < (3, 4):
+		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
+
+	# report header
+
 	if threading.active_count() == 1:
-		reporter.header()
+		reporter.print_header()
 		print()
 
-	# process miner
+	# process provider
 
-	data = miner.process(args)
+	provider_result = provider.process(program)
 
-	# handle data
+	# handle exit
 
-	if len(data) == 0:
-		exit(wording.get('data_no') + wording.get('exclamation_mark'))
+	if not provider_result:
+		exit(wording.get('result_no') + wording.get('exclamation_mark'))
 
-	# process data
+	# report provider
 
-	result = reporter.process(data)
-	if result:
-		reporter.log(result)
+	provider_report = reporter.create_provider_report(provider_result)
+	if provider_report:
+		reporter.print_report(provider_report)
 		print()
 
 	# handle dry run
 
+	args = program.parse_known_args()[0]
 	if args.dry_run is False:
 
-		# handle device
+		# process consumer
 
-		if len(device_manager.devices) == 0:
-			exit(wording.get('device_no') + wording.get('exclamation_mark'))
+		status = helper.get_provider_status(provider_result)
+		consumer_result = consumer.process(status, program)
 
-		# process device
+		# report consumer
 
-		result = device.process(device_manager.devices, result['status'])
-		if result:
-			reporter.log(result)
+		consumer_report = reporter.create_consumer_report(consumer_result)
+		if consumer_report:
+			reporter.print_report(consumer_report)
 			print()
 
 	# handle thread
@@ -61,7 +53,7 @@ def run(args):
 	if args.background_run is True:
 		threading.Timer(args.background_interval, run, args =
 		[
-			args
+			program
 		]).start()
 
 

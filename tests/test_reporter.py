@@ -1,8 +1,8 @@
 from src import reporter
 
 
-def test_process_passed():
-	data = reporter.process(data =
+def test_create_provider_report_passed():
+	provider_report = reporter.create_provider_report(provider_result =
 	[
 		{
 			'provider': 'travis',
@@ -11,75 +11,103 @@ def test_process_passed():
 			'status': 'passed'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in data['message'][0]
-	assert data['status'] == 'passed'
+
+	assert 'Build of redaxmedia/chroma-feedback on travis passed' in provider_report[0]
 
 
-def test_process_process():
-	data = reporter.process(data =
+def test_create_provider_report_process():
+	provider_report = reporter.create_provider_report(provider_result =
 	[
 		{
-			'provider': 'appveyor',
+			'provider': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'process'
-		},
-		{
-			'provider': 'travis',
-			'slug': 'redaxmedia/chroma-feedback',
-			'active': True,
-			'status': 'passed'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on appveyor in process' in data['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in data['message'][1]
-	assert data['status'] == 'process'
+
+	assert 'Build of redaxmedia/chroma-feedback on travis in process' in provider_report[0]
 
 
-def test_process_errored():
-	data = reporter.process(data =
+def test_create_provider_report_errored():
+	provider_report = reporter.create_provider_report(provider_result =
 	[
 		{
-			'provider': 'appveyor',
+			'provider': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'errored'
-		},
-		{
-			'provider': 'travis',
-			'slug': 'redaxmedia/chroma-feedback',
-			'active': True,
-			'status': 'passed'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on appveyor errored' in data['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in data['message'][1]
-	assert data['status'] == 'errored'
+
+	assert 'Build of redaxmedia/chroma-feedback on travis errored' in provider_report[0]
 
 
-def test_process_failed():
-	data = reporter.process(data =
+def test_create_provider_report_failed():
+	provider_report = reporter.create_provider_report(provider_result =
 	[
 		{
-			'provider': 'appveyor',
+			'provider': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'failed'
-		},
+		}
+	])
+
+	assert 'Build of redaxmedia/chroma-feedback on travis failed' in provider_report[0]
+
+
+def test_create_consumer_report_passed():
+	consumer_report = reporter.create_consumer_report(consumer_result =
+	[
 		{
-			'provider': 'circle',
-			'slug': 'redaxmedia/chroma-feedback',
-			'active': True,
-			'status': 'errored'
-		},
-		{
-			'provider': 'travis',
-			'slug': 'redaxmedia/chroma-feedback',
+			'consumer': 'razer_chroma',
+			'name': 'Razer Chroma',
 			'active': True,
 			'status': 'passed'
 		}
 	])
-	assert 'Build of redaxmedia/chroma-feedback on appveyor failed' in data['message'][0]
-	assert 'Build of redaxmedia/chroma-feedback on circle errored' in data['message'][1]
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in data['message'][2]
-	assert data['status'] == 'failed'
+
+	assert 'Setting Razer Chroma to build passed' in consumer_report[0]
+
+
+def test_create_consumer_report_process():
+	consumer_report = reporter.create_consumer_report(consumer_result =
+	[
+		{
+			'consumer': 'razer_chroma',
+			'name': 'Razer Chroma',
+			'active': True,
+			'status': 'process'
+		}
+	])
+
+	assert 'Setting Razer Chroma to build in process' in consumer_report[0]
+
+
+def test_create_consumer_report_errored():
+	consumer_report = reporter.create_consumer_report(consumer_result =
+	[
+		{
+			'consumer': 'razer_chroma',
+			'name': 'Razer Chroma',
+			'active': True,
+			'status': 'errored'
+		}
+	])
+
+	assert 'Setting Razer Chroma to build errored' in consumer_report[0]
+
+
+def test_create_consumer_report_failed():
+	consumer_report = reporter.create_consumer_report(consumer_result =
+	[
+		{
+			'consumer': 'razer_chroma',
+			'name': 'Razer Chroma',
+			'active': True,
+			'status': 'failed'
+		}
+	])
+
+	assert 'Setting Razer Chroma to build failed' in consumer_report[0]

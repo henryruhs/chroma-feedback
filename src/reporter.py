@@ -2,39 +2,46 @@ from __future__ import print_function
 from src import color, metadata, wording
 
 
-def process(data):
-	message = []
-	status = 'passed'
+def create_provider_report(provider_result):
+	report = []
 
-	# process data
+	# process result
 
-	for project in data:
-		if project['active'] is True:
-			if project['status'] == 'passed':
-				message.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(project['slug'], project['provider']))
-			if project['status'] == 'process':
-				message.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(project['slug'], project['provider']))
-				if status != 'errored' and status != 'failed':
-					status = 'process'
-			if project['status'] == 'errored':
-				message.append(wording.get('cross') + ' ' + wording.get('build_errored').format(project['slug'], project['provider']))
-				if status != 'failed':
-					status = 'errored'
-			if project['status'] == 'failed':
-				message.append(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(project['slug'], project['provider']))
-				status = 'failed'
-	return\
-	{
-		'message': message,
-		'status': status
-	}
+	for provider in provider_result:
+		if provider['active'] is True:
+			if provider['status'] == 'passed':
+				report.append(color.green(wording.get('tick')) + ' ' + wording.get('build_passed').format(provider['slug'], provider['provider']))
+			if provider['status'] == 'process':
+				report.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(provider['slug'], provider['provider']))
+			if provider['status'] == 'errored':
+				report.append(wording.get('cross') + ' ' + wording.get('build_errored').format(provider['slug'], provider['provider']))
+			if provider['status'] == 'failed':
+				report.append(color.red(wording.get('cross')) + ' ' + wording.get('build_failed').format(provider['slug'], provider['provider']))
+	return report
 
 
-def header():
+def create_consumer_report(consumer_result):
+	report = []
+
+	# process result
+
+	for consumer in consumer_result:
+		if consumer['active'] is True:
+			if consumer['status'] == 'passed':
+				report.append(color.green(wording.get('tick')) + ' ' + wording.get('setting_passed').format(consumer['name']) + wording.get('point'))
+			if consumer['status'] == 'process':
+				report.append(color.yellow(wording.get('hourglass')) + ' ' + wording.get('setting_process').format(consumer['name']) + wording.get('point'))
+			if consumer['status'] == 'errored':
+				report.append(wording.get('cross') + ' ' + wording.get('setting_errored').format(consumer['name']) + wording.get('point'))
+			if consumer['status'] == 'failed':
+				report.append(color.red(wording.get('cross')) + ' ' + wording.get('setting_failed').format(consumer['name']) + wording.get('point'))
+	return report
+
+
+def print_header():
 	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
 
 
-def log(result):
-	if 'message' in result:
-		for message in result['message']:
-			print(message)
+def print_report(report):
+	for message in report:
+		print(message)

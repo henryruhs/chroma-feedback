@@ -1,0 +1,53 @@
+import requests
+from .normalize import normalize_data
+
+args = None
+
+
+def init(program):
+	global args
+
+	if not args:
+		program.add_argument('--appveyor-host', default = 'https://ci.appveyor.com')
+		program.add_argument('--appveyor-slug', action = 'append')
+		program.add_argument('--appveyor-token')
+	args = program.parse_known_args()[0]
+
+
+def run():
+	host = args.appveyor_host
+	slugs = args.appveyor_slug
+	token = args.appveyor_token
+	result = []
+
+	for slug in slugs:
+		result.extend(fetch(host, slug, token))
+	return result
+
+
+def fetch(host, slug, token):
+	response = None
+
+	if host and slug:
+		response = requests.get(host + '/api/projects/' + slug)
+	elif host and token:
+		response = requests.get(host + '/api/projects', headers =
+		{
+			'Authorization': 'Bearer ' + token
+		})
+
+	# process response
+
+	if response and response.status_code == 200:
+		data = response.json()
+
+		if 'project' and 'build' in data:
+			return normalize_data(data['project'], data['build'])
+		if 'builds' in data[0]:
+			result = []
+
+			for project in data:
+				if project['builds']:
+					result.extend(normalize_data(project, project['builds'][0]))
+			return result
+	return []

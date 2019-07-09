@@ -3,18 +3,16 @@
 disable =
 	bad-continuation,
 	bad-whitespace,
-	consider-using-in,
+	cyclic-import,
 	duplicate-code,
-	import-error,
+	global-statement,
 	invalid-name,
-	len-as-condition,
-	line-too-long,
 	missing-docstring,
 	protected-access,
-	too-many-return-statements,
+	unexpected-keyword-arg,
 	unused-argument
 
 [format]
 
 indent-string = '\t'
-max-line-length = 140
+max-line-length = 280
