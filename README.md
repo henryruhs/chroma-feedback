@@ -1,7 +1,7 @@
 Chroma Feedback
 ===============
 
-> Turn your Razer keyboard, mouse or headphone into a extreme feedback device.
+> Turn your Philips Hue lights, Razer Chroma devices or ThingM Blink lights into extreme feedback devices.
 
 [![Build Status Travis](https://img.shields.io/travis/redaxmedia/chroma-feedback.svg)](https://travis-ci.org/redaxmedia/chroma-feedback)
 [![Build Status AppVeyor](https://img.shields.io/appveyor/ci/redaxmedia/chroma-feedback.svg)](https://ci.appveyor.com/project/redaxmedia/chroma-feedback)
@@ -77,6 +77,15 @@ Indicate via `Razer Chroma` devices:
 chroma-feedback --consumer=razer_chroma
 ```
 
+
+ThingM Blink
+------------
+
+Indicate via `ThingM Blink` lights:
+
+```
+chroma-feedback --consumer=thingm_blink
+```
 
 
 Providers
