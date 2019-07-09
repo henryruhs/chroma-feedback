@@ -8,7 +8,12 @@ def init(program):
 	global args
 
 	if not args:
-		program.add_argument('--philips-hue-host', required = True)
+		host = discover_host()
+
+		if host:
+			program.add_argument('--philips-hue-host', default = host)
+		else:
+			program.add_argument('--philips-hue-host', required = True)
 		program.add_argument('--philips-hue-username', required = True)
 		program.add_argument('--philips-hue-group', action = 'append', required = True)
 	args = program.parse_known_args()[0]
@@ -90,3 +95,16 @@ def update(group, data):
 	if response and response.status_code == 200:
 		return True
 	return False
+
+
+def discover_host():
+	response = requests.get('https://discovery.meethue.com')
+
+	# process response
+	
+	if response and response.status_code == 200:
+		data = response.json()
+
+		if 'internalipaddress' in data[0]:
+			return 'http://' + data[0]['internalipaddress']
+	return None

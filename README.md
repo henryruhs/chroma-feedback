@@ -52,18 +52,17 @@ Consumers
 Philips Hue
 -----------
 
-| Name     | Mandatory |
-|----------|-----------|
-| Host     | required  |
-| Username | required  |
-| Group    | required  |
+| Name     | Default                       | Mandatory |
+|----------|-------------------------------|-----------|
+| Host     | https://discovery.meethue.com | optional  |
+| Username |                               | required  |
+| Group    |                               | required  |
 
 Indicate via `Philips Hue` lights:
 
 ```
 chroma-feedback --consumer=philips_hue
 
---philips-hue-host <host>
 --philips-hue-username <username>
 --philips-hue-group <group-id>
 ```
