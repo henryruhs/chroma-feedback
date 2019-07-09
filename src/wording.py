@@ -3,6 +3,7 @@ wording =\
 	'version_no': 'Python {}.{} not supported',
 	'package_no': 'Package {} not found',
 	'device_no': 'Device not found',
+	'group_no': 'Group not found',
 	'provider_no': 'Provider not found',
 	'consumer_no': 'Consumer not found',
 	'result_no': 'Result not found',

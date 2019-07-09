@@ -80,7 +80,7 @@ Philips Hue
 | IP       | optional  |
 | Group    | optional  |
 
-Indicate via Philips Hue lights:
+Indicate status via lights:
 
 ```
 chroma-feedback --consumer=philips_hue
@@ -96,7 +96,7 @@ Razer Chroma
 |--------|-----------|
 | Device | optional  |
 
-Indicate via Razer Chroma devices:
+Indicate status via devices:
 
 ```
 chroma-feedback --consumer=razer_chroma
@@ -108,7 +108,7 @@ chroma-feedback --consumer=razer_chroma
 ThingM Blink
 ------------
 
-Indicate via ThingM Blink lights:
+Indicate status via lights:
 
 ```
 chroma-feedback --consumer=thingm_blink

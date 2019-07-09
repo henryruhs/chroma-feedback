@@ -1,4 +1,5 @@
 import requests
+from src import wording
 from .factory import bridge_factory
 
 args = None
@@ -25,8 +26,14 @@ def run(status):
 	bridge = bridge_factory(args.philips_hue_ip)
 	groups = bridge.get_group()
 
-	# if args.philips_hue_group and group_name in args.philips_hue_group or args.philips_hue_group is None:
+	if args.philips_hue_group:
+		for group in dict(groups):
+			group_name = groups[group]['name']
 
+			if group_name not in args.philips_hue_group:
+				del groups[group]
+	if not groups:
+		exit(wording.get('group_no') + wording.get('exclamation_mark'))
 	return process(status, groups)
 
 

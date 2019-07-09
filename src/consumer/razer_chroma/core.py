@@ -14,12 +14,15 @@ def init(program):
 
 def run(status):
 	device_manager = device_manager_factory()
+	devices = device_manager.devices
 
-	# if args.razer_chroma_device and device.name in args.razer_chroma_device or args.razer_chroma_device is None:
-
-	if not device_manager.devices:
+	if args.razer_chroma_device:
+		for device in list(devices):
+			if device.name not in args.razer_chroma_device:
+				devices.remove(device)
+	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-	return process(status, device_manager.devices)
+	return process(status, devices)
 
 
 def process(status, devices):
