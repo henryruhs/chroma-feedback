@@ -101,7 +101,7 @@ def discover_host():
 	response = requests.get('https://discovery.meethue.com')
 
 	# process response
-	
+
 	if response and response.status_code == 200:
 		data = response.json()
 
