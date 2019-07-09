@@ -1,7 +1,7 @@
 metadata =\
 {
 	'name': 'chroma-feedback',
-	'description': 'Turn your Philips Hue lights, Razer Chroma devices or ThingM Blink lights into extreme feedback devices',
+	'description': 'Turn your RGB powered hardware into an extreme feedback device for continuous integration',
 	'version': '4.0.0',
 	'license': 'GPL-3.0',
 	'keywords': 'appveyor circle github gitlab jenkins teamcity travis ci notification indication',
