@@ -1,26 +1,31 @@
-import json
 import requests
+from .factory import bridge_factory
 
 args = None
+bridge = None
 
 
 def init(program):
 	global args
 
 	if not args:
-		host = discover_host()
+		ip = discover_ip()
 
-		if host:
-			program.add_argument('--philips-hue-host', default = host)
+		if ip:
+			program.add_argument('--philips-hue-ip', default = ip)
 		else:
-			program.add_argument('--philips-hue-host', required = True)
-		program.add_argument('--philips-hue-username', required = True)
-		program.add_argument('--philips-hue-group', action = 'append', required = True)
+			program.add_argument('--philips-hue-ip', required = True)
+		program.add_argument('--philips-hue-group', action = 'append')
 	args = program.parse_known_args()[0]
 
 
 def run(status):
-	groups = args.philips_hue_group
+	global bridge
+
+	bridge = bridge_factory(args.philips_hue_ip)
+	groups = bridge.get_group()
+
+	# if args.philips_hue_group and group_name in args.philips_hue_group or args.philips_hue_group is None:
 
 	return process(status, groups)
 
@@ -31,75 +36,78 @@ def process(status, groups):
 	# process groups
 
 	for group in groups:
+		group_name = groups[group]['name']
+
 		if status == 'passed':
 			result.append({
 				'consumer': 'philips_hue',
-				'name': group,
-				'active': static(group, 26000, 255),
+				'name': group_name,
+				'active': static(group_name,
+				{
+					'hue': 26000,
+					'sat': 255
+				}),
 				'status': status
 			})
 		if status == 'process':
 			result.append({
 				'consumer': 'philips_hue',
-				'name': group,
-				'active': static(group, 10000, 255),
+				'name': group_name,
+				'active': static(group_name,
+				{
+					'hue': 10000,
+					'sat': 255
+				}),
 				'status': status
 			})
 		if status == 'errored':
 			result.append({
 				'consumer': 'philips_hue',
-				'name': group,
-				'active': pulsate(group, 10000, 0),
+				'name': group_name,
+				'active': pulsate(group_name,
+				{
+					'hue': 10000,
+					'sat': 0
+				}),
 				'status': status
 			})
 		if status == 'failed':
 			result.append({
 				'consumer': 'philips_hue',
-				'name': group,
-				'active': pulsate(group, 0, 255),
+				'name': group_name,
+				'active': static(group_name,
+				{
+					'hue': 0,
+					'sat': 255
+				}),
 				'status': status
 			})
 	return result
 
 
-def static(group, hue, sat):
-	return update(group,
+def static(group, state):
+	return bridge is not None and bridge.set_group(group,
 	{
-		'hue': hue,
-		'sat': sat,
+		'hue': state['hue'],
+		'sat': state['sat'],
 		'on': True,
 		'bri': 255,
 		'alert': 'none'
-	})
+	}) is not None
 
 
-def pulsate(group, hue, sat):
-	return update(group,
-	 {
-		'hue': hue,
-		'sat': sat,
+def pulsate(group, state):
+	return bridge is not None and bridge.set_group(group,
+	{
+		'hue': state['hue'],
+		'sat': state['sat'],
 		'on': True,
 		'bri': 255,
 		'alert': 'lselect'
-	})
+	}) is not None
 
 
-def update(group, data):
-	response = None
-	host = args.philips_hue_host
-	username = args.philips_hue_username
-
-	if host and username:
-		response = requests.put(host + '/api/' + username + '/groups/' + group + '/action', data = json.dumps(data))
-
-	# process response
-
-	if response and response.status_code == 200:
-		return True
-	return False
-
-
-def discover_host():
+def discover_ip():
 	response = requests.get('https://discovery.meethue.com')
 
 	# process response
@@ -108,5 +116,5 @@ def discover_host():
 		data = response.json()
 
 		if 'internalipaddress' in data[0]:
-			return 'http://' + data[0]['internalipaddress']
+			return data[0]['internalipaddress']
 	return None

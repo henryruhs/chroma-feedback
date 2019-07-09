@@ -11,11 +11,11 @@ def device_manager_factory():
 	except ImportError:
 		exit(wording.get('package_no').format('OPENRAZER') + wording.get('exclamation_mark'))
 
-	# build daemon
+	# create instance
 
 	try:
 		device_manager = DeviceManager()
 		device_manager.sync_effects = True
-	except DaemonNotFound:
-		exit(wording.get('daemon_no').format('OPENRAZER') + wording.get('exclamation_mark'))
+	except DaemonNotFound as exception:
+		exit(exception)
 	return device_manager

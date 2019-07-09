@@ -14,12 +14,10 @@ def init(program):
 
 
 def run():
-	host = args.travis_host
-	slugs = args.travis_slug
 	result = []
 
-	for slug in slugs:
-		result.extend(fetch(host, slug))
+	for slug in args.travis_slug:
+		result.extend(fetch(args.travis_host, slug))
 	return result
 
 

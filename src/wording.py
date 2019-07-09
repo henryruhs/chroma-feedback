@@ -2,8 +2,7 @@ wording =\
 {
 	'version_no': 'Python {}.{} not supported',
 	'package_no': 'Package {} not found',
-	'daemon_no': 'Daemon {} not found',
-	'device_no': 'Device {} not found',
+	'device_no': 'Device not found',
 	'provider_no': 'Provider not found',
 	'consumer_no': 'Consumer not found',
 	'result_no': 'Result not found',

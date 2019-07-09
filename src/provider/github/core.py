@@ -17,14 +17,10 @@ def init(program):
 
 
 def run():
-	host = args.github_host
-	slugs = args.github_slug
-	username = args.github_username
-	token = args.github_token
 	result = []
 
-	for slug in slugs:
-		result.extend(fetch(host, slug, username, token))
+	for slug in args.github_slug:
+		result.extend(fetch(args.github_host, slug, args.github_username, args.github_token))
 	return result
 
 

@@ -17,14 +17,10 @@ def init(program):
 
 
 def run():
-	host = args.teamcity_host
-	slugs = args.teamcity_slug
-	username = args.teamcity_usernmae
-	password = args.teamcity_password
 	result = []
 
-	for slug in slugs:
-		result.extend(fetch(host, slug, username, password))
+	for slug in args.teamcity_slug:
+		result.extend(fetch(args.teamcity_host, slug, args.teamcity_username, args.teamcity_password))
 	return result
 
 

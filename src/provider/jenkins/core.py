@@ -14,12 +14,10 @@ def init(program):
 
 
 def run():
-	host = args.jenkins_host
-	slugs = args.jenkins_slug
 	result = []
 
-	for slug in slugs:
-		result.extend(fetch(host, slug))
+	for slug in args.jenkins_slug:
+		result.extend(fetch(args.jenkins_host, slug))
 	return result
 
 

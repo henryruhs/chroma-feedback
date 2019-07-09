@@ -7,11 +7,15 @@ args = None
 def init(program):
 	global args
 
+	if not args:
+		program.add_argument('--razer-chroma-device', action = 'append')
 	args = program.parse_known_args()[0]
 
 
 def run(status):
 	device_manager = device_manager_factory()
+
+	# if args.razer_chroma_device and device.name in args.razer_chroma_device or args.razer_chroma_device is None:
 
 	if not device_manager.devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))

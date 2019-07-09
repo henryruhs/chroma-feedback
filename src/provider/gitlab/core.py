@@ -15,13 +15,10 @@ def init(program):
 
 
 def run():
-	host = args.gitlab_host
-	slugs = args.gitlab_slug
-	token = args.gitlab_token
 	result = []
 
-	for slug in slugs:
-		result.extend(fetch(host, slug, token))
+	for slug in args.gitlab_slug:
+		result.extend(fetch(args.gitlab_host, slug, args.gitlab_token))
 	return result
 
 

@@ -52,29 +52,33 @@ Consumers
 Philips Hue
 -----------
 
-| Name     | Default                       | Mandatory |
-|----------|-------------------------------|-----------|
-| Host     | https://discovery.meethue.com | optional  |
-| Username |                               | required  |
-| Group    |                               | required  |
+| Name     | Mandatory |
+|----------|-----------|
+| IP       | optional  |
+| Group    | optional  |
 
 Indicate via `Philips Hue` lights:
 
 ```
 chroma-feedback --consumer=philips_hue
 
---philips-hue-username <username>
---philips-hue-group <group-id>
+--philips-hue-group <group-name>
 ```
 
 
 Razer Chroma
 ------------
 
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
+
 Indicate via `Razer Chroma` devices:
 
 ```
 chroma-feedback --consumer=razer_chroma
+
+--razer-chrome-device <device-name>
 ```
 
 

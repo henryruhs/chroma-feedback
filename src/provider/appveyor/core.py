@@ -15,13 +15,10 @@ def init(program):
 
 
 def run():
-	host = args.appveyor_host
-	slugs = args.appveyor_slug
-	token = args.appveyor_token
 	result = []
 
-	for slug in slugs:
-		result.extend(fetch(host, slug, token))
+	for slug in args.appveyor_slug:
+		result.extend(fetch(args.appveyor_host, slug, args.appveyor_token))
 	return result
 
 

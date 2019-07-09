@@ -16,13 +16,10 @@ def init(program):
 
 
 def run():
-	host = args.circle_host
-	slugs = args.circle_slug
-	token = args.circle_token
 	result = []
 
-	for slug in slugs:
-		result.extend(fetch(host, slug, token))
+	for slug in args.circle_slug:
+		result.extend(fetch(args.circle_host, slug, args.circle_token))
 	return result
 
 
