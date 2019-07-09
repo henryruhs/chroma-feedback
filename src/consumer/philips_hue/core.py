@@ -35,47 +35,49 @@ def process(status, groups):
 			result.append({
 				'consumer': 'philips_hue',
 				'name': group,
-				'active': static(group, 25500),
+				'active': static(group, 26000, 255),
 				'status': status
 			})
 		if status == 'process':
 			result.append({
 				'consumer': 'philips_hue',
 				'name': group,
-				'active': static(group, 12500),
+				'active': static(group, 10000, 255),
 				'status': status
 			})
 		if status == 'errored':
 			result.append({
 				'consumer': 'philips_hue',
 				'name': group,
-				'active': pulsate(group, 34000),
+				'active': pulsate(group, 10000, 0),
 				'status': status
 			})
 		if status == 'failed':
 			result.append({
 				'consumer': 'philips_hue',
 				'name': group,
-				'active': pulsate(group, 0),
+				'active': pulsate(group, 0, 255),
 				'status': status
 			})
 	return result
 
 
-def static(group, hue):
+def static(group, hue, sat):
 	return update(group,
 	{
 		'hue': hue,
+		'sat': sat,
 		'on': True,
 		'bri': 255,
 		'alert': 'none'
 	})
 
 
-def pulsate(group, hue):
+def pulsate(group, hue, sat):
 	return update(group,
 	 {
 		'hue': hue,
+		'sat': sat,
 		'on': True,
 		'bri': 255,
 		'alert': 'lselect'
