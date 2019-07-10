@@ -23,7 +23,17 @@ setup(
 	[
 		'chroma_feedback',
 		'chroma_feedback.provider',
-		'chroma_feedback.consumer'
+		'chroma_feedback.provider.appveyor',
+		'chroma_feedback.provider.circle',
+		'chroma_feedback.provider.github',
+		'chroma_feedback.provider.gitlab',
+		'chroma_feedback.provider.jenkins',
+		'chroma_feedback.provider.teamcity',
+		'chroma_feedback.provider.travis',
+		'chroma_feedback.consumer',
+		'chroma_feedback.consumer.philips_hue',
+		'chroma_feedback.consumer.razer_chroma',
+		'chroma_feedback.consumer.thingm_blink'
 	],
 	scripts =
 	[
