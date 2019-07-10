@@ -4,5 +4,6 @@ __all__ =\
 [
 	'philips_hue',
 	'razer_chroma',
-	'thingm_blink'
+	'thingm_blink',
+	'xiaomi_yeelight'
 ]
