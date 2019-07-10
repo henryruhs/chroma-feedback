@@ -20,19 +20,19 @@ Preview
 Installation
 ------------
 
-Install Chroma Feedback using PyPI:
+Install Chroma Feedback:
 
 ```
 pip3 install chroma-feedback
 ```
 
-Optional install `phue` for Philips Hue:
+Install `phue` for Philips Hue:
 
 ```
 pip3 install phue
 ```
 
-Optional install `openrazer-meta` for Razer Chroma:
+Install `openrazer-meta` for Razer Chroma:
 
 ```
 add-apt-repository ppa:openrazer/stable
@@ -43,10 +43,14 @@ apt-get update
 apt install openrazer-meta
 ```
 
-Optional install `blink1` for ThingM Blink:
+Install `blink1` for ThingM Blink:
 
 ```
-pip3 install pip install blink1
+apt-get install libusb-dev libudev-dev
+```
+
+```
+pip3 install blink1
 ```
 
 

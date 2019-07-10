@@ -46,7 +46,8 @@ def process(status, groups):
 		group_name = groups[group]['name']
 
 		if status == 'passed':
-			result.append({
+			result.append(
+			{
 				'consumer': 'philips_hue',
 				'name': group_name,
 				'active': static(group_name,
@@ -57,7 +58,8 @@ def process(status, groups):
 				'status': status
 			})
 		if status == 'process':
-			result.append({
+			result.append(
+			{
 				'consumer': 'philips_hue',
 				'name': group_name,
 				'active': static(group_name,
@@ -68,7 +70,8 @@ def process(status, groups):
 				'status': status
 			})
 		if status == 'errored':
-			result.append({
+			result.append(
+			{
 				'consumer': 'philips_hue',
 				'name': group_name,
 				'active': pulsate(group_name,
@@ -79,7 +82,8 @@ def process(status, groups):
 				'status': status
 			})
 		if status == 'failed':
-			result.append({
+			result.append(
+			{
 				'consumer': 'philips_hue',
 				'name': group_name,
 				'active': static(group_name,

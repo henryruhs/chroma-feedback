@@ -1,7 +1,7 @@
 from src import wording
 
 
-def bridge_factory(host):
+def bridge_factory(ip):
 	bridge = None
 
 	# handle import
@@ -14,7 +14,7 @@ def bridge_factory(host):
 	# create instance
 
 	try:
-		bridge = Bridge(host)
-	except PhueRegistrationException as exception:
-		exit(exception)
+		bridge = Bridge(ip)
+	except PhueRegistrationException:
+		exit(wording.get('connection_no').format('BRIDGE') + wording.get('exclamation_mark') + ' ' + wording.get('press_button').format('PAIRING') + wording.get('exclamation_mark'))
 	return bridge

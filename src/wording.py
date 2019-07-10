@@ -2,6 +2,8 @@ wording =\
 {
 	'version_no': 'Python {}.{} not supported',
 	'package_no': 'Package {} not found',
+	'connection_no': 'Connection to {} not found',
+	'daemon_no': 'Daemon for {} not found',
 	'device_no': 'Device not found',
 	'group_no': 'Group not found',
 	'provider_no': 'Provider not found',
@@ -15,6 +17,7 @@ wording =\
 	'setting_process': 'Setting {} to build in process',
 	'setting_errored': 'Setting {} to build errored',
 	'setting_failed': 'Setting {} to build failed',
+	'press_button': 'Press the {} button',
 	'goodbye': 'Goodbye',
 	'by': 'by',
 	'hourglass': u'\u29d7',

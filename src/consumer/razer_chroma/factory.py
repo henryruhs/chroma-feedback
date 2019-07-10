@@ -16,6 +16,6 @@ def device_manager_factory():
 	try:
 		device_manager = DeviceManager()
 		device_manager.sync_effects = True
-	except DaemonNotFound as exception:
-		exit(exception)
+	except DaemonNotFound:
+		exit(wording.get('daemon_no').format('OPENRAZER') + wording.get('exclamation_mark'))
 	return device_manager

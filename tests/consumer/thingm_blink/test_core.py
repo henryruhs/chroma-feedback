@@ -1,40 +1,40 @@
 from mock import MagicMock
-from src.consumer import philips_hue
+from src.consumer import thingm_blink
 
 mock = MagicMock()
-groups =\
+devices =\
 {
 	1: mock
 }
 
 
 def test_process_passed():
-	result = philips_hue.process('passed', groups)
+	result = thingm_blink.process('passed', devices)
 
-	assert result[0]['consumer'] == 'philips_hue'
+	assert result[0]['consumer'] == 'thingm_blink'
 	assert result[0]['name']
 	assert result[0]['status'] == 'passed'
 
 
 def test_process_process():
-	result = philips_hue.process('process', groups)
+	result = thingm_blink.process('process', devices)
 
-	assert result[0]['consumer'] == 'philips_hue'
+	assert result[0]['consumer'] == 'thingm_blink'
 	assert result[0]['name']
 	assert result[0]['status'] == 'process'
 
 
 def test_process_errored():
-	result = philips_hue.process('errored', groups)
+	result = thingm_blink.process('errored', devices)
 
-	assert result[0]['consumer'] == 'philips_hue'
+	assert result[0]['consumer'] == 'thingm_blink'
 	assert result[0]['name']
 	assert result[0]['status'] == 'errored'
 
 
 def test_process_failed():
-	result = philips_hue.process('failed', groups)
+	result = thingm_blink.process('failed', devices)
 
-	assert result[0]['consumer'] == 'philips_hue'
+	assert result[0]['consumer'] == 'thingm_blink'
 	assert result[0]['name']
 	assert result[0]['status'] == 'failed'

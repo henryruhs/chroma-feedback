@@ -32,28 +32,32 @@ def process(status, devices):
 
 	for device in devices:
 		if status == 'passed':
-			result.append({
+			result.append(
+			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
 				'active': static(device.fx, [0, 255, 0]),
 				'status': status
 			})
 		if status == 'process':
-			result.append({
+			result.append(
+			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
 				'active': static(device.fx, [255, 255, 0]),
 				'status': status
 			})
 		if status == 'errored':
-			result.append({
+			result.append(
+			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
 				'active': pulsate(device.fx, [255, 255, 255]),
 				'status': status
 			})
 		if status == 'failed':
-			result.append({
+			result.append(
+			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
 				'active': pulsate(device.fx, [255, 0, 0]),
