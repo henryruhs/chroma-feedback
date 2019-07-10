@@ -17,5 +17,5 @@ install:
 - pip install mock
 
 test_script:
-- pylint bin/chroma-feedback src tests
+- pylint bin/chroma-feedback chroma_feedback tests
 - pytest tests
