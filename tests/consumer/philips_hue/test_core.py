@@ -1,5 +1,5 @@
 from mock import MagicMock
-from src.consumer import philips_hue
+from chroma_feedback.consumer import philips_hue
 
 mock = MagicMock()
 groups =\

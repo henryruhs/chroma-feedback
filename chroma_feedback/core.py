@@ -2,7 +2,7 @@ from __future__ import print_function
 import os
 import sys
 import threading
-from src import consumer, helper, provider, reporter, wording
+from chroma_feedback import consumer, helper, provider, reporter, wording
 
 
 def run(program):

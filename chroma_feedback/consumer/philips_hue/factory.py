@@ -1,4 +1,4 @@
-from src import wording
+from chroma_feedback import wording
 
 
 def bridge_factory(ip):

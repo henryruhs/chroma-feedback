@@ -1,6 +1,6 @@
 import os
 import pytest
-from src.provider import appveyor
+from chroma_feedback.provider import appveyor
 
 
 def test_fetch_slug():

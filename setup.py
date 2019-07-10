@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from setuptools import setup
-from src import metadata
+from chroma_feedback import metadata
 
 try:
 	from pypandoc import convert
@@ -21,8 +21,9 @@ setup(
 	url = metadata.get('url'),
 	packages =
 	[
-		'src',
-		'src/provider'
+		'chroma_feedback',
+		'chroma_feedback.provider',
+		'chroma_feedback.consumer'
 	],
 	scripts =
 	[

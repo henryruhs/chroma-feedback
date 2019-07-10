@@ -1,5 +1,5 @@
 from __future__ import print_function
-from src import color, metadata, wording
+from chroma_feedback import color, metadata, wording
 
 
 def create_provider_report(provider_result):

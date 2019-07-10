@@ -1,5 +1,5 @@
 import importlib
-from src import wording
+from chroma_feedback import wording
 
 def process(status, program):
 	args = program.parse_known_args()[0]
@@ -7,7 +7,7 @@ def process(status, program):
 
 	for consumer in args.consumer:
 		try:
-			CONSUMER = importlib.import_module('src.consumer.' + consumer)
+			CONSUMER = importlib.import_module('chroma_feedback.consumer.' + consumer)
 			CONSUMER.init(program)
 			result.extend(CONSUMER.run(status))
 		except ImportError:

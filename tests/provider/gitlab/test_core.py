@@ -1,6 +1,6 @@
 import os
 import pytest
-from src.provider import gitlab
+from chroma_feedback.provider import gitlab
 
 
 def test_fetch_slug():

@@ -1,4 +1,4 @@
-from src.provider import jenkins
+from chroma_feedback.provider import jenkins
 
 
 def test_fetch_invalid():

@@ -18,8 +18,8 @@ install:
 - pip install mock
 
 script:
-- pylint bin/chroma-feedback src tests
-- pytest tests --cov=src
+- pylint bin/chroma-feedback chroma_feedback tests
+- pytest tests --cov=chroma_feedback
 
 after_success:
 - coveralls

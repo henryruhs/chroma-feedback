@@ -1,4 +1,4 @@
-from src.provider import travis
+from chroma_feedback.provider import travis
 
 
 def test_fetch_slug():

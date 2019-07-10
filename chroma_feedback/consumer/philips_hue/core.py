@@ -1,5 +1,5 @@
 import requests
-from src import wording
+from chroma_feedback import wording
 from .factory import bridge_factory
 
 args = None

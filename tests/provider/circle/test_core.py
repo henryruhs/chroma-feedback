@@ -1,6 +1,6 @@
 import os
 import pytest
-from src.provider import circle
+from chroma_feedback.provider import circle
 
 
 def test_fetch_slug():

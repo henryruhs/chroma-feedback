@@ -1,4 +1,4 @@
-from src import wording
+from chroma_feedback import wording
 from .factory import blink_factory
 
 args = None

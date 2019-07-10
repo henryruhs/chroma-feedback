@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 import sys
-from src import provider
+from chroma_feedback import provider
 
 def test_process(mocker):
 	program = ArgumentParser()

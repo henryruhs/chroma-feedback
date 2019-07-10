@@ -1,5 +1,5 @@
 import importlib
-from src import wording
+from chroma_feedback import wording
 
 
 def process(program):
@@ -8,7 +8,7 @@ def process(program):
 
 	for provider in args.provider:
 		try:
-			PROVIDER = importlib.import_module('src.provider.' + provider)
+			PROVIDER = importlib.import_module('chroma_feedback.provider.' + provider)
 			PROVIDER.init(program)
 			result.extend(PROVIDER.run())
 		except ImportError:

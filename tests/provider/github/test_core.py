@@ -1,6 +1,6 @@
 import os
 import pytest
-from src.provider import github
+from chroma_feedback.provider import github
 
 def test_fetch_slug():
 	if 'GITHUB_TOKEN' in os.environ:

@@ -1,5 +1,5 @@
 from mock import MagicMock
-from src.consumer import thingm_blink
+from chroma_feedback.consumer import thingm_blink
 
 mock = MagicMock()
 devices =\

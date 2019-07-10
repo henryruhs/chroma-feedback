@@ -1,4 +1,4 @@
-from src import color
+from chroma_feedback import color
 
 
 def test_red():

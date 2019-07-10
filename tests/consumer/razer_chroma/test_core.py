@@ -1,5 +1,5 @@
 from mock import MagicMock
-from src.consumer import razer_chroma
+from chroma_feedback.consumer import razer_chroma
 
 mock = MagicMock()
 mock.name = 'Razer Chroma'

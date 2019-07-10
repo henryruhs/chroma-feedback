@@ -1,4 +1,4 @@
-from src import wording
+from chroma_feedback import wording
 
 
 def device_manager_factory():

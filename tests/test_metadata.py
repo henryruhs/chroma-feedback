@@ -1,4 +1,4 @@
-from src import metadata
+from chroma_feedback import metadata
 
 
 def test_get():

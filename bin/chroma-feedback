@@ -2,8 +2,8 @@
 
 import signal
 from argparse import ArgumentParser
-from src.core import run, destroy
-from src import metadata
+from chroma_feedback.core import run, destroy
+from chroma_feedback import metadata
 
 signal.signal(signal.SIGINT, destroy)
 

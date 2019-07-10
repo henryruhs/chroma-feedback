@@ -1,4 +1,4 @@
-from src import reporter
+from chroma_feedback import reporter
 
 
 def test_create_provider_report_passed():
