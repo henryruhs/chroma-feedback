@@ -15,7 +15,8 @@ def init(program):
 def run(status):
 	global blink
 
-	blink = blink_factory()
+	if not blink:
+		blink = blink_factory()
 	devices = blink.list()
 
 	if args.thingm_blink_device:

@@ -23,7 +23,8 @@ def init(program):
 def run(status):
 	global bridge
 
-	bridge = bridge_factory(args.philips_hue_ip)
+	if not bridge:
+		bridge = bridge_factory(args.philips_hue_ip)
 	groups = bridge.get_group()
 
 	if args.philips_hue_group:
