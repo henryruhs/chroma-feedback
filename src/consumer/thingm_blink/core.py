@@ -7,6 +7,8 @@ blink = None
 def init(program):
 	global args
 
+	if not args:
+		program.add_argument('--thingm-blink-device', action = 'append')
 	args = program.parse_known_args()[0]
 
 
@@ -16,6 +18,10 @@ def run(status):
 	blink = blink_factory()
 	devices = blink.list()
 
+	if args.thingm_blink_device:
+		for device in list(devices):
+			if device not in args.thingm_blink_device:
+				devices.remove(device)
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
 	return process(status, devices)
@@ -63,8 +69,8 @@ def process(status, devices):
 
 
 def static(rgb):
-	return blink is not None and blink.fade_to_rgb(1000, rgb[0], rgb[1], rgb[2])
+	return blink is not None and blink.fade_to_rgb(100, rgb[0], rgb[1], rgb[2]) is None
 
 
 def pulsate(rgb):
-	return blink is not None and blink.fade_to_rgb(1000, rgb[0], rgb[1], rgb[2])
+	return blink is not None and blink.fade_to_rgb(100, rgb[0], rgb[1], rgb[2]) is None

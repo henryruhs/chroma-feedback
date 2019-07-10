@@ -4,7 +4,7 @@ from src.consumer import thingm_blink
 mock = MagicMock()
 devices =\
 {
-	1: mock
+	mock
 }
 
 
