@@ -53,6 +53,12 @@ apt-get install libusb-dev libudev-dev
 pip3 install blink1
 ```
 
+Install `yeelight` for Xiaomi Yeelight:
+
+```
+pip3 install yeelight
+```
+
 
 Usage
 -----
@@ -122,6 +128,20 @@ Indicate status via lights:
 chroma-feedback --consumer=thingm_blink
 
 --thingm-blink-device <device-serial>
+```
+
+
+Xiaomi Yeelight
+---------------
+
+| Name     | Mandatory |
+|----------|-----------|
+| IP       | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=xiaomi_yeelight
 ```
 
 
