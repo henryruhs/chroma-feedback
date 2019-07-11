@@ -2,7 +2,7 @@ metadata =\
 {
 	'name': 'chroma-feedback',
 	'description': 'Turn your RGB powered hardware into an extreme feedback device for continuous integration',
-	'version': '4.0.2',
+	'version': '4.1.0',
 	'license': 'GPL-3.0',
 	'keywords': 'appveyor circle github gitlab jenkins teamcity travis ci notification indication',
 	'author': 'Henry Ruhs',

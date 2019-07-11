@@ -1,3 +1,4 @@
+from __future__ import print_function
 import socket
 from chroma_feedback import wording
 from .factory import bulb_factory
