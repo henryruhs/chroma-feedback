@@ -99,7 +99,8 @@ def discover_ips():
 	while True:
 		try:
 			ip = SOCKET.recvfrom(65507)[1][0]
+			if ip not in ips:
+				ips.append(ip)
 		except socket.timeout:
 			break
-		ips.append(ip)
-	return list(dict.fromkeys(ips))
+	return ips
