@@ -66,8 +66,8 @@ def process(status, devices):
 
 
 def static(device, rgb):
-	return device.set_rgb(rgb[0], rgb[1], rgb[2])
+	return device.set_rgb(rgb[0], rgb[1], rgb[2]) == 'ok'
 
 
 def pulsate(device, rgb):
-	return device.set_rgb(rgb[0], rgb[1], rgb[2])
+	return device.set_rgb(rgb[0], rgb[1], rgb[2]) == 'ok'

@@ -15,6 +15,7 @@ def bulb_factory(ip):
 
 	try:
 		bulb = Bulb(ip)
+		bulb.turn_on()
 	except BulbException:
 		exit(wording.get('connection_no').format('YEELIGHT') + wording.get('exclamation_mark'))
 	return bulb
