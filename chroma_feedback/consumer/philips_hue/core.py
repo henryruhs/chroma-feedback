@@ -1,3 +1,4 @@
+from __future__ import print_function
 import requests
 from chroma_feedback import wording
 from .factory import bridge_factory
