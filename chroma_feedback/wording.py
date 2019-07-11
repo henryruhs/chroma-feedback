@@ -3,7 +3,6 @@ wording =\
 	'version_no': 'Python {}.{} not supported',
 	'package_no': 'Package {} not found',
 	'connection_no': 'Connection to {} not found',
-	'discovery_no': 'Discovery for {} failed',
 	'daemon_no': 'Daemon for {} not found',
 	'device_no': 'Device not found',
 	'group_no': 'Group not found',

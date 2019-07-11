@@ -1,4 +1,3 @@
-from __future__ import print_function
 import requests
 from chroma_feedback import wording
 from .factory import bridge_factory
@@ -16,8 +15,6 @@ def init(program):
 		if ip:
 			program.add_argument('--philips-hue-ip', default = ip)
 		else:
-			print(wording.get('discovery_no').format('IP') + wording.get('exclamation_mark'))
-			print()
 			program.add_argument('--philips-hue-ip', required = True)
 		program.add_argument('--philips-hue-group', action = 'append')
 	args = program.parse_known_args()[0]

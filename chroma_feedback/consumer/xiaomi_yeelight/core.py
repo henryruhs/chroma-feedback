@@ -1,4 +1,3 @@
-from __future__ import print_function
 import socket
 from chroma_feedback import wording
 from .factory import bulb_factory
@@ -15,9 +14,7 @@ def init(program):
 		if ip:
 			program.add_argument('--xiaomi-yeelight-ip', default = ip)
 		else:
-			print(wording.get('discovery_no').format('IP') + wording.get('exclamation_mark'))
-			print()
-			program.add_argument('--xiaomi-yeelight-ip', required = True)
+			program.add_argument('--xiaomi-yeelight-ip', action = 'append', required = True)
 	args = program.parse_known_args()[0]
 
 
