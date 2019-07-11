@@ -1,3 +1,4 @@
+import socket
 from chroma_feedback import wording
 from .factory import bulb_factory
 
@@ -8,14 +9,22 @@ def init(program):
 	global args
 
 	if not args:
-		program.add_argument('--xiaomi-yeeligh-ip', action = 'append', required = True)
+		ip = discover_ips()
+
+
+		if ip:
+			program.add_argument('--xiaomi-yeelight-ip', default = ip)
+		else:
+			print(wording.get('discovery_no').format('IP') + wording.get('exclamation_mark'))
+			print()
+			program.add_argument('--xiaomi-yeelight-ip', required = True)
 	args = program.parse_known_args()[0]
 
 
 def run(status):
 	devices = []
 
-	for ip in args.xiaomi_yeeligh_ip:
+	for ip in args.xiaomi_yeelight_ip:
 		devices.append(bulb_factory(ip))
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
@@ -71,3 +80,26 @@ def static(device, rgb):
 
 def pulsate(device, rgb):
 	return device.set_rgb(rgb[0], rgb[1], rgb[2]) == 'ok'
+
+
+def discover_ips():
+	message =\
+	[
+		'M-SEARCH * HTTP/1.1',
+		'HOST: 239.255.255.250:1982',
+		'MAN: "ssdp:discover"',
+		'ST: wifi_bulb'
+	]
+	SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+	SOCKET.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32)
+	SOCKET.settimeout(1)
+	SOCKET.sendto('\r\n'.join(message).encode(), ('239.255.255.250', 1982))
+	ips = []
+
+	while True:
+		try:
+			ip = SOCKET.recvfrom(65507)[1][0]
+		except socket.timeout:
+			break
+		ips.append(ip)
+	return list(dict.fromkeys(ips))

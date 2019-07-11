@@ -136,15 +136,12 @@ Xiaomi Yeelight
 
 | Name     | Mandatory |
 |----------|-----------|
-| IP       | required  |
+| IP       | optional  |
 
 Indicate status via lights:
 
 ```
 chroma-feedback --consumer=xiaomi_yeelight
-
---xiaomi-yeelight-ip <ip>
---xiaomi-yeelight-ip <ip>
 ```
 
 
