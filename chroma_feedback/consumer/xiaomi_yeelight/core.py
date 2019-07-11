@@ -11,7 +11,6 @@ def init(program):
 	if not args:
 		ip = discover_ips()
 
-
 		if ip:
 			program.add_argument('--xiaomi-yeelight-ip', default = ip)
 		else:
