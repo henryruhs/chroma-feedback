@@ -18,8 +18,11 @@ def init(program):
 def run():
 	result = []
 
-	for slug in args.circle_slug:
-		result.extend(fetch(args.circle_host, slug, args.circle_token))
+	if args.circle_slug:
+		for slug in args.circle_slug:
+			result.extend(fetch(args.circle_host, slug, None))
+	else:
+		result.extend(fetch(args.circle_host, None, args.circle_token))
 	return result
 
 

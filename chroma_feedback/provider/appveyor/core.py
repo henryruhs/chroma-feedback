@@ -17,8 +17,11 @@ def init(program):
 def run():
 	result = []
 
-	for slug in args.appveyor_slug:
-		result.extend(fetch(args.appveyor_host, slug, args.appveyor_token))
+	if args.appveyor_slug:
+		for slug in args.appveyor_slug:
+			result.extend(fetch(args.appveyor_host, slug, None))
+	else:
+		result.extend(fetch(args.appveyor_host, None, args.appveyor_token))
 	return result
 
 

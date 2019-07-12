@@ -19,8 +19,11 @@ def init(program):
 def run():
 	result = []
 
-	for slug in args.teamcity_slug:
-		result.extend(fetch(args.teamcity_host, slug, args.teamcity_username, args.teamcity_password))
+	if args.teamcity_slug:
+		for slug in args.teamcity_slug:
+			result.extend(fetch(args.teamcity_host, slug, args.teamcity_username, args.teamcity_password))
+	else:
+		result.extend(fetch(args.teamcity_host, None, args.teamcity_username, args.teamcity_password))
 	return result
 
 
