@@ -1,3 +1,4 @@
+from json import JSONDecodeError
 from chroma_feedback import wording
 
 
@@ -7,7 +8,7 @@ def bridge_factory(ip):
 	# handle import
 
 	try:
-		from phue import Bridge, PhueRegistrationException
+		from phue import Bridge, PhueRegistrationException, PhueRequestTimeout
 	except ImportError:
 		exit(wording.get('package_no').format('PHUE') + wording.get('exclamation_mark'))
 
@@ -15,6 +16,8 @@ def bridge_factory(ip):
 
 	try:
 		bridge = Bridge(ip)
+	except (PhueRequestTimeout, OSError, JSONDecodeError):
+		exit(wording.get('connection_no').format('PHILIPS HUE') + wording.get('exclamation_mark'))
 	except PhueRegistrationException:
-		exit(wording.get('connection_no').format('BRIDGE') + wording.get('exclamation_mark') + ' ' + wording.get('press_button').format('PAIRING') + wording.get('exclamation_mark'))
+		exit(wording.get('press_button').format('PAIRING', 'PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
 	return bridge
