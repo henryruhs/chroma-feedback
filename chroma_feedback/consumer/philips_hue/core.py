@@ -1,5 +1,5 @@
 import requests
-from chroma_feedback import wording
+from chroma_feedback import helper, wording
 from .factory import bridge_factory
 
 args = None
@@ -10,8 +10,10 @@ def init(program):
 	global args
 
 	if not args:
-		ip = discover_ip()
+		ip = None
 
+		if not helper.has_argument('--philips-hue-ip'):
+			ip = discover_ip()
 		if ip:
 			program.add_argument('--philips-hue-ip', default = ip)
 		else:

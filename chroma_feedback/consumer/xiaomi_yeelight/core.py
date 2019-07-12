@@ -1,5 +1,5 @@
 import socket
-from chroma_feedback import wording
+from chroma_feedback import helper, wording
 from .factory import bulb_factory
 
 args = None
@@ -9,8 +9,10 @@ def init(program):
 	global args
 
 	if not args:
-		ip = discover_ips()
+		ip = None
 
+		if not helper.has_argument('--xiaomi-yeelight-ip'):
+			ip = discover_ips()
 		if ip:
 			program.add_argument('--xiaomi-yeelight-ip', default = ip)
 		else:
@@ -84,7 +86,7 @@ def discover_ips():
 	[
 		'M-SEARCH * HTTP/1.1',
 		'HOST: 239.255.255.250:1982',
-		'MAN: "ssdp:discover"',
+		'MAN: \'ssdp:discover\'',
 		'ST: wifi_bulb'
 	]
 	SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)

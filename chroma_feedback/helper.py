@@ -1,3 +1,6 @@
+import sys
+
+
 def get_provider_status(provider_result):
 	status = 'passed'
 
@@ -14,3 +17,7 @@ def get_provider_status(provider_result):
 			if project['status'] == 'failed':
 				status = 'failed'
 	return status
+
+
+def has_argument(argument):
+	return any(argument in argv for argv in sys.argv)
