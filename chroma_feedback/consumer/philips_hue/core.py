@@ -87,7 +87,7 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': static(group_name,
+				'active': pulsate(group_name,
 				{
 					'hue': 0,
 					'sat': 255
