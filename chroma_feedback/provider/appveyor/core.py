@@ -40,7 +40,7 @@ def fetch(host, slug, token):
 
 		if 'project' and 'build' in data:
 			return normalize_data(data['project'], data['build'])
-		if 'builds' in data[0]:
+		if data and data[0] and 'builds' in data[0]:
 			result = []
 
 			for project in data:
