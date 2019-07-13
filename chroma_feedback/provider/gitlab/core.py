@@ -1,4 +1,5 @@
 import requests
+from chroma_feedback import helper
 from .normalize import normalize_data
 
 args = None
@@ -34,7 +35,7 @@ def fetch(host, slug, token):
 	# process response
 
 	if response and response.status_code == 200:
-		data = response.json()
+		data = helper.parse_json(response)
 
 		if data and data[0] and 'id' in data[0]:
 			return fetch_jobs(host, slug, str(data[0]['id']), token)
@@ -53,7 +54,7 @@ def fetch_jobs(host, slug, pipeline, token):
 	# process response
 
 	if response and response.status_code == 200:
-		data = response.json()
+		data = helper.parse_json(response)
 		result = []
 
 		for project in data:

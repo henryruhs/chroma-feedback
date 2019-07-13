@@ -19,5 +19,12 @@ def get_provider_status(provider_result):
 	return status
 
 
+def parse_json(response):
+	try:
+		return response.json()
+	except ValueError:
+		return []
+
+
 def has_argument(argument):
 	return any(argument in argv for argv in sys.argv)

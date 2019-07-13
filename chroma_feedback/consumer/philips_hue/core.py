@@ -127,7 +127,7 @@ def discover_ip():
 	# process response
 
 	if response and response.status_code == 200:
-		data = response.json()
+		data = helper.parse_json(response)
 
 		if data and data[0] and 'internalipaddress' in data[0]:
 			return data[0]['internalipaddress']

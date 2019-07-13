@@ -1,5 +1,6 @@
 import base64
 import requests
+from chroma_feedback import helper
 from .normalize import normalize_data
 
 args = None
@@ -37,7 +38,7 @@ def fetch(host, slug, username, token):
 	# process response
 
 	if response and response.status_code == 200:
-		data = response.json()
+		data = helper.parse_json(response)
 
 		if data:
 			return normalize_data(data)
