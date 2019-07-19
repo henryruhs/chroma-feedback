@@ -9,7 +9,6 @@ disable =
 	invalid-name,
 	missing-docstring,
 	protected-access,
-	unexpected-keyword-arg,
 	unused-argument
 
 [format]

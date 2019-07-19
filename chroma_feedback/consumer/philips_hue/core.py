@@ -1,9 +1,9 @@
 import requests
 from chroma_feedback import helper, wording
-from .factory import bridge_factory
+from .factory import api_factory
 
 args = None
-bridge = None
+api = None
 
 
 def init(program):
@@ -23,11 +23,11 @@ def init(program):
 
 
 def run(status):
-	global bridge
+	global api
 
-	if not bridge:
-		bridge = bridge_factory(args.philips_hue_ip)
-	groups = bridge.get_group()
+	if not api:
+		api = api_factory(args.philips_hue_ip)
+	groups = api.get_group()
 
 	if args.philips_hue_group:
 		for group in dict(groups):
@@ -100,8 +100,8 @@ def process(status, groups):
 
 
 def static(group, state):
-	return bridge is not None and bridge.set_group(group,
-	{
+	return api is not None and api.set_group(group,
+											 {
 		'hue': state['hue'],
 		'sat': state['sat'],
 		'on': True,
@@ -111,8 +111,8 @@ def static(group, state):
 
 
 def pulsate(group, state):
-	return bridge is not None and bridge.set_group(group,
-	{
+	return api is not None and api.set_group(group,
+											 {
 		'hue': state['hue'],
 		'sat': state['sat'],
 		'on': True,
