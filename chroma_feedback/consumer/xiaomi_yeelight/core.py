@@ -1,5 +1,5 @@
 import socket
-from chroma_feedback import helper, wording
+from chroma_feedback import color, helper, wording
 from .factory import api_factory
 
 args = None
@@ -12,7 +12,7 @@ def init(program):
 		ip = None
 
 		if not helper.has_argument('--xiaomi-yeelight-ip'):
-			ip = discover_ips()
+			ip = discover_light_ips()
 		if ip:
 			program.add_argument('--xiaomi-yeelight-ip', default = ip)
 		else:
@@ -21,72 +21,68 @@ def init(program):
 
 
 def run(status):
-	devices = []
+	lights = []
 
 	for ip in args.xiaomi_yeelight_ip:
-		devices.append(api_factory(ip))
-	if not devices:
-		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-	return process(status, devices)
+		lights.append(api_factory(ip))
+	if not lights:
+		exit(wording.get('light_no') + wording.get('exclamation_mark'))
+	return process(status, lights)
 
 
-def process(status, devices):
+def process(status, lights):
 	result = []
 
 	# process devices
 
-	for device in devices:
-		device_name = device.get_properties()['name']
+	for light in lights:
+		name = light.get_properties()['name']
 
 		if status == 'passed':
 			result.append(
 			{
 				'consumer': 'xiaomi_yeelight',
-				'name': device_name,
-				'active': static(device, [0, 255, 0]),
+				'name': name,
+				'active': static(light, color.get_passed_rgb()),
 				'status': status
 			})
 		if status == 'process':
 			result.append(
 			{
 				'consumer': 'xiaomi_yeelight',
-				'name': device_name,
-				'active': static(device, [255, 255, 0]),
+				'name': name,
+				'active': static(light, color.get_process_rgb()),
 				'status': status
 			})
 		if status == 'errored':
 			result.append(
 			{
 				'consumer': 'xiaomi_yeelight',
-				'name': device_name,
-				'active': pulsate(device, [255, 255, 255]),
+				'name': name,
+				'active': static(light, color.get_errored_rgb()),
 				'status': status
 			})
 		if status == 'failed':
 			result.append(
 			{
 				'consumer': 'xiaomi_yeelight',
-				'name': device_name,
-				'active': pulsate(device, [255, 0, 0]),
+				'name': name,
+				'active': static(light, color.get_failed_rgb()),
 				'status': status
 			})
 	return result
 
 
-def static(device, rgb):
-	return device.set_rgb(rgb[0], rgb[1], rgb[2]) == 'ok'
+def static(light, state):
+	return light.set_rgb(state['red'], state['green'], state['blue']) == 'ok'
 
 
-def pulsate(device, rgb):
-	return device.set_rgb(rgb[0], rgb[1], rgb[2]) == 'ok'
-
-
-def discover_ips():
+def discover_light_ips():
 	message =\
 	[
 		'M-SEARCH * HTTP/1.1',
 		'HOST: 239.255.255.250:1982',
-		'MAN: \'ssdp:discover\'',
+		'MAN: "ssdp:discover"',
 		'ST: wifi_bulb'
 	]
 	SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)

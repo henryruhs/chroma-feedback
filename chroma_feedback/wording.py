@@ -5,6 +5,7 @@ wording =\
 	'connection_no': 'Connection to {} not found',
 	'daemon_no': 'Daemon for {} not found',
 	'device_no': 'Device not found',
+	'light_no': 'Light not found',
 	'group_no': 'Group not found',
 	'provider_no': 'Provider not found',
 	'consumer_no': 'Consumer not found',
