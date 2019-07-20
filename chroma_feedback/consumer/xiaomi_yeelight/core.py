@@ -1,6 +1,6 @@
 import socket
 from chroma_feedback import helper, wording
-from .factory import bulb_factory
+from .factory import api_factory
 
 args = None
 
@@ -24,7 +24,7 @@ def run(status):
 	devices = []
 
 	for ip in args.xiaomi_yeelight_ip:
-		devices.append(bulb_factory(ip))
+		devices.append(api_factory(ip))
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
 	return process(status, devices)

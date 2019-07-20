@@ -1,8 +1,8 @@
 from chroma_feedback import wording
-from .factory import blink_factory
+from .factory import api_factory
 
 args = None
-blink = None
+api = None
 
 def init(program):
 	global args
@@ -13,11 +13,11 @@ def init(program):
 
 
 def run(status):
-	global blink
+	global api
 
-	if not blink:
-		blink = blink_factory()
-	devices = blink.list()
+	if not api:
+		api = api_factory()
+	devices = api.list()
 
 	if args.thingm_blink_device:
 		for device in list(devices):
@@ -70,8 +70,8 @@ def process(status, devices):
 
 
 def static(rgb):
-	return blink is not None and blink.fade_to_rgb(100, rgb[0], rgb[1], rgb[2]) is None
+	return api is not None and api.fade_to_rgb(100, rgb[0], rgb[1], rgb[2]) is None
 
 
 def pulsate(rgb):
-	return blink is not None and blink.fade_to_rgb(100, rgb[0], rgb[1], rgb[2]) is None
+	return api is not None and api.fade_to_rgb(100, rgb[0], rgb[1], rgb[2]) is None

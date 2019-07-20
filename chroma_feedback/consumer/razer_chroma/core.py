@@ -1,5 +1,5 @@
 from chroma_feedback import wording
-from .factory import device_manager_factory
+from .factory import api_factory
 
 args = None
 
@@ -13,8 +13,8 @@ def init(program):
 
 
 def run(status):
-	device_manager = device_manager_factory()
-	devices = device_manager.devices
+	api = api_factory()
+	devices = api.devices
 
 	if args.razer_chroma_device:
 		for device in list(devices):
@@ -36,7 +36,7 @@ def process(status, devices):
 			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
-				'active': static(device.fx, [0, 255, 0]),
+				'active': static(device, [0, 255, 0]),
 				'status': status
 			})
 		if status == 'process':
@@ -44,7 +44,7 @@ def process(status, devices):
 			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
-				'active': static(device.fx, [255, 255, 0]),
+				'active': static(device, [255, 255, 0]),
 				'status': status
 			})
 		if status == 'errored':
@@ -52,7 +52,7 @@ def process(status, devices):
 			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
-				'active': pulsate(device.fx, [255, 255, 255]),
+				'active': pulsate(device, [255, 255, 255]),
 				'status': status
 			})
 		if status == 'failed':
@@ -60,19 +60,19 @@ def process(status, devices):
 			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
-				'active': pulsate(device.fx, [255, 0, 0]),
+				'active': pulsate(device, [255, 0, 0]),
 				'status': status
 			})
 	return result
 
 
-def static(fx, rgb):
-	if fx.has('logo') and fx.has('scroll'):
-		return fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
-	return fx.static(rgb[0], rgb[1], rgb[2])
+def static(device, rgb):
+	if device.fx.has('logo') and device.fx.has('scroll'):
+		return device.fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
+	return device.fx.static(rgb[0], rgb[1], rgb[2])
 
 
-def pulsate(fx, rgb):
-	if fx.has('logo') and fx.has('scroll'):
-		return fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
-	return fx.breath_single(rgb[0], rgb[1], rgb[2])
+def pulsate(device, rgb):
+	if device.fx.has('logo') and device.fx.has('scroll'):
+		return device.fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
+	return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
