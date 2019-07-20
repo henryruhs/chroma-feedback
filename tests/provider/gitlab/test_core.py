@@ -1,11 +1,11 @@
 import os
 import pytest
-from chroma_feedback.provider import gitlab
+from chroma_feedback.provider.gitlab.core import fetch
 
 
 def test_fetch_slug():
 	if 'GITLAB_TOKEN' in os.environ:
-		result = gitlab.fetch('https://gitlab.com', '7311836', os.environ['GITLAB_TOKEN'])
+		result = fetch('https://gitlab.com', '7311836', os.environ['GITLAB_TOKEN'])
 
 		assert result[0]['provider'] == 'gitlab'
 		assert result[0]['active'] is True
@@ -15,6 +15,6 @@ def test_fetch_slug():
 
 
 def test_fetch_invalid():
-	result = gitlab.fetch(None, None, None)
+	result = fetch(None, None, None)
 
 	assert result == []

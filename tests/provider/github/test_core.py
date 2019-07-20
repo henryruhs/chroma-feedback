@@ -1,10 +1,10 @@
 import os
 import pytest
-from chroma_feedback.provider import github
+from chroma_feedback.provider.github.core import fetch
 
 def test_fetch_slug():
 	if 'GITHUB_TOKEN' in os.environ:
-		result = github.fetch('https://api.github.com', 'redaxmedia/chroma-feedback', 'redaxmedia', os.environ['GITHUB_TOKEN'])
+		result = fetch('https://api.github.com', 'redaxmedia/chroma-feedback', 'redaxmedia', os.environ['GITHUB_TOKEN'])
 
 		assert result[0]['provider'] == 'github'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
@@ -15,6 +15,6 @@ def test_fetch_slug():
 
 
 def test_fetch_invalid():
-	result = github.fetch(None, None, None, None)
+	result = fetch(None, None, None, None)
 
 	assert result == []

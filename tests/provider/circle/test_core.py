@@ -1,10 +1,10 @@
 import os
 import pytest
-from chroma_feedback.provider import circle
+from chroma_feedback.provider.circle.core import fetch
 
 
 def test_fetch_slug():
-	result = circle.fetch('https://circleci.com', 'github/redaxmedia/chroma-feedback', None)
+	result = fetch('https://circleci.com', 'github/redaxmedia/chroma-feedback', None)
 
 	assert result[0]['provider'] == 'circle'
 	assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
@@ -14,7 +14,7 @@ def test_fetch_slug():
 
 def test_fetch_user():
 	if 'CIRCLE_TOKEN' in os.environ:
-		result = circle.fetch('https://circleci.com', None, os.environ['CIRCLE_TOKEN'])
+		result = fetch('https://circleci.com', None, os.environ['CIRCLE_TOKEN'])
 
 		assert result[0]['provider'] == 'circle'
 		assert result[0]['active'] is True
@@ -24,6 +24,6 @@ def test_fetch_user():
 
 
 def test_fetch_invalid():
-	result = circle.fetch(None, None, None)
+	result = fetch(None, None, None)
 
 	assert result == []

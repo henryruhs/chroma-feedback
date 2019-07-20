@@ -1,7 +1,7 @@
-from chroma_feedback.provider import jenkins
+from chroma_feedback.provider.jenkins.core import fetch
 
 
 def test_fetch_invalid():
-	result = jenkins.fetch(None, None)
+	result = fetch(None, None)
 
 	assert result == []

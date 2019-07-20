@@ -1,7 +1,7 @@
-from chroma_feedback.provider import teamcity
+from chroma_feedback.provider.teamcity.core import fetch
 
 
 def test_fetch_invalid():
-	result = teamcity.fetch(None, None, None, None)
+	result = fetch(None, None, None, None)
 
 	assert result == []
