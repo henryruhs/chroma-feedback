@@ -14,15 +14,19 @@ def init(program):
 
 def run(status):
 	api = api_factory()
-	devices = api.devices
+	devices = get_devices(api.devices, args.razer_chroma_device)
 
-	if args.razer_chroma_device:
-		for device in list(devices):
-			if device.name not in args.razer_chroma_device:
-				devices.remove(device)
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
 	return process(status, devices)
+
+
+def get_devices(devices, device_names):
+	if device_names:
+		for device in list(devices):
+			if device.name not in device_names:
+				devices.remove(device)
+	return devices
 
 
 def process(status, devices):

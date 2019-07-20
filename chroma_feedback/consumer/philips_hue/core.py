@@ -27,17 +27,21 @@ def run(status):
 
 	if not api:
 		api = api_factory(args.philips_hue_ip)
-	groups = api.get_group()
+	groups = get_groups(api.get_group(), args.philips_hue_group)
 
-	if args.philips_hue_group:
-		for group in dict(groups):
-			group_name = groups[group]['name']
-
-			if group_name not in args.philips_hue_group:
-				del groups[group]
 	if not groups:
 		exit(wording.get('group_no') + wording.get('exclamation_mark'))
 	return process(status, groups)
+
+
+def get_groups(groups, group_names):
+	if group_names:
+		for group in dict(groups):
+			group_name = groups[group]['name']
+
+			if group_name not in group_names:
+				del groups[group]
+	return groups
 
 
 def process(status, groups):

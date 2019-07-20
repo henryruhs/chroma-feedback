@@ -21,13 +21,19 @@ def init(program):
 
 
 def run(status):
-	lights = []
+	lights = get_lights(args.xiaomi_yeelight_ip)
 
-	for ip in args.xiaomi_yeelight_ip:
-		lights.append(api_factory(ip))
 	if not lights:
 		exit(wording.get('light_no') + wording.get('exclamation_mark'))
 	return process(status, lights)
+
+
+def get_lights(ips):
+	lights = []
+
+	for ip in ips:
+		lights.append(api_factory(ip))
+	return lights
 
 
 def process(status, lights):
