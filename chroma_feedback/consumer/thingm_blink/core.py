@@ -1,4 +1,4 @@
-from chroma_feedback import wording
+from chroma_feedback import color, wording
 from .factory import api_factory
 
 args = None
@@ -39,7 +39,7 @@ def process(status, devices):
 			{
 				'consumer': 'thingm_blink',
 				'name': device,
-				'active': static([0, 255, 0]),
+				'active': static(color.get_passed_rgb()),
 				'status': status
 			})
 		if status == 'process':
@@ -47,7 +47,7 @@ def process(status, devices):
 			{
 				'consumer': 'thingm_blink',
 				'name': device,
-				'active': static([255, 255, 0]),
+				'active': static(color.get_process_rgb()),
 				'status': status
 			})
 		if status == 'errored':
@@ -55,7 +55,7 @@ def process(status, devices):
 			{
 				'consumer': 'thingm_blink',
 				'name': device,
-				'active': pulsate([255, 255, 255]),
+				'active': static(color.get_errored_rgb()),
 				'status': status
 			})
 		if status == 'failed':
@@ -63,15 +63,11 @@ def process(status, devices):
 			{
 				'consumer': 'thingm_blink',
 				'name': device,
-				'active': pulsate([255, 0, 0]),
+				'active': static(color.get_failed_rgb()),
 				'status': status
 			})
 	return result
 
 
-def static(rgb):
-	return api is not None and api.fade_to_rgb(100, rgb[0], rgb[1], rgb[2]) is None
-
-
-def pulsate(rgb):
-	return api is not None and api.fade_to_rgb(100, rgb[0], rgb[1], rgb[2]) is None
+def static(state):
+	return api is not None and api.fade_to_rgb(100, state['red'], state['green'], state['blue']) is None

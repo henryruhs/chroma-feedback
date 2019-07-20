@@ -90,7 +90,7 @@ Philips Hue
 | IP       | optional  |
 | Group    | optional  |
 
-Indicate status via lights:
+Indicate status via groups:
 
 ```
 chroma-feedback --consumer=philips_hue
@@ -122,7 +122,7 @@ ThingM Blink
 |--------|-----------|
 | Device | optional  |
 
-Indicate status via lights:
+Indicate status via devices:
 
 ```
 chroma-feedback --consumer=thingm_blink

@@ -1,4 +1,4 @@
-from chroma_feedback import wording
+from chroma_feedback import color, wording
 from .factory import api_factory
 
 args = None
@@ -36,7 +36,7 @@ def process(status, devices):
 			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
-				'active': static(device, [0, 255, 0]),
+				'active': static(device, color.get_passed_rgb()),
 				'status': status
 			})
 		if status == 'process':
@@ -44,7 +44,7 @@ def process(status, devices):
 			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
-				'active': static(device, [255, 255, 0]),
+				'active': static(device, color.get_process_rgb()),
 				'status': status
 			})
 		if status == 'errored':
@@ -52,7 +52,7 @@ def process(status, devices):
 			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
-				'active': pulsate(device, [255, 255, 255]),
+				'active': pulsate(device, color.get_errored_rgb()),
 				'status': status
 			})
 		if status == 'failed':
@@ -60,19 +60,19 @@ def process(status, devices):
 			{
 				'consumer': 'razer_chroma',
 				'name': device.name,
-				'active': pulsate(device, [255, 0, 0]),
+				'active': pulsate(device, color.get_failed_rgb()),
 				'status': status
 			})
 	return result
 
 
-def static(device, rgb):
+def static(device, state):
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.static(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.static(rgb[0], rgb[1], rgb[2])
-	return device.fx.static(rgb[0], rgb[1], rgb[2])
+		return device.fx.misc.logo.static(state['red'], state['green'], state['blue']) and device.fx.misc.scroll_wheel.static(state['red'], state['green'], state['blue'])
+	return device.fx.static(state['red'], state['green'], state['blue'])
 
 
-def pulsate(device, rgb):
+def pulsate(device, state):
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.pulsate(rgb[0], rgb[1], rgb[2]) and device.fx.misc.scroll_wheel.pulsate(rgb[0], rgb[1], rgb[2])
-	return device.fx.breath_single(rgb[0], rgb[1], rgb[2])
+		return device.fx.misc.logo.pulsate(state['red'], state['green'], state['blue']) and device.fx.misc.scroll_wheel.pulsate(state['red'], state['green'], state['blue'])
+	return device.fx.breath_single(state['red'], state['green'], state['blue'])

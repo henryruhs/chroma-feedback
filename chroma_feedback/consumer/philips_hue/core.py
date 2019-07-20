@@ -1,5 +1,5 @@
 import requests
-from chroma_feedback import helper, wording
+from chroma_feedback import color, helper, wording
 from .factory import api_factory
 
 args = None
@@ -13,7 +13,7 @@ def init(program):
 		ip = None
 
 		if not helper.has_argument('--philips-hue-ip'):
-			ip = discover_ip()
+			ip = discover_bridge_ip()
 		if ip:
 			program.add_argument('--philips-hue-ip', default = ip)
 		else:
@@ -53,11 +53,7 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': static(group_name,
-				{
-					'hue': 26000,
-					'sat': 255
-				}),
+				'active': static(group_name, color.get_passed_hue()),
 				'status': status
 			})
 		if status == 'process':
@@ -65,11 +61,7 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': static(group_name,
-				{
-					'hue': 10000,
-					'sat': 255
-				}),
+				'active': static(group_name, color.get_process_hue()),
 				'status': status
 			})
 		if status == 'errored':
@@ -77,11 +69,7 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': pulsate(group_name,
-				{
-					'hue': 10000,
-					'sat': 0
-				}),
+				'active': pulsate(group_name, color.get_errored_hue()),
 				'status': status
 			})
 		if status == 'failed':
@@ -89,39 +77,31 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': pulsate(group_name,
-				{
-					'hue': 0,
-					'sat': 255
-				}),
+				'active': pulsate(group_name, color.get_failed_hue()),
 				'status': status
 			})
 	return result
 
 
-def static(group, state):
-	return api is not None and api.set_group(group,
-											 {
+def static(group_name, state):
+	return api is not None and api.set_group(group_name,
+	{
 		'hue': state['hue'],
-		'sat': state['sat'],
-		'on': True,
-		'bri': 255,
+		'sat': state['saturation'],
 		'alert': 'none'
 	}) is not None
 
 
-def pulsate(group, state):
-	return api is not None and api.set_group(group,
-											 {
+def pulsate(group_name, state):
+	return api is not None and api.set_group(group_name,
+	{
 		'hue': state['hue'],
-		'sat': state['sat'],
-		'on': True,
-		'bri': 255,
+		'sat': state['saturation'],
 		'alert': 'lselect'
 	}) is not None
 
 
-def discover_ip():
+def discover_bridge_ip():
 	response = requests.get('https://discovery.meethue.com')
 
 	# process response
