@@ -1,5 +1,5 @@
 from mock import MagicMock
-from chroma_feedback.consumer import lifx_light
+from chroma_feedback.consumer.lifx_light.light import process_lights
 
 mock = MagicMock()
 lights =\
@@ -8,33 +8,37 @@ lights =\
 }
 
 
-def test_process_lights_passed():
-	result = lifx_light.process_lights('passed', lights)
+def test_process_passed():
+	result = process_lights('passed', lights)
 
 	assert result[0]['consumer'] == 'lifx_light'
+	assert result[0]['type'] == 'light'
 	assert result[0]['name']
 	assert result[0]['status'] == 'passed'
 
 
-def test_process_lights_process():
-	result = lifx_light.process_lights('process', lights)
+def test_process_process():
+	result = process_lights('process', lights)
 
 	assert result[0]['consumer'] == 'lifx_light'
+	assert result[0]['type'] == 'light'
 	assert result[0]['name']
 	assert result[0]['status'] == 'process'
 
 
-def test_process_lights_errored():
-	result = lifx_light.process_lights('errored', lights)
+def test_process_errored():
+	result = process_lights('errored', lights)
 
 	assert result[0]['consumer'] == 'lifx_light'
+	assert result[0]['type'] == 'light'
 	assert result[0]['name']
 	assert result[0]['status'] == 'errored'
 
 
-def test_process_lights_failed():
-	result = lifx_light.process_lights('failed', lights)
+def test_process_failed():
+	result = process_lights('failed', lights)
 
 	assert result[0]['consumer'] == 'lifx_light'
+	assert result[0]['type'] == 'light'
 	assert result[0]['name']
 	assert result[0]['status'] == 'failed'

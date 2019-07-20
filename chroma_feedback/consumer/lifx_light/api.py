@@ -1,7 +1,17 @@
 from chroma_feedback import wording
 
+api = None
 
-def api_factory():
+
+def get_api():
+	global api
+
+	if not api:
+		api = factory()
+	return api
+
+
+def factory():
 	try:
 		from lifxlan import LifxLAN
 
