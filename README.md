@@ -26,6 +26,12 @@ Install Chroma Feedback:
 pip3 install chroma-feedback
 ```
 
+Install `lifxlan` for Lifx Light:
+
+```
+pip3 install lifxlan
+```
+
 Install `phue` for Philips Hue:
 
 ```
@@ -80,6 +86,31 @@ chroma-feedback [options]
 
 Consumers
 =========
+
+
+Lifx Light
+----------
+
+| Name     | Mandatory |
+|----------|-----------|
+| Light    | optional  |
+| Group    | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=lifx_light
+
+--lifx_light-light <light-name>
+```
+
+Indicate status via groups:
+
+```
+chroma-feedback --consumer=lifx_light
+
+--lifx_light-group <group-name>
+```
 
 
 Philips Hue

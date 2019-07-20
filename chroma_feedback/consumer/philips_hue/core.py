@@ -20,7 +20,7 @@ def init(program):
 		else:
 			program.add_argument('--philips-hue-ip', required = True)
 		program.add_argument('--philips-hue-light', action = 'append')
-		program.add_argument('--philips-hue-group', action='append')
+		program.add_argument('--philips-hue-group', action = 'append')
 	args = program.parse_known_args()[0]
 
 
@@ -58,7 +58,7 @@ def get_lights(lights, light_names):
 
 def get_groups(groups, group_names):
 	if group_names:
-		for group in dict(groups):
+		for group in copy.copy(groups):
 			group_name = groups[group]['name']
 
 			if group_name not in group_names:

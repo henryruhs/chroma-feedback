@@ -1,3 +1,4 @@
+import copy
 from chroma_feedback import color, wording
 from .factory import api_factory
 
@@ -26,7 +27,7 @@ def run(status):
 
 def get_devices(devices, device_names):
 	if device_names:
-		for device in list(devices):
+		for device in copy.copy(devices):
 			if device not in device_names:
 				devices.remove(device)
 	return devices
