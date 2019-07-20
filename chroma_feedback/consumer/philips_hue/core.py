@@ -29,18 +29,23 @@ def run(status):
 
 	if not api:
 		api = api_factory(args.philips_hue_ip)
+
+	# use groups
+
 	if args.philips_hue_group:
 		groups = get_groups(api.get_group(), args.philips_hue_group)
 
 		if not groups:
 			exit(wording.get('group_no') + wording.get('exclamation_mark'))
 		return process_groups(status, groups)
-	else:
-		lights = get_lights(api.get_light_objects(), args.philips_hue_light)
 
-		if not lights:
-			exit(wording.get('light_no') + wording.get('exclamation_mark'))
-		return process_lights(status, lights)
+	# use lights
+
+	lights = get_lights(api.get_light_objects(), args.philips_hue_light)
+
+	if not lights:
+		exit(wording.get('light_no') + wording.get('exclamation_mark'))
+	return process_lights(status, lights)
 
 
 def get_lights(lights, light_names):
