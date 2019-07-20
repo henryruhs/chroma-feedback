@@ -88,7 +88,16 @@ Philips Hue
 | Name     | Mandatory |
 |----------|-----------|
 | IP       | optional  |
+| Light    | optional  |
 | Group    | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=philips_hue
+
+--philips-hue-light <light-name>
+```
 
 Indicate status via groups:
 

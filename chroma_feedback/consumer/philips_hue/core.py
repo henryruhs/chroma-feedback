@@ -1,3 +1,4 @@
+import copy
 import requests
 from chroma_feedback import color, helper, wording
 from .factory import api_factory
@@ -18,7 +19,8 @@ def init(program):
 			program.add_argument('--philips-hue-ip', default = ip)
 		else:
 			program.add_argument('--philips-hue-ip', required = True)
-		program.add_argument('--philips-hue-group', action = 'append')
+		program.add_argument('--philips-hue-light', action = 'append')
+		program.add_argument('--philips-hue-group', action='append')
 	args = program.parse_known_args()[0]
 
 
@@ -27,11 +29,26 @@ def run(status):
 
 	if not api:
 		api = api_factory(args.philips_hue_ip)
-	groups = get_groups(api.get_group(), args.philips_hue_group)
+	if args.philips_hue_group:
+		groups = get_groups(api.get_group(), args.philips_hue_group)
 
-	if not groups:
-		exit(wording.get('group_no') + wording.get('exclamation_mark'))
-	return process(status, groups)
+		if not groups:
+			exit(wording.get('group_no') + wording.get('exclamation_mark'))
+		return process_groups(status, groups)
+	else:
+		lights = get_lights(api.get_light_objects(), args.philips_hue_light)
+
+		if not lights:
+			exit(wording.get('light_no') + wording.get('exclamation_mark'))
+		return process_lights(status, lights)
+
+
+def get_lights(lights, light_names):
+	if light_names:
+		for light in copy.copy(lights):
+			if light.name not in light_names:
+				lights.remove(light)
+	return lights
 
 
 def get_groups(groups, group_names):
@@ -44,7 +61,48 @@ def get_groups(groups, group_names):
 	return groups
 
 
-def process(status, groups):
+def process_lights(status, lights):
+	result = []
+
+	# process lights
+
+	for light in lights:
+		if status == 'passed':
+			result.append(
+			{
+				'consumer': 'philips_hue',
+				'name': light.name,
+				'active': static_light(light.name, color.get_passed_hue()),
+				'status': status
+			})
+		if status == 'process':
+			result.append(
+			{
+				'consumer': 'philips_hue',
+				'name': light.name,
+				'active': static_light(light.name, color.get_process_hue()),
+				'status': status
+			})
+		if status == 'errored':
+			result.append(
+			{
+				'consumer': 'philips_hue',
+				'name': light.name,
+				'active': pulsate_light(light.name, color.get_errored_hue()),
+				'status': status
+			})
+		if status == 'failed':
+			result.append(
+			{
+				'consumer': 'philips_hue',
+				'name': light.name,
+				'active': pulsate_light(light.name, color.get_failed_hue()),
+				'status': status
+			})
+	return result
+
+
+def process_groups(status, groups):
 	result = []
 
 	# process groups
@@ -57,7 +115,7 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': static(group_name, color.get_passed_hue()),
+				'active': static_group(group_name, color.get_passed_hue()),
 				'status': status
 			})
 		if status == 'process':
@@ -65,7 +123,7 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': static(group_name, color.get_process_hue()),
+				'active': static_group(group_name, color.get_process_hue()),
 				'status': status
 			})
 		if status == 'errored':
@@ -73,7 +131,7 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': pulsate(group_name, color.get_errored_hue()),
+				'active': pulsate_group(group_name, color.get_errored_hue()),
 				'status': status
 			})
 		if status == 'failed':
@@ -81,13 +139,31 @@ def process(status, groups):
 			{
 				'consumer': 'philips_hue',
 				'name': group_name,
-				'active': pulsate(group_name, color.get_failed_hue()),
+				'active': pulsate_group(group_name, color.get_failed_hue()),
 				'status': status
 			})
 	return result
 
 
-def static(group_name, state):
+def static_light(light_name, state):
+	return api is not None and api.set_light(light_name,
+	{
+		'hue': state['hue'],
+		'sat': state['saturation'],
+		'alert': 'none'
+	}) is not None
+
+
+def pulsate_light(light_name, state):
+	return api is not None and api.set_light(light_name,
+	{
+		'hue': state['hue'],
+		'sat': state['saturation'],
+		'alert': 'lselect'
+	}) is not None
+
+
+def static_group(group_name, state):
 	return api is not None and api.set_group(group_name,
 	{
 		'hue': state['hue'],
@@ -96,7 +172,7 @@ def static(group_name, state):
 	}) is not None
 
 
-def pulsate(group_name, state):
+def pulsate_group(group_name, state):
 	return api is not None and api.set_group(group_name,
 	{
 		'hue': state['hue'],
