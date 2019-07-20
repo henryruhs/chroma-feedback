@@ -88,16 +88,7 @@ Philips Hue
 | Name     | Mandatory |
 |----------|-----------|
 | IP       | optional  |
-| Device   | optional  |
 | Group    | optional  |
-
-Indicate status via lights:
-
-```
-chroma-feedback --consumer=philips_hue
-
---philips-hue-light <light-name>
-```
 
 Indicate status via groups:
 
@@ -106,6 +97,7 @@ chroma-feedback --consumer=philips_hue
 
 --philips-hue-group <group-name>
 ```
+
 
 Razer Chroma
 ------------

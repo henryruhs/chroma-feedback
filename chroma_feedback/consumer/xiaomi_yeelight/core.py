@@ -33,16 +33,16 @@ def run(status):
 def process(status, lights):
 	result = []
 
-	# process devices
+	# process lights
 
 	for light in lights:
-		name = light.get_properties()['name']
+		light_name = light.get_properties()['name']
 
 		if status == 'passed':
 			result.append(
 			{
 				'consumer': 'xiaomi_yeelight',
-				'name': name,
+				'name': light_name,
 				'active': static(light, color.get_passed_rgb()),
 				'status': status
 			})
@@ -50,7 +50,7 @@ def process(status, lights):
 			result.append(
 			{
 				'consumer': 'xiaomi_yeelight',
-				'name': name,
+				'name': light_name,
 				'active': static(light, color.get_process_rgb()),
 				'status': status
 			})
@@ -58,7 +58,7 @@ def process(status, lights):
 			result.append(
 			{
 				'consumer': 'xiaomi_yeelight',
-				'name': name,
+				'name': light_name,
 				'active': static(light, color.get_errored_rgb()),
 				'status': status
 			})
@@ -66,7 +66,7 @@ def process(status, lights):
 			result.append(
 			{
 				'consumer': 'xiaomi_yeelight',
-				'name': name,
+				'name': light_name,
 				'active': static(light, color.get_failed_rgb()),
 				'status': status
 			})

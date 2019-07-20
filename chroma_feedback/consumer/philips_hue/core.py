@@ -46,45 +46,45 @@ def process(status, groups):
 	# process groups
 
 	for group in groups:
-		name = groups[group]['name']
+		group_name = groups[group]['name']
 
 		if status == 'passed':
 			result.append(
 			{
 				'consumer': 'philips_hue',
-				'name': name,
-				'active': static(name, color.get_passed_hue()),
+				'name': group_name,
+				'active': static(group_name, color.get_passed_hue()),
 				'status': status
 			})
 		if status == 'process':
 			result.append(
 			{
 				'consumer': 'philips_hue',
-				'name': name,
-				'active': static(name, color.get_process_hue()),
+				'name': group_name,
+				'active': static(group_name, color.get_process_hue()),
 				'status': status
 			})
 		if status == 'errored':
 			result.append(
 			{
 				'consumer': 'philips_hue',
-				'name': name,
-				'active': pulsate(name, color.get_errored_hue()),
+				'name': group_name,
+				'active': pulsate(group_name, color.get_errored_hue()),
 				'status': status
 			})
 		if status == 'failed':
 			result.append(
 			{
 				'consumer': 'philips_hue',
-				'name': name,
-				'active': pulsate(name, color.get_failed_hue()),
+				'name': group_name,
+				'active': pulsate(group_name, color.get_failed_hue()),
 				'status': status
 			})
 	return result
 
 
-def static(group, state):
-	return api is not None and api.set_group(group,
+def static(group_name, state):
+	return api is not None and api.set_group(group_name,
 	{
 		'hue': state['hue'],
 		'sat': state['saturation'],
@@ -92,8 +92,8 @@ def static(group, state):
 	}) is not None
 
 
-def pulsate(group, state):
-	return api is not None and api.set_group(group,
+def pulsate(group_name, state):
+	return api is not None and api.set_group(group_name,
 	{
 		'hue': state['hue'],
 		'sat': state['saturation'],
