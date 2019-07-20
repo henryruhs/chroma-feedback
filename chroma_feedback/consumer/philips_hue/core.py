@@ -56,7 +56,7 @@ def process(status, groups):
 				'active': static(group_name,
 				{
 					'hue': 26000,
-					'sat': 255
+					'saturation': 255
 				}),
 				'status': status
 			})
@@ -68,7 +68,7 @@ def process(status, groups):
 				'active': static(group_name,
 				{
 					'hue': 10000,
-					'sat': 255
+					'saturation': 255
 				}),
 				'status': status
 			})
@@ -80,7 +80,7 @@ def process(status, groups):
 				'active': pulsate(group_name,
 				{
 					'hue': 10000,
-					'sat': 0
+					'saturation': 0
 				}),
 				'status': status
 			})
@@ -92,7 +92,7 @@ def process(status, groups):
 				'active': pulsate(group_name,
 				{
 					'hue': 0,
-					'sat': 255
+					'saturation': 255
 				}),
 				'status': status
 			})
@@ -103,9 +103,7 @@ def static(group, state):
 	return api is not None and api.set_group(group,
 											 {
 		'hue': state['hue'],
-		'sat': state['sat'],
-		'on': True,
-		'bri': 255,
+		'sat': state['saturation'],
 		'alert': 'none'
 	}) is not None
 
@@ -114,9 +112,7 @@ def pulsate(group, state):
 	return api is not None and api.set_group(group,
 											 {
 		'hue': state['hue'],
-		'sat': state['sat'],
-		'on': True,
-		'bri': 255,
+		'sat': state['saturation'],
 		'alert': 'lselect'
 	}) is not None
 
