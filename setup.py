@@ -43,7 +43,11 @@ setup(
 	],
 	install_requires =
 	[
-		'requests'
+		'blink1',
+		'lifxlan',
+		'phue',
+		'requests',
+		'yeelight'
 	],
 	tests_require=
 	[

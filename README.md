@@ -26,18 +26,6 @@ Install Chroma Feedback:
 pip3 install chroma-feedback
 ```
 
-Install `lifxlan` for Lifx Light:
-
-```
-pip3 install lifxlan
-```
-
-Install `phue` for Philips Hue:
-
-```
-pip3 install phue
-```
-
 Install `openrazer-meta` for Razer Chroma:
 
 ```
@@ -49,20 +37,10 @@ apt-get update
 apt install openrazer-meta
 ```
 
-Install `blink1` for ThingM Blink:
+Install `libusb-dev` and `libudev-dev` for ThingM Blink:
 
 ```
 apt-get install libusb-dev libudev-dev
-```
-
-```
-pip3 install blink1
-```
-
-Install `yeelight` for Xiaomi Yeelight:
-
-```
-pip3 install yeelight
 ```
 
 
