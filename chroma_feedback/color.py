@@ -1,4 +1,4 @@
-color =\
+COLOR =\
 {
 	'red': '\033[0;31m',
 	'green': '\033[0;32m',
@@ -8,15 +8,15 @@ color =\
 
 
 def red(text):
-	return color['red'] + text + color['end']
+	return COLOR['red'] + text + COLOR['end']
 
 
 def green(text):
-	return color['green'] + text + color['end']
+	return COLOR['green'] + text + COLOR['end']
 
 
 def yellow(text):
-	return color['yellow'] + text + color['end']
+	return COLOR['yellow'] + text + COLOR['end']
 
 
 def get_passed_rgb():

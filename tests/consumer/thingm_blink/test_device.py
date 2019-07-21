@@ -1,15 +1,14 @@
 from mock import MagicMock
 from chroma_feedback.consumer.thingm_blink.device import process_devices
 
-mock = MagicMock()
-devices =\
-{
-	mock
-}
+MOCK = MagicMock()
 
 
 def test_process_passed():
-	result = process_devices('passed', devices)
+	result = process_devices('passed',
+	{
+		MOCK
+	})
 
 	assert result[0]['consumer'] == 'thingm_blink'
 	assert result[0]['type'] == 'device'
@@ -18,7 +17,10 @@ def test_process_passed():
 
 
 def test_process_process():
-	result = process_devices('process', devices)
+	result = process_devices('process',
+	{
+		MOCK
+	})
 
 	assert result[0]['consumer'] == 'thingm_blink'
 	assert result[0]['type'] == 'device'
@@ -27,7 +29,10 @@ def test_process_process():
 
 
 def test_process_errored():
-	result = process_devices('errored', devices)
+	result = process_devices('errored',
+	{
+		MOCK
+	})
 
 	assert result[0]['consumer'] == 'thingm_blink'
 	assert result[0]['type'] == 'device'
@@ -36,7 +41,10 @@ def test_process_errored():
 
 
 def test_process_failed():
-	result = process_devices('failed', devices)
+	result = process_devices('failed',
+	{
+		MOCK
+	})
 
 	assert result[0]['consumer'] == 'thingm_blink'
 	assert result[0]['type'] == 'device'

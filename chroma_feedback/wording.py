@@ -1,4 +1,4 @@
-wording =\
+WORDING =\
 {
 	'version_no': 'Python {}.{} not supported',
 	'package_no': 'Package {} not found',
@@ -34,4 +34,4 @@ wording =\
 
 
 def get(key):
-	return wording[key]
+	return WORDING[key]

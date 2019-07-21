@@ -1,5 +1,5 @@
 from chroma_feedback import color
-from chroma_feedback.consumer.xiaomi_yeelight.api import get_api
+from .api import get_api
 
 
 def get_lights(ips):

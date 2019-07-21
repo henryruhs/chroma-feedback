@@ -10,15 +10,7 @@ disable =
 	protected-access,
 	unused-argument
 
-good-names =
-	ip,
-	color,
-	devices,
-	groups,
-	lights,
-	metadata,
-	mock,
-	wording
+good-names = ip
 
 [format]
 

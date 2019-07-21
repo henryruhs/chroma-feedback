@@ -1,4 +1,4 @@
-metadata =\
+METADATA =\
 {
 	'name': 'chroma-feedback',
 	'description': 'Turn your RGB powered hardware into an extreme feedback device for continuous integration',
@@ -12,4 +12,4 @@ metadata =\
 
 
 def get(key):
-	return metadata[key]
+	return METADATA[key]
