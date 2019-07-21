@@ -10,7 +10,10 @@ disable =
 	protected-access,
 	unused-argument
 
-good-names = ip
+good-names =
+	chroma-feedback,
+	ip,
+	program
 
 [format]
 

@@ -9,6 +9,11 @@ python:
 - 3.7
 
 install:
+- pip install blink1
+- pip install lifxlan
+- pip install phue
+- pip install requests
+- pip install yeelight
 - pip install coveralls
 - pip install requests
 - pip install pylint
