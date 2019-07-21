@@ -6,14 +6,26 @@ jobs:
   - image: circleci/python:3.6.6-stretch-browsers
   steps:
   - checkout
-  - run: sudo pip install requests pylint pytest pytest-mock mock
+  - run: pip install coveralls
+  - run: pip install requests
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install mock
   - run: pylint bin/chroma-feedback chroma_feedback tests
  test:
   docker:
   - image: circleci/python:3.6.6-stretch-browsers
   steps:
   - checkout
-  - run: sudo pip install requests pylint pytest pytest-mock mock
+  - run: pip install coveralls
+  - run: pip install requests
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install mock
   - run: pytest tests
 
 workflows:
