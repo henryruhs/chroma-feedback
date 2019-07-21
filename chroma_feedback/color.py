@@ -7,15 +7,15 @@ COLOR =\
 }
 
 
-def red(text):
+def format_red(text):
 	return COLOR['red'] + text + COLOR['end']
 
 
-def green(text):
+def format_green(text):
 	return COLOR['green'] + text + COLOR['end']
 
 
-def yellow(text):
+def format_yellow(text):
 	return COLOR['yellow'] + text + COLOR['end']
 
 
@@ -80,7 +80,7 @@ def get_errored():
 			255,
 			255
 		],
-		'hue': 58275,
+		'hue': 58000,
 		'saturation':
 		[
 			0,
