@@ -79,7 +79,7 @@ Indicate status via lights:
 ```
 chroma-feedback --consumer=lifx_light
 
---lifx_light-light <light-name>
+--lifx-light-light <light-name>
 ```
 
 Indicate status via groups:
@@ -87,7 +87,7 @@ Indicate status via groups:
 ```
 chroma-feedback --consumer=lifx_light
 
---lifx_light-group <group-name>
+--lifx-light-group <group-name>
 ```
 
 
