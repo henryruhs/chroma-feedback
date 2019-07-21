@@ -31,7 +31,7 @@ setup(
 		'chroma_feedback.provider.teamcity',
 		'chroma_feedback.provider.travis',
 		'chroma_feedback.consumer',
-		'chroma_feedback.consumer.lifx_light'
+		'chroma_feedback.consumer.lifx_light',
 		'chroma_feedback.consumer.philips_hue',
 		'chroma_feedback.consumer.razer_chroma',
 		'chroma_feedback.consumer.thingm_blink',
