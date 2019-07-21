@@ -24,7 +24,7 @@ def process_lights(status, lights):
 				'consumer': 'xiaomi_yeelight',
 				'type': 'light',
 				'name': light_name,
-				'active': static_light(light, color.get_passed_rgb()),
+				'active': static_light(light, color.get_passed()),
 				'status': status
 			})
 		if status == 'process':
@@ -33,7 +33,7 @@ def process_lights(status, lights):
 				'consumer': 'xiaomi_yeelight',
 				'type': 'light',
 				'name': light_name,
-				'active': static_light(light, color.get_process_rgb()),
+				'active': static_light(light, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -42,7 +42,7 @@ def process_lights(status, lights):
 				'consumer': 'xiaomi_yeelight',
 				'type': 'light',
 				'name': light_name,
-				'active': static_light(light, color.get_errored_rgb()),
+				'active': static_light(light, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -51,11 +51,11 @@ def process_lights(status, lights):
 				'consumer': 'xiaomi_yeelight',
 				'type': 'light',
 				'name': light_name,
-				'active': static_light(light, color.get_failed_rgb()),
+				'active': static_light(light, color.get_failed()),
 				'status': status
 			})
 	return result
 
 
 def static_light(light, state):
-	return light.set_rgb(state['red'], state['green'], state['blue']) == 'ok'
+	return light.turn_on() == 'ok' and light.set_rgb(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue']) == 'ok'

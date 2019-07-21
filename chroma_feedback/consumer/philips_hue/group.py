@@ -28,7 +28,7 @@ def process_groups(status, groups):
 				'consumer': 'philips_hue',
 				'type': 'group',
 				'name': group_name,
-				'active': static_group(group_name, color.get_passed_hue()),
+				'active': static_group(group_name, color.get_passed()),
 				'status': status
 			})
 		if status == 'process':
@@ -37,7 +37,7 @@ def process_groups(status, groups):
 				'consumer': 'philips_hue',
 				'type': 'group',
 				'name': group_name,
-				'active': static_group(group_name, color.get_process_hue()),
+				'active': static_group(group_name, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -46,7 +46,7 @@ def process_groups(status, groups):
 				'consumer': 'philips_hue',
 				'type': 'group',
 				'name': group_name,
-				'active': pulsate_group(group_name, color.get_errored_hue()),
+				'active': pulsate_group(group_name, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -55,7 +55,7 @@ def process_groups(status, groups):
 				'consumer': 'philips_hue',
 				'type': 'group',
 				'name': group_name,
-				'active': pulsate_group(group_name, color.get_failed_hue()),
+				'active': pulsate_group(group_name, color.get_failed()),
 				'status': status
 			})
 	return result
@@ -67,7 +67,9 @@ def static_group(group_name, state):
 	return api is not None and api.set_group(group_name,
 	{
 		'hue': state['hue'],
-		'sat': state['saturation'],
+		'sat': state['saturation'][1],
+		'bri': state['brightness'][1],
+		'on': True,
 		'alert': 'none'
 	}) is not None
 
@@ -78,6 +80,8 @@ def pulsate_group(group_name, state):
 	return api is not None and api.set_group(group_name,
 	{
 		'hue': state['hue'],
-		'sat': state['saturation'],
+		'sat': state['saturation'][1],
+		'bri': state['brightness'][1],
+		'on': True,
 		'alert': 'lselect'
 	}) is not None

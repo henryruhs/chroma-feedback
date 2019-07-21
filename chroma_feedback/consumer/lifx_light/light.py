@@ -27,7 +27,7 @@ def process_lights(status, lights):
 				'consumer': 'lifx_light',
 				'type': 'light',
 				'name': light_name,
-				'active': static(light, color.get_passed_hue()),
+				'active': static_light(light, color.get_passed()),
 				'status': status
 			})
 		if status == 'process':
@@ -36,7 +36,7 @@ def process_lights(status, lights):
 				'consumer': 'lifx_light',
 				'type': 'light',
 				'name': light_name,
-				'active': static(light, color.get_process_hue()),
+				'active': static_light(light, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -45,7 +45,7 @@ def process_lights(status, lights):
 				'consumer': 'lifx_light',
 				'type': 'light',
 				'name': light_name,
-				'active': static(light, color.get_errored_hue()),
+				'active': static_light(light, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -54,11 +54,17 @@ def process_lights(status, lights):
 				'consumer': 'lifx_light',
 				'type': 'light',
 				'name': light_name,
-				'active': static(light, color.get_failed_hue()),
+				'active': static_light(light, color.get_failed()),
 				'status': status
 			})
 	return result
 
 
-def static(light, state):
-	return light.set_hue(state['hue']) is None and light.set_saturation(state['saturation']) is None
+def static_light(light, state):
+	return light.set_power('on') is None and light.set_color(
+	[
+		state['hue'],
+		state['saturation'][2],
+		state['brightness'][2],
+		state['kelvin']
+	]) is None

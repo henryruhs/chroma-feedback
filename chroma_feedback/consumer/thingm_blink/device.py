@@ -23,7 +23,7 @@ def process_devices(status, devices):
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_passed_rgb()),
+				'active': static_device(color.get_passed()),
 				'status': status
 			})
 		if status == 'process':
@@ -32,7 +32,7 @@ def process_devices(status, devices):
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_process_rgb()),
+				'active': static_device(color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -41,7 +41,7 @@ def process_devices(status, devices):
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_errored_rgb()),
+				'active': static_device(color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -50,7 +50,7 @@ def process_devices(status, devices):
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_failed_rgb()),
+				'active': static_device(color.get_failed()),
 				'status': status
 			})
 	return result
@@ -59,4 +59,4 @@ def process_devices(status, devices):
 def static_device(state):
 	api = get_api()
 
-	return api is not None and api.fade_to_rgb(100, state['red'], state['green'], state['blue']) is None
+	return api is not None and api.fade_to_rgb(100, state['rgb']['red'], state['rgb']['green'], state['rgb']['blue']) is None

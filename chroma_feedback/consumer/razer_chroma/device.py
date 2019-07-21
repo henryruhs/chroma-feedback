@@ -22,7 +22,7 @@ def process_devices(status, devices):
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': static_device(device, color.get_passed_rgb()),
+				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
 		if status == 'process':
@@ -31,7 +31,7 @@ def process_devices(status, devices):
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': static_device(device, color.get_process_rgb()),
+				'active': static_device(device, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -40,7 +40,7 @@ def process_devices(status, devices):
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': pulsate_device(device, color.get_errored_rgb()),
+				'active': pulsate_device(device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -49,19 +49,23 @@ def process_devices(status, devices):
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': pulsate_device(device, color.get_failed_rgb()),
+				'active': pulsate_device(device, color.get_failed()),
 				'status': status
 			})
 	return result
 
 
 def static_device(device, state):
+	if device.has('brightness'):
+		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.static(state['red'], state['green'], state['blue']) and device.fx.misc.scroll_wheel.static(state['red'], state['green'], state['blue'])
-	return device.fx.static(state['red'], state['green'], state['blue'])
+		return device.fx.misc.logo.static(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue']) and device.fx.misc.scroll_wheel.static(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue'])
+	return device.fx.static(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue'])
 
 
 def pulsate_device(device, state):
+	if device.has('brightness'):
+		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.pulsate(state['red'], state['green'], state['blue']) and device.fx.misc.scroll_wheel.pulsate(state['red'], state['green'], state['blue'])
-	return device.fx.breath_single(state['red'], state['green'], state['blue'])
+		return device.fx.misc.logo.pulsate(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue']) and device.fx.misc.scroll_wheel.pulsate(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue'])
+	return device.fx.breath_single(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue'])

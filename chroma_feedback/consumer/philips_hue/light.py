@@ -24,7 +24,7 @@ def process_lights(status, lights):
 				'consumer': 'philips_hue',
 				'type': 'light',
 				'name': light.name,
-				'active': static_light(light.name, color.get_passed_hue()),
+				'active': static_light(light.name, color.get_passed()),
 				'status': status
 			})
 		if status == 'process':
@@ -33,7 +33,7 @@ def process_lights(status, lights):
 				'consumer': 'philips_hue',
 				'type': 'light',
 				'name': light.name,
-				'active': static_light(light.name, color.get_process_hue()),
+				'active': static_light(light.name, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -42,7 +42,7 @@ def process_lights(status, lights):
 				'consumer': 'philips_hue',
 				'type': 'light',
 				'name': light.name,
-				'active': pulsate_light(light.name, color.get_errored_hue()),
+				'active': pulsate_light(light.name, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -51,7 +51,7 @@ def process_lights(status, lights):
 				'consumer': 'philips_hue',
 				'type': 'light',
 				'name': light.name,
-				'active': pulsate_light(light.name, color.get_failed_hue()),
+				'active': pulsate_light(light.name, color.get_failed()),
 				'status': status
 			})
 	return result
@@ -63,7 +63,9 @@ def static_light(light_name, state):
 	return api is not None and api.set_light(light_name,
 	{
 		'hue': state['hue'],
-		'sat': state['saturation'],
+		'sat': state['saturation'][1],
+		'bri': state['brightness'][1],
+		'on': True,
 		'alert': 'none'
 	}) is not None
 
@@ -74,6 +76,8 @@ def pulsate_light(light_name, state):
 	return api is not None and api.set_light(light_name,
 	{
 		'hue': state['hue'],
-		'sat': state['saturation'],
+		'sat': state['saturation'][1],
+		'bri': state['brightness'][1],
+		'on': True,
 		'alert': 'lselect'
 	}) is not None

@@ -15,11 +15,11 @@ def api_factory():
 	api = None
 
 	try:
-		from lifxlan import LifxLAN
+		from lifxlan import LifxLAN, WorkflowException
 
 		try:
 			api = LifxLAN()
-		except (OSError, ValueError):
+		except WorkflowException:
 			exit(wording.get('connection_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:

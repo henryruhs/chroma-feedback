@@ -19,69 +19,105 @@ def yellow(text):
 	return COLOR['yellow'] + text + COLOR['end']
 
 
-def get_passed_rgb():
+def get_passed():
 	return\
 	{
-		'red': 0,
-		'green': 255,
-		'blue': 0
-	}
-
-
-def get_process_rgb():
-	return\
-	{
-		'red': 255,
-		'green': 255,
-		'blue': 0
-	}
-
-
-def get_errored_rgb():
-	return\
-	{
-		'red': 255,
-		'green': 255,
-		'blue': 255
-	}
-
-
-def get_failed_rgb():
-	return\
-	{
-		'red': 255,
-		'green': 0,
-		'blue': 0
-	}
-
-
-def get_passed_hue():
-	return\
-	{
+		'rgb':
+		{
+			'red': 255,
+			'green': 0,
+			'blue': 0
+		},
 		'hue': 26000,
-		'saturation': 255
+		'saturation':
+		[
+			100,
+			255,
+			65535
+		],
+		'brightness':
+		[
+			100,
+			255,
+			65535
+		],
+		'kelvin': 3500
 	}
 
 
-def get_process_hue():
+def get_process():
 	return\
 	{
+		'rgb':
+		{
+			'red': 255,
+			'green': 255,
+			'blue': 0
+		},
 		'hue': 10000,
-		'saturation': 255
+		'saturation':
+		[
+			100,
+			255,
+			65535
+		],
+		'brightness':
+		[
+			100,
+			255,
+			65535
+		],
+		'kelvin': 3500
 	}
 
 
-def get_errored_hue():
+def get_errored():
 	return\
 	{
-		'hue': 10000,
-		'saturation': 0
+		'rgb':
+		{
+			'red': 255,
+			'green': 255,
+			'blue': 255
+		},
+		'hue': 58275,
+		'saturation':
+		[
+			0,
+			0,
+			0
+		],
+		'brightness':
+		[
+			100,
+			255,
+			65535
+		],
+		'kelvin': 3500
 	}
 
 
-def get_failed_hue():
+def get_failed():
 	return\
 	{
+		'rgb':
+		{
+			'red': 255,
+			'green': 0,
+			'blue': 0
+		},
 		'hue': 0,
-		'saturation': 255
+		'saturation':
+		[
+			100,
+			255,
+			65535
+		],
+		'brightness':
+		[
+			100,
+			255,
+			65535
+		],
+		'kelvin': 3500
 	}
