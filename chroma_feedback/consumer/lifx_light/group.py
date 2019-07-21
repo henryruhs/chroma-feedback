@@ -31,7 +31,7 @@ def process_groups(status, groups):
 				'consumer': 'lifx_light',
 				'type': 'group',
 				'name': group_name,
-				'active': static(group, color.get_passed_hue()),
+				'active': static_group(group, color.get_passed_hue()),
 				'status': status
 			})
 		if status == 'process':
@@ -40,7 +40,7 @@ def process_groups(status, groups):
 				'consumer': 'lifx_light',
 				'type': 'group',
 				'name': group_name,
-				'active': static(group, color.get_process_hue()),
+				'active': static_group(group, color.get_process_hue()),
 				'status': status
 			})
 		if status == 'errored':
@@ -49,7 +49,7 @@ def process_groups(status, groups):
 				'consumer': 'lifx_light',
 				'type': 'group',
 				'name': group_name,
-				'active': static(group, color.get_errored_hue()),
+				'active': static_group(group, color.get_errored_hue()),
 				'status': status
 			})
 		if status == 'failed':
@@ -58,11 +58,11 @@ def process_groups(status, groups):
 				'consumer': 'lifx_light',
 				'type': 'group',
 				'name': group_name,
-				'active': static(group, color.get_failed_hue()),
+				'active': static_group(group, color.get_failed_hue()),
 				'status': status
 			})
 	return result
 
 
-def static(group, state):
+def static_group(group, state):
 	return group.set_hue(state['hue']) is None and group.set_saturation(state['saturation']) is None

@@ -2,23 +2,23 @@ import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
-args = None
+ARGS = None
 
 
 def init(program):
-	global args
+	global ARGS
 
-	if not args:
+	if not ARGS:
 		program.add_argument('--jenkins-host', required = True)
 		program.add_argument('--jenkins-slug', action = 'append', required = True)
-	args = program.parse_known_args()[0]
+	ARGS = program.parse_known_args()[0]
 
 
 def run():
 	result = []
 
-	for slug in args.jenkins_slug:
-		result.extend(fetch(args.jenkins_host, slug))
+	for slug in ARGS.jenkins_slug:
+		result.extend(fetch(ARGS.jenkins_host, slug))
 	return result
 
 

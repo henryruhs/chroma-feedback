@@ -2,24 +2,24 @@ import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
-args = None
+ARGS = None
 
 
 def init(program):
-	global args
+	global ARGS
 
-	if not args:
+	if not ARGS:
 		program.add_argument('--gitlab-host', default = 'https://gitlab.com')
 		program.add_argument('--gitlab-slug', action = 'append', required = True)
 		program.add_argument('--gitlab-token', required = True)
-	args = program.parse_known_args()[0]
+	ARGS = program.parse_known_args()[0]
 
 
 def run():
 	result = []
 
-	for slug in args.gitlab_slug:
-		result.extend(fetch(args.gitlab_host, slug, args.gitlab_token))
+	for slug in ARGS.gitlab_slug:
+		result.extend(fetch(ARGS.gitlab_host, slug, ARGS.gitlab_token))
 	return result
 
 

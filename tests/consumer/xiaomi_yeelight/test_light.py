@@ -1,40 +1,44 @@
 from mock import MagicMock
-from chroma_feedback.consumer import xiaomi_yeelight
+from chroma_feedback.consumer.xiaomi_yeelight.light import process_lights
 
 mock = MagicMock()
-devices =\
-[
+lights =\
+{
 	mock
-]
+}
 
 
 def test_process_passed():
-	result = xiaomi_yeelight.process('passed', devices)
+	result = process_lights('passed', lights)
 
 	assert result[0]['consumer'] == 'xiaomi_yeelight'
+	assert result[0]['type'] == 'light'
 	assert result[0]['name']
 	assert result[0]['status'] == 'passed'
 
 
 def test_process_process():
-	result = xiaomi_yeelight.process('process', devices)
+	result = process_lights('process', lights)
 
 	assert result[0]['consumer'] == 'xiaomi_yeelight'
+	assert result[0]['type'] == 'light'
 	assert result[0]['name']
 	assert result[0]['status'] == 'process'
 
 
 def test_process_errored():
-	result = xiaomi_yeelight.process('errored', devices)
+	result = process_lights('errored', lights)
 
 	assert result[0]['consumer'] == 'xiaomi_yeelight'
+	assert result[0]['type'] == 'light'
 	assert result[0]['name']
 	assert result[0]['status'] == 'errored'
 
 
 def test_process_failed():
-	result = xiaomi_yeelight.process('failed', devices)
+	result = process_lights('failed', lights)
 
 	assert result[0]['consumer'] == 'xiaomi_yeelight'
+	assert result[0]['type'] == 'light'
 	assert result[0]['name']
 	assert result[0]['status'] == 'failed'

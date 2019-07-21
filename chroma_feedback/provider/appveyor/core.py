@@ -2,27 +2,27 @@ import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
-args = None
+ARGS = None
 
 
 def init(program):
-	global args
+	global ARGS
 
-	if not args:
+	if not ARGS:
 		program.add_argument('--appveyor-host', default = 'https://ci.appveyor.com')
 		program.add_argument('--appveyor-slug', action = 'append')
 		program.add_argument('--appveyor-token')
-	args = program.parse_known_args()[0]
+	ARGS = program.parse_known_args()[0]
 
 
 def run():
 	result = []
 
-	if args.appveyor_slug:
-		for slug in args.appveyor_slug:
-			result.extend(fetch(args.appveyor_host, slug, None))
+	if ARGS.appveyor_slug:
+		for slug in ARGS.appveyor_slug:
+			result.extend(fetch(ARGS.appveyor_host, slug, None))
 	else:
-		result.extend(fetch(args.appveyor_host, None, args.appveyor_token))
+		result.extend(fetch(ARGS.appveyor_host, None, ARGS.appveyor_token))
 	return result
 
 

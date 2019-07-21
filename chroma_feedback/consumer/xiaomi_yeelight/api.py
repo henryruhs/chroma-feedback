@@ -1,5 +1,15 @@
 from chroma_feedback import wording
 
+API = None
+
+
+def get_api(ip):
+	global API
+
+	if not API:
+		API = api_factory(ip)
+	return API
+
 
 def api_factory(ip):
 	api = None

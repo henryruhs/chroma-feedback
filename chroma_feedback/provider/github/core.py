@@ -3,25 +3,25 @@ import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
-args = None
+ARGS = None
 
 
 def init(program):
-	global args
+	global ARGS
 
-	if not args:
+	if not ARGS:
 		program.add_argument('--github-host', default = 'https://api.github.com')
 		program.add_argument('--github-slug', action = 'append', required = True)
 		program.add_argument('--github-username', required = True)
 		program.add_argument('--github-token', required = True)
-	args = program.parse_known_args()[0]
+	ARGS = program.parse_known_args()[0]
 
 
 def run():
 	result = []
 
-	for slug in args.github_slug:
-		result.extend(fetch(args.github_host, slug, args.github_username, args.github_token))
+	for slug in ARGS.github_slug:
+		result.extend(fetch(ARGS.github_host, slug, ARGS.github_username, ARGS.github_token))
 	return result
 
 

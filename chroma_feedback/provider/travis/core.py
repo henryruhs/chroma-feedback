@@ -2,23 +2,23 @@ import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
-args = None
+ARGS = None
 
 
 def init(program):
-	global args
+	global ARGS
 
-	if not args:
+	if not ARGS:
 		program.add_argument('--travis-host', default = 'https://api.travis-ci.org')
 		program.add_argument('--travis-slug', action = 'append', required = True)
-	args = program.parse_known_args()[0]
+	ARGS = program.parse_known_args()[0]
 
 
 def run():
 	result = []
 
-	for slug in args.travis_slug:
-		result.extend(fetch(args.travis_host, slug))
+	for slug in ARGS.travis_slug:
+		result.extend(fetch(ARGS.travis_host, slug))
 	return result
 
 

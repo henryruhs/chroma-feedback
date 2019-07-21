@@ -3,27 +3,27 @@ import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
-args = None
+ARGS = None
 
 
 def init(program):
-	global args
+	global ARGS
 
-	if not args:
+	if not ARGS:
 		program.add_argument('--circle-host', default = 'https://circleci.com')
 		program.add_argument('--circle-slug', action = 'append')
 		program.add_argument('--circle-token')
-	args = program.parse_known_args()[0]
+	ARGS = program.parse_known_args()[0]
 
 
 def run():
 	result = []
 
-	if args.circle_slug:
-		for slug in args.circle_slug:
-			result.extend(fetch(args.circle_host, slug, None))
+	if ARGS.circle_slug:
+		for slug in ARGS.circle_slug:
+			result.extend(fetch(ARGS.circle_host, slug, None))
 	else:
-		result.extend(fetch(args.circle_host, None, args.circle_token))
+		result.extend(fetch(ARGS.circle_host, None, ARGS.circle_token))
 	return result
 
 

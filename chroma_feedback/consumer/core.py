@@ -5,11 +5,11 @@ def process(status, program):
 	args = program.parse_known_args()[0]
 	result = []
 
-	for consumer in args.consumer:
+	for consumer_name in args.consumer:
 		try:
-			CONSUMER = importlib.import_module('chroma_feedback.consumer.' + consumer)
-			CONSUMER.init(program)
-			result.extend(CONSUMER.run(status))
+			consumer = importlib.import_module('chroma_feedback.consumer.' + consumer_name)
+			consumer.init(program)
+			result.extend(consumer.run(status))
 		except ImportError:
 			exit(wording.get('consumer_no') + wording.get('exclamation_mark'))
 	return result

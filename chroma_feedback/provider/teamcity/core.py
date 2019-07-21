@@ -3,28 +3,28 @@ import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
-args = None
+ARGS = None
 
 
 def init(program):
-	global args
+	global ARGS
 
-	if not args:
+	if not ARGS:
 		program.add_argument('--teamcity-host', default = 'https://teamcity.jetbrains.com')
 		program.add_argument('--teamcity-slug', action = 'append')
 		program.add_argument('--teamcity-username', required = True)
 		program.add_argument('--teamcity-password', required = True)
-	args = program.parse_known_args()[0]
+	ARGS = program.parse_known_args()[0]
 
 
 def run():
 	result = []
 
-	if args.teamcity_slug:
-		for slug in args.teamcity_slug:
-			result.extend(fetch(args.teamcity_host, slug, args.teamcity_username, args.teamcity_password))
+	if ARGS.teamcity_slug:
+		for slug in ARGS.teamcity_slug:
+			result.extend(fetch(ARGS.teamcity_host, slug, ARGS.teamcity_username, ARGS.teamcity_password))
 	else:
-		result.extend(fetch(args.teamcity_host, None, args.teamcity_username, args.teamcity_password))
+		result.extend(fetch(ARGS.teamcity_host, None, ARGS.teamcity_username, ARGS.teamcity_password))
 	return result
 
 

@@ -1,20 +1,26 @@
 from chroma_feedback import wording
 
-api = None
+API = None
 
 
 def get_api():
-	global api
+	global API
 
-	if not api:
-		api = factory()
-	return api
+	if not API:
+		API = api_factory()
+	return API
 
 
-def factory():
+def api_factory():
+	api = None
+
 	try:
 		from lifxlan import LifxLAN
 
-		return LifxLAN()
+		try:
+			api = LifxLAN()
+		except (OSError, ValueError):
+			exit(wording.get('connection_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))
+		return api
 	except ImportError:
 		exit(wording.get('package_no').format('LIFXLAN') + wording.get('exclamation_mark'))
