@@ -23,11 +23,11 @@ def get_passed():
 	return\
 	{
 		'rgb':
-		{
-			'red': 255,
-			'green': 0,
-			'blue': 0
-		},
+		[
+			0,
+			255,
+			0
+		],
 		'hue': 26000,
 		'saturation':
 		[
@@ -49,11 +49,11 @@ def get_process():
 	return\
 	{
 		'rgb':
-		{
-			'red': 255,
-			'green': 255,
-			'blue': 0
-		},
+		[
+			255,
+			255,
+			0
+		],
 		'hue': 10000,
 		'saturation':
 		[
@@ -75,11 +75,11 @@ def get_errored():
 	return\
 	{
 		'rgb':
-		{
-			'red': 255,
-			'green': 255,
-			'blue': 255
-		},
+		[
+			255,
+			255,
+			255
+		],
 		'hue': 58275,
 		'saturation':
 		[
@@ -101,11 +101,11 @@ def get_failed():
 	return\
 	{
 		'rgb':
-		{
-			'red': 255,
-			'green': 0,
-			'blue': 0
-		},
+		[
+			255,
+			0,
+			0
+		],
 		'hue': 0,
 		'saturation':
 		[

@@ -59,4 +59,4 @@ def process_devices(status, devices):
 def static_device(state):
 	api = get_api()
 
-	return api is not None and api.fade_to_rgb(100, state['rgb']['red'], state['rgb']['green'], state['rgb']['blue']) is None
+	return api is not None and api.fade_to_rgb(100, state['rgb'][0], state['rgb'][1], state['rgb'][2]) is None

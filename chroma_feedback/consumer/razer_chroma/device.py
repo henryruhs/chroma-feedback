@@ -59,13 +59,13 @@ def static_device(device, state):
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.static(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue']) and device.fx.misc.scroll_wheel.static(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue'])
-	return device.fx.static(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue'])
+		return device.fx.misc.logo.static(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	return device.fx.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 
 
 def pulsate_device(device, state):
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.pulsate(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue']) and device.fx.misc.scroll_wheel.pulsate(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue'])
-	return device.fx.breath_single(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue'])
+		return device.fx.misc.logo.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])

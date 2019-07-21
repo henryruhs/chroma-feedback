@@ -58,4 +58,4 @@ def process_lights(status, lights):
 
 
 def static_light(light, state):
-	return light.turn_on() == 'ok' and light.set_rgb(state['rgb']['red'], state['rgb']['green'], state['rgb']['blue']) == 'ok'
+	return light.turn_on() == 'ok' and light.set_rgb(state['rgb'][0], state['rgb'][1], state['rgb'][2]) == 'ok'
