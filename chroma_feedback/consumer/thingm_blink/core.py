@@ -4,6 +4,7 @@ from .api import get_api
 
 ARGS = None
 
+
 def init(program):
 	global ARGS
 
