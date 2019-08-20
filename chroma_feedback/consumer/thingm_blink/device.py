@@ -1,6 +1,6 @@
 import copy
 from chroma_feedback import color
-from .api import get_api
+from .api import api_factory
 
 
 def get_devices(devices, device_names):
@@ -23,7 +23,7 @@ def process_devices(status, devices):
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_passed()),
+				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
 		if status == 'process':
@@ -32,7 +32,7 @@ def process_devices(status, devices):
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_process()),
+				'active': static_device(device, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -41,7 +41,7 @@ def process_devices(status, devices):
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_errored()),
+				'active': static_device(device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -50,13 +50,13 @@ def process_devices(status, devices):
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_failed()),
+				'active': static_device(device, color.get_failed()),
 				'status': status
 			})
 	return result
 
 
-def static_device(state):
-	api = get_api()
+def static_device(device, state):
+	api = api_factory(device)
 
 	return api is not None and api.fade_to_rgb(100, state['rgb'][0], state['rgb'][1], state['rgb'][2]) is None

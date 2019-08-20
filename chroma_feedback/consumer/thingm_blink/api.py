@@ -7,18 +7,18 @@ def get_api():
 	global API
 
 	if not API:
-		API = api_factory()
+		API = api_factory(None)
 	return API
 
 
-def api_factory():
+def api_factory(device):
 	api = None
 
 	try:
 		from blink1.blink1 import Blink1, Blink1ConnectionFailed
 
 		try:
-			api = Blink1()
+			api = Blink1(device)
 		except Blink1ConnectionFailed:
 			exit(wording.get('connection_no').format('THINGM BLINK') + wording.get('exclamation_mark'))
 		return api

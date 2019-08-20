@@ -16,6 +16,7 @@ def init(program):
 def run(status):
 	api = get_api()
 	devices = get_devices(api.list(), ARGS.thingm_blink_device)
+	api.close()
 
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
