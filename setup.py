@@ -49,8 +49,9 @@ setup(
 		'requests',
 		'yeelight'
 	],
-	tests_require=
+	tests_require =
 	[
+		'coveralls',
 		'pylint',
 		'pytest',
 		'pytest-cov',
