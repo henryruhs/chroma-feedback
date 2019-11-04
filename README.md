@@ -63,107 +63,6 @@ chroma-feedback [options]
 ```
 
 
-Consumers
-=========
-
-
-Lifx Light
-----------
-
-| Name     | Mandatory |
-|----------|-----------|
-| Light    | optional  |
-| Group    | optional  |
-
-Indicate status via lights:
-
-```
-chroma-feedback --consumer=lifx_light
-
---lifx-light-light <light-name>
-```
-
-Indicate status via groups:
-
-```
-chroma-feedback --consumer=lifx_light
-
---lifx-light-group <group-name>
-```
-
-
-Philips Hue
------------
-
-| Name     | Mandatory |
-|----------|-----------|
-| IP       | optional  |
-| Light    | optional  |
-| Group    | optional  |
-
-Indicate status via lights:
-
-```
-chroma-feedback --consumer=philips_hue
-
---philips-hue-light <light-name>
-```
-
-Indicate status via groups:
-
-```
-chroma-feedback --consumer=philips_hue
-
---philips-hue-group <group-name>
-```
-
-
-Razer Chroma
-------------
-
-| Name   | Mandatory |
-|--------|-----------|
-| Device | optional  |
-
-Indicate status via devices:
-
-```
-chroma-feedback --consumer=razer_chroma
-
---razer-chrome-device <device-name>
-```
-
-
-ThingM Blink
-------------
-
-| Name   | Mandatory |
-|--------|-----------|
-| Device | optional  |
-
-Indicate status via devices:
-
-```
-chroma-feedback --consumer=thingm_blink
-
---thingm-blink-device <device-serial>
-```
-
-
-Xiaomi Yeelight
----------------
-
-| Name     | Mandatory |
-|----------|-----------|
-| IP       | optional  |
-
-Indicate status via lights:
-
-```
-chroma-feedback --consumer=xiaomi_yeelight
-```
-
-
 Providers
 =========
 
@@ -396,4 +295,105 @@ Monitor multiple projects:
 chroma-feedback --provider=travis
 
 --travis-slug <username>
+```
+
+
+Consumers
+=========
+
+
+Lifx Light
+----------
+
+| Name     | Mandatory |
+|----------|-----------|
+| Light    | optional  |
+| Group    | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=lifx_light
+
+--lifx-light-light <light-name>
+```
+
+Indicate status via groups:
+
+```
+chroma-feedback --consumer=lifx_light
+
+--lifx-light-group <group-name>
+```
+
+
+Philips Hue
+-----------
+
+| Name     | Mandatory |
+|----------|-----------|
+| IP       | optional  |
+| Light    | optional  |
+| Group    | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=philips_hue
+
+--philips-hue-light <light-name>
+```
+
+Indicate status via groups:
+
+```
+chroma-feedback --consumer=philips_hue
+
+--philips-hue-group <group-name>
+```
+
+
+Razer Chroma
+------------
+
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
+
+Indicate status via devices:
+
+```
+chroma-feedback --consumer=razer_chroma
+
+--razer-chrome-device <device-name>
+```
+
+
+ThingM Blink
+------------
+
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
+
+Indicate status via devices:
+
+```
+chroma-feedback --consumer=thingm_blink
+
+--thingm-blink-device <device-serial>
+```
+
+
+Xiaomi Yeelight
+---------------
+
+| Name     | Mandatory |
+|----------|-----------|
+| IP       | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=xiaomi_yeelight
 ```
