@@ -25,6 +25,7 @@ setup(
 		'chroma_feedback.provider',
 		'chroma_feedback.provider.appveyor',
 		'chroma_feedback.provider.circle',
+		'chroma_feedback.provider.codeship',
 		'chroma_feedback.provider.github',
 		'chroma_feedback.provider.gitlab',
 		'chroma_feedback.provider.jenkins',

@@ -4,6 +4,7 @@ __all__ =\
 [
 	'appveyor',
 	'circle',
+	'codeship',
 	'github',
 	'gitlab',
 	'jenkins',

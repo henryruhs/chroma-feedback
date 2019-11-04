@@ -11,7 +11,7 @@ def test_fetch_slug():
 		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
-		pytest.skip('GITLAB_TOKEN not defined')
+		pytest.skip('GITLAB_TOKEN is not defined')
 
 
 def test_fetch_invalid():

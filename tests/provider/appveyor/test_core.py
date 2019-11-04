@@ -20,7 +20,7 @@ def test_fetch_user():
 		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
-		pytest.skip('APPVEYOR_TOKEN not defined')
+		pytest.skip('APPVEYOR_TOKEN is not defined')
 
 
 def test_fetch_invalid():

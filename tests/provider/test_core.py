@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 import sys
 from chroma_feedback import provider
 
+
 def test_process(mocker):
 	program = ArgumentParser()
 	program.add_argument('-P', '--provider', action = 'append', required = True)

@@ -220,6 +220,41 @@ chroma-feedback --provider=circle
 ```
 
 
+Codeship
+--------
+
+| Name         | Default                  | Mandatory |
+|--------------|--------------------------|-----------|
+| Host         | https://api.codeship.com | optional  |
+| Organization |                          | required  |
+| Project      |                          | required  |
+| Username     |                          | required  |
+| Password     |                          | required  |
+
+Monitor a single project:
+
+```
+chroma-feedback --provider=codeship
+
+--codeship-oranization <oranization-uuid>
+--codeship-oranization <project-uuid>
+--codeship-username <username>
+--codeship-password <password>
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=codeship
+
+--codeship-oranization <oranization-uuid>
+--codeship-oranization <project-uuid>
+--codeship-oranization <project-uuid>
+--codeship-username <username>
+--codeship-password <password>
+```
+
+
 GitHub
 ------
 
