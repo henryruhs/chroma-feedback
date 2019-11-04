@@ -237,7 +237,7 @@ Monitor a single project:
 chroma-feedback --provider=codeship
 
 --codeship-oranization <oranization-uuid>
---codeship-oranization <project-uuid>
+--codeship-project <project-uuid>
 --codeship-username <username>
 --codeship-password <password>
 ```
@@ -248,8 +248,8 @@ Monitor multiple projects:
 chroma-feedback --provider=codeship
 
 --codeship-oranization <oranization-uuid>
---codeship-oranization <project-uuid>
---codeship-oranization <project-uuid>
+--codeship-project <project-uuid>
+--codeship-project <project-uuid>
 --codeship-username <username>
 --codeship-password <password>
 ```

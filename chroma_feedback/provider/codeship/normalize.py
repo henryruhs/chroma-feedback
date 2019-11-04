@@ -18,4 +18,3 @@ def normalize_status(status):
 	if status in ['failed', 'infrastructure_failure']:
 		return 'failed'
 	return 'passed'
-
