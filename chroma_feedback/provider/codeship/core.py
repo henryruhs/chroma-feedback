@@ -11,8 +11,7 @@ def init(program):
 
 	if not ARGS:
 		program.add_argument('--codeship-host', default = 'https://api.codeship.com')
-		program.add_argument('--codeship-organization', required = True)
-		program.add_argument('--codeship-project', action = 'append', required = True)
+		program.add_argument('--codeship-slug', action = 'append')
 		program.add_argument('--codeship-username', required = True)
 		program.add_argument('--codeship-password', required = True)
 	ARGS = program.parse_known_args()[0]
@@ -20,15 +19,36 @@ def init(program):
 
 def run():
 	result = []
-	token = fetch_token(ARGS.codeship_host, ARGS.codeship_username, ARGS.codeship_password)
+	auth = fetch_auth(ARGS.codeship_host, ARGS.codeship_username, ARGS.codeship_password)
 
-	if token:
-		for project in ARGS.codeship_project:
-			result.extend(fetch(ARGS.codeship_host, ARGS.codeship_organization, project, token))
+	for organization in auth['organizations']:
+		result.extend(fetch(ARGS.codeship_host, organization['uuid'], ARGS.codeship_slug, auth['access_token']))
 	return result
 
 
-def fetch(host, organization, project, token):
+def fetch(host, organization, slug, token):
+	response = None
+
+	if host and organization and token:
+		response = requests.get(host + '/v2/organizations/' + organization + '/projects', headers =
+		{
+			'Authorization': 'Bearer ' + token
+		})
+
+	# process response
+
+	if response and response.status_code == 200:
+		data = helper.parse_json(response)
+		result = []
+
+		for project in data['projects']:
+			if not slug or str(project['id']) in slug:
+				result.extend(fetch_builds(host, organization, project['uuid'], token))
+		return result
+	return []
+
+
+def fetch_builds(host, organization, project, token):
 	response = None
 
 	if host and organization and project and token:
@@ -42,12 +62,12 @@ def fetch(host, organization, project, token):
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		if 'builds' in data:
+		if data['builds']:
 			return normalize_data(data['builds'][0])
 	return []
 
 
-def fetch_token(host, username, password):
+def fetch_auth(host, username, password):
 	response = None
 
 	if host and username and password:
@@ -62,6 +82,6 @@ def fetch_token(host, username, password):
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		if data['access_token']:
-			return data['access_token']
+		if data:
+			return data
 	return None

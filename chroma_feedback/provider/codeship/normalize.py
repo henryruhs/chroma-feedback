@@ -11,7 +11,7 @@ def normalize_data(build):
 
 
 def normalize_status(status):
-	if status in ['initiated', 'waiting']:
+	if status in ['initiated', 'testing', 'waiting']:
 		return 'process'
 	if status in ['error', 'blocked', 'ignored']:
 		return 'errored'

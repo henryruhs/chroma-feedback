@@ -3,7 +3,7 @@ def normalize_data(project):
 	[
 		{
 			'provider': 'gitlab',
-			'slug': project['user']['username'] + '/' + project['slug'] + '/' + project['name'],
+			'slug': project['slug'] + '/' + project['name'],
 			'active': True,
 			'status': normalize_status(project['status'])
 		}

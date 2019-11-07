@@ -122,21 +122,19 @@ chroma-feedback --provider=circle
 Codeship
 --------
 
-| Name         | Default                  | Mandatory |
-|--------------|--------------------------|-----------|
-| Host         | https://api.codeship.com | optional  |
-| Organization |                          | required  |
-| Project      |                          | required  |
-| Username     |                          | required  |
-| Password     |                          | required  |
+| Name     | Default                  | Mandatory |
+|----------|--------------------------|-----------|
+| Host     | https://api.codeship.com | optional  |
+| Slug     |                          | optional  |
+| Username |                          | required  |
+| Password |                          | required  |
 
 Monitor a single project:
 
 ```
 chroma-feedback --provider=codeship
 
---codeship-oranization <oranization-uuid>
---codeship-project <project-uuid>
+--codeship-slug <project-id>
 --codeship-username <username>
 --codeship-password <password>
 ```
@@ -146,9 +144,6 @@ Monitor multiple projects:
 ```
 chroma-feedback --provider=codeship
 
---codeship-oranization <oranization-uuid>
---codeship-project <project-uuid>
---codeship-project <project-uuid>
 --codeship-username <username>
 --codeship-password <password>
 ```

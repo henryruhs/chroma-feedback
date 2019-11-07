@@ -17,6 +17,7 @@ def test_fetch_user():
 		result = fetch('https://circleci.com', None, os.environ['CIRCLE_TOKEN'])
 
 		assert result[0]['provider'] == 'circle'
+		assert result[0]['slug']
 		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
