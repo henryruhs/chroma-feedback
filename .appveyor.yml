@@ -10,6 +10,7 @@ environment:
    PYTHON_ARCH: '64'
 
 install:
+- python --version
 - pip install requests
 - pip install pylint
 - pip install pytest
