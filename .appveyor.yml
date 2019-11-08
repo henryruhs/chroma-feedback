@@ -5,11 +5,10 @@ platform:
 
 environment:
  matrix:
- - PYTHON: C:\\Python36-x64
-   PYTHON_VERSION: 3.6.0
-   PYTHON_ARCH: 64
+ - TOXENV: py37
 
 install:
+- pip install tox
 - pip install pylint
 - pip install pytest
 - pip install pytest-mock
@@ -17,6 +16,7 @@ install:
 - pip install mypy
 
 test_script:
+- tox
 - pylint bin/chroma-feedback chroma_feedback tests
 - mypy chroma_feedback/provider --no-strict-optional
 - pytest tests
