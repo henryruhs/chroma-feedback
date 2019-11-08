@@ -14,6 +14,7 @@ def test_fetch_user():
 	result = fetch('https://api.travis-ci.org', 'redaxmedia')
 
 	assert result[1]['provider'] == 'travis'
+	assert result[1]['slug']
 	assert result[1]['active'] is True
 	assert result[1]['status']
 

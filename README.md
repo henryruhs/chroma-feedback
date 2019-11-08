@@ -6,6 +6,7 @@ Chroma Feedback
 [![Build Status Travis](https://img.shields.io/travis/redaxmedia/chroma-feedback.svg)](https://travis-ci.org/redaxmedia/chroma-feedback)
 [![Build Status AppVeyor](https://img.shields.io/appveyor/ci/redaxmedia/chroma-feedback.svg)](https://ci.appveyor.com/project/redaxmedia/chroma-feedback)
 [![Build Status Circle](https://img.shields.io/circleci/project/github/redaxmedia/chroma-feedback.svg)](https://circleci.com/gh/redaxmedia/chroma-feedback)
+[![Build Status Codeship](https://img.shields.io/codeship/f33c1280-e07d-0137-b700-5a25ac1d7a35.svg)](https://app.codeship.com/projects/372431)
 [![Coverage Status](https://img.shields.io/coveralls/redaxmedia/chroma-feedback.svg)](https://coveralls.io/r/redaxmedia/chroma-feedback)
 [![PyPI](https://img.shields.io/pypi/v/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
 [![License](https://img.shields.io/pypi/l/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
@@ -62,107 +63,6 @@ chroma-feedback [options]
 ```
 
 
-Consumers
-=========
-
-
-Lifx Light
-----------
-
-| Name     | Mandatory |
-|----------|-----------|
-| Light    | optional  |
-| Group    | optional  |
-
-Indicate status via lights:
-
-```
-chroma-feedback --consumer=lifx_light
-
---lifx-light-light <light-name>
-```
-
-Indicate status via groups:
-
-```
-chroma-feedback --consumer=lifx_light
-
---lifx-light-group <group-name>
-```
-
-
-Philips Hue
------------
-
-| Name     | Mandatory |
-|----------|-----------|
-| IP       | optional  |
-| Light    | optional  |
-| Group    | optional  |
-
-Indicate status via lights:
-
-```
-chroma-feedback --consumer=philips_hue
-
---philips-hue-light <light-name>
-```
-
-Indicate status via groups:
-
-```
-chroma-feedback --consumer=philips_hue
-
---philips-hue-group <group-name>
-```
-
-
-Razer Chroma
-------------
-
-| Name   | Mandatory |
-|--------|-----------|
-| Device | optional  |
-
-Indicate status via devices:
-
-```
-chroma-feedback --consumer=razer_chroma
-
---razer-chrome-device <device-name>
-```
-
-
-ThingM Blink
-------------
-
-| Name   | Mandatory |
-|--------|-----------|
-| Device | optional  |
-
-Indicate status via devices:
-
-```
-chroma-feedback --consumer=thingm_blink
-
---thingm-blink-device <device-serial>
-```
-
-
-Xiaomi Yeelight
----------------
-
-| Name     | Mandatory |
-|----------|-----------|
-| IP       | optional  |
-
-Indicate status via lights:
-
-```
-chroma-feedback --consumer=xiaomi_yeelight
-```
-
-
 Providers
 =========
 
@@ -216,6 +116,36 @@ Monitor multiple projects:
 chroma-feedback --provider=circle
 
 --circle-token <token>
+```
+
+
+Codeship
+--------
+
+| Name     | Default                  | Mandatory |
+|----------|--------------------------|-----------|
+| Host     | https://api.codeship.com | optional  |
+| Slug     |                          | optional  |
+| Username |                          | required  |
+| Password |                          | required  |
+
+Monitor a single project:
+
+```
+chroma-feedback --provider=codeship
+
+--codeship-slug <project-id>
+--codeship-username <username>
+--codeship-password <password>
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --provider=codeship
+
+--codeship-username <username>
+--codeship-password <password>
 ```
 
 
@@ -360,4 +290,105 @@ Monitor multiple projects:
 chroma-feedback --provider=travis
 
 --travis-slug <username>
+```
+
+
+Consumers
+=========
+
+
+Lifx Light
+----------
+
+| Name     | Mandatory |
+|----------|-----------|
+| Light    | optional  |
+| Group    | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=lifx_light
+
+--lifx-light-light <light-name>
+```
+
+Indicate status via groups:
+
+```
+chroma-feedback --consumer=lifx_light
+
+--lifx-light-group <group-name>
+```
+
+
+Philips Hue
+-----------
+
+| Name     | Mandatory |
+|----------|-----------|
+| IP       | optional  |
+| Light    | optional  |
+| Group    | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=philips_hue
+
+--philips-hue-light <light-name>
+```
+
+Indicate status via groups:
+
+```
+chroma-feedback --consumer=philips_hue
+
+--philips-hue-group <group-name>
+```
+
+
+Razer Chroma
+------------
+
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
+
+Indicate status via devices:
+
+```
+chroma-feedback --consumer=razer_chroma
+
+--razer-chrome-device <device-name>
+```
+
+
+ThingM Blink
+------------
+
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
+
+Indicate status via devices:
+
+```
+chroma-feedback --consumer=thingm_blink
+
+--thingm-blink-device <device-serial>
+```
+
+
+Xiaomi Yeelight
+---------------
+
+| Name     | Mandatory |
+|----------|-----------|
+| IP       | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=xiaomi_yeelight
 ```

@@ -1,5 +1,8 @@
 import pytest
-from mock import MagicMock
+try:
+	from unittest.mock import MagicMock
+except ImportError:
+	from mock import MagicMock
 from chroma_feedback.consumer.razer_chroma.device import process_devices
 
 MOCK = MagicMock()

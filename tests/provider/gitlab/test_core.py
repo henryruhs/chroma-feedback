@@ -8,10 +8,11 @@ def test_fetch_slug():
 		result = fetch('https://gitlab.com', '7311836', os.environ['GITLAB_TOKEN'])
 
 		assert result[0]['provider'] == 'gitlab'
+		assert result[0]['slug']
 		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
-		pytest.skip('GITLAB_TOKEN not defined')
+		pytest.skip('GITLAB_TOKEN is not defined')
 
 
 def test_fetch_invalid():
