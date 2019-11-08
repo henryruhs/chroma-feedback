@@ -3,6 +3,12 @@ build: false
 platform:
 - x64
 
+environment:
+ matrix:
+ - PYTHON: C:\\Python37-x64
+   PYTHON_VERSION: 3.7.4
+   PYTHON_ARCH: 64
+
 install:
 - pip install request
 - pip install pylint
