@@ -1,7 +1,6 @@
+from typing import Dict, List
 import base64
 import requests
-
-from typing import Dict, List
 from chroma_feedback import helper
 from .normalize import normalize_data
 
