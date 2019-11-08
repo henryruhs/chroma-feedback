@@ -3,7 +3,7 @@ def normalize_data(build):
 	[
 		{
 			'provider': 'codeship',
-			'slug': build['project_id'],
+			'slug': str(build['project_id']),
 			'active': True,
 			'status': normalize_status(build['status'])
 		}
