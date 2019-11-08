@@ -1,13 +1,21 @@
 version: 2
 
 jobs:
+ install:
+  steps:
+  - run: pip install coveralls
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install mock
+  - run: pip install mypy
  lint:
   docker:
   - image: circleci/python:3.7.4-buster
   steps:
   - checkout
-  - run: sudo apt-get install libusb-1.0-0-dev
-  - run: sudo pip install .[dev]
+  - install
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy chroma_feedback/provider --no-strict-optional
  test:
@@ -15,8 +23,7 @@ jobs:
   - image: circleci/python:3.6.6-stretch-browsers
   steps:
   - checkout
-  - run: sudo apt-get install libusb-1.0-0-dev
-  - run: sudo pip install .[dev]
+  - install
   - run: pytest tests
 
 workflows:

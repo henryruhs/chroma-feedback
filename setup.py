@@ -9,16 +9,6 @@ try:
 except ImportError:
 	long_description = open('README.md').read()
 
-dev_dependencies =\
-[
-	'coveralls',
-	'pylint',
-	'pytest',
-	'pytest-cov',
-	'pytest-mock',
-	'mock',
-	'mypy'
-]
 setup(
 	name = metadata.get('name'),
 	description =  metadata.get('description'),
@@ -60,9 +50,14 @@ setup(
 		'requests',
 		'yeelight'
 	],
-	tests_require = dev_dependencies,
-	extras_require =
-	{
-		'dev': dev_dependencies
-	}
+	tests_require =
+	[
+		'coveralls',
+		'pylint',
+		'pytest',
+		'pytest-cov',
+		'pytest-mock',
+		'mock',
+		'mypy'
+	]
 )

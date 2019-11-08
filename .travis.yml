@@ -9,12 +9,14 @@ python:
 - 3.7
 - nightly
 
-apt_packages:
- - libudev-dev
- - libusb-1.0-0-dev
-
 install:
-- pip install .[dev]
+- pip install coveralls
+- pip install pylint
+- pip install pytest
+- pip install pytest-cov
+- pip install pytest-mock
+- pip install mock
+- pip install mypy
 
 script:
 - pylint bin/chroma-feedback chroma_feedback tests

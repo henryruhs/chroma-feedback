@@ -10,8 +10,13 @@ environment:
    PYTHON_ARCH: 64
 
 install:
-- apt-get install libusb-1.0-0-dev
-- pip install .[dev]
+- pip install coveralls
+- pip install pylint
+- pip install pytest
+- pip install pytest-cov
+- pip install pytest-mock
+- pip install mock
+- pip install mypy
 
 test_script:
 - pylint bin/chroma-feedback chroma_feedback tests
