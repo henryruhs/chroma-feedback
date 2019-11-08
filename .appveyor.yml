@@ -10,7 +10,7 @@ environment:
    PYTHON_ARCH: 64
 
 install:
-- SET PATH=%PYTHON%;%PATH%
+- SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
 - pip install requests
 - pip install pylint
 - pip install pytest
