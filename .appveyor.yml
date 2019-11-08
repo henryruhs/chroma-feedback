@@ -5,17 +5,21 @@ platform:
 
 environment:
  matrix:
+ - PYTHON: C:\\Python36-x64
+   PYTHON_VERSION: 3.6.5
+   PYTHON_ARCH: 64
  - PYTHON: C:\\Python37-x64
    PYTHON_VERSION: 3.7.4
    PYTHON_ARCH: 64
 
 install:
-- pip install request
 - pip install pylint
 - pip install pytest
 - pip install pytest-mock
 - pip install mock
+- pip install mypy
 
 test_script:
 - pylint bin/chroma-feedback chroma_feedback tests
+- mypy chroma_feedback/provider --no-strict-optional
 - pytest tests
