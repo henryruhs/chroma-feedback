@@ -1,12 +1,13 @@
 import base64
 import requests
+from typing import Dict, List
 from chroma_feedback import helper
 from .normalize import normalize_data
 
 ARGS = None
 
 
-def init(program):
+def init(program) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -17,7 +18,7 @@ def init(program):
 	ARGS = program.parse_known_args()[0]
 
 
-def run():
+def run() -> List:
 	result = []
 	auth = fetch_auth(ARGS.codeship_host, ARGS.codeship_username, ARGS.codeship_password)
 
@@ -26,7 +27,7 @@ def run():
 	return result
 
 
-def fetch(host, organization, slug, token):
+def fetch(host: str, organization: str, slug: str, token: str) -> List:
 	response = None
 
 	if host and organization and token:
@@ -43,12 +44,12 @@ def fetch(host, organization, slug, token):
 
 		for project in data['projects']:
 			if not slug or str(project['id']) in slug:
-				result.extend(fetch_builds(host, organization, project['uuid'], token))
+				result.append(fetch_builds(host, organization, project['uuid'], token))
 		return result
 	return []
 
 
-def fetch_builds(host, organization, project, token):
+def fetch_builds(host: str, organization: str, project: str, token: str) -> Dict:
 	response = None
 
 	if host and organization and project and token:
@@ -64,10 +65,10 @@ def fetch_builds(host, organization, project, token):
 
 		if data['builds']:
 			return normalize_data(data['builds'][0])
-	return []
+	return {}
 
 
-def fetch_auth(host, username, password):
+def fetch_auth(host: str, username: str, password: str) -> Dict:
 	response = None
 
 	if host and username and password:
@@ -84,4 +85,4 @@ def fetch_auth(host, username, password):
 
 		if data:
 			return data
-	return None
+	return {}

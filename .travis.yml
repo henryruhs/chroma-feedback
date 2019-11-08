@@ -7,18 +7,14 @@ python:
 - 3.5
 - 3.6
 - 3.7
+- nightly
 
 install:
-- pip install coveralls
-- pip install requests
-- pip install pylint
-- pip install pytest
-- pip install pytest-cov
-- pip install pytest-mock
-- pip install mock
+- pip install .[dev]
 
 script:
 - pylint bin/chroma-feedback chroma_feedback tests
+- mypy chroma_feedback/provider --no-strict-optional
 - pytest tests --cov=chroma_feedback
 
 after_success:
