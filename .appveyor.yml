@@ -10,6 +10,7 @@ environment:
    PYTHON_ARCH: 64
 
 install:
+- apt-get install libusb-1.0-0-dev
 - pip install .[dev]
 
 test_script:
