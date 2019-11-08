@@ -1,29 +1,23 @@
 version: 2
 
 jobs:
- install:
-  steps:
-  - run: pip install coveralls
-  - run: pip install pylint
-  - run: pip install pytest
-  - run: pip install pytest-cov
-  - run: pip install pytest-mock
-  - run: pip install mock
-  - run: pip install mypy
  lint:
   docker:
-  - image: circleci/python:3.7.4-buster
+  - image: circleci/python:3.7.1-buster
   steps:
   - checkout
-  - install
+  - run: pip install pylint
+  - run: pop install mypy
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy chroma_feedback/provider --no-strict-optional
  test:
   docker:
-  - image: circleci/python:3.6.6-stretch-browsers
+  - image: circleci/python:3.7.1-buster
   steps:
   - checkout
-  - install
+  - run: pip install pytest
+  - run: pip install pytest-mock
+  - run: pip install mock
   - run: pytest tests
 
 workflows:

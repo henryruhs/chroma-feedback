@@ -5,15 +5,13 @@ platform:
 
 environment:
  matrix:
- - PYTHON: C:\\Python36-x64
-   PYTHON_VERSION: 3.6.0
+ - PYTHON: C:\\Python37-x64
+   PYTHON_VERSION: 3.7.1
    PYTHON_ARCH: 64
 
 install:
-- pip install coveralls
 - pip install pylint
 - pip install pytest
-- pip install pytest-cov
 - pip install pytest-mock
 - pip install mock
 - pip install mypy
