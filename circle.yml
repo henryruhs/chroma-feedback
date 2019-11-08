@@ -7,6 +7,7 @@ jobs:
   steps:
   - checkout
   - run: sudo pip install pylint
+  - run: sudo pip install pytest
   - run: sudo pip install mypy
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy chroma_feedback/provider --no-strict-optional
