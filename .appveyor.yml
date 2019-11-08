@@ -5,18 +5,41 @@ platform:
 
 environment:
  matrix:
-    - PYTHON: "C:\\Python36-x64"
-      PYTHON_VERSION: "3.6.x"
-      PYTHON_ARCH: "64"
+ - PYTHON: 'C:\\Python37-x64'
+   PYTHON_VERSION: '3.7.x'
+   PYTHON_ARCH: '64'
 
 install:
+
+- ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER -and $env:APPVEYOR_BUILD_NUMBER -ne ((Invoke-RestMethod `
+      https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
+      Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
+        throw "There are newer queued builds for this pull request, failing early." }
+- ECHO "Filesystem root:"
+- ps: "ls \"C:/\""
+
+- ECHO "Installed SDKs:"
+- ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
+
+# Install Python (from the official .msi of https://python.org) and pip when
+# not already installed.
+- ps: if (-not(Test-Path($env:PYTHON))) { & appveyor\install.ps1 }
+
+# Prepend newly installed Python to the PATH of this build (this cannot be
+# done from inside the powershell script as it would require to restart
+# the parent CMD process).
+- "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+
+
 - python --version
 - pip install requests
 - pip install pylint
 - pip install pytest
 - pip install pytest-mock
 - pip install mock
+- pip install mypy
 
 test_script:
 - pylint bin/chroma-feedback chroma_feedback tests
+- mypy chroma_feedback/provider --no-strict-optional
 - pytest tests
