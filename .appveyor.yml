@@ -5,9 +5,9 @@ platform:
 
 environment:
  matrix:
- - PYTHON: 'C:\\Python37-x64'
-   PYTHON_VERSION: '3.7.x'
-   PYTHON_ARCH: '64'
+ - PYTHON: C:\\Python37-x64
+   PYTHON_VERSION: 3.7.4
+   PYTHON_ARCH: 64
 
 install:
 
@@ -17,9 +17,6 @@ install:
         throw "There are newer queued builds for this pull request, failing early." }
 - ECHO "Filesystem root:"
 - ps: "ls \"C:/\""
-
-- ECHO "Installed SDKs:"
-- ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
 
 # Install Python (from the official .msi of https://python.org) and pip when
 # not already installed.
