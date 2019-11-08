@@ -10,6 +10,7 @@ python:
 - nightly
 
 apt_packages:
+ - libudev-dev
  - libusb-1.0-0-dev
 
 install:
