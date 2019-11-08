@@ -4,6 +4,7 @@ platform:
 - x64
 
 install:
+- pip install request
 - pip install pylint
 - pip install pytest
 - pip install pytest-mock
