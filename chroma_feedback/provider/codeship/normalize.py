@@ -1,6 +1,6 @@
 from typing import Dict
 
-def normalize_data(build: Dict) -> Dict:
+def normalize_data(build : Dict) -> Dict:
 	return\
 	{
 		'provider': 'codeship',
@@ -10,7 +10,7 @@ def normalize_data(build: Dict) -> Dict:
 	}
 
 
-def normalize_status(status: str) -> str:
+def normalize_status(status : str) -> str:
 	if status in ['initiated', 'testing', 'waiting']:
 		return 'process'
 	if status in ['error', 'blocked', 'ignored']:
