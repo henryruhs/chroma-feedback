@@ -1,5 +1,6 @@
 from typing import Any, Dict, List
 import sys
+from requests import Response
 
 
 def get_provider_status(provider_result : List[Dict[str, Any]]) -> str:
@@ -20,7 +21,7 @@ def get_provider_status(provider_result : List[Dict[str, Any]]) -> str:
 	return status
 
 
-def parse_json(response):
+def parse_json(response : Response) -> Any:
 	try:
 		return response.json()
 	except ValueError:

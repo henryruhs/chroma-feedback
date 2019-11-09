@@ -1,5 +1,5 @@
 from typing import Any, Dict, List
-import argparse
+from argparse import ArgumentParser
 import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
@@ -7,7 +7,7 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program : argparse.ArgumentParser) -> None:
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 
