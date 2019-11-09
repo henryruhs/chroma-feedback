@@ -1,7 +1,8 @@
+from typing import Any, Dict, List
 import sys
 
 
-def get_provider_status(provider_result):
+def get_provider_status(provider_result : List[Dict[str, Any]]) -> str:
 	status = 'passed'
 
 	# process provider

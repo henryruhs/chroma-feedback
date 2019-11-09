@@ -1,4 +1,5 @@
-from typing import List
+from typing import Any, Dict, List
+import argparse
 import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
@@ -6,8 +7,9 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program) -> None:
+def init(program : argparse.ArgumentParser) -> None:
 	global ARGS
+
 
 	if not ARGS:
 		program.add_argument('--appveyor-host', default = 'https://ci.appveyor.com')
@@ -16,7 +18,7 @@ def init(program) -> None:
 	ARGS = program.parse_known_args()[0]
 
 
-def run() -> List:
+def run() -> List[Dict[str, Any]]:
 	result = []
 
 	if ARGS.appveyor_slug:
@@ -27,7 +29,7 @@ def run() -> List:
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List:
+def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug:
@@ -53,6 +55,6 @@ def fetch(host : str, slug : str, token : str) -> List:
 
 			for project in data:
 				if project['builds'] and project['builds'][0]:
-					result.extend(normalize_data(project, project['builds'][0]))
+					result.append(normalize_data(project, project['builds'][0]))
 			return result
 	return []

@@ -19,7 +19,7 @@ install:
 
 script:
 - pylint bin/chroma-feedback chroma_feedback tests
-- mypy chroma_feedback/provider --no-strict-optional
+- mypy bin/chroma-feedback chroma_feedback tests
 - pytest tests --cov=chroma_feedback
 
 after_success:
