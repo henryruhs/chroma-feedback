@@ -1,16 +1,17 @@
-def normalize_data(project, build):
+from typing import Dict
+
+
+def normalize_data(project : Dict, build : Dict) -> Dict:
 	return\
-	[
-		{
-			'provider': 'appveyor',
-			'slug': project['accountName'] + '/' + project['slug'],
-			'active': True,
-			'status': normalize_status(build['status'])
-		}
-	]
+	{
+		'provider': 'appveyor',
+		'slug': project['accountName'] + '/' + project['slug'],
+		'active': True,
+		'status': normalize_status(build['status'])
+	}
 
 
-def normalize_status(status):
+def normalize_status(status : str) -> str:
 	if status in ['queued', 'running']:
 		return 'process'
 	if status == 'canceled':

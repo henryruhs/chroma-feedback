@@ -1,3 +1,4 @@
+from typing import List
 import base64
 import requests
 from chroma_feedback import helper
@@ -6,7 +7,7 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program):
+def init(program) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -16,7 +17,7 @@ def init(program):
 	ARGS = program.parse_known_args()[0]
 
 
-def run():
+def run() -> List:
 	result = []
 
 	if ARGS.circle_slug:
@@ -27,7 +28,7 @@ def run():
 	return result
 
 
-def fetch(host, slug, token):
+def fetch(host : str, slug : str, token : str) -> List:
 	response = None
 
 	if host and slug:
@@ -44,5 +45,8 @@ def fetch(host, slug, token):
 		data = helper.parse_json(response)
 
 		for project in data:
-			return normalize_data(project)
+			return\
+			[
+				normalize_data(project)
+			]
 	return []

@@ -1,3 +1,4 @@
+from typing import List
 import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
@@ -5,7 +6,7 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program):
+def init(program) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -15,7 +16,7 @@ def init(program):
 	ARGS = program.parse_known_args()[0]
 
 
-def run():
+def run() -> List:
 	result = []
 
 	if ARGS.appveyor_slug:
@@ -26,7 +27,7 @@ def run():
 	return result
 
 
-def fetch(host, slug, token):
+def fetch(host : str, slug : str, token : str) -> List:
 	response = None
 
 	if host and slug:
@@ -42,13 +43,16 @@ def fetch(host, slug, token):
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		if 'project' and 'build' in data:
-			return normalize_data(data['project'], data['build'])
-		if data and data[0] and 'builds' in data[0]:
+		if data and data['project'] and data['build']:
+			return\
+			[
+				normalize_data(data['project'], data['build'])
+			]
+		if data:
 			result = []
 
 			for project in data:
-				if project['builds']:
+				if project['builds'] and project['builds'][0]:
 					result.extend(normalize_data(project, project['builds'][0]))
 			return result
 	return []
