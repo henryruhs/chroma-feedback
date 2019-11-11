@@ -41,7 +41,7 @@ apt install openrazer-meta
 Install `libusb-1.0-0-dev` and `libudev-dev` for ThingM Blink:
 
 ```
-apt-get install libusb-dev libudev-dev
+apt-get install libusb-1.0-0-dev libudev-dev
 ```
 
 
