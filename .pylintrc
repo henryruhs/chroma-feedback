@@ -3,6 +3,7 @@
 disable =
 	bad-continuation,
 	bad-whitespace,
+	bare-except,
 	consider-using-sys-exit,
 	cyclic-import,
 	duplicate-code,

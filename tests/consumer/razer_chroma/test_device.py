@@ -19,7 +19,7 @@ def test_process_passed():
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'passed'
-	except SystemExit:
+	except:
 		pytest.skip()
 
 
@@ -34,7 +34,7 @@ def test_process_process():
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'process'
-	except SystemExit:
+	except:
 		pytest.skip()
 
 
@@ -64,5 +64,5 @@ def test_process_failed():
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'failed'
-	except SystemExit:
+	except:
 		pytest.skip()
