@@ -1,9 +1,11 @@
+from typing import Any, Dict, List
+from argparse import ArgumentParser
 import importlib
-from chroma_feedback import wording
+from chroma_feedback import helper, wording
 
 
-def process(program):
-	args = program.parse_known_args()[0]
+def process(program : ArgumentParser) -> List[Dict[str, Any]]:
+	args = helper.get_first(program.parse_known_args())
 	result = []
 
 	for provider_name in args.provider:

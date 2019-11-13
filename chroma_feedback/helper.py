@@ -28,7 +28,7 @@ def parse_json(response : Response) -> Any:
 		return []
 
 
-def has_argument(argument):
+def has_argument(argument : str) -> bool:
 	return any(argument in argv for argv in sys.argv)
 
 

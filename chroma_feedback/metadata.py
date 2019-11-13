@@ -11,5 +11,5 @@ METADATA =\
 }
 
 
-def get(key):
+def get(key : str) -> str:
 	return METADATA[key]
