@@ -1,6 +1,7 @@
 import importlib
 from chroma_feedback import wording
 
+
 def process(status, program):
 	args = program.parse_known_args()[0]
 	result = []

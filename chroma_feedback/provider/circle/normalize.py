@@ -1,7 +1,7 @@
-from typing import Dict
+from typing import Any, Dict
 
 
-def normalize_data(project : Dict) -> Dict:
+def normalize_data(project : Dict[str, str]) -> Dict[str, Any]:
 	return\
 	{
 		'provider': 'circle',

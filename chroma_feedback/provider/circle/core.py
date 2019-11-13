@@ -1,4 +1,5 @@
-from typing import List
+from typing import Any, Dict, List
+from argparse import ArgumentParser
 import base64
 import requests
 from chroma_feedback import helper
@@ -7,17 +8,17 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program) -> None:
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
 		program.add_argument('--circle-host', default = 'https://circleci.com')
 		program.add_argument('--circle-slug', action = 'append')
 		program.add_argument('--circle-token')
-	ARGS = program.parse_known_args()[0]
+	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run() -> List:
+def run() -> List[Dict[str, Any]]:
 	result = []
 
 	if ARGS.circle_slug:
@@ -28,7 +29,7 @@ def run() -> List:
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List:
+def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug:
