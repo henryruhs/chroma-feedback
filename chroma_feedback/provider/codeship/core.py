@@ -66,7 +66,7 @@ def fetch_builds(host : str, organization : str, project : str, token : str) -> 
 		data = helper.parse_json(response)
 
 		if 'builds' in data:
-			build = helper.get_first(project['builds'])
+			build = helper.get_first(data['builds'])
 			if build:
 				return\
 				[
@@ -90,6 +90,6 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		if data['access_token'] and data['organizations']:
+		if 'access_token' and 'organizations' in data:
 			return data
 	return {}
