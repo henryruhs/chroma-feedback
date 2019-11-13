@@ -1,6 +1,7 @@
-from typing import Dict
+from typing import Any, Dict
 
-def normalize_data(build : Dict) -> Dict:
+
+def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 	return\
 	{
 		'provider': 'codeship',
