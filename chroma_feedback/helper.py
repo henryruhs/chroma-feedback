@@ -30,3 +30,7 @@ def parse_json(response : Response) -> Any:
 
 def has_argument(argument):
 	return any(argument in argv for argv in sys.argv)
+
+
+def get_first(__list__ : Any) -> Any:
+	return next(iter(__list__), None)
