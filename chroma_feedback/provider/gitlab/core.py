@@ -1,3 +1,5 @@
+from typing import Any, Dict, List
+from argparse import ArgumentParser
 import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
@@ -5,17 +7,17 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program):
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
 		program.add_argument('--gitlab-host', default = 'https://gitlab.com')
 		program.add_argument('--gitlab-slug', action = 'append', required = True)
 		program.add_argument('--gitlab-token', required = True)
-	ARGS = program.parse_known_args()[0]
+	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run():
+def run() -> List[Dict[str, Any]]:
 	result = []
 
 	for slug in ARGS.gitlab_slug:
@@ -23,7 +25,7 @@ def run():
 	return result
 
 
-def fetch(host, slug, token):
+def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
@@ -37,12 +39,13 @@ def fetch(host, slug, token):
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		if data and data[0] and 'id' in data[0]:
-			return fetch_jobs(host, slug, str(data[0]['id']), token)
+		if helper.get_first(data):
+			pipeline = str(helper.get_first(data)['id'])
+			return fetch_jobs(host, slug, pipeline, token)
 	return []
 
 
-def fetch_jobs(host, slug, pipeline, token):
+def fetch_jobs(host : str, slug : str, pipeline : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and pipeline and token:
@@ -59,6 +62,6 @@ def fetch_jobs(host, slug, pipeline, token):
 
 		for project in data:
 			project['slug'] = slug
-			result.extend(normalize_data(project))
+			result.append(normalize_data(project))
 		return result
 	return []
