@@ -76,7 +76,7 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 	result =\
 	{
 		'token': None,
-		'organizations': None
+		'organizations': []
 	}
 	response = None
 
