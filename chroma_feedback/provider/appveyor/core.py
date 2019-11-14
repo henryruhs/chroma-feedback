@@ -29,6 +29,7 @@ def run() -> List[Dict[str, Any]]:
 
 
 def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and slug:
@@ -45,16 +46,10 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		data = helper.parse_json(response)
 
 		if 'project' and 'build' in data:
-			return\
-			[
-				normalize_data(data['project'], data['build'])
-			]
+			result.append(normalize_data(data['project'], data['build']))
 		if 'builds' in helper.get_first(data):
-			result = []
-
 			for project in data:
 				build = helper.get_first(project['builds'])
 				if build:
 					result.append(normalize_data(project, build))
-			return result
-	return []
+	return result

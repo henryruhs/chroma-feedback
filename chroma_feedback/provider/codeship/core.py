@@ -24,11 +24,12 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 
 	for organization in auth['organizations']:
-		result.extend(fetch(ARGS.codeship_host, organization['uuid'], ARGS.codeship_slug, auth['access_token']))
+		result.extend(fetch(ARGS.codeship_host, organization['uuid'], ARGS.codeship_slug, auth['token']))
 	return result
 
 
 def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and organization and token:
@@ -41,17 +42,16 @@ def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[
 
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
-		result = []
 
 		for project in data['projects']:
 			project_id = str(project['id'])
 			if not slug or project_id in slug:
 				result.extend(fetch_builds(host, organization, project['uuid'], token))
-		return result
-	return []
+	return result
 
 
 def fetch_builds(host : str, organization : str, project : str, token : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and organization and project and token:
@@ -68,14 +68,12 @@ def fetch_builds(host : str, organization : str, project : str, token : str) -> 
 		if 'builds' in data:
 			build = helper.get_first(data['builds'])
 			if build:
-				return\
-				[
-					normalize_data(build)
-				]
-	return []
+				result.append(normalize_data(build))
+	return result
 
 
-def fetch_auth(host : str, username : str, password : str) -> Any:
+def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
+	result = {}
 	response = None
 
 	if host and username and password:
@@ -91,5 +89,9 @@ def fetch_auth(host : str, username : str, password : str) -> Any:
 		data = helper.parse_json(response)
 
 		if 'access_token' and 'organizations' in data:
-			return data
-	return {}
+			result =\
+			{
+				'token': data['access_token'],
+				'organizations': data['organizations']
+			}
+	return result

@@ -30,6 +30,7 @@ def run() -> List[Dict[str, Any]]:
 
 
 def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and slug:
@@ -46,8 +47,5 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		data = helper.parse_json(response)
 
 		for project in data:
-			return\
-			[
-				normalize_data(project)
-			]
-	return []
+			result.append(normalize_data(project))
+	return result
