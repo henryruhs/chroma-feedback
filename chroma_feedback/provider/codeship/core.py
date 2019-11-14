@@ -73,7 +73,11 @@ def fetch_builds(host : str, organization : str, project : str, token : str) -> 
 
 
 def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
-	result = {}
+	result =\
+	{
+		'token': None,
+		'organizations': None
+	}
 	response = None
 
 	if host and username and password:
@@ -89,9 +93,6 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 		data = helper.parse_json(response)
 
 		if 'access_token' and 'organizations' in data:
-			result =\
-			{
-				'token': data['access_token'],
-				'organizations': data['organizations']
-			}
+			result['token'] = data['access_token']
+			result['organizations'] = data['organizations']
 	return result
