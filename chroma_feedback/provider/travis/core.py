@@ -25,8 +25,9 @@ def run() -> List[Dict[str, Any]]:
 
 
 def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
-
+	
 	if host and slug:
 		response = requests.get(host + '/repos/' + slug, headers =
 		{
@@ -39,16 +40,8 @@ def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
 		data = helper.parse_json(response)
 
 		if 'repo' in data:
-			return\
-			[
-				normalize_data(data['repo'])
-			]
+			result.append(normalize_data(data['repo']))
 		if 'repos' in data:
-			result = []
 			for project in data['repos']:
-				result.extend(
-				[
-					normalize_data(project)
-				])
-			return result
-	return []
+				result.append(normalize_data(project))
+	return result

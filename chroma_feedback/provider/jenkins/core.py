@@ -25,6 +25,7 @@ def run() -> List[Dict[str, Any]]:
 
 
 def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and slug:
@@ -36,8 +37,5 @@ def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
 		data = helper.parse_json(response)
 
 		if data:
-			return\
-			[
-				normalize_data(data)
-			]
-	return []
+			result.append(normalize_data(data))
+	return result

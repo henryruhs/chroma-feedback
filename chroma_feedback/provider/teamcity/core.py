@@ -31,6 +31,7 @@ def run() -> List[Dict[str, Any]]:
 
 
 def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and username and password:
@@ -51,11 +52,8 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 		data = helper.parse_json(response)
 
 		if 'buildType' in data:
-			result = []
-
 			for project in data['buildType']:
 				if 'build' in project['builds']:
 					build = helper.get_first(project['builds']['build'])
 					result.append(normalize_data(build))
-			return result
-	return []
+	return result
