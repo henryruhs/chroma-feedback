@@ -20,8 +20,8 @@ def init(program : ArgumentParser) -> None:
 
 
 def run() -> List[Dict[str, Any]]:
-	auth = fetch_auth(ARGS.codeship_host, ARGS.codeship_username, ARGS.codeship_password)
 	result = []
+	auth = fetch_auth(ARGS.codeship_host, ARGS.codeship_username, ARGS.codeship_password)
 
 	for organization in auth['organizations']:
 		result.extend(fetch(ARGS.codeship_host, organization['uuid'], ARGS.codeship_slug, auth['token']))

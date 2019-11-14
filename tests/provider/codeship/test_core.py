@@ -7,8 +7,9 @@ def test_fetch_slug():
 	if 'CODESHIP_USERNAME' in os.environ and 'CODESHIP_PASSWORD' in os.environ:
 		result = []
 		auth = fetch_auth('https://api.codeship.com', os.environ['CODESHIP_USERNAME'], os.environ['CODESHIP_PASSWORD'])
+
 		for organization in auth['organizations']:
-			result.extend(fetch('https://api.codeship.com', organization['uuid'], '372431', auth['access_token']))
+			result.extend(fetch('https://api.codeship.com', organization['uuid'], '372431', auth['token']))
 
 		assert result[0]['provider'] == 'codeship'
 		assert result[0]['slug'] == '372431'
@@ -22,8 +23,9 @@ def test_fetch_user():
 	if 'CODESHIP_USERNAME' in os.environ and 'CODESHIP_PASSWORD' in os.environ:
 		result = []
 		auth = fetch_auth('https://api.codeship.com', os.environ['CODESHIP_USERNAME'], os.environ['CODESHIP_PASSWORD'])
+
 		for organization in auth['organizations']:
-			result.extend(fetch('https://api.codeship.com', organization['uuid'], None, auth['access_token']))
+			result.extend(fetch('https://api.codeship.com', organization['uuid'], None, auth['token']))
 
 		assert result[0]['provider'] == 'codeship'
 		assert result[0]['active'] is True
