@@ -1,16 +1,17 @@
-def normalize_data(project):
+from typing import Any, Dict
+
+
+def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
 	return\
-	[
-		{
-			'provider': 'github',
-			'slug': project['repository']['full_name'],
-			'active': True,
-			'status': normalize_status(project['state'])
-		}
-	]
+	{
+		'provider': 'github',
+		'slug': project['repository']['full_name'],
+		'active': True,
+		'status': normalize_status(project['state'])
+	}
 
 
-def normalize_status(status):
+def normalize_status(status : str) -> str:
 	if status == 'pending':
 		return 'process'
 	if status == 'error':
