@@ -27,7 +27,7 @@ def run() -> List[Dict[str, Any]]:
 def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
-	
+
 	if host and slug:
 		response = requests.get(host + '/repos/' + slug, headers =
 		{

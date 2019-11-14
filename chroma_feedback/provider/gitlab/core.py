@@ -26,6 +26,7 @@ def run() -> List[Dict[str, Any]]:
 
 
 def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and slug and token:
@@ -41,11 +42,12 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 
 		if helper.get_first(data):
 			pipeline = str(helper.get_first(data)['id'])
-			return fetch_jobs(host, slug, pipeline, token)
-	return []
+			result.extend(fetch_jobs(host, slug, pipeline, token))
+	return result
 
 
 def fetch_jobs(host : str, slug : str, pipeline : str, token : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and slug and pipeline and token:
@@ -58,10 +60,8 @@ def fetch_jobs(host : str, slug : str, pipeline : str, token : str) -> List[Dict
 
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
-		result = []
 
 		for project in data:
 			project['slug'] = slug
 			result.append(normalize_data(project))
-		return result
-	return []
+	return result
