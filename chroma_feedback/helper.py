@@ -25,7 +25,7 @@ def parse_json(response : Response) -> Any:
 	try:
 		return response.json()
 	except ValueError:
-		return []
+		return None
 
 
 def has_argument(argument : str) -> bool:

@@ -1,3 +1,5 @@
+from typing import Any, Dict, List
+from argparse import ArgumentParser
 import base64
 import requests
 from chroma_feedback import helper
@@ -6,7 +8,7 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program):
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -14,10 +16,10 @@ def init(program):
 		program.add_argument('--teamcity-slug', action = 'append')
 		program.add_argument('--teamcity-username', required = True)
 		program.add_argument('--teamcity-password', required = True)
-	ARGS = program.parse_known_args()[0]
+	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run():
+def run() -> List[Dict[str, Any]]:
 	result = []
 
 	if ARGS.teamcity_slug:
@@ -28,7 +30,7 @@ def run():
 	return result
 
 
-def fetch(host, slug, username, password):
+def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and username and password:
@@ -52,7 +54,8 @@ def fetch(host, slug, username, password):
 			result = []
 
 			for project in data['buildType']:
-				if project['builds']['build']:
-					result.extend(normalize_data(project['builds']['build'][0]))
+				if 'build' in project['builds']:
+					build = helper.get_first(project['builds']['build'])
+					result.append(normalize_data(build))
 			return result
 	return []
