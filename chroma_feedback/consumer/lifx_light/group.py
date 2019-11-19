@@ -1,8 +1,9 @@
+from typing import Any, Dict, List
 from chroma_feedback import color
 from .api import get_api
 
 
-def get_groups(group_names):
+def get_groups(group_names : List[str]) -> List[Dict[str, Any]]:
 	api = get_api()
 	groups = []
 
@@ -12,12 +13,12 @@ def get_groups(group_names):
 	return groups
 
 
-def get_group_name(group):
+def get_group_name(group : Any) -> Any:
 	for device in group.get_device_list():
 		return device.get_group_label()
 
 
-def process_groups(status, groups):
+def process_groups(status : str, groups : Any) -> List[Dict[str, Any]]:
 	result = []
 
 	# process groups
@@ -64,7 +65,7 @@ def process_groups(status, groups):
 	return result
 
 
-def static_group(group, state):
+def static_group(group : Any, state : Any) -> bool:
 	return group.set_power('on') is None and group.set_color(
 	[
 		state['hue'],
