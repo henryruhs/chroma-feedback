@@ -1,8 +1,10 @@
+from typing import Any, Dict, List
+from argparse import ArgumentParser
 import importlib
 from chroma_feedback import wording
 
 
-def process(status, program):
+def process(program : ArgumentParser, status : str) -> List[Dict[str, Any]]:
 	args = program.parse_known_args()[0]
 	result = []
 

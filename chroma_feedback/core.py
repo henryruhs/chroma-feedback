@@ -39,7 +39,7 @@ def run(program):
 		# process consumer
 
 		status = helper.get_provider_status(provider_result)
-		consumer_result = consumer.process(status, program)
+		consumer_result = consumer.process(program, status)
 
 		# report consumer
 
