@@ -10,10 +10,10 @@ MOCK = MagicMock()
 
 def test_process_passed():
 	try:
-		result = process_devices('passed',
+		result = process_devices(
 		{
 			MOCK
-		})
+		}, 'passed')
 
 		assert result[0]['consumer'] == 'thingm_blink'
 		assert result[0]['type'] == 'device'
@@ -25,10 +25,10 @@ def test_process_passed():
 
 def test_process_process():
 	try:
-		result = process_devices('process',
+		result = process_devices(
 		{
 			MOCK
-		})
+		}, 'process')
 
 		assert result[0]['consumer'] == 'thingm_blink'
 		assert result[0]['type'] == 'device'
@@ -40,10 +40,10 @@ def test_process_process():
 
 def test_process_errored():
 	try:
-		result = process_devices('errored',
+		result = process_devices(
 		{
 			MOCK
-		})
+		}, 'errored')
 
 		assert result[0]['consumer'] == 'thingm_blink'
 		assert result[0]['type'] == 'device'
@@ -55,10 +55,10 @@ def test_process_errored():
 
 def test_process_failed():
 	try:
-		result = process_devices('failed',
+		result = process_devices(
 		{
 			MOCK
-		})
+		}, 'failed')
 
 		assert result[0]['consumer'] == 'thingm_blink'
 		assert result[0]['type'] == 'device'

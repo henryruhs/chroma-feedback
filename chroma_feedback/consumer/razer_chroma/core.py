@@ -19,4 +19,4 @@ def run(status):
 
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-	return process_devices(status, devices)
+	return process_devices(devices, status)

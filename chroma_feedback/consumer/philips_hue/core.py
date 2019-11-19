@@ -34,7 +34,7 @@ def run(status):
 
 		if not groups:
 			exit(wording.get('group_no') + wording.get('exclamation_mark'))
-		return process_groups(status, groups)
+		return process_groups(groups, status)
 
 	# use lights
 
@@ -42,7 +42,7 @@ def run(status):
 
 	if not lights:
 		exit(wording.get('light_no') + wording.get('exclamation_mark'))
-	return process_lights(status, lights)
+	return process_lights(lights, status)
 
 
 def discover_ip():

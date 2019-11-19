@@ -18,7 +18,7 @@ def get_group_name(group : Any) -> Any:
 		return device.get_group_label()
 
 
-def process_groups(status : str, groups : Any) -> List[Dict[str, Any]]:
+def process_groups(groups : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
 	# process groups

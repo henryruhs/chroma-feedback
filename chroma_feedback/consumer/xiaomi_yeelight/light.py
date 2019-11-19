@@ -10,7 +10,7 @@ def get_lights(ips):
 	return lights
 
 
-def process_lights(status, lights):
+def process_lights(lights, status):
 	result = []
 
 	# process lights

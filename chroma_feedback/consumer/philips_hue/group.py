@@ -14,7 +14,7 @@ def get_groups(groups, group_names):
 	return groups
 
 
-def process_groups(status, groups):
+def process_groups(groups, status):
 	result = []
 
 	# process groups

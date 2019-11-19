@@ -13,7 +13,7 @@ def get_lights(lights : Any, light_names : List[str]) -> Any:
 	return lights
 
 
-def process_lights(status : str, lights : Any) -> List[Dict[str, Any]]:
+def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
 	# process lights

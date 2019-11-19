@@ -11,7 +11,7 @@ def get_devices(devices, device_names):
 	return devices
 
 
-def process_devices(status, devices):
+def process_devices(devices, status):
 	result = []
 
 	# process devices

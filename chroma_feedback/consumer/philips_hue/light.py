@@ -12,7 +12,7 @@ def get_lights(lights, light_names):
 	return lights
 
 
-def process_lights(status, lights):
+def process_lights(lights, status):
 	result = []
 
 	# process lights

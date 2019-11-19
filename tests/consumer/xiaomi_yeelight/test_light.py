@@ -10,10 +10,10 @@ MOCK = MagicMock()
 
 def test_process_passed():
 	try:
-		result = process_lights('passed',
+		result = process_lights(
 		{
 			MOCK
-		})
+		}, 'passed')
 
 		assert result[0]['consumer'] == 'xiaomi_yeelight'
 		assert result[0]['type'] == 'light'
@@ -25,10 +25,10 @@ def test_process_passed():
 
 def test_process_process():
 	try:
-		result = process_lights('process',
+		result = process_lights(
 		{
 			MOCK
-		})
+		}, 'process')
 
 		assert result[0]['consumer'] == 'xiaomi_yeelight'
 		assert result[0]['type'] == 'light'
@@ -40,10 +40,10 @@ def test_process_process():
 
 def test_process_errored():
 	try:
-		result = process_lights('errored',
+		result = process_lights(
 		{
 			MOCK
-		})
+		}, 'errored')
 
 		assert result[0]['consumer'] == 'xiaomi_yeelight'
 		assert result[0]['type'] == 'light'
@@ -55,10 +55,10 @@ def test_process_errored():
 
 def test_process_failed():
 	try:
-		result = process_lights('failed',
+		result = process_lights(
 		{
 			MOCK
-		})
+		}, 'failed')
 
 		assert result[0]['consumer'] == 'xiaomi_yeelight'
 		assert result[0]['type'] == 'light'
