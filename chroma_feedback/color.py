@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 COLOR =\
 {
 	'red': '\033[0;31m',
@@ -7,19 +9,19 @@ COLOR =\
 }
 
 
-def format_red(text):
+def format_red(text : str) -> str:
 	return COLOR['red'] + text + COLOR['end']
 
 
-def format_green(text):
+def format_green(text : str) -> str:
 	return COLOR['green'] + text + COLOR['end']
 
 
-def format_yellow(text):
+def format_yellow(text : str) -> str:
 	return COLOR['yellow'] + text + COLOR['end']
 
 
-def get_passed():
+def get_passed() -> Dict[str, Any]:
 	return\
 	{
 		'rgb':
@@ -45,7 +47,7 @@ def get_passed():
 	}
 
 
-def get_process():
+def get_process() -> Dict[str, Any]:
 	return\
 	{
 		'rgb':
@@ -71,7 +73,7 @@ def get_process():
 	}
 
 
-def get_errored():
+def get_errored() -> Dict[str, Any]:
 	return\
 	{
 		'rgb':
@@ -97,7 +99,7 @@ def get_errored():
 	}
 
 
-def get_failed():
+def get_failed() -> Dict[str, Any]:
 	return\
 	{
 		'rgb':

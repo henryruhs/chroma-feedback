@@ -1,11 +1,14 @@
 from __future__ import print_function
+from typing import Any
+from argparse import ArgumentParser
 import os
+import signal
 import sys
 import threading
 from chroma_feedback import consumer, helper, provider, reporter, wording
 
 
-def run(program):
+def run(program : ArgumentParser) -> None:
 	if sys.version_info < (3, 4):
 		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
@@ -57,6 +60,6 @@ def run(program):
 		]).start()
 
 
-def destroy(number, frame):
+def destroy(signal_number : int, frame : Any) -> None:
 	print('\r' + wording.get('goodbye') + wording.get('exclamation_mark'))
-	os._exit(0)
+	os.kill(os.getpid(), signal.SIGKILL)

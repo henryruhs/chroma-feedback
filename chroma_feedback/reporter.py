@@ -1,8 +1,9 @@
 from __future__ import print_function
+from typing import Any, Dict, List
 from chroma_feedback import color, metadata, wording
 
 
-def create_provider_report(provider_result):
+def create_provider_report(provider_result : List) -> List[Dict[str, Any]]:
 	report = []
 
 	# process result
@@ -20,7 +21,7 @@ def create_provider_report(provider_result):
 	return report
 
 
-def create_consumer_report(consumer_result):
+def create_consumer_report(consumer_result : List) -> List[Dict[str, Any]]:
 	report = []
 
 	# process result
@@ -38,10 +39,10 @@ def create_consumer_report(consumer_result):
 	return report
 
 
-def print_header():
+def print_header() -> None:
 	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
 
 
-def print_report(report):
+def print_report(report) -> None:
 	for message in report:
 		print(message)
