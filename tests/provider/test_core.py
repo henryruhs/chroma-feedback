@@ -1,9 +1,10 @@
+from typing import Any
 from argparse import ArgumentParser
 import sys
 from chroma_feedback import provider
 
 
-def test_process(mocker) -> None:
+def test_process(mocker : Any) -> None:
 	program = ArgumentParser()
 	program.add_argument('-P', '--provider', action = 'append', required = True)
 	sys.argv.append('--provider')
@@ -12,4 +13,5 @@ def test_process(mocker) -> None:
 	sys.argv.append('redaxmedia')
 	process = mocker.spy(provider.travis, 'run')
 	provider.process(program)
+
 	assert process.call_count == 1

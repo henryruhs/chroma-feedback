@@ -8,7 +8,7 @@ from chroma_feedback.consumer.philips_hue.light import process_lights
 MOCK = MagicMock()
 
 
-def test_process_passed():
+def test_process_passed() -> None:
 	try:
 		result = process_lights(
 		{
@@ -23,7 +23,7 @@ def test_process_passed():
 		pytest.skip()
 
 
-def test_process_process():
+def test_process_process() -> None:
 	try:
 		result = process_lights(
 		{
@@ -38,7 +38,7 @@ def test_process_process():
 		pytest.skip()
 
 
-def test_process_errored():
+def test_process_errored() -> None:
 	try:
 		result = process_lights(
 		{
@@ -53,7 +53,7 @@ def test_process_errored():
 		pytest.skip()
 
 
-def test_process_failed():
+def test_process_failed() -> None:
 	try:
 		result = process_lights(
 		{

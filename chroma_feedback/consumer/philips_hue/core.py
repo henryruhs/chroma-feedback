@@ -1,3 +1,4 @@
+from typing import Any
 import requests
 from chroma_feedback import helper, wording
 from .group import get_groups, process_groups
@@ -24,7 +25,7 @@ def init(program):
 	ARGS = program.parse_known_args()[0]
 
 
-def run(status):
+def run(status : str):
 	api = get_api(ARGS.philips_hue_ip)
 
 	# use groups
@@ -45,7 +46,7 @@ def run(status):
 	return process_lights(lights, status)
 
 
-def discover_ip():
+def discover_ip() -> Any:
 	response = requests.get('https://discovery.meethue.com')
 
 	# process response
@@ -53,6 +54,6 @@ def discover_ip():
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		if data and data[0] and data[0]['internalipaddress']:
-			return data[0]['internalipaddress']
+		if 'internalipaddress' in helper.get_first(data):
+			return helper.get_first(data)['internalipaddress']
 	return None

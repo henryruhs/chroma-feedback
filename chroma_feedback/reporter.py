@@ -3,7 +3,7 @@ from typing import Any, Dict, List
 from chroma_feedback import color, metadata, wording
 
 
-def create_provider_report(provider_result : List) -> List[Dict[str, Any]]:
+def create_provider_report(provider_result : List[Dict[str, Any]]) -> List[str]:
 	report = []
 
 	# process result
@@ -21,7 +21,7 @@ def create_provider_report(provider_result : List) -> List[Dict[str, Any]]:
 	return report
 
 
-def create_consumer_report(consumer_result : List) -> List[Dict[str, Any]]:
+def create_consumer_report(consumer_result : List[Dict[str, Any]]) -> List[str]:
 	report = []
 
 	# process result
@@ -43,6 +43,6 @@ def print_header() -> None:
 	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
 
 
-def print_report(report) -> None:
+def print_report(report : List[str]) -> None:
 	for message in report:
 		print(message)

@@ -1,3 +1,4 @@
+from typing import List
 import socket
 from chroma_feedback import helper, wording
 from .light import get_lights, process_lights
@@ -28,7 +29,7 @@ def run(status):
 	return process_lights(lights, status)
 
 
-def discover_ips():
+def discover_ips() -> List[str]:
 	message =\
 	[
 		'M-SEARCH * HTTP/1.1',
