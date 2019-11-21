@@ -3,7 +3,7 @@ import pytest
 from chroma_feedback.provider.codeship.core import fetch, fetch_auth
 
 
-def test_fetch_slug():
+def test_fetch_slug() -> None:
 	if 'CODESHIP_USERNAME' in os.environ and 'CODESHIP_PASSWORD' in os.environ:
 		result = []
 		auth = fetch_auth('https://api.codeship.com', os.environ['CODESHIP_USERNAME'], os.environ['CODESHIP_PASSWORD'])
@@ -19,7 +19,7 @@ def test_fetch_slug():
 		pytest.skip('CODESHIP_USERNAME or CODESHIP_PASSWORD')
 
 
-def test_fetch_user():
+def test_fetch_user() -> None:
 	if 'CODESHIP_USERNAME' in os.environ and 'CODESHIP_PASSWORD' in os.environ:
 		result = []
 		auth = fetch_auth('https://api.codeship.com', os.environ['CODESHIP_USERNAME'], os.environ['CODESHIP_PASSWORD'])
@@ -34,7 +34,7 @@ def test_fetch_user():
 		pytest.skip('CODESHIP_USERNAME or CODESHIP_PASSWORD is not defined')
 
 
-def test_fetch_invalid():
+def test_fetch_invalid() -> None:
 	result = fetch(None, None, None, None)
 
 	assert result == []

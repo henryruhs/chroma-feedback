@@ -3,7 +3,7 @@ import sys
 from chroma_feedback import provider
 
 
-def test_process(mocker):
+def test_process(mocker) -> None:
 	program = ArgumentParser()
 	program.add_argument('-P', '--provider', action = 'append', required = True)
 	sys.argv.append('--provider')
