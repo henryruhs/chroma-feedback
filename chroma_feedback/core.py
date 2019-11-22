@@ -36,7 +36,7 @@ def run(program : ArgumentParser) -> None:
 
 	# handle dry run
 
-	args = program.parse_known_args()[0]
+	args = helper.get_first(program.parse_known_args())
 	if args.dry_run is False:
 
 		# process consumer

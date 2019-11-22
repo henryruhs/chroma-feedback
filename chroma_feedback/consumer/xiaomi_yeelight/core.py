@@ -1,4 +1,5 @@
 from typing import List
+from argparse import ArgumentParser
 import socket
 from chroma_feedback import helper, wording
 from .light import get_lights, process_lights
@@ -6,7 +7,7 @@ from .light import get_lights, process_lights
 ARGS = None
 
 
-def init(program):
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -18,7 +19,7 @@ def init(program):
 			program.add_argument('--xiaomi-yeelight-ip', default = ip)
 		else:
 			program.add_argument('--xiaomi-yeelight-ip', action = 'append', required = True)
-	ARGS = program.parse_known_args()[0]
+	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(status):

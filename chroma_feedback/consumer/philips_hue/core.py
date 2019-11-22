@@ -1,4 +1,5 @@
 from typing import Any
+from argparse import ArgumentParser
 import requests
 from chroma_feedback import helper, wording
 from .group import get_groups, process_groups
@@ -8,7 +9,7 @@ from .api import get_api
 ARGS = None
 
 
-def init(program):
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -22,7 +23,7 @@ def init(program):
 			program.add_argument('--philips-hue-ip', required = True)
 		program.add_argument('--philips-hue-light', action = 'append')
 		program.add_argument('--philips-hue-group', action = 'append')
-	ARGS = program.parse_known_args()[0]
+	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(status : str):
