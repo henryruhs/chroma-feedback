@@ -7,7 +7,7 @@ from chroma_feedback import color
 def get_devices(devices : Any, device_names : List[str]) -> Any:
 	if device_names:
 		for device in copy.copy(devices):
-			if device not in device_names:
+			if device.get_serial() not in device_names:
 				devices.remove(device)
 	return devices
 
