@@ -1,5 +1,4 @@
 from typing import Any
-from usb import USBError
 from chroma_feedback import wording
 
 API = None
@@ -22,7 +21,7 @@ def api_factory() -> Any:
 		try:
 			api = blinkstick
 			api.find_all()
-		except (USBError, blinkstick.BlinkStickException):
+		except (IOError, blinkstick.BlinkStickException):
 			exit(wording.get('connection_no').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
