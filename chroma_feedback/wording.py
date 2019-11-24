@@ -11,7 +11,7 @@ WORDING =\
 	'provider_no': 'Provider not found',
 	'consumer_no': 'Consumer not found',
 	'result_no': 'Result not found',
-	'permission_no': 'Permission for {} denied',
+	'access_no': 'Access for {} denied',
 	'build_passed': 'Build of {} on {} passed',
 	'build_process': 'Build of {} on {} in process',
 	'build_errored': 'Build of {} on {} errored',
