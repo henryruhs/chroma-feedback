@@ -4,6 +4,7 @@ WORDING =\
 	'package_no': 'Package {} not found',
 	'connection_no': 'Connection to {} not found',
 	'daemon_no': 'Daemon for {} not found',
+	'ip_no': 'IP for {} not found',
 	'device_no': 'Device not found',
 	'light_no': 'Light not found',
 	'group_no': 'Group not found',

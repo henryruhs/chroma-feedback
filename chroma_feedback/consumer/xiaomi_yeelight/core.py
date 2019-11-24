@@ -44,9 +44,8 @@ def discover_ips() -> List[str]:
 	discovery.sendto('\r\n'.join(message).encode(), ('239.255.255.250', 1982))
 	ips = []
 
-	while True:
-		try:
-			ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
-		except socket.timeout:
-			break
+	try:
+		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
+	except socket.timeout:
+		print(wording.get('ip_no').format('XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
 	return ips

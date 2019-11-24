@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
+import socket
 from chroma_feedback import helper, wording
 from .group import get_groups, process_groups
 from .light import get_lights, process_lights
@@ -48,15 +48,21 @@ def run(status : str) -> List[Dict[str, Any]]:
 
 
 def discover_ips() -> List[str]:
-	response = requests.get('https://discovery.meethue.com')
+	message =\
+	[
+		'M-SEARCH * HTTP/1.1',
+		'HOST: 239.255.255.250:1900',
+		'MAN: "ssdp:discover"',
+		'SR: ssdp:all'
+	]
+	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+	discovery.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32)
+	discovery.settimeout(1)
+	discovery.sendto('\r\n'.join(message).encode(), ('239.255.255.250', 1900))
 	ips = []
 
-	# process response
-
-	if response and response.status_code == 200:
-		data = helper.parse_json(response)
-
-		for value in data:
-			if 'internalipaddress' in value:
-				ips.append(value['internalipaddress'])
+	try:
+		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
+	except socket.timeout:
+		print(wording.get('ip_no').format('PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
 	return ips
