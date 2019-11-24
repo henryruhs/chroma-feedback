@@ -17,11 +17,12 @@ def api_factory() -> Any:
 
 	try:
 		from blinkstick import blinkstick
+		from blinkstick.blinkstick import BlinkStickException
 
 		try:
 			api = blinkstick
 			api.find_all()
-		except (IOError, blinkstick.BlinkStickException):
+		except (IOError, BlinkStickException):
 			exit(wording.get('connection_no').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
