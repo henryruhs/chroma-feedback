@@ -2,7 +2,6 @@ from __future__ import print_function
 from typing import Any
 from argparse import ArgumentParser
 import os
-import signal
 import sys
 import threading
 from chroma_feedback import consumer, helper, provider, reporter, wording
@@ -62,4 +61,4 @@ def run(program : ArgumentParser) -> None:
 
 def destroy(signal_number : int, frame : Any) -> None:
 	print('\r' + wording.get('goodbye') + wording.get('exclamation_mark'))
-	os.kill(os.getpid(), signal.SIGKILL)
+	os._exit(0)

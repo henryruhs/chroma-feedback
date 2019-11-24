@@ -9,6 +9,7 @@ disable =
 	global-statement,
 	import-outside-toplevel,
 	missing-docstring,
+	protected-access,
 	unused-argument
 
 good-names =
