@@ -1,7 +1,8 @@
 from typing import Any, Dict, List
 import copy
+from usb import USBError
+
 from chroma_feedback import color
-from .api import api_factory
 
 
 def get_devices(devices : Any, device_names : List[str]) -> Any:
@@ -21,43 +22,51 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 		if status == 'passed':
 			result.append(
 			{
-				'consumer': 'thingm_blink',
+				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'name': device,
+				'name': device.get_serial(),
 				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
 		if status == 'process':
 			result.append(
 			{
-				'consumer': 'thingm_blink',
+				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'name': device,
+				'name': device.get_serial(),
 				'active': static_device(device, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
 			result.append(
 			{
-				'consumer': 'thingm_blink',
+				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'name': device,
-				'active': static_device(device, color.get_errored()),
+				'name': device.get_serial(),
+				'active': pulsate_device(device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
 			result.append(
 			{
-				'consumer': 'thingm_blink',
+				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'name': device,
-				'active': static_device(device, color.get_failed()),
+				'name': device.get_serial(),
+				'active': pulsate_device(device, color.get_failed()),
 				'status': status
 			})
 	return result
 
 
 def static_device(device : Any, state : Dict[str, Any]) -> bool:
-	api = api_factory(device)
+	try:
+		return device.set_color(red = state['rgb'][0], green = state['rgb'][1], blue = state['rgb'][2]) is None
+	except USBError:
+		return False
 
-	return api is not None and api.color_to_rgb((state['rgb'][0], state['rgb'][1], state['rgb'][2])) is None
+
+def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
+	try:
+		return device.pulse(red = state['rgb'][0], green = state['rgb'][1], blue = state['rgb'][2]) is None and device.morph(red = state['rgb'][0], green = state['rgb'][1], blue = state['rgb'][2]) is None
+	except USBError:
+		return False

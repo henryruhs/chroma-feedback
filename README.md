@@ -32,7 +32,7 @@ apt-get update
 apt install openrazer-meta
 ```
 
-Install `libusb-1.0-0-dev` and `libudev-dev` for ThingM Blink:
+Install `libusb-1.0-0-dev` and `libudev-dev` for Agile Innovative Blinkstick and ThingM Blink:
 
 ```
 apt-get install libusb-1.0-0-dev libudev-dev
@@ -295,6 +295,22 @@ chroma-feedback --provider=travis
 
 Consumers
 =========
+
+
+Agile Innovative Blinkstick
+---------------------------
+
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
+
+Indicate status via devices:
+
+```
+chroma-feedback --consumer=agile_innovative_blinkstick
+
+--agile-innovative-blinkstick-device <device-serial>
+```
 
 
 Lifx Light

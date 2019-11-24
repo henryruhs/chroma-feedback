@@ -32,6 +32,7 @@ setup(
 		'chroma_feedback.provider.teamcity',
 		'chroma_feedback.provider.travis',
 		'chroma_feedback.consumer',
+		'chroma_feedback.consumer.agile_innovative_blinkstick',
 		'chroma_feedback.consumer.lifx_light',
 		'chroma_feedback.consumer.philips_hue',
 		'chroma_feedback.consumer.razer_chroma',
@@ -45,6 +46,7 @@ setup(
 	install_requires =
 	[
 		'blink1',
+		'blinkstick',
 		'lifxlan',
 		'phue',
 		'requests',
