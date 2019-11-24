@@ -1,7 +1,9 @@
+from typing import Any, Dict, List
 import sys
+from requests import Response
 
 
-def get_provider_status(provider_result):
+def get_provider_status(provider_result : List[Dict[str, Any]]) -> str:
 	status = 'passed'
 
 	# process provider
@@ -19,12 +21,16 @@ def get_provider_status(provider_result):
 	return status
 
 
-def parse_json(response):
+def parse_json(response : Response) -> Any:
 	try:
 		return response.json()
 	except ValueError:
-		return []
+		return None
 
 
-def has_argument(argument):
+def has_argument(argument : str) -> bool:
 	return any(argument in argv for argv in sys.argv)
+
+
+def get_first(__list__ : Any) -> Any:
+	return next(iter(__list__), None)

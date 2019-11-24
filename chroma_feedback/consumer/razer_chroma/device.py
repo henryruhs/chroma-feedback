@@ -1,8 +1,9 @@
+from typing import Any, Dict, List
 import copy
 from chroma_feedback import color
 
 
-def get_devices(devices, device_names):
+def get_devices(devices : Any, device_names : List[str]) -> Any:
 	if device_names:
 		for device in copy.copy(devices):
 			if device.name not in device_names:
@@ -10,7 +11,7 @@ def get_devices(devices, device_names):
 	return devices
 
 
-def process_devices(status, devices):
+def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
 	# process devices
@@ -55,7 +56,7 @@ def process_devices(status, devices):
 	return result
 
 
-def static_device(device, state):
+def static_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):
@@ -63,7 +64,7 @@ def static_device(device, state):
 	return device.fx.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 
 
-def pulsate_device(device, state):
+def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):

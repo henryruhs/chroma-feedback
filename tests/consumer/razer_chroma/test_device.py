@@ -8,42 +8,42 @@ from chroma_feedback.consumer.razer_chroma.device import process_devices
 MOCK = MagicMock()
 
 
-def test_process_passed():
+def test_process_passed() -> None:
 	try:
-		result = process_devices('passed',
+		result = process_devices(
 		{
 			MOCK
-		})
+		}, 'passed')
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'passed'
-	except SystemExit:
+	except:
 		pytest.skip()
 
 
-def test_process_process():
+def test_process_process() -> None:
 	try:
-		result = process_devices('process',
+		result = process_devices(
 		{
 			MOCK
-		})
+		}, 'process')
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'process'
-	except SystemExit:
+	except:
 		pytest.skip()
 
 
-def test_process_errored():
+def test_process_errored() -> None:
 	try:
-		result = process_devices('errored',
+		result = process_devices(
 		{
 			MOCK
-		})
+		}, 'errored')
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'
@@ -53,16 +53,16 @@ def test_process_errored():
 		pytest.skip()
 
 
-def test_process_failed():
+def test_process_failed() -> None:
 	try:
-		result = process_devices('failed',
+		result = process_devices(
 		{
 			MOCK
-		})
+		}, 'failed')
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'failed'
-	except SystemExit:
+	except:
 		pytest.skip()

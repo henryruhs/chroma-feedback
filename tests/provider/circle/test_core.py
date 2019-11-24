@@ -3,7 +3,7 @@ import pytest
 from chroma_feedback.provider.circle.core import fetch
 
 
-def test_fetch_slug():
+def test_fetch_slug() -> None:
 	result = fetch('https://circleci.com', 'github/redaxmedia/chroma-feedback', None)
 
 	assert result[0]['provider'] == 'circle'
@@ -12,7 +12,7 @@ def test_fetch_slug():
 	assert result[0]['status']
 
 
-def test_fetch_user():
+def test_fetch_user() -> None:
 	if 'CIRCLE_TOKEN' in os.environ:
 		result = fetch('https://circleci.com', None, os.environ['CIRCLE_TOKEN'])
 
@@ -24,7 +24,7 @@ def test_fetch_user():
 		pytest.skip('CIRCLE_TOKEN is not defined')
 
 
-def test_fetch_invalid():
+def test_fetch_invalid() -> None:
 	result = fetch(None, None, None)
 
 	assert result == []

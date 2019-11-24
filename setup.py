@@ -11,7 +11,7 @@ except ImportError:
 
 setup(
 	name = metadata.get('name'),
-	description =  metadata.get('description'),
+	description = metadata.get('description'),
 	long_description = long_description,
 	version = metadata.get('version'),
 	license = metadata.get('license'),
@@ -57,6 +57,7 @@ setup(
 		'pytest',
 		'pytest-cov',
 		'pytest-mock',
-		'mock'
+		'mock',
+		'mypy'
 	]
 )

@@ -1,9 +1,9 @@
+from typing import Any, Dict, List
 import copy
-
 from chroma_feedback import color
 
 
-def get_lights(lights, light_names):
+def get_lights(lights : Any, light_names : List[str]) -> Any:
 	if light_names:
 		for light in copy.copy(lights):
 			light_name = light.get_label()
@@ -13,7 +13,7 @@ def get_lights(lights, light_names):
 	return lights
 
 
-def process_lights(status, lights):
+def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
 	# process lights
@@ -60,7 +60,7 @@ def process_lights(status, lights):
 	return result
 
 
-def static_light(light, state):
+def static_light(light : Any, state : Dict[str, Any]) -> bool:
 	return light.set_power('on') is None and light.set_color(
 	[
 		state['hue'],

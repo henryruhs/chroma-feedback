@@ -8,61 +8,61 @@ from chroma_feedback.consumer.philips_hue.light import process_lights
 MOCK = MagicMock()
 
 
-def test_process_passed():
+def test_process_passed() -> None:
 	try:
-		result = process_lights('passed',
+		result = process_lights(
 		{
 			MOCK
-		})
+		}, 'passed')
 
 		assert result[0]['consumer'] == 'philips_hue'
 		assert result[0]['type'] == 'light'
 		assert result[0]['name']
 		assert result[0]['status'] == 'passed'
-	except SystemExit:
+	except:
 		pytest.skip()
 
 
-def test_process_process():
+def test_process_process() -> None:
 	try:
-		result = process_lights('process',
+		result = process_lights(
 		{
 			MOCK
-		})
+		}, 'process')
 
 		assert result[0]['consumer'] == 'philips_hue'
 		assert result[0]['type'] == 'light'
 		assert result[0]['name']
 		assert result[0]['status'] == 'process'
-	except SystemExit:
+	except:
 		pytest.skip()
 
 
-def test_process_errored():
+def test_process_errored() -> None:
 	try:
-		result = process_lights('errored',
+		result = process_lights(
 		{
 			MOCK
-		})
+		}, 'errored')
 
 		assert result[0]['consumer'] == 'philips_hue'
 		assert result[0]['type'] == 'light'
 		assert result[0]['name']
 		assert result[0]['status'] == 'errored'
-	except SystemExit:
+	except:
 		pytest.skip()
 
 
-def test_process_failed():
+def test_process_failed() -> None:
 	try:
-		result = process_lights('failed',
+		result = process_lights(
 		{
 			MOCK
-		})
+		}, 'failed')
 
 		assert result[0]['consumer'] == 'philips_hue'
 		assert result[0]['type'] == 'light'
 		assert result[0]['name']
 		assert result[0]['status'] == 'failed'
-	except SystemExit:
+	except:
 		pytest.skip()

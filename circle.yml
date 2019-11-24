@@ -6,24 +6,17 @@ jobs:
   - image: circleci/python:3.7.4-buster
   steps:
   - checkout
-  - run: sudo pip install coveralls
-  - run: sudo pip install requests
   - run: sudo pip install pylint
   - run: sudo pip install pytest
-  - run: sudo pip install pytest-cov
-  - run: sudo pip install pytest-mock
-  - run: sudo pip install mock
+  - run: sudo pip install mypy
   - run: pylint bin/chroma-feedback chroma_feedback tests
+  - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
   docker:
-  - image: circleci/python:3.6.6-stretch-browsers
+  - image: circleci/python:3.7.4-buster
   steps:
   - checkout
-  - run: sudo pip install coveralls
-  - run: sudo pip install requests
-  - run: sudo pip install pylint
   - run: sudo pip install pytest
-  - run: sudo pip install pytest-cov
   - run: sudo pip install pytest-mock
   - run: sudo pip install mock
   - run: pytest tests

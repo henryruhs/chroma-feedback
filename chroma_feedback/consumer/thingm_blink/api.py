@@ -1,9 +1,10 @@
+from typing import Any
 from chroma_feedback import wording
 
 API = None
 
 
-def get_api():
+def get_api() -> Any:
 	global API
 
 	if not API:
@@ -11,7 +12,7 @@ def get_api():
 	return API
 
 
-def api_factory(device):
+def api_factory(device : str) -> Any:
 	api = None
 
 	try:

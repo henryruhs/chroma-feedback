@@ -1,11 +1,13 @@
 from __future__ import print_function
+from typing import Any
+from argparse import ArgumentParser
 import os
 import sys
 import threading
 from chroma_feedback import consumer, helper, provider, reporter, wording
 
 
-def run(program):
+def run(program : ArgumentParser) -> None:
 	if sys.version_info < (3, 4):
 		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
@@ -33,13 +35,13 @@ def run(program):
 
 	# handle dry run
 
-	args = program.parse_known_args()[0]
+	args = helper.get_first(program.parse_known_args())
 	if args.dry_run is False:
 
 		# process consumer
 
 		status = helper.get_provider_status(provider_result)
-		consumer_result = consumer.process(status, program)
+		consumer_result = consumer.process(program, status)
 
 		# report consumer
 
@@ -57,6 +59,6 @@ def run(program):
 		]).start()
 
 
-def destroy(number, frame):
+def destroy(signal_number : int, frame : Any) -> None:
 	print('\r' + wording.get('goodbye') + wording.get('exclamation_mark'))
 	os._exit(0)

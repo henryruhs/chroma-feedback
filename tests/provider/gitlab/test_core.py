@@ -3,7 +3,7 @@ import pytest
 from chroma_feedback.provider.gitlab.core import fetch
 
 
-def test_fetch_slug():
+def test_fetch_slug() -> None:
 	if 'GITLAB_TOKEN' in os.environ:
 		result = fetch('https://gitlab.com', '7311836', os.environ['GITLAB_TOKEN'])
 
@@ -15,7 +15,7 @@ def test_fetch_slug():
 		pytest.skip('GITLAB_TOKEN is not defined')
 
 
-def test_fetch_invalid():
+def test_fetch_invalid() -> None:
 	result = fetch(None, None, None)
 
 	assert result == []

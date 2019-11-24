@@ -1,3 +1,5 @@
+from typing import Any, Dict, List
+from argparse import ArgumentParser
 import base64
 import requests
 from chroma_feedback import helper
@@ -6,17 +8,17 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program):
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
 		program.add_argument('--circle-host', default = 'https://circleci.com')
 		program.add_argument('--circle-slug', action = 'append')
 		program.add_argument('--circle-token')
-	ARGS = program.parse_known_args()[0]
+	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run():
+def run() -> List[Dict[str, Any]]:
 	result = []
 
 	if ARGS.circle_slug:
@@ -27,7 +29,8 @@ def run():
 	return result
 
 
-def fetch(host, slug, token):
+def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
+	result = []
 	response = None
 
 	if host and slug:
@@ -44,5 +47,5 @@ def fetch(host, slug, token):
 		data = helper.parse_json(response)
 
 		for project in data:
-			return normalize_data(project)
-	return []
+			result.append(normalize_data(project))
+	return result

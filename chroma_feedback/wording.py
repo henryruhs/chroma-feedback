@@ -33,5 +33,5 @@ WORDING =\
 }
 
 
-def get(key):
+def get(key : str) -> str:
 	return WORDING[key]

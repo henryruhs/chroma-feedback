@@ -1,3 +1,5 @@
+from typing import Any, Dict, List
+from argparse import ArgumentParser
 import socket
 from chroma_feedback import helper, wording
 from .light import get_lights, process_lights
@@ -5,7 +7,7 @@ from .light import get_lights, process_lights
 ARGS = None
 
 
-def init(program):
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -17,18 +19,18 @@ def init(program):
 			program.add_argument('--xiaomi-yeelight-ip', default = ip)
 		else:
 			program.add_argument('--xiaomi-yeelight-ip', action = 'append', required = True)
-	ARGS = program.parse_known_args()[0]
+	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status):
+def run(status : str) -> List[Dict[str, Any]]:
 	lights = get_lights(ARGS.xiaomi_yeelight_ip)
 
 	if not lights:
 		exit(wording.get('light_no') + wording.get('exclamation_mark'))
-	return process_lights(status, lights)
+	return process_lights(lights, status)
 
 
-def discover_ips():
+def discover_ips() -> List[str]:
 	message =\
 	[
 		'M-SEARCH * HTTP/1.1',
@@ -44,9 +46,7 @@ def discover_ips():
 
 	while True:
 		try:
-			ip = discovery.recvfrom(65507)[1][0]
-			if ip not in ips:
-				ips.append(ip)
+			ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 		except socket.timeout:
 			break
 	return ips

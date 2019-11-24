@@ -3,7 +3,7 @@ import pytest
 from chroma_feedback.provider.appveyor.core import fetch
 
 
-def test_fetch_slug():
+def test_fetch_slug() -> None:
 	result = fetch('https://ci.appveyor.com', 'redaxmedia/chroma-feedback', None)
 
 	assert result[0]['provider'] == 'appveyor'
@@ -12,7 +12,7 @@ def test_fetch_slug():
 	assert result[0]['status']
 
 
-def test_fetch_user():
+def test_fetch_user() -> None:
 	if 'APPVEYOR_TOKEN' in os.environ:
 		result = fetch('https://ci.appveyor.com', None, os.environ['APPVEYOR_TOKEN'])
 
@@ -24,7 +24,7 @@ def test_fetch_user():
 		pytest.skip('APPVEYOR_TOKEN is not defined')
 
 
-def test_fetch_invalid():
+def test_fetch_invalid() -> None:
 	result = fetch(None, None, None)
 
 	assert result == []

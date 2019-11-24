@@ -2,7 +2,7 @@ import os
 import pytest
 from chroma_feedback.provider.github.core import fetch
 
-def test_fetch_slug():
+def test_fetch_slug() -> None:
 	if 'GITHUB_TOKEN' in os.environ:
 		result = fetch('https://api.github.com', 'redaxmedia/chroma-feedback', 'redaxmedia', os.environ['GITHUB_TOKEN'])
 
@@ -14,7 +14,7 @@ def test_fetch_slug():
 		pytest.skip('GITHUB_TOKEN is not defined')
 
 
-def test_fetch_invalid():
+def test_fetch_invalid() -> None:
 	result = fetch(None, None, None, None)
 
 	assert result == []

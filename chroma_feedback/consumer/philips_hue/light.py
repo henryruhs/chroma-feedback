@@ -1,10 +1,10 @@
+from typing import Any, Dict, List
 import copy
-
 from chroma_feedback import color
 from .api import get_api
 
 
-def get_lights(lights, light_names):
+def get_lights(lights : Any, light_names : List[str]) -> Any:
 	if light_names:
 		for light in copy.copy(lights):
 			if light.name not in light_names:
@@ -12,7 +12,7 @@ def get_lights(lights, light_names):
 	return lights
 
 
-def process_lights(status, lights):
+def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
 	# process lights
@@ -57,7 +57,7 @@ def process_lights(status, lights):
 	return result
 
 
-def static_light(light_name, state):
+def static_light(light_name : str, state : Dict[str, Any]) -> bool:
 	api = get_api(None)
 
 	return api is not None and api.set_light(light_name,
@@ -70,7 +70,7 @@ def static_light(light_name, state):
 	}) is not None
 
 
-def pulsate_light(light_name, state):
+def pulsate_light(light_name : str, state : Dict[str, Any]) -> bool:
 	api = get_api(None)
 
 	return api is not None and api.set_light(light_name,
