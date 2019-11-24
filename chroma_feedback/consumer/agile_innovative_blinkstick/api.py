@@ -22,7 +22,9 @@ def api_factory() -> Any:
 		try:
 			api = blinkstick
 			api.find_all()
-		except (IOError, BlinkStickException):
+		except IOError:
+			exit(wording.get('permission_no').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
+		except BlinkStickException:
 			exit(wording.get('connection_no').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
