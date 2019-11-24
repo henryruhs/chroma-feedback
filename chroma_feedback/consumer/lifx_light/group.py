@@ -65,7 +65,7 @@ def process_groups(groups : Any, status : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def static_group(group : Any, state : Any) -> bool:
+def static_group(group : Any, state : Dict[str, Any]) -> bool:
 	return group.set_power('on') is None and group.set_color(
 	[
 		state['hue'],

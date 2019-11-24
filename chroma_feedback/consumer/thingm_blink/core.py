@@ -1,3 +1,4 @@
+from typing import Any, Dict, List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
 from .device import get_devices, process_devices
@@ -14,7 +15,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status):
+def run(status : str) -> List[Dict[str, Any]]:
 	api = get_api()
 	devices = get_devices(api.list(), ARGS.thingm_blink_device)
 	api.close()

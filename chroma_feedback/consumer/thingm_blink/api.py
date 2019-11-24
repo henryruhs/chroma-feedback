@@ -12,7 +12,7 @@ def get_api() -> Any:
 	return API
 
 
-def api_factory(device) -> Any:
+def api_factory(device : str) -> Any:
 	api = None
 
 	try:

@@ -4,7 +4,7 @@ from chroma_feedback import wording
 API = None
 
 
-def get_api(ip) -> Any:
+def get_api(ip : str) -> Any:
 	global API
 
 	if not API:
@@ -12,7 +12,7 @@ def get_api(ip) -> Any:
 	return API
 
 
-def api_factory(ip) -> Any:
+def api_factory(ip : str) -> Any:
 	api = None
 
 	try:

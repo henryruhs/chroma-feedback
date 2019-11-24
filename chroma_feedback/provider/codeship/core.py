@@ -73,11 +73,7 @@ def fetch_builds(host : str, organization : str, project : str, token : str) -> 
 
 
 def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
-	result =\
-	{
-		'token': None,
-		'organizations': []
-	}
+	result = {}
 	response = None
 
 	if host and username and password:

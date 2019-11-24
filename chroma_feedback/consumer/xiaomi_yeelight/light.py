@@ -1,8 +1,9 @@
+from typing import Any, Dict, List
 from chroma_feedback import color
 from .api import get_api
 
 
-def get_lights(ips):
+def get_lights(ips : List[str]) -> List[Dict[str, Any]]:
 	lights = []
 
 	for ip in ips:
@@ -10,7 +11,7 @@ def get_lights(ips):
 	return lights
 
 
-def process_lights(lights, status):
+def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
 	# process lights
@@ -57,5 +58,5 @@ def process_lights(lights, status):
 	return result
 
 
-def static_light(light, state):
+def static_light(light : Any, state : Dict[str, Any]) -> bool:
 	return light.turn_on() == 'ok' and light.set_rgb(state['rgb'][0], state['rgb'][1], state['rgb'][2]) == 'ok'

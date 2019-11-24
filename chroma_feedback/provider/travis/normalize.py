@@ -6,7 +6,7 @@ def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
 	{
 		'provider': 'travis',
 		'slug': project['slug'],
-		'active': project['active'] is True,
+		'active': project['active'],
 		'status': normalize_status(project['last_build_state'])
 	}
 

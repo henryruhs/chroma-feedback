@@ -1,10 +1,10 @@
+from typing import List, Dict, Any
 import copy
-
 from chroma_feedback import color
 from .api import get_api
 
 
-def get_groups(groups, group_names):
+def get_groups(groups : Any, group_names : List[str]) -> Any:
 	if group_names:
 		for group in copy.copy(groups):
 			group_name = groups[group]['name']
@@ -14,7 +14,7 @@ def get_groups(groups, group_names):
 	return groups
 
 
-def process_groups(groups, status):
+def process_groups(groups : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
 	# process groups
@@ -61,7 +61,7 @@ def process_groups(groups, status):
 	return result
 
 
-def static_group(group_name, state):
+def static_group(group_name : str, state : Dict[str, Any]) -> bool:
 	api = get_api(None)
 
 	return api is not None and api.set_group(group_name,
@@ -74,7 +74,7 @@ def static_group(group_name, state):
 	}) is not None
 
 
-def pulsate_group(group_name, state):
+def pulsate_group(group_name : str, state : Dict[str, Any]) -> bool:
 	api = get_api(None)
 
 	return api is not None and api.set_group(group_name,

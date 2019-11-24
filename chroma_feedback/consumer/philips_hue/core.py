@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict, List
 from argparse import ArgumentParser
 import requests
 from chroma_feedback import helper, wording
@@ -16,7 +16,7 @@ def init(program : ArgumentParser) -> None:
 		ip = None
 
 		if not helper.has_argument('--philips-hue-ip'):
-			ip = discover_ip()
+			ip = helper.get_first(discover_ips())
 		if ip:
 			program.add_argument('--philips-hue-ip', default = ip)
 		else:
@@ -26,7 +26,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : str):
+def run(status : str) -> List[Dict[str, Any]]:
 	api = get_api(ARGS.philips_hue_ip)
 
 	# use groups
@@ -47,14 +47,16 @@ def run(status : str):
 	return process_lights(lights, status)
 
 
-def discover_ip() -> Any:
+def discover_ips() -> List[str]:
 	response = requests.get('https://discovery.meethue.com')
+	ips = []
 
 	# process response
 
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		if 'internalipaddress' in helper.get_first(data):
-			return helper.get_first(data)['internalipaddress']
-	return None
+		for value in data:
+			if 'internalipaddress' in value:
+				ips.append(value['internalipaddress'])
+	return ips

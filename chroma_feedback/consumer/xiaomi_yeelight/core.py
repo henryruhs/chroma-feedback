@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, Dict, List
 from argparse import ArgumentParser
 import socket
 from chroma_feedback import helper, wording
@@ -22,7 +22,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status):
+def run(status : str) -> List[Dict[str, Any]]:
 	lights = get_lights(ARGS.xiaomi_yeelight_ip)
 
 	if not lights:
@@ -46,9 +46,7 @@ def discover_ips() -> List[str]:
 
 	while True:
 		try:
-			ip = discovery.recvfrom(65507)[1][0]
-			if ip not in ips:
-				ips.append(ip)
+			ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 		except socket.timeout:
 			break
 	return ips

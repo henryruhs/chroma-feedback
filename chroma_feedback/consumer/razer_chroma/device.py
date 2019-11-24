@@ -1,9 +1,9 @@
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List
 import copy
 from chroma_feedback import color
 
 
-def get_devices(devices : Set[Any], device_names : List[str]) -> Set[Any]:
+def get_devices(devices : Any, device_names : List[str]) -> Any:
 	if device_names:
 		for device in copy.copy(devices):
 			if device.name not in device_names:
@@ -11,7 +11,7 @@ def get_devices(devices : Set[Any], device_names : List[str]) -> Set[Any]:
 	return devices
 
 
-def process_devices(devices : Set[Any], status : str) -> List[Dict[str, Any]]:
+def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
 	# process devices
@@ -60,13 +60,13 @@ def static_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.static(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.static(state['rgb'][0], state['rgb'][1], state['rgb'][2]) is True
-	return device.fx.static(state['rgb'][0], state['rgb'][1], state['rgb'][2]) is True
+		return device.fx.misc.logo.static(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	return device.fx.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 
 
 def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2]) is True
-	return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2]) is True
+		return device.fx.misc.logo.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
