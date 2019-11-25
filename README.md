@@ -21,6 +21,16 @@ Preview
 Installation
 ------------
 
+Install Chroma Feedback:
+
+```
+apt-get install libusb-1.0-0-dev libudev-dev
+```
+
+```
+pip3 install chroma-feedback
+```
+
 Install `openrazer-meta` for Razer Chroma:
 
 ```
@@ -30,18 +40,6 @@ apt-get update
 
 ```
 apt install openrazer-meta
-```
-
-Install `libusb-1.0-0-dev` and `libudev-dev` for Agile Innovative BlinkStick and ThingM Blink:
-
-```
-apt-get install libusb-1.0-0-dev libudev-dev
-```
-
-Install Chroma Feedback:
-
-```
-pip3 install chroma-feedback
 ```
 
 
