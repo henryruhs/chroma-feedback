@@ -8,15 +8,15 @@ def get_provider_status(provider_result : List[Dict[str, Any]]) -> str:
 
 	# process provider
 
-	for project in provider_result:
-		if project['active'] is True:
-			if project['status'] == 'process':
+	for provider in provider_result:
+		if provider['active'] is True:
+			if provider['status'] == 'process':
 				if status not in ['errored', 'failed']:
 					status = 'process'
-			if project['status'] == 'errored':
+			if provider['status'] == 'errored':
 				if status != 'failed':
 					status = 'errored'
-			if project['status'] == 'failed':
+			if provider['status'] == 'failed':
 				status = 'failed'
 	return status
 
