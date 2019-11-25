@@ -9,7 +9,6 @@ jobs:
   - run: sudo pip install pylint
   - run: sudo pip install pytest
   - run: sudo pip install mypy
-  - run: sudo pip install hidapi
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
@@ -20,7 +19,6 @@ jobs:
   - run: sudo pip install pytest
   - run: sudo pip install pytest-mock
   - run: sudo pip install mock
-  - run: sudo pip install hidapi
   - run: pytest tests
 
 workflows:
