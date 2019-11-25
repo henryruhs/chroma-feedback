@@ -32,7 +32,7 @@ apt-get update
 apt install openrazer-meta
 ```
 
-Install `libusb-1.0-0-dev` and `libudev-dev` for Agile Innovative Blinkstick and ThingM Blink:
+Install `libusb-1.0-0-dev` and `libudev-dev` for Agile Innovative BlinkStick and ThingM Blink:
 
 ```
 apt-get install libusb-1.0-0-dev libudev-dev
@@ -297,7 +297,7 @@ Consumers
 =========
 
 
-Agile Innovative Blinkstick
+Agile Innovative BlinkStick
 ---------------------------
 
 | Name   | Mandatory |

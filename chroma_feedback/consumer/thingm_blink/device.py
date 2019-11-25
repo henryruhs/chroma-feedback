@@ -60,4 +60,4 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 def static_device(device : Any, state : Dict[str, Any]) -> bool:
 	api = api_factory(device)
 
-	return api is not None and api.color_to_rgb((state['rgb'][0], state['rgb'][1], state['rgb'][2])) is None
+	return api is not None and api.fade_to_rgb(0, state['rgb'][0], state['rgb'][1], state['rgb'][2]) is None

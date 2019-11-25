@@ -42,7 +42,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
 				'name': device.get_serial(),
-				'active': pulsate_device(device, color.get_errored()),
+				'active': static_device(device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -51,7 +51,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
 				'name': device.get_serial(),
-				'active': pulsate_device(device, color.get_failed()),
+				'active': static_device(device, color.get_failed()),
 				'status': status
 			})
 	return result
@@ -60,12 +60,5 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 def static_device(device : Any, state : Dict[str, Any]) -> bool:
 	try:
 		return device.set_color(red = state['rgb'][0], green = state['rgb'][1], blue = state['rgb'][2]) is None
-	except IOError:
-		return False
-
-
-def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
-	try:
-		return device.pulse(red = state['rgb'][0], green = state['rgb'][1], blue = state['rgb'][2]) is None and device.morph(red = state['rgb'][0], green = state['rgb'][1], blue = state['rgb'][2]) is None
 	except IOError:
 		return False
