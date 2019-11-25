@@ -47,6 +47,7 @@ setup(
 	[
 		'blink1',
 		'blinkstick',
+		'hidapi',
 		'lifxlan',
 		'phue',
 		'requests',
