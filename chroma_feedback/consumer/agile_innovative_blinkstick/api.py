@@ -17,7 +17,6 @@ def api_factory() -> Any:
 
 	try:
 		from blinkstick import blinkstick
-		from blinkstick.blinkstick import VENDOR_ID, PRODUCT_ID
 
 		try:
 			api = blinkstick
