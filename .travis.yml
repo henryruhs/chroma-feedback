@@ -16,6 +16,7 @@ install:
 - pip install pytest-mock
 - pip install mock
 - pip install mypy
+- pip install hidapi
 
 script:
 - pylint bin/chroma-feedback chroma_feedback tests
