@@ -52,12 +52,11 @@ def discover_ips() -> List[str]:
 	[
 		'M-SEARCH * HTTP/1.1',
 		'HOST: 239.255.255.250:1900',
-		'MAN: "ssdp:discover"',
-		'SR: ssdp:all'
+		'MAN: "ssdp:discover"'
 	]
 	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 	discovery.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32)
-	discovery.settimeout(1)
+	discovery.settimeout(2)
 	discovery.sendto('\r\n'.join(message).encode(), ('239.255.255.250', 1900))
 	ips = []
 
