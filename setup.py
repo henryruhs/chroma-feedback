@@ -3,16 +3,11 @@
 from setuptools import setup
 from chroma_feedback import metadata
 
-try:
-	from pypandoc import convert_file
-	long_description = convert_file('README.md', 'rst')
-except ImportError:
-	long_description = open('README.md').read()
-
 setup(
 	name = metadata.get('name'),
 	description = metadata.get('description'),
-	long_description = long_description,
+	long_description = open('README.md').read(),
+	long_description_content_type = 'text/markdown',
 	version = metadata.get('version'),
 	license = metadata.get('license'),
 	keywords = metadata.get('keywords'),
