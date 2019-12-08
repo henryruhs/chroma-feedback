@@ -211,10 +211,12 @@ chroma-feedback --provider=gitlab
 Jenkins
 -------
 
-| Name | Mandatory |
-|------|-----------|
-| Host | required  |
-| Slug | required  |
+| Name     | Mandatory |
+|----------|-----------|
+| Host     | required  |
+| Slug     | required  |
+| Username | required  |
+| Token    | required  |
 
 Monitor a single project:
 
@@ -223,6 +225,8 @@ chroma-feedback --provider=jenkins
 
 --jenkins-host <host>
 --jenkins-slug <job>
+--jenkins-username <username>
+--jenkins-token <token>
 ```
 
 Monitor multiple projects:
