@@ -247,8 +247,7 @@ TeamCity
 |----------|--------------------------------|-----------|
 | Host     | https://teamcity.jetbrains.com | optional  |
 | Slug     |                                | optional  |
-| Username |                                | required  |
-| Password |                                | required  |
+| Token    |                                | required  |
 
 Monitor a single project:
 
@@ -256,8 +255,7 @@ Monitor a single project:
 chroma-feedback --provider=teamcity
 
 --teamcity-slug <project-id>
---teamcity-username <username>
---teamcity-password <password>
+--teamcity-token<token>
 ```
 
 Monitor multiple projects:
@@ -265,8 +263,7 @@ Monitor multiple projects:
 ```
 chroma-feedback --provider=teamcity
 
---teamcity-username <username>
---teamcity-password <password>
+--teamcity-token <token>
 ```
 
 
