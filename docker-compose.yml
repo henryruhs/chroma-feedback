@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+ jenkins:
+  image: 'jenkins/jenkins:lts'
+  ports:
+  - 8080:8080
+  environment:
+  - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+ teamcity-server:
+  image: 'jetbrains/teamcity-server'
+  ports:
+  - 8111:8111
+ teamcity-agent:
+  image: 'jetbrains/teamcity-agent'
+  environment:
+  - SERVER_URL=teamcity-server:8111
