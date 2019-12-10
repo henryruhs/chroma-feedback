@@ -7,7 +7,7 @@ def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
 		'provider': 'github',
 		'slug': project['repository']['full_name'],
 		'active': True,
-		'status': normalize_status(project['state'])
+		'status': normalize_status(project['state'].lower())
 	}
 
 

@@ -7,7 +7,7 @@ def normalize_data(project : Dict[str, Any], build : Dict[str, Any]) -> Dict[str
 		'provider': 'appveyor',
 		'slug': project['accountName'] + '/' + project['slug'],
 		'active': True,
-		'status': normalize_status(build['status'])
+		'status': normalize_status(build['status'].lower())
 	}
 
 

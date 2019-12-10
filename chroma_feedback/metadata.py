@@ -1,10 +1,10 @@
 METADATA =\
 {
 	'name': 'chroma-feedback',
-	'description': 'Turn your RGB powered hardware into an extreme feedback device for continuous integration',
-	'version': '6.1.0',
+	'description': 'Turn your RGB powered hardware into an build light indicator for continuous integration',
+	'version': '6.2.0',
 	'license': 'GPL-3.0',
-	'keywords': 'appveyor circle codeship github gitlab jenkins teamcity travis ci notification indication',
+	'keywords': 'appveyor bamboo circle codeship github gitlab jenkins teamcity travis',
 	'author': 'Henry Ruhs',
 	'author_email': 'info@redaxmedia.com',
 	'url': 'https://github.com/redaxmedia/chroma-feedback'
