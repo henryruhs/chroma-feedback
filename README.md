@@ -1,7 +1,7 @@
 Chroma Feedback
 ===============
 
-> Turn your RGB powered hardware into an build light indicator for continuous integration.
+> Turn your RGB powered hardware into an build indicator for continuous integration.
 
 [![Build Status Travis](https://img.shields.io/travis/redaxmedia/chroma-feedback.svg)](https://travis-ci.org/redaxmedia/chroma-feedback)
 [![Build Status AppVeyor](https://img.shields.io/appveyor/ci/redaxmedia/chroma-feedback.svg)](https://ci.appveyor.com/project/redaxmedia/chroma-feedback)
