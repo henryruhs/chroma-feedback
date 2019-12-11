@@ -7,13 +7,11 @@ def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
 		'provider': 'bamboo',
 		'slug': project['key'],
 		'active': True,
-		'status': normalize_status(project['buildState'].lower(), project['lifeCycleState'].lower())
+		'status': normalize_status(project['buildState'].lower())
 	}
 
 
-def normalize_status(status : str, lifecycle : str) -> str:
-	if lifecycle == 'inprogress':
-		return 'process'
+def normalize_status(status : str) -> str:
 	if status == 'failed':
 		return 'failed'
 	return 'passed'

@@ -19,6 +19,7 @@ setup(
 		'chroma_feedback',
 		'chroma_feedback.provider',
 		'chroma_feedback.provider.appveyor',
+		'chroma_feedback.provider.bamboo',
 		'chroma_feedback.provider.circle',
 		'chroma_feedback.provider.codeship',
 		'chroma_feedback.provider.github',
