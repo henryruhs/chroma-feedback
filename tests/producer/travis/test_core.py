@@ -1,0 +1,25 @@
+from chroma_feedback.producer.travis.core import fetch
+
+
+def test_fetch_slug() -> None:
+	result = fetch('https://api.travis-ci.org', 'redaxmedia/chroma-feedback')
+
+	assert result[0]['producer'] == 'travis'
+	assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
+	assert result[0]['active'] is True
+	assert result[0]['status']
+
+
+def test_fetch_user() -> None:
+	result = fetch('https://api.travis-ci.org', 'redaxmedia')
+
+	assert result[1]['producer'] == 'travis'
+	assert result[1]['slug']
+	assert result[1]['active'] is True
+	assert result[1]['status']
+
+
+def test_fetch_invalid() -> None:
+	result = fetch(None, None)
+
+	assert result == []

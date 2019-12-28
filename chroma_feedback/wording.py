@@ -8,7 +8,7 @@ WORDING =\
 	'device_no': 'Device not found',
 	'light_no': 'Light not found',
 	'group_no': 'Group not found',
-	'provider_no': 'Provider not found',
+	'producer_no': 'Producer not found',
 	'consumer_no': 'Consumer not found',
 	'result_no': 'Result not found',
 	'build_passed': 'Build of {} on {} passed',

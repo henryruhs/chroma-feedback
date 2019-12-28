@@ -1,60 +1,60 @@
 from chroma_feedback import reporter
 
 
-def test_create_provider_report_passed() -> None:
-	provider_report = reporter.create_provider_report(provider_result =
+def test_create_producer_report_passed() -> None:
+	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
-			'provider': 'travis',
+			'producer': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'passed'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in provider_report[0]
+	assert 'Build of redaxmedia/chroma-feedback on travis passed' in producer_report[0]
 
 
-def test_create_provider_report_process() -> None:
-	provider_report = reporter.create_provider_report(provider_result =
+def test_create_producer_report_process() -> None:
+	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
-			'provider': 'travis',
+			'producer': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'process'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis in process' in provider_report[0]
+	assert 'Build of redaxmedia/chroma-feedback on travis in process' in producer_report[0]
 
 
-def test_create_provider_report_errored() -> None:
-	provider_report = reporter.create_provider_report(provider_result =
+def test_create_producer_report_errored() -> None:
+	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
-			'provider': 'travis',
+			'producer': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'errored'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis errored' in provider_report[0]
+	assert 'Build of redaxmedia/chroma-feedback on travis errored' in producer_report[0]
 
 
-def test_create_provider_report_failed() -> None:
-	provider_report = reporter.create_provider_report(provider_result =
+def test_create_producer_report_failed() -> None:
+	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
-			'provider': 'travis',
+			'producer': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'failed'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis failed' in provider_report[0]
+	assert 'Build of redaxmedia/chroma-feedback on travis failed' in producer_report[0]
 
 
 def test_create_consumer_report_passed() -> None:
