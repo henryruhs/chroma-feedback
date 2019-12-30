@@ -10,5 +10,6 @@ __all__ =\
 	'gitlab',
 	'jenkins',
 	'teamcity',
-	'travis'
+	'travis',
+	'wercker'
 ]
