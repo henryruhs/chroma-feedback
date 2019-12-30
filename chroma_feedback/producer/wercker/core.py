@@ -45,12 +45,12 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch_runs(host : str, slug : str, application : str, token : str) -> List[Dict[str, Any]]:
+def fetch_runs(host : str, slug : str, application_id : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug and application and token:
-		response = requests.get(host + '/api/v3/runs?applicationId=' + application, headers =
+	if host and slug and application_id and token:
+		response = requests.get(host + '/api/v3/runs?applicationId=' + application_id, headers =
 		{
 			'Bearer': token
 		})
@@ -61,9 +61,7 @@ def fetch_runs(host : str, slug : str, application : str, token : str) -> List[D
 		data = helper.parse_json(response)
 
 		if helper.get_first(data):
-			result.append(normalize_data(
-			{
-				'slug': slug,
-				'status': helper.get_first(data)['result'].lower()
-			}))
+			project = helper.get_first(data)
+			project['slug'] = slug
+			result.append(normalize_data(project))
 	return result

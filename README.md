@@ -326,6 +326,36 @@ chroma-feedback --producer=travis
 ```
 
 
+
+Wercker
+-------
+
+| Name  | Default                 | Mandatory |
+|-------|-------------------------|-----------|
+| Host  | https://app.wercker.com | optional  |
+| Slug  |                         | required  |
+| Token |                         | required  |
+
+Monitor a single project:
+
+```
+chroma-feedback --producer=wercker
+
+--wercker-slug <username/repository>
+--wercker-token <token>
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --producer=wercker
+
+--wercker-slug <<username/repository>>
+--wercker-slug <<username/repository>>
+--wercker-token <token>
+```
+
+
 Consumers
 =========
 
