@@ -59,9 +59,9 @@ def fetch_runs(host : str, slug : str, application_id : str, token : str) -> Lis
 
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
+		build = helper.get_first(data)
 
-		if helper.get_first(data):
-			project = helper.get_first(data)
-			project['slug'] = slug
-			result.append(normalize_data(project))
+		if build:
+			build['slug'] = slug
+			result.append(normalize_data(build))
 	return result

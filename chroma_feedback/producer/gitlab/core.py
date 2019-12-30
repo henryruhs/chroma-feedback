@@ -39,19 +39,20 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
+		pipeline = helper.get_first(data)
 
-		if helper.get_first(data):
-			pipeline = str(helper.get_first(data)['id'])
-			result.extend(fetch_jobs(host, slug, pipeline, token))
+		if pipeline:
+			pipeline_id = str(pipeline['id'])
+			result.extend(fetch_jobs(host, slug, pipeline_id, token))
 	return result
 
 
-def fetch_jobs(host : str, slug : str, pipeline : str, token : str) -> List[Dict[str, Any]]:
+def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug and pipeline and token:
-		response = requests.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline + '/jobs', headers =
+	if host and slug and pipeline_id and token:
+		response = requests.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers =
 		{
 			'Private-Token': token
 		})
@@ -61,7 +62,7 @@ def fetch_jobs(host : str, slug : str, pipeline : str, token : str) -> List[Dict
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		for project in data:
-			project['slug'] = slug
-			result.append(normalize_data(project))
+		for build in data:
+			build['slug'] = slug
+			result.append(normalize_data(build))
 	return result

@@ -1,13 +1,13 @@
 from typing import Any, Dict
 
 
-def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
+def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'gitlab',
-		'slug': project['slug'] + '/' + project['name'],
+		'slug': build['slug'] + '/' + build['name'],
 		'active': True,
-		'status': normalize_status(project['status'].lower())
+		'status': normalize_status(build['status'].lower())
 	}
 
 
