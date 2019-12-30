@@ -341,7 +341,7 @@ Monitor a single project:
 ```
 chroma-feedback --producer=wercker
 
---wercker-slug <username/repository>
+--wercker-slug <username/application>
 --wercker-token <token>
 ```
 
@@ -350,8 +350,8 @@ Monitor multiple projects:
 ```
 chroma-feedback --producer=wercker
 
---wercker-slug <<username/repository>>
---wercker-slug <<username/repository>>
+--wercker-slug <<username/application>>
+--wercker-slug <<username/application>>
 --wercker-token <token>
 ```
 
