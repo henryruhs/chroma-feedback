@@ -3,20 +3,20 @@ import sys
 from requests import Response
 
 
-def get_provider_status(provider_result : List[Dict[str, Any]]) -> str:
+def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
 	status = 'passed'
 
-	# process provider
+	# process producer
 
-	for provider in provider_result:
-		if provider['active'] is True:
-			if provider['status'] == 'process':
+	for producer in producer_result:
+		if producer['active'] is True:
+			if producer['status'] == 'process':
 				if status not in ['errored', 'failed']:
 					status = 'process'
-			if provider['status'] == 'errored':
+			if producer['status'] == 'errored':
 				if status != 'failed':
 					status = 'errored'
-			if provider['status'] == 'failed':
+			if producer['status'] == 'failed':
 				status = 'failed'
 	return status
 

@@ -44,13 +44,13 @@ apt install openrazer-meta
 Usage
 -----
 
-Combine providers and consumers as needed:
+Combine producers and consumers as needed:
 
 ```
 chroma-feedback [options]
 
 -V, --version
--P, --provider <provider>
+-P, --producer <producer>
 -C, --consumer <consumer>
 -I, --background-interval <background-interval>
 -B, --background-run
@@ -59,7 +59,7 @@ chroma-feedback [options]
 ```
 
 
-Providers
+Producers
 =========
 
 
@@ -75,7 +75,7 @@ AppVeyor
 Monitor a single project:
 
 ```
-chroma-feedback --provider=appveyor
+chroma-feedback --producer=appveyor
 
 --appveyor-slug <username/repository>
 ```
@@ -83,7 +83,7 @@ chroma-feedback --provider=appveyor
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=appveyor
+chroma-feedback --producer=appveyor
 
 --appveyor-token <token>
 ```
@@ -135,7 +135,7 @@ Circle
 Monitor a single project:
 
 ```
-chroma-feedback --provider=circle
+chroma-feedback --producer=circle
 
 --circle-slug <username/repository>
 ```
@@ -143,7 +143,7 @@ chroma-feedback --provider=circle
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=circle
+chroma-feedback --producer=circle
 
 --circle-token <token>
 ```
@@ -162,7 +162,7 @@ Codeship
 Monitor a single project:
 
 ```
-chroma-feedback --provider=codeship
+chroma-feedback --producer=codeship
 
 --codeship-slug <project-id>
 --codeship-username <username>
@@ -172,7 +172,7 @@ chroma-feedback --provider=codeship
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=codeship
+chroma-feedback --producer=codeship
 
 --codeship-username <username>
 --codeship-password <password>
@@ -192,7 +192,7 @@ GitHub
 Monitor a single project:
 
 ```
-chroma-feedback --provider=github
+chroma-feedback --producer=github
 
 --github-slug <username/repository>
 --github-username <username>
@@ -202,7 +202,7 @@ chroma-feedback --provider=github
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=github
+chroma-feedback --producer=github
 
 --github-slug <username/repository>
 --github-slug <username/repository>
@@ -223,7 +223,7 @@ GitLab
 Monitor a single project:
 
 ```
-chroma-feedback --provider=gitlab
+chroma-feedback --producer=gitlab
 
 --gitlab-slug <project-id>
 --gitlab-token <token>
@@ -232,7 +232,7 @@ chroma-feedback --provider=gitlab
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=gitlab
+chroma-feedback --producer=gitlab
 
 --gitlab-slug <project-id>
 --gitlab-slug <project-id>
@@ -253,7 +253,7 @@ Jenkins
 Monitor a single project:
 
 ```
-chroma-feedback --provider=jenkins
+chroma-feedback --producer=jenkins
 
 --jenkins-host <host>
 --jenkins-slug <job>
@@ -264,7 +264,7 @@ chroma-feedback --provider=jenkins
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=jenkins
+chroma-feedback --producer=jenkins
 
 --jenkins-host <host>
 --jenkins-slug <job>
@@ -286,7 +286,7 @@ TeamCity
 Monitor a single project:
 
 ```
-chroma-feedback --provider=teamcity
+chroma-feedback --producer=teamcity
 
 --teamcity-slug <project-id>
 --teamcity-token<token>
@@ -295,7 +295,7 @@ chroma-feedback --provider=teamcity
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=teamcity
+chroma-feedback --producer=teamcity
 
 --teamcity-token <token>
 ```
@@ -312,7 +312,7 @@ Travis
 Monitor a single project:
 
 ```
-chroma-feedback --provider=travis
+chroma-feedback --producer=travis
 
 --travis-slug <username/repository>
 ```
@@ -320,7 +320,7 @@ chroma-feedback --provider=travis
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=travis
+chroma-feedback --producer=travis
 
 --travis-slug <username>
 ```

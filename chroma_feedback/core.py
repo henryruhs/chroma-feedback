@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 import os
 import sys
 import threading
-from chroma_feedback import consumer, helper, provider, reporter, wording
+from chroma_feedback import consumer, helper, producer, reporter, wording
 
 
 def run(program : ArgumentParser) -> None:
@@ -17,20 +17,20 @@ def run(program : ArgumentParser) -> None:
 		reporter.print_header()
 		print()
 
-	# process provider
+	# process producer
 
-	provider_result = provider.process(program)
+	producer_result = producer.process(program)
 
 	# handle exit
 
-	if not provider_result:
+	if not producer_result:
 		exit(wording.get('result_no') + wording.get('exclamation_mark'))
 
-	# report provider
+	# report producer
 
-	provider_report = reporter.create_provider_report(provider_result)
-	if provider_report:
-		reporter.print_report(provider_report)
+	producer_report = reporter.create_producer_report(producer_result)
+	if producer_report:
+		reporter.print_report(producer_report)
 		print()
 
 	# handle dry run
@@ -40,7 +40,7 @@ def run(program : ArgumentParser) -> None:
 
 		# process consumer
 
-		status = helper.get_provider_status(provider_result)
+		status = helper.get_producer_status(producer_result)
 		consumer_result = consumer.process(program, status)
 
 		# report consumer

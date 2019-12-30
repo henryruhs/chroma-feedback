@@ -3,21 +3,21 @@ from typing import Any, Dict, List
 from chroma_feedback import color, metadata, wording
 
 
-def create_provider_report(provider_result : List[Dict[str, Any]]) -> List[str]:
+def create_producer_report(producer_result : List[Dict[str, Any]]) -> List[str]:
 	report = []
 
 	# process result
 
-	for provider in provider_result:
-		if provider['active'] is True:
-			if provider['status'] == 'passed':
-				report.append(color.format_green(wording.get('tick')) + ' ' + wording.get('build_passed').format(provider['slug'], provider['provider']))
-			if provider['status'] == 'process':
-				report.append(color.format_yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(provider['slug'], provider['provider']))
-			if provider['status'] == 'errored':
-				report.append(wording.get('cross') + ' ' + wording.get('build_errored').format(provider['slug'], provider['provider']))
-			if provider['status'] == 'failed':
-				report.append(color.format_red(wording.get('cross')) + ' ' + wording.get('build_failed').format(provider['slug'], provider['provider']))
+	for producer in producer_result:
+		if producer['active'] is True:
+			if producer['status'] == 'passed':
+				report.append(color.format_green(wording.get('tick')) + ' ' + wording.get('build_passed').format(producer['slug'], producer['producer']))
+			if producer['status'] == 'process':
+				report.append(color.format_yellow(wording.get('hourglass')) + ' ' + wording.get('build_process').format(producer['slug'], producer['producer']))
+			if producer['status'] == 'errored':
+				report.append(wording.get('cross') + ' ' + wording.get('build_errored').format(producer['slug'], producer['producer']))
+			if producer['status'] == 'failed':
+				report.append(color.format_red(wording.get('cross')) + ' ' + wording.get('build_failed').format(producer['slug'], producer['producer']))
 	return report
 
 
