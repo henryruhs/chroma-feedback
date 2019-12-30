@@ -350,8 +350,8 @@ Monitor multiple projects:
 ```
 chroma-feedback --producer=wercker
 
---wercker-slug <<username/application>>
---wercker-slug <<username/application>>
+--wercker-slug <<username/application>
+--wercker-slug <<username/application>
 --wercker-token <token>
 ```
 

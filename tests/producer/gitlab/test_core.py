@@ -8,7 +8,7 @@ def test_fetch_slug() -> None:
 		result = fetch('https://gitlab.com', '7311836', os.environ['GITLAB_TOKEN'])
 
 		assert result[0]['producer'] == 'gitlab'
-		assert result[0]['slug']
+		assert result[0]['slug'] == '7311836'
 		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:

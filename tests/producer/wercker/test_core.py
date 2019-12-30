@@ -8,7 +8,7 @@ def test_fetch_slug() -> None:
 		result = fetch('https://app.wercker.com', 'redaxmedia/chroma-feedback', os.environ['WERCKER_TOKEN'])
 
 		assert result[0]['producer'] == 'wercker'
-		assert result[0]['slug']
+		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
 		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
