@@ -102,7 +102,7 @@ Bamboo
 Monitor a single project:
 
 ```
-chroma-feedback --provider=bamboo
+chroma-feedback --producer=bamboo
 
 --bamboo-host <host>
 --bamboo-slug <project-key>
@@ -113,7 +113,7 @@ chroma-feedback --provider=bamboo
 Monitor multiple projects:
 
 ```
-chroma-feedback --provider=bamboo
+chroma-feedback --producer=bamboo
 
 --bamboo-host <host>
 --bamboo-slug <project-key>
