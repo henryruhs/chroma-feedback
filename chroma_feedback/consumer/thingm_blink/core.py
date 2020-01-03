@@ -18,7 +18,6 @@ def init(program : ArgumentParser) -> None:
 def run(status : str) -> List[Dict[str, Any]]:
 	api = get_api()
 	devices = get_devices(api.list(), ARGS.thingm_blink_device)
-	api.close()
 
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
