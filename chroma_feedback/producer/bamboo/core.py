@@ -46,8 +46,8 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 
 		if 'results' in data and 'result' in data['results']:
 			for plan in data['results']['result']:
-			    result.append(normalize_data(plan))
+				result.append(normalize_data(plan))
 		else:
-		    result.append(normalize_data(data))
+			result.append(normalize_data(data))
 
 	return result
