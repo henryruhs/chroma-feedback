@@ -33,7 +33,7 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 
 	if host and slug and username and password:
 		username_password = username + ':' + password
-		response = requests.get(host + '/rest/api/latest/result/' + slug, headers =
+		response = requests.get(host + '/rest/api/latest/result/' + get_slug(slug), headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
@@ -45,5 +45,14 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 		data = helper.parse_json(response)
 
 		if 'results' in data and 'result' in data['results']:
-			result.append(normalize_data(helper.get_first(data['results']['result'])))
+			for plan in data['results']['result']:
+				result.append(normalize_data(plan))
+		else:
+			result.append(normalize_data(data))
 	return result
+
+
+def get_slug(slug : str) -> str:
+	if '-' in slug:
+		return slug + '-latest'
+	return slug

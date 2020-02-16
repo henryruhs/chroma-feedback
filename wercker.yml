@@ -2,7 +2,7 @@ box: python:3.7.6
 
 build:
  steps:
-  - script:
+ - script:
     name: install
     code: |
      pip install requests
@@ -11,12 +11,13 @@ build:
      pip install pytest-mock
      pip install mock
      pip install mypy
-  - script:
+
+ - script:
     name: lint
     code: |
      pylint bin/chroma-feedback chroma_feedback tests
      mypy bin/chroma-feedback chroma_feedback tests
-  - script:
+
+ - script:
     name: test
-    code: |
-     pytest tests
+    code: pytest tests

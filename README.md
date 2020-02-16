@@ -116,8 +116,7 @@ Monitor multiple projects:
 chroma-feedback --producer=bamboo
 
 --bamboo-host <host>
---bamboo-slug <project-key>
---bamboo-slug <project-key>
+--bamboo-slug <plan>
 --bamboo-username <username>
 --bamboo-password <password>
 ```

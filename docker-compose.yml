@@ -5,20 +5,24 @@ services:
   image: 'atlassian/bamboo-agent-base'
   environment:
   - BAMBOO_SERVER_URL=bamboo-server:8085
+
  bamboo-server:
   image: 'atlassian/bamboo-server'
   ports:
   - 8085:8085
+
  jenkins:
   image: 'jenkins/jenkins:lts'
   ports:
   - 8080:8080
   environment:
   - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+
  teamcity-agent:
   image: 'jetbrains/teamcity-agent'
   environment:
   - SERVER_URL=teamcity-server:8111
+
  teamcity-server:
   image: 'jetbrains/teamcity-server'
   ports:
