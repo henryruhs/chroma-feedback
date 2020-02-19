@@ -17,6 +17,14 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	# process devices
 
 	for device in devices:
+		# Determine the lighting effect based on device capabilities:
+		if device.fx.has('logo_pulsate') and device.fx.has('scroll_pulsate'):
+			effect_method = "pulsate_device"
+		elif device.fx.has('logo_breath_single') and device.fx.has('scroll_breath_single'):
+			effect_method = "breath_device"
+		else:
+			effect_method = "pulsate_device"
+
 		if status == 'passed':
 			result.append(
 			{
@@ -41,7 +49,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': pulsate_device(device, color.get_errored()),
+				'active': globals()[effect_method](device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -50,7 +58,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': pulsate_device(device, color.get_failed()),
+				'active': globals()[effect_method](device, color.get_failed()),
 				'status': status
 			})
 	return result
@@ -68,5 +76,14 @@ def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
 	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+		if device.fx.has('logo_pulsate') and device.fx.has('scroll_pulsate'):
+			return device.fx.misc.logo.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	return device.fx.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+
+def breath_device(device : Any, state : Dict[str, Any]) -> bool:
+	if device.has('brightness'):
+		device.brightness = state['brightness'][0]
+	if device.fx.has('logo') and device.fx.has('scroll'):
+		if device.fx.has('logo_breath_single') and device.fx.has('scroll_breath_single'):
+			return device.fx.misc.logo.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 	return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
