@@ -59,10 +59,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 def static_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
-	if device.fx.has('logo_static'):
-		return device.fx.misc.logo.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-	if device.fx.has('scroll_static'):
-		return device.fx.misc.scroll_wheel.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 	if device.fx.has('static'):
 		return device.fx.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 	return False
@@ -71,10 +67,6 @@ def static_device(device : Any, state : Dict[str, Any]) -> bool:
 def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
-	if device.fx.has('logo_pulsate'):
-		return device.fx.misc.logo.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-	if device.fx.has('scroll_pulsate'):
-		return device.fx.misc.scroll_wheel.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 	if device.fx.has('pulsate'):
 		return device.fx.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 	return False
@@ -83,10 +75,6 @@ def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
 def breath_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
-	if device.fx.has('logo_breath_single'):
-		return device.fx.misc.logo.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-	if device.fx.has('scroll_breath_single'):
-		return device.fx.misc.scroll_wheel.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 	if device.fx.has('breath_single'):
 		return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
 	return False
