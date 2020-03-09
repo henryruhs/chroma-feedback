@@ -84,14 +84,16 @@ def misc_effect(device : Any, state : Dict[str, Any], effect_name : str) -> bool
 	effect_state = False
 	parts =\
 	[
-		'logo'
-		'scroll'
-		'left'
-		'right'
+		'logo',
+		'scroll_wheel',
+		'left',
+		'right',
 		'backlight'
 	]
 
 	for part in parts:
 		if device.fx.has(part + '_' + effect_name):
-			effect_state = device.misc.fx[part][effect_name](state['rgb'][0], state['rgb'][1], state['rgb'][2]) or effect_state
+			part_object = getattr(device.fx.misc, part)
+			effect_function = getattr(part_object, effect_name)
+			effect_state = effect_function(state['rgb'][0], state['rgb'][1], state['rgb'][2]) or effect_state
 	return effect_state
