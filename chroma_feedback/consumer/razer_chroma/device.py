@@ -41,7 +41,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': pulsate_device(device, color.get_errored()),
+				'active': pulsate_device(device, color.get_errored()) or breath_device(device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -50,7 +50,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': pulsate_device(device, color.get_failed()),
+				'active': pulsate_device(device, color.get_failed()) or breath_device(device, color.get_failed()),
 				'status': status
 			})
 	return result
@@ -59,14 +59,39 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 def static_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
-	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.static(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-	return device.fx.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	if device.fx.has('static'):
+		return device.fx.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	return misc_effect(device, state, 'static')
 
 
 def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = state['brightness'][0]
-	if device.fx.has('logo') and device.fx.has('scroll'):
-		return device.fx.misc.logo.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2]) and device.fx.misc.scroll_wheel.pulsate(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-	return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	if device.fx.has('pulsate'):
+		return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	return misc_effect(device, state, 'pulsate')
+
+
+def breath_device(device : Any, state : Dict[str, Any]) -> bool:
+	if device.has('brightness'):
+		device.brightness = state['brightness'][0]
+	if device.fx.has('breath_single'):
+		return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+	return misc_effect(device, state, 'breath_single')
+
+
+def misc_effect(device : Any, state : Dict[str, Any], effect_name : str) -> bool:
+	effect_state = False
+	parts =\
+	[
+		'logo'
+		'scroll'
+		'left'
+		'right'
+		'backlight'
+	]
+
+	for part in parts:
+		if device.fx.has(part + '_' + effect_name):
+			effect_state = device.misc.fx[part][effect_name](state['rgb'][0], state['rgb'][1], state['rgb'][2]) or effect_state
+	return effect_state
