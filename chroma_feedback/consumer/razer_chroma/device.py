@@ -93,7 +93,6 @@ def misc_effect(device : Any, state : Dict[str, Any], effect_name : str) -> bool
 
 	for part in parts:
 		if device.fx.has(part + '_' + effect_name):
-			part_object = getattr(device.fx.misc, part)
-			effect_function = getattr(part_object, effect_name)
+			effect_function = getattr(getattr(device.fx.misc, part), effect_name)
 			effect_state = effect_function(state['rgb'][0], state['rgb'][1], state['rgb'][2]) or effect_state
 	return effect_state
