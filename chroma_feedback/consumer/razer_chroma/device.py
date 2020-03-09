@@ -83,16 +83,16 @@ def breath_device(device : Any, state : Dict[str, Any]) -> bool:
 def misc_effect(device : Any, state : Dict[str, Any], effect_name : str) -> bool:
 	effect_state = False
 	parts =\
-	[
-		'logo',
-		'scroll_wheel',
-		'left',
-		'right',
-		'backlight'
-	]
+	{
+		'logo': 'logo',
+		'scroll': 'scroll_wheel',
+		'left': 'left',
+		'right': 'right',
+		'backlight': 'backlight'
+	}
 
-	for part in parts:
-		if device.fx.has(part + '_' + effect_name):
-			effect_function = getattr(getattr(device.fx.misc, part), effect_name)
+	for part_key, part_value in parts.items():
+		if device.fx.has(part_key + '_' + effect_name):
+			effect_function = getattr(getattr(device.fx.misc, part_value), effect_name)
 			effect_state = effect_function(state['rgb'][0], state['rgb'][1], state['rgb'][2]) or effect_state
 	return effect_state
