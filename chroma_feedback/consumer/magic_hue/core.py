@@ -33,7 +33,7 @@ def discover_ips() -> List[str]:
 	ips = []
 
 	try:
-		print()
+		ips.append('127.1.1.0')
 	except OSError:
 		print(wording.get('ip_no').format('MAGIC_HUE') + wording.get('exclamation_mark'))
 	return ips
