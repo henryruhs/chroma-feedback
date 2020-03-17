@@ -35,7 +35,7 @@ def process_devices(devices : Any, status : str, *args, **kwargs) -> List[Dict[s
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': pulsate_device(color.get_warning()) if effect == 'pulse' else static_device(color.get_process()),
+				'active': pulse_device(color.get_warning()) if effect == 'pulse' else static_device(color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -44,7 +44,7 @@ def process_devices(devices : Any, status : str, *args, **kwargs) -> List[Dict[s
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': pulsate_device(color.get_errored()),
+				'active': pulse_device(color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -53,7 +53,7 @@ def process_devices(devices : Any, status : str, *args, **kwargs) -> List[Dict[s
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': pulsate_device(color.get_failed()),
+				'active': pulse_device(color.get_failed()),
 				'status': status
 			})
 	return result
@@ -64,7 +64,7 @@ def static_device(state : Dict[str, Any]) -> bool:
 
 	return api is not None and api.fade_to_rgb(0, state['rgb'][0], state['rgb'][1], state['rgb'][2]) is None
 
-def pulsate_device(state : Dict[str, Any]) -> bool:
+def pulse_device(state : Dict[str, Any]) -> bool:
 	api = get_api()
 
 	if api is not None:
