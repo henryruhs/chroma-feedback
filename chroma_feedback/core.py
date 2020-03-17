@@ -27,7 +27,6 @@ def run(program : ArgumentParser) -> None:
 		exit(wording.get('result_no') + wording.get('exclamation_mark'))
 
 	# report producer
-
 	producer_report = reporter.create_producer_report(producer_result)
 	if producer_report:
 		reporter.print_report(producer_report)
@@ -41,8 +40,8 @@ def run(program : ArgumentParser) -> None:
 		# process consumer
 
 		status = helper.get_producer_status(producer_result)
-		consumer_result = consumer.process(program, status)
-
+		effect = helper.get_producer_effect(producer_result)
+		consumer_result = consumer.process(program, status, effect = effect)
 		# report consumer
 
 		consumer_report = reporter.create_consumer_report(consumer_result)

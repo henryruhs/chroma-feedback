@@ -11,8 +11,10 @@ def get_lights(ips : List[str]) -> List[Dict[str, Any]]:
 	return lights
 
 
-def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
+def process_lights(lights : Any, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
 	result = []
+
+	effect = kwargs.get('effect', 'default') # pylint: disable=unused-variable
 
 	# process lights
 

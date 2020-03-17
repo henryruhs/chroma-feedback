@@ -5,6 +5,7 @@ COLOR =\
 	'red': '\033[0;31m',
 	'green': '\033[0;32m',
 	'yellow': '\033[0;33m',
+	'orange': '\033[38:2:255:165:0m',
 	'end': '\033[0m'
 }
 
@@ -21,9 +22,14 @@ def format_yellow(text : str) -> str:
 	return COLOR['yellow'] + text + COLOR['end']
 
 
+def format_orange(text : str) -> str:
+	return COLOR['orange'] + text + COLOR['end']
+
+
 def get_passed() -> Dict[str, Any]:
 	return\
 	{
+		'name': 'green',
 		'rgb':
 		[
 			0,
@@ -46,10 +52,37 @@ def get_passed() -> Dict[str, Any]:
 		'kelvin': 3500
 	}
 
+def get_warning() -> Dict[str, Any]:
+	return\
+	{
+		'name': 'orange',
+		'rgb':
+		[
+			255,
+			127, # This seems very 'yellow' on a Razer Chroma mouse...is 32 better?
+			0
+		],
+		'hue': 5460,
+		'saturation':
+		[
+			100,
+			255,
+			65535
+		],
+		'brightness':
+		[
+			100,
+			255,
+			65535
+		],
+		'kelvin': 3500
+	}
+
 
 def get_process() -> Dict[str, Any]:
 	return\
 	{
+		'name': 'yellow',
 		'rgb':
 		[
 			255,
@@ -76,6 +109,7 @@ def get_process() -> Dict[str, Any]:
 def get_errored() -> Dict[str, Any]:
 	return\
 	{
+		'name': 'white',
 		'rgb':
 		[
 			255,
@@ -102,6 +136,7 @@ def get_errored() -> Dict[str, Any]:
 def get_failed() -> Dict[str, Any]:
 	return\
 	{
+		'name': 'red',
 		'rgb':
 		[
 			255,

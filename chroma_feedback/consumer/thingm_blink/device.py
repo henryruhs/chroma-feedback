@@ -12,8 +12,10 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
+def process_devices(devices : Any, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
 	result = []
+
+	effect = kwargs.get('effect', 'default')
 
 	# process devices
 
@@ -33,7 +35,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_process()),
+				'active': pulsate_device(color.get_warning()) if effect == 'pulse' else static_device(color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -42,7 +44,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_errored()),
+				'active': pulsate_device(color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -51,7 +53,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_failed()),
+				'active': pulsate_device(color.get_failed()),
 				'status': status
 			})
 	return result
@@ -61,3 +63,13 @@ def static_device(state : Dict[str, Any]) -> bool:
 	api = get_api()
 
 	return api is not None and api.fade_to_rgb(0, state['rgb'][0], state['rgb'][1], state['rgb'][2]) is None
+
+def pulsate_device(state : Dict[str, Any]) -> bool:
+	api = get_api()
+
+	if api is not None:
+		api.write_pattern_line(2000, 'black', 0)
+		api.write_pattern_line(2000, state['name'],  1)
+		return api.play(0,1,0) is None
+
+	return False

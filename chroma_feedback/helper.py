@@ -20,6 +20,11 @@ def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
 				status = 'failed'
 	return status
 
+def get_producer_effect(producer_result : List[Dict[str, Any]]) -> str:
+	for producer in producer_result:
+		if producer['active'] is True:
+			return producer.get('effect', 'default')
+	return 'default'
 
 def parse_json(response : Response) -> Any:
 	try:

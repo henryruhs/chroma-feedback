@@ -4,14 +4,14 @@ import importlib
 from chroma_feedback import helper, wording
 
 
-def process(program : ArgumentParser, status : str) -> List[Dict[str, Any]]:
-	args = helper.get_first(program.parse_known_args())
+def process(program : ArgumentParser, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
+	program_args = helper.get_first(program.parse_known_args())
 	result = []
 
-	for consumer_name in args.consumer:
+	for consumer_name in program_args.consumer:
 		consumer = load_consumer(consumer_name)
 		consumer.init(program)
-		result.extend(consumer.run(status))
+		result.extend(consumer.run(status, *args, **kwargs))
 	return result
 
 

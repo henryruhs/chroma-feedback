@@ -12,8 +12,10 @@ def get_lights(lights : Any, light_names : List[str]) -> Any:
 	return lights
 
 
-def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
+def process_lights(lights : Any, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
 	result = []
+
+	effect = kwargs.get('effect', 'default')
 
 	# process lights
 
@@ -33,7 +35,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'philips_hue',
 				'type': 'light',
 				'name': light.name,
-				'active': static_light(light.name, color.get_process()),
+				'active': pulsate_light(light.name, color.get_warning()) if effect == 'pulse' else static_light(light.name, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':

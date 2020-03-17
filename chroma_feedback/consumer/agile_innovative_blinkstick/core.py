@@ -15,10 +15,10 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : str) -> List[Dict[str, Any]]:
+def run(status : str, *args, **kwargs) -> List[Dict[str, Any]]:
 	api = get_api()
 	devices = get_devices(api.find_all(), ARGS.agile_innovative_blinkstick_device)
 
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-	return process_devices(devices, status)
+	return process_devices(devices, status, *args, **kwargs)

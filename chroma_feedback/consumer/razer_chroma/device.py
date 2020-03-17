@@ -11,11 +11,12 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
+def process_devices(devices : Any, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
 	result = []
 
-	# process devices
+	effect = kwargs.get('effect', 'default')
 
+	# process devices
 	for device in devices:
 		if status == 'passed':
 			result.append(
@@ -32,7 +33,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': static_device(device, color.get_process()),
+				'active': pulse_device(device, color.get_warning()) if effect == 'pulse' else static_device(device, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
@@ -41,7 +42,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': pulsate_device(device, color.get_errored()) or breath_device(device, color.get_errored()),
+				'active': pulse_device(device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -50,11 +51,13 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': pulsate_device(device, color.get_failed()) or breath_device(device, color.get_failed()),
+				'active': pulse_device(device, color.get_failed()),
 				'status': status
 			})
 	return result
 
+def pulse_device(device : Any, state : Dict[str, Any]) -> bool:
+	return pulsate_device(device, state) or breath_device(device, state)
 
 def static_device(device : Any, state : Dict[str, Any]) -> bool:
 	if device.has('brightness'):

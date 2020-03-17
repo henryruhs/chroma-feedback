@@ -26,7 +26,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : str) -> List[Dict[str, Any]]:
+def run(status : str, *args, **kwargs) -> List[Dict[str, Any]]:
 	api = get_api(ARGS.philips_hue_ip)
 
 	# use groups
@@ -36,7 +36,7 @@ def run(status : str) -> List[Dict[str, Any]]:
 
 		if not groups:
 			exit(wording.get('group_no') + wording.get('exclamation_mark'))
-		return process_groups(groups, status)
+		return process_groups(groups, status, *args, **kwargs)
 
 	# use lights
 
@@ -44,7 +44,7 @@ def run(status : str) -> List[Dict[str, Any]]:
 
 	if not lights:
 		exit(wording.get('light_no') + wording.get('exclamation_mark'))
-	return process_lights(lights, status)
+	return process_lights(lights, status, *args, **kwargs)
 
 
 def discover_ips() -> List[str]:

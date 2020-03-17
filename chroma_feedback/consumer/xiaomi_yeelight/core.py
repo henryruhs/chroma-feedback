@@ -22,12 +22,12 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : str) -> List[Dict[str, Any]]:
+def run(status : str, *args, **kwargs) -> List[Dict[str, Any]]:
 	lights = get_lights(ARGS.xiaomi_yeelight_ip)
 
 	if not lights:
 		exit(wording.get('light_no') + wording.get('exclamation_mark'))
-	return process_lights(lights, status)
+	return process_lights(lights, status, *args, **kwargs)
 
 
 def discover_ips() -> List[str]:

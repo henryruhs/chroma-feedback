@@ -10,6 +10,7 @@ __all__ =\
 	'gitlab',
 	'jenkins',
 	'teamcity',
+	'terraform',
 	'travis',
 	'wercker'
 ]

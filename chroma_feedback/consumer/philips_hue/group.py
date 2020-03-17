@@ -14,8 +14,10 @@ def get_groups(groups : Any, group_names : List[str]) -> Any:
 	return groups
 
 
-def process_groups(groups : Any, status : str) -> List[Dict[str, Any]]:
+def process_groups(groups : Any, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
 	result = []
+
+	effect = kwargs.get('effect', 'default')
 
 	# process groups
 
@@ -37,7 +39,7 @@ def process_groups(groups : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'philips_hue',
 				'type': 'group',
 				'name': group_name,
-				'active': static_group(group_name, color.get_process()),
+				'active': pulsate_group(group_name, color.get_warning()) if effect == 'pulse' else static_group(group_name, color.get_process()),
 				'status': status
 			})
 		if status == 'errored':
