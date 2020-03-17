@@ -1,3 +1,4 @@
+import socket
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
@@ -31,9 +32,17 @@ def run(status : str) -> List[Dict[str, Any]]:
 
 def discover_ips() -> List[str]:
 	ips = []
+	message =\
+	[
+		'HF-A11ASSISTHREAD'
+	]
+	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	discovery.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+	discovery.settimeout(2)
+	discovery.sendto('\r\n'.join(message).encode(), ('255.255.255.255', 48899))
 
 	try:
-		ips.append('127.1.1.0')
+		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 	except OSError:
-		print(wording.get('ip_no').format('MAGIC_HUE') + wording.get('exclamation_mark'))
+		print(wording.get('ip_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
 	return ips

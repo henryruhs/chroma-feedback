@@ -31,6 +31,7 @@ def run(status : str) -> List[Dict[str, Any]]:
 
 
 def discover_ips() -> List[str]:
+	ips = []
 	message =\
 	[
 		'M-SEARCH * HTTP/1.1',
@@ -42,7 +43,6 @@ def discover_ips() -> List[str]:
 	discovery.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32)
 	discovery.settimeout(2)
 	discovery.sendto('\r\n'.join(message).encode(), ('239.255.255.250', 1982))
-	ips = []
 
 	try:
 		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
