@@ -8,6 +8,7 @@ Chroma Feedback
 [![Coverage Status](https://img.shields.io/coveralls/redaxmedia/chroma-feedback.svg)](https://coveralls.io/r/redaxmedia/chroma-feedback)
 [![PyPI](https://img.shields.io/pypi/v/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
 [![License](https://img.shields.io/pypi/l/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
+[![Telegram Chat](https://img.shields.io/badge/chat-on_telegram-0088cc.svg)](https://t.me/chroma_feedback)
 
 
 Preview
