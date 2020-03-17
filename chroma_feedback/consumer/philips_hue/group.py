@@ -14,7 +14,7 @@ def get_groups(groups : Any, group_names : List[str]) -> Any:
 	return groups
 
 
-def process_groups(groups : Any, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
+def process_groups(groups : Any, status : str, *args : str, **kwargs : str) -> List[Dict[str, Any]]:
 	result = []
 
 	effect = kwargs.get('effect', 'default')

@@ -22,7 +22,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : str, *args, **kwargs) -> List[Dict[str, Any]]:
+def run(status : str, *args : str, **kwargs : str) -> List[Dict[str, Any]]:
 	lights = get_lights(ARGS.xiaomi_yeelight_ip)
 
 	if not lights:

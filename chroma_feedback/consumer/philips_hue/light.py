@@ -12,7 +12,7 @@ def get_lights(lights : Any, light_names : List[str]) -> Any:
 	return lights
 
 
-def process_lights(lights : Any, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
+def process_lights(lights : Any, status : str, *args : str, **kwargs : str) -> List[Dict[str, Any]]:
 	result = []
 
 	effect = kwargs.get('effect', 'default')

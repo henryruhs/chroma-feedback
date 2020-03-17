@@ -12,7 +12,7 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, status : str, *args, **kwargs) -> List[Dict[str, Any]]:
+def process_devices(devices : Any, status : str, *args : str, **kwargs : str) -> List[Dict[str, Any]]:
 	result = []
 
 	effect = kwargs.get('effect', 'default')

@@ -61,10 +61,11 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 						'status': status
 					}
 					result.append(normalize_data(data))
-		return result
+
+	return result
 
 
-def parse_slug(slug : str):
+def parse_slug(slug : str) -> str:
 	if slug:
 		tokens = slug.split('/')
 		if len(tokens) == 1:
