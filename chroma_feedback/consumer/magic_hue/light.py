@@ -58,6 +58,11 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 
 
 def static_light(light : Any, state : Dict[str, Any]) -> bool:
-	light.is_white = False
-	light.rgb = (state['rgb'][1], state['rgb'][0], state['rgb'][2])
+	light.mode = state.mode
+	light.speed = 0
+	return light.update_status() is None
+
+
+def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
+	light.mode = state.mode
 	return light.update_status() is None
