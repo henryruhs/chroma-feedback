@@ -400,6 +400,20 @@ chroma-feedback --consumer=lifx_light
 ```
 
 
+Magic Hue
+---------
+
+| Name     | Mandatory |
+|----------|-----------|
+| IP       | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=magic-hue
+```
+
+
 Philips Hue
 -----------
 
