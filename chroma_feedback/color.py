@@ -43,8 +43,7 @@ def get_passed() -> Dict[str, Any]:
 			255,
 			65535
 		],
-		'kelvin': 3500,
-		'mode': 0x27
+		'kelvin': 3500
 	}
 
 
@@ -70,8 +69,7 @@ def get_process() -> Dict[str, Any]:
 			255,
 			65535
 		],
-		'kelvin': 3500,
-		'mode': 0x29
+		'kelvin': 3500
 	}
 
 
@@ -97,8 +95,7 @@ def get_errored() -> Dict[str, Any]:
 			255,
 			65535
 		],
-		'kelvin': 3500,
-		'mode': 0x2c
+		'kelvin': 3500
 	}
 
 
@@ -124,6 +121,5 @@ def get_failed() -> Dict[str, Any]:
 			255,
 			65535
 		],
-		'kelvin': 3500,
-		'mode': 0x26
+		'kelvin': 3500
 	}
