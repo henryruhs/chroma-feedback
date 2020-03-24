@@ -26,4 +26,4 @@ def api_factory(ip : str) -> Any:
 			exit(wording.get('press_button').format('PAIRING', 'PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('PHUE') + wording.get('exclamation_mark'))
+		exit(wording.get('package_no').format('PHILIPS HUE') + wording.get('exclamation_mark'))

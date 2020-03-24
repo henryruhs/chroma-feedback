@@ -24,4 +24,4 @@ def api_factory() -> Any:
 			exit(wording.get('connection_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('LIFXLAN') + wording.get('exclamation_mark'))
+		exit(wording.get('package_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))

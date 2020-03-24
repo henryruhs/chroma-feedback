@@ -25,4 +25,4 @@ def api_factory() -> Any:
 			exit(wording.get('daemon_no').format('RAZER CHROMA') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('OPENRAZER') + wording.get('exclamation_mark'))
+		exit(wording.get('package_no').format('RAZER CHROMA') + wording.get('exclamation_mark'))

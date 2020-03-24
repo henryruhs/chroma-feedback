@@ -28,4 +28,4 @@ def api_factory(ip : str) -> Any:
 			exit(wording.get('enable_feature').format('LAN CONTROL', 'XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('YEELIGHT') + wording.get('exclamation_mark'))
+		exit(wording.get('package_no').format('XIAOMI YEELIGHT') + wording.get('exclamation_mark'))

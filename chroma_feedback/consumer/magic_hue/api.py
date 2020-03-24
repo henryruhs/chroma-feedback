@@ -24,7 +24,7 @@ def api_factory(ip : str) -> Any:
 			exit(wording.get('connection_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('PYTHON MAGICHUE') + wording.get('exclamation_mark'))
+		exit(wording.get('package_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
 
 
 def get_modes() -> Any:

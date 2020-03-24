@@ -25,4 +25,4 @@ def api_factory() -> Any:
 			exit(wording.get('connection_no').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('BLINKSTICK') + wording.get('exclamation_mark'))
+		exit(wording.get('package_no').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
