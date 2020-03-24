@@ -71,7 +71,7 @@ def static_light(light : Any, state : Dict[str, Any]) -> bool:
 	return light.update_status() is None
 
 
-def pulsate_light(light : Any, state) -> bool:
+def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
 	light.mode = magichue.CustomMode(
 		mode = magichue.MODE_GRADUALLY,
 		speed = 1,
