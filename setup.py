@@ -31,6 +31,7 @@ setup(
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative_blinkstick',
 		'chroma_feedback.consumer.lifx_light',
+		'chroma_feedback.consumer.magic_hue',
 		'chroma_feedback.consumer.philips_hue',
 		'chroma_feedback.consumer.razer_chroma',
 		'chroma_feedback.consumer.thingm_blink',
@@ -46,6 +47,7 @@ setup(
 		'blinkstick',
 		'lifxlan',
 		'phue',
+		'python-magichue',
 		'requests',
 		'yeelight'
 	],
