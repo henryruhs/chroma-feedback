@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
-import magichue
 from chroma_feedback import color
-from .api import get_api
+from .api import get_api, get_modes
 
 
 def get_lights(ips : List[str]) -> List[Dict[str, Any]]:
@@ -59,26 +58,32 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 
 
 def static_light(light : Any, state : Dict[str, Any]) -> bool:
-	light.mode = magichue.CustomMode(
-		mode = magichue.MODE_GRADUALLY,
-		speed = 1,
-		colors = \
-		[
-			(state['rgb'][0], state['rgb'][1], state['rgb'][2]),
-			(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-		]
-	)
+	modes = get_modes()
+
+	if modes:
+		light.mode = modes.CustomMode(
+			mode = modes.MODE_GRADUALLY,
+			speed = 1,
+			colors = \
+			[
+				(state['rgb'][0], state['rgb'][1], state['rgb'][2]),
+				(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+			]
+		)
 	return light.update_status() is None
 
 
 def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
-	light.mode = magichue.CustomMode(
-		mode = magichue.MODE_GRADUALLY,
-		speed = 1,
-		colors = \
-		[
-			(state['rgb'][0], state['rgb'][1], state['rgb'][2]),
-			(0, 0, 0)
-		]
-	)
+	modes = get_modes()
+
+	if modes:
+		light.mode = modes.CustomMode(
+			mode = modes.MODE_GRADUALLY,
+			speed = 1,
+			colors = \
+			[
+				(state['rgb'][0], state['rgb'][1], state['rgb'][2]),
+				(0, 0, 0)
+			]
+		)
 	return light.update_status() is None
