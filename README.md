@@ -411,7 +411,7 @@ Magic Hue
 Indicate status via lights:
 
 ```
-chroma-feedback --consumer=magic-hue
+chroma-feedback --consumer=magic_hue
 ```
 
 
