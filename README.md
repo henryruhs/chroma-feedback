@@ -179,6 +179,46 @@ chroma-feedback --producer=codeship
 ```
 
 
+Custom
+------
+
+| Name     | Mandatory |
+|----------|-----------|
+| Host     | required  |
+| Slug     | required  |
+
+Monitor a single project:
+
+```
+chroma-feedback --producer=custom
+
+--custom-host <host>
+--custom-slug <slug>
+```
+
+Monitor multiple projects:
+
+```
+chroma-feedback --producer=custom
+
+--custom-host <host>
+--custom-slug <slug>
+--custom-slug <slug>
+```
+
+Example for `{host}/statuses/{slug}` endpoint:
+
+```
+[
+	{
+		"slug": "chroma-feedback",
+		"active": true,
+		"status": "passed"
+	}
+]
+```
+
+
 GitHub
 ------
 
@@ -324,7 +364,6 @@ chroma-feedback --producer=travis
 
 --travis-slug <username>
 ```
-
 
 
 Wercker

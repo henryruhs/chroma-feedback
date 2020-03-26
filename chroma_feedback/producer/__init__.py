@@ -6,6 +6,7 @@ __all__ =\
 	'bamboo',
 	'circle',
 	'codeship',
+	'custom',
 	'github',
 	'gitlab',
 	'jenkins',
