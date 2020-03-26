@@ -1,6 +1,6 @@
 from typing import Any
-from chroma_feedback.producer.custom.core import fetch
 from unittest.mock import patch
+from chroma_feedback.producer.custom.core import fetch
 
 
 @patch('requests.get')
@@ -15,7 +15,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 			'status': 'passed'
 		}
 	]
-	result = fetch('http://localhost:3000', 'redaxmedia/chroma-feedback')
+	result = fetch('https://localhost', 'redaxmedia/chroma-feedback')
 
 	assert result[0]['producer'] == 'custom'
 	assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
