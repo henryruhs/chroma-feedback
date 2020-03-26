@@ -15,7 +15,7 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--jenkins-host', required = True)
 		program.add_argument('--jenkins-slug', action = 'append', required = True)
 		program.add_argument('--jenkins-username')
-		program.add_argument('--jenkins-token')
+		program.add_argument('--jenkins-password')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
@@ -23,19 +23,19 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 
 	for slug in ARGS.jenkins_slug:
-		result.extend(fetch(ARGS.jenkins_host, slug, ARGS.jenkins_username, ARGS.jenkins_token))
+		result.extend(fetch(ARGS.jenkins_host, slug, ARGS.jenkins_username, ARGS.jenkins_password))
 	return result
 
 
-def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug and username and token:
-		username_token = username + ':' + token
+	if host and slug and username and password:
+		username_password = username + ':' + password
 		response = requests.get(host + '/job/' + slug + '/lastBuild/api/json', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
+			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
 		})
 	elif host and slug:
 		response = requests.get(host + '/job/' + slug + '/lastBuild/api/json')
