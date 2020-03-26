@@ -1,21 +1,24 @@
 from typing import Any, Dict
+from chroma_feedback import helper
 
 
 def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'jenkins',
-		'slug': project['displayName'],
+		'slug': project['slug'],
 		'active': True,
-		'status': normalize_status(project['color'].lower())
+		'status': normalize_status(project['building'], project['result'])
 	}
 
 
-def normalize_status(color : str) -> str:
-	if 'anime' in color:
+def normalize_status(building : bool, status : str) -> str:
+	status = helper.to_lower_case(status)
+
+	if building is True:
 		return 'process'
-	if color == 'grey':
+	if status == 'unstable':
 		return 'errored'
-	if color == 'red':
+	if status in ['failure', 'not_build']:
 		return 'failed'
 	return 'passed'

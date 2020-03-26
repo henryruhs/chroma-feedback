@@ -287,8 +287,8 @@ Jenkins
 |----------|-----------|
 | Host     | required  |
 | Slug     | required  |
-| Username | required  |
-| Token    | required  |
+| Username | optional  |
+| Password | optional  |
 
 Monitor a single project:
 
@@ -298,7 +298,7 @@ chroma-feedback --producer=jenkins
 --jenkins-host <host>
 --jenkins-slug <job>
 --jenkins-username <username>
---jenkins-token <token>
+--jenkins-password <password>
 ```
 
 Monitor multiple projects:
@@ -310,7 +310,7 @@ chroma-feedback --producer=jenkins
 --jenkins-slug <job>
 --jenkins-slug <job>
 --jenkins-username <username>
---jenkins-token <token>
+--jenkins-password <password>
 ```
 
 

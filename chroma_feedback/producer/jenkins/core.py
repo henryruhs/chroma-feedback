@@ -14,8 +14,8 @@ def init(program : ArgumentParser) -> None:
 	if not ARGS:
 		program.add_argument('--jenkins-host', required = True)
 		program.add_argument('--jenkins-slug', action = 'append', required = True)
-		program.add_argument('--jenkins-username', required = True)
-		program.add_argument('--jenkins-token', required = True)
+		program.add_argument('--jenkins-username')
+		program.add_argument('--jenkins-token')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
@@ -33,10 +33,12 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str,
 
 	if host and slug and username and token:
 		username_token = username + ':' + token
-		response = requests.get(host + '/job/' + slug + '/api/json', headers =
+		response = requests.get(host + '/job/' + slug + '/lastBuild/api/json', headers =
 		{
 			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})
+	elif host and slug:
+		response = requests.get(host + '/job/' + slug + '/lastBuild/api/json')
 
 	# process response
 
@@ -44,5 +46,6 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str,
 		data = helper.parse_json(response)
 
 		if data:
+			data['slug'] = slug
 			result.append(normalize_data(data))
 	return result
