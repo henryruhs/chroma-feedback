@@ -179,36 +179,6 @@ chroma-feedback --producer=codeship
 ```
 
 
-Codeship
---------
-
-| Name     | Default                  | Mandatory |
-|----------|--------------------------|-----------|
-| Host     | https://api.codeship.com | optional  |
-| Slug     |                          | optional  |
-| Username |                          | required  |
-| Password |                          | required  |
-
-Monitor a single project:
-
-```
-chroma-feedback --producer=codeship
-
---codeship-slug <project-id>
---codeship-username <username>
---codeship-password <password>
-```
-
-Monitor multiple projects:
-
-```
-chroma-feedback --producer=codeship
-
---codeship-username <username>
---codeship-password <password>
-```
-
-
 Custom
 ------
 
