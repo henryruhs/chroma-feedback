@@ -28,6 +28,10 @@ def parse_json(response : Response) -> Any:
 		return None
 
 
+def to_lower_case(__string__ : Any) -> str:
+	return str(__string__).lower()
+
+
 def has_argument(argument : str) -> bool:
 	return any(argument in argv for argv in sys.argv)
 

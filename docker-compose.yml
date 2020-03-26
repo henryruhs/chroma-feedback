@@ -12,11 +12,9 @@ services:
   - 8085:8085
 
  jenkins:
-  image: 'jenkins/jenkins:lts'
+  image: 'jenkins/jenkins'
   ports:
   - 8080:8080
-  environment:
-  - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
 
  teamcity-agent:
   image: 'jetbrains/teamcity-agent'

@@ -1,4 +1,5 @@
 from typing import Any, Dict
+from chroma_feedback import helper
 
 
 def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
@@ -7,11 +8,14 @@ def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 		'producer': 'wercker',
 		'slug': build['slug'],
 		'active': True,
-		'status': normalize_status(build['status'].lower(), build['result'].lower())
+		'status': normalize_status(build['status'], build['result'])
 	}
 
 
 def normalize_status(status : str, result : str) -> str:
+	status = helper.to_lower_case(status)
+	result = helper.to_lower_case(result)
+
 	if status == 'running':
 		return 'process'
 	if result == 'aborted':
