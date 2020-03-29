@@ -50,7 +50,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 
 		if 'buildType' in data:
 			for project in data['buildType']:
-				if 'build' in project['builds']:
+				if project['builds']['build']:
 					build = helper.get_first(project['builds']['build'])
 					result.append(normalize_data(build))
 	return result

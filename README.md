@@ -329,7 +329,7 @@ Monitor a single project:
 chroma-feedback --producer=teamcity
 
 --teamcity-slug <project-id>
---teamcity-token<token>
+--teamcity-token <token>
 ```
 
 Monitor multiple projects:
