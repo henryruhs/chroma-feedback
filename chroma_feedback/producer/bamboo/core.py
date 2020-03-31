@@ -1,6 +1,5 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import base64
 import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
