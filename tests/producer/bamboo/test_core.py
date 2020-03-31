@@ -1,33 +1,49 @@
-import os
-import pytest
+from typing import Any
+from unittest.mock import patch
 from chroma_feedback.producer.bamboo.core import fetch
 
 
-def test_fetch_project_slug() -> None:
-	if 'BAMBOO_HOST' in os.environ and 'BAMBOO_PROJECT_SLUG' in os.environ and 'BAMBOO_USERNAME' in os.environ and 'BAMBOO_TOKEN' in os.environ:
-		result = fetch(os.environ['BAMBOO_HOST'], os.environ['BAMBOO_PROJECT_SLUG'], os.environ['BAMBOO_USERNAME'], os.environ['BAMBOO_TOKEN'])
+@patch('requests.get')
+def test_fetch_plan_slug(request_mock : Any) -> None:
+	request_mock.return_value.status_code = 200
+	request_mock.return_value.json.return_value = \
+	{
+		'key': 'redaxmedia-chroma_feedback',
+		'buildState': 'Failed'
+	}
+	result = fetch('http://localhost', 'redaxmedia-chroma_feedback', 'token')
 
-		assert result[0]['producer'] == 'bamboo'
-		assert result[0]['slug']
-		assert result[0]['active'] is True
-		assert result[0]['status']
-	else:
-		pytest.skip('BAMBOO_HOST and BAMBOO_PROJECT_SLUG and BAMBOO_USERNAME and BAMBOO_TOKEN must be defined.')
+	assert result[0]['producer'] == 'bamboo'
+	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
+	assert result[0]['active'] is True
+	assert result[0]['status']
 
 
-def test_fetch_plan_slug() -> None:
-	if 'BAMBOO_HOST' in os.environ and 'BAMBOO_PLAN_SLUG' in os.environ and 'BAMBOO_USERNAME' in os.environ and 'BAMBOO_TOKEN' in os.environ:
-		result = fetch(os.environ['BAMBOO_HOST'], os.environ['BAMBOO_PLAN_SLUG'], os.environ['BAMBOO_USERNAME'], os.environ['BAMBOO_TOKEN'])
+@patch('requests.get')
+def test_fetch_project_slug(request_mock : Any) -> None:
+	request_mock.return_value.status_code = 200
+	request_mock.return_value.json.return_value = \
+	{
+		'results':
+		{
+			'result':
+			[
+				{
+					'key': 'redaxmedia-chroma_feedback',
+					'buildState': 'Failed'
+				}
+			]
+		}
+	}
+	result = fetch('http://localhost', 'redaxmedia', 'token')
 
-		assert result[0]['producer'] == 'bamboo'
-		assert result[0]['slug']
-		assert result[0]['active'] is True
-		assert result[0]['status']
-	else:
-		pytest.skip('BAMBOO_HOST and BAMBOO_PLAN_SLUG and BAMBOO_USERNAME and BAMBOO_TOKEN must be defined.')
+	assert result[0]['producer'] == 'bamboo'
+	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
+	assert result[0]['active'] is True
+	assert result[0]['status']
 
 
 def test_fetch_invalid() -> None:
-	result = fetch(None, None, None, None)
+	result = fetch(None, None, None)
 
 	assert result == []

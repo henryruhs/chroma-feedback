@@ -73,7 +73,7 @@ AppVeyor
 | Slug  |                         | optional  |
 | Token |                         | optional  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=appveyor
@@ -81,7 +81,7 @@ chroma-feedback --producer=appveyor
 --appveyor-slug <username/repository>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=appveyor
@@ -93,33 +93,30 @@ chroma-feedback --producer=appveyor
 Bamboo
 ------
 
-| Name     | Mandatory |
-|----------|-----------|
-| Host     | required  |
-| Slug     | required  |
-| Username | required  |
-| Password | required  |
+| Name  | Mandatory |
+|-------|-----------|
+| Host  | required  |
+| Slug  | required  |
+| Token | required  |
 
-Monitor a single project:
-
-```
-chroma-feedback --producer=bamboo
-
---bamboo-host <host>
---bamboo-slug <project-key>
---bamboo-username <username>
---bamboo-password <password>
-```
-
-Monitor multiple projects:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=bamboo
 
 --bamboo-host <host>
 --bamboo-slug <plan>
---bamboo-username <username>
---bamboo-password <password>
+--bamboo-token <token>
+```
+
+Monitor multiple builds:
+
+```
+chroma-feedback --producer=bamboo
+
+--bamboo-host <host>
+--bamboo-slug <project>
+--bamboo-token <token>
 ```
 
 
@@ -132,7 +129,7 @@ Circle
 | Slug  |                      | optional  |
 | Token |                      | optional  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=circle
@@ -140,7 +137,7 @@ chroma-feedback --producer=circle
 --circle-slug <username/repository>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=circle
@@ -159,7 +156,7 @@ Codeship
 | Username |                          | required  |
 | Password |                          | required  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=codeship
@@ -169,7 +166,7 @@ chroma-feedback --producer=codeship
 --codeship-password <password>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=codeship
@@ -187,7 +184,7 @@ Custom
 | Host     | required  |
 | Slug     | required  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=custom
@@ -196,7 +193,7 @@ chroma-feedback --producer=custom
 --custom-slug <slug>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=custom
@@ -229,7 +226,7 @@ GitHub
 | Username |                        | required  |
 | Token    |                        | required  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=github
@@ -239,7 +236,7 @@ chroma-feedback --producer=github
 --github-token <token>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=github
@@ -260,7 +257,7 @@ GitLab
 | Slug  |                    | required  |
 | Token |                    | required  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=gitlab
@@ -269,7 +266,7 @@ chroma-feedback --producer=gitlab
 --gitlab-token <token>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=gitlab
@@ -290,7 +287,7 @@ Jenkins
 | Username | optional  |
 | Password | optional  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=jenkins
@@ -301,7 +298,7 @@ chroma-feedback --producer=jenkins
 --jenkins-password <password>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=jenkins
@@ -323,7 +320,7 @@ TeamCity
 | Slug     |                                | optional  |
 | Token    |                                | required  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=teamcity
@@ -332,7 +329,7 @@ chroma-feedback --producer=teamcity
 --teamcity-token <token>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=teamcity
@@ -349,7 +346,7 @@ Travis
 | Host | https://api.travis-ci.org | optional  |
 | Slug |                           | required  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=travis
@@ -357,7 +354,7 @@ chroma-feedback --producer=travis
 --travis-slug <username/repository>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=travis
@@ -375,7 +372,7 @@ Wercker
 | Slug  |                         | required  |
 | Token |                         | required  |
 
-Monitor a single project:
+Monitor a single build:
 
 ```
 chroma-feedback --producer=wercker
@@ -384,7 +381,7 @@ chroma-feedback --producer=wercker
 --wercker-token <token>
 ```
 
-Monitor multiple projects:
+Monitor multiple builds:
 
 ```
 chroma-feedback --producer=wercker

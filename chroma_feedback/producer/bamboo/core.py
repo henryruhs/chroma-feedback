@@ -14,8 +14,7 @@ def init(program : ArgumentParser) -> None:
 	if not ARGS:
 		program.add_argument('--bamboo-host', required = True)
 		program.add_argument('--bamboo-slug', action = 'append', required = True)
-		program.add_argument('--bamboo-username', required = True)
-		program.add_argument('--bamboo-password', required = True)
+		program.add_argument('--bamboo-token', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
 
@@ -23,20 +22,19 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 
 	for slug in ARGS.bamboo_slug:
-		result.extend(fetch(ARGS.bamboo_host, slug, ARGS.bamboo_username, ARGS.bamboo_password))
+		result.extend(fetch(ARGS.bamboo_host, slug, ARGS.bamboo_token))
 	return result
 
 
-def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug and username and password:
-		username_password = username + ':' + password
+	if host and slug and token:
 		response = requests.get(host + '/rest/api/latest/result/' + get_slug(slug), headers =
 		{
 			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
+			'Authorization': 'Bearer ' + token
 		})
 
 	# process response
