@@ -9,7 +9,7 @@ def test_fetch_plan_slug(request_mock : Any) -> None:
 	request_mock.return_value.json.return_value = \
 	{
 		'key': 'redaxmedia-chroma_feedback',
-		'buildState': 'Failed'
+		'buildState': 'Successful'
 	}
 	result = fetch('http://localhost', 'redaxmedia-chroma_feedback', 'token')
 
@@ -30,7 +30,7 @@ def test_fetch_project_slug(request_mock : Any) -> None:
 			[
 				{
 					'key': 'redaxmedia-chroma_feedback',
-					'buildState': 'Failed'
+					'buildState': 'Successful'
 				}
 			]
 		}
