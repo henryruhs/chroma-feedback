@@ -11,12 +11,6 @@ Chroma Feedback
 [![Telegram Chat](https://img.shields.io/badge/chat-on_telegram-0088cc.svg)](https://t.me/chroma_feedback)
 
 
-Preview
--------
-
-![Terminal Session](https://cdn.rawgit.com/redaxmedia/media/master/chroma-feedback/terminal-session.svg)
-
-
 Installation
 ------------
 
