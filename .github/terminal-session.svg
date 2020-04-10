@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="400" width="914">
-	<rect fill="#282c34" x="0" y="0" height="400" width="914" />
+	<rect x="0" y="0" height="400" width="914" />
 	<circle cx="20" cy="20" r="6" class="is-error" />
 	<circle cx="40" cy="20" r="6" class="is-warning "/>
 	<circle cx="60" cy="20" r="6" class="is-success" />
 	<foreignObject x="20" y="50" height="320" width="867">
 		<pre xmlns="http://www.w3.org/1999/xhtml"><span class="is-success">redaxmedia@local</span>:<span class="is-info">~</span>$ chroma-feedback -P=travis --travis-slug=redaxmedia -C=philips_hue
-chroma-feedback 7.5.0 by Henry Ruhs
+chroma-feedback 7.5.1 by Henry Ruhs
 
 <span class="is-success">✔</span> Build of redaxmedia/chroma-feedback on travis passed
 <span class="is-success">✔</span> Build of redaxmedia/grunt-ftpress on travis passed
@@ -29,6 +29,11 @@ chroma-feedback 7.5.0 by Henry Ruhs
 			::selection
 			{
 				all: unset;
+			}
+
+			rect
+			{
+				fill: #282c34;
 			}
 
 			pre
