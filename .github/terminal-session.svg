@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="400" width="900">
+	<rect fill="#282c34" x="0" y="0" height="400" width="900" />
+	<circle cx="20" cy="20" r="6" fill="#ff5f56" />
+	<circle cx="40" cy="20" r="6" fill="#ffbd2e" />
+	<circle cx="60" cy="20" r="6" fill="#27c93f" />
+	<foreignObject x="20" y="50" height="320" width="860">
+		<pre xmlns="http://www.w3.org/1999/xhtml"><span>redaxmedia@local</span>:~$ chroma-feedback -P=travis --travis-slug=redaxmedia -C=philips_hue
+chroma-feedback 7.5.0 by Henry Ruhs
+
+<span>✔</span> Build of redaxmedia/chroma-feedback on travis passed
+<span>✔</span> Build of redaxmedia/grunt-ftpress on travis passed
+<span>✔</span> Build of redaxmedia/grunt-tocgen on travis passed
+<span>✔</span> Build of redaxmedia/handpick on travis passed
+<span>✔</span> Build of redaxmedia/ncss-documentation on travis passed
+<span>✔</span> Build of redaxmedia/ncss-linter on travis passed
+<span>✔</span> Build of redaxmedia/ngx-crud on travis passed
+
+<span>✔</span> Setting Hue play 1 to build passed.
+<span>✔</span> Setting Hue play 2 to build passed.
+<span>✔</span> Setting Hue play 3 to build passed.
+<span>✔</span> Setting Hue lightstrip 1 to build passed.
+<span>✔</span> Setting Hue lightstrip 2 to build passed.
+		</pre>
+
+	</foreignObject>
+	<defs>
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro');
+
+			::selection
+			{
+				all: unset;
+			}
+
+			pre
+			{
+				color: #aaa;
+				font: 16px 'Source Code Pro', monospace;
+				margin: 0;
+			}
+
+			span
+			{
+				color: #27c93f;
+			}
+		</style>
+	</defs>
+</svg>
