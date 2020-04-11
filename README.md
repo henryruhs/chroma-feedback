@@ -14,7 +14,7 @@ Chroma Feedback
 Preview
 -------
 
-![Terminal Session](https://raw.githack.com/redaxmedia/chroma-feedback/master/.github/terminal-session.svg)
+![Terminal Session](https://raw.githubusercontent.com/redaxmedia/chroma-feedback/master/.github/terminal-session.svg?sanitize=true)
 
 
 Installation
