@@ -23,8 +23,9 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 	auth = fetch_auth(ARGS.codeship_host, ARGS.codeship_username, ARGS.codeship_password)
 
-	for organization in auth['organizations']:
-		result.extend(fetch(ARGS.codeship_host, organization['uuid'], ARGS.codeship_slug, auth['token']))
+	if 'organizations' in auth:
+		for organization in auth['organizations']:
+			result.extend(fetch(ARGS.codeship_host, organization['uuid'], ARGS.codeship_slug, auth['token']))
 	return result
 
 
@@ -43,10 +44,11 @@ def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		for project in data['projects']:
-			project_id = str(project['id'])
-			if not slug or project_id in slug:
-				result.extend(fetch_builds(host, organization, project['uuid'], token))
+		if 'projects' in data:
+			for project in data['projects']:
+				project_id = str(project['id'])
+				if not slug or project_id in slug:
+					result.extend(fetch_builds(host, organization, project['uuid'], token))
 	return result
 
 

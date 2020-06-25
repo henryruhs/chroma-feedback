@@ -8,8 +8,11 @@ def test_fetch_slug() -> None:
 		result = []
 		auth = fetch_auth('https://api.codeship.com', os.environ['CODESHIP_USERNAME'], os.environ['CODESHIP_PASSWORD'])
 
-		for organization in auth['organizations']:
-			result.extend(fetch('https://api.codeship.com', organization['uuid'], '372431', auth['token']))
+		if 'organizations' in auth:
+			for organization in auth['organizations']:
+				result.extend(fetch('https://api.codeship.com', organization['uuid'], '372431', auth['token']))
+		else:
+			pytest.skip('AUTHENTICATION FAILED')
 
 		assert result[0]['producer'] == 'codeship'
 		assert result[0]['slug'] == '372431'
@@ -24,8 +27,11 @@ def test_fetch_user() -> None:
 		result = []
 		auth = fetch_auth('https://api.codeship.com', os.environ['CODESHIP_USERNAME'], os.environ['CODESHIP_PASSWORD'])
 
-		for organization in auth['organizations']:
-			result.extend(fetch('https://api.codeship.com', organization['uuid'], None, auth['token']))
+		if 'organizations' in auth:
+			for organization in auth['organizations']:
+				result.extend(fetch('https://api.codeship.com', organization['uuid'], None, auth['token']))
+		else:
+			pytest.skip('AUTHENTICATION FAILED')
 
 		assert result[0]['producer'] == 'codeship'
 		assert result[0]['active'] is True
