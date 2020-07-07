@@ -20,7 +20,7 @@ install:
 script:
 - pylint bin/chroma-feedback chroma_feedback tests
 - mypy bin/chroma-feedback chroma_feedback tests
-- travis_retry pytest tests --cov=chroma_feedback
+- pytest tests --cov=chroma_feedback
 
 after_success:
 - coveralls
