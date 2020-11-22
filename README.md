@@ -406,7 +406,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=agile_innovative_blinkstick
 
---agile-innovative-blinkstick-device <device-serial>
+--agile-innovative-blinkstick <device-serial>
 ```
 
 
@@ -503,7 +503,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=thingm_blink
 
---thingm-blink-device <device-serial>
+--thingm-blink <device-serial>
 ```
 
 
