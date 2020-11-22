@@ -35,6 +35,9 @@ jobs:
   - run: pip install pytest-mock
   - run: pip install requests
   - run: pytest tests
+    env:
+     GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  report:
   needs: test
   runs-on: ubuntu-latest
@@ -53,3 +56,5 @@ jobs:
   - run: pip install requests
   - run: pytest tests --cov=chroma_feedback
   - run: coveralls
+    env:
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
