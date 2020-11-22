@@ -1,23 +1,19 @@
-build: false
+dist: xenial
 
-platform:
-- x64
+language: python
 
-environment:
- PYTHON: C:\\Python37-x64
- PYTHON_VERSION: 3.7.4
- PYTHON_ARCH: 64
+python:
+- 3.7
 
 install:
-- SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
 - pip install mock
 - pip install mypy
 - pip install pylint
 - pip install pytest
+- pip install pytest-cov
 - pip install pytest-mock
-- pip install requests
 
-test_script:
+script:
 - pylint bin/chroma-feedback chroma_feedback tests
 - mypy bin/chroma-feedback chroma_feedback tests
 - pytest tests
