@@ -487,7 +487,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=razer_chroma
 
---razer-chrome-device <device-name>
+--razer-chroma-device <device-name>
 ```
 
 
