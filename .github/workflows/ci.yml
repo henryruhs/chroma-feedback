@@ -12,10 +12,10 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: 3.9
-  - run: pip install requests
-  - run: pip install pylint
   - run: pip install mypy
+  - run: pip install pylint
   - run: pip install pytest
+  - run: pip install requests
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
@@ -30,8 +30,25 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: ${{ matrix.python-version }}
-  - run: pip install requests
+  - run: pip install mock
   - run: pip install pytest
   - run: pip install pytest-mock
-  - run: pip install mock
+  - run: pip install requests
   - run: pytest tests
+ report:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v2
+  - name: Set up Python 3.9
+    uses: actions/setup-python@v2
+    with:
+     python-version: 3.9 
+  - run: pip install coveralls
+  - run: pip install mock 
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install requests
+  - run: pytest tests --cov=chroma_feedback
+  - run: coveralls
