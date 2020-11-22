@@ -60,7 +60,6 @@ jobs:
   - run: pip install pytest-mock
   - run: pip install requests
   - run: pytest tests --cov=chroma_feedback
-  - run: coveralls
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
      CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
@@ -69,3 +68,6 @@ jobs:
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
+  - run: coveralls
+    env:
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
