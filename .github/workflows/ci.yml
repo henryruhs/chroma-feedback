@@ -37,10 +37,12 @@ jobs:
   - run: pytest tests
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
+     CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
      CODESHIP_USERNAME: ${{ secrets.CODESHIP_USERNAME }}
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
  report:
   needs: test
   runs-on: ubuntu-latest
@@ -61,7 +63,9 @@ jobs:
   - run: coveralls
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
+     CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
      CODESHIP_USERNAME: ${{ secrets.CODESHIP_USERNAME }}
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
