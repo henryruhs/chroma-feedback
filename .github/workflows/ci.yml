@@ -32,4 +32,6 @@ jobs:
      python-version: ${{ matrix.python-version }}
   - run: pip install requests
   - run: pip install pytest
+  - run: pip install pytest-mock
+  - run: pip install mock
   - run: pytest tests
