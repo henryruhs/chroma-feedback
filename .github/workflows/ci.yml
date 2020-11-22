@@ -1,0 +1,73 @@
+name: ci
+
+on: [ push, pull_request ]
+
+jobs:
+ lint:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v2
+  - name: Set up Python 3.9
+    uses: actions/setup-python@v2
+    with:
+     python-version: 3.9
+  - run: pip install mypy
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install requests
+  - run: pylint bin/chroma-feedback chroma_feedback tests
+  - run: mypy bin/chroma-feedback chroma_feedback tests
+ test:
+  runs-on: ubuntu-latest
+  strategy:
+   matrix:
+    python-version: [ 3.5, 3.6, 3.7, 3.8, 3.9 ]
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v2
+  - name: Set up Python ${{ matrix.python-version }}
+    uses: actions/setup-python@v2
+    with:
+     python-version: ${{ matrix.python-version }}
+  - run: pip install mock
+  - run: pip install pytest
+  - run: pip install pytest-mock
+  - run: pip install requests
+  - run: pytest tests
+    env:
+     APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
+     CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
+     CODESHIP_USERNAME: ${{ secrets.CODESHIP_USERNAME }}
+     CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
+ report:
+  needs: test
+  runs-on: ubuntu-latest
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v2
+  - name: Set up Python 3.9
+    uses: actions/setup-python@v2
+    with:
+     python-version: 3.9 
+  - run: pip install coveralls
+  - run: pip install mock 
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install requests
+  - run: pytest tests --cov=chroma_feedback
+    env:
+     APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
+     CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
+     CODESHIP_USERNAME: ${{ secrets.CODESHIP_USERNAME }}
+     CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
+  - run: coveralls
+    env:
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -5,12 +5,12 @@ build:
  - script:
     name: install
     code: |
-     pip install requests
+     pip install mock
+     pip install mypy
      pip install pylint
      pip install pytest
      pip install pytest-mock
-     pip install mock
-     pip install mypy
+     pip install requests
 
  - script:
     name: lint

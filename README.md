@@ -3,11 +3,10 @@ Chroma Feedback
 
 > Turn your RGB powered hardware into an build indicator for continuous integration.
 
-[![Build Status Travis](https://img.shields.io/travis/redaxmedia/chroma-feedback.svg)](https://travis-ci.org/redaxmedia/chroma-feedback)
+[![Build Status](https://img.shields.io/github/workflow/status/redaxmedia/chroma-feedback/ci.svg)](https://github.com/redaxmedia/chroma-feedback/actions?query=workflow:ci)
 [![Coverage Status](https://img.shields.io/coveralls/redaxmedia/chroma-feedback.svg)](https://coveralls.io/r/redaxmedia/chroma-feedback)
 [![PyPI](https://img.shields.io/pypi/v/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
 [![License](https://img.shields.io/pypi/l/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
-[![Telegram Chat](https://img.shields.io/badge/chat-on_telegram-0088cc.svg)](https://t.me/chroma_feedback)
 
 
 Preview
