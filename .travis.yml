@@ -12,6 +12,7 @@ install:
 - pip install pytest
 - pip install pytest-cov
 - pip install pytest-mock
+- pip install requests
 
 script:
 - pylint bin/chroma-feedback chroma_feedback tests
