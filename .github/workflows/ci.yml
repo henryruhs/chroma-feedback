@@ -15,5 +15,6 @@ jobs:
   - run: pip install requests
   - run: pip install pylint
   - run: pip install mypy
+  - run: pip install pytest
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
