@@ -36,6 +36,7 @@ jobs:
   - run: pip install requests
   - run: pytest tests
  report:
+  needs: test
   runs-on: ubuntu-latest
   steps:
   - name: Checkout
