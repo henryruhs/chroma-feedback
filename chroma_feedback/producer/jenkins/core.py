@@ -35,7 +35,7 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 		username_password = username + ':' + password
 		response = requests.get(host + '/job/' + slug + '/lastBuild/api/json', headers =
 		{
-			'Authorization': 'basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
+			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
 		})
 	elif host and slug:
 		response = requests.get(host + '/job/' + slug + '/lastBuild/api/json')

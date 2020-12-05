@@ -33,7 +33,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		response = requests.get(host + '/rest/api/latest/result/' + get_slug(slug), headers =
 		{
 			'Accept': 'application/json',
-			'Authorization': 'bearer ' + token
+			'Authorization': 'Bearer ' + token
 		})
 
 	# process response

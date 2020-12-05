@@ -35,7 +35,7 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str,
 		username_token = username + ':' + token
 		response = requests.get(host + '/repos/' + slug + '/status/master', headers =
 		{
-			'Authorization': 'basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
+			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})
 
 	# process response

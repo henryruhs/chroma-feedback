@@ -339,10 +339,11 @@ chroma-feedback --producer=teamcity
 Travis
 ------
 
-| Name | Default                   | Mandatory |
-|------|---------------------------|-----------|
-| Host | https://api.travis-ci.org | optional  |
-| Slug |                           | required  |
+| Name  | Default                   | Mandatory |
+|-------|---------------------------|-----------|
+| Host  | https://api.travis-ci.com | optional  |
+| Slug  |                           | required  |
+| Token |                           | required  |
 
 Monitor a single build:
 
@@ -350,6 +351,7 @@ Monitor a single build:
 chroma-feedback --producer=travis
 
 --travis-slug <username/repository>
+--travis-token <token>
 ```
 
 Monitor multiple builds:
@@ -358,6 +360,7 @@ Monitor multiple builds:
 chroma-feedback --producer=travis
 
 --travis-slug <username>
+--travis-token <token>
 ```
 
 

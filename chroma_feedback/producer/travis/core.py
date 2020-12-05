@@ -11,8 +11,9 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--travis-host', default = 'https://api.travis-ci.org')
+		program.add_argument('--travis-host', default = 'https://api.travis-ci.com')
 		program.add_argument('--travis-slug', action = 'append', required = True)
+		program.add_argument('--travis-token', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
 
@@ -20,18 +21,19 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 
 	for slug in ARGS.travis_slug:
-		result.extend(fetch(ARGS.travis_host, slug))
+		result.extend(fetch(ARGS.travis_host, slug, ARGS.travis_token))
 	return result
 
 
-def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug:
+	if host and slug and token:
 		response = requests.get(host + '/repos/' + slug, headers =
 		{
-			'Accept': 'application/vnd.travis-ci.2.1+json'
+			'Travis-API-Version': '3',
+			'Authorization': 'Token ' + token
 		})
 
 	# process response

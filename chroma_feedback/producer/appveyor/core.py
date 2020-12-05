@@ -37,7 +37,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	elif host and token:
 		response = requests.get(host + '/api/projects', headers =
 		{
-			'Authorization': 'bearer ' + token
+			'Authorization': 'Bearer ' + token
 		})
 
 	# process response
