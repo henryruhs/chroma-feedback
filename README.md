@@ -239,8 +239,6 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=github
 
---github-slug <username/repository>
---github-slug <username/repository>
 --github-username <username>
 --github-token <token>
 ```
