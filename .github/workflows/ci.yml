@@ -42,6 +42,7 @@ jobs:
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
  report:
   needs: test
@@ -67,6 +68,7 @@ jobs:
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
   - run: coveralls
     env:
