@@ -38,7 +38,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	elif host and token:
 		response = requests.get(host + '/api/v1.1/recent-builds', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
+			'Authorization': 'basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
 		})
 
 	# process response

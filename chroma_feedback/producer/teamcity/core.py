@@ -36,7 +36,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		headers =\
 		{
 			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
+			'Authorization': 'bearer ' + token
 		}
 		if slug:
 			response = requests.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers = headers)

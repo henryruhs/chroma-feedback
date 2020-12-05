@@ -36,7 +36,7 @@ def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[
 	if host and organization and token:
 		response = requests.get(host + '/v2/organizations/' + organization + '/projects', headers =
 		{
-			'Authorization': 'Bearer ' + token
+			'Authorization': 'bearer ' + token
 		})
 
 	# process response
@@ -59,7 +59,7 @@ def fetch_builds(host : str, organization : str, project : str, token : str) -> 
 	if host and organization and project and token:
 		response = requests.get(host + '/v2/organizations/' + organization + '/projects/' + project + '/builds', headers =
 		{
-			'Authorization': 'Bearer ' + token
+			'Authorization': 'bearer ' + token
 		})
 
 	# process response
@@ -82,7 +82,7 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 		username_token = username + ':' + password
 		response = requests.post(host + '/v2/auth', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
+			'Authorization': 'basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})
 
 	# process response
