@@ -32,7 +32,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	if host and slug and token:
 		response = requests.get(host + '/repos/' + slug, headers =
 		{
-			'Travis-API-Version': '3',
+			'Accept': 'application/vnd.travis-ci.2.1+json',
 			'Authorization': 'Token ' + token
 		})
 
