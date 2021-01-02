@@ -1,6 +1,5 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
@@ -30,7 +29,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = requests.get(host + '/rest/api/latest/result/' + get_slug(slug), headers =
+		response = helper.fetch('BAMBOO', host + '/rest/api/latest/result/' + get_slug(slug), headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token

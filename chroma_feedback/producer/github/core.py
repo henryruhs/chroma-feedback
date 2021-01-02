@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 import base64
-import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
@@ -38,7 +37,7 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str,
 
 	if host and slug and username and token:
 		username_token = username + ':' + token
-		response = requests.get(host + '/repos/' + slug + '/status/master', headers =
+		response = helper.fetch('GITHUB', host + '/repos/' + slug + '/status/master', headers =
 		{
 			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})
@@ -59,7 +58,7 @@ def fetch_slugs(host : str, username : str, token : str) -> List[Dict[str, Any]]
 
 	if host and username and token:
 		username_token = username + ':' + token
-		response = requests.get(host + '/user/repos', headers =
+		response = helper.fetch('GITHUB', host + '/user/repos', headers =
 		{
 			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})

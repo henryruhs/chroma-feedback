@@ -1,6 +1,5 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
@@ -34,9 +33,9 @@ def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[
 	response = None
 
 	if host and slug:
-		response = requests.get(host + '/api/v2/project/' + slug + '/pipeline')
+		response = helper.fetch('CIRCLE', host + '/api/v2/project/' + slug + '/pipeline')
 	elif host and organization and token:
-		response = requests.get(host + '/api/v2/pipeline?org-slug=' + organization, headers =
+		response = helper.fetch('CIRCLE', host + '/api/v2/pipeline?org-slug=' + organization, headers =
 		{
 			'Circle-Token': token
 		})
@@ -58,7 +57,7 @@ def fetch_workflows(host : str, pipeline_id : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and pipeline_id:
-		response = requests.get(host + '/api/v2/pipeline/' + pipeline_id + '/workflow')
+		response = helper.fetch('CIRCLE', host + '/api/v2/pipeline/' + pipeline_id + '/workflow')
 
 	# process response
 

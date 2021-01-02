@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 import base64
-import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
@@ -34,7 +33,7 @@ def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[
 	response = None
 
 	if host and organization and token:
-		response = requests.get(host + '/v2/organizations/' + organization + '/projects', headers =
+		response = helper.fetch('CODESHIP', host + '/v2/organizations/' + organization + '/projects', headers =
 		{
 			'Authorization': 'Bearer ' + token
 		})
@@ -57,7 +56,7 @@ def fetch_builds(host : str, organization : str, project : str, token : str) -> 
 	response = None
 
 	if host and organization and project and token:
-		response = requests.get(host + '/v2/organizations/' + organization + '/projects/' + project + '/builds', headers =
+		response = helper.fetch('CODESHIP', host + '/v2/organizations/' + organization + '/projects/' + project + '/builds', headers =
 		{
 			'Authorization': 'Bearer ' + token
 		})
@@ -80,7 +79,7 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 
 	if host and username and password:
 		username_token = username + ':' + password
-		response = requests.post(host + '/v2/auth', headers =
+		response = helper.fetch('CODESHIP', host + '/v2/auth', headers =
 		{
 			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})

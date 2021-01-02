@@ -1,6 +1,5 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
@@ -29,7 +28,7 @@ def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug:
-		response = requests.get(host + '/statuses/' + slug)
+		response = helper.fetch('CUSTOM', host + '/statuses/' + slug)
 
 	# process response
 

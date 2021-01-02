@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 import base64
-import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
@@ -33,12 +32,12 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 
 	if host and slug and username and password:
 		username_password = username + ':' + password
-		response = requests.get(host + '/job/' + slug + '/lastBuild/api/json', headers =
+		response = helper.fetch('JENKINS', host + '/job/' + slug + '/lastBuild/api/json', headers =
 		{
 			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
 		})
 	elif host and slug:
-		response = requests.get(host + '/job/' + slug + '/lastBuild/api/json')
+		response = helper.fetch('JENKINS', host + '/job/' + slug + '/lastBuild/api/json')
 
 	# process response
 

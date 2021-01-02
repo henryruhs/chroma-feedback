@@ -1,6 +1,8 @@
 from typing import Any, Dict, List
 import sys
-from requests import Response
+import requests
+from requests import Response, RequestException
+from chroma_feedback import wording
 
 
 def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
@@ -19,6 +21,13 @@ def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
 			if producer['status'] == 'failed':
 				status = 'failed'
 	return status
+
+
+def fetch(name : str, url : str, headers : Any = None) -> Response:
+	try:
+		return requests.get(url, headers)
+	except RequestException:
+		exit(wording.get('connection_no').format(name) + wording.get('exclamation_mark'))
 
 
 def parse_json(response : Response) -> Any:

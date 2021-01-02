@@ -1,6 +1,5 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
 
@@ -39,9 +38,9 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 			'Authorization': 'Bearer ' + token
 		}
 		if slug:
-			response = requests.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers = headers)
+			response = helper.fetch('TEAMCITY', host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers = headers)
 		else:
-			response = requests.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers = headers)
+			response = helper.fetch('TEAMCITY', host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers = headers)
 
 	# process response
 
