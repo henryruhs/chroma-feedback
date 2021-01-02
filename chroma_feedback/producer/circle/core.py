@@ -1,6 +1,5 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import base64
 import requests
 from chroma_feedback import helper
 from .normalize import normalize_data
@@ -38,14 +37,15 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	elif host and token:
 		response = requests.get(host + '/api/v1.1/recent-builds', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
+			'Circle-Token': token
 		})
 
 	# process response
 
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
+		build = helper.get_first(data)
 
-		for project in data:
-			result.append(normalize_data(project))
+		if build:
+			result.append(normalize_data(build))
 	return result
