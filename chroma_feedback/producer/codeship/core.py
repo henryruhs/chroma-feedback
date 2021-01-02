@@ -46,8 +46,7 @@ def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[
 
 		if 'projects' in data:
 			for project in data['projects']:
-				project_id = str(project['id'])
-				if not slug or project_id in slug:
+				if not slug or project['id'] in slug:
 					result.extend(fetch_builds(host, organization, project['uuid'], token))
 	return result
 

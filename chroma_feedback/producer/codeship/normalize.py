@@ -6,7 +6,7 @@ def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'codeship',
-		'slug': str(build['project_id']),
+		'slug': build['project_id'],
 		'active': True,
 		'status': normalize_status(build['status'])
 	}

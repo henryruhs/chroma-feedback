@@ -121,11 +121,12 @@ chroma-feedback --producer=bamboo
 Circle
 ------
 
-| Name  | Default              | Mandatory |
-|-------|----------------------|-----------|
-| Host  | https://circleci.com | optional  |
-| Slug  |                      | optional  |
-| Token |                      | optional  |
+| Name         | Default              | Mandatory |
+|--------------|----------------------|-----------|
+| Host         | https://circleci.com | optional  |
+| Slug         |                      | optional  |
+| Organization |                      | optional  |
+| Token        |                      | optional  |
 
 Monitor a single build:
 
@@ -140,6 +141,7 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=circle
 
+--circle-organization <organization>
 --circle-token <token>
 ```
 
@@ -385,8 +387,8 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=wercker
 
---wercker-slug <<username/application>
---wercker-slug <<username/application>
+--wercker-slug <username/application>
+--wercker-slug <username/application>
 --wercker-token <token>
 ```
 
