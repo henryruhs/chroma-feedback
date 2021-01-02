@@ -22,7 +22,7 @@ def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
 	return status
 
 
-def fetch(url : str, headers : Any = None) -> Response or None:
+def fetch(url : str, headers : Any = None) -> Any:
 	try:
 		return requests.get(url, headers = headers)
 	except RequestException:
