@@ -2,7 +2,6 @@ from typing import Any, Dict, List
 import sys
 import requests
 from requests import Response, RequestException
-from chroma_feedback import wording
 
 
 def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
@@ -23,11 +22,11 @@ def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
 	return status
 
 
-def fetch(name : str, url : str, headers : Any = None) -> Response:
+def fetch(url : str, headers : Any = None) -> Response or None:
 	try:
-		return requests.get(url, headers)
+		return requests.get(url, headers = headers)
 	except RequestException:
-		exit(wording.get('connection_no').format(name) + wording.get('exclamation_mark'))
+		return None
 
 
 def parse_json(response : Response) -> Any:

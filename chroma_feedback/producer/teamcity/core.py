@@ -38,9 +38,9 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 			'Authorization': 'Bearer ' + token
 		}
 		if slug:
-			response = helper.fetch('TEAMCITY', host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers = headers)
+			response = helper.fetch(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers = headers)
 		else:
-			response = helper.fetch('TEAMCITY', host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers = headers)
+			response = helper.fetch(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers = headers)
 
 	# process response
 

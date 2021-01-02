@@ -32,9 +32,9 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug:
-		response = helper.fetch('APPVEYOR', host + '/api/projects/' + slug)
+		response = helper.fetch(host + '/api/projects/' + slug)
 	elif host and token:
-		response = helper.fetch('APPVEYOR', host + '/api/projects', headers =
+		response = helper.fetch(host + '/api/projects', headers =
 		{
 			'Authorization': 'Bearer ' + token
 		})

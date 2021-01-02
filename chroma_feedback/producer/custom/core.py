@@ -28,7 +28,7 @@ def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug:
-		response = helper.fetch('CUSTOM', host + '/statuses/' + slug)
+		response = helper.fetch(host + '/statuses/' + slug)
 
 	# process response
 

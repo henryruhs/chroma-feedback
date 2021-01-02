@@ -29,7 +29,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = helper.fetch('GITLAB', host + '/api/v4/projects/' + slug + '/pipelines', headers =
+		response = helper.fetch(host + '/api/v4/projects/' + slug + '/pipelines', headers =
 		{
 			'Private-Token': token
 		})
@@ -51,7 +51,7 @@ def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[D
 	response = None
 
 	if host and slug and pipeline_id and token:
-		response = helper.fetch('GITLAB', host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers =
+		response = helper.fetch(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers =
 		{
 			'Private-Token': token
 		})

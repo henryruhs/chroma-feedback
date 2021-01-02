@@ -29,7 +29,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = helper.fetch('WERCKER', host + '/api/v3/applications/' + slug, headers =
+		response = helper.fetch(host + '/api/v3/applications/' + slug, headers =
 		{
 			'Bearer': token
 		})
@@ -49,7 +49,7 @@ def fetch_runs(host : str, slug : str, application_id : str, token : str) -> Lis
 	response = None
 
 	if host and slug and application_id and token:
-		response = helper.fetch('WERCKER', host + '/api/v3/runs?applicationId=' + application_id, headers =
+		response = helper.fetch(host + '/api/v3/runs?applicationId=' + application_id, headers =
 		{
 			'Bearer': token
 		})

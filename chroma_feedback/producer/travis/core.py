@@ -29,7 +29,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = helper.fetch('TRAVIS', host + '/repos/' + slug, headers =
+		response = helper.fetch(host + '/repos/' + slug, headers =
 		{
 			'Accept': 'application/vnd.travis-ci.2.1+json',
 			'Authorization': 'Token ' + token

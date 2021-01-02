@@ -33,9 +33,9 @@ def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[
 	response = None
 
 	if host and slug:
-		response = helper.fetch('CIRCLE', host + '/api/v2/project/' + slug + '/pipeline')
+		response = helper.fetch(host + '/api/v2/project/' + slug + '/pipeline')
 	elif host and organization and token:
-		response = helper.fetch('CIRCLE', host + '/api/v2/pipeline?org-slug=' + organization, headers =
+		response = helper.fetch(host + '/api/v2/pipeline?org-slug=' + organization, headers =
 		{
 			'Circle-Token': token
 		})
@@ -57,7 +57,7 @@ def fetch_workflows(host : str, pipeline_id : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and pipeline_id:
-		response = helper.fetch('CIRCLE', host + '/api/v2/pipeline/' + pipeline_id + '/workflow')
+		response = helper.fetch(host + '/api/v2/pipeline/' + pipeline_id + '/workflow')
 
 	# process response
 

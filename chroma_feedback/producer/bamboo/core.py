@@ -29,7 +29,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = helper.fetch('BAMBOO', host + '/rest/api/latest/result/' + get_slug(slug), headers =
+		response = helper.fetch(host + '/rest/api/latest/result/' + get_slug(slug), headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token

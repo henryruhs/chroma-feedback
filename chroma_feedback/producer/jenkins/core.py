@@ -32,12 +32,12 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 
 	if host and slug and username and password:
 		username_password = username + ':' + password
-		response = helper.fetch('JENKINS', host + '/job/' + slug + '/lastBuild/api/json', headers =
+		response = helper.fetch(host + '/job/' + slug + '/lastBuild/api/json', headers =
 		{
 			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
 		})
 	elif host and slug:
-		response = helper.fetch('JENKINS', host + '/job/' + slug + '/lastBuild/api/json')
+		response = helper.fetch(host + '/job/' + slug + '/lastBuild/api/json')
 
 	# process response
 
