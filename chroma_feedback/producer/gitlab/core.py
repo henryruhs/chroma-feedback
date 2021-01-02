@@ -42,7 +42,8 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		pipeline = helper.get_first(data)
 
 		if 'id' in pipeline:
-			result.extend(fetch_jobs(host, slug, pipeline['id'], token))
+			pipeline_id = str(pipeline['id'])
+			result.extend(fetch_jobs(host, slug, pipeline_id, token))
 	return result
 
 

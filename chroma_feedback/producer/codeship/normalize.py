@@ -3,10 +3,11 @@ from chroma_feedback import helper
 
 
 def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
+	print(build)
 	return\
 	{
 		'producer': 'codeship',
-		'slug': build['project_id'],
+		'slug': str(build['project_id']),
 		'active': True,
 		'status': normalize_status(build['status'])
 	}
