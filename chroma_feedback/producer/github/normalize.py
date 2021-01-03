@@ -8,17 +8,17 @@ def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 		'producer': 'github',
 		'slug': build['repository']['full_name'],
 		'active': True,
-		'status': normalize_status(build['conclusion'])
+		'status': normalize_status(build['status'], build['conclusion'])
 	}
 
 
-def normalize_status(status : str) -> str:
+def normalize_status(status : str, conclusion : str) -> str:
 	status = helper.to_lower_case(status)
 
-	if status == 'pending':
+	if status in ['queued', 'in_progress']:
 		return 'process'
-	if status == 'error':
+	if conclusion in ['cancelled', 'timed_out']:
 		return 'errored'
-	if status == 'failure':
+	if conclusion == 'failure':
 		return 'failed'
 	return 'passed'
