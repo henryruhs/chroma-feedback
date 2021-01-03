@@ -3,7 +3,6 @@ from chroma_feedback import helper
 
 
 def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
-	print(build)
 	return\
 	{
 		'producer': 'codeship',

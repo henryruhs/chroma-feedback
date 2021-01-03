@@ -70,5 +70,6 @@ def fetch_slugs(host : str, username : str, token : str) -> List[Dict[str, Any]]
 
 		if data:
 			for project in data:
-				result.append(project['full_name'])
+				if 'full_name' in project:
+					result.append(project['full_name'])
 	return result

@@ -8,14 +8,14 @@ def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 		'producer': 'teamcity',
 		'slug': build['buildType']['projectName'],
 		'active': True,
-		'status': normalize_status(build['running'], build['status'])
+		'status': normalize_status(build['status'], build['running'])
 	}
 
 
-def normalize_status(running : str, status : str) -> str:
+def normalize_status(status : str, process : str) -> str:
 	status = helper.to_lower_case(status)
 
-	if running is True:
+	if process is True:
 		return 'process'
 	if status == 'error':
 		return 'errored'

@@ -65,6 +65,6 @@ def fetch_workflows(host : str, pipeline_id : str) -> List[Dict[str, Any]]:
 		data = helper.parse_json(response)
 
 		if 'items' in data:
-			for project in data['items']:
-				result.append(normalize_data(project))
+			for build in data['items']:
+				result.append(normalize_data(build))
 	return result

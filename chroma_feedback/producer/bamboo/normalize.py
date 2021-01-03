@@ -2,13 +2,13 @@ from typing import Any, Dict
 from chroma_feedback import helper
 
 
-def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
+def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'bamboo',
-		'slug': project['key'],
+		'slug': build['key'],
 		'active': True,
-		'status': normalize_status(project['buildState'])
+		'status': normalize_status(build['buildState'])
 	}
 
 
@@ -18,3 +18,9 @@ def normalize_status(status : str) -> str:
 	if status == 'failed':
 		return 'failed'
 	return 'passed'
+
+
+def normalize_slug(slug : str) -> str:
+	if '-' in slug:
+		return slug + '-latest'
+	return slug
