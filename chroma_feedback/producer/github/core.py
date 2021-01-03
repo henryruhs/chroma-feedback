@@ -37,7 +37,7 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str,
 
 	if host and slug and username and token:
 		username_token = username + ':' + token
-		response = helper.fetch(host + '/repos/' + slug + '/status/master', headers =
+		response = helper.fetch(host + '/repos/' + slug + '/actions/runs', headers =
 		{
 			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})
@@ -47,8 +47,10 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str,
 	if response and response.status_code == 200:
 		data = helper.parse_json(response)
 
-		if data:
-			result.append(normalize_data(data))
+		if 'workflow_runs' in data:
+			build = helper.get_first(data['workflow_runs'])
+			if build:
+				result.append(normalize_data(build))
 	return result
 
 
