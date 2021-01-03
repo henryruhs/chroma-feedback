@@ -247,12 +247,11 @@ Example for `{host}/statuses/{slug}` endpoint:
 GitHub
 ------
 
-| Name     | Default                | Mandatory |
-|----------|------------------------|-----------|
-| Host     | https://api.github.com | optional  |
-| Slug     |                        | required  |
-| Username |                        | required  |
-| Token    |                        | required  |
+| Name  | Default                | Mandatory |
+|-------|------------------------|-----------|
+| Host  | https://api.github.com | optional  |
+| Slug  |                        | required  |
+| Token |                        | required  |
 
 Monitor a single build:
 
@@ -260,7 +259,6 @@ Monitor a single build:
 chroma-feedback --producer=github
 
 --github-slug <username/repository>
---github-username <username>
 --github-token <token>
 ```
 
@@ -269,7 +267,7 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=github
 
---github-username <username>
+--github-slug <username>
 --github-token <token>
 ```
 

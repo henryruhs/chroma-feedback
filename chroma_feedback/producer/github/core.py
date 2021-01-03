@@ -1,6 +1,5 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import base64
 from chroma_feedback import helper
 from .normalize import normalize_data
 
@@ -12,8 +11,7 @@ def init(program : ArgumentParser) -> None:
 
 	if not ARGS:
 		program.add_argument('--github-host', default = 'https://api.github.com')
-		program.add_argument('--github-slug', action = 'append')
-		program.add_argument('--github-username', required = True)
+		program.add_argument('--github-slug', action = 'append', required = True)
 		program.add_argument('--github-token', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
@@ -21,25 +19,25 @@ def init(program : ArgumentParser) -> None:
 def run() -> List[Dict[str, Any]]:
 	result = []
 
-	if ARGS.github_slug:
-		for slug in ARGS.github_slug:
-			result.extend(fetch(ARGS.github_host, slug, ARGS.github_username, ARGS.github_token))
-	else:
-		slugs = fetch_slugs(ARGS.github_host, ARGS.github_username, ARGS.github_token)
-		for slug in slugs:
-			result.extend(fetch(ARGS.github_host, slug, ARGS.github_username, ARGS.github_token))
+	for slug in ARGS.github_slug:
+		slugs = fetch_slugs(ARGS.github_host, slug, ARGS.github_token)
+		if slugs:
+			for __slug__ in slugs:
+				result.extend(fetch(ARGS.github_host, __slug__, ARGS.github_token))
+		else:
+			result.extend(fetch(ARGS.github_host, slug, ARGS.github_token))
 	return result
 
 
-def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug and username and token:
-		username_token = username + ':' + token
+	if host and slug and token:
 		response = helper.fetch(host + '/repos/' + slug + '/actions/runs', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
+			'Accept': 'application/vnd.github.v3+json',
+			'Authorization': 'Token ' + token
 		})
 
 	# process response
@@ -58,11 +56,11 @@ def fetch_slugs(host : str, username : str, token : str) -> List[Dict[str, Any]]
 	result = []
 	response = None
 
-	if host and username and token:
-		username_token = username + ':' + token
-		response = helper.fetch(host + '/user/repos', headers =
+	if host and token:
+		response = helper.fetch(host + '/users/' + username + '/repos', headers =
 		{
-			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
+			'Accept': 'application/vnd.github.v3+json',
+			'Authorization': 'Token ' + token
 		})
 
 	# process response
