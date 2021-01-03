@@ -118,6 +118,34 @@ chroma-feedback --producer=bamboo
 ```
 
 
+Bitbucket
+---------
+
+| Name | Default                   | Mandatory |
+|------|---------------------------|-----------|
+| Host | https://api.bitbucket.org | optional  |
+| Slug |                           | required  |
+
+Monitor a single build:
+
+```
+chroma-feedback --producer=bitbucket
+
+--bitbucket-host <host>
+--bitbucket-slug <username/repository>
+```
+
+Monitor multiple builds:
+
+```
+chroma-feedback --producer=bitbucket
+
+--bitbucket-host <host>
+--bitbucket-slug <username/repository>
+--bitbucket-slug <username/repository>
+```
+
+
 Circle
 ------
 
