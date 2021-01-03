@@ -15,7 +15,7 @@ def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 def normalize_status(status : str, conclusion : str) -> str:
 	status = helper.to_lower_case(status)
 
-	if status in ['queued', 'in_progress']:
+	if status in ['in_progress', 'queued']:
 		return 'process'
 	if conclusion in ['cancelled', 'timed_out']:
 		return 'errored'
