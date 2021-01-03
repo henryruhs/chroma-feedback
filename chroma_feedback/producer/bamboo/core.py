@@ -46,5 +46,3 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		elif data:
 			result.append(normalize_data(data))
 	return result
-
-
