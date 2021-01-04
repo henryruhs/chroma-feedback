@@ -1,7 +1,7 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 import base64
-from chroma_feedback import helper
+from chroma_feedback import helper, request
 from .normalize import normalize_data
 
 ARGS = None
@@ -32,15 +32,16 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str,
 
 	if host and slug and username and token:
 		username_token = username + ':' + token
-		response = helper.fetch(host + '/job/' + slug + '/lastBuild/api/json', headers =
+		response = request.get(host + '/job/' + slug + '/lastBuild/api/json', headers =
 		{
+			'Accept': 'application/json',
 			'Authorization': 'Basic ' + base64.b64encode(username_token.encode('utf-8')).decode('ascii')
 		})
 
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if data:
 			data['slug'] = slug

@@ -1,7 +1,5 @@
 from typing import Any, Dict, List
 import sys
-import requests
-from requests import Response, RequestException
 
 
 def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
@@ -20,20 +18,6 @@ def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
 			if producer['status'] == 'failed':
 				status = 'failed'
 	return status
-
-
-def fetch(url : str, headers : Any = None) -> Any:
-	try:
-		return requests.get(url, headers = headers)
-	except RequestException:
-		return None
-
-
-def parse_json(response : Response) -> Any:
-	try:
-		return response.json()
-	except ValueError:
-		return None
 
 
 def to_lower_case(__string__ : Any) -> str:

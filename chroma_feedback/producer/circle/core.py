@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-from chroma_feedback import helper
+from chroma_feedback import helper, request
 from .normalize import normalize_data
 
 ARGS = None
@@ -33,17 +33,21 @@ def fetch(host : str, organization : str, slug : str, token : str) -> List[Dict[
 	response = None
 
 	if host and slug:
-		response = helper.fetch(host + '/api/v2/project/' + slug + '/pipeline')
-	elif host and organization and token:
-		response = helper.fetch(host + '/api/v2/pipeline?org-slug=' + organization, headers =
+		response = request.get(host + '/api/v2/project/' + slug + '/pipeline', headers =
 		{
+			'Accept': 'application/json'
+		})
+	elif host and organization and token:
+		response = request.get(host + '/api/v2/pipeline?org-slug=' + organization, headers =
+		{
+			'Accept': 'application/json',
 			'Circle-Token': token
 		})
 
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if 'items' in data:
 			pipeline = helper.get_first(data['items'])
@@ -57,12 +61,15 @@ def fetch_workflows(host : str, pipeline_id : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and pipeline_id:
-		response = helper.fetch(host + '/api/v2/pipeline/' + pipeline_id + '/workflow')
+		response = request.get(host + '/api/v2/pipeline/' + pipeline_id + '/workflow', headers =
+		{
+			'Accept': 'application/json'
+		})
 
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if 'items' in data:
 			for build in data['items']:

@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-from chroma_feedback import helper
+from chroma_feedback import helper, request
 from .normalize import normalize_data
 
 ARGS = None
@@ -28,12 +28,15 @@ def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug:
-		response = helper.fetch(host + '/2.0/repositories/' + slug + '/pipelines/')
+		response = request.get(host + '/2.0/repositories/' + slug + '/pipelines/', headers =
+		{
+			'Accept': 'application/json'
+		})
 
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if 'values' in data:
 			build = helper.get_first(data['values'])

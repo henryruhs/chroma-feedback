@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-from chroma_feedback import helper
+from chroma_feedback import helper, request
 from .normalize import normalize_data
 
 ARGS = None
@@ -41,7 +41,7 @@ def fetch_slugs(host : str, username : str, token : str) -> List[str]:
 	response = None
 
 	if host and username and token:
-		response = helper.fetch(host + '/users/' + username + '/repos', headers =
+		response = request.get(host + '/users/' + username + '/repos', headers =
 		{
 			'Accept': 'application/vnd.github.v3+json',
 			'Authorization': 'Token ' + token
@@ -50,7 +50,7 @@ def fetch_slugs(host : str, username : str, token : str) -> List[str]:
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if data:
 			for project in data:
@@ -64,7 +64,7 @@ def fetch_runs(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = helper.fetch(host + '/repos/' + slug + '/actions/runs', headers =
+		response = request.get(host + '/repos/' + slug + '/actions/runs', headers =
 		{
 			'Accept': 'application/vnd.github.v3+json',
 			'Authorization': 'Token ' + token
@@ -73,7 +73,7 @@ def fetch_runs(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if 'workflow_runs' in data:
 			build = helper.get_first(data['workflow_runs'])
