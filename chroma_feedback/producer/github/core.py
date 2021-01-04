@@ -36,11 +36,11 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch_slugs(host : str, username : str, token : str) -> List[Dict[str, Any]]:
+def fetch_slugs(host : str, username : str, token : str) -> List[str]:
 	result = []
 	response = None
 
-	if host and token:
+	if host and username and token:
 		response = helper.fetch(host + '/users/' + username + '/repos', headers =
 		{
 			'Accept': 'application/vnd.github.v3+json',
