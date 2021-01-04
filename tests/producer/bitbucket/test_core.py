@@ -16,6 +16,6 @@ def test_fetch_slug() -> None:
 
 
 def test_fetch_invalid() -> None:
-	result = fetch(None, None)
+	result = fetch(None, None, None, None)
 
 	assert result == []
