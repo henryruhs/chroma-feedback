@@ -34,6 +34,7 @@ def test_fetch_user() -> None:
 			pytest.skip('AUTHENTICATION FAILED')
 
 		assert result[0]['producer'] == 'codeship'
+		assert result[0]['slug']
 		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:

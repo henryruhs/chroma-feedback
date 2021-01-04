@@ -20,35 +20,19 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 
 	for slug in ARGS.github_slug:
-		slugs = fetch_slugs(ARGS.github_host, slug, ARGS.github_token)
-		if slugs:
-			for __slug__ in slugs:
-				result.extend(fetch(ARGS.github_host, __slug__, ARGS.github_token))
-		else:
-			result.extend(fetch(ARGS.github_host, slug, ARGS.github_token))
+		result.extend(fetch(ARGS.github_host, slug, ARGS.github_token))
 	return result
 
 
 def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
-	response = None
+	slugs = fetch_slugs(host, slug, token)
 
-	if host and slug and token:
-		response = helper.fetch(host + '/repos/' + slug + '/actions/runs', headers =
-		{
-			'Accept': 'application/vnd.github.v3+json',
-			'Authorization': 'Token ' + token
-		})
-
-	# process response
-
-	if response and response.status_code == 200:
-		data = helper.parse_json(response)
-
-		if 'workflow_runs' in data:
-			build = helper.get_first(data['workflow_runs'])
-			if build:
-				result.append(normalize_data(build))
+	if slugs:
+		for __slug__ in slugs:
+			result.extend(fetch_runs(host, __slug__, token))
+	else:
+		result.extend(fetch_runs(host, slug, token))
 	return result
 
 
@@ -72,4 +56,27 @@ def fetch_slugs(host : str, username : str, token : str) -> List[Dict[str, Any]]
 			for project in data:
 				if 'full_name' in project:
 					result.append(project['full_name'])
+	return result
+
+
+def fetch_runs(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
+	result = []
+	response = None
+
+	if host and slug and token:
+		response = helper.fetch(host + '/repos/' + slug + '/actions/runs', headers =
+		{
+			'Accept': 'application/vnd.github.v3+json',
+			'Authorization': 'Token ' + token
+		})
+
+	# process response
+
+	if response and response.status_code == 200:
+		data = helper.parse_json(response)
+
+		if 'workflow_runs' in data:
+			build = helper.get_first(data['workflow_runs'])
+			if build:
+				result.append(normalize_data(build))
 	return result
