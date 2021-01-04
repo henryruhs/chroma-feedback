@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
-from chroma_feedback import helper
+from chroma_feedback import helper, request
 from .normalize import normalize_data
 
 ARGS = None
@@ -30,7 +29,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = requests.get(host + '/repos/' + slug, headers =
+		response = request.get(host + '/repos/' + slug, headers =
 		{
 			'Accept': 'application/vnd.travis-ci.2.1+json',
 			'Authorization': 'Token ' + token
@@ -39,7 +38,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if 'repo' in data:
 			result.append(normalize_data(data['repo']))

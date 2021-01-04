@@ -20,6 +20,7 @@ setup(
 		'chroma_feedback.producer',
 		'chroma_feedback.producer.appveyor',
 		'chroma_feedback.producer.bamboo',
+		'chroma_feedback.producer.bitbucket',
 		'chroma_feedback.producer.circle',
 		'chroma_feedback.producer.codeship',
 		'chroma_feedback.producer.github',

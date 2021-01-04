@@ -8,17 +8,17 @@ def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
 		'producer': 'jenkins',
 		'slug': project['slug'],
 		'active': True,
-		'status': normalize_status(project['building'], project['result'])
+		'status': normalize_status(project['result'], project['building'])
 	}
 
 
-def normalize_status(building : bool, status : str) -> str:
+def normalize_status(status : str, process : bool) -> str:
 	status = helper.to_lower_case(status)
 
-	if building is True:
+	if process is True:
 		return 'process'
-	if status == 'unstable':
+	if status in ['unstable', 'not_build']:
 		return 'errored'
-	if status in ['failure', 'not_build']:
+	if status == 'failure':
 		return 'failed'
 	return 'passed'

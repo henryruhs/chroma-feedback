@@ -6,7 +6,7 @@ from chroma_feedback.producer.teamcity.core import fetch
 @patch('requests.get')
 def test_fetch_slug(request_mock : Any) -> None:
 	request_mock.return_value.status_code = 200
-	request_mock.return_value.json.return_value = \
+	request_mock.return_value.json.return_value =\
 	{
 		'buildType':
 		[

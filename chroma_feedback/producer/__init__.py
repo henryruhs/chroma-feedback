@@ -4,6 +4,7 @@ __all__ =\
 [
 	'appveyor',
 	'bamboo',
+	'bitbucket',
 	'circle',
 	'codeship',
 	'custom',

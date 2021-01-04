@@ -1,8 +1,7 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
-from chroma_feedback import helper
-from .normalize import normalize_data
+from chroma_feedback import helper, request
+from .normalize import normalize_data, normalize_slug
 
 ARGS = None
 
@@ -30,7 +29,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = requests.get(host + '/rest/api/latest/result/' + get_slug(slug), headers =
+		response = request.get(host + '/rest/api/latest/result/' + normalize_slug(slug), headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token
@@ -39,17 +38,11 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if 'results' in data and 'result' in data['results']:
-			for plan in data['results']['result']:
-				result.append(normalize_data(plan))
+			for project in data['results']['result']:
+				result.append(normalize_data(project))
 		elif data:
 			result.append(normalize_data(data))
 	return result
-
-
-def get_slug(slug : str) -> str:
-	if '-' in slug:
-		return slug + '-latest'
-	return slug

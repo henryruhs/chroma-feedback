@@ -2,23 +2,23 @@ from typing import Any, Dict
 from chroma_feedback import helper
 
 
-def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
+def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'github',
-		'slug': project['repository']['full_name'],
+		'slug': build['repository']['full_name'],
 		'active': True,
-		'status': normalize_status(project['state'])
+		'status': normalize_status(build['status'], build['conclusion'])
 	}
 
 
-def normalize_status(status : str) -> str:
+def normalize_status(status : str, conclusion : str) -> str:
 	status = helper.to_lower_case(status)
 
-	if status == 'pending':
+	if status in ['in_progress', 'queued']:
 		return 'process'
-	if status == 'error':
+	if conclusion in ['cancelled', 'timed_out']:
 		return 'errored'
-	if status == 'failure':
+	if conclusion == 'failure':
 		return 'failed'
 	return 'passed'

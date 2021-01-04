@@ -5,20 +5,20 @@ from chroma_feedback import helper
 def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 	return\
 	{
-		'producer': 'teamcity',
-		'slug': build['buildType']['projectName'],
+		'producer': 'bitbucket',
+		'slug': build['repository']['full_name'],
 		'active': True,
-		'status': normalize_status(build['status'], build['running'])
+		'status': normalize_status(build['state']['result']['name'])
 	}
 
 
-def normalize_status(status : str, process : str) -> str:
+def normalize_status(status : str) -> str:
 	status = helper.to_lower_case(status)
 
-	if process is True:
+	if status == 'inprogress':
 		return 'process'
-	if status == 'error':
+	if status == 'stopped':
 		return 'errored'
-	if status == 'failure':
+	if status == 'failed':
 		return 'failed'
 	return 'passed'

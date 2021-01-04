@@ -69,7 +69,7 @@ AppVeyor
 |-------|-------------------------|-----------|
 | Host  | https://ci.appveyor.com | optional  |
 | Slug  |                         | optional  |
-| Token |                         | optional  |
+| Token |                         | required  |
 
 Monitor a single build:
 
@@ -77,6 +77,7 @@ Monitor a single build:
 chroma-feedback --producer=appveyor
 
 --appveyor-slug <username/repository>
+--appveyor-token <token>
 ```
 
 Monitor multiple builds:
@@ -118,14 +119,47 @@ chroma-feedback --producer=bamboo
 ```
 
 
+Bitbucket
+---------
+
+| Name     | Default                   | Mandatory |
+|----------|---------------------------|-----------|
+| Host     | https://api.bitbucket.org | optional  |
+| Slug     |                           | required  |
+| Username |                           | required  |
+| Password |                           | required  |
+
+Monitor a single build:
+
+```
+chroma-feedback --producer=bitbucket
+
+--bitbucket-slug <username/repository>
+--bitbucket-username <username>
+--bitbucket-password <password>
+```
+
+Monitor multiple builds:
+
+```
+chroma-feedback --producer=bitbucket
+
+--bitbucket-slug <username/repository>
+--bitbucket-slug <username/repository>
+--bitbucket-username <username>
+--bitbucket-password <password>
+```
+
+
 Circle
 ------
 
-| Name  | Default              | Mandatory |
-|-------|----------------------|-----------|
-| Host  | https://circleci.com | optional  |
-| Slug  |                      | optional  |
-| Token |                      | optional  |
+| Name         | Default              | Mandatory |
+|--------------|----------------------|-----------|
+| Host         | https://circleci.com | optional  |
+| Slug         |                      | optional  |
+| Organization |                      | optional  |
+| Token        |                      | required  |
 
 Monitor a single build:
 
@@ -133,6 +167,7 @@ Monitor a single build:
 chroma-feedback --producer=circle
 
 --circle-slug <username/repository>
+--circle-token <token>
 ```
 
 Monitor multiple builds:
@@ -140,6 +175,7 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=circle
 
+--circle-organization <organization>
 --circle-token <token>
 ```
 
@@ -217,12 +253,11 @@ Example for `{host}/statuses/{slug}` endpoint:
 GitHub
 ------
 
-| Name     | Default                | Mandatory |
-|----------|------------------------|-----------|
-| Host     | https://api.github.com | optional  |
-| Slug     |                        | required  |
-| Username |                        | required  |
-| Token    |                        | required  |
+| Name  | Default                | Mandatory |
+|-------|------------------------|-----------|
+| Host  | https://api.github.com | optional  |
+| Slug  |                        | required  |
+| Token |                        | required  |
 
 Monitor a single build:
 
@@ -230,7 +265,6 @@ Monitor a single build:
 chroma-feedback --producer=github
 
 --github-slug <username/repository>
---github-username <username>
 --github-token <token>
 ```
 
@@ -239,7 +273,7 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=github
 
---github-username <username>
+--github-slug <username>
 --github-token <token>
 ```
 
@@ -280,8 +314,8 @@ Jenkins
 |----------|-----------|
 | Host     | required  |
 | Slug     | required  |
-| Username | optional  |
-| Password | optional  |
+| Username | required  |
+| Password | required  |
 
 Monitor a single build:
 
@@ -385,8 +419,8 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=wercker
 
---wercker-slug <<username/application>
---wercker-slug <<username/application>
+--wercker-slug <username/application>
+--wercker-slug <username/application>
 --wercker-token <token>
 ```
 

@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
-from chroma_feedback import helper
+from chroma_feedback import helper, request
 from .normalize import normalize_data
 
 ARGS = None
@@ -32,25 +31,28 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and token:
-		headers =\
+	if host and slug and token:
+		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token
-		}
-		if slug:
-			response = requests.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers = headers)
-		else:
-			response = requests.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers = headers)
+		})
+	elif host and token:
+		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers =
+		{
+			'Accept': 'application/json',
+			'Authorization': 'Bearer ' + token
+		})
 
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		if 'buildType' in data:
 			for project in data['buildType']:
 				if project['builds']['build']:
 					build = helper.get_first(project['builds']['build'])
-					result.append(normalize_data(build))
+					if build:
+						result.append(normalize_data(build))
 	return result

@@ -1,7 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-import requests
-from chroma_feedback import helper
+from chroma_feedback import helper, request
 from .normalize import normalize_data
 
 ARGS = None
@@ -30,18 +29,19 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = requests.get(host + '/api/v4/projects/' + slug + '/pipelines', headers =
+		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines', headers =
 		{
+			'Accept': 'application/json',
 			'Private-Token': token
 		})
 
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 		pipeline = helper.get_first(data)
 
-		if pipeline:
+		if 'id' in pipeline:
 			pipeline_id = str(pipeline['id'])
 			result.extend(fetch_jobs(host, slug, pipeline_id, token))
 	return result
@@ -52,15 +52,16 @@ def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[D
 	response = None
 
 	if host and slug and pipeline_id and token:
-		response = requests.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers =
+		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers =
 		{
+			'Accept': 'application/json',
 			'Private-Token': token
 		})
 
 	# process response
 
 	if response and response.status_code == 200:
-		data = helper.parse_json(response)
+		data = request.parse_json(response)
 
 		for build in data:
 			build['slug'] = slug

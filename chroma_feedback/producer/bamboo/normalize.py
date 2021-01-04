@@ -18,3 +18,9 @@ def normalize_status(status : str) -> str:
 	if status == 'failed':
 		return 'failed'
 	return 'passed'
+
+
+def normalize_slug(slug : str) -> str:
+	if '-' in slug:
+		return slug + '-latest'
+	return slug
