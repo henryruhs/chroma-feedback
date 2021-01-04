@@ -1,5 +1,6 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
+import base64
 from chroma_feedback import helper, request
 from .normalize import normalize_data
 
@@ -12,6 +13,8 @@ def init(program : ArgumentParser) -> None:
 	if not ARGS:
 		program.add_argument('--bitbucket-host', default = 'https://api.bitbucket.org')
 		program.add_argument('--bitbucket-slug', action = 'append')
+		program.add_argument('--bitbucket-username', required = True)
+		program.add_argument('--bitbucket-password', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
 
@@ -19,18 +22,20 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 
 	for slug in ARGS.bitbucket_slug:
-		result.extend(fetch(ARGS.bitbucket_host, slug))
+		result.extend(fetch(ARGS.bitbucket_host, slug, ARGS.bitbucket_username, ARGS.bitbucket_password,))
 	return result
 
 
-def fetch(host : str, slug : str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug:
+	if host and slug and username and password:
+		username_password = username + ':' + password
 		response = request.get(host + '/2.0/repositories/' + slug + '/pipelines/', headers =
 		{
-			'Accept': 'application/json'
+			'Accept': 'application/json',
+			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
 		})
 
 	# process response

@@ -122,18 +122,21 @@ chroma-feedback --producer=bamboo
 Bitbucket
 ---------
 
-| Name | Default                   | Mandatory |
-|------|---------------------------|-----------|
-| Host | https://api.bitbucket.org | optional  |
-| Slug |                           | required  |
+| Name     | Default                   | Mandatory |
+|----------|---------------------------|-----------|
+| Host     | https://api.bitbucket.org | optional  |
+| Slug     |                           | required  |
+| Username |                           | required  |
+| Password |                           | required  |
 
 Monitor a single build:
 
 ```
 chroma-feedback --producer=bitbucket
 
---bitbucket-host <host>
 --bitbucket-slug <username/repository>
+--bitbucket-username <username>
+--bitbucket-password <password>
 ```
 
 Monitor multiple builds:
@@ -141,9 +144,10 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=bitbucket
 
---bitbucket-host <host>
 --bitbucket-slug <username/repository>
 --bitbucket-slug <username/repository>
+--bitbucket-username <username>
+--bitbucket-password <password>
 ```
 
 
