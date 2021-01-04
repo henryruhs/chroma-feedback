@@ -5,10 +5,10 @@ from chroma_feedback.producer.codeship.core import fetch
 
 def test_fetch_slug() -> None:
 	if 'CODESHIP_USERNAME' in os.environ and 'CODESHIP_PASSWORD' in os.environ:
-		result = fetch('https://api.codeship.com', '372431', os.environ['CODESHIP_USERNAME'], os.environ['CODESHIP_PASSWORD'])
+		result = fetch('https://api.codeship.com', 'redaxmedia/chroma-feedback', os.environ['CODESHIP_USERNAME'], os.environ['CODESHIP_PASSWORD'])
 
 		assert result[0]['producer'] == 'codeship'
-		assert result[0]['slug'] == '372431'
+		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
 		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:

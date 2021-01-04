@@ -26,17 +26,18 @@ def run() -> List[Dict[str, Any]]:
 
 def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
-	slugs = fetch_slugs(host, slug, token)
+	repositories = fetch_repositories(host, slug, token)
 
-	if slugs:
-		for __slug__ in slugs:
-			result.extend(fetch_runs(host, __slug__, token))
+	if repositories:
+		for repository in repositories:
+			if 'full_name' in repository:
+				result.extend(fetch_runs(host, repository['full_name'], token))
 	else:
 		result.extend(fetch_runs(host, slug, token))
 	return result
 
 
-def fetch_slugs(host : str, username : str, token : str) -> List[str]:
+def fetch_repositories(host : str, username : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
@@ -54,8 +55,7 @@ def fetch_slugs(host : str, username : str, token : str) -> List[str]:
 
 		if data:
 			for project in data:
-				if 'full_name' in project:
-					result.append(project['full_name'])
+				result.append(project)
 	return result
 
 

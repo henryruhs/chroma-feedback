@@ -195,7 +195,7 @@ Monitor a single build:
 ```
 chroma-feedback --producer=codeship
 
---codeship-slug <project-id>
+--codeship-slug <username/repository>
 --codeship-username <username>
 --codeship-password <password>
 ```

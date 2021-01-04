@@ -22,8 +22,7 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 
 	if ARGS.codeship_slug:
-		for slug in ARGS.codeship_slug:
-			result.extend(fetch(ARGS.codeship_host, slug, ARGS.codeship_username, ARGS.codeship_password))
+		result.extend(fetch(ARGS.codeship_host, ARGS.codeship_slug, ARGS.codeship_username, ARGS.codeship_password))
 	else:
 		result.extend(fetch(ARGS.codeship_host, None, ARGS.codeship_username, ARGS.codeship_password))
 	return result
@@ -35,7 +34,10 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 
 	if 'organizations' in auth and 'token' in auth:
 		for organization in auth['organizations']:
-			result.extend(fetch_projects(host, organization['uuid'], slug, auth['token']))
+			projects = fetch_projects(host, organization['uuid'], auth['token'])
+			for project in projects:
+				if not slug or project['name'] in slug:
+					result.extend(fetch_builds(host, organization['uuid'], project['name'], project['uuid'], auth['token']))
 	return result
 
 
@@ -62,12 +64,12 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 	return result
 
 
-def fetch_projects(host : str, organization : str, slug : str, token : str) -> List[Dict[str, Any]]:
+def fetch_projects(host : str, organization_id : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and organization and token:
-		response = request.get(host + '/v2/organizations/' + organization + '/projects', headers =
+	if host and organization_id and token:
+		response = request.get(host + '/v2/organizations/' + organization_id + '/projects', headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token
@@ -80,18 +82,16 @@ def fetch_projects(host : str, organization : str, slug : str, token : str) -> L
 
 		if 'projects' in data:
 			for project in data['projects']:
-				project_id = str(project['id'])
-				if not slug or slug == project_id:
-					result.extend(fetch_builds(host, organization, project['uuid'], token))
+				result.append(project)
 	return result
 
 
-def fetch_builds(host : str, organization : str, project : str, token : str) -> List[Dict[str, Any]]:
+def fetch_builds(host : str, organization_id : str, slug : str, project_id : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and organization and project and token:
-		response = request.get(host + '/v2/organizations/' + organization + '/projects/' + project + '/builds', headers =
+	if host and organization_id and project_id and token:
+		response = request.get(host + '/v2/organizations/' + organization_id + '/projects/' + project_id + '/builds', headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token
@@ -105,5 +105,6 @@ def fetch_builds(host : str, organization : str, project : str, token : str) -> 
 		if 'builds' in data:
 			build = helper.get_first(data['builds'])
 			if build:
+				build['slug'] = slug
 				result.append(normalize_data(build))
 	return result
