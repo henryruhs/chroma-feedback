@@ -309,8 +309,8 @@ Jenkins
 |----------|-----------|
 | Host     | required  |
 | Slug     | required  |
-| Username | optional  |
-| Password | optional  |
+| Username | required  |
+| Password | required  |
 
 Monitor a single build:
 
