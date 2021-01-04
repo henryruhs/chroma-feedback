@@ -31,16 +31,18 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and token:
-		headers =\
+	if host and slug and token:
+		response = helper.fetch(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token
-		}
-		if slug:
-			response = helper.fetch(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers = headers)
-		else:
-			response = helper.fetch(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers = headers)
+		})
+	elif host and token:
+		response = helper.fetch(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers =
+		{
+			'Accept': 'application/json',
+			'Authorization': 'Bearer ' + token
+		})
 
 	# process response
 

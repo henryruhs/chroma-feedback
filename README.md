@@ -69,7 +69,7 @@ AppVeyor
 |-------|-------------------------|-----------|
 | Host  | https://ci.appveyor.com | optional  |
 | Slug  |                         | optional  |
-| Token |                         | optional  |
+| Token |                         | required  |
 
 Monitor a single build:
 
@@ -77,6 +77,7 @@ Monitor a single build:
 chroma-feedback --producer=appveyor
 
 --appveyor-slug <username/repository>
+--appveyor-token <token>
 ```
 
 Monitor multiple builds:

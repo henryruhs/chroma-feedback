@@ -12,7 +12,7 @@ def init(program : ArgumentParser) -> None:
 	if not ARGS:
 		program.add_argument('--appveyor-host', default = 'https://ci.appveyor.com')
 		program.add_argument('--appveyor-slug', action = 'append')
-		program.add_argument('--appveyor-token')
+		program.add_argument('--appveyor-token', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
 
@@ -31,8 +31,11 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug:
-		response = helper.fetch(host + '/api/projects/' + slug)
+	if host and slug and token:
+		response = helper.fetch(host + '/api/projects/' + slug, headers =
+		{
+			'Authorization': 'Bearer ' + token
+		})
 	elif host and token:
 		response = helper.fetch(host + '/api/projects', headers =
 		{
