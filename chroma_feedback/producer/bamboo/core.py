@@ -41,8 +41,8 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		data = request.parse_json(response)
 
 		if 'results' in data and 'result' in data['results']:
-			for build in data['results']['result']:
-				result.append(normalize_data(build))
+			for project in data['results']['result']:
+				result.append(normalize_data(project))
 		elif data:
 			result.append(normalize_data(data))
 	return result
