@@ -26,13 +26,13 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
-		if status == 'process':
+		if status == 'started':
 			result.append(
 			{
 				'consumer': 'razer_chroma',
 				'type': 'device',
 				'name': device.name,
-				'active': static_device(device, color.get_process()),
+				'active': static_device(device, color.get_started()),
 				'status': status
 			})
 		if status == 'errored':

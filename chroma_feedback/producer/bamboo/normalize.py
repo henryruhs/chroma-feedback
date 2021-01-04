@@ -15,6 +15,8 @@ def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
 def normalize_status(status : str) -> str:
 	status = helper.to_lower_case(status)
 
+	if status == 'unknown':
+		return 'errored'
 	if status == 'failed':
 		return 'failed'
 	return 'passed'

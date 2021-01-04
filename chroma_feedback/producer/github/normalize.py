@@ -16,7 +16,7 @@ def normalize_status(status : str, conclusion : str) -> str:
 	status = helper.to_lower_case(status)
 
 	if status in ['in_progress', 'queued']:
-		return 'process'
+		return 'started'
 	if conclusion in ['cancelled', 'timed_out']:
 		return 'errored'
 	if conclusion == 'failure':

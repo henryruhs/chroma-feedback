@@ -27,13 +27,13 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'active': static_device(color.get_passed()),
 				'status': status
 			})
-		if status == 'process':
+		if status == 'started':
 			result.append(
 			{
 				'consumer': 'thingm_blink',
 				'type': 'device',
 				'name': device,
-				'active': static_device(color.get_process()),
+				'active': static_device(color.get_started()),
 				'status': status
 			})
 		if status == 'errored':

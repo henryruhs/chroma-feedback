@@ -23,17 +23,17 @@ def test_process_passed() -> None:
 		pytest.skip()
 
 
-def test_process_process() -> None:
+def test_process_started() -> None:
 	try:
 		result = process_devices(
 		{
 			MOCK
-		}, 'process')
+		}, 'started')
 
 		assert result[0]['consumer'] == 'agile_innovative_blinkstick'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
-		assert result[0]['status'] == 'process'
+		assert result[0]['status'] == 'started'
 	except:
 		pytest.skip()
 

@@ -31,13 +31,13 @@ def process_groups(groups : Any, status : str) -> List[Dict[str, Any]]:
 				'active': static_group(group_name, color.get_passed()),
 				'status': status
 			})
-		if status == 'process':
+		if status == 'started':
 			result.append(
 			{
 				'consumer': 'philips_hue',
 				'type': 'group',
 				'name': group_name,
-				'active': static_group(group_name, color.get_process()),
+				'active': static_group(group_name, color.get_started()),
 				'status': status
 			})
 		if status == 'errored':

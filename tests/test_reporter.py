@@ -15,18 +15,18 @@ def test_create_producer_report_passed() -> None:
 	assert 'Build of redaxmedia/chroma-feedback on travis passed' in producer_report[0]
 
 
-def test_create_producer_report_process() -> None:
+def test_create_producer_report_started() -> None:
 	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
 			'producer': 'travis',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
-			'status': 'process'
+			'status': 'started'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis in process' in producer_report[0]
+	assert 'Build of redaxmedia/chroma-feedback on travis started' in producer_report[0]
 
 
 def test_create_producer_report_errored() -> None:
@@ -71,18 +71,18 @@ def test_create_consumer_report_passed() -> None:
 	assert 'Setting Razer Chroma to build passed' in consumer_report[0]
 
 
-def test_create_consumer_report_process() -> None:
+def test_create_consumer_report_started() -> None:
 	consumer_report = reporter.create_consumer_report(consumer_result =
 	[
 		{
 			'consumer': 'razer_chroma',
 			'name': 'Razer Chroma',
 			'active': True,
-			'status': 'process'
+			'status': 'started'
 		}
 	])
 
-	assert 'Setting Razer Chroma to build in process' in consumer_report[0]
+	assert 'Setting Razer Chroma to build started' in consumer_report[0]
 
 
 def test_create_consumer_report_errored() -> None:

@@ -9,9 +9,9 @@ def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
 
 	for producer in producer_result:
 		if producer['active'] is True:
-			if producer['status'] == 'process':
+			if producer['status'] == 'started':
 				if status not in ['errored', 'failed']:
-					status = 'process'
+					status = 'started'
 			if producer['status'] == 'errored':
 				if status != 'failed':
 					status = 'errored'

@@ -30,13 +30,13 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 				'active': static_light(light, color.get_passed()),
 				'status': status
 			})
-		if status == 'process':
+		if status == 'started':
 			result.append(
 			{
 				'consumer': 'lifx_light',
 				'type': 'light',
 				'name': light_name,
-				'active': static_light(light, color.get_process()),
+				'active': static_light(light, color.get_started()),
 				'status': status
 			})
 		if status == 'errored':

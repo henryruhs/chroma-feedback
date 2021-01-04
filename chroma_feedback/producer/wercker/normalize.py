@@ -17,7 +17,7 @@ def normalize_status(status : str, result : str) -> str:
 	result = helper.to_lower_case(result)
 
 	if status == 'running':
-		return 'process'
+		return 'started'
 	if result == 'aborted':
 		return 'errored'
 	if result == 'failed':

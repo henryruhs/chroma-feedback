@@ -12,11 +12,11 @@ def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
 	}
 
 
-def normalize_status(status : str, process : bool) -> str:
+def normalize_status(status : str, started : bool) -> str:
 	status = helper.to_lower_case(status)
 
-	if process is True:
-		return 'process'
+	if started is True:
+		return 'started'
 	if status in ['unstable', 'not_build']:
 		return 'errored'
 	if status == 'failure':

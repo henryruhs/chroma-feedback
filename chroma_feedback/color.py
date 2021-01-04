@@ -2,23 +2,23 @@ from typing import Any, Dict
 
 COLOR =\
 {
-	'red': '\033[0;31m',
-	'green': '\033[0;32m',
-	'yellow': '\033[0;33m',
+	'failed': '\033[0;31m',
+	'passed': '\033[0;32m',
+	'started': '\033[0;33m',
 	'end': '\033[0m'
 }
 
 
-def format_red(text : str) -> str:
-	return COLOR['red'] + text + COLOR['end']
+def format_passed(text : str) -> str:
+	return COLOR['passed'] + text + COLOR['end']
 
 
-def format_green(text : str) -> str:
-	return COLOR['green'] + text + COLOR['end']
+def format_started(text : str) -> str:
+	return COLOR['started'] + text + COLOR['end']
 
 
-def format_yellow(text : str) -> str:
-	return COLOR['yellow'] + text + COLOR['end']
+def format_failed(text : str) -> str:
+	return COLOR['failed'] + text + COLOR['end']
 
 
 def get_passed() -> Dict[str, Any]:
@@ -47,7 +47,7 @@ def get_passed() -> Dict[str, Any]:
 	}
 
 
-def get_process() -> Dict[str, Any]:
+def get_started() -> Dict[str, Any]:
 	return\
 	{
 		'rgb':

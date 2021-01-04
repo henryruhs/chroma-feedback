@@ -27,13 +27,13 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 				'active': static_light(light.name, color.get_passed()),
 				'status': status
 			})
-		if status == 'process':
+		if status == 'started':
 			result.append(
 			{
 				'consumer': 'philips_hue',
 				'type': 'light',
 				'name': light.name,
-				'active': static_light(light.name, color.get_process()),
+				'active': static_light(light.name, color.get_started()),
 				'status': status
 			})
 		if status == 'errored':

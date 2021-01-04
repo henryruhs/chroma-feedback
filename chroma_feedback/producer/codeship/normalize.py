@@ -16,7 +16,7 @@ def normalize_status(status : str) -> str:
 	status = helper.to_lower_case(status)
 
 	if status in ['initiated', 'testing', 'waiting']:
-		return 'process'
+		return 'started'
 	if status in ['error', 'blocked', 'ignored']:
 		return 'errored'
 	if status in ['failed', 'infrastructure_failure']:

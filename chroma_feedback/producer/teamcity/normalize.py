@@ -12,11 +12,11 @@ def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
 	}
 
 
-def normalize_status(status : str, process : str) -> str:
+def normalize_status(status : str, started : str) -> str:
 	status = helper.to_lower_case(status)
 
-	if process is True:
-		return 'process'
+	if started is True:
+		return 'started'
 	if status == 'error':
 		return 'errored'
 	if status == 'failure':
