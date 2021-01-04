@@ -6,7 +6,7 @@ from chroma_feedback.producer.bamboo.core import fetch
 @patch('requests.get')
 def test_fetch_plan_slug(request_mock : Any) -> None:
 	request_mock.return_value.status_code = 200
-	request_mock.return_value.json.return_value = \
+	request_mock.return_value.json.return_value =\
 	{
 		'key': 'redaxmedia-chroma_feedback',
 		'buildState': 'Successful'
@@ -22,7 +22,7 @@ def test_fetch_plan_slug(request_mock : Any) -> None:
 @patch('requests.get')
 def test_fetch_project_slug(request_mock : Any) -> None:
 	request_mock.return_value.status_code = 200
-	request_mock.return_value.json.return_value = \
+	request_mock.return_value.json.return_value =\
 	{
 		'results':
 		{

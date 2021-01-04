@@ -64,7 +64,7 @@ def static_light(light : Any, state : Dict[str, Any]) -> bool:
 		light.mode = modes.CustomMode(
 			mode = modes.MODE_GRADUALLY,
 			speed = 1,
-			colors = \
+			colors =\
 			[
 				(state['rgb'][0], state['rgb'][1], state['rgb'][2]),
 				(state['rgb'][0], state['rgb'][1], state['rgb'][2])
@@ -80,7 +80,7 @@ def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
 		light.mode = modes.CustomMode(
 			mode = modes.MODE_GRADUALLY,
 			speed = 1,
-			colors = \
+			colors =\
 			[
 				(state['rgb'][0], state['rgb'][1], state['rgb'][2]),
 				(0, 0, 0)

@@ -1,6 +1,6 @@
 import os
 import pytest
-from chroma_feedback.producer.github.core import fetch, fetch_slugs
+from chroma_feedback.producer.github.core import fetch
 
 def test_fetch_slug() -> None:
 	if 'GITHUB_TOKEN' in os.environ:
