@@ -36,6 +36,7 @@ setup(
 		'chroma_feedback.consumer.philips_hue',
 		'chroma_feedback.consumer.razer_chroma',
 		'chroma_feedback.consumer.thingm_blink',
+		'chroma_feedback.consumer.wiz_light',
 		'chroma_feedback.consumer.xiaomi_yeelight'
 	],
 	scripts =
@@ -49,6 +50,7 @@ setup(
 		'lifxlan',
 		'phue',
 		'python-magichue',
+		'pywizlight',
 		'requests',
 		'yeelight'
 	],

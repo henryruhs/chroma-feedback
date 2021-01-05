@@ -213,10 +213,10 @@ chroma-feedback --producer=codeship
 Custom
 ------
 
-| Name     | Mandatory |
-|----------|-----------|
-| Host     | required  |
-| Slug     | required  |
+| Name | Mandatory |
+|------|-----------|
+| Host | required  |
+| Slug | required  |
 
 Monitor a single build:
 
@@ -344,11 +344,11 @@ chroma-feedback --producer=jenkins
 TeamCity
 --------
 
-| Name     | Default                        | Mandatory |
-|----------|--------------------------------|-----------|
-| Host     | https://teamcity.jetbrains.com | optional  |
-| Slug     |                                | optional  |
-| Token    |                                | required  |
+| Name  | Default                        | Mandatory |
+|-------|--------------------------------|-----------|
+| Host  | https://teamcity.jetbrains.com | optional  |
+| Slug  |                                | optional  |
+| Token |                                | required  |
 
 Monitor a single build:
 
@@ -448,10 +448,10 @@ chroma-feedback --consumer=agile_innovative_blinkstick
 Lifx Light
 ----------
 
-| Name     | Mandatory |
-|----------|-----------|
-| Light    | optional  |
-| Group    | optional  |
+| Name  | Mandatory |
+|-------|-----------|
+| Light | optional  |
+| Group | optional  |
 
 Indicate status via lights:
 
@@ -473,9 +473,9 @@ chroma-feedback --consumer=lifx_light
 Magic Hue
 ---------
 
-| Name     | Mandatory |
-|----------|-----------|
-| IP       | optional  |
+| Name | Mandatory |
+|------|-----------|
+| IP   | optional  |
 
 Indicate status via lights:
 
@@ -487,11 +487,11 @@ chroma-feedback --consumer=magic_hue
 Philips Hue
 -----------
 
-| Name     | Mandatory |
-|----------|-----------|
-| IP       | optional  |
-| Light    | optional  |
-| Group    | optional  |
+| Name  | Mandatory |
+|-------|-----------|
+| IP    | optional  |
+| Light | optional  |
+| Group | optional  |
 
 Indicate status via lights:
 
@@ -542,12 +542,26 @@ chroma-feedback --consumer=thingm_blink
 ```
 
 
+Wiz Light
+---------
+
+| Name | Mandatory |
+|------|-----------|
+| IP   | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=wiz_light
+```
+
+
 Xiaomi Yeelight
 ---------------
 
-| Name     | Mandatory |
-|----------|-----------|
-| IP       | optional  |
+| Name | Mandatory |
+|------|-----------|
+| IP   | optional  |
 
 Indicate status via lights:
 
