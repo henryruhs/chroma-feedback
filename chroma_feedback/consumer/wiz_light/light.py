@@ -59,7 +59,9 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 
 def static_light(light : Any, state : Dict[str, Any]) -> bool:
 	print('static_light')
+	return True
 
 
 def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
 	print('pulsate_light')
+	return True

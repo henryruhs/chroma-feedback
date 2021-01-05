@@ -15,7 +15,6 @@ def test_process_passed() -> None:
 			MOCK
 		}, 'passed')
 
-
 		assert result[0]['consumer'] == 'wiz_light'
 		assert result[0]['type'] == 'light'
 		assert result[0]['name']
