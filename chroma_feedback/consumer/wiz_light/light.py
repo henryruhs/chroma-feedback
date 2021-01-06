@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 from chroma_feedback import color
-from .api import get_api, get_modes
+from .api import get_api, get_loop, get_builder
 
 
 def get_lights(ips : List[str]) -> List[Dict[str, Any]]:
@@ -17,73 +17,57 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	# process lights
 
 	for light in lights:
+		light_name = get_light_name(light)
 
 		if status == 'passed':
 			result.append(
 			{
-				'consumer': 'magic_hue',
+				'consumer': 'wiz_light',
 				'type': 'light',
-				'name': light.name,
+				'name': light_name,
 				'active': static_light(light, color.get_passed()),
 				'status': status
 			})
 		if status == 'started':
 			result.append(
 			{
-				'consumer': 'magic_hue',
+				'consumer': 'wiz_light',
 				'type': 'light',
-				'name': light.name,
+				'name': light,
 				'active': static_light(light, color.get_started()),
 				'status': status
 			})
 		if status == 'errored':
 			result.append(
 			{
-				'consumer': 'magic_hue',
+				'consumer': 'wiz_light',
 				'type': 'light',
-				'name': light.name,
-				'active': pulsate_light(light, color.get_errored()),
+				'name': light,
+				'active': static_light(light, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
 			result.append(
 			{
-				'consumer': 'magic_hue',
+				'consumer': 'wiz_light',
 				'type': 'light',
-				'name': light.name,
-				'active': pulsate_light(light, color.get_failed()),
+				'name': light,
+				'active': static_light(light, color.get_failed()),
 				'status': status
 			})
 	return result
 
 
+def get_light_name(light : Any) -> str:
+	loop = get_loop()
+	config = loop.run_until_complete(light.getBulbConfig())
+	if 'result' in config and 'moduleName' in config['result']:
+		return config['result']['moduleName']
+	return 'unknown'
+
+
 def static_light(light : Any, state : Dict[str, Any]) -> bool:
-	modes = get_modes()
-
-	if modes:
-		light.mode = modes.CustomMode(
-			mode = modes.MODE_GRADUALLY,
-			speed = 1,
-			colors =\
-			[
-				state['rgb'],
-				state['rgb']
-			]
-		)
-	return light.update_status() is None
-
-
-def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
-	modes = get_modes()
-
-	if modes:
-		light.mode = modes.CustomMode(
-			mode = modes.MODE_GRADUALLY,
-			speed = 1,
-			colors =\
-			[
-				state['rgb'],
-				(0, 0, 0)
-			]
-		)
-	return light.update_status() is None
+	loop = get_loop()
+	builder = get_builder()
+	loop.run_until_complete(light.turn_on(builder(rgb = state['rgb'])))
+	return loop.is_closed() is False
