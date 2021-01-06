@@ -45,6 +45,7 @@ setup(
 	],
 	install_requires =
 	[
+		'asyncio',
 		'blink1',
 		'blinkstick',
 		'lifxlan',

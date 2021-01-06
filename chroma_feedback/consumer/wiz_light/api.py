@@ -3,7 +3,6 @@ from chroma_feedback import wording
 
 API = None
 
-
 def get_api(ip : str) -> Any:
 	global API
 
@@ -25,3 +24,12 @@ def api_factory(ip : str) -> Any:
 		return api
 	except ImportError:
 		exit(wording.get('package_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+
+
+def get_builder() -> Any:
+	try:
+		from pywizlight import PilotBuilder
+
+		return PilotBuilder
+	except ImportError:
+		return None

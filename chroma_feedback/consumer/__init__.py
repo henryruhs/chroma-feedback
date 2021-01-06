@@ -8,5 +8,6 @@ __all__ =\
 	'philips_hue',
 	'razer_chroma',
 	'thingm_blink',
+	'wiz_light',
 	'xiaomi_yeelight'
 ]
