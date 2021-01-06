@@ -18,10 +18,13 @@ def api_factory(ip : str) -> Any:
 
 	try:
 		from pywizlight import wizlight
+		from pywizlight.exceptions import WizLightError
 
 		try:
 			api = wizlight(ip)
-		except OSError:
+			builder = get_builder()
+			get_loop().run_until_complete(api.turn_on(builder()))
+		except WizLightError:
 			exit(wording.get('connection_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
