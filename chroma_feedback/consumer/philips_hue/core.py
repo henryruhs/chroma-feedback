@@ -52,7 +52,6 @@ def discover_ips() -> List[str]:
 	message =\
 	[
 		'M-SEARCH * HTTP/1.1',
-		'HOST: 239.255.255.250:1900',
 		'MAN: "ssdp:discover"'
 	]
 	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)

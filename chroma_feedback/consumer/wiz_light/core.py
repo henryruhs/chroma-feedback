@@ -35,7 +35,6 @@ def discover_ips() -> List[str]:
 	message =\
 	[
 		'M-SEARCH * HTTP/1.1',
-		'HOST: 239.255.255.250:1900',
 		'MAN: "ssdp:discover"'
 	]
 	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -45,6 +44,7 @@ def discover_ips() -> List[str]:
 
 	try:
 		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
+		print(ips)
 	except OSError:
 		print(wording.get('ip_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
 	return ips

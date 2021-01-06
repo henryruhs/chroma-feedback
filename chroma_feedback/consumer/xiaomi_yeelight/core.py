@@ -35,7 +35,6 @@ def discover_ips() -> List[str]:
 	message =\
 	[
 		'M-SEARCH * HTTP/1.1',
-		'HOST: 239.255.255.250:1982',
 		'MAN: "ssdp:discover"',
 		'ST: wifi_bulb'
 	]
