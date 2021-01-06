@@ -44,7 +44,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'wiz_light',
 				'type': 'light',
 				'name': light,
-				'active': pulsate_light(light, color.get_errored()),
+				'active': static_light(light, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -53,7 +53,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'wiz_light',
 				'type': 'light',
 				'name': light,
-				'active': pulsate_light(light, color.get_failed()),
+				'active': static_light(light, color.get_failed()),
 				'status': status
 			})
 	return result
@@ -62,16 +62,13 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 def get_light_name(light : Any) -> str:
 	loop = asyncio.get_event_loop()
 	config = loop.run_until_complete(light.getBulbConfig())
-	return config['result']['moduleName']
+	if 'result' in config and 'moduleName' in config['result']:
+		return config['result']['moduleName']
+	return 'unknown'
 
 
 def static_light(light : Any, state : Dict[str, Any]) -> bool:
 	builder = get_builder()
 	loop = asyncio.get_event_loop()
-	loop.run_until_complete(light.turn_on(builder(rgb = (state['rgb'][0], state['rgb'][1], state['rgb'][2]))))
+	loop.run_until_complete(light.turn_on(builder(rgb = state['rgb'])))
 	return loop.close() is None
-
-
-def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
-	print('pulsate_light')
-	return True
