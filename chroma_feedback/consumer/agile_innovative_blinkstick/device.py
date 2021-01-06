@@ -61,7 +61,9 @@ def static_device(device : Any, state : Dict[str, Any]) -> bool:
 	try:
 		return device.set_led_data(0,
 		[
-			state['rgb'][1], state['rgb'][0], state['rgb'][2]
+			state['rgb'][1],
+			state['rgb'][0],
+			state['rgb'][2]
 		] * 64) is None
 	except OSError:
 		return False

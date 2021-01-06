@@ -66,8 +66,8 @@ def static_light(light : Any, state : Dict[str, Any]) -> bool:
 			speed = 1,
 			colors =\
 			[
-				(state['rgb'][0], state['rgb'][1], state['rgb'][2]),
-				(state['rgb'][0], state['rgb'][1], state['rgb'][2])
+				state['rgb'],
+				state['rgb']
 			]
 		)
 	return light.update_status() is None
@@ -82,7 +82,7 @@ def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
 			speed = 1,
 			colors =\
 			[
-				(state['rgb'][0], state['rgb'][1], state['rgb'][2]),
+				state['rgb'],
 				(0, 0, 0)
 			]
 		)
