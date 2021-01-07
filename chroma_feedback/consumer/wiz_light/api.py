@@ -22,8 +22,7 @@ def api_factory(ip : str) -> Any:
 
 		try:
 			api = wizlight(ip)
-			builder = get_builder()
-			get_loop().run_until_complete(api.turn_on(builder()))
+			get_loop().run_until_complete(api.updateState())
 		except WizLightError:
 			exit(wording.get('connection_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 		return api

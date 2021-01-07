@@ -17,7 +17,6 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	# process lights
 
 	for light in lights:
-
 		if status == 'passed':
 			result.append(
 			{

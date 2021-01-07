@@ -33,7 +33,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'wiz_light',
 				'type': 'light',
-				'name': light,
+				'name': light_name,
 				'active': static_light(light, color.get_started()),
 				'status': status
 			})
@@ -42,7 +42,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'wiz_light',
 				'type': 'light',
-				'name': light,
+				'name': light_name,
 				'active': static_light(light, color.get_errored()),
 				'status': status
 			})
@@ -51,7 +51,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'wiz_light',
 				'type': 'light',
-				'name': light,
+				'name': light_name,
 				'active': static_light(light, color.get_failed()),
 				'status': status
 			})
