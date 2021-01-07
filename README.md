@@ -542,7 +542,7 @@ chroma-feedback --consumer=thingm_blink
 ```
 
 
-Wiz Light
+WiZ Light
 ---------
 
 | Name | Mandatory |
