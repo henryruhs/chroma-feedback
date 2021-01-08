@@ -4,10 +4,12 @@ from argparse import ArgumentParser
 import os
 import sys
 import threading
-from chroma_feedback import consumer, helper, producer, reporter, wording
+from chroma_feedback import consumer, helper, producer, reporter, systray, wording
 
 
 def run(program : ArgumentParser) -> None:
+	status = None
+
 	if sys.version_info < (3, 4):
 		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
@@ -57,6 +59,11 @@ def run(program : ArgumentParser) -> None:
 		[
 			program
 		]).start()
+		systray_report = reporter.create_systray_report(producer_result)
+		if threading.active_count() == 2:
+			systray.create(status, systray_report)
+		if threading.active_count() > 2:
+			systray.update(status, systray_report)
 
 
 def destroy(signal_number : int, frame : Any) -> None:

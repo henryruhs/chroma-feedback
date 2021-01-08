@@ -58,5 +58,5 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def static_light(light : Any, state : Dict[str, Any]) -> bool:
-	return light.turn_on() == 'ok' and light.set_rgb(state['rgb'][0], state['rgb'][1], state['rgb'][2]) == 'ok'
+def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
+	return light.turn_on() == 'ok' and light.set_rgb(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]) == 'ok'
