@@ -44,7 +44,7 @@ def api_factory(ip : str) -> Any:
 
 		try:
 			api = Nanoleaf(ip, token)
-		except Exception:
+		except:
 			exit(wording.get('connection_no').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))
 		if token is None:
 			exit(wording.get('press_button').format('PAIRING', 'NANOLEAF LIGHT') + wording.get('exclamation_mark'))
