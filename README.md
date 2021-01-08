@@ -484,6 +484,20 @@ chroma-feedback --consumer=magic_hue
 ```
 
 
+Nanoleaf Light
+--------------
+
+| Name | Mandatory |
+|------|-----------|
+| IP   | optional  |
+
+Indicate status via lights:
+
+```
+chroma-feedback --consumer=nanoleaf_light
+```
+
+
 Philips Hue
 -----------
 
