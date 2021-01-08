@@ -50,7 +50,7 @@ setup(
 		'blinkstick',
 		'lifxlan',
 		'phue',
-		'pystray',
+		'pillow',
 		'python-magichue',
 		'pywizlight',
 		'requests',

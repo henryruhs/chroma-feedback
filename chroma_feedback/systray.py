@@ -1,14 +1,18 @@
 from typing import Any, List
 import tempfile
 import os
-from gi import require_version
-
-require_version('Gtk', '3.0')
-require_version('AppIndicator3', '0.1')
-
-from gi.repository import Gtk, AppIndicator3
-from PIL import Image, ImageDraw
 from chroma_feedback import color, metadata, wording
+try:
+	import gi
+
+	gi.require_version('Gtk', '3.0')
+	gi.require_version('AppIndicator3', '0.1')
+
+	from gi.repository import Gtk
+	from gi.repository import AppIndicator3
+except (ImportError, ValueError):
+	exit(wording.get('package_no').format('APPINDICATOR') + wording.get('exclamation_mark'))
+from PIL import Image, ImageDraw
 
 SYSTRAY = None
 
