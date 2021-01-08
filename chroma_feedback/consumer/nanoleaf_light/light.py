@@ -58,7 +58,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def get_light_name(light) -> str:
+def get_light_name(light : Any) -> str:
 	info = light.get_panel_info()
 	if 'name' in info:
 		return info['name']
