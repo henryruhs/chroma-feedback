@@ -7,6 +7,7 @@ build:
     code: |
      pip install mock
      pip install mypy
+     pip install pillow
      pip install pylint
      pip install pytest
      pip install pytest-mock

@@ -1,6 +1,7 @@
 from typing import Any, List
 import tempfile
 import os
+from PIL import Image, ImageDraw
 from chroma_feedback import color, metadata, wording
 try:
 	import gi
@@ -12,7 +13,7 @@ try:
 	from gi.repository import AppIndicator3
 except (ImportError, ValueError):
 	exit(wording.get('package_no').format('APPINDICATOR') + wording.get('exclamation_mark'))
-from PIL import Image, ImageDraw
+
 
 SYSTRAY = None
 
