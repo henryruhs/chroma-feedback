@@ -56,31 +56,31 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def static_device(device : Any, state : Dict[str, Any]) -> bool:
+def static_device(device : Any, color_config : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
-		device.brightness = state['brightness'][0]
+		device.brightness = color_config['brightness'][0]
 	if device.fx.has('static'):
-		return device.fx.static(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-	return misc_effect(device, state, 'static')
+		return device.fx.static(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])
+	return misc_effect(device, color_config, 'static')
 
 
-def pulsate_device(device : Any, state : Dict[str, Any]) -> bool:
+def pulsate_device(device : Any, color_config : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
-		device.brightness = state['brightness'][0]
+		device.brightness = color_config['brightness'][0]
 	if device.fx.has('pulsate'):
-		return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-	return misc_effect(device, state, 'pulsate')
+		return device.fx.breath_single(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])
+	return misc_effect(device, color_config, 'pulsate')
 
 
-def breath_device(device : Any, state : Dict[str, Any]) -> bool:
+def breath_device(device : Any, color_config : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
-		device.brightness = state['brightness'][0]
+		device.brightness = color_config['brightness'][0]
 	if device.fx.has('breath_single'):
-		return device.fx.breath_single(state['rgb'][0], state['rgb'][1], state['rgb'][2])
-	return misc_effect(device, state, 'breath_single')
+		return device.fx.breath_single(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])
+	return misc_effect(device, color_config, 'breath_single')
 
 
-def misc_effect(device : Any, state : Dict[str, Any], effect_name : str) -> bool:
+def misc_effect(device : Any, color_config : Dict[str, Any], effect_name : str) -> bool:
 	effect_state = False
 	parts =\
 	{
@@ -94,5 +94,5 @@ def misc_effect(device : Any, state : Dict[str, Any], effect_name : str) -> bool
 	for part_key, part_value in parts.items():
 		if device.fx.has(part_key + '_' + effect_name):
 			effect_function = getattr(getattr(device.fx.misc, part_value), effect_name)
-			effect_state = effect_function(state['rgb'][0], state['rgb'][1], state['rgb'][2]) or effect_state
+			effect_state = effect_function(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]) or effect_state
 	return effect_state

@@ -13,6 +13,7 @@ jobs:
     with:
      python-version: 3.9
   - run: pip install mypy
+  - run: pip install pillow
   - run: pip install pylint
   - run: pip install pytest
   - run: pip install requests
@@ -31,6 +32,7 @@ jobs:
     with:
      python-version: ${{ matrix.python-version }}
   - run: pip install mock
+  - run: pip install pillow
   - run: pip install pytest
   - run: pip install pytest-mock
   - run: pip install requests
@@ -57,7 +59,8 @@ jobs:
     with:
      python-version: 3.9 
   - run: pip install coveralls
-  - run: pip install mock 
+  - run: pip install mock
+  - run: pip install pillow
   - run: pip install pytest
   - run: pip install pytest-cov
   - run: pip install pytest-mock

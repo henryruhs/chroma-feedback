@@ -57,7 +57,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def static_device(state : Dict[str, Any]) -> bool:
+def static_device(color_config : Dict[str, Any]) -> bool:
 	api = get_api()
 
-	return api is not None and api.fade_to_rgb(0, state['rgb'][0], state['rgb'][1], state['rgb'][2]) is None
+	return api is not None and api.fade_to_rgb(0, color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]) is None

@@ -56,7 +56,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def static_light(light : Any, state : Dict[str, Any]) -> bool:
+def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
 	modes = get_modes()
 
 	if modes:
@@ -65,14 +65,14 @@ def static_light(light : Any, state : Dict[str, Any]) -> bool:
 			speed = 1,
 			colors =\
 			[
-				state['rgb'],
-				state['rgb']
+				color_config['rgb'],
+				color_config['rgb']
 			]
 		)
 	return light.update_status() is None
 
 
-def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
+def pulsate_light(light : Any, color_config : Dict[str, Any]) -> bool:
 	modes = get_modes()
 
 	if modes:
@@ -81,7 +81,7 @@ def pulsate_light(light : Any, state : Dict[str, Any]) -> bool:
 			speed = 1,
 			colors =\
 			[
-				state['rgb'],
+				color_config['rgb'],
 				(0, 0, 0)
 			]
 		)

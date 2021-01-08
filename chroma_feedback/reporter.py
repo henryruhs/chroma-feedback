@@ -39,6 +39,24 @@ def create_consumer_report(consumer_result : List[Dict[str, Any]]) -> List[str]:
 	return report
 
 
+def create_systray_report(producer_result : List[Dict[str, Any]]) -> List[str]:
+	report = []
+
+	# process result
+
+	for producer in producer_result:
+		if producer['active'] is True:
+			if producer['status'] == 'passed':
+				report.append(wording.get('build_passed').format(producer['slug'], producer['producer']))
+			if producer['status'] == 'started':
+				report.append(wording.get('build_started').format(producer['slug'], producer['producer']))
+			if producer['status'] == 'errored':
+				report.append(wording.get('build_errored').format(producer['slug'], producer['producer']))
+			if producer['status'] == 'failed':
+				report.append(wording.get('build_failed').format(producer['slug'], producer['producer']))
+	return report
+
+
 def print_header() -> None:
 	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
 

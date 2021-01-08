@@ -66,8 +66,8 @@ def get_light_name(light : Any) -> str:
 	return 'unknown'
 
 
-def static_light(light : Any, state : Dict[str, Any]) -> bool:
+def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
 	loop = get_loop()
 	builder = get_builder()
-	loop.run_until_complete(light.turn_on(builder(rgb = state['rgb'])))
+	loop.run_until_complete(light.turn_on(builder(rgb = color_config['rgb'])))
 	return loop.is_closed() is False

@@ -21,6 +21,16 @@ def format_failed(text : str) -> str:
 	return COLOR['failed'] + text + COLOR['end']
 
 
+def get_by_status(status : str) -> Dict[str, Any]:
+	if status == 'started':
+		return get_started()
+	if status == 'errored':
+		return get_errored()
+	if status == 'failed':
+		return get_failed()
+	return get_passed()
+
+
 def get_passed() -> Dict[str, Any]:
 	return\
 	{

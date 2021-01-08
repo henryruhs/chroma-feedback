@@ -10,7 +10,8 @@ disable =
 	import-outside-toplevel,
 	missing-docstring,
 	protected-access,
-	unused-argument
+	unused-argument,
+	wrong-import-position
 
 good-names =
 	chroma-feedback,
