@@ -9,10 +9,9 @@ try:
 	gi.require_version('Gtk', '3.0')
 	gi.require_version('AppIndicator3', '0.1')
 
-	from gi.repository import Gtk
-	from gi.repository import AppIndicator3
+	from gi.repository import Gtk, AppIndicator3
 except (ImportError, ValueError):
-	exit(wording.get('package_no').format('APPINDICATOR') + wording.get('exclamation_mark'))
+	exit(wording.get('package_no').format('GIRL APPINDICATOR') + wording.get('exclamation_mark'))
 
 
 SYSTRAY = None
@@ -36,6 +35,12 @@ def update(status : str, report : List[str]) -> None:
 	SYSTRAY.set_menu(create_menu(report))
 
 
+def is_active() -> bool:
+	global SYSTRAY
+
+	return SYSTRAY is not None
+
+
 def create_menu(report : List[str]) ->Gtk.Menu:
 	menu = Gtk.Menu()
 
@@ -43,10 +48,11 @@ def create_menu(report : List[str]) ->Gtk.Menu:
 
 	for message in report:
 		menu.append(Gtk.MenuItem(message))
+	if report:
+		menu.append(Gtk.SeparatorMenuItem())
 
 	# handle action
 
-	menu.append(Gtk.SeparatorMenuItem())
 	item_exit = Gtk.MenuItem(wording.get('exit'))
 	item_exit.connect('activate', destroy)
 	menu.append(item_exit)

@@ -60,10 +60,10 @@ def run(program : ArgumentParser) -> None:
 			program
 		]).start()
 		systray_report = reporter.create_systray_report(producer_result)
-		if threading.active_count() == 2:
-			systray.create(status, systray_report)
-		if threading.active_count() > 2:
+		if systray.is_active():
 			systray.update(status, systray_report)
+		else:
+			systray.create(status, systray_report)
 
 
 def destroy(signal_number : int, frame : Any) -> None:
