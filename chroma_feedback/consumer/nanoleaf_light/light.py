@@ -17,14 +17,12 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 	# process lights
 
 	for light in lights:
-		light_name = get_light_name(light)
-
 		if status == 'passed':
 			result.append(
 			{
 				'consumer': 'nanoleaf_light',
 				'type': 'light',
-				'name': light_name,
+				'name': light.get_name(),
 				'active': static_light(light, color.get_passed()),
 				'status': status
 			})
@@ -33,7 +31,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'nanoleaf_light',
 				'type': 'light',
-				'name': light_name,
+				'name': light.get_name(),
 				'active': static_light(light, color.get_started()),
 				'status': status
 			})
@@ -42,7 +40,7 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'nanoleaf_light',
 				'type': 'light',
-				'name': light_name,
+				'name': light.get_name(),
 				'active': static_light(light, color.get_errored()),
 				'status': status
 			})
@@ -51,18 +49,11 @@ def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'nanoleaf_light',
 				'type': 'light',
-				'name': light_name,
+				'name': light.get_name(),
 				'active': static_light(light, color.get_failed()),
 				'status': status
 			})
 	return result
-
-
-def get_light_name(light : Any) -> str:
-	info = light.get_panel_info()
-	if 'name' in info:
-		return info['name']
-	return 'unknown'
 
 
 def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
