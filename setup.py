@@ -46,26 +46,26 @@ setup(
 	],
 	install_requires =
 	[
-		'asyncio',
-		'blink1',
-		'blinkstick',
-		'lifxlan',
-		'nanoleafapi',
-		'phue',
-		'pillow',
-		'python-magichue',
-		'pywizlight',
-		'requests',
-		'yeelight'
+		'asyncio==3.4.3',
+		'blink1==0.3.1',
+		'blinkstick==1.1.8',
+		'lifxlan==1.2.5',
+		'nanoleafapi==1.1.5',
+		'phue==1.1',
+		'pillow==7.0.0',
+		'python-magichue==0.2.8',
+		'pywizlight==0.4.2',
+		'requests==2.25.0',
+		'yeelight==0.5.1'
 	],
 	tests_require =
 	[
-		'coveralls',
-		'pylint',
-		'pytest',
-		'pytest-cov',
-		'pytest-mock',
-		'mock',
-		'mypy'
+		'coveralls==2.2.0',
+		'pylint==2.6.0',
+		'pytest==6.1.2',
+		'pytest-cov==2.10.1',
+		'pytest-mock==3.5.0',
+		'mock==4.0.3',
+		'mypy==0.790'
 	]
 )
