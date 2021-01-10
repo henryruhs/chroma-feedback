@@ -22,6 +22,7 @@ WORDING =\
 	'press_button': 'Press {} button on {}',
 	'enable_feature': 'Enable {} on {}',
 	'goodbye': 'Goodbye',
+	'about': 'About',
 	'exit': 'Exit',
 	'by': 'by',
 	'hourglass': u'\u29d7',

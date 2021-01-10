@@ -9,10 +9,9 @@ try:
 	gi.require_version('Gtk', '3.0')
 	gi.require_version('AppIndicator3', '0.1')
 
-	from gi.repository import Gtk, AppIndicator3
+	from gi.repository import AppIndicator3, GdkPixbuf, Gtk
 except (ImportError, ValueError):
 	exit(wording.get('package_no').format('GIRL APPINDICATOR') + wording.get('exclamation_mark'))
-
 
 SYSTRAY = None
 
@@ -53,8 +52,12 @@ def create_menu(report : List[str]) ->Gtk.Menu:
 
 	# handle action
 
+	item_about = Gtk.MenuItem(wording.get('about'))
+	item_about.connect('activate', about)
 	item_exit = Gtk.MenuItem(wording.get('exit'))
 	item_exit.connect('activate', destroy)
+	menu.append(item_about)
+	menu.append(Gtk.SeparatorMenuItem())
 	menu.append(item_exit)
 	menu.show_all()
 	return menu
@@ -68,6 +71,18 @@ def create_icon(status : str) -> str:
 	path = tempfile.mktemp('.png')
 	image.save(path)
 	return path
+
+
+def about(menu_item : Any) -> None:
+	logo = GdkPixbuf.Pixbuf.new_from_file_at_size(create_icon('passed'), 20, 20)
+	about_dialog = Gtk.AboutDialog()
+	about_dialog.set_program_name(metadata.get('name'))
+	about_dialog.set_comments(metadata.get('description'))
+	about_dialog.set_version(metadata.get('version'))
+	about_dialog.set_website(metadata.get('url'))
+	about_dialog.set_website_label(metadata.get('url'))
+	about_dialog.set_logo(logo)
+	about_dialog.present()
 
 
 def destroy(menu_item : Any) -> None:
