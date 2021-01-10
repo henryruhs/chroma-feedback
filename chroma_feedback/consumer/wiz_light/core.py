@@ -45,5 +45,5 @@ def discover_ips() -> List[str]:
 	try:
 		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 	except OSError:
-		print(wording.get('ip_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		print(wording.get('ip_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 	return ips
