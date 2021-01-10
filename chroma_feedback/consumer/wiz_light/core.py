@@ -11,12 +11,12 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		ip = None
+		ips = None
 
 		if not helper.has_argument('--wiz-light-ip'):
-			ip = discover_ips()
-		if ip:
-			program.add_argument('--wiz-light-ip', default = ip)
+			ips = discover_ips()
+		if ips:
+			program.add_argument('--wiz-light-ip', default = ips)
 		else:
 			program.add_argument('--wiz-light-ip', action = 'append', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
