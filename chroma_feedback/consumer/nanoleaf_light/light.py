@@ -73,15 +73,15 @@ def pulsate_light(light : Any, color_config : Dict[str, Any]) -> bool:
 	for data in position_data:
 		device_ids.append(data['panelId'])
 
-	animData = str(len(device_ids))
+	animation_data = str(len(device_ids))
 
 	# process devices ids
 
 	for device_id in device_ids:
-		animData += ' ' + str(device_id) + ' 2 ' + str(color_config['rgb'][0]) + ' ' + str(color_config['rgb'][1]) + ' ' + str(color_config['rgb'][2]) + ' 0 50 0 0 0 0 50'
+		animation_data += ' ' + str(device_id) + ' 2 ' + str(color_config['rgb'][0]) + ' ' + str(color_config['rgb'][1]) + ' ' + str(color_config['rgb'][2]) + ' 0 50 0 0 0 0 50'
 	return light.write_effect({
 		'command': 'display',
 		'animType': 'custom',
-		'animData': animData,
+		'animData': animation_data,
 		'loop': True
 	})
