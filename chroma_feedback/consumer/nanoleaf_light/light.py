@@ -61,27 +61,4 @@ def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
 
 
 def pulsate_light(light : Any, color_config : Dict[str, Any]) -> bool:
-	position_data = []
-	device_ids = []
-	info_data = light.get_info()
-
-	if 'panelLayout' in info_data and 'layout' in info_data['panelLayout'] and 'positionData' in info_data['panelLayout']['layout']:
-		position_data = info_data['panelLayout']['layout']['positionData']
-
-	# process position data
-
-	for data in position_data:
-		device_ids.append(data['panelId'])
-
-	animation_data = str(len(device_ids))
-
-	# process devices ids
-
-	for device_id in device_ids:
-		animation_data += ' ' + str(device_id) + ' 2 ' + str(color_config['rgb'][0]) + ' ' + str(color_config['rgb'][1]) + ' ' + str(color_config['rgb'][2]) + ' 0 50 0 0 0 0 50'
-	return light.write_effect({
-		'command': 'display',
-		'animType': 'custom',
-		'animData': animation_data,
-		'loop': True
-	})
+	return light.pulsate(color_config['rgb'], 5)

@@ -50,7 +50,7 @@ setup(
 		'blink1==0.3.1',
 		'blinkstick==1.1.8',
 		'lifxlan==1.2.5',
-		'nanoleafapi==2.0.0b1',
+		'nanoleafapi==2.0.0b6',
 		'phue==1.1',
 		'pillow==7.0.0',
 		'python-magichue==0.2.8',
