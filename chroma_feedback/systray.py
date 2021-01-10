@@ -57,7 +57,6 @@ def create_menu(report : List[str]) ->Gtk.Menu:
 	item_exit = Gtk.MenuItem(wording.get('exit'))
 	item_exit.connect('activate', destroy)
 	menu.append(item_about)
-	menu.append(Gtk.SeparatorMenuItem())
 	menu.append(item_exit)
 	menu.show_all()
 	return menu
