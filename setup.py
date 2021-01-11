@@ -50,19 +50,19 @@ setup(
 		'blink1==0.3.1',
 		'blinkstick==1.1.8',
 		'lifxlan==1.2.5',
-		'nanoleafapi==2.0.0b6',
+		'nanoleafapi==2.0.0',
 		'phue==1.1',
 		'pillow==7.0.0',
 		'python-magichue==0.2.8',
 		'pywizlight==0.4.2',
-		'requests==2.25.0',
+		'requests==2.25.1',
 		'yeelight==0.5.1'
 	],
 	tests_require =
 	[
 		'coveralls==2.2.0',
 		'pylint==2.6.0',
-		'pytest==6.1.2',
+		'pytest==6.2.1',
 		'pytest-cov==2.10.1',
 		'pytest-mock==3.5.0',
 		'mock==4.0.3',
