@@ -1,20 +1,20 @@
-from typing import Any
+from typing import Any, Dict
 import requests
 from requests import Response, RequestException
 
 
-def get(url : str, headers : Any = None) -> Any:
+def get(url : str, headers : Dict[str, str] = None) -> Any:
 	try:
-		return requests.get(url, headers = headers)
+		return requests.get(url, headers = headers, timeout = 10)
 	except RequestException:
-		return None
+		return get(url, headers)
 
 
-def post(url : str, headers : Any = None) -> Any:
+def post(url : str, headers : Dict[str, str] = None) -> Any:
 	try:
-		return requests.post(url, headers = headers)
+		return requests.post(url, headers = headers, timeout = 10)
 	except RequestException:
-		return None
+		return post(url, headers)
 
 
 def parse_json(response: Response) -> Any:
