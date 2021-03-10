@@ -52,7 +52,7 @@ setup(
 		'lifxlan==1.2.5',
 		'nanoleafapi==2.0.0',
 		'phue==1.1',
-		'pillow==7.0.0',
+		'pillow==8.1.2',
 		'python-magichue==0.2.8',
 		'pywizlight==0.4.2',
 		'requests==2.25.1',
