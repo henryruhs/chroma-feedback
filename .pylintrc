@@ -8,8 +8,10 @@ disable =
 	duplicate-code,
 	global-statement,
 	import-outside-toplevel,
+	inconsistent-return-statements,
 	missing-docstring,
 	protected-access,
+	simplifiable-condition,
 	unused-argument,
 	wrong-import-position
 
