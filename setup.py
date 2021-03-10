@@ -60,7 +60,7 @@ setup(
 	],
 	tests_require =
 	[
-		'coveralls==2.2.0',
+		'coveralls==2.9.3',
 		'pylint==2.6.0',
 		'pytest==6.2.1',
 		'pytest-cov==2.10.1',
