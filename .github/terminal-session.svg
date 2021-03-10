@@ -5,7 +5,7 @@
 	<circle cx="60" cy="20" r="6" class="is-success" />
 	<foreignObject x="20" y="50" height="320" width="867">
 		<pre xmlns="http://www.w3.org/1999/xhtml" class="code-terminal-session"><span class="is-success">redaxmedia@local</span>:<span class="is-info">~</span>$ chroma-feedback -P=travis --travis-slug=redaxmedia -C=philips_hue
-chroma-feedback 8.1.0 by Henry Ruhs
+chroma-feedback 8.1.1 by Henry Ruhs
 
 <span class="is-success">✔</span> Build of redaxmedia/chroma-feedback on github passed
 <span class="is-success">✔</span> Build of redaxmedia/grunt-ftpress on github passed
