@@ -4,7 +4,9 @@ from argparse import ArgumentParser
 import os
 import sys
 import threading
-from chroma_feedback import consumer, helper, producer, reporter, systray, wording
+from chroma_feedback import consumer, helper, producer, reporter, wording
+if helper.is_linux():
+	from chroma_feedback import systray
 
 
 def run(program : ArgumentParser) -> None:
@@ -59,11 +61,12 @@ def run(program : ArgumentParser) -> None:
 		[
 			program
 		]).start()
-		systray_report = reporter.create_systray_report(producer_result)
-		if systray.is_active():
-			systray.update(status, systray_report)
-		else:
-			systray.create(status, systray_report)
+		if helper.is_linux():
+			systray_report = reporter.create_systray_report(producer_result)
+			if systray.is_active():
+				systray.update(status, systray_report)
+			else:
+				systray.create(status, systray_report)
 
 
 def destroy(signal_number : int, frame : Any) -> None:

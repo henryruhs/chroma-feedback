@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
+import platform
 import sys
-
 
 def get_producer_status(producer_result : List[Dict[str, Any]]) -> str:
 	status = 'passed'
@@ -26,6 +26,10 @@ def to_lower_case(__string__ : Any) -> str:
 
 def has_argument(argument : str) -> bool:
 	return any(argument in argv for argv in sys.argv)
+
+
+def is_linux() -> bool:
+	return to_lower_case(platform.system()) == 'linux'
 
 
 def get_first(__list__ : Any) -> Any:
