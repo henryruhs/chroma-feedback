@@ -4,8 +4,8 @@ from chroma_feedback.producer.gitlab.core import fetch
 
 
 def test_fetch_slug() -> None:
-	if 'GITLAB_TOKEN' in os.environ:
-		result = fetch('https://gitlab.com', '7311836', os.environ['GITLAB_TOKEN'])
+	if os.environ.get('GITLAB_TOKEN'):
+		result = fetch('https://gitlab.com', '7311836', os.environ.get('GITLAB_TOKEN'))
 
 		assert result[0]['producer'] == 'gitlab'
 		assert result[0]['slug']
