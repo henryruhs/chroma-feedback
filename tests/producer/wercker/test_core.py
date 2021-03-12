@@ -4,8 +4,8 @@ from chroma_feedback.producer.wercker.core import fetch
 
 
 def test_fetch_slug() -> None:
-	if 'WERCKER_TOKEN' in os.environ:
-		result = fetch('https://app.wercker.com', 'redaxmedia/chroma-feedback', os.environ['WERCKER_TOKEN'])
+	if os.environ.get('WERCKER_TOKEN'):
+		result = fetch('https://app.wercker.com', 'redaxmedia/chroma-feedback', os.environ.get('WERCKER_TOKEN'))
 
 		assert result[0]['producer'] == 'wercker'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
