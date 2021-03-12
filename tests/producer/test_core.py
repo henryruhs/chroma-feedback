@@ -7,7 +7,7 @@ from chroma_feedback import producer
 
 
 def test_process(mocker : Any) -> None:
-	if 'TRAVIS_TOKEN' in os.environ:
+	if os.environ.get('TRAVIS_TOKEN'):
 		program = ArgumentParser()
 		program.add_argument('-P', '--producer', action='append', required=True)
 		sys.argv.append('--producer')
@@ -15,7 +15,7 @@ def test_process(mocker : Any) -> None:
 		sys.argv.append('--travis-slug')
 		sys.argv.append('redaxmedia')
 		sys.argv.append('--travis-token')
-		sys.argv.append(os.environ['TRAVIS_TOKEN'])
+		sys.argv.append(os.environ.get('TRAVIS_TOKEN'))
 		process = mocker.spy(producer.travis, 'run')
 		producer.process(program)
 
