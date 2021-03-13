@@ -22,7 +22,7 @@ def api_factory(ip : str) -> Any:
 		from pywizlight.exceptions import WizLightConnectionError, WizLightTimeOutError
 
 		try:
-			api = wizlight(ip, connect_on_init = True)
+			api = wizlight(ip, True)
 		except (WizLightConnectionError, WizLightTimeOutError):
 			exit(wording.get('connection_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 		return api

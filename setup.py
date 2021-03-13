@@ -48,24 +48,24 @@ setup(
 	[
 		'asyncio==3.4.3',
 		'blink1==0.3.1',
-		'blinkstick==1.1.8',
+		'blinkstick==1.2.0',
 		'lifxlan==1.2.5',
 		'nanoleafapi==2.0.0',
 		'phue==1.1',
 		'pillow==8.1.2',
-		'python-magichue==0.2.8',
+		'python-magichue==0.2.9.3',
 		'pywizlight==0.4.5',
 		'requests==2.25.1',
-		'yeelight==0.5.1'
+		'yeelight==0.5.4'
 	],
 	tests_require =
 	[
-		'coveralls==2.9.3',
-		'pylint==2.6.0',
-		'pytest==6.2.1',
-		'pytest-cov==2.10.1',
-		'pytest-mock==3.5.0',
+		'coveralls==3.0.1',
+		'pylint==2.7.2',
+		'pytest==6.2.2',
+		'pytest-cov==2.11.1',
+		'pytest-mock==3.5.1',
 		'mock==4.0.3',
-		'mypy==0.790'
+		'mypy==0.812'
 	]
 )
