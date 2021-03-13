@@ -4,6 +4,7 @@ __all__ =\
 [
 	'agile_innovative_blinkstick',
 	'lifx_light',
+	'luxafor',
 	'magic_hue',
 	'nanoleaf_light',
 	'philips_hue',

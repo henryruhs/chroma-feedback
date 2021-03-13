@@ -470,6 +470,22 @@ chroma-feedback --consumer=lifx_light
 ```
 
 
+Luxafor
+----------
+
+| Name       | Mandatory |
+|------------|-----------|
+| Webhook id | required  |
+
+Indicate status via light:
+
+```
+chroma-feedback --consumer=luxafor
+
+--luxafor-webhook-id <webhook-id>
+```
+
+
 Magic Hue
 ---------
 
