@@ -6,6 +6,14 @@ def test_to_lower_case() -> None:
 	assert helper.to_lower_case('SUCCESS') == 'success'
 
 
+def test_has_argument() -> None:
+	assert helper.has_argument('invalid') == False
+
+
+def test_is_linux() -> None:
+	assert type(helper.is_linux()) == bool
+
+
 def test_get_first() -> None:
 	assert helper.get_first(
 	[

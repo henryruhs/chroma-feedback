@@ -2,7 +2,7 @@ METADATA =\
 {
 	'name': 'chroma-feedback',
 	'description': 'Turn your RGB powered hardware into an build indicator for continuous integration',
-	'version': '8.2.1',
+	'version': '8.3.0',
 	'license': 'MIT',
 	'keywords': 'appveyor bamboo circle codeship github gitlab jenkins teamcity travis',
 	'author': 'Henry Ruhs',
