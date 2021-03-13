@@ -19,12 +19,11 @@ def api_factory(ip : str) -> Any:
 
 	try:
 		from pywizlight import wizlight
-		from pywizlight.exceptions import WizLightError
+		from pywizlight.exceptions import WizLightConnectionError, WizLightTimeOutError
 
 		try:
-			api = wizlight(ip)
-			get_loop().run_until_complete(api.updateState())
-		except WizLightError:
+			api = wizlight(ip, connect_on_init = True)
+		except (WizLightConnectionError, WizLightTimeOutError):
 			exit(wording.get('connection_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:

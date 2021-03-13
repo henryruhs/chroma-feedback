@@ -54,7 +54,7 @@ setup(
 		'phue==1.1',
 		'pillow==8.1.2',
 		'python-magichue==0.2.8',
-		'pywizlight==0.4.2',
+		'pywizlight==0.4.5',
 		'requests==2.25.1',
 		'yeelight==0.5.1'
 	],
