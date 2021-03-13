@@ -7,7 +7,7 @@ def test_to_lower_case() -> None:
 
 
 def test_has_argument() -> None:
-	assert helper.has_argument('invalid') == False
+	assert helper.has_argument('invalid') is False
 
 
 def test_is_linux() -> None:

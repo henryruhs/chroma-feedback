@@ -15,7 +15,7 @@ def test_fetch_slug() -> None:
 
 
 def test_fetch_user() -> None:
-	if os.environ.get('GITHUB_TOKEN' ):
+	if os.environ.get('GITHUB_TOKEN'):
 		result = fetch('https://api.github.com', 'redaxmedia', os.environ.get('GITHUB_TOKEN'))
 
 		assert result[0]['producer'] == 'github'
