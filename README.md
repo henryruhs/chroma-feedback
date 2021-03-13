@@ -157,8 +157,9 @@ Circle
 | Name         | Default              | Mandatory |
 |--------------|----------------------|-----------|
 | Host         | https://circleci.com | optional  |
-| Slug         |                      | optional  |
 | Organization |                      | optional  |
+| Slug         |                      | optional  |
+| Filter       |                      | optional  |
 | Token        |                      | required  |
 
 Monitor a single build:
@@ -167,6 +168,16 @@ Monitor a single build:
 chroma-feedback --producer=circle
 
 --circle-slug <username/repository>
+--circle-token <token>
+```
+
+Monitor multiple builds with `mine` filter:
+
+```
+chroma-feedback --producer=circle
+--circle-slug <username/repository>
+--circle-slug <username/repository>
+--circle-filter=mine
 --circle-token <token>
 ```
 

@@ -11,6 +11,7 @@ disable =
 	inconsistent-return-statements,
 	missing-docstring,
 	protected-access,
+	redefined-builtin,
 	simplifiable-condition,
 	unused-argument,
 	wrong-import-position
