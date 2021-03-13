@@ -11,7 +11,7 @@ def test_has_argument() -> None:
 
 
 def test_is_linux() -> None:
-	assert type(helper.is_linux()) == bool
+	assert helper.is_linux() is True or False
 
 
 def test_get_first() -> None:
