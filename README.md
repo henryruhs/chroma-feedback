@@ -154,13 +154,13 @@ chroma-feedback --producer=bitbucket
 Circle
 ------
 
-| Name             | Default              | Mandatory |
-|------------------|----------------------|-----------|
-| Host             | https://circleci.com | optional  |
-| Slug             |                      | optional  |
-| Organization     |                      | optional  |
-| Token            |                      | required  |
-| Only Mine        | false                | optional  |
+| Name         | Default              | Mandatory |
+|--------------|----------------------|-----------|
+| Host         | https://circleci.com | optional  |
+| Organization |                      | optional  |
+| Slug         |                      | optional  |
+| Filter       |                      | optional  |
+| Token        |                      | required  |
 
 Monitor a single build:
 
@@ -171,21 +171,22 @@ chroma-feedback --producer=circle
 --circle-token <token>
 ```
 
+Monitor multiple builds with `mine` filter:
+
+```
+chroma-feedback --producer=circle
+--circle-slug <username/repository>
+--circle-slug <username/repository>
+--circle-filter=mine
+--circle-token <token>
+```
+
 Monitor multiple builds:
 
 ```
 chroma-feedback --producer=circle
 
 --circle-organization <organization>
---circle-token <token>
-```
-
-Monitor my own pipelines (won't work for a whole organisation):
-
-```
-chroma-feedback --producer=circle --circle-only-mine=true
-
---circle-slug <username/repository>
 --circle-token <token>
 ```
 
