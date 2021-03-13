@@ -4,8 +4,8 @@ from chroma_feedback.producer.travis.core import fetch
 
 
 def test_fetch_slug() -> None:
-	if 'TRAVIS_TOKEN' in os.environ:
-		result = fetch('https://api.travis-ci.com', 'redaxmedia/chroma-feedback', os.environ['TRAVIS_TOKEN'])
+	if os.environ.get('TRAVIS_TOKEN'):
+		result = fetch('https://api.travis-ci.com', 'redaxmedia/chroma-feedback', os.environ.get('TRAVIS_TOKEN'))
 
 		assert result[0]['producer'] == 'travis'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
@@ -16,8 +16,8 @@ def test_fetch_slug() -> None:
 
 
 def test_fetch_user() -> None:
-	if 'TRAVIS_TOKEN' in os.environ:
-		result = fetch('https://api.travis-ci.com', 'redaxmedia', os.environ['TRAVIS_TOKEN'])
+	if os.environ.get('TRAVIS_TOKEN'):
+		result = fetch('https://api.travis-ci.com', 'redaxmedia', os.environ.get('TRAVIS_TOKEN'))
 
 		assert result[0]['producer'] == 'travis'
 		assert result[0]['slug']

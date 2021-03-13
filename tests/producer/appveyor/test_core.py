@@ -4,8 +4,8 @@ from chroma_feedback.producer.appveyor.core import fetch
 
 
 def test_fetch_slug() -> None:
-	if 'APPVEYOR_TOKEN' in os.environ:
-		result = fetch('https://ci.appveyor.com', 'redaxmedia/chroma-feedback', os.environ['APPVEYOR_TOKEN'])
+	if os.environ.get('APPVEYOR_TOKEN'):
+		result = fetch('https://ci.appveyor.com', 'redaxmedia/chroma-feedback', os.environ.get('APPVEYOR_TOKEN'))
 
 		assert result[0]['producer'] == 'appveyor'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
@@ -16,8 +16,8 @@ def test_fetch_slug() -> None:
 
 
 def test_fetch_user() -> None:
-	if 'APPVEYOR_TOKEN' in os.environ:
-		result = fetch('https://ci.appveyor.com', None, os.environ['APPVEYOR_TOKEN'])
+	if os.environ.get('APPVEYOR_TOKEN'):
+		result = fetch('https://ci.appveyor.com', None, os.environ.get('APPVEYOR_TOKEN'))
 
 		assert result[0]['producer'] == 'appveyor'
 		assert result[0]['slug']

@@ -15,8 +15,8 @@ def test_fetch_only_mine() -> None:
 		pytest.skip('CIRCLE_TOKEN is not defined')
 
 def test_fetch_slug() -> None:
-	if 'CIRCLE_TOKEN' in os.environ:
-		result = fetch('https://circleci.com', None, 'github/redaxmedia/chroma-feedback', os.environ['CIRCLE_TOKEN'], 'false')
+	if os.environ.get('CIRCLE_TOKEN'):
+		result = fetch('https://circleci.com', None, 'github/redaxmedia/chroma-feedback', os.environ.get('CIRCLE_TOKEN'))
 
 		assert result[0]['producer'] == 'circle'
 		assert result[0]['slug'] == 'gh/redaxmedia/chroma-feedback/lint-and-test'
@@ -27,8 +27,8 @@ def test_fetch_slug() -> None:
 
 
 def test_fetch_organization() -> None:
-	if 'CIRCLE_TOKEN' in os.environ:
-		result = fetch('https://circleci.com', 'github/redaxmedia', None, os.environ['CIRCLE_TOKEN'], 'false')
+	if os.environ.get('CIRCLE_TOKEN'):
+		result = fetch('https://circleci.com', 'github/redaxmedia', None, os.environ.get('CIRCLE_TOKEN'))
 
 		assert result[0]['producer'] == 'circle'
 		assert result[0]['slug']
