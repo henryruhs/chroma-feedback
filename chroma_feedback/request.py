@@ -10,9 +10,9 @@ def get(url : str, headers : Dict[str, str] = None) -> Any:
 		return get(url, headers)
 
 
-def post(url : str, headers : Dict[str, str] = None) -> Any:
+def post(url : str, headers : Dict[str, str] = None, data : Any = None) -> Any:
 	try:
-		return requests.post(url, headers = headers, timeout = 10)
+		return requests.post(url, data = data, headers = headers, timeout = 10)
 	except RequestException:
 		return post(url, headers)
 
