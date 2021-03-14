@@ -493,7 +493,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=luxafor_flag
 
---luxafor-flag-device <device-serial>
+--luxafor-flag-device <device-name>
 ```
 
 
