@@ -1,68 +1,51 @@
+import os
 import pytest
-try:
-	from unittest.mock import MagicMock
-except ImportError:
-	from mock import MagicMock
 from chroma_feedback.consumer.luxafor.device import process_devices
-
-MOCK = MagicMock()
 
 
 def test_process_passed() -> None:
-	try:
-		result = process_devices(
-		{
-			MOCK
-		}, 'passed')
+	if os.environ.get('LUXAFOR_ID'):
+		result = process_devices('https://api.luxafor.com', os.environ.get('LUXAFOR_ID'), 'passed')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['name'] == os.environ.get('LUXAFOR_ID')
 		assert result[0]['status'] == 'passed'
-	except:
-		pytest.skip()
+	else:
+		pytest.skip('LUXAFOR_ID is not defined')
 
 
 def test_process_started() -> None:
-	try:
-		result = process_devices(
-		{
-			MOCK
-		}, 'started')
+	if os.environ.get('LUXAFOR_ID'):
+		result = process_devices('https://api.luxafor.com', os.environ.get('LUXAFOR_ID'), 'started')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['name'] == os.environ.get('LUXAFOR_ID')
 		assert result[0]['status'] == 'started'
-	except:
-		pytest.skip()
+	else:
+		pytest.skip('LUXAFOR_ID is not defined')
 
 
 def test_process_errored() -> None:
-	try:
-		result = process_devices(
-		{
-			MOCK
-		}, 'errored')
+	if os.environ.get('LUXAFOR_ID'):
+		result = process_devices('https://api.luxafor.com', os.environ.get('LUXAFOR_ID'), 'errored')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['name'] == os.environ.get('LUXAFOR_ID')
 		assert result[0]['status'] == 'errored'
-	except:
-		pytest.skip()
+	else:
+		pytest.skip('LUXAFOR_ID is not defined')
 
 
 def test_process_failed() -> None:
-	try:
-		result = process_devices(
-		{
-			MOCK
-		}, 'failed')
+	if os.environ.get('LUXAFOR_ID'):
+		result = process_devices('https://api.luxafor.com', os.environ.get('LUXAFOR_ID'), 'failed')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['name'] == os.environ.get('LUXAFOR_ID')
 		assert result[0]['status'] == 'failed'
-	except:
-		pytest.skip()
+	else:
+		pytest.skip('LUXAFOR_ID is not defined')
