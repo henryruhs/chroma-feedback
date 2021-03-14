@@ -484,17 +484,16 @@ chroma-feedback --consumer=lifx_light
 Luxafor
 -------
 
-| Name | Default                 | Mandatory |
-|------|-------------------------|-----------|
-| Host | https://api.luxafor.com | optional  |
-| ID   |                         | required  |
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
 
 Indicate status via devices:
 
 ```
 chroma-feedback --consumer=luxafor
 
---luxafor-id <user-id>
+--luxafor-device <device-serial>
 ```
 
 

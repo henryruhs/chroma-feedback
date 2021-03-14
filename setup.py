@@ -48,6 +48,7 @@ setup(
 	install_requires =
 	[
 		'asyncio==3.4.3',
+		'busylight-for-humans==0.8.2',
 		'blink1==0.3.1',
 		'blinkstick==1.2.0',
 		'lifxlan==1.2.5',

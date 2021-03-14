@@ -1,74 +1,65 @@
 from typing import Any, Dict, List
-from chroma_feedback import color, request
+import copy
+
+from chroma_feedback import color
 
 
-def process_devices(host : str, ids : List[str], status : str) -> List[Dict[str, Any]]:
+def get_devices(devices : Any, device_names : List[str]) -> Any:
+	if device_names:
+		for device in copy.copy(devices):
+			if device.name() not in device_names:
+				devices.remove(device)
+	return devices
+
+
+def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	result = []
 
-	# process ids
+	# process devices
 
-	for id in ids:
+	for device in devices:
 		if status == 'passed':
 			result.append(
 			{
-				'consumer': 'luxafor',
+				'consumer': 'luxaflor',
 				'type': 'device',
-				'name': id,
-				'active': static_device(host, id, color.get_passed()),
+				'name': device.name(),
+				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
 		if status == 'started':
 			result.append(
 			{
-				'consumer': 'luxafor',
+				'consumer': 'luxaflor',
 				'type': 'device',
-				'name': id,
-				'active': static_device(host, id, color.get_started()),
+				'name': device.name(),
+				'active': static_device(device, color.get_started()),
 				'status': status
 			})
 		if status == 'errored':
 			result.append(
 			{
-				'consumer': 'luxafor',
+				'consumer': 'luxaflor',
 				'type': 'device',
-				'name': id,
-				'active': static_device(host, id, color.get_errored()),
+				'name': device.name(),
+				'active': pulsate_device(device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
 			result.append(
 			{
-				'consumer': 'luxafor',
+				'consumer': 'luxaflor',
 				'type': 'device',
-				'name': id,
-				'active': static_device(host, id, color.get_failed()),
+				'name': device.name(),
+				'active': pulsate_device(device, color.get_failed()),
 				'status': status
 			})
 	return result
 
 
-def static_device(host : str, id : str, color_config : Dict[str, Any]) -> bool:
-	response = None
+def static_device(device : Any, color_config : Dict[str, Any]) -> bool:
+	return device.color((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None
 
-	if host and id:
-		response = request.post(host + '/webhook/v1/actions/solid_color',
-		data =
-		{
-			'userId': id,
-			'actionFields':
-			{
-				'color': color_config['name']
-			}
-		},
-		headers =
-		{
-			'Content-Type': 'application/json'
-		})
 
-	# process response
-
-	if response and response.status_code == 200:
-		data = request.parse_json(response)
-		if 'id' in data and id in data['id']:
-			return True
-	return False
+def pulsate_device(device : Any, color_config : Dict[str, Any]) -> bool:
+	return device.blink((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None
