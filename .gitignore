@@ -1,2 +1,4 @@
 .env
 .idea
+build/
+dist/
