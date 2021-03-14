@@ -14,7 +14,7 @@ def process_devices(host : str, ids : List[str], status : str) -> List[Dict[str,
 				'consumer': 'luxafor',
 				'type': 'device',
 				'name': id,
-				'active': static_light(host, id, color.get_passed()),
+				'active': static_device(host, id, color.get_passed()),
 				'status': status
 			})
 		if status == 'started':
@@ -23,7 +23,7 @@ def process_devices(host : str, ids : List[str], status : str) -> List[Dict[str,
 				'consumer': 'luxafor',
 				'type': 'device',
 				'name': id,
-				'active': static_light(host, id, color.get_started()),
+				'active': static_device(host, id, color.get_started()),
 				'status': status
 			})
 		if status == 'errored':
@@ -32,7 +32,7 @@ def process_devices(host : str, ids : List[str], status : str) -> List[Dict[str,
 				'consumer': 'luxafor',
 				'type': 'device',
 				'name': id,
-				'active': static_light(host, id, color.get_errored()),
+				'active': static_device(host, id, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -41,13 +41,13 @@ def process_devices(host : str, ids : List[str], status : str) -> List[Dict[str,
 				'consumer': 'luxafor',
 				'type': 'device',
 				'name': id,
-				'active': static_light(host, id, color.get_failed()),
+				'active': static_device(host, id, color.get_failed()),
 				'status': status
 			})
 	return result
 
 
-def static_light(host : str, id : str, color_config : Dict[str, Any]) -> bool:
+def static_device(host : str, id : str, color_config : Dict[str, Any]) -> bool:
 	response = None
 
 	if host and id:
