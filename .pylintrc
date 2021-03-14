@@ -18,6 +18,7 @@ disable =
 
 good-names =
 	chroma-feedback,
+	id,
 	ip
 
 [format]

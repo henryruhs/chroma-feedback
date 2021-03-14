@@ -1,11 +1,19 @@
 import pytest
+try:
+	from unittest.mock import MagicMock
+except ImportError:
+	from mock import MagicMock
+from chroma_feedback.consumer.luxafor.device import process_devices
 
-from chroma_feedback.consumer.luxafor.device import process_device
+MOCK = MagicMock()
 
 
 def test_process_passed() -> None:
 	try:
-		result = process_device("webhook_id", 'passed')
+		result = process_devices(
+		{
+			MOCK
+		}, 'passed')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
@@ -17,7 +25,10 @@ def test_process_passed() -> None:
 
 def test_process_started() -> None:
 	try:
-		result = process_device("webhook_id", 'started')
+		result = process_devices(
+		{
+			MOCK
+		}, 'started')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
@@ -29,7 +40,10 @@ def test_process_started() -> None:
 
 def test_process_errored() -> None:
 	try:
-		result = process_device("webhook_id", 'errored')
+		result = process_devices(
+		{
+			MOCK
+		}, 'errored')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
@@ -41,7 +55,10 @@ def test_process_errored() -> None:
 
 def test_process_failed() -> None:
 	try:
-		result = process_device("webhook_id", 'failed')
+		result = process_devices(
+		{
+			MOCK
+		}, 'failed')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'

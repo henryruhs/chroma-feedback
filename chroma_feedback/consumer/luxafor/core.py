@@ -1,7 +1,7 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
-from chroma_feedback import helper, wording
-from .device import get_devices, process_device
+from chroma_feedback import helper
+from .device import process_devices
 
 ARGS = None
 
@@ -16,9 +16,4 @@ def init(program : ArgumentParser) -> None:
 
 
 def run(status : str) -> List[Dict[str, Any]]:
-	devices = get_devices(ARGS.luxafor_host, ARGS.luxafor_id)
-
-	if not devices:
-		exit(wording.get('device_no') + wording.get('exclamation_mark'))
-	# todo: pass devices here to support multiple devices
-	return process_device(ARGS.luxafor_host, ARGS.luxafor_id, status)
+	return process_devices(ARGS.luxafor_host, ARGS.luxafor_id, status)
