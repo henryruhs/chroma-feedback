@@ -23,7 +23,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'luxaflor_flag',
 				'type': 'device',
-				'name': device.name(),
+				'name': device.name,
 				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
@@ -32,7 +32,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'luxaflor_flag',
 				'type': 'device',
-				'name': device.name(),
+				'name': device.name,
 				'active': static_device(device, color.get_started()),
 				'status': status
 			})
@@ -41,8 +41,8 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'luxaflor_flag',
 				'type': 'device',
-				'name': device.name(),
-				'active': pulsate_device(device, color.get_errored()),
+				'name': device.name,
+				'active': static_device(device, color.get_errored()),
 				'status': status
 			})
 		if status == 'failed':
@@ -50,8 +50,8 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'luxaflor_flag',
 				'type': 'device',
-				'name': device.name(),
-				'active': pulsate_device(device, color.get_failed()),
+				'name': device.name,
+				'active': static_device(device, color.get_failed()),
 				'status': status
 			})
 	return result
@@ -59,7 +59,3 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 
 def static_device(device : Any, color_config : Dict[str, Any]) -> bool:
 	return device.color((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None
-
-
-def pulsate_device(device : Any, color_config : Dict[str, Any]) -> bool:
-	return device.blink((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None
