@@ -34,6 +34,7 @@ def get_by_status(status : str) -> Dict[str, Any]:
 def get_passed() -> Dict[str, Any]:
 	return\
 	{
+		'name': 'green',
 		'rgb':
 		[
 			0,
@@ -60,6 +61,7 @@ def get_passed() -> Dict[str, Any]:
 def get_started() -> Dict[str, Any]:
 	return\
 	{
+		'name': 'yellow',
 		'rgb':
 		[
 			255,
@@ -86,6 +88,7 @@ def get_started() -> Dict[str, Any]:
 def get_errored() -> Dict[str, Any]:
 	return\
 	{
+		'name': 'white',
 		'rgb':
 		[
 			255,
@@ -112,6 +115,7 @@ def get_errored() -> Dict[str, Any]:
 def get_failed() -> Dict[str, Any]:
 	return\
 	{
+		'name': 'red',
 		'rgb':
 		[
 			255,

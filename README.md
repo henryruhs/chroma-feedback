@@ -482,18 +482,19 @@ chroma-feedback --consumer=lifx_light
 
 
 Luxafor
-----------
+-------
 
-| Name       | Mandatory |
-|------------|-----------|
-| Webhook id | required  |
+| Name | Default                 | Mandatory |
+|------|-------------------------|-----------|
+| Host | https://api.luxafor.com | optional  |
+| ID   |                         | required  |
 
-Indicate status via light:
+Indicate status via devices:
 
 ```
 chroma-feedback --consumer=luxafor
 
---luxafor-webhook-id <webhook-id>
+--luxafor-id <user-id>
 ```
 
 
