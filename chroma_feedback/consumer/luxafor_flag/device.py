@@ -58,4 +58,4 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 
 
 def static_device(device : Any, color_config : Dict[str, Any]) -> bool:
-	return device.color((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None
+	return device.on((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None
