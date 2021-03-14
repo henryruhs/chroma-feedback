@@ -16,13 +16,13 @@ def api_factory() -> Any:
 	api = None
 
 	try:
+		from busylight.lights import USBLight
 		from busylight.lights.luxafor import Flag
 
 		try:
-			api = Flag
-			api.state()
+			api = Flag(USBLight)
 		except OSError:
-			exit(wording.get('connection_no').format('LUXAFOR') + wording.get('exclamation_mark'))
+			exit(wording.get('connection_no').format('LUXAFOR FLAG') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
 		exit(wording.get('package_no').format('BUSYLIGHT FOR HUMANS') + wording.get('exclamation_mark'))

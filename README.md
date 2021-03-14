@@ -481,8 +481,8 @@ chroma-feedback --consumer=lifx_light
 ```
 
 
-Luxafor
--------
+Luxafor Flag
+------------
 
 | Name   | Mandatory |
 |--------|-----------|
@@ -491,9 +491,9 @@ Luxafor
 Indicate status via devices:
 
 ```
-chroma-feedback --consumer=luxafor
+chroma-feedback --consumer=luxafor_flag
 
---luxafor-device <device-serial>
+--luxafor-flag-device <device-serial>
 ```
 
 

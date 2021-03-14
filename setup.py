@@ -32,7 +32,7 @@ setup(
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative_blinkstick',
 		'chroma_feedback.consumer.lifx_light',
-		'chroma_feedback.consumer.lucafor',
+		'chroma_feedback.consumer.lucafor_flag',
 		'chroma_feedback.consumer.magic_hue',
 		'chroma_feedback.consumer.nanoleaf_light',
 		'chroma_feedback.consumer.philips_hue',
