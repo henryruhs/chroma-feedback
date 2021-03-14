@@ -5,7 +5,10 @@ from chroma_feedback.consumer.luxafor.device import process_devices
 
 def test_process_passed() -> None:
 	if os.environ.get('LUXAFOR_ID'):
-		result = process_devices('https://api.luxafor.com', os.environ.get('LUXAFOR_ID'), 'passed')
+		result = process_devices('https://api.luxafor.com',
+		[
+			os.environ.get('LUXAFOR_ID')
+		], 'passed')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
@@ -17,7 +20,10 @@ def test_process_passed() -> None:
 
 def test_process_started() -> None:
 	if os.environ.get('LUXAFOR_ID'):
-		result = process_devices('https://api.luxafor.com', os.environ.get('LUXAFOR_ID'), 'started')
+		result = process_devices('https://api.luxafor.com',
+		[
+			os.environ.get('LUXAFOR_ID')
+		], 'started')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
@@ -29,7 +35,10 @@ def test_process_started() -> None:
 
 def test_process_errored() -> None:
 	if os.environ.get('LUXAFOR_ID'):
-		result = process_devices('https://api.luxafor.com', os.environ.get('LUXAFOR_ID'), 'errored')
+		result = process_devices('https://api.luxafor.com',
+		 [
+			 os.environ.get('LUXAFOR_ID')
+		 ], 'errored')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
@@ -41,7 +50,10 @@ def test_process_errored() -> None:
 
 def test_process_failed() -> None:
 	if os.environ.get('LUXAFOR_ID'):
-		result = process_devices('https://api.luxafor.com', os.environ.get('LUXAFOR_ID'), 'failed')
+		result = process_devices('https://api.luxafor.com',
+		[
+			os.environ.get('LUXAFOR_ID')
+		], 'failed')
 
 		assert result[0]['consumer'] == 'luxafor'
 		assert result[0]['type'] == 'device'
