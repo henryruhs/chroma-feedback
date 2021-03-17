@@ -1,0 +1,22 @@
+- pipeline: 'ci'
+  trigger_mode: 'ON_EVERY_PUSH'
+  ref_name: 'refs/heads/*'
+  ref_type: 'WILDCARD'
+  actions:
+  - action: 'lint and test'
+    type: 'BUILD'
+    docker_image_name: 'library/python'
+    docker_image_tag: '3.5'
+    setup_commands:
+    - pip install mock
+    - pip install mypy
+    - pip install pillow
+    - pip install pylint
+    - pip install pytest
+    - pip install pytest-cov
+    - pip install pytest-mock
+    - pip install requests
+    execute_commands:
+    - pylint bin/chroma-feedback chroma_feedback tests
+    - mypy bin/chroma-feedback chroma_feedback tests
+    - pytest tests

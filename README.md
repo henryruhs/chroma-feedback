@@ -151,6 +151,35 @@ chroma-feedback --producer=bitbucket
 ```
 
 
+Buddy
+-----
+
+| Name  | Default                 | Mandatory |
+|-------|-------------------------|-----------|
+| Host  | https://api.buddy.works | optional  |
+| Slug  |                         | required  |
+| Token |                         | required  |
+
+Monitor a single build:
+
+```
+chroma-feedback --producer=buddy
+
+--buddy-slug <workspace/project>
+--buddy-token <token>
+```
+
+Monitor multiple builds:
+
+```
+chroma-feedback --producer=buddy
+
+--buddy-slug <workspace/project>
+--buddy-slug <workspace/project>
+--buddy-token <token>
+```
+
+
 Circle
 ------
 
