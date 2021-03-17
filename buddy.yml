@@ -1,0 +1,7 @@
+- pipeline: 'ci'
+  trigger_mode: 'ON_EVERY_PUSH'
+  ref_name: 'refs/heads/*'
+  ref_type: 'WILDCARD'
+  priority: 'NORMAL'
+  fail_on_prepare_env_warning: true
+  trigger_condition: 'ALWAYS'
