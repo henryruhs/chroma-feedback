@@ -2,6 +2,7 @@ import os
 import pytest
 from chroma_feedback.producer.github.core import fetch
 
+
 def test_fetch_slug() -> None:
 	if os.environ.get('GITHUB_TOKEN'):
 		result = fetch('https://api.github.com', 'redaxmedia/chroma-feedback', os.environ.get('GITHUB_TOKEN'))
