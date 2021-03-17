@@ -5,13 +5,12 @@
   priority: 'NORMAL'
   fail_on_prepare_env_warning: true
   trigger_condition: 'ALWAYS'
-
-- action: 'install'
+  actions:
+  - action: 'install'
     type: 'BUILD'
-    working_directory: '/buddy/chroma-feedback'
     docker_image_name: 'library/python'
     docker_image_tag: '3.5'
-    execute_commands:
+    setup_commands:
     - pip install mock
     - pip install mypy
     - pip install pillow
@@ -20,9 +19,7 @@
     - pip install pytest-cov
     - pip install pytest-mock
     - pip install requests
-    cached_dirs:
-    - '/root/.cache/pip'
-    volume_mappings:
-    - '/:/buddy/chroma-feedback'
-    trigger_condition: 'ALWAYS'
-    shell: 'BASH'
+    execute_commands:
+    - pylint bin/chroma-feedback chroma_feedback tests
+    - mypy bin/chroma-feedback chroma_feedback tests
+    - pytest tests
