@@ -3,8 +3,8 @@
   ref_name: 'refs/heads/*'
   ref_type: 'WILDCARD'
   actions:
-  - action: 'lint and test'
-    type: 'INVALID'
+  action: 'lint and test'
+    type: 'BUILD'
     docker_image_name: 'library/python'
     docker_image_tag: '3.5'
     setup_commands:
