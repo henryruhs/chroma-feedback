@@ -2,11 +2,8 @@
   trigger_mode: 'ON_EVERY_PUSH'
   ref_name: 'refs/heads/*'
   ref_type: 'WILDCARD'
-  priority: 'NORMAL'
-  fail_on_prepare_env_warning: true
-  trigger_condition: 'ALWAYS'
   actions:
-  - action: 'install'
+  - action: 'lint and test'
     type: 'BUILD'
     docker_image_name: 'library/python'
     docker_image_tag: '3.5'
