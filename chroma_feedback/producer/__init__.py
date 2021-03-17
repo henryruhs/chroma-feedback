@@ -5,6 +5,7 @@ __all__ =\
 	'appveyor',
 	'bamboo',
 	'bitbucket',
+	'buddy',
 	'circle',
 	'codeship',
 	'custom',
