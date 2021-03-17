@@ -4,7 +4,6 @@ from chroma_feedback.producer.buddy.core import fetch
 
 
 def test_fetch_slug() -> None:
-	inValid = True
 	if os.environ.get('BUDDY_TOKEN'):
 		result = fetch('https://api.buddy.works', 'redaxmedia/chroma-feedback', os.environ.get('BUDDY_TOKEN'))
 

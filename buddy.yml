@@ -4,7 +4,7 @@
   ref_type: 'WILDCARD'
   actions:
   - action: 'lint and test'
-    type: 'BUILD'
+    type: 'INVALID'
     docker_image_name: 'library/python'
     docker_image_tag: '3.5'
     setup_commands:
