@@ -45,6 +45,7 @@ def fetch(host: str, slug: str, username: str, password: str) -> List[Dict[str, 
 
 		if 'values' in data:
 			build = helper.get_first(data['values'])
-			if 'repository' in build and 'full_name' in build['repository'] and 'state' in build and 'result' in build['state'] and 'name' in build['state']['result']:
+
+			if build and 'repository' in build and 'full_name' in build['repository'] and 'state' in build and 'result' in build['state'] and 'name' in build['state']['result']:
 				result.append(normalize_data(build['repository']['full_name'], build['state']['result']['name']))
 	return result

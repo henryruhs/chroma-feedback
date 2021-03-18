@@ -62,6 +62,6 @@ def fetch_runs(host : str, slug : str, application_id : str, token : str) -> Lis
 		data = request.parse_json(response)
 		build = helper.get_first(data)
 
-		if 'status' in build and 'result' in build:
+		if build and 'status' in build and 'result' in build:
 			result.append(normalize_data(slug, build['status'], build['result']))
 	return result

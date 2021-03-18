@@ -43,7 +43,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		if 'repo' in data and 'slug' in data['repo'] and 'active' in data['repo'] and 'last_build_state' in data['repo']:
 			result.append(normalize_data(data['repo']['slug'], data['repo']['active'], data['repo']['last_build_state']))
 		if 'repos' in data:
-			for repo in data['repos']:
-				if 'slug' in repo and 'active' in repo and 'last_build_state' in repo:
-					result.append(normalize_data(repo['slug'], repo['active'], repo['last_build_state']))
+			for repository in data['repos']:
+				if 'slug' in repository and 'active' in repository and 'last_build_state' in repository:
+					result.append(normalize_data(repository['slug'], repository['active'], repository['last_build_state']))
 	return result

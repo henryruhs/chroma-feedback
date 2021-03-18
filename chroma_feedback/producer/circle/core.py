@@ -59,7 +59,8 @@ def fetch(host : str, organization : str, slug : str, filter : str, token : str)
 
 		if 'items' in data:
 			pipeline = helper.get_first(data['items'])
-			if 'id' in pipeline:
+
+			if pipeline and 'id' in pipeline:
 				result.extend(fetch_workflows(host, pipeline['id'], token))
 	return result
 

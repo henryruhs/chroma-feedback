@@ -54,6 +54,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		if 'builds' in helper.get_first(data):
 			for project in data:
 				build = helper.get_first(project['builds'])
-				if 'accountName' in project and 'slug' in project and 'status' in build:
-					result.append(normalize_data(project['accountName'] + '/' + project['slug'], build['status']))
+
+				if build and 'accountName' in build and 'slug' in build and 'status' in build:
+					result.append(normalize_data(build['accountName'] + '/' + project['slug'], build['status']))
 	return result
