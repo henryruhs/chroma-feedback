@@ -7,7 +7,7 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program: ArgumentParser) -> None:
+def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -26,7 +26,7 @@ def run() -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch(host: str, slug: str, username: str, password: str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
