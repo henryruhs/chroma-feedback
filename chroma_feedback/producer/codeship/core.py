@@ -104,7 +104,6 @@ def fetch_builds(host : str, organization_id : str, slug : str, project_id : str
 
 		if 'builds' in data:
 			build = helper.get_first(data['builds'])
-			if build:
-				build['slug'] = slug
-				result.append(normalize_data(build))
+			if 'status' in build:
+				result.append(normalize_data(slug, build['status']))
 	return result

@@ -64,6 +64,6 @@ def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[D
 		data = request.parse_json(response)
 
 		for build in data:
-			build['slug'] = slug
-			result.append(normalize_data(build))
+			if 'name' in build and 'status' in build:
+				result.append(normalize_data(slug + '/' + build['name'], build['status']))
 	return result

@@ -77,6 +77,6 @@ def fetch_runs(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 
 		if 'workflow_runs' in data:
 			build = helper.get_first(data['workflow_runs'])
-			if build:
-				result.append(normalize_data(build))
+			if 'repository' in build and 'full_name' in build['repository'] and 'status' in build and 'conclusion' in build:
+				result.append(normalize_data(build['repository']['full_name'], build['status'], build['conclusion']))
 	return result

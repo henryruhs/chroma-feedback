@@ -7,7 +7,7 @@ from .normalize import normalize_data
 ARGS = None
 
 
-def init(program : ArgumentParser) -> None:
+def init(program: ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
@@ -22,11 +22,11 @@ def run() -> List[Dict[str, Any]]:
 	result = []
 
 	for slug in ARGS.bitbucket_slug:
-		result.extend(fetch(ARGS.bitbucket_host, slug, ARGS.bitbucket_username, ARGS.bitbucket_password,))
+		result.extend(fetch(ARGS.bitbucket_host, slug, ARGS.bitbucket_username, ARGS.bitbucket_password))
 	return result
 
 
-def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[str, Any]]:
+def fetch(host: str, slug: str, username: str, password: str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
@@ -45,6 +45,6 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[s
 
 		if 'values' in data:
 			build = helper.get_first(data['values'])
-			if build:
-				result.append(normalize_data(build))
+			if 'repository' in build and 'full_name' in build['repository'] and 'state' in build and 'result' in build['state'] and 'name' in build['state']['result']:
+				result.append(normalize_data(build['repository']['full_name'], build['state']['result']['name']))
 	return result

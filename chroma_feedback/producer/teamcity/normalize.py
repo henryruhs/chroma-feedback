@@ -2,20 +2,20 @@ from typing import Any, Dict
 from chroma_feedback import helper
 
 
-def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
+def normalize_data(slug : str, status : str, is_running : bool) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'teamcity',
-		'slug': build['buildType']['projectName'],
+		'slug': slug,
 		'active': True,
-		'status': normalize_status(build['status'], build['running'])
+		'status': normalize_status(status, is_running)
 	}
 
 
-def normalize_status(status : str, started : str) -> str:
+def normalize_status(status : str, is_running : bool) -> str:
 	status = helper.to_lower_case(status)
 
-	if started is True:
+	if is_running is True:
 		return 'started'
 	if status == 'error':
 		return 'errored'

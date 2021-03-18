@@ -43,7 +43,6 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Dict[str,
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if data:
-			data['slug'] = slug
-			result.append(normalize_data(data))
+		if 'result' in data and 'building' in data:
+			result.append(normalize_data(slug, data['result'], data['building']))
 	return result

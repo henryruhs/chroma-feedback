@@ -2,13 +2,13 @@ from typing import Any, Dict
 from chroma_feedback import helper
 
 
-def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
+def normalize_data(slug : str, status : str, result : str) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'wercker',
-		'slug': build['slug'],
+		'slug': slug,
 		'active': True,
-		'status': normalize_status(build['status'], build['result'])
+		'status': normalize_status(status, result)
 	}
 
 

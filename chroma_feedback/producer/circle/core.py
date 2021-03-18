@@ -82,5 +82,6 @@ def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Dict[str
 
 		if 'items' in data:
 			for build in data['items']:
-				result.append(normalize_data(build))
+				if 'project_slug' in build and 'name' in build and 'status' in build:
+					result.append(normalize_data(build['project_slug'] + '/' + build['name'], build['status']))
 	return result
