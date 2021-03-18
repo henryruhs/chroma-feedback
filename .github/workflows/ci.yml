@@ -41,6 +41,7 @@ jobs:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
      BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
      BITBUCKET_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
+     BUDDY_TOKEN: ${{ secrets.BUDDY_TOKEN }}
      CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
      CODESHIP_USERNAME: ${{ secrets.CODESHIP_USERNAME }}
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
@@ -68,6 +69,9 @@ jobs:
   - run: pytest tests --cov=chroma_feedback
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
+     BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
+     BITBUCKET_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
+     BUDDY_TOKEN: ${{ secrets.BUDDY_TOKEN }}
      CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
      CODESHIP_USERNAME: ${{ secrets.CODESHIP_USERNAME }}
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}

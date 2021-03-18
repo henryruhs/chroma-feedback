@@ -42,7 +42,8 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 
 		if 'results' in data and 'result' in data['results']:
 			for project in data['results']['result']:
-				result.append(normalize_data(project))
-		elif data:
-			result.append(normalize_data(data))
+				if 'key' in project and 'buildState' in project:
+					result.append(normalize_data(project['key'], project['buildState']))
+		elif 'key' in data and 'buildState' in data:
+			result.append(normalize_data(data['key'], data['buildState']))
 	return result

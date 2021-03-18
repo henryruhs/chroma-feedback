@@ -43,6 +43,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 
 		if 'pipelines' in data:
 			pipeline = helper.get_first(data['pipelines'])
-			if 'last_execution_status' in pipeline:
+
+			if pipeline and 'last_execution_status' in pipeline:
 				result.append(normalize_data(slug, pipeline['last_execution_status']))
 	return result

@@ -41,7 +41,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 		data = request.parse_json(response)
 		pipeline = helper.get_first(data)
 
-		if 'id' in pipeline:
+		if pipeline and 'id' in pipeline:
 			pipeline_id = str(pipeline['id'])
 			result.extend(fetch_jobs(host, slug, pipeline_id, token))
 	return result
@@ -64,6 +64,6 @@ def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[D
 		data = request.parse_json(response)
 
 		for build in data:
-			build['slug'] = slug
-			result.append(normalize_data(build))
+			if 'name' in build and 'status' in build:
+				result.append(normalize_data(slug + '/' + build['name'], build['status']))
 	return result

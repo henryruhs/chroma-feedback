@@ -2,23 +2,24 @@ from typing import Any, Dict
 from chroma_feedback import helper
 
 
-def normalize_data(build : Dict[str, Any]) -> Dict[str, Any]:
+def normalize_data(slug : str, status : str, result : str) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'github',
-		'slug': build['repository']['full_name'],
+		'slug': slug,
 		'active': True,
-		'status': normalize_status(build['status'], build['conclusion'])
+		'status': normalize_status(status, result)
 	}
 
 
-def normalize_status(status : str, conclusion : str) -> str:
+def normalize_status(status : str, result : str) -> str:
 	status = helper.to_lower_case(status)
+	result = helper.to_lower_case(result)
 
 	if status in ['in_progress', 'queued']:
 		return 'started'
-	if conclusion in ['cancelled', 'timed_out']:
+	if result in ['cancelled', 'timed_out']:
 		return 'errored'
-	if conclusion == 'failure':
+	if result == 'failure':
 		return 'failed'
 	return 'passed'

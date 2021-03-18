@@ -58,7 +58,7 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if 'access_token' and 'organizations' in data:
+		if 'access_token' in data and 'organizations' in data:
 			result['token'] = data['access_token']
 			result['organizations'] = data['organizations']
 	return result
@@ -104,7 +104,7 @@ def fetch_builds(host : str, organization_id : str, slug : str, project_id : str
 
 		if 'builds' in data:
 			build = helper.get_first(data['builds'])
-			if build:
-				build['slug'] = slug
-				result.append(normalize_data(build))
+
+			if build and 'status' in build:
+				result.append(normalize_data(slug, build['status']))
 	return result

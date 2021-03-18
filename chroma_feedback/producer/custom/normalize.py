@@ -1,11 +1,11 @@
 from typing import Any, Dict
 
 
-def normalize_data(project : Dict[str, Any]) -> Dict[str, Any]:
+def normalize_data(slug : str, active : bool, status : str) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'custom',
-		'slug': project['slug'],
-		'active': project['active'],
-		'status': project['status']
+		'slug': slug,
+		'active': active,
+		'status': status
 	}

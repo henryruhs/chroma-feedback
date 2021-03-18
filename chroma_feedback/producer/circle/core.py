@@ -59,7 +59,8 @@ def fetch(host : str, organization : str, slug : str, filter : str, token : str)
 
 		if 'items' in data:
 			pipeline = helper.get_first(data['items'])
-			if 'id' in pipeline:
+
+			if pipeline and 'id' in pipeline:
 				result.extend(fetch_workflows(host, pipeline['id'], token))
 	return result
 
@@ -82,5 +83,6 @@ def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Dict[str
 
 		if 'items' in data:
 			for build in data['items']:
-				result.append(normalize_data(build))
+				if 'project_slug' in build and 'name' in build and 'status' in build:
+					result.append(normalize_data(build['project_slug'] + '/' + build['name'], build['status']))
 	return result
