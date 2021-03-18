@@ -49,12 +49,12 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if 'project' and 'build' in data:
+		if 'project' in data and 'build' in data:
 			result.append(normalize_data(data['project'], data['build']))
 		if 'builds' in helper.get_first(data):
 			for project in data:
 				build = helper.get_first(project['builds'])
 
-				if build and 'accountName' in build and 'slug' in build and 'status' in build:
-					result.append(normalize_data(build['accountName'] + '/' + project['slug'], build['status']))
+				if project and 'accountName' in project and 'slug' in project and build and 'status' in build:
+					result.append(normalize_data(project['accountName'] + '/' + project['slug'], build['status']))
 	return result

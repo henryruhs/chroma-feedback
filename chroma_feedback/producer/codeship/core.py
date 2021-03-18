@@ -58,7 +58,7 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if 'access_token' and 'organizations' in data:
+		if 'access_token' in data and 'organizations' in data:
 			result['token'] = data['access_token']
 			result['organizations'] = data['organizations']
 	return result
