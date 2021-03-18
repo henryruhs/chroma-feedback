@@ -13,6 +13,7 @@ disable =
 	protected-access,
 	redefined-builtin,
 	simplifiable-condition,
+	too-many-boolean-expressions,
 	unused-argument,
 	wrong-import-position
 
