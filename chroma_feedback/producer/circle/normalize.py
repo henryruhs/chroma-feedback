@@ -19,6 +19,6 @@ def normalize_status(status : str) -> str:
 		return 'started'
 	if status in ['canceled', 'no_tests']:
 		return 'errored'
-	if status == 'failed':
+	if status in ['failed', 'failing']:
 		return 'failed'
 	return 'passed'
