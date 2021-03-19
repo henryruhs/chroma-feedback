@@ -174,8 +174,7 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=buddy
 
---buddy-slug <workspace/project>
---buddy-slug <workspace/project>
+--buddy-slug <workspace>
 --buddy-token <token>
 ```
 

@@ -29,6 +29,12 @@ def has_argument(argument : str) -> bool:
 	return any(argument in argv for argv in sys.argv)
 
 
+def parse_slug(slug : str) -> Dict[str, Any]:
+	if slug:
+		return dict(zip(['workspace', 'project'], slug.split('/')))
+	return {}
+
+
 def is_linux() -> bool:
 	return to_lower_case(platform.system()) == 'linux'
 

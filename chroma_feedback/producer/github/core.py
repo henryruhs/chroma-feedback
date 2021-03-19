@@ -26,14 +26,18 @@ def run() -> List[Dict[str, Any]]:
 
 def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	result = []
-	repositories = fetch_repositories(host, slug, token)
+	SLUG = helper.parse_slug(slug)
+	repositories = None
+
+	if 'workspace' in SLUG and 'project' not in SLUG:
+		repositories = fetch_repositories(host, SLUG['workspace'], token)
 
 	if repositories:
 		for repository in repositories:
 			if 'full_name' in repository:
 				result.extend(fetch_runs(host, repository['full_name'], token))
-	else:
-		result.extend(fetch_runs(host, slug, token))
+	elif 'workspace' in SLUG and 'project' in SLUG:
+		result.extend(fetch_runs(host, SLUG['workspace'] + '/' + SLUG['project'], token))
 	return result
 
 

@@ -10,6 +10,15 @@ def test_has_argument() -> None:
 	assert helper.has_argument('invalid') is False
 
 
+def test_parse_slug() -> None:
+	assert 'workspace' in helper.parse_slug('redaxmedia')
+	assert 'project' not in helper.parse_slug('redaxmedia')
+	assert 'workspace' in helper.parse_slug('redaxmedia/chroma-feedback')
+	assert 'project' in helper.parse_slug('redaxmedia/chroma-feedback')
+	assert 'workspace' not in helper.parse_slug(None)
+	assert 'project' not in helper.parse_slug(None)
+
+
 def test_is_linux() -> None:
 	assert helper.is_linux() is True or False
 
