@@ -42,6 +42,10 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 
 		if 'id' in data:
 			result.extend(fetch_runs(host, slug, data['id'], token))
+		else:
+			for application in data:
+				if 'id' in application:
+					result.extend(fetch_runs(host, slug, application['id'], token))
 	return result
 
 

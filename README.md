@@ -458,8 +458,7 @@ Monitor multiple builds:
 ```
 chroma-feedback --producer=wercker
 
---wercker-slug <username/application>
---wercker-slug <username/application>
+--wercker-slug <username>
 --wercker-token <token>
 ```
 
