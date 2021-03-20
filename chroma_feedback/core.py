@@ -33,6 +33,7 @@ def run(program : ArgumentParser) -> None:
 	# report producer
 
 	producer_report = reporter.create_producer_report(producer_result)
+
 	if producer_report:
 		reporter.print_report(producer_report)
 		print()
@@ -40,6 +41,7 @@ def run(program : ArgumentParser) -> None:
 	# handle dry run
 
 	args = helper.get_first(program.parse_known_args())
+
 	if args.dry_run is False:
 
 		# process consumer
@@ -50,6 +52,7 @@ def run(program : ArgumentParser) -> None:
 		# report consumer
 
 		consumer_report = reporter.create_consumer_report(consumer_result)
+
 		if consumer_report:
 			reporter.print_report(consumer_report)
 			print()
@@ -61,6 +64,7 @@ def run(program : ArgumentParser) -> None:
 		[
 			program
 		]).start()
+
 		if helper.is_linux():
 			systray_report = reporter.create_systray_report(producer_result)
 			if systray.is_active():
