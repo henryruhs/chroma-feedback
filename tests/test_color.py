@@ -16,6 +16,7 @@ def test_format_failed() -> None:
 def test_get_passed() -> None:
 	state = color.get_passed()
 
+	assert 'name' in state
 	assert 'rgb' in state
 	assert 'hue' in state
 	assert 'saturation' in state
@@ -26,6 +27,7 @@ def test_get_passed() -> None:
 def test_get_started() -> None:
 	state = color.get_started()
 
+	assert 'name' in state
 	assert 'rgb' in state
 	assert 'hue' in state
 	assert 'saturation' in state
@@ -36,6 +38,7 @@ def test_get_started() -> None:
 def test_get_errored() -> None:
 	state = color.get_errored()
 
+	assert 'name' in state
 	assert 'rgb' in state
 	assert 'hue' in state
 	assert 'saturation' in state
@@ -46,6 +49,7 @@ def test_get_errored() -> None:
 def test_get_failed() -> None:
 	state = color.get_failed()
 
+	assert 'name' in state
 	assert 'rgb' in state
 	assert 'hue' in state
 	assert 'saturation' in state
