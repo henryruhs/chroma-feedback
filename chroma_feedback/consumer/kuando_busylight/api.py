@@ -17,13 +17,13 @@ def api_factory() -> Any:
 
 	try:
 		from busylight.lights import USBLightIOError, USBLightNotFound
-		from busylight.lights.agile_innovations import BlinkStick
+		from busylight.lights.kuando import BusyLight
 
 		try:
-			api = BlinkStick
-			api.first_light()
+			api = BusyLight
+			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
-			exit(wording.get('connection_no').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
+			exit(wording.get('connection_no').format('KUANDO BUSYLIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
 		exit(wording.get('package_no').format('BUSYLIGHT FOR HUMANS') + wording.get('exclamation_mark'))

@@ -1,13 +1,14 @@
 from typing import Any, Dict, List
 import copy
-
 from chroma_feedback import color
 
 
-def get_devices(devices : Any, device_names : List[str]) -> Any:
-	if device_names:
+def get_devices(devices : Any, device_serials : List[str]) -> Any:
+	if device_serials:
 		for device in copy.copy(devices):
-			if device.get_serial() not in device_names:
+			device_serial = device.info['serial_number']
+
+			if device_serial not in device_serials:
 				devices.remove(device)
 	return devices
 
@@ -18,12 +19,14 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	# process devices
 
 	for device in devices:
+		device_name = device.info['product_string'] + ' (' + device.info['serial_number'] + ')'
+
 		if status == 'passed':
 			result.append(
 			{
 				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'name': device.get_serial(),
+				'name': device_name,
 				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
@@ -32,7 +35,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'name': device.get_serial(),
+				'name': device_name,
 				'active': static_device(device, color.get_started()),
 				'status': status
 			})
@@ -41,7 +44,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'name': device.get_serial(),
+				'name': device_name,
 				'active': static_device(device, color.get_errored()),
 				'status': status
 			})
@@ -50,7 +53,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'name': device.get_serial(),
+				'name': device_name,
 				'active': static_device(device, color.get_failed()),
 				'status': status
 			})
@@ -58,12 +61,4 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 
 
 def static_device(device : Any, color_config : Dict[str, Any]) -> bool:
-	try:
-		return device.set_led_data(0,
-		[
-			color_config['rgb'][1],
-			color_config['rgb'][0],
-			color_config['rgb'][2]
-		] * 64) is None
-	except OSError:
-		return False
+	return device.on((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None

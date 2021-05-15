@@ -24,7 +24,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 		if status == 'passed':
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'consumer': 'embrava_blynclight',
 				'type': 'device',
 				'name': device_name,
 				'active': static_device(device, color.get_passed()),
@@ -33,7 +33,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 		if status == 'started':
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'consumer': 'embrava_blynclight',
 				'type': 'device',
 				'name': device_name,
 				'active': static_device(device, color.get_started()),
@@ -42,7 +42,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 		if status == 'errored':
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'consumer': 'embrava_blynclight',
 				'type': 'device',
 				'name': device_name,
 				'active': static_device(device, color.get_errored()),
@@ -51,7 +51,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 		if status == 'failed':
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'consumer': 'embrava_blynclight',
 				'type': 'device',
 				'name': device_name,
 				'active': static_device(device, color.get_failed()),

@@ -46,7 +46,7 @@ def fetch_projects(host : str, workspace : str, token : str) -> List[Dict[str, A
 	response = None
 
 	if host and workspace and token:
-		response = request.get(host + '/workspaces/' + workspace +  '/projects', headers =
+		response = request.get(host + '/workspaces/' + workspace + '/projects', headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token

@@ -3,12 +3,12 @@ import copy
 from chroma_feedback import color
 
 
-def get_devices(devices : Any, device_names : List[str]) -> Any:
-	if device_names:
+def get_devices(devices : Any, device_serials : List[str]) -> Any:
+	if device_serials:
 		for device in copy.copy(devices):
-			device_name = device.info['product_string']
+			device_serial = device.info['serial_number']
 
-			if device_name not in device_names:
+			if device_serial not in device_serials:
 				devices.remove(device)
 	return devices
 
@@ -19,12 +19,12 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	# process devices
 
 	for device in devices:
-		device_name = device.info['product_string']
+		device_name = device.info['product_string'] + ' (' + device.info['serial_number'] + ')'
 
 		if status == 'passed':
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'consumer': 'thingm_blink1',
 				'type': 'device',
 				'name': device_name,
 				'active': static_device(device, color.get_passed()),
@@ -33,7 +33,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 		if status == 'started':
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'consumer': 'thingm_blink1',
 				'type': 'device',
 				'name': device_name,
 				'active': static_device(device, color.get_started()),
@@ -42,7 +42,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 		if status == 'errored':
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'consumer': 'thingm_blink1',
 				'type': 'device',
 				'name': device_name,
 				'active': static_device(device, color.get_errored()),
@@ -51,7 +51,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 		if status == 'failed':
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'consumer': 'thingm_blink1',
 				'type': 'device',
 				'name': device_name,
 				'active': static_device(device, color.get_failed()),

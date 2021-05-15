@@ -13,7 +13,7 @@ def process(program : ArgumentParser) -> List[Dict[str, Any]]:
 		producer.init(program)
 		try:
 			result.extend(producer.run())
-		except:
+		except IOError:
 			exit(wording.get('producer_crash').format(producer_name) + wording.get('exclamation_mark'))
 	return result
 

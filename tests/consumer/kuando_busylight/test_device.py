@@ -3,7 +3,7 @@ try:
 	from unittest.mock import MagicMock
 except ImportError:
 	from mock import MagicMock
-from chroma_feedback.consumer.thingm_blink.device import process_devices
+from chroma_feedback.consumer.kuando_busylight.device import process_devices
 
 MOCK = MagicMock()
 
@@ -15,7 +15,7 @@ def test_process_passed() -> None:
 			MOCK
 		}, 'passed')
 
-		assert result[0]['consumer'] == 'thingm_blink'
+		assert result[0]['consumer'] == 'kuando_busylight'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'passed'
@@ -30,7 +30,7 @@ def test_process_started() -> None:
 			MOCK
 		}, 'started')
 
-		assert result[0]['consumer'] == 'thingm_blink'
+		assert result[0]['consumer'] == 'kuando_busylight'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'started'
@@ -45,7 +45,7 @@ def test_process_errored() -> None:
 			MOCK
 		}, 'errored')
 
-		assert result[0]['consumer'] == 'thingm_blink'
+		assert result[0]['consumer'] == 'kuando_busylight'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'errored'
@@ -60,7 +60,7 @@ def test_process_failed() -> None:
 			MOCK
 		}, 'failed')
 
-		assert result[0]['consumer'] == 'thingm_blink'
+		assert result[0]['consumer'] == 'kuando_busylight'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'failed'

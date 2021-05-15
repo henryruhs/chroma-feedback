@@ -11,13 +11,13 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--agile-innovative-blinkstick-device', action = 'append')
+		program.add_argument('--kuando-busylight-device', action = 'append')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(status : str) -> List[Dict[str, Any]]:
 	api = get_api()
-	devices = get_devices(api.all_lights(), ARGS.agile_innovative_blinkstick_device)
+	devices = get_devices(api.all_lights(), ARGS.kuando_busylight_device)
 
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
