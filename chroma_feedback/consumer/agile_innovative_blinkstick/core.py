@@ -17,7 +17,7 @@ def init(program : ArgumentParser) -> None:
 
 def run(status : str) -> List[Dict[str, Any]]:
 	api = get_api()
-	devices = get_devices(api.find_all(), ARGS.agile_innovative_blinkstick_device)
+	devices = get_devices(api.all_lights(), ARGS.agile_innovative_blinkstick_device)
 
 	if not devices:
 		exit(wording.get('device_no') + wording.get('exclamation_mark'))
