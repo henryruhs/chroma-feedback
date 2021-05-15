@@ -567,6 +567,8 @@ Indicate status via lights:
 
 ```
 chroma-feedback --consumer=magic_hue
+
+--magic-hue-ip <light-ip>
 ```
 
 
@@ -581,6 +583,8 @@ Indicate status via lights:
 
 ```
 chroma-feedback --consumer=nanoleaf_light
+
+--nanoleaf-light-ip <light-ip>
 ```
 
 
@@ -598,6 +602,7 @@ Indicate status via lights:
 ```
 chroma-feedback --consumer=philips_hue
 
+--philips-hue-ip <bridge-ip>
 --philips-hue-light <light-name>
 ```
 
@@ -606,6 +611,7 @@ Indicate status via groups:
 ```
 chroma-feedback --consumer=philips_hue
 
+--philips-hue-ip <bridge-ip>
 --philips-hue-group <group-name>
 ```
 
@@ -653,6 +659,8 @@ Indicate status via lights:
 
 ```
 chroma-feedback --consumer=wiz_light
+
+--wiz-light-ip <light-ip>
 ```
 
 
@@ -667,4 +675,6 @@ Indicate status via lights:
 
 ```
 chroma-feedback --consumer=xiaomi_yeelight
+
+--xiaomi-yeelight-ip <light-ip>
 ```
