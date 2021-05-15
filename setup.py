@@ -32,6 +32,8 @@ setup(
 		'chroma_feedback.producer.wercker',
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative_blinkstick',
+		'chroma_feedback.consumer.embrava_blynclight',
+		'chroma_feedback.consumer.kuando_busylight',
 		'chroma_feedback.consumer.lifx_light',
 		'chroma_feedback.consumer.luxafor_flag',
 		'chroma_feedback.consumer.magic_hue',

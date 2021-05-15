@@ -483,6 +483,38 @@ chroma-feedback --consumer=agile_innovative_blinkstick
 ```
 
 
+Embrava Blynclight
+------------------
+
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
+
+Indicate status via devices:
+
+```
+chroma-feedback --consumer=embrava_blynclight
+
+--embrava-blynclight-device <device-name>
+```
+
+
+Kuando Busylight
+----------------
+
+| Name   | Mandatory |
+|--------|-----------|
+| Device | optional  |
+
+Indicate status via devices:
+
+```
+chroma-feedback --consumer=kuando_busylight
+
+--kuando-busylight-device <device-name>
+```
+
+
 Lifx Light
 ----------
 
