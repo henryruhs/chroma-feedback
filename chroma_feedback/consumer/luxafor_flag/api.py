@@ -21,7 +21,7 @@ def api_factory() -> Any:
 
 		try:
 			api = Flag
-			api.all_lights()
+			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
 			exit(wording.get('connection_no').format('LUXAFOR FLAG') + wording.get('exclamation_mark'))
 		return api

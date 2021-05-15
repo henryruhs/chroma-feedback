@@ -19,8 +19,7 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	# process devices
 
 	for device in devices:
-		device_name = device.info['product_string']
-		device_serial = device.info['serial_number']
+		device_name = device.info['product_string'] + ' (' + device.info['serial_number'] + ')'
 
 		if status == 'passed':
 			result.append(
@@ -28,7 +27,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'thingm_blink1',
 				'type': 'device',
 				'name': device_name,
-				'serial': device_serial,
 				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
@@ -38,7 +36,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'thingm_blink1',
 				'type': 'device',
 				'name': device_name,
-				'serial': device_serial,
 				'active': static_device(device, color.get_started()),
 				'status': status
 			})
@@ -48,7 +45,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'thingm_blink1',
 				'type': 'device',
 				'name': device_name,
-				'serial': device_serial,
 				'active': static_device(device, color.get_errored()),
 				'status': status
 			})
@@ -58,7 +54,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'thingm_blink1',
 				'type': 'device',
 				'name': device_name,
-				'serial': device_serial,
 				'active': static_device(device, color.get_failed()),
 				'status': status
 			})

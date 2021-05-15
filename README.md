@@ -495,7 +495,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=embrava_blynclight
 
---embrava-blynclight-device <device-serial>
+--embrava-blynclight-device <device-name>
 ```
 
 
@@ -511,7 +511,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=kuando_busylight
 
---kuando-busylight-device <device-serial>
+--kuando-busylight-device <device-name>
 ```
 
 
@@ -552,7 +552,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=luxafor_flag
 
---luxafor-flag-device <device-serial>
+--luxafor-flag-device <device-name>
 ```
 
 

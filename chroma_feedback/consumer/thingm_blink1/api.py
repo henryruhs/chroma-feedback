@@ -21,7 +21,7 @@ def api_factory() -> Any:
 
 		try:
 			api = Blink1
-			api.all_lights()
+			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
 			exit(wording.get('connection_no').format('THINGM BLINK1') + wording.get('exclamation_mark'))
 		return api

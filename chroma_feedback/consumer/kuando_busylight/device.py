@@ -3,12 +3,12 @@ import copy
 from chroma_feedback import color
 
 
-def get_devices(devices : Any, device_serials : List[str]) -> Any:
-	if device_serials:
+def get_devices(devices : Any, device_names : List[str]) -> Any:
+	if device_names:
 		for device in copy.copy(devices):
-			device_serial = device.info['serial_number']
+			device_name = device.info['product_string']
 
-			if device_serial not in device_serials:
+			if device_name not in device_names:
 				devices.remove(device)
 	return devices
 
@@ -20,7 +20,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 
 	for device in devices:
 		device_name = device.info['product_string']
-		device_serial = device.info['serial_number']
 
 		if status == 'passed':
 			result.append(
@@ -28,7 +27,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'kuando_busylight',
 				'type': 'device',
 				'name': device_name,
-				'serial': device_serial,
 				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
@@ -38,7 +36,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'kuando_busylight',
 				'type': 'device',
 				'name': device_name,
-				'serial': device_serial,
 				'active': static_device(device, color.get_started()),
 				'status': status
 			})
@@ -48,7 +45,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'kuando_busylight',
 				'type': 'device',
 				'name': device_name,
-				'serial': device_serial,
 				'active': static_device(device, color.get_errored()),
 				'status': status
 			})
@@ -58,7 +54,6 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 				'consumer': 'kuando_busylight',
 				'type': 'device',
 				'name': device_name,
-				'serial': device_serial,
 				'active': static_device(device, color.get_failed()),
 				'status': status
 			})
