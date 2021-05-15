@@ -13,7 +13,7 @@ def process(program : ArgumentParser, status : str) -> List[Dict[str, Any]]:
 		consumer.init(program)
 		try:
 			result.extend(consumer.run(status))
-		except:
+		except IOError:
 			exit(wording.get('consumer_crash').format(consumer_name) + wording.get('exclamation_mark'))
 	return result
 

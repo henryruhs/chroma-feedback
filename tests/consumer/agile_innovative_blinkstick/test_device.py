@@ -18,6 +18,7 @@ def test_process_passed() -> None:
 		assert result[0]['consumer'] == 'agile_innovative_blinkstick'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
+		assert result[0]['serial']
 		assert result[0]['status'] == 'passed'
 	except:
 		pytest.skip()
@@ -33,6 +34,7 @@ def test_process_started() -> None:
 		assert result[0]['consumer'] == 'agile_innovative_blinkstick'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
+		assert result[0]['serial']
 		assert result[0]['status'] == 'started'
 	except:
 		pytest.skip()
@@ -48,6 +50,7 @@ def test_process_errored() -> None:
 		assert result[0]['consumer'] == 'agile_innovative_blinkstick'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
+		assert result[0]['serial']
 		assert result[0]['status'] == 'errored'
 	except:
 		pytest.skip()
@@ -63,6 +66,7 @@ def test_process_failed() -> None:
 		assert result[0]['consumer'] == 'agile_innovative_blinkstick'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
+		assert result[0]['serial']
 		assert result[0]['status'] == 'failed'
 	except:
 		pytest.skip()

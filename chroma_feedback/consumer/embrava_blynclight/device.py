@@ -3,10 +3,12 @@ import copy
 from chroma_feedback import color
 
 
-def get_devices(devices : Any, device_names : List[str]) -> Any:
-	if device_names:
+def get_devices(devices : Any, device_serials : List[str]) -> Any:
+	if device_serials:
 		for device in copy.copy(devices):
-			if device.name not in device_names:
+			device_serial = device.info['serial_number']
+
+			if device_serial not in device_serials:
 				devices.remove(device)
 	return devices
 
@@ -17,12 +19,16 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 	# process devices
 
 	for device in devices:
+		device_name = device.info['product_string']
+		device_serial = device.info['serial_number']
+
 		if status == 'passed':
 			result.append(
 			{
 				'consumer': 'embrava_blynclight',
 				'type': 'device',
-				'name': device.name,
+				'name': device_name,
+				'serial': device_serial,
 				'active': static_device(device, color.get_passed()),
 				'status': status
 			})
@@ -31,7 +37,8 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'embrava_blynclight',
 				'type': 'device',
-				'name': device.name,
+				'name': device_name,
+				'serial': device_serial,
 				'active': static_device(device, color.get_started()),
 				'status': status
 			})
@@ -40,7 +47,8 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'embrava_blynclight',
 				'type': 'device',
-				'name': device.name,
+				'name': device_name,
+				'serial': device_serial,
 				'active': static_device(device, color.get_errored()),
 				'status': status
 			})
@@ -49,7 +57,8 @@ def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
 			{
 				'consumer': 'embrava_blynclight',
 				'type': 'device',
-				'name': device.name,
+				'name': device_name,
+				'serial': device_serial,
 				'active': static_device(device, color.get_failed()),
 				'status': status
 			})

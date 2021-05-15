@@ -27,15 +27,19 @@ def create_consumer_report(consumer_result : List[Dict[str, Any]]) -> List[str]:
 	# process result
 
 	for consumer in consumer_result:
+		consumer_name = consumer['name']
+		if 'serial' in consumer:
+			consumer_name += ' [' + consumer['serial'] + ']'
+
 		if consumer['active'] is True:
 			if consumer['status'] == 'passed':
-				report.append(color.format_passed(wording.get('tick')) + ' ' + wording.get('setting_passed').format(consumer['name']) + wording.get('point'))
+				report.append(color.format_passed(wording.get('tick')) + ' ' + wording.get('setting_passed').format(consumer_name) + wording.get('point'))
 			if consumer['status'] == 'started':
-				report.append(color.format_started(wording.get('hourglass')) + ' ' + wording.get('setting_started').format(consumer['name']) + wording.get('point'))
+				report.append(color.format_started(wording.get('hourglass')) + ' ' + wording.get('setting_started').format(consumer_name) + wording.get('point'))
 			if consumer['status'] == 'errored':
-				report.append(wording.get('cross') + ' ' + wording.get('setting_errored').format(consumer['name']) + wording.get('point'))
+				report.append(wording.get('cross') + ' ' + wording.get('setting_errored').format(consumer_name) + wording.get('point'))
 			if consumer['status'] == 'failed':
-				report.append(color.format_failed(wording.get('cross')) + ' ' + wording.get('setting_failed').format(consumer['name']) + wording.get('point'))
+				report.append(color.format_failed(wording.get('cross')) + ' ' + wording.get('setting_failed').format(consumer_name) + wording.get('point'))
 	return report
 
 

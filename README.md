@@ -479,7 +479,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=agile_innovative_blinkstick
 
---agile-innovative-blinkstick-device <device-name>
+--agile-innovative-blinkstick-device <device-serial>
 ```
 
 
@@ -495,7 +495,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=embrava_blynclight
 
---embrava-blynclight-device <device-name>
+--embrava-blynclight-device <device-serial>
 ```
 
 
@@ -511,7 +511,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=kuando_busylight
 
---kuando-busylight-device <device-name>
+--kuando-busylight-device <device-serial>
 ```
 
 
@@ -552,7 +552,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=luxafor_flag
 
---luxafor-flag-device <device-name>
+--luxafor-flag-device <device-serial>
 ```
 
 
@@ -638,7 +638,7 @@ Indicate status via devices:
 ```
 chroma-feedback --consumer=thingm_blink1
 
---thingm-blink1-device <device-name>
+--thingm-blink1-device <device-serial>
 ```
 
 
