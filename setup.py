@@ -38,7 +38,7 @@ setup(
 		'chroma_feedback.consumer.nanoleaf_light',
 		'chroma_feedback.consumer.philips_hue',
 		'chroma_feedback.consumer.razer_chroma',
-		'chroma_feedback.consumer.thingm_blink',
+		'chroma_feedback.consumer.thingm_blink1',
 		'chroma_feedback.consumer.wiz_light',
 		'chroma_feedback.consumer.xiaomi_yeelight'
 	],
@@ -50,7 +50,6 @@ setup(
 	[
 		'asyncio==3.4.3',
 		'busylight-for-humans==0.8.2',
-		'blink1==0.3.1',
 		'blinkstick==1.2.0',
 		'lifxlan==1.2.5',
 		'nanoleafapi==2.0.0',

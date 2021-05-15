@@ -594,8 +594,8 @@ chroma-feedback --consumer=razer_chroma
 ```
 
 
-ThingM Blink
-------------
+ThingM Blink1
+-------------
 
 | Name   | Mandatory |
 |--------|-----------|
@@ -604,9 +604,9 @@ ThingM Blink
 Indicate status via devices:
 
 ```
-chroma-feedback --consumer=thingm_blink
+chroma-feedback --consumer=thingm_blink1
 
---thingm-blink-device <device-serial>
+--thingm-blink1-device <device-serial>
 ```
 
 
