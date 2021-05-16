@@ -51,7 +51,7 @@ setup(
 	install_requires =
 	[
 		'asyncio==3.4.3',
-		'busylight-for-humans==0.9.0',
+		'busylight-for-humans==0.10.0',
 		'lifxlan==1.2.5',
 		'nanoleafapi==2.0.0',
 		'phue==1.1',

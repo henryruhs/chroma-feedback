@@ -17,7 +17,7 @@ def api_factory() -> Any:
 
 	try:
 		from busylight.lights import USBLightIOError, USBLightNotFound
-		from busylight.lights.agile_innovations import BlinkStick
+		from busylight.lights.agile_innovative import BlinkStick
 
 		try:
 			api = BlinkStick
