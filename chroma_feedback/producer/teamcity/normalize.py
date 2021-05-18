@@ -1,5 +1,6 @@
 from typing import Any, Dict
 from chroma_feedback import helper
+from chroma_feedback.typing import StatusType
 
 
 def normalize_data(slug : str, status : str, is_running : bool) -> Dict[str, Any]:
@@ -12,7 +13,7 @@ def normalize_data(slug : str, status : str, is_running : bool) -> Dict[str, Any
 	}
 
 
-def normalize_status(status : str, is_running : bool) -> str:
+def normalize_status(status : str, is_running : bool) -> StatusType:
 	status = helper.to_lower_case(status)
 
 	if is_running is True:

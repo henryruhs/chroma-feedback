@@ -1,6 +1,7 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
+from chroma_feedback.typing import StatusType
 from .api import get_api
 from .group import get_groups, process_groups
 from .light import get_lights, process_lights
@@ -17,7 +18,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : str) -> List[Dict[str, Any]]:
+def run(status : StatusType) -> List[Dict[str, Any]]:
 	api = get_api()
 
 	# use groups

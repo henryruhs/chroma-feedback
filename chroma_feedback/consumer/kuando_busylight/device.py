@@ -1,62 +1,31 @@
 from typing import Any, Dict, List
 import copy
 from chroma_feedback import color
+from chroma_feedback.typing import StatusType
 
 
 def get_devices(devices : Any, device_names : List[str]) -> Any:
 	if device_names:
 		for device in copy.copy(devices):
-			device_name = device.info['product_string']
-
-			if device_name not in device_names:
+			if device.info['product_string'] not in device_names:
 				devices.remove(device)
 	return devices
 
 
-def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
+def process_devices(devices : Any, status : StatusType) -> List[Dict[str, Any]]:
 	result = []
 
 	# process devices
 
 	for device in devices:
-		device_name = device.info['product_string']
-
-		if status == 'passed':
-			result.append(
-			{
-				'consumer': 'kuando_busylight',
-				'type': 'device',
-				'name': device_name,
-				'active': static_device(device, color.get_passed()),
-				'status': status
-			})
-		if status == 'started':
-			result.append(
-			{
-				'consumer': 'kuando_busylight',
-				'type': 'device',
-				'name': device_name,
-				'active': static_device(device, color.get_started()),
-				'status': status
-			})
-		if status == 'errored':
-			result.append(
-			{
-				'consumer': 'kuando_busylight',
-				'type': 'device',
-				'name': device_name,
-				'active': static_device(device, color.get_errored()),
-				'status': status
-			})
-		if status == 'failed':
-			result.append(
-			{
-				'consumer': 'kuando_busylight',
-				'type': 'device',
-				'name': device_name,
-				'active': static_device(device, color.get_failed()),
-				'status': status
-			})
+		result.append(
+		{
+			'consumer': 'kuando_busylight',
+			'type': 'device',
+			'name': device.info['product_string'],
+			'active': static_device(device, color.get_by_status(status)),
+			'status': status
+		})
 	return result
 
 

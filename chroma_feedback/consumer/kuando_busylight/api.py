@@ -21,7 +21,9 @@ def api_factory() -> Any:
 
 		try:
 			api = BusyLight
-			api.first_light().release()
+			first_light = api.first_light()
+			first_light.update()
+			first_light.release()
 		except (USBLightIOError, USBLightNotFound):
 			exit(wording.get('connection_no').format('KUANDO BUSYLIGHT') + wording.get('exclamation_mark'))
 		return api

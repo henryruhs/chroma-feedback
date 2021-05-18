@@ -1,6 +1,7 @@
 from typing import Any, Dict, List
 import copy
 from chroma_feedback import color
+from chroma_feedback.typing import StatusType
 
 
 def get_devices(devices : Any, device_names : List[str]) -> Any:
@@ -11,48 +12,20 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, status : str) -> List[Dict[str, Any]]:
+def process_devices(devices : Any, status : StatusType) -> List[Dict[str, Any]]:
 	result = []
 
 	# process devices
 
 	for device in devices:
-		if status == 'passed':
-			result.append(
-			{
-				'consumer': 'razer_chroma',
-				'type': 'device',
-				'name': device.name,
-				'active': static_device(device, color.get_passed()),
-				'status': status
-			})
-		if status == 'started':
-			result.append(
-			{
-				'consumer': 'razer_chroma',
-				'type': 'device',
-				'name': device.name,
-				'active': static_device(device, color.get_started()),
-				'status': status
-			})
-		if status == 'errored':
-			result.append(
-			{
-				'consumer': 'razer_chroma',
-				'type': 'device',
-				'name': device.name,
-				'active': pulsate_device(device, color.get_errored()) or breath_device(device, color.get_errored()),
-				'status': status
-			})
-		if status == 'failed':
-			result.append(
-			{
-				'consumer': 'razer_chroma',
-				'type': 'device',
-				'name': device.name,
-				'active': pulsate_device(device, color.get_failed()) or breath_device(device, color.get_failed()),
-				'status': status
-			})
+		result.append(
+		{
+			'consumer': 'razer_chroma',
+			'type': 'device',
+			'name': device.name,
+			'active': static_device(device, color.get_by_status(status)),
+			'status': status
+		})
 	return result
 
 
