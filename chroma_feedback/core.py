@@ -5,7 +5,6 @@ import os
 import sys
 import threading
 from chroma_feedback import consumer, helper, producer, reporter, wording
-
 if helper.is_linux():
 	from chroma_feedback import systray
 
@@ -13,7 +12,7 @@ if helper.is_linux():
 def run(program : ArgumentParser) -> None:
 	status = None
 
-	if sys.version_info < (3, 4):
+	if sys.version_info < (3, 8):
 		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
 	# report header
