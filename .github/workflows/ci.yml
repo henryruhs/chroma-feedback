@@ -8,10 +8,10 @@ jobs:
   steps:
   - name: Checkout
     uses: actions/checkout@v2
-  - name: Set up Python 3.10
+  - name: Set up Python 3.9
     uses: actions/setup-python@v2
     with:
-     python-version: 3.10
+     python-version: 3.9
   - run: pip install mypy
   - run: pip install pillow
   - run: pip install pylint
@@ -23,7 +23,7 @@ jobs:
   runs-on: ubuntu-latest
   strategy:
    matrix:
-    python-version: [ 3.8, 3.9, 3.10 ]
+    python-version: [ 3.8, 3.9, 3.10-dev ]
   steps:
   - name: Checkout
     uses: actions/checkout@v2
@@ -55,10 +55,10 @@ jobs:
   steps:
   - name: Checkout
     uses: actions/checkout@v2
-  - name: Set up Python 3.10
+  - name: Set up Python 3.9
     uses: actions/setup-python@v2
     with:
-     python-version: 3.10
+     python-version: 3.9
   - run: pip install coveralls
   - run: pip install mock
   - run: pip install pillow
