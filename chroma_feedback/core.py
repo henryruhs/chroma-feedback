@@ -5,6 +5,7 @@ import os
 import sys
 import threading
 from chroma_feedback import consumer, helper, producer, reporter, wording
+
 if helper.is_linux():
 	from chroma_feedback import systray
 

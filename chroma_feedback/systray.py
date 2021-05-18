@@ -3,6 +3,8 @@ import tempfile
 import os
 from PIL import Image, ImageDraw
 from chroma_feedback import color, metadata, wording
+from chroma_feedback.typing import StatusType
+
 try:
 	import gi
 
@@ -16,7 +18,7 @@ except (ImportError, ValueError):
 SYSTRAY = None
 
 
-def create(status : str, report : List[str]) -> None:
+def create(status : StatusType, report : List[str]) -> None:
 	global SYSTRAY
 
 	if not SYSTRAY:
@@ -27,7 +29,7 @@ def create(status : str, report : List[str]) -> None:
 	Gtk.main()
 
 
-def update(status : str, report : List[str]) -> None:
+def update(status : StatusType, report : List[str]) -> None:
 	icon_path = create_icon(status)
 
 	SYSTRAY.set_icon(icon_path)
@@ -62,7 +64,7 @@ def create_menu(report : List[str]) ->Gtk.Menu:
 	return menu
 
 
-def create_icon(status : str) -> str:
+def create_icon(status : StatusType) -> str:
 	color_config = color.get_by_status(status)
 	image = Image.new('RGBA', (100, 100), (0, 0, 0, 0))
 	draw = ImageDraw.Draw(image)

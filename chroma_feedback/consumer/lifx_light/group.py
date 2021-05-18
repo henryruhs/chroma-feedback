@@ -1,5 +1,6 @@
 from typing import Any, Dict, List
 from chroma_feedback import color
+from chroma_feedback.typing import StatusType
 from .api import get_api
 
 
@@ -18,58 +19,28 @@ def get_group_name(group : Any) -> Any:
 		return device.get_group_label()
 
 
-def process_groups(groups : Any, status : str) -> List[Dict[str, Any]]:
+def process_groups(groups : Any, status : StatusType) -> List[Dict[str, Any]]:
 	result = []
 
 	# process groups
 
 	for group in groups:
-		group_name = get_group_name(group)
-
-		if status == 'passed':
-			result.append(
-			{
-				'consumer': 'lifx_light',
-				'type': 'group',
-				'name': group_name,
-				'active': static_group(group, color.get_passed()),
-				'status': status
-			})
-		if status == 'started':
-			result.append(
-			{
-				'consumer': 'lifx_light',
-				'type': 'group',
-				'name': group_name,
-				'active': static_group(group, color.get_started()),
-				'status': status
-			})
-		if status == 'errored':
-			result.append(
-			{
-				'consumer': 'lifx_light',
-				'type': 'group',
-				'name': group_name,
-				'active': static_group(group, color.get_errored()),
-				'status': status
-			})
-		if status == 'failed':
-			result.append(
-			{
-				'consumer': 'lifx_light',
-				'type': 'group',
-				'name': group_name,
-				'active': static_group(group, color.get_failed()),
-				'status': status
-			})
+		result.append(
+		{
+			'consumer': 'lifx_light',
+			'type': 'group',
+			'name': get_group_name(group),
+			'active': static_group(group, color.get_by_status(status)),
+			'status': status
+		})
 	return result
 
 
-def static_group(group : Any, state : Dict[str, Any]) -> bool:
+def static_group(group : Any, color_config : Dict[str, Any]) -> bool:
 	return group.set_power('on') is None and group.set_color(
 	[
-		state['hue'],
-		state['saturation'][2],
-		state['brightness'][2],
-		state['kelvin']
+		color_config['hue'],
+		color_config['saturation'][2],
+		color_config['brightness'][2],
+		color_config['kelvin']
 	]) is None

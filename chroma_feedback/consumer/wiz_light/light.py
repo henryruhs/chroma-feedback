@@ -1,5 +1,6 @@
 from typing import Any, Dict, List
 from chroma_feedback import color
+from chroma_feedback.typing import StatusType
 from .api import get_api, get_loop, get_builder
 
 
@@ -11,50 +12,20 @@ def get_lights(ips : List[str]) -> List[Dict[str, Any]]:
 	return lights
 
 
-def process_lights(lights : Any, status : str) -> List[Dict[str, Any]]:
+def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
 	result = []
 
 	# process lights
 
 	for light in lights:
-		light_name = get_light_name(light)
-
-		if status == 'passed':
-			result.append(
-			{
-				'consumer': 'wiz_light',
-				'type': 'light',
-				'name': light_name,
-				'active': static_light(light, color.get_passed()),
-				'status': status
-			})
-		if status == 'started':
-			result.append(
-			{
-				'consumer': 'wiz_light',
-				'type': 'light',
-				'name': light_name,
-				'active': static_light(light, color.get_started()),
-				'status': status
-			})
-		if status == 'errored':
-			result.append(
-			{
-				'consumer': 'wiz_light',
-				'type': 'light',
-				'name': light_name,
-				'active': static_light(light, color.get_errored()),
-				'status': status
-			})
-		if status == 'failed':
-			result.append(
-			{
-				'consumer': 'wiz_light',
-				'type': 'light',
-				'name': light_name,
-				'active': static_light(light, color.get_failed()),
-				'status': status
-			})
+		result.append(
+		{
+			'consumer': 'wiz_light',
+			'type': 'light',
+			'name': get_light_name(light),
+			'active': static_light(light, color.get_by_status(status)),
+			'status': status
+		})
 	return result
 
 

@@ -1,87 +1,56 @@
 from typing import List, Dict, Any
 import copy
 from chroma_feedback import color
+from chroma_feedback.typing import StatusType
 from .api import get_api
 
 
 def get_groups(groups : Any, group_names : List[str]) -> Any:
 	if group_names:
-		for group in copy.copy(groups):
-			group_name = groups[group]['name']
-
-			if group_name not in group_names:
-				del groups[group]
+		for index in copy.copy(groups):
+			if groups[index]['name'] not in group_names:
+				del groups[index]
 	return groups
 
 
-def process_groups(groups : Any, status : str) -> List[Dict[str, Any]]:
+def process_groups(groups : Any, status : StatusType) -> List[Dict[str, Any]]:
 	result = []
 
 	# process groups
 
-	for group in groups:
-		group_name = groups[group]['name']
-
-		if status == 'passed':
-			result.append(
-			{
-				'consumer': 'philips_hue',
-				'type': 'group',
-				'name': group_name,
-				'active': static_group(group_name, color.get_passed()),
-				'status': status
-			})
-		if status == 'started':
-			result.append(
-			{
-				'consumer': 'philips_hue',
-				'type': 'group',
-				'name': group_name,
-				'active': static_group(group_name, color.get_started()),
-				'status': status
-			})
-		if status == 'errored':
-			result.append(
-			{
-				'consumer': 'philips_hue',
-				'type': 'group',
-				'name': group_name,
-				'active': pulsate_group(group_name, color.get_errored()),
-				'status': status
-			})
-		if status == 'failed':
-			result.append(
-			{
-				'consumer': 'philips_hue',
-				'type': 'group',
-				'name': group_name,
-				'active': pulsate_group(group_name, color.get_failed()),
-				'status': status
-			})
+	for index in groups:
+		result.append(
+		{
+			'consumer': 'philips_hue',
+			'type': 'group',
+			'name': groups[index]['name'],
+			'active': static_group(groups[index]['name'], color.get_by_status(status)),
+			'status': status
+		})
 	return result
 
 
-def static_group(group_name : str, state : Dict[str, Any]) -> bool:
+def static_group(group_name : str, color_config : Dict[str, Any]) -> bool:
 	api = get_api(None)
 
 	return api is not None and api.set_group(group_name,
 	{
-		'hue': state['hue'],
-		'sat': state['saturation'][1],
-		'bri': state['brightness'][1],
+		'hue': color_config['hue'],
+		'sat': color_config['saturation'][1],
+		'bri': color_config['brightness'][1],
 		'on': True,
 		'alert': 'none'
 	}) is not None
 
 
-def pulsate_group(group_name : str, state : Dict[str, Any]) -> bool:
+def pulsate_group(group_name : str, color_config : Dict[str, Any]) -> bool:
 	api = get_api(None)
 
 	return api is not None and api.set_group(group_name,
 	{
-		'hue': state['hue'],
-		'sat': state['saturation'][1],
-		'bri': state['brightness'][1],
+		'hue': color_config['hue'],
+		'sat': color_config['saturation'][1],
+		'bri': color_config['brightness'][1],
 		'on': True,
 		'alert': 'lselect'
 	}) is not None

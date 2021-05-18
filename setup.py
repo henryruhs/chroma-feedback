@@ -51,15 +51,15 @@ setup(
 	install_requires =
 	[
 		'asyncio==3.4.3',
-		'busylight-for-humans==0.10.0',
+		'busylight-for-humans==0.12.2',
 		'lifxlan==1.2.5',
 		'nanoleafapi==2.0.0',
 		'phue==1.1',
 		'pillow==8.1.2',
 		'python-magichue==0.2.9.3',
-		'pywizlight==0.4.5',
+		'pywizlight==0.4.7',
 		'requests==2.25.1',
-		'yeelight==0.5.4'
+		'yeelight==0.6.2'
 	],
 	tests_require =
 	[
