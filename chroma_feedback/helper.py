@@ -1,3 +1,4 @@
+import os
 from typing import Any, Dict, List
 import platform
 import sys
@@ -22,22 +23,26 @@ def get_producer_status(producer_result : List[Dict[str, Any]]) -> StatusType:
 	return status
 
 
-def to_lower_case(__string__ : Any) -> str:
-	return str(__string__).lower()
-
-
-def has_argument(argument : str) -> bool:
-	return any(argument in argv for argv in sys.argv)
-
-
 def parse_slug(slug : str) -> Dict[str, Any]:
 	if slug:
 		return dict(zip(['workspace', 'project'], slug.split('/')))
 	return {}
 
 
+def is_root() -> bool:
+	return os.geteuid() == 0
+
+
 def is_linux() -> bool:
 	return to_lower_case(platform.system()) == 'linux'
+
+
+def to_lower_case(__string__ : Any) -> str:
+	return str(__string__).lower()
+
+
+def has_argument(argument : str) -> bool:
+	return any(argument in argv for argv in sys.argv)
 
 
 def get_first(__list__ : Any) -> Any:

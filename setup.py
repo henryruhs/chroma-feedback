@@ -2,6 +2,7 @@
 
 from setuptools import setup
 from chroma_feedback import metadata
+from chroma_feedback.install import InstallCommand
 
 setup(
 	name = metadata.get('name'),
@@ -44,6 +45,10 @@ setup(
 		'chroma_feedback.consumer.wiz_light',
 		'chroma_feedback.consumer.xiaomi_yeelight'
 	],
+	cmdclass =
+	{
+		'install': InstallCommand
+	},
 	scripts =
 	[
 		'bin/chroma-feedback'
