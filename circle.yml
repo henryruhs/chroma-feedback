@@ -3,7 +3,7 @@ version: 2
 jobs:
  lint:
   docker:
-  - image: circleci/python:3.7.4-buster
+  - image: circleci/python:3.9-buster
   steps:
   - checkout
   - run: sudo pip install mypy
