@@ -6,7 +6,7 @@
   - action: 'lint and test'
     type: 'BUILD'
     docker_image_name: 'library/python'
-    docker_image_tag: '3.5'
+    docker_image_tag: '3.9'
     setup_commands:
     - pip install mock
     - pip install mypy
