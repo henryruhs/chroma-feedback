@@ -3,12 +3,12 @@ from chroma_feedback import helper
 from chroma_feedback.typing import StatusType
 
 
-def normalize_data(slug : str, status : str, is_running : bool) -> Dict[str, Any]:
+def normalize_data(slug : str, paused : bool, status : str, is_running : bool) -> Dict[str, Any]:
 	return\
 	{
 		'producer': 'teamcity',
 		'slug': slug,
-		'active': True,
+		'active': paused is False,
 		'status': normalize_status(status, is_running)
 	}
 

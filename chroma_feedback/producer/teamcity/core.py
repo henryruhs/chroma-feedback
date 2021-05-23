@@ -32,13 +32,13 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))&locator=affectedProject:(id:' + slug + ')', headers =
+		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName,paused))))&locator=affectedProject:(id:' + slug + ')', headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token
 		})
 	elif host and token:
-		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName))))', headers =
+		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName,paused))))', headers =
 		{
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + token
@@ -54,6 +54,6 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 				if 'builds' in project and 'build' in project['builds']:
 					build = helper.get_first(project['builds']['build'])
 
-					if build and 'buildType' in build and 'projectName' in build['buildType'] and 'status' in build and 'running' in build:
-						result.append(normalize_data(build['buildType']['projectName'], build['status'], build['running']))
+					if build and 'buildType' in build and 'projectName' in build['buildType'] and 'paused' in build['buildType'] and 'status' in build and 'running' in build:
+						result.append(normalize_data(build['buildType']['projectName'], build['buildType']['paused'], build['status'], build['running']))
 	return result
