@@ -20,7 +20,8 @@ def test_fetch_slug(request_mock : Any) -> None:
 							'running': False,
 							'buildType':
 							{
-								'projectName': 'chroma-feedback'
+								'projectName': 'chroma-feedback',
+								'paused': False
 							}
 						}
 					]
