@@ -17,9 +17,9 @@ def normalize_status(status : str, result : str) -> StatusType:
 	status = helper.to_lower_case(status)
 	result = helper.to_lower_case(result)
 
-	if status == 'inprogress':
+	if status in ['inprogress', 'notstarted']:
 		return 'started'
-	if result == 'canceled':
+	if status == 'cancelling' or result == 'canceled':
 		return 'errored'
 	if result == 'failed':
 		return 'failed'
