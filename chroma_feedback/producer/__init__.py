@@ -3,6 +3,7 @@ from .core import process
 __all__ =\
 [
 	'appveyor',
+	'azure',
 	'bamboo',
 	'bitbucket',
 	'buddy',

@@ -20,6 +20,7 @@ setup(
 		'chroma_feedback',
 		'chroma_feedback.producer',
 		'chroma_feedback.producer.appveyor',
+		'chroma_feedback.producer.azure',
 		'chroma_feedback.producer.bamboo',
 		'chroma_feedback.producer.bitbucket',
 		'chroma_feedback.producer.buddy',
@@ -56,7 +57,7 @@ setup(
 	install_requires =
 	[
 		'asyncio==3.4.3',
-		'busylight-for-humans==0.12.4',
+		'busylight-for-humans==0.12.5',
 		'lifxlan==1.2.5',
 		'nanoleafapi==2.0.0',
 		'phue==1.1',

@@ -89,6 +89,35 @@ chroma-feedback --producer=appveyor
 ```
 
 
+Azure
+-----
+
+| Name  | Default               | Mandatory |
+|-------|-----------------------|-----------|
+| Host  | https://dev.azure.com | optional  |
+| Slug  |                       | required  |
+| Token |                       | required  |
+
+Monitor a single build:
+
+```
+chroma-feedback --producer=azure
+
+--azure-slug <organization/project>
+--azure-token <token>
+```
+
+Monitor multiple builds:
+
+```
+chroma-feedback --producer=azure
+
+--azure-slug <organization/project>
+--azure-slug <organization/project>
+--azure-token <token>
+```
+
+
 Bamboo
 ------
 
