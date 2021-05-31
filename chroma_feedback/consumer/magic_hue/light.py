@@ -43,4 +43,3 @@ def set_light(light : Any, color_config : Dict[str, Any]) -> bool:
 			]
 		)
 	return light.update_status() is None
-

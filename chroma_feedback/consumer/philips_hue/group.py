@@ -41,4 +41,3 @@ def set_group(group_name : str, color_config : Dict[str, Any]) -> bool:
 		'on': True,
 		'alert': 'none'
 	}) is not None
-

@@ -31,4 +31,3 @@ def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
 
 def set_light(light : Any, color_config : Dict[str, Any]) -> bool:
 	return light.set_color(color_config['rgb'])
-
