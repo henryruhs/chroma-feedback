@@ -23,37 +23,21 @@ def process_devices(devices : Any, status : StatusType) -> List[Dict[str, Any]]:
 			'consumer': 'razer_chroma',
 			'type': 'device',
 			'name': device.name,
-			'active': static_device(device, color.get_by_status(status)),
+			'active': set_device(device, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def static_device(device : Any, color_config : Dict[str, Any]) -> bool:
+def set_device(device : Any, color_config : Dict[str, Any]) -> bool:
 	if device.has('brightness'):
 		device.brightness = color_config['brightness'][0]
 	if device.fx.has('static'):
 		return device.fx.static(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])
-	return misc_effect(device, color_config, 'static')
+	return use_effect(device, color_config, 'static')
 
 
-def pulsate_device(device : Any, color_config : Dict[str, Any]) -> bool:
-	if device.has('brightness'):
-		device.brightness = color_config['brightness'][0]
-	if device.fx.has('pulsate'):
-		return device.fx.breath_single(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])
-	return misc_effect(device, color_config, 'pulsate')
-
-
-def breath_device(device : Any, color_config : Dict[str, Any]) -> bool:
-	if device.has('brightness'):
-		device.brightness = color_config['brightness'][0]
-	if device.fx.has('breath_single'):
-		return device.fx.breath_single(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])
-	return misc_effect(device, color_config, 'breath_single')
-
-
-def misc_effect(device : Any, color_config : Dict[str, Any], effect_name : str) -> bool:
+def use_effect(device : Any, color_config : Dict[str, Any], effect_name : str) -> bool:
 	effect_state = False
 	parts =\
 	{

@@ -23,11 +23,11 @@ def process_devices(devices : Any, status : StatusType) -> List[Dict[str, Any]]:
 			'consumer': 'luxafor_flag',
 			'type': 'device',
 			'name': device.info['product_string'],
-			'active': static_device(device, color.get_by_status(status)),
+			'active': set_device(device, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def static_device(device : Any, color_config : Dict[str, Any]) -> bool:
+def set_device(device : Any, color_config : Dict[str, Any]) -> bool:
 	return device.on((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None

@@ -30,13 +30,13 @@ def process_groups(groups : Any, status : StatusType) -> List[Dict[str, Any]]:
 			'consumer': 'lifx_light',
 			'type': 'group',
 			'name': get_group_name(group),
-			'active': static_group(group, color.get_by_status(status)),
+			'active': set_group(group, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def static_group(group : Any, color_config : Dict[str, Any]) -> bool:
+def set_group(group : Any, color_config : Dict[str, Any]) -> bool:
 	return group.set_power('on') is None and group.set_color(
 	[
 		color_config['hue'],

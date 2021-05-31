@@ -23,7 +23,7 @@ def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
 			'consumer': 'wiz_light',
 			'type': 'light',
 			'name': get_light_name(light),
-			'active': static_light(light, color.get_by_status(status)),
+			'active': set_light(light, color.get_by_status(status)),
 			'status': status
 		})
 	return result
@@ -35,7 +35,7 @@ def get_light_name(light : Any) -> str:
 	return config.name
 
 
-def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
+def set_light(light : Any, color_config : Dict[str, Any]) -> bool:
 	loop = get_loop()
 	builder = get_builder()
 	loop.run_until_complete(light.turn_on(builder(rgb = color_config['rgb'])))

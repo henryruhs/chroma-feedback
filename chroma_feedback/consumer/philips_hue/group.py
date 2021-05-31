@@ -24,13 +24,13 @@ def process_groups(groups : Any, status : StatusType) -> List[Dict[str, Any]]:
 			'consumer': 'philips_hue',
 			'type': 'group',
 			'name': groups[index]['name'],
-			'active': static_group(groups[index]['name'], color.get_by_status(status)),
+			'active': set_group(groups[index]['name'], color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def static_group(group_name : str, color_config : Dict[str, Any]) -> bool:
+def set_group(group_name : str, color_config : Dict[str, Any]) -> bool:
 	api = get_api(None)
 
 	return api is not None and api.set_group(group_name,
@@ -42,15 +42,3 @@ def static_group(group_name : str, color_config : Dict[str, Any]) -> bool:
 		'alert': 'none'
 	}) is not None
 
-
-def pulsate_group(group_name : str, color_config : Dict[str, Any]) -> bool:
-	api = get_api(None)
-
-	return api is not None and api.set_group(group_name,
-	{
-		'hue': color_config['hue'],
-		'sat': color_config['saturation'][1],
-		'bri': color_config['brightness'][1],
-		'on': True,
-		'alert': 'lselect'
-	}) is not None

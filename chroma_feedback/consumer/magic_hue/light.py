@@ -23,13 +23,13 @@ def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
 			'consumer': 'magic_hue',
 			'type': 'light',
 			'name': light.name,
-			'active': static_light(light, color.get_by_status(status)),
+			'active': set_light(light, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
+def set_light(light : Any, color_config : Dict[str, Any]) -> bool:
 	modes = get_modes()
 
 	if modes:
@@ -44,18 +44,3 @@ def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
 		)
 	return light.update_status() is None
 
-
-def pulsate_light(light : Any, color_config : Dict[str, Any]) -> bool:
-	modes = get_modes()
-
-	if modes:
-		light.mode = modes.CustomMode(
-			mode = modes.MODE_GRADUALLY,
-			speed = 1,
-			colors =\
-			[
-				color_config['rgb'],
-				(0, 0, 0)
-			]
-		)
-	return light.update_status() is None

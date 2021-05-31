@@ -23,13 +23,13 @@ def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
 			'consumer': 'lifx_light',
 			'type': 'light',
 			'name': light.get_label(),
-			'active': static_light(light, color.get_by_status(status)),
+			'active': set_light(light, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def static_light(light : Any, color_config : Dict[str, Any]) -> bool:
+def set_light(light : Any, color_config : Dict[str, Any]) -> bool:
 	return light.set_power('on') is None and light.set_color(
 	[
 		color_config['hue'],

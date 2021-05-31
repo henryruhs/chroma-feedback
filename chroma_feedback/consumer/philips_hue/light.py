@@ -24,13 +24,13 @@ def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
 			'consumer': 'philips_hue',
 			'type': 'light',
 			'name': light.name,
-			'active': static_light(light.name, color.get_by_status(status)),
+			'active': set_light(light.name, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def static_light(light_name : str, color_config : Dict[str, Any]) -> bool:
+def set_light(light_name : str, color_config : Dict[str, Any]) -> bool:
 	api = get_api(None)
 
 	return api is not None and api.set_light(light_name,
@@ -42,15 +42,3 @@ def static_light(light_name : str, color_config : Dict[str, Any]) -> bool:
 		'alert': 'none'
 	}) is not None
 
-
-def pulsate_light(light_name : str, color_config : Dict[str, Any]) -> bool:
-	api = get_api(None)
-
-	return api is not None and api.set_light(light_name,
-	{
-		'hue': color_config['hue'],
-		'sat': color_config['saturation'][1],
-		'bri': color_config['brightness'][1],
-		'on': True,
-		'alert': 'lselect'
-	}) is not None
