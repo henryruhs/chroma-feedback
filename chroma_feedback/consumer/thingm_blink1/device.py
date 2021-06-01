@@ -30,4 +30,4 @@ def process_devices(devices : Any, status : StatusType) -> List[Dict[str, Any]]:
 
 
 def set_device(device : Any, color_config : Dict[str, Any]) -> bool:
-	return device.on((color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])) is None
+	return device.on(tuple(color_config['rgb'])) is None

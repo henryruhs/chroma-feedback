@@ -68,7 +68,7 @@ def create_icon(status : StatusType) -> str:
 	color_config = color.get_by_status(status)
 	image = Image.new('RGBA', (100, 100), (0, 0, 0, 0))
 	draw = ImageDraw.Draw(image)
-	draw.ellipse((20, 20, 80, 80), fill = (color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]))
+	draw.ellipse((20, 20, 80, 80), fill = tuple(color_config['rgb']))
 	path = tempfile.mktemp('.png')
 	image.save(path)
 	return path
