@@ -1,9 +1,11 @@
 [disable]
 
 disable =
+	bare-except,
 	duplicate-code,
 	global-statement,
 	import-outside-toplevel,
+	import-error,
 	inconsistent-return-statements,
 	missing-docstring,
 	no-name-in-module,
