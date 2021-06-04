@@ -1,3 +1,4 @@
+import sys
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 import importlib
@@ -15,7 +16,7 @@ def process(program : ArgumentParser, status : StatusType) -> List[Dict[str, Any
 		try:
 			result.extend(consumer.run(status))
 		except IOError:
-			exit(wording.get('consumer_crash').format(consumer_name) + wording.get('exclamation_mark'))
+			sys.exit(wording.get('consumer_crash').format(consumer_name) + wording.get('exclamation_mark'))
 	return result
 
 
@@ -23,4 +24,4 @@ def load_consumer(consumer_name : str) -> Any:
 	try:
 		return importlib.import_module('chroma_feedback.consumer.' + consumer_name)
 	except ImportError:
-		exit(wording.get('consumer_no').format(consumer_name) + wording.get('exclamation_mark'))
+		sys.exit(wording.get('consumer_no').format(consumer_name) + wording.get('exclamation_mark'))

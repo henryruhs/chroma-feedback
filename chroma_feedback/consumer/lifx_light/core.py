@@ -1,3 +1,4 @@
+import sys
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
@@ -27,7 +28,7 @@ def run(status : StatusType) -> List[Dict[str, Any]]:
 		groups = get_groups(ARGS.lifx_light_group)
 
 		if not groups:
-			exit(wording.get('group_no') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('group_no') + wording.get('exclamation_mark'))
 		return process_groups(groups, status)
 
 	# use lights
@@ -35,5 +36,5 @@ def run(status : StatusType) -> List[Dict[str, Any]]:
 	lights = get_lights(api.get_lights(), ARGS.lifx_light_light)
 
 	if not lights:
-		exit(wording.get('light_no') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('light_no') + wording.get('exclamation_mark'))
 	return process_lights(lights, status)

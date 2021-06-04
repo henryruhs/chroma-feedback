@@ -1,3 +1,4 @@
+import sys
 from typing import Any
 from chroma_feedback import wording
 
@@ -21,9 +22,9 @@ def api_factory(ip : str) -> Any:
 		try:
 			api = Bridge(ip)
 		except (PhueRequestTimeout, OSError, ValueError):
-			exit(wording.get('connection_no').format('PHILIPS HUE') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_no').format('PHILIPS HUE') + wording.get('exclamation_mark'))
 		except PhueRegistrationException:
-			exit(wording.get('press_button').format('PAIRING', 'PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('press_button').format('PAIRING', 'PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('PHILIPS HUE') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_no').format('PHILIPS HUE') + wording.get('exclamation_mark'))

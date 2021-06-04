@@ -1,4 +1,5 @@
 import socket
+import sys
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
@@ -27,7 +28,7 @@ def run(status : StatusType) -> List[Dict[str, Any]]:
 	lights = get_lights(ARGS.wiz_light_ip)
 
 	if not lights:
-		exit(wording.get('light_no') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('light_no') + wording.get('exclamation_mark'))
 	return process_lights(lights, status)
 
 
@@ -46,5 +47,5 @@ def discover_ips() -> List[str]:
 	try:
 		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 	except OSError:
-		print(wording.get('ip_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('ip_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 	return ips

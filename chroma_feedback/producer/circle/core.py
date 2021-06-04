@@ -29,11 +29,11 @@ def run() -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch(host : str, organization : str, slug : str, filter : str, token : str) -> List[Dict[str, Any]]:
+def fetch(host : str, organization : str, slug : str, __filter__ : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
-	if host and slug and filter == 'mine' and token:
+	if host and slug and __filter__ == 'mine' and token:
 		response = request.get(host + '/api/v2/project/' + slug + '/pipeline/mine', headers =
 		{
 			'Accept': 'application/json',

@@ -1,3 +1,4 @@
+import sys
 from typing import Any
 from chroma_feedback import wording
 
@@ -21,10 +22,10 @@ def api_factory(ip : str) -> Any:
 		try:
 			api = Light(ip)
 		except OSError:
-			exit(wording.get('connection_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_no').format('MAGIC HUE') + wording.get('exclamation_mark'))
 
 
 def get_modes() -> Any:

@@ -1,3 +1,4 @@
+import sys
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
@@ -21,5 +22,5 @@ def run(status : StatusType) -> List[Dict[str, Any]]:
 	devices = get_devices(api.all_lights(), ARGS.embrava_blynclight_device)
 
 	if not devices:
-		exit(wording.get('device_no') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('device_no') + wording.get('exclamation_mark'))
 	return process_devices(devices, status)

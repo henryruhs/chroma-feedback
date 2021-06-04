@@ -21,7 +21,7 @@ Installation
 Install Chroma Feedback:
 
 ```
-apt-get install gir1.2-appindicator3-0.1 libusb-1.0-0-dev libudev-dev
+apt-get install libusb-1.0-0-dev libudev-dev
 ```
 
 ```

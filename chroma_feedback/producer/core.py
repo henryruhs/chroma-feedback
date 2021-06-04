@@ -1,4 +1,5 @@
 from typing import Any, Dict, List
+import sys
 from argparse import ArgumentParser
 import importlib
 from chroma_feedback import helper, wording
@@ -14,7 +15,7 @@ def process(program : ArgumentParser) -> List[Dict[str, Any]]:
 		try:
 			result.extend(producer.run())
 		except IOError:
-			exit(wording.get('producer_crash').format(producer_name) + wording.get('exclamation_mark'))
+			sys.exit(wording.get('producer_crash').format(producer_name) + wording.get('exclamation_mark'))
 	return result
 
 
@@ -22,4 +23,4 @@ def load_producer(producer_name : str) -> Any:
 	try:
 		return importlib.import_module('chroma_feedback.producer.' + producer_name)
 	except ImportError:
-		exit(wording.get('producer_no').format(producer_name) + wording.get('exclamation_mark'))
+		sys.exit(wording.get('producer_no').format(producer_name) + wording.get('exclamation_mark'))
