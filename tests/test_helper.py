@@ -11,11 +11,11 @@ def test_parse_slug() -> None:
 
 
 def test_is_root() -> None:
-	assert type(helper.is_linux()) is bool
+	assert helper.is_root() is False
 
 
 def test_is_linux() -> None:
-	assert type(helper.is_linux()) is bool
+	assert helper.is_linux() is True
 
 
 def test_to_lower_case() -> None:
