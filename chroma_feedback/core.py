@@ -22,7 +22,7 @@ def init(program : ArgumentParser) -> None:
 		timer = loop.get_timer()
 		timer.setInterval(args.background_interval * 1000)
 		timer.timeout.connect(lambda: run(program))
-		timer.singleShot(0, lambda: run(program))
+		#timer.singleShot(0, lambda: run(program))
 		timer.start()
 		sys.exit(application.exec_())
 	else:
