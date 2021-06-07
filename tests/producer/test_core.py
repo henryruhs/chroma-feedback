@@ -16,7 +16,7 @@ def test_process(mocker : Any) -> None:
 		sys.argv.append('redaxmedia')
 		sys.argv.append('--travis-token')
 		sys.argv.append(os.environ.get('TRAVIS_TOKEN'))
-		process = mocker.spy(producer.travis, 'run')
+		process = mocker.spy(producer.travis, 'run') # type: ignore
 		producer.process(program)
 
 		assert process.call_count == 1

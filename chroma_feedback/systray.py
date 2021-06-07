@@ -2,7 +2,7 @@ import sys
 from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
-from PyQt5.QtWidgets import QAction, QMenu, QSystemTrayIcon
+from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
 from chroma_feedback import color, loop, wording
 from chroma_feedback.typing import StatusType
 
@@ -15,6 +15,7 @@ def create(status : StatusType, report : List[str]) -> None:
 	if not SYSTRAY:
 		SYSTRAY = QSystemTrayIcon()
 	update(status, report)
+	SYSTRAY.show()
 
 
 def update(status : StatusType, report : List[str]) -> None:
@@ -22,8 +23,7 @@ def update(status : StatusType, report : List[str]) -> None:
 
 	SYSTRAY.setContextMenu(create_menu(report))
 	SYSTRAY.setIcon(create_icon(status))
-	SYSTRAY.hide()
-	SYSTRAY.show()
+	refresh()
 
 
 def is_active() -> bool:
@@ -39,19 +39,20 @@ def create_menu(report : List[str]) -> QMenu:
 	# process report
 
 	for value in report:
-		item_report = QAction(value)
-		menu.addAction(item_report)
+		menu.addAction(value)
 	if report:
 		menu.addSeparator()
 
 	# handle action
 
-	item_exit = QAction(wording.get('start'))
-	item_exit.triggered.connect(timer.start)
-	item_exit = QAction(wording.get('stop'))
-	item_exit.triggered.connect(timer.stop)
-	item_exit = QAction(wording.get('exit'))
+	item_start = menu.addAction(wording.get('start'))
+	item_start.triggered.connect(timer.start)
+	item_stop = menu.addAction(wording.get('stop'))
+	item_stop.triggered.connect(timer.stop)
+	item_exit = menu.addAction(wording.get('exit'))
 	item_exit.triggered.connect(destroy)
+	menu.addAction(item_start)
+	menu.addAction(item_stop)
 	menu.addAction(item_exit)
 	return menu
 
@@ -65,6 +66,13 @@ def create_icon(status : StatusType) -> QIcon:
 	painter.drawEllipse(20, 20, 60, 60)
 	painter.end()
 	return QIcon(pixmap)
+
+
+def refresh() -> None:
+	global SYSTRAY
+
+	SYSTRAY.hide()
+	SYSTRAY.show()
 
 
 def destroy() -> None:
