@@ -22,7 +22,7 @@ def get_timer() -> QTimer:
 	return TIMER
 
 
-def is_active() -> bool:
+def is_created() -> bool:
 	global APPLIACTION, TIMER
 
 	return APPLIACTION is not None and TIMER is not None

@@ -26,7 +26,7 @@ def update(status : StatusType, report : List[str]) -> None:
 	refresh()
 
 
-def is_active() -> bool:
+def is_created() -> bool:
 	global SYSTRAY
 
 	return SYSTRAY is not None
