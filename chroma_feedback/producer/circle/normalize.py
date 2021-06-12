@@ -1,9 +1,8 @@
-from typing import Any, Dict
 from chroma_feedback import helper
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ProducerModel
 
 
-def normalize_data(slug : str, status : str) -> Dict[str, Any]:
+def normalize_data(slug : str, status : str) -> ProducerModel:
 	return\
 	{
 		'producer': 'circle',

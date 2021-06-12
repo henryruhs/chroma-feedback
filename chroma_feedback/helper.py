@@ -5,7 +5,7 @@ import sys
 from chroma_feedback.typing import StatusType
 
 
-def get_producer_status(producer_result : List[Dict[str, Any]]) -> StatusType:
+def get_producer_status(producer_result : List[Dict]) -> StatusType:
 	status: StatusType = 'passed'
 
 	# process producer
@@ -23,7 +23,7 @@ def get_producer_status(producer_result : List[Dict[str, Any]]) -> StatusType:
 	return status
 
 
-def parse_slug(slug : str) -> Dict[str, Any]:
+def parse_slug(slug : str) -> Dict:
 	if slug:
 		return dict(zip(['workspace', 'project'], slug.split('/')))
 	return {}

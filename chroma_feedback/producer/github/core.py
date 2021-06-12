@@ -1,6 +1,7 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 from chroma_feedback import helper, request
+from chroma_feedback.typing import ProducerModel
 from .normalize import normalize_data
 
 ARGS = None
@@ -16,7 +17,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run() -> List[Dict[str, Any]]:
+def run() -> List[ProducerModel]:
 	result = []
 
 	for slug in ARGS.github_slug:
@@ -24,7 +25,7 @@ def run() -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, token : str) -> List[ProducerModel]:
 	result = []
 	SLUG = helper.parse_slug(slug)
 	repositories = None
@@ -41,7 +42,7 @@ def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch_repositories(host : str, username : str, token : str) -> List[Dict[str, Any]]:
+def fetch_repositories(host : str, username : str, token : str) -> List[Dict]:
 	result = []
 	response = None
 
@@ -63,7 +64,7 @@ def fetch_repositories(host : str, username : str, token : str) -> List[Dict[str
 	return result
 
 
-def fetch_runs(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
+def fetch_runs(host : str, slug : str, token : str) -> List[Dict]:
 	result = []
 	response = None
 

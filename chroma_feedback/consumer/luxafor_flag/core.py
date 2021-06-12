@@ -1,8 +1,8 @@
 import sys
-from typing import Any, Dict, List
+from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ConsumerModel
 from .device import get_devices, process_devices
 from .api import get_api
 
@@ -17,7 +17,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : StatusType) -> List[Dict[str, Any]]:
+def run(status : StatusType) -> List[ConsumerModel]:
 	api = get_api()
 	devices = get_devices(api.all_lights(), ARGS.luxafor_flag_device)
 

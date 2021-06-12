@@ -1,9 +1,8 @@
-from typing import Any, Dict
 from chroma_feedback import helper
 from chroma_feedback.typing import StatusType
 
 
-def normalize_data(slug : str, result : str, is_building : bool) -> Dict[str, Any]:
+def normalize_data(slug : str, result : str, is_building : bool) -> ProducerModel:
 	return\
 	{
 		'producer': 'jenkins',

@@ -1,7 +1,7 @@
-from typing import Any, Dict
+from chroma_feedback.typing import ProducerModel
 
 
-def normalize_data(slug : str, active : bool, status : str) -> Dict[str, Any]:
+def normalize_data(slug : str, active : bool, status : str) -> ProducerModel:
 	return\
 	{
 		'producer': 'custom',

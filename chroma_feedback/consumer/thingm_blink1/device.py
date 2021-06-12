@@ -1,7 +1,7 @@
-from typing import Any, Dict, List
+from typing import Any, List
 import copy
 from chroma_feedback import color
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ConsumerModel, ColorConfigModel
 
 
 def get_devices(devices : Any, device_serials : List[str]) -> Any:
@@ -12,7 +12,7 @@ def get_devices(devices : Any, device_serials : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, status : StatusType) -> List[Dict[str, Any]]:
+def process_devices(devices : Any, status : StatusType) -> List[ConsumerModel]:
 	result = []
 
 	# process devices
@@ -29,5 +29,5 @@ def process_devices(devices : Any, status : StatusType) -> List[Dict[str, Any]]:
 	return result
 
 
-def set_device(device : Any, color_config : Dict[str, Any]) -> bool:
+def set_device(device : Any, color_config : ColorConfigModel) -> bool:
 	return device.on(tuple(color_config['rgb'])) is None

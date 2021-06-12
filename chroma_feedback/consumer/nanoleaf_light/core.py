@@ -1,9 +1,9 @@
 import socket
 import sys
-from typing import Any, Dict, List
+from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ConsumerModel
 from .light import get_lights, process_lights
 
 ARGS = None
@@ -24,7 +24,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : StatusType) -> List[Dict[str, Any]]:
+def run(status : StatusType) -> List[ConsumerModel]:
 	lights = get_lights(ARGS.nanoleaf_light_ip)
 
 	if not lights:

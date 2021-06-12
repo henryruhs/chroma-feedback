@@ -1,12 +1,12 @@
 import sys
-from typing import Any, Dict, List
+from typing import Any, List
 from argparse import ArgumentParser
 import importlib
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ConsumerModel
 
 
-def process(program : ArgumentParser, status : StatusType) -> List[Dict[str, Any]]:
+def process(program : ArgumentParser, status : StatusType) -> List[ConsumerModel]:
 	args = helper.get_first(program.parse_known_args())
 	result = []
 

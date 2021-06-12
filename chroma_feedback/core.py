@@ -70,12 +70,10 @@ def run(program : ArgumentParser) -> None:
 	# handle systray
 
 	if loop.is_created() is True:
-		systray_report = reporter.create_systray_report(producer_result)
-
 		if systray.is_created() is True:
-			systray.update(status, systray_report)
+			systray.update(status, producer_report)
 		else:
-			systray.create(status, systray_report)
+			systray.create(status, producer_report)
 
 
 def destroy() -> None:

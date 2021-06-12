@@ -1,15 +1,16 @@
 import sys
+import webbrowser
 from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
-from chroma_feedback import color, loop, wording
-from chroma_feedback.typing import StatusType
+from chroma_feedback import color, loop, metadata, wording
+from chroma_feedback.typing import StatusType, ReportModel
 
 SYSTRAY = None
 
 
-def create(status : StatusType, report : List[str]) -> None:
+def create(status : StatusType, report : List[ReportModel]) -> None:
 	global SYSTRAY
 
 	if not SYSTRAY:
@@ -18,7 +19,7 @@ def create(status : StatusType, report : List[str]) -> None:
 	SYSTRAY.show()
 
 
-def update(status : StatusType, report : List[str]) -> None:
+def update(status : StatusType, report : List[ReportModel]) -> None:
 	global SYSTRAY
 
 	SYSTRAY.setContextMenu(create_menu(report))
@@ -32,14 +33,16 @@ def is_created() -> bool:
 	return SYSTRAY is not None
 
 
-def create_menu(report : List[str]) -> QMenu:
+def create_menu(report : List[ReportModel]) -> QMenu:
 	menu = QMenu()
 	timer = loop.get_timer()
 
 	# process report
 
 	for value in report:
-		menu.addAction(value)
+		item_report = menu.addAction(value['message'])
+		item_report.setIcon(create_icon(value['status']))
+		item_report.setIconVisibleInMenu(True)
 	if report:
 		menu.addSeparator()
 

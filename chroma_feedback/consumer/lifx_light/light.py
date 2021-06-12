@@ -1,7 +1,7 @@
-from typing import Any, Dict, List
+from typing import Any, List
 import copy
 from chroma_feedback import color
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ConsumerModel, ColorConfigModel
 
 
 def get_lights(lights : Any, light_names : List[str]) -> Any:
@@ -12,7 +12,7 @@ def get_lights(lights : Any, light_names : List[str]) -> Any:
 	return lights
 
 
-def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
+def process_lights(lights : Any, status : StatusType) -> List[ConsumerModel]:
 	result = []
 
 	# process lights
@@ -29,7 +29,7 @@ def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
 	return result
 
 
-def set_light(light : Any, color_config : Dict[str, Any]) -> bool:
+def set_light(light : Any, color_config : ColorConfigModel) -> bool:
 	return light.set_power('on') is None and light.set_color(
 	[
 		color_config['hue'],

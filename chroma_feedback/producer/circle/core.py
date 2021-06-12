@@ -1,6 +1,7 @@
 from typing import Any, Dict, List
 from argparse import ArgumentParser
 from chroma_feedback import helper, request
+from chroma_feedback.typing import ProducerModel
 from .normalize import normalize_data
 
 ARGS = None
@@ -18,7 +19,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run() -> List[Dict[str, Any]]:
+def run() -> List[ProducerModel]:
 	result = []
 
 	if ARGS.circle_slug:
@@ -29,7 +30,7 @@ def run() -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch(host : str, organization : str, slug : str, __filter__ : str, token : str) -> List[Dict[str, Any]]:
+def fetch(host : str, organization : str, slug : str, __filter__ : str, token : str) -> List[ProducerModel]:
 	result = []
 	response = None
 
@@ -65,7 +66,7 @@ def fetch(host : str, organization : str, slug : str, __filter__ : str, token : 
 	return result
 
 
-def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Dict[str, Any]]:
+def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Dict]:
 	result = []
 	response = None
 
