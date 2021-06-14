@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, List
 from chroma_feedback import color
 from chroma_feedback.typing import StatusType, ConsumerModel, ColorConfigModel
 from .api import get_api
@@ -14,13 +14,13 @@ def get_groups(group_names : List[str]) -> Any:
 	return groups
 
 
-def get_group_name(group : Any) -> str:
+def get_group_name(group : Any) -> Any:
 	for device in group.get_device_list():
 		return device.get_group_label()
 
 
 def process_groups(groups : Any, status : StatusType) -> List[ConsumerModel]:
-	result = []
+	result : List[ConsumerModel] = []
 
 	# process groups
 

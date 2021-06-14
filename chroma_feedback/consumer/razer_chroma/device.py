@@ -13,7 +13,7 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 
 
 def process_devices(devices : Any, status : StatusType) -> List[ConsumerModel]:
-	result = []
+	result : List[ConsumerModel] = []
 
 	# process devices
 

@@ -14,7 +14,7 @@ def get_lights(lights : Any, light_names : List[str]) -> Any:
 
 
 def process_lights(lights : Any, status : StatusType) -> List[ConsumerModel]:
-	result = []
+	result : List[ConsumerModel] = []
 
 	# process lights
 

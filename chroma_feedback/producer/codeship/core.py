@@ -42,7 +42,7 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Produc
 	return result
 
 
-def fetch_auth(host : str, username : str, password : str) -> Dict:
+def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 	result = {}
 	response = None
 
@@ -65,7 +65,7 @@ def fetch_auth(host : str, username : str, password : str) -> Dict:
 	return result
 
 
-def fetch_projects(host : str, organization_id : str, token : str) -> List[Dict]:
+def fetch_projects(host : str, organization_id : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
@@ -87,7 +87,7 @@ def fetch_projects(host : str, organization_id : str, token : str) -> List[Dict]
 	return result
 
 
-def fetch_builds(host : str, organization_id : str, slug : str, project_id : str, token : str) -> List[Dict]:
+def fetch_builds(host : str, organization_id : str, slug : str, project_id : str, token : str) -> List[ProducerModel]:
 	result = []
 	response = None
 

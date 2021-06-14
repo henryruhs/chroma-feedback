@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import List
 from argparse import ArgumentParser
 import base64
 from chroma_feedback import helper, request
@@ -27,7 +27,7 @@ def run() -> List[ProducerModel]:
 	return result
 
 
-def fetch(host : str, slug : str, username : str, password : str) -> List[Dict]:
+def fetch(host : str, slug : str, username : str, password : str) -> List[ProducerModel]:
 	result = []
 	response = None
 

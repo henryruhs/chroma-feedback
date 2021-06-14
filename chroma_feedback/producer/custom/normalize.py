@@ -1,7 +1,7 @@
-from chroma_feedback.typing import ProducerModel
+from chroma_feedback.typing import StatusType, ProducerModel
 
 
-def normalize_data(slug : str, active : bool, status : str) -> ProducerModel:
+def normalize_data(slug : str, active : bool, status : StatusType) -> ProducerModel:
 	return\
 	{
 		'producer': 'custom',

@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, List
 from chroma_feedback import color
 from chroma_feedback.typing import StatusType, ConsumerModel, ColorConfigModel
 from .api import get_api
@@ -13,7 +13,7 @@ def get_lights(ips : List[str]) -> Any:
 
 
 def process_lights(lights : Any, status : StatusType) -> List[ConsumerModel]:
-	result = []
+	result : List[ConsumerModel] = []
 
 	# process lights
 

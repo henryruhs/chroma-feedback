@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, request
 from chroma_feedback.typing import ProducerModel
@@ -50,7 +50,7 @@ def fetch(host : str, slug : str, token : str) -> List[ProducerModel]:
 	return result
 
 
-def fetch_runs(host : str, slug : str, application_id : str, token : str) -> List[Dict]:
+def fetch_runs(host : str, slug : str, application_id : str, token : str) -> List[ProducerModel]:
 	result = []
 	response = None
 

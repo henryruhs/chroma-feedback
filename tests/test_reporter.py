@@ -5,56 +5,64 @@ def test_create_producer_report_passed() -> None:
 	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
-			'producer': 'travis',
+			'producer': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'passed'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis passed' in producer_report[0]
+	assert producer_report[0]['status'] == 'passed'
+	assert producer_report[0]['message'] == 'Build of redaxmedia/chroma-feedback on github passed'
+	assert producer_report[0]['symbol']
 
 
 def test_create_producer_report_started() -> None:
 	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
-			'producer': 'travis',
+			'producer': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'started'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis started' in producer_report[0]
+	assert producer_report[0]['status'] == 'started'
+	assert producer_report[0]['message'] == 'Build of redaxmedia/chroma-feedback on github started'
+	assert producer_report[0]['symbol']
 
 
 def test_create_producer_report_errored() -> None:
 	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
-			'producer': 'travis',
+			'producer': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'errored'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis errored' in producer_report[0]
+	assert producer_report[0]['status'] == 'errored'
+	assert producer_report[0]['message'] == 'Build of redaxmedia/chroma-feedback on github errored'
+	assert producer_report[0]['symbol']
 
 
 def test_create_producer_report_failed() -> None:
 	producer_report = reporter.create_producer_report(producer_result =
 	[
 		{
-			'producer': 'travis',
+			'producer': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'failed'
 		}
 	])
 
-	assert 'Build of redaxmedia/chroma-feedback on travis failed' in producer_report[0]
+	assert producer_report[0]['status'] == 'failed'
+	assert producer_report[0]['message'] == 'Build of redaxmedia/chroma-feedback on github failed'
+	assert producer_report[0]['symbol']
 
 
 def test_create_consumer_report_passed() -> None:
@@ -68,7 +76,10 @@ def test_create_consumer_report_passed() -> None:
 		}
 	])
 
-	assert 'Setting Razer Chroma to build passed' in consumer_report[0]
+	assert consumer_report[0]['status'] == 'passed'
+	assert consumer_report[0]['message'] == 'Setting Razer Chroma to build passed'
+	assert consumer_report[0]['symbol']
+
 
 
 def test_create_consumer_report_started() -> None:
@@ -82,7 +93,9 @@ def test_create_consumer_report_started() -> None:
 		}
 	])
 
-	assert 'Setting Razer Chroma to build started' in consumer_report[0]
+	assert consumer_report[0]['status'] == 'started'
+	assert consumer_report[0]['message'] == 'Setting Razer Chroma to build started'
+	assert consumer_report[0]['symbol']
 
 
 def test_create_consumer_report_errored() -> None:
@@ -96,7 +109,9 @@ def test_create_consumer_report_errored() -> None:
 		}
 	])
 
-	assert 'Setting Razer Chroma to build errored' in consumer_report[0]
+	assert consumer_report[0]['status'] == 'errored'
+	assert consumer_report[0]['message'] == 'Setting Razer Chroma to build errored'
+	assert consumer_report[0]['symbol']
 
 
 def test_create_consumer_report_failed() -> None:
@@ -110,4 +125,6 @@ def test_create_consumer_report_failed() -> None:
 		}
 	])
 
-	assert 'Setting Razer Chroma to build failed' in consumer_report[0]
+	assert consumer_report[0]['status'] == 'failed'
+	assert consumer_report[0]['message'] == 'Setting Razer Chroma to build failed'
+	assert consumer_report[0]['symbol']

@@ -14,7 +14,7 @@ def get_groups(groups : Any, group_names : List[str]) -> Any:
 
 
 def process_groups(groups : Any, status : StatusType) -> List[ConsumerModel]:
-	result = []
+	result : List[ConsumerModel] = []
 
 	# process groups
 

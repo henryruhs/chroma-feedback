@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, request
 from chroma_feedback.typing import ProducerModel

@@ -5,7 +5,7 @@ from chroma_feedback.typing import ConsumerModel, ProducerModel, ReportModel
 
 
 def create_producer_report(producer_result : List[ProducerModel]) -> List[ReportModel]:
-	report = []
+	report : List[ReportModel] = []
 
 	# process result
 
@@ -36,14 +36,14 @@ def create_producer_report(producer_result : List[ProducerModel]) -> List[Report
 				report.append(
 				{
 					'status': 'failed',
-					'message': wording.get('build_errored').format(producer['slug'], producer['producer']),
+					'message': wording.get('build_failed').format(producer['slug'], producer['producer']),
 					'symbol': color.format_failed(wording.get('cross'))
 				})
 	return report
 
 
 def create_consumer_report(consumer_result : List[ConsumerModel]) -> List[ReportModel]:
-	report = []
+	report : List[ReportModel] = []
 
 	# process result
 
@@ -53,28 +53,28 @@ def create_consumer_report(consumer_result : List[ConsumerModel]) -> List[Report
 				report.append(
 				{
 					'status': 'passed',
-					'message': wording.get('setting_passed').format(consumer['name']) + wording.get('point'),
+					'message': wording.get('setting_passed').format(consumer['name']),
 					'symbol': color.format_passed(wording.get('tick'))
 				})
 			if consumer['status'] == 'started':
 				report.append(
 				{
 					'status': 'started',
-					'message': wording.get('setting_started').format(consumer['name']) + wording.get('point'),
+					'message': wording.get('setting_started').format(consumer['name']),
 					'symbol': color.format_started(wording.get('hourglass'))
 				})
 			if consumer['status'] == 'errored':
 				report.append(
 				{
 					'status': 'errored',
-					'message': wording.get('setting_errored').format(consumer['name']) + wording.get('point'),
+					'message': wording.get('setting_errored').format(consumer['name']),
 					'symbol': wording.get('cross')
 				})
 			if consumer['status'] == 'failed':
 				report.append(
 				{
 					'status': 'failed',
-					'message': wording.get('setting_failed').format(consumer['name']) + wording.get('point'),
+					'message': wording.get('setting_failed').format(consumer['name']),
 					'symbol': color.format_failed(wording.get('cross'))
 				})
 	return report

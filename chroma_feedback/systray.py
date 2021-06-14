@@ -1,10 +1,9 @@
 import sys
-import webbrowser
 from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
-from chroma_feedback import color, loop, metadata, wording
+from chroma_feedback import color, loop, wording
 from chroma_feedback.typing import StatusType, ReportModel
 
 SYSTRAY = None

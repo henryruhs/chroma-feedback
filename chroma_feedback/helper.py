@@ -2,10 +2,10 @@ import os
 from typing import Any, Dict, List
 import platform
 import sys
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ProducerModel
 
 
-def get_producer_status(producer_result : List[Dict]) -> StatusType:
+def get_producer_status(producer_result : List[ProducerModel]) -> StatusType:
 	status: StatusType = 'passed'
 
 	# process producer
@@ -23,7 +23,7 @@ def get_producer_status(producer_result : List[Dict]) -> StatusType:
 	return status
 
 
-def parse_slug(slug : str) -> Dict:
+def parse_slug(slug : str) -> Dict[str, Any]:
 	if slug:
 		return dict(zip(['workspace', 'project'], slug.split('/')))
 	return {}

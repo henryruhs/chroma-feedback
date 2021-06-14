@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, request
 from chroma_feedback.typing import ProducerModel
@@ -66,7 +66,7 @@ def fetch(host : str, organization : str, slug : str, __filter__ : str, token : 
 	return result
 
 
-def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Dict]:
+def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[ProducerModel]:
 	result = []
 	response = None
 

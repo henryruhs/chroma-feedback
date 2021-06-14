@@ -42,7 +42,7 @@ def fetch(host : str, slug : str, token : str) -> List[ProducerModel]:
 	return result
 
 
-def fetch_projects(host : str, workspace : str, token : str) -> List[Dict]:
+def fetch_projects(host : str, workspace : str, token : str) -> List[Dict[str, Any]]:
 	result = []
 	response = None
 
@@ -64,7 +64,7 @@ def fetch_projects(host : str, workspace : str, token : str) -> List[Dict]:
 	return result
 
 
-def fetch_pipelines(host: str, workspace: str, project : str, token: str) -> List[Dict]:
+def fetch_pipelines(host: str, workspace: str, project : str, token: str) -> List[ProducerModel]:
 	result = []
 	response = None
 

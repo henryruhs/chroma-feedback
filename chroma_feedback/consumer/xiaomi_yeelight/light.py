@@ -13,7 +13,7 @@ def get_lights(ips : List[str]) -> Any:
 
 
 def process_lights(lights : Any, status : StatusType) -> List[ConsumerModel]:
-	result = []
+	result : List[ConsumerModel] = []
 
 	# process lights
 
