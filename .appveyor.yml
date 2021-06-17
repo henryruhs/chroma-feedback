@@ -8,7 +8,6 @@ environment:
 
 install:
 - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
-- pip install coverall
 - pip install pylint
 - pip install pytest
 - pip install pytest-cov

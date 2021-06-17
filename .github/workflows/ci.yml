@@ -12,7 +12,6 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: 3.9
-  - run: pip install coverall
   - run: pip install pylint
   - run: pip install pytest
   - run: pip install pytest-cov
@@ -35,7 +34,6 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: ${{ matrix.python-version }}
-  - run: pip install coverall
   - run: pip install pylint
   - run: pip install pytest
   - run: pip install pytest-cov
@@ -67,7 +65,6 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: 3.9
-  - run: pip install coverall
   - run: pip install pylint
   - run: pip install pytest
   - run: pip install pytest-cov

@@ -6,7 +6,6 @@ python:
 - 3.9
 
 install:
-- pip install coverall
 - pip install pylint
 - pip install pytest
 - pip install pytest-cov

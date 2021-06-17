@@ -5,7 +5,6 @@ build:
  - script:
     name: install
     code: |
-     pip install coverall
      pip install pylint
      pip install pytest
      pip install pytest-cov
