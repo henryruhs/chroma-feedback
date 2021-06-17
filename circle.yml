@@ -6,10 +6,7 @@ jobs:
   - image: circleci/python:3.9-buster
   steps:
   - checkout
-  - run: sudo pip install mypy
-  - run: sudo pip install pylint
-  - run: sudo pip install pytest
-  - run: sudo pip install requests
+  - run: sudo pip install .[dev]
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
@@ -17,10 +14,7 @@ jobs:
   - image: circleci/python:3.9-buster
   steps:
   - checkout
-  - run: sudo pip install mock
-  - run: sudo pip install pytest
-  - run: sudo pip install pytest-mock
-  - run: sudo pip install requests
+  - run: sudo pip install .[dev]
   - run: pytest tests
 
 workflows:

@@ -8,13 +8,7 @@
     docker_image_name: 'library/python'
     docker_image_tag: '3.9'
     setup_commands:
-    - pip install mock
-    - pip install mypy
-    - pip install pylint
-    - pip install pytest
-    - pip install pytest-cov
-    - pip install pytest-mock
-    - pip install requests
+    - pip install .[dev]
     execute_commands:
     - pylint bin/chroma-feedback chroma_feedback tests
     - mypy bin/chroma-feedback chroma_feedback tests
