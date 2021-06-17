@@ -6,12 +6,13 @@ python:
 - 3.9
 
 install:
+- pip install mock
+- pip install mypy
 - pip install pylint
 - pip install pytest
 - pip install pytest-cov
 - pip install pytest-mock
-- pip install mock
-- pip install mypy
+- pip install requests
 - pip install types-mock
 - pip install types-requests
 
