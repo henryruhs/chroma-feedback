@@ -66,20 +66,5 @@ setup(
 		'pywizlight==0.4.7',
 		'requests==2.25.1',
 		'yeelight==0.6.2'
-	],
-	extras_require =
-	{
-		'dev':
-		[
-			'coveralls==3.0.1',
-			'pylint==2.8.2',
-			'pytest==6.2.4',
-			'pytest-cov==2.12.0',
-			'pytest-mock==3.6.1',
-			'mock==4.0.3',
-			'mypy==0.812',
-			'types-mock==0.1.3',
-			'types-requests==0.1.12'
-		]
-	}
+	]
 )

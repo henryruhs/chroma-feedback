@@ -12,7 +12,15 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: 3.9
-  - run: pip install .[dev]
+  - run: pip install coverall
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install mock
+  - run: pip install mypy
+  - run: pip install types-mock
+  - run: pip install types-requests
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
@@ -27,7 +35,15 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: ${{ matrix.python-version }}
-  - run: pip install .[dev]
+  - run: pip install coverall
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install mock
+  - run: pip install mypy
+  - run: pip install types-mock
+  - run: pip install types-requests
   - run: pytest tests
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
@@ -51,7 +67,15 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: 3.9
-  - run: pip install .[dev]
+  - run: pip install coverall
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install mock
+  - run: pip install mypy
+  - run: pip install types-mock
+  - run: pip install types-requests
   - run: pytest tests --cov=chroma_feedback
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
