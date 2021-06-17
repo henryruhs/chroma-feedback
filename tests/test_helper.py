@@ -11,7 +11,7 @@ def test_parse_slug() -> None:
 
 
 def test_is_root() -> None:
-	assert helper.is_root() is False
+	assert helper.is_root() is not None
 
 
 def test_is_linux() -> None:
