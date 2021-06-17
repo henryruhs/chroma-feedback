@@ -2,7 +2,7 @@ from chroma_feedback import reporter
 
 
 def test_create_producer_report_passed() -> None:
-	producer_report = reporter.create_producer_report(producer_result =
+	producer_report = reporter.create_producer_report(
 	[
 		{
 			'producer': 'github',
@@ -18,7 +18,7 @@ def test_create_producer_report_passed() -> None:
 
 
 def test_create_producer_report_started() -> None:
-	producer_report = reporter.create_producer_report(producer_result =
+	producer_report = reporter.create_producer_report(
 	[
 		{
 			'producer': 'github',
@@ -34,7 +34,7 @@ def test_create_producer_report_started() -> None:
 
 
 def test_create_producer_report_errored() -> None:
-	producer_report = reporter.create_producer_report(producer_result =
+	producer_report = reporter.create_producer_report(
 	[
 		{
 			'producer': 'github',
@@ -50,7 +50,7 @@ def test_create_producer_report_errored() -> None:
 
 
 def test_create_producer_report_failed() -> None:
-	producer_report = reporter.create_producer_report(producer_result =
+	producer_report = reporter.create_producer_report(
 	[
 		{
 			'producer': 'github',
@@ -66,10 +66,11 @@ def test_create_producer_report_failed() -> None:
 
 
 def test_create_consumer_report_passed() -> None:
-	consumer_report = reporter.create_consumer_report(consumer_result =
+	consumer_report = reporter.create_consumer_report(
 	[
 		{
 			'consumer': 'razer_chroma',
+			'type': 'device',
 			'name': 'Razer Chroma',
 			'active': True,
 			'status': 'passed'
@@ -83,10 +84,11 @@ def test_create_consumer_report_passed() -> None:
 
 
 def test_create_consumer_report_started() -> None:
-	consumer_report = reporter.create_consumer_report(consumer_result =
+	consumer_report = reporter.create_consumer_report(
 	[
 		{
 			'consumer': 'razer_chroma',
+			'type': 'device',
 			'name': 'Razer Chroma',
 			'active': True,
 			'status': 'started'
@@ -99,10 +101,11 @@ def test_create_consumer_report_started() -> None:
 
 
 def test_create_consumer_report_errored() -> None:
-	consumer_report = reporter.create_consumer_report(consumer_result =
+	consumer_report = reporter.create_consumer_report(
 	[
 		{
 			'consumer': 'razer_chroma',
+			'type': 'device',
 			'name': 'Razer Chroma',
 			'active': True,
 			'status': 'errored'
@@ -115,10 +118,11 @@ def test_create_consumer_report_errored() -> None:
 
 
 def test_create_consumer_report_failed() -> None:
-	consumer_report = reporter.create_consumer_report(consumer_result =
+	consumer_report = reporter.create_consumer_report(
 	[
 		{
 			'consumer': 'razer_chroma',
+			'type': 'device',
 			'name': 'Razer Chroma',
 			'active': True,
 			'status': 'failed'
