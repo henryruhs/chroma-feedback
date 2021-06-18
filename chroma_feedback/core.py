@@ -3,6 +3,8 @@ import sys
 from argparse import ArgumentParser
 from chroma_feedback import consumer, helper, loop, producer, systray, reporter, wording
 
+INTERVAL = 0
+
 
 def init(program : ArgumentParser) -> None:
 	args = helper.get_first(program.parse_known_args())
@@ -20,13 +22,28 @@ def init(program : ArgumentParser) -> None:
 	if args.background_run is True:
 		application = loop.get_application()
 		timer = loop.get_timer()
-		timer.setInterval(args.background_interval * 1000)
-		timer.timeout.connect(lambda: run(program))
+		timer.setInterval(500)
+		timer.timeout.connect(lambda: background_run(program))
 		timer.singleShot(0, lambda: run(program)) # type: ignore
 		timer.start()
 		sys.exit(application.exec_())
 	else:
 		run(program)
+
+
+def background_run(program : ArgumentParser) -> None:
+	global INTERVAL
+
+	args = helper.get_first(program.parse_known_args())
+	timer = loop.get_timer()
+
+	# handle interval
+
+	if INTERVAL == args.background_interval * 1000:
+		run(program)
+		INTERVAL = 0
+	else:
+		INTERVAL += timer.interval()
 
 
 def run(program : ArgumentParser) -> None:
