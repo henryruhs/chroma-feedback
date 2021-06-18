@@ -1,10 +1,10 @@
-from typing import Any, Dict, List
+from typing import Any, List
 from chroma_feedback import color
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ConsumerModel, ColorConfigModel
 from .api import get_api, get_modes
 
 
-def get_lights(ips : List[str]) -> List[Dict[str, Any]]:
+def get_lights(ips : List[str]) -> Any:
 	lights = []
 
 	for ip in ips:
@@ -12,8 +12,8 @@ def get_lights(ips : List[str]) -> List[Dict[str, Any]]:
 	return lights
 
 
-def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
-	result = []
+def process_lights(lights : Any, status : StatusType) -> List[ConsumerModel]:
+	result : List[ConsumerModel] = []
 
 	# process lights
 
@@ -29,7 +29,7 @@ def process_lights(lights : Any, status : StatusType) -> List[Dict[str, Any]]:
 	return result
 
 
-def set_light(light : Any, color_config : Dict[str, Any]) -> bool:
+def set_light(light : Any, color_config : ColorConfigModel) -> bool:
 	modes = get_modes()
 
 	if modes:

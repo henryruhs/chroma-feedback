@@ -1,5 +1,4 @@
-from typing import Any, Dict
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ColorConfigModel
 
 COLOR =\
 {
@@ -22,7 +21,7 @@ def format_failed(text : str) -> str:
 	return COLOR['failed'] + text + COLOR['end']
 
 
-def get_by_status(status : StatusType) -> Dict[str, Any]:
+def get_by_status(status : StatusType) -> ColorConfigModel:
 	if status == 'started':
 		return get_started()
 	if status == 'errored':
@@ -32,7 +31,7 @@ def get_by_status(status : StatusType) -> Dict[str, Any]:
 	return get_passed()
 
 
-def get_passed() -> Dict[str, Any]:
+def get_passed() -> ColorConfigModel:
 	return\
 	{
 		'name': 'green',
@@ -59,7 +58,7 @@ def get_passed() -> Dict[str, Any]:
 	}
 
 
-def get_started() -> Dict[str, Any]:
+def get_started() -> ColorConfigModel:
 	return\
 	{
 		'name': 'yellow',
@@ -86,7 +85,7 @@ def get_started() -> Dict[str, Any]:
 	}
 
 
-def get_errored() -> Dict[str, Any]:
+def get_errored() -> ColorConfigModel:
 	return\
 	{
 		'name': 'white',
@@ -113,7 +112,7 @@ def get_errored() -> Dict[str, Any]:
 	}
 
 
-def get_failed() -> Dict[str, Any]:
+def get_failed() -> ColorConfigModel:
 	return\
 	{
 		'name': 'red',

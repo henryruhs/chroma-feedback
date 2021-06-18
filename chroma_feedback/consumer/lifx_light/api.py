@@ -1,3 +1,4 @@
+import sys
 from typing import Any
 from chroma_feedback import wording
 
@@ -21,7 +22,7 @@ def api_factory() -> Any:
 		try:
 			api = LifxLAN()
 		except WorkflowException:
-			exit(wording.get('connection_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))

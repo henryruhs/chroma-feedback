@@ -1,3 +1,4 @@
+import sys
 from typing import Any
 from chroma_feedback import wording
 
@@ -22,7 +23,7 @@ def api_factory() -> Any:
 			api = DeviceManager()
 			api.sync_effects = True
 		except DaemonNotFound:
-			exit(wording.get('daemon_no').format('RAZER CHROMA') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('daemon_no').format('RAZER CHROMA') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('OPENRAZER META') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_no').format('OPENRAZER META') + wording.get('exclamation_mark'))

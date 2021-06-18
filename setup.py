@@ -61,20 +61,10 @@ setup(
 		'lifxlan==1.2.5',
 		'nanoleafapi==2.0.0',
 		'phue==1.1',
-		'pillow==8.2.0',
 		'python-magichue==0.2.9.3',
+		'pyqt5==5.15.4',
 		'pywizlight==0.4.7',
 		'requests==2.25.1',
 		'yeelight==0.6.2'
-	],
-	tests_require =
-	[
-		'coveralls==3.0.1',
-		'pylint==2.8.2',
-		'pytest==6.2.4',
-		'pytest-cov==2.12.0',
-		'pytest-mock==3.6.1',
-		'mock==4.0.3',
-		'mypy==0.812'
 	]
 )

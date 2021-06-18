@@ -2,10 +2,10 @@ import os
 from typing import Any, Dict, List
 import platform
 import sys
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ProducerModel
 
 
-def get_producer_status(producer_result : List[Dict[str, Any]]) -> StatusType:
+def get_producer_status(producer_result : List[ProducerModel]) -> StatusType:
 	status: StatusType = 'passed'
 
 	# process producer

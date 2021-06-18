@@ -1,21 +1,15 @@
 [disable]
 
 disable =
-	bad-continuation,
-	bad-whitespace,
 	bare-except,
-	consider-using-sys-exit,
 	duplicate-code,
 	global-statement,
 	import-outside-toplevel,
+	import-error,
 	inconsistent-return-statements,
 	missing-docstring,
-	protected-access,
-	redefined-builtin,
-	simplifiable-condition,
-	too-many-boolean-expressions,
-	unused-argument,
-	wrong-import-position
+	no-name-in-module,
+	too-many-boolean-expressions
 
 good-names =
 	chroma-feedback,

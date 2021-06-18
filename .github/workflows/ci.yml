@@ -13,17 +13,18 @@ jobs:
     with:
      python-version: 3.9
   - run: pip install mypy
-  - run: pip install pillow
   - run: pip install pylint
   - run: pip install pytest
   - run: pip install requests
+  - run: pip install types-mock
+  - run: pip install types-requests
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
   runs-on: ubuntu-latest
   strategy:
    matrix:
-    python-version: [ 3.8, 3.9 ]
+    python-version: [ 3.8, 3.9, 3.10-dev ]
   steps:
   - name: Checkout
     uses: actions/checkout@v2
@@ -32,7 +33,6 @@ jobs:
     with:
      python-version: ${{ matrix.python-version }}
   - run: pip install mock
-  - run: pip install pillow
   - run: pip install pytest
   - run: pip install pytest-mock
   - run: pip install requests
@@ -61,7 +61,6 @@ jobs:
      python-version: 3.9
   - run: pip install coveralls
   - run: pip install mock
-  - run: pip install pillow
   - run: pip install pytest
   - run: pip install pytest-cov
   - run: pip install pytest-mock

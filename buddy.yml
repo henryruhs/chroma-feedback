@@ -10,12 +10,13 @@
     setup_commands:
     - pip install mock
     - pip install mypy
-    - pip install pillow
     - pip install pylint
     - pip install pytest
     - pip install pytest-cov
     - pip install pytest-mock
     - pip install requests
+    - pip install types-mock
+    - pip install types-requests
     execute_commands:
     - pylint bin/chroma-feedback chroma_feedback tests
     - mypy bin/chroma-feedback chroma_feedback tests

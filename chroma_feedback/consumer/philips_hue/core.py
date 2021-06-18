@@ -1,8 +1,9 @@
-from typing import Any, Dict, List
+import sys
+from typing import List
 from argparse import ArgumentParser
 import socket
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import StatusType
+from chroma_feedback.typing import StatusType, ConsumerModel
 from .group import get_groups, process_groups
 from .light import get_lights, process_lights
 from .api import get_api
@@ -27,7 +28,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : StatusType) -> List[Dict[str, Any]]:
+def run(status : StatusType) -> List[ConsumerModel]:
 	api = get_api(ARGS.philips_hue_ip)
 
 	# use groups
@@ -36,7 +37,7 @@ def run(status : StatusType) -> List[Dict[str, Any]]:
 		groups = get_groups(api.get_group(), ARGS.philips_hue_group)
 
 		if not groups:
-			exit(wording.get('group_no') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('group_no') + wording.get('exclamation_mark'))
 		return process_groups(groups, status)
 
 	# use lights
@@ -44,7 +45,7 @@ def run(status : StatusType) -> List[Dict[str, Any]]:
 	lights = get_lights(api.get_light_objects(), ARGS.philips_hue_light)
 
 	if not lights:
-		exit(wording.get('light_no') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('light_no') + wording.get('exclamation_mark'))
 	return process_lights(lights, status)
 
 
@@ -63,5 +64,5 @@ def discover_ips() -> List[str]:
 	try:
 		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 	except socket.timeout:
-		print(wording.get('ip_no').format('PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('ip_no').format('PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
 	return ips

@@ -1,3 +1,4 @@
+import sys
 from typing import Any
 from chroma_feedback import wording
 
@@ -21,9 +22,9 @@ def api_factory(ip : str) -> Any:
 		try:
 			api = Nanoleaf(ip)
 		except NanoleafConnectionError:
-			exit(wording.get('connection_no').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_no').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))
 		except NanoleafRegistrationError:
-			exit(wording.get('press_button').format('PAIRING', 'NANOLEAF LIGHT') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('press_button').format('PAIRING', 'NANOLEAF LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_no').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))

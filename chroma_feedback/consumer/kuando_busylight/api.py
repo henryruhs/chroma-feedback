@@ -1,3 +1,4 @@
+import sys
 from typing import Any
 from chroma_feedback import wording
 
@@ -23,7 +24,7 @@ def api_factory() -> Any:
 			api = BusyLight
 			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
-			exit(wording.get('connection_no').format('KUANDO BUSYLIGHT') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_no').format('KUANDO BUSYLIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		exit(wording.get('package_no').format('BUSYLIGHT FOR HUMANS') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_no').format('BUSYLIGHT FOR HUMANS') + wording.get('exclamation_mark'))

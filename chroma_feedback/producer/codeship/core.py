@@ -2,6 +2,7 @@ from typing import Any, Dict, List
 from argparse import ArgumentParser
 import base64
 from chroma_feedback import helper, request
+from chroma_feedback.typing import ProducerModel
 from .normalize import normalize_data
 
 ARGS = None
@@ -18,7 +19,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run() -> List[Dict[str, Any]]:
+def run() -> List[ProducerModel]:
 	result = []
 
 	if ARGS.codeship_slug:
@@ -28,7 +29,7 @@ def run() -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch(host : str, slug : str, username : str, password : str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, username : str, password : str) -> List[ProducerModel]:
 	result = []
 	auth = fetch_auth(host, username, password)
 
@@ -86,7 +87,7 @@ def fetch_projects(host : str, organization_id : str, token : str) -> List[Dict[
 	return result
 
 
-def fetch_builds(host : str, organization_id : str, slug : str, project_id : str, token : str) -> List[Dict[str, Any]]:
+def fetch_builds(host : str, organization_id : str, slug : str, project_id : str, token : str) -> List[ProducerModel]:
 	result = []
 	response = None
 

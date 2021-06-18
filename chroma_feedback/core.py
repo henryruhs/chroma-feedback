@@ -1,25 +1,54 @@
 from __future__ import print_function
-from typing import Any
-from argparse import ArgumentParser
-import os
 import sys
-import threading
-from chroma_feedback import consumer, helper, producer, reporter, wording
-if helper.is_linux():
-	from chroma_feedback import systray
+from argparse import ArgumentParser
+from chroma_feedback import consumer, helper, loop, producer, systray, reporter, wording
+
+INTERVAL = 0
 
 
-def run(program : ArgumentParser) -> None:
-	status = None
+def init(program : ArgumentParser) -> None:
+	args = helper.get_first(program.parse_known_args())
 
 	if sys.version_info < (3, 8):
-		exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
+		sys.exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
 	# report header
 
-	if threading.active_count() == 1:
-		reporter.print_header()
-		print()
+	reporter.print_header()
+	print()
+
+	# handle background run
+
+	if args.background_run is True:
+		application = loop.get_application()
+		timer = loop.get_timer()
+		timer.setInterval(500)
+		timer.timeout.connect(lambda: background_run(program))
+		timer.singleShot(0, lambda: run(program)) # type: ignore
+		timer.start()
+		sys.exit(application.exec_())
+	else:
+		run(program)
+
+
+def background_run(program : ArgumentParser) -> None:
+	global INTERVAL
+
+	args = helper.get_first(program.parse_known_args())
+	timer = loop.get_timer()
+
+	# handle interval
+
+	if INTERVAL == args.background_interval * 1000:
+		run(program)
+		INTERVAL = 0
+	else:
+		INTERVAL += timer.interval()
+
+
+def run(program : ArgumentParser) -> None:
+	args = helper.get_first(program.parse_known_args())
+	status = None
 
 	# process producer
 
@@ -28,7 +57,7 @@ def run(program : ArgumentParser) -> None:
 	# handle exit
 
 	if not producer_result:
-		exit(wording.get('result_no') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('result_no') + wording.get('exclamation_mark'))
 
 	# report producer
 
@@ -39,8 +68,6 @@ def run(program : ArgumentParser) -> None:
 		print()
 
 	# handle dry run
-
-	args = helper.get_first(program.parse_known_args())
 
 	if args.dry_run is False:
 
@@ -57,22 +84,15 @@ def run(program : ArgumentParser) -> None:
 			reporter.print_report(consumer_report)
 			print()
 
-	# handle thread
+	# handle systray
 
-	if args.background_run is True:
-		threading.Timer(args.background_interval, run, args =
-		[
-			program
-		]).start()
-
-		if helper.is_linux():
-			systray_report = reporter.create_systray_report(producer_result)
-			if systray.is_active():
-				systray.update(status, systray_report)
-			else:
-				systray.create(status, systray_report)
+	if loop.is_created() is True:
+		if systray.is_created() is True:
+			systray.update(status, producer_report)
+		else:
+			systray.create(status, producer_report)
 
 
-def destroy(signal_number : int, frame : Any) -> None:
-	print('\r' + wording.get('goodbye') + wording.get('exclamation_mark'))
-	os._exit(0)
+def destroy() -> None:
+	print()
+	sys.exit(wording.get('goodbye') + wording.get('exclamation_mark'))

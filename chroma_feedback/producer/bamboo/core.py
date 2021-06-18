@@ -1,6 +1,7 @@
-from typing import Any, Dict, List
+from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, request
+from chroma_feedback.typing import ProducerModel
 from .normalize import normalize_data, normalize_slug
 
 ARGS = None
@@ -16,7 +17,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run() -> List[Dict[str, Any]]:
+def run() -> List[ProducerModel]:
 	result = []
 
 	for slug in ARGS.bamboo_slug:
@@ -24,7 +25,7 @@ def run() -> List[Dict[str, Any]]:
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List[Dict[str, Any]]:
+def fetch(host : str, slug : str, token : str) -> List[ProducerModel]:
 	result = []
 	response = None
 

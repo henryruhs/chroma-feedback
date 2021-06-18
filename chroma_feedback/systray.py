@@ -1,91 +1,82 @@
-from typing import Any, List
-import tempfile
-import os
-from PIL import Image, ImageDraw
-from chroma_feedback import color, metadata, wording
-from chroma_feedback.typing import StatusType
-
-try:
-	import gi
-
-	gi.require_version('Gtk', '3.0')
-	gi.require_version('AppIndicator3', '0.1')
-
-	from gi.repository import AppIndicator3, GdkPixbuf, Gtk
-except (ImportError, ValueError):
-	exit(wording.get('package_no').format('GIRL APPINDICATOR') + wording.get('exclamation_mark'))
+import sys
+from typing import List
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
+from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
+from chroma_feedback import color, loop, wording
+from chroma_feedback.typing import StatusType, ReportModel
 
 SYSTRAY = None
 
 
-def create(status : StatusType, report : List[str]) -> None:
+def create(status : StatusType, report : List[ReportModel]) -> None:
 	global SYSTRAY
 
 	if not SYSTRAY:
-		icon_path = create_icon(status)
-		SYSTRAY = AppIndicator3.Indicator.new(metadata.get('name') + ' ' + metadata.get('version'), icon_path, AppIndicator3.IndicatorCategory.APPLICATION_STATUS)
-		SYSTRAY.set_status(AppIndicator3.IndicatorStatus.ACTIVE)
-		SYSTRAY.set_menu(create_menu(report))
-	Gtk.main()
+		SYSTRAY = QSystemTrayIcon()
+	update(status, report)
+	SYSTRAY.show()
 
 
-def update(status : StatusType, report : List[str]) -> None:
-	icon_path = create_icon(status)
+def update(status : StatusType, report : List[ReportModel]) -> None:
+	global SYSTRAY
 
-	SYSTRAY.set_icon(icon_path)
-	SYSTRAY.set_menu(create_menu(report))
+	SYSTRAY.setContextMenu(create_menu(report))
+	SYSTRAY.setIcon(create_icon(status))
+	refresh()
 
 
-def is_active() -> bool:
+def is_created() -> bool:
 	global SYSTRAY
 
 	return SYSTRAY is not None
 
 
-def create_menu(report : List[str]) ->Gtk.Menu:
-	menu = Gtk.Menu()
+def create_menu(report : List[ReportModel]) -> QMenu:
+	menu = QMenu()
+	timer = loop.get_timer()
 
 	# process report
 
-	for message in report:
-		menu.append(Gtk.MenuItem(message))
+	for value in report:
+		item_report = menu.addAction(value['message'])
+		item_report.setIcon(create_icon(value['status']))
+		item_report.setIconVisibleInMenu(True)
 	if report:
-		menu.append(Gtk.SeparatorMenuItem())
+		menu.addSeparator()
 
 	# handle action
 
-	item_about = Gtk.MenuItem(wording.get('about'))
-	item_about.connect('activate', about)
-	item_exit = Gtk.MenuItem(wording.get('exit'))
-	item_exit.connect('activate', destroy)
-	menu.append(item_about)
-	menu.append(item_exit)
-	menu.show_all()
+	item_start = menu.addAction(wording.get('start'))
+	item_start.triggered.connect(timer.start)
+	item_stop = menu.addAction(wording.get('stop'))
+	item_stop.triggered.connect(timer.stop)
+	item_exit = menu.addAction(wording.get('exit'))
+	item_exit.triggered.connect(destroy)
+	menu.addAction(item_start)
+	menu.addAction(item_stop)
+	menu.addAction(item_exit)
 	return menu
 
 
-def create_icon(status : StatusType) -> str:
+def create_icon(status : StatusType) -> QIcon:
 	color_config = color.get_by_status(status)
-	image = Image.new('RGBA', (100, 100), (0, 0, 0, 0))
-	draw = ImageDraw.Draw(image)
-	draw.ellipse((20, 20, 80, 80), fill = tuple(color_config['rgb']))
-	path = tempfile.mktemp('.png')
-	image.save(path)
-	return path
+	pixmap = QPixmap(100, 100)
+	pixmap.fill(Qt.transparent)
+	painter = QPainter(pixmap)
+	painter.setBrush(QBrush(QColor(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]), Qt.SolidPattern))
+	painter.drawEllipse(20, 20, 60, 60)
+	painter.end()
+	return QIcon(pixmap)
 
 
-def about(menu_item : Any) -> None:
-	logo = GdkPixbuf.Pixbuf.new_from_file_at_size(create_icon('passed'), 20, 20)
-	about_dialog = Gtk.AboutDialog()
-	about_dialog.set_program_name(metadata.get('name'))
-	about_dialog.set_comments(metadata.get('description'))
-	about_dialog.set_version(metadata.get('version'))
-	about_dialog.set_website(metadata.get('url'))
-	about_dialog.set_website_label(metadata.get('url'))
-	about_dialog.set_logo(logo)
-	about_dialog.present()
+def refresh() -> None:
+	global SYSTRAY
+
+	SYSTRAY.hide()
+	SYSTRAY.show()
 
 
-def destroy(menu_item : Any) -> None:
-	print('\r' + wording.get('goodbye') + wording.get('exclamation_mark'))
-	os._exit(0)
+def destroy() -> None:
+	print()
+	sys.exit(wording.get('goodbye') + wording.get('exclamation_mark'))

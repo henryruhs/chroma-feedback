@@ -6,11 +6,16 @@ jobs:
   - image: circleci/python:3.9-buster
   steps:
   - checkout
-  - run: sudo pip install mypy
-  - run: sudo pip install pillow
-  - run: sudo pip install pylint
-  - run: sudo pip install pytest
-  - run: sudo pip install requests
+  - run: pip install mock
+  - run: pip install mypy
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install requests
+  - run: pip install types-mock
+  - run: pip install types-requests
+  - run: pytest tests
   - run: pylint bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
@@ -18,11 +23,14 @@ jobs:
   - image: circleci/python:3.9-buster
   steps:
   - checkout
-  - run: sudo pip install mock
-  - run: sudo pip install pillow
-  - run: sudo pip install pytest
-  - run: sudo pip install pytest-mock
-  - run: sudo pip install requests
+  - run: pip install pylint
+  - run: pip install pytest
+  - run: pip install pytest-cov
+  - run: pip install pytest-mock
+  - run: pip install mock
+  - run: pip install mypy
+  - run: pip install types-mock
+  - run: pip install types-requests
   - run: pytest tests
 
 workflows:
