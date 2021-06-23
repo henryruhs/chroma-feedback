@@ -3,14 +3,14 @@ import requests
 from requests import Response, RequestException
 
 
-def get(url : str, headers : Dict[str, str] = None) -> Any:
+def get(url : str, headers : Dict[str, str] = None) -> Response:
 	try:
 		return requests.get(url, headers = headers, timeout = 10)
 	except RequestException:
 		return get(url, headers)
 
 
-def post(url : str, data : Any = None, headers : Dict[str, str] = None) -> Any:
+def post(url : str, data : Any = None, headers : Dict[str, str] = None) -> Response:
 	try:
 		return requests.post(url, data, headers = headers, timeout = 10)
 	except RequestException:
