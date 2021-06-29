@@ -50,14 +50,17 @@ setup(
 	{
 		'install': InstallCommand
 	},
-	scripts =
-	[
-		'bin/chroma-feedback'
-	],
+	entry_points =
+	{
+		 'console_scripts':
+		 [
+			  'chroma-feedback = chroma_feedback.core:cli',
+		 ]
+	},
 	install_requires =
 	[
 		'asyncio==3.4.3',
-		'busylight-for-humans==0.12.5',
+		'busylight-for-humans==0.12.9',
 		'lifxlan==1.2.5',
 		'nanoleafapi==2.0.0',
 		'phue==1.1',

@@ -1,9 +1,22 @@
 from __future__ import print_function
+import signal
 import sys
 from argparse import ArgumentParser
-from chroma_feedback import consumer, helper, loop, producer, systray, reporter, wording
+from chroma_feedback import consumer, helper, loop, metadata, producer, systray, reporter, wording
 
 INTERVAL = 0
+
+
+def cli() -> None:
+	signal.signal(signal.SIGINT, lambda signal_number, frame: destroy())
+	program = ArgumentParser()
+	program.add_argument('-V', '--version', action = 'version', version = metadata.get('name') + ' ' + metadata.get('version'))
+	program.add_argument('-P', '--producer', action = 'append', choices = producer.__all__, required = True)
+	program.add_argument('-C', '--consumer', action = 'append', choices = consumer.__all__, required = True)
+	program.add_argument('-I', '--background-interval', default = 60, type = int)
+	program.add_argument('-B', '--background-run', action = 'store_true')
+	program.add_argument('-D', '--dry-run', action = 'store_true')
+	init(program)
 
 
 def init(program : ArgumentParser) -> None:
