@@ -90,4 +90,3 @@ def print_report(report : List[ReportModel]) -> None:
 			print(value['symbol'] + ' ' + value['message'])
 		else:
 			print(value['message'])
-
