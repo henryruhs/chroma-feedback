@@ -1,3 +1,4 @@
+from chroma_feedback import helper
 from chroma_feedback.typing import StatusType, ColorConfigModel
 
 COLOR =\
@@ -10,15 +11,21 @@ COLOR =\
 
 
 def format_passed(text : str) -> str:
-	return COLOR['green'] + text + COLOR['end']
+	if helper.is_windows() is False:
+		return COLOR['green'] + text + COLOR['end']
+	return text
 
 
 def format_started(text : str) -> str:
-	return COLOR['yellow'] + text + COLOR['end']
+	if helper.is_windows() is False:
+		return COLOR['yellow'] + text + COLOR['end']
+	return text
 
 
 def format_failed(text : str) -> str:
-	return COLOR['red'] + text + COLOR['end']
+	if helper.is_windows() is False:
+		return COLOR['red'] + text + COLOR['end']
+	return text
 
 
 def get_by_status(status : StatusType) -> ColorConfigModel:

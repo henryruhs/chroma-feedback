@@ -37,6 +37,10 @@ def is_linux() -> bool:
 	return to_lower_case(platform.system()) == 'linux'
 
 
+def is_windows() -> bool:
+	return to_lower_case(platform.system()) == 'windows'
+
+
 def to_lower_case(__string__ : Any) -> str:
 	return str(__string__).lower()
 
