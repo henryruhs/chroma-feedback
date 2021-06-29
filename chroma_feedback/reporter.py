@@ -1,6 +1,6 @@
 from __future__ import print_function
 from typing import List
-from chroma_feedback import color, metadata, wording
+from chroma_feedback import color, helper, metadata, wording
 from chroma_feedback.typing import ConsumerModel, ProducerModel, ReportModel
 
 
@@ -86,4 +86,8 @@ def print_header() -> None:
 
 def print_report(report : List[ReportModel]) -> None:
 	for value in report:
-		print(value['symbol'] + ' ' + value['message'])
+		if helper.is_windows() is False:
+			print(value['symbol'] + ' ' + value['message'])
+		else:
+			print(value['message'])
+
