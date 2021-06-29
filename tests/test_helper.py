@@ -1,6 +1,90 @@
 from chroma_feedback import helper
 
 
+def test_get_producer_status_started() -> None:
+	assert helper.get_producer_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'started'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'passed'
+		}
+	]) is 'started'
+
+
+def test_get_producer_status_errored() -> None:
+	assert helper.get_producer_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'errored'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'started'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'passed'
+		}
+	]) is 'errored'
+
+
+def test_get_producer_status_failed() -> None:
+	assert helper.get_producer_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'failed'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'started'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'errored'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'passed'
+		},
+	]) is 'failed'
+
+
+def test_get_producer_status_passed() -> None:
+	assert helper.get_producer_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'passed'
+		}
+	]) is 'passed'
+
+
 def test_parse_slug() -> None:
 	assert 'workspace' in helper.parse_slug('redaxmedia')
 	assert 'project' not in helper.parse_slug('redaxmedia')
