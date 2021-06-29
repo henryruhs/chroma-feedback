@@ -1,12 +1,12 @@
-from chroma_feedback.producer import __all__ as producer
+from chroma_feedback import producer
 
 METADATA =\
 {
 	'name': 'chroma-feedback',
 	'description': 'Turn your RGB powered hardware into an build indicator for continuous integration',
-	'version': '10.0.0',
+	'version': '10.1.0',
 	'license': 'MIT',
-	'keywords': ' '.join(producer),
+	'keywords': ' '.join(producer.__all__),
 	'author': 'Henry Ruhs',
 	'author_email': 'info@redaxmedia.com',
 	'url': 'https://github.com/redaxmedia/chroma-feedback'
