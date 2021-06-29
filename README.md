@@ -21,14 +21,14 @@ Installation
 Install Chroma Feedback:
 
 ```
-apt-get install libusb-1.0-0-dev libudev-dev
-```
-
-```
 pip3 install chroma-feedback
 ```
 
-Install `openrazer-meta` for Razer Chroma:
+Install the dependencies for Linux:
+
+```
+apt-get install libusb-1.0-0-dev libudev-dev
+```
 
 ```
 add-apt-repository ppa:openrazer/stable

@@ -16,7 +16,7 @@ def test_get_producer_status_started() -> None:
 			'active': True,
 			'status': 'passed'
 		}
-	]) is 'started'
+	]) == 'started'
 
 
 def test_get_producer_status_errored() -> None:
@@ -40,7 +40,7 @@ def test_get_producer_status_errored() -> None:
 			'active': True,
 			'status': 'passed'
 		}
-	]) is 'errored'
+	]) == 'errored'
 
 
 def test_get_producer_status_failed() -> None:
@@ -70,7 +70,7 @@ def test_get_producer_status_failed() -> None:
 			'active': True,
 			'status': 'passed'
 		},
-	]) is 'failed'
+	]) == 'failed'
 
 
 def test_get_producer_status_passed() -> None:
@@ -82,7 +82,7 @@ def test_get_producer_status_passed() -> None:
 			'active': True,
 			'status': 'passed'
 		}
-	]) is 'passed'
+	]) == 'passed'
 
 
 def test_parse_slug() -> None:
