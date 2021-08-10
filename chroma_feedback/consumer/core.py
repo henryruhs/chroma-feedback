@@ -12,11 +12,15 @@ def process(program : ArgumentParser, status : StatusType) -> List[ConsumerModel
 
 	for consumer_name in args.consumer:
 		consumer = load_consumer(consumer_name)
-		consumer.init(program)
-		try:
-			result.extend(consumer.run(status))
-		except IOError:
-			sys.exit(wording.get('consumer_crash').format(consumer_name) + wording.get('exclamation_mark'))
+
+		if consumer.support() is True:
+			try:
+				consumer.init(program)
+				result.extend(consumer.run(status))
+			except IOError:
+				sys.exit(wording.get('consumer_crashed').format(consumer_name) + wording.get('exclamation_mark'))
+		else:
+			sys.exit(wording.get('consumer_not_supported').format(consumer_name) + wording.get('exclamation_mark'))
 	return result
 
 
@@ -24,4 +28,4 @@ def load_consumer(consumer_name : str) -> Any:
 	try:
 		return importlib.import_module('chroma_feedback.consumer.' + consumer_name)
 	except ImportError:
-		sys.exit(wording.get('consumer_no').format(consumer_name) + wording.get('exclamation_mark'))
+		sys.exit(wording.get('consumer_not_found').format(consumer_name) + wording.get('exclamation_mark'))

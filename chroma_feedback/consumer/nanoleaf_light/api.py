@@ -22,9 +22,9 @@ def api_factory(ip : str) -> Any:
 		try:
 			api = Nanoleaf(ip)
 		except NanoleafConnectionError:
-			sys.exit(wording.get('connection_no').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_not_found').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))
 		except NanoleafRegistrationError:
 			sys.exit(wording.get('press_button').format('PAIRING', 'NANOLEAF LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		sys.exit(wording.get('package_no').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_not_found').format('NANOLEAF LIGHT') + wording.get('exclamation_mark'))

@@ -24,7 +24,7 @@ def api_factory() -> Any:
 			api = Blink1
 			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
-			sys.exit(wording.get('connection_no').format('THINGM BLINK1') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_not_found').format('THINGM BLINK1') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		sys.exit(wording.get('package_no').format('BUSYLIGHT FOR HUMANS') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_not_found').format('BUSYLIGHT FOR HUMANS') + wording.get('exclamation_mark'))

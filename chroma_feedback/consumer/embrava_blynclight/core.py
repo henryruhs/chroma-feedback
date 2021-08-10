@@ -9,6 +9,10 @@ from .api import get_api
 ARGS = None
 
 
+def support() -> bool:
+	return helper.is_linux() is True or helper.is_mac() is True
+
+
 def init(program : ArgumentParser) -> None:
 	global ARGS
 
@@ -22,5 +26,5 @@ def run(status : StatusType) -> List[ConsumerModel]:
 	devices = get_devices(api.all_lights(), ARGS.embrava_blynclight_device)
 
 	if not devices:
-		sys.exit(wording.get('device_no') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('device_not_found') + wording.get('exclamation_mark'))
 	return process_devices(devices, status)

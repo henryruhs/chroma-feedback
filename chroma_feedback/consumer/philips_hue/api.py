@@ -22,9 +22,9 @@ def api_factory(ip : str) -> Any:
 		try:
 			api = Bridge(ip)
 		except (PhueRequestTimeout, OSError, ValueError):
-			sys.exit(wording.get('connection_no').format('PHILIPS HUE') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_not_found').format('PHILIPS HUE') + wording.get('exclamation_mark'))
 		except PhueRegistrationException:
 			sys.exit(wording.get('press_button').format('PAIRING', 'PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		sys.exit(wording.get('package_no').format('PHILIPS HUE') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_not_found').format('PHILIPS HUE') + wording.get('exclamation_mark'))
