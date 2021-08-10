@@ -13,7 +13,7 @@ def process(program : ArgumentParser, status : StatusType) -> List[ConsumerModel
 	for consumer_name in args.consumer:
 		consumer = load_consumer(consumer_name)
 
-		if consumer.support():
+		if consumer.support() is True:
 			try:
 				consumer.init(program)
 				result.extend(consumer.run(status))

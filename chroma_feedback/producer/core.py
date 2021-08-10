@@ -12,8 +12,8 @@ def process(program : ArgumentParser) -> List[ProducerModel]:
 
 	for producer_name in args.producer:
 		producer = load_producer(producer_name)
-		producer.init(program)
 		try:
+			producer.init(program)
 			result.extend(producer.run())
 		except IOError:
 			sys.exit(wording.get('producer_crashed').format(producer_name) + wording.get('exclamation_mark'))
