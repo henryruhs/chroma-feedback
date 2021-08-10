@@ -16,7 +16,7 @@ def process(program : ArgumentParser) -> List[ProducerModel]:
 		try:
 			result.extend(producer.run())
 		except IOError:
-			sys.exit(wording.get('producer_crash').format(producer_name) + wording.get('exclamation_mark'))
+			sys.exit(wording.get('producer_crashed').format(producer_name) + wording.get('exclamation_mark'))
 	return result
 
 
@@ -24,4 +24,4 @@ def load_producer(producer_name : str) -> Any:
 	try:
 		return importlib.import_module('chroma_feedback.producer.' + producer_name)
 	except ImportError:
-		sys.exit(wording.get('producer_no').format(producer_name) + wording.get('exclamation_mark'))
+		sys.exit(wording.get('producer_not_found').format(producer_name) + wording.get('exclamation_mark'))

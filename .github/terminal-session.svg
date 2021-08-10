@@ -15,11 +15,11 @@ chroma-feedback 10.1.0 by Henry Ruhs
 <span class="is-success">✔</span> Build of redaxmedia/ncss-linter on github passed
 <span class="is-success">✔</span> Build of redaxmedia/ngx-crud on github passed
 
-<span class="is-success">✔</span> Setting Hue play 1 to build passed.
-<span class="is-success">✔</span> Setting Hue play 2 to build passed.
-<span class="is-success">✔</span> Setting Hue play 3 to build passed.
-<span class="is-success">✔</span> Setting Hue lightstrip 1 to build passed.
-<span class="is-success">✔</span> Setting Hue lightstrip 2 to build passed.
+<span class="is-success">✔</span> Set Hue play 1 state to passed.
+<span class="is-success">✔</span> Set Hue play 2 state to passed.
+<span class="is-success">✔</span> Set Hue play 3 state to passed.
+<span class="is-success">✔</span> Set Hue lightstrip 1 state to passed.
+<span class="is-success">✔</span> Set Hue lightstrip 2 state to passed.
 		</pre>
 	</foreignObject>
 	<defs>

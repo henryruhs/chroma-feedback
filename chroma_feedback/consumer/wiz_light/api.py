@@ -25,10 +25,10 @@ def api_factory(ip : str) -> Any:
 		try:
 			api = wizlight(ip, True)
 		except (WizLightConnectionError, WizLightTimeOutError):
-			sys.exit(wording.get('connection_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		sys.exit(wording.get('package_no').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 
 
 def get_loop() -> Any:

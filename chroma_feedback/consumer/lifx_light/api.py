@@ -22,7 +22,7 @@ def api_factory() -> Any:
 		try:
 			api = LifxLAN()
 		except WorkflowException:
-			sys.exit(wording.get('connection_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))
+			sys.exit(wording.get('connection_not_found').format('LIFX LIGHT') + wording.get('exclamation_mark'))
 		return api
 	except ImportError:
-		sys.exit(wording.get('package_no').format('LIFX LIGHT') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('package_not_found').format('LIFX LIGHT') + wording.get('exclamation_mark'))

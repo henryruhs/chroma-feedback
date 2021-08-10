@@ -23,7 +23,7 @@ def init(program : ArgumentParser) -> None:
 	args = helper.get_first(program.parse_known_args())
 
 	if sys.version_info < (3, 8):
-		sys.exit(wording.get('version_no').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
+		sys.exit(wording.get('version_not_supported').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 
 	# report header
 
@@ -70,7 +70,7 @@ def run(program : ArgumentParser) -> None:
 	# handle exit
 
 	if not producer_result:
-		sys.exit(wording.get('result_no') + wording.get('exclamation_mark'))
+		sys.exit(wording.get('result_not_found') + wording.get('exclamation_mark'))
 
 	# report producer
 
