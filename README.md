@@ -61,4 +61,4 @@ chroma-feedback [options]
 Documentation
 -------------
 
-Read the [documenation](https://redaxmedia.gitbook.io/ngx-crud) for a deep dive.
+Read the [documenation](https://redaxmedia.gitbook.io/chroma-feedback) for a deep dive.
