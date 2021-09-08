@@ -11,7 +11,7 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--custom-host')
+		program.add_argument('--custom-host', default = 'http://localhost')
 		program.add_argument('--custom-slug', action = 'append', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
