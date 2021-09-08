@@ -6,7 +6,7 @@ from chroma_feedback import helper
 class InstallCommand(install):
 	@staticmethod
 	def write_rule() -> None:
-		with open('/etc/udev/rules.d/99-chroma-feedback.rules', 'w+') as file:
+		with open('/etc/udev/rules.d/99-chroma-feedback.rules', 'w+', encoding = 'utf8') as file:
 			file.write('SUBSYSTEM=="usb", MODE="0666"')
 			file.close()
 
