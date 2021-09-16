@@ -4,6 +4,7 @@ disable =
 	bare-except,
 	duplicate-code,
 	global-statement,
+	global-variable-not-assigned,
 	import-outside-toplevel,
 	import-error,
 	inconsistent-return-statements,

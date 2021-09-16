@@ -61,7 +61,6 @@ def background_run(program : ArgumentParser) -> None:
 
 def run(program : ArgumentParser) -> None:
 	args = helper.get_first(program.parse_known_args())
-	status = None
 
 	# process producer
 
@@ -80,13 +79,16 @@ def run(program : ArgumentParser) -> None:
 		reporter.print_report(producer_report)
 		print()
 
+	# process status
+
+	status = helper.get_producer_status(producer_result)
+
 	# handle dry run
 
 	if args.dry_run is False:
 
 		# process consumer
 
-		status = helper.get_producer_status(producer_result)
 		consumer_result = consumer.process(program, status)
 
 		# report consumer

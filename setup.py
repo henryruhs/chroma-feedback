@@ -60,14 +60,14 @@ setup(
 	install_requires =
 	[
 		'asyncio==3.4.3',
-		'busylight-for-humans==0.12.9',
-		'lifxlan==1.2.5',
-		'nanoleafapi==2.0.0',
+		'busylight-for-humans==0.12.10',
+		'lifxlan==1.2.7',
+		'nanoleafapi==2.1.1',
 		'phue==1.1',
 		'python-magichue==0.2.9.3',
 		'pyqt5==5.15.4',
 		'pywizlight==0.4.7',
-		'requests==2.25.1',
-		'yeelight==0.6.2'
+		'requests==2.26.0',
+		'yeelight==0.7.4'
 	]
 )

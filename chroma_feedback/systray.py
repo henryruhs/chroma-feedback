@@ -36,7 +36,7 @@ def is_created() -> bool:
 
 
 def update_menu(report : List[ReportModel]) -> None:
-	global MENU, IS_RUNNING
+	global MENU
 
 	MENU.clear()
 
