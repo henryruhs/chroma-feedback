@@ -35,7 +35,7 @@ def init(program : ArgumentParser) -> None:
 	if args.background_run is True:
 		application = loop.get_application()
 		timer = loop.get_timer()
-		timer.setInterval(500)
+		timer.setInterval(100)
 		timer.timeout.connect(lambda: background_run(program))
 		timer.singleShot(0, lambda: run(program)) # type: ignore
 		timer.start()

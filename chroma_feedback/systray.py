@@ -7,56 +7,59 @@ from chroma_feedback import color, loop, wording
 from chroma_feedback.typing import StatusType, ReportModel
 
 SYSTRAY = None
+MENU = None
 
 
 def create(status : StatusType, report : List[ReportModel]) -> None:
-	global SYSTRAY
+	global SYSTRAY, MENU
 
 	if not SYSTRAY:
 		SYSTRAY = QSystemTrayIcon()
+	if not MENU:
+		MENU = QMenu()
 	update(status, report)
 	SYSTRAY.show()
 
 
 def update(status : StatusType, report : List[ReportModel]) -> None:
-	global SYSTRAY
+	global SYSTRAY, MENU
 
-	SYSTRAY.setContextMenu(create_menu(report))
+	update_menu(report)
+	SYSTRAY.setContextMenu(MENU)
 	SYSTRAY.setIcon(create_icon(status))
-	refresh()
 
 
 def is_created() -> bool:
-	global SYSTRAY
+	global SYSTRAY, MENU
 
-	return SYSTRAY is not None
+	return SYSTRAY is not None and MENU is not None
 
 
-def create_menu(report : List[ReportModel]) -> QMenu:
-	menu = QMenu()
-	timer = loop.get_timer()
+def update_menu(report : List[ReportModel]) -> None:
+	global MENU, IS_RUNNING
+
+	MENU.clear()
 
 	# process report
 
 	for value in report:
-		item_report = menu.addAction(value['message'])
+		item_report = MENU.addAction(value['message'])
 		item_report.setIcon(create_icon(value['status']))
 		item_report.setIconVisibleInMenu(True)
 	if report:
-		menu.addSeparator()
+		MENU.addSeparator()
 
 	# handle action
 
-	item_start = menu.addAction(wording.get('start'))
-	item_start.triggered.connect(timer.start)
-	item_stop = menu.addAction(wording.get('stop'))
-	item_stop.triggered.connect(timer.stop)
-	item_exit = menu.addAction(wording.get('exit'))
-	item_exit.triggered.connect(destroy)
-	menu.addAction(item_start)
-	menu.addAction(item_stop)
-	menu.addAction(item_exit)
-	return menu
+	item_start = MENU.addAction(wording.get('start'))
+	item_start.triggered.connect(action_start)
+	MENU.addAction(item_start)
+	item_stop = MENU.addAction(wording.get('stop'))
+	item_stop.triggered.connect(action_stop)
+	MENU.addAction(item_stop)
+	item_exit = MENU.addAction(wording.get('exit'))
+	item_exit.triggered.connect(action_exit)
+	MENU.addAction(item_exit)
 
 
 def create_icon(status : StatusType) -> QIcon:
@@ -70,13 +73,14 @@ def create_icon(status : StatusType) -> QIcon:
 	return QIcon(pixmap)
 
 
-def refresh() -> None:
-	global SYSTRAY
-
-	SYSTRAY.hide()
-	SYSTRAY.show()
+def action_start() -> None:
+	loop.get_timer().start()
 
 
-def destroy() -> None:
+def action_stop() -> None:
+	loop.get_timer().stop()
+
+
+def action_exit() -> None:
 	print()
 	sys.exit(wording.get('goodbye') + wording.get('exclamation_mark'))

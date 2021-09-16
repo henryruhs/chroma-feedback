@@ -2,16 +2,16 @@ import sys
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication
 
-APPLIACTION = None
+APPLICATION = None
 TIMER = None
 
 
 def get_application() -> QApplication:
-	global APPLIACTION
+	global APPLICATION
 
-	if APPLIACTION is None:
-		APPLIACTION = QApplication(sys.argv)
-	return APPLIACTION
+	if APPLICATION is None:
+		APPLICATION = QApplication(sys.argv)
+	return APPLICATION
 
 
 def get_timer() -> QTimer:
@@ -23,6 +23,6 @@ def get_timer() -> QTimer:
 
 
 def is_created() -> bool:
-	global APPLIACTION, TIMER
+	global APPLICATION, TIMER
 
-	return APPLIACTION is not None and TIMER is not None
+	return APPLICATION is not None and TIMER is not None
