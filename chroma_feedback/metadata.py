@@ -9,7 +9,7 @@ METADATA =\
 	'keywords': ' '.join(producer.__all__),
 	'author': 'Henry Ruhs',
 	'author_email': 'info@redaxmedia.com',
-	'url': 'https://github.com/redaxmedia/chroma-feedback'
+	'url': 'https://chroma-feedback.com'
 }
 
 
