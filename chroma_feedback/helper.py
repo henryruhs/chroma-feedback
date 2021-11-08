@@ -50,7 +50,7 @@ def to_lower_case(__string__ : Any) -> str:
 
 
 def has_argument(argument : str) -> bool:
-	return any(argument in argv for argv in sys.argv)
+	return any(argv.startswith(argument) for argv in sys.argv)
 
 
 def get_first(__list__ : Any) -> Any:

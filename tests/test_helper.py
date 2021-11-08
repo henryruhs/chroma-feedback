@@ -1,3 +1,4 @@
+import sys
 from chroma_feedback import helper
 
 
@@ -112,7 +113,15 @@ def test_to_lower_case() -> None:
 
 
 def test_has_argument() -> None:
-	assert helper.has_argument('invalid') is False
+	sys.argv.clear()
+	sys.argv.append('--valid')
+	assert helper.has_argument('--valid') is True
+
+
+def test_has_argument_invalid() -> None:
+	sys.argv.clear()
+	sys.argv.append('----invalid')
+	assert helper.has_argument('--invalid') is False
 
 
 def test_get_first() -> None:
