@@ -1,6 +1,6 @@
 from typing import Any, List
 from chroma_feedback import color
-from chroma_feedback.typing import StatusType, ConsumerModel, ColorConfigModel
+from chroma_feedback.typing import Status, Consumer, Color
 from .api import get_api, get_loop, get_builder
 
 
@@ -12,8 +12,8 @@ def get_lights(ips : List[str]) -> Any:
 	return lights
 
 
-def process_lights(lights : Any, status : StatusType) -> List[ConsumerModel]:
-	result : List[ConsumerModel] = []
+def process_lights(lights : Any, status : Status) -> List[Consumer]:
+	result : List[Consumer] = []
 
 	# process lights
 
@@ -35,7 +35,7 @@ def get_light_name(light : Any) -> str:
 	return config.name
 
 
-def set_light(light : Any, color_config : ColorConfigModel) -> bool:
+def set_light(light : Any, color_config : Color) -> bool:
 	loop = get_loop()
 	builder = get_builder()
 	loop.run_until_complete(light.turn_on(builder(rgb = color_config['rgb'])))

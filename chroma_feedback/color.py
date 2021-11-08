@@ -1,5 +1,5 @@
 from chroma_feedback import helper
-from chroma_feedback.typing import StatusType, ColorConfigModel
+from chroma_feedback.typing import Status, Color
 
 COLOR =\
 {
@@ -28,7 +28,7 @@ def format_failed(text : str) -> str:
 	return text
 
 
-def get_by_status(status : StatusType) -> ColorConfigModel:
+def get_by_status(status : Status) -> Color:
 	if status == 'started':
 		return get_started()
 	if status == 'errored':
@@ -38,7 +38,7 @@ def get_by_status(status : StatusType) -> ColorConfigModel:
 	return get_passed()
 
 
-def get_passed() -> ColorConfigModel:
+def get_passed() -> Color:
 	return\
 	{
 		'name': 'green',
@@ -65,7 +65,7 @@ def get_passed() -> ColorConfigModel:
 	}
 
 
-def get_started() -> ColorConfigModel:
+def get_started() -> Color:
 	return\
 	{
 		'name': 'yellow',
@@ -92,7 +92,7 @@ def get_started() -> ColorConfigModel:
 	}
 
 
-def get_errored() -> ColorConfigModel:
+def get_errored() -> Color:
 	return\
 	{
 		'name': 'white',
@@ -119,7 +119,7 @@ def get_errored() -> ColorConfigModel:
 	}
 
 
-def get_failed() -> ColorConfigModel:
+def get_failed() -> Color:
 	return\
 	{
 		'name': 'red',

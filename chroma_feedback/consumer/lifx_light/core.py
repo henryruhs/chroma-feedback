@@ -2,7 +2,7 @@ import sys
 from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import StatusType, ConsumerModel
+from chroma_feedback.typing import Status, Consumer
 from .api import get_api
 from .group import get_groups, process_groups
 from .light import get_lights, process_lights
@@ -23,7 +23,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : StatusType) -> List[ConsumerModel]:
+def run(status : Status) -> List[Consumer]:
 	api = get_api()
 
 	# use groups

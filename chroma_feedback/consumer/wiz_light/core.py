@@ -3,7 +3,7 @@ import sys
 from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import StatusType, ConsumerModel
+from chroma_feedback.typing import Status, Consumer
 from .light import get_lights, process_lights
 
 ARGS = None
@@ -28,7 +28,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : StatusType) -> List[ConsumerModel]:
+def run(status : Status) -> List[Consumer]:
 	lights = get_lights(ARGS.wiz_light_ip)
 
 	if not lights:

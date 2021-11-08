@@ -1,8 +1,8 @@
 from chroma_feedback import helper
-from chroma_feedback.typing import StatusType, ProducerModel
+from chroma_feedback.typing import Status, Producer
 
 
-def normalize_data(slug : str, status : str) -> ProducerModel:
+def normalize_data(slug : str, status : str) -> Producer:
 	return\
 	{
 		'producer': 'bitbucket',
@@ -12,7 +12,7 @@ def normalize_data(slug : str, status : str) -> ProducerModel:
 	}
 
 
-def normalize_status(status : str) -> StatusType:
+def normalize_status(status : str) -> Status:
 	status = helper.to_lower_case(status)
 
 	if status == 'inprogress':

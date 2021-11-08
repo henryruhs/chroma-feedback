@@ -1,8 +1,8 @@
 from chroma_feedback import helper
-from chroma_feedback.typing import StatusType, ProducerModel
+from chroma_feedback.typing import Status, Producer
 
 
-def normalize_data(slug : str, paused : bool, status : str, is_running : bool) -> ProducerModel:
+def normalize_data(slug : str, paused : bool, status : str, is_running : bool) -> Producer:
 	return\
 	{
 		'producer': 'teamcity',
@@ -12,7 +12,7 @@ def normalize_data(slug : str, paused : bool, status : str, is_running : bool) -
 	}
 
 
-def normalize_status(status : str, is_running : bool) -> StatusType:
+def normalize_status(status : str, is_running : bool) -> Status:
 	status = helper.to_lower_case(status)
 
 	if is_running is True:

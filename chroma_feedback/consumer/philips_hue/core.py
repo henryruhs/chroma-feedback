@@ -3,7 +3,7 @@ from typing import List
 from argparse import ArgumentParser
 import socket
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import StatusType, ConsumerModel
+from chroma_feedback.typing import Status, Consumer
 from .group import get_groups, process_groups
 from .light import get_lights, process_lights
 from .api import get_api
@@ -32,7 +32,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(status : StatusType) -> List[ConsumerModel]:
+def run(status : Status) -> List[Consumer]:
 	api = get_api(ARGS.philips_hue_ip)
 
 	# use groups

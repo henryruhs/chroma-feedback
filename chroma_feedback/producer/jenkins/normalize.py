@@ -1,8 +1,8 @@
 from chroma_feedback import helper
-from chroma_feedback.typing import StatusType, ProducerModel
+from chroma_feedback.typing import Status, Producer
 
 
-def normalize_data(slug : str, result : str, is_building : bool) -> ProducerModel:
+def normalize_data(slug : str, result : str, is_building : bool) -> Producer:
 	return\
 	{
 		'producer': 'jenkins',
@@ -12,7 +12,7 @@ def normalize_data(slug : str, result : str, is_building : bool) -> ProducerMode
 	}
 
 
-def normalize_status(result : str, is_building: bool) -> StatusType:
+def normalize_status(result : str, is_building: bool) -> Status:
 	result = helper.to_lower_case(result)
 
 	if is_building is True:

@@ -1,30 +1,30 @@
 from typing import Literal, TypedDict, List
 
-StatusType = Literal['passed', 'started', 'errored', 'failed']
+Status = Literal['passed', 'started', 'errored', 'failed']
 
 
-class ProducerModel(TypedDict):
+class Producer(TypedDict):
 	producer: str
 	slug: str
 	active: bool
-	status: StatusType
+	status: Status
 
 
-class ConsumerModel(TypedDict):
+class Consumer(TypedDict):
 	consumer: str
 	type: Literal['light', 'device', 'group']
 	name: str
 	active: bool
-	status: StatusType
+	status: Status
 
 
-class ReportModel(TypedDict):
-	status : StatusType
+class Report(TypedDict):
+	status : Status
 	message : str
 	symbol : str
 
 
-class ColorConfigModel(TypedDict):
+class Color(TypedDict):
 	name: str
 	rgb: List[int]
 	hue: int

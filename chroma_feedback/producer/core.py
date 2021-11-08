@@ -3,10 +3,10 @@ import sys
 from argparse import ArgumentParser
 import importlib
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import ProducerModel
+from chroma_feedback.typing import Producer
 
 
-def process(program : ArgumentParser) -> List[ProducerModel]:
+def process(program : ArgumentParser) -> List[Producer]:
 	args = helper.get_first(program.parse_known_args())
 	result = []
 

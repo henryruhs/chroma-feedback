@@ -1,7 +1,7 @@
 from typing import Any, List
 import copy
 from chroma_feedback import color
-from chroma_feedback.typing import StatusType, ConsumerModel, ColorConfigModel
+from chroma_feedback.typing import Status, Consumer, Color
 
 
 def get_devices(devices : Any, device_names : List[str]) -> Any:
@@ -12,8 +12,8 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, status : StatusType) -> List[ConsumerModel]:
-	result : List[ConsumerModel] = []
+def process_devices(devices : Any, status : Status) -> List[Consumer]:
+	result : List[Consumer] = []
 
 	# process devices
 
@@ -29,7 +29,7 @@ def process_devices(devices : Any, status : StatusType) -> List[ConsumerModel]:
 	return result
 
 
-def set_device(device : Any, color_config : ColorConfigModel) -> bool:
+def set_device(device : Any, color_config : Color) -> bool:
 	if device.has('brightness'):
 		device.brightness = color_config['brightness'][0]
 	if device.fx.has('static'):
@@ -37,7 +37,7 @@ def set_device(device : Any, color_config : ColorConfigModel) -> bool:
 	return use_effect(device, color_config, 'static')
 
 
-def use_effect(device : Any, color_config : ColorConfigModel, effect_name : str) -> bool:
+def use_effect(device : Any, color_config : Color, effect_name : str) -> bool:
 	effect_state = False
 	parts =\
 	{

@@ -1,6 +1,6 @@
 from typing import Any, List
 from chroma_feedback import color
-from chroma_feedback.typing import StatusType, ConsumerModel, ColorConfigModel
+from chroma_feedback.typing import Status, Consumer, Color
 from .api import get_api
 
 
@@ -19,8 +19,8 @@ def get_group_name(group : Any) -> Any:
 		return device.get_group_label()
 
 
-def process_groups(groups : Any, status : StatusType) -> List[ConsumerModel]:
-	result : List[ConsumerModel] = []
+def process_groups(groups : Any, status : Status) -> List[Consumer]:
+	result : List[Consumer] = []
 
 	# process groups
 
@@ -36,7 +36,7 @@ def process_groups(groups : Any, status : StatusType) -> List[ConsumerModel]:
 	return result
 
 
-def set_group(group : Any, color_config : ColorConfigModel) -> bool:
+def set_group(group : Any, color_config : Color) -> bool:
 	return group.set_power('on') is None and group.set_color(
 	[
 		color_config['hue'],
