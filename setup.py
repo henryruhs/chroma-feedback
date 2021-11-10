@@ -26,6 +26,7 @@ setup(
 		'chroma_feedback.producer.buddy',
 		'chroma_feedback.producer.circle',
 		'chroma_feedback.producer.codeship',
+		'chroma_feedback.producer.datadog',
 		'chroma_feedback.producer.github',
 		'chroma_feedback.producer.gitlab',
 		'chroma_feedback.producer.jenkins',
