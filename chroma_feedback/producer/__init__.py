@@ -10,6 +10,7 @@ __all__ =\
 	'circle',
 	'codeship',
 	'custom',
+	'datadog',
 	'github',
 	'gitlab',
 	'jenkins',
