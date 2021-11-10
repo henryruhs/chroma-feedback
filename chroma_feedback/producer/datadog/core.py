@@ -23,7 +23,7 @@ def run() -> List[Producer]:
 
 	if ARGS.datadog_slug:
 		for slug in ARGS.datadog_slug:
-			result.extend(fetch(ARGS.azure_host, slug, ARGS.datadog_api_key, ARGS.datadog_application_key))
+			result.extend(fetch(ARGS.datadog_host, slug, ARGS.datadog_api_key, ARGS.datadog_application_key))
 	return result
 
 
