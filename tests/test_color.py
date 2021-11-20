@@ -10,7 +10,7 @@ def test_format_started() -> None:
 
 
 def test_format_warned() -> None:
-	assert color.format_started('__test__') == '\033[0;33m__test__\033[0m'
+	assert color.format_warned('__test__') == '\033[0;33m__test__\033[0m'
 
 
 def test_format_failed() -> None:
