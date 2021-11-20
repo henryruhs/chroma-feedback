@@ -53,6 +53,21 @@ def test_process_errored() -> None:
 		pytest.skip()
 
 
+def test_process_warned() -> None:
+	try:
+		result = process_devices(
+		{
+			MOCK
+		}, 'warned')
+
+		assert result[0]['consumer'] == 'kuando_busylight'
+		assert result[0]['type'] == 'device'
+		assert result[0]['name']
+		assert result[0]['status'] == 'warned'
+	except:
+		pytest.skip()
+
+
 def test_process_failed() -> None:
 	try:
 		result = process_devices(

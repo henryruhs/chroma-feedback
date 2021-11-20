@@ -49,6 +49,22 @@ def test_create_producer_report_errored() -> None:
 	assert producer_report[0]['symbol']
 
 
+def test_create_producer_report_warned() -> None:
+	producer_report = reporter.create_producer_report(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'warned'
+		}
+	])
+
+	assert producer_report[0]['status'] == 'warned'
+	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is warned'
+	assert producer_report[0]['symbol']
+
+
 def test_create_producer_report_failed() -> None:
 	producer_report = reporter.create_producer_report(
 	[
@@ -114,6 +130,23 @@ def test_create_consumer_report_errored() -> None:
 
 	assert consumer_report[0]['status'] == 'errored'
 	assert consumer_report[0]['message'] == 'Set status of Razer Chroma to errored'
+	assert consumer_report[0]['symbol']
+
+
+def test_create_consumer_report_warned() -> None:
+	consumer_report = reporter.create_consumer_report(
+	[
+		{
+			'consumer': 'razer_chroma',
+			'type': 'device',
+			'name': 'Razer Chroma',
+			'active': True,
+			'status': 'warned'
+		}
+	])
+
+	assert consumer_report[0]['status'] == 'warned'
+	assert consumer_report[0]['message'] == 'Set status of Razer Chroma to warned'
 	assert consumer_report[0]['symbol']
 
 
