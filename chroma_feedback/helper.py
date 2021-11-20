@@ -5,19 +5,19 @@ import sys
 from chroma_feedback.typing import Status, Producer
 
 
-def get_producer_status(producer_result : List[Producer]) -> Status:
+def resolve_producer_status(producer_result : List[Producer]) -> Status:
 	status: Status = 'passed'
 
 	# process producer
 
 	for producer in producer_result:
 		if producer['active'] is True:
-			if producer['status'] == 'started':
-				if status not in ['errored', 'failed']:
-					status = 'started'
-			if producer['status'] == 'errored':
-				if status != 'failed':
-					status = 'errored'
+			if producer['status'] == 'started' and status not in ['errored', 'warned' ,'failed']:
+				status = 'started'
+			if producer['status'] == 'errored' and status not in ['warned' ,'failed']:
+				status = 'errored'
+			if producer['status'] == 'warned' and status != 'failed':
+				status = 'warned'
 			if producer['status'] == 'failed':
 				status = 'failed'
 	return status

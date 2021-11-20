@@ -81,7 +81,7 @@ def run(program : ArgumentParser) -> None:
 
 	# process status
 
-	status = helper.get_producer_status(producer_result)
+	status = helper.resolve_producer_status(producer_result)
 
 	# handle dry run
 
