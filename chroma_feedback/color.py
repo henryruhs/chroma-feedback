@@ -7,6 +7,7 @@ COLOR =\
 	'green': '\033[0;32m',
 	'yellow': '\033[0;33m',
 	'blue': '\033[0;34m',
+	'white': '\033[0;37m',
 	'end': '\033[0m'
 }
 
@@ -20,6 +21,12 @@ def format_passed(text : str) -> str:
 def format_started(text : str) -> str:
 	if helper.is_windows() is False:
 		return COLOR['blue'] + text + COLOR['end']
+	return text
+
+
+def format_errored(text : str) -> str:
+	if helper.is_windows() is False:
+		return COLOR['white'] + text + COLOR['end']
 	return text
 
 

@@ -30,7 +30,7 @@ def create_producer_report(producer_result : List[Producer]) -> List[Report]:
 				{
 					'status': 'errored',
 					'message': wording.get('has_status').format(producer['slug'], producer['producer'], 'errored'),
-					'symbol': wording.get('cross')
+					'symbol': color.format_errored(wording.get('cross'))
 				})
 			if producer['status'] == 'warned':
 				report.append(
@@ -75,7 +75,7 @@ def create_consumer_report(consumer_result : List[Consumer]) -> List[Report]:
 				{
 					'status': 'errored',
 					'message': wording.get('set_status').format(consumer['name'], 'errored'),
-					'symbol': wording.get('cross')
+					'symbol': color.format_errored(wording.get('cross'))
 				})
 			if consumer['status'] == 'warned':
 				report.append(
