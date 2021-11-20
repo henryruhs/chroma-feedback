@@ -4,7 +4,7 @@ METADATA =\
 {
 	'name': 'chroma-feedback',
 	'description': 'Turn your RGB powered hardware into an build indicator for continuous integration',
-	'version': '10.7.0',
+	'version': '11.0.0',
 	'license': 'MIT',
 	'keywords': ' '.join(producer.__all__),
 	'author': 'Henry Ruhs',

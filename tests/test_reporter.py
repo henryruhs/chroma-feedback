@@ -13,7 +13,7 @@ def test_create_producer_report_passed() -> None:
 	])
 
 	assert producer_report[0]['status'] == 'passed'
-	assert producer_report[0]['message'] == 'Build of redaxmedia/chroma-feedback on github passed'
+	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is passed'
 	assert producer_report[0]['symbol']
 
 
@@ -29,7 +29,7 @@ def test_create_producer_report_started() -> None:
 	])
 
 	assert producer_report[0]['status'] == 'started'
-	assert producer_report[0]['message'] == 'Build of redaxmedia/chroma-feedback on github started'
+	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is started'
 	assert producer_report[0]['symbol']
 
 
@@ -45,7 +45,7 @@ def test_create_producer_report_errored() -> None:
 	])
 
 	assert producer_report[0]['status'] == 'errored'
-	assert producer_report[0]['message'] == 'Build of redaxmedia/chroma-feedback on github errored'
+	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is errored'
 	assert producer_report[0]['symbol']
 
 
@@ -61,7 +61,7 @@ def test_create_producer_report_failed() -> None:
 	])
 
 	assert producer_report[0]['status'] == 'failed'
-	assert producer_report[0]['message'] == 'Build of redaxmedia/chroma-feedback on github failed'
+	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is failed'
 	assert producer_report[0]['symbol']
 
 
@@ -78,7 +78,7 @@ def test_create_consumer_report_passed() -> None:
 	])
 
 	assert consumer_report[0]['status'] == 'passed'
-	assert consumer_report[0]['message'] == 'Set Razer Chroma state to passed'
+	assert consumer_report[0]['message'] == 'Set status of Razer Chroma to passed'
 	assert consumer_report[0]['symbol']
 
 
@@ -96,7 +96,7 @@ def test_create_consumer_report_started() -> None:
 	])
 
 	assert consumer_report[0]['status'] == 'started'
-	assert consumer_report[0]['message'] == 'Set Razer Chroma state to started'
+	assert consumer_report[0]['message'] == 'Set status of Razer Chroma to started'
 	assert consumer_report[0]['symbol']
 
 
@@ -113,7 +113,7 @@ def test_create_consumer_report_errored() -> None:
 	])
 
 	assert consumer_report[0]['status'] == 'errored'
-	assert consumer_report[0]['message'] == 'Set Razer Chroma state to errored'
+	assert consumer_report[0]['message'] == 'Set status of Razer Chroma to errored'
 	assert consumer_report[0]['symbol']
 
 
@@ -130,5 +130,5 @@ def test_create_consumer_report_failed() -> None:
 	])
 
 	assert consumer_report[0]['status'] == 'failed'
-	assert consumer_report[0]['message'] == 'Set Razer Chroma state to failed'
+	assert consumer_report[0]['message'] == 'Set status of Razer Chroma to failed'
 	assert consumer_report[0]['symbol']

@@ -15,35 +15,35 @@ def create_producer_report(producer_result : List[Producer]) -> List[Report]:
 				report.append(
 				{
 					'status': 'passed',
-					'message': wording.get('build_passed').format(producer['slug'], producer['producer']),
+					'message': wording.get('has_status').format(producer['slug'], producer['producer'], 'passed'),
 					'symbol': color.format_passed(wording.get('tick'))
 				})
 			if producer['status'] == 'started':
 				report.append(
 				{
 					'status': 'started',
-					'message': wording.get('build_started').format(producer['slug'], producer['producer']),
+					'message': wording.get('has_status').format(producer['slug'], producer['producer'], 'started'),
 					'symbol': color.format_started(wording.get('hourglass'))
 				})
 			if producer['status'] == 'errored':
 				report.append(
 				{
 					'status': 'errored',
-					'message': wording.get('build_errored').format(producer['slug'], producer['producer']),
+					'message': wording.get('has_status').format(producer['slug'], producer['producer'], 'errored'),
 					'symbol': wording.get('cross')
 				})
 			if producer['status'] == 'warned':
 				report.append(
 				{
 					'status': 'warned',
-					'message': wording.get('build_warned').format(producer['slug'], producer['producer']),
+					'message': wording.get('has_status').format(producer['slug'], producer['producer'], 'warned'),
 					'symbol': color.format_warned(wording.get('cross'))
 				})
 			if producer['status'] == 'failed':
 				report.append(
 				{
 					'status': 'failed',
-					'message': wording.get('build_failed').format(producer['slug'], producer['producer']),
+					'message': wording.get('has_status').format(producer['slug'], producer['producer'], 'failed'),
 					'symbol': color.format_failed(wording.get('cross'))
 				})
 	return report
@@ -60,35 +60,35 @@ def create_consumer_report(consumer_result : List[Consumer]) -> List[Report]:
 				report.append(
 				{
 					'status': 'passed',
-					'message': wording.get('set_passed').format(consumer['name']),
+					'message': wording.get('set_status').format(consumer['name'], 'passed'),
 					'symbol': color.format_passed(wording.get('tick'))
 				})
 			if consumer['status'] == 'started':
 				report.append(
 				{
 					'status': 'started',
-					'message': wording.get('set_started').format(consumer['name']),
+					'message': wording.get('set_status').format(consumer['name'], 'started'),
 					'symbol': color.format_started(wording.get('hourglass'))
 				})
 			if consumer['status'] == 'errored':
 				report.append(
 				{
 					'status': 'errored',
-					'message': wording.get('set_errored').format(consumer['name']),
+					'message': wording.get('set_status').format(consumer['name'], 'errored'),
 					'symbol': wording.get('cross')
 				})
 			if consumer['status'] == 'warned':
 				report.append(
 				{
 					'status': 'warned',
-					'message': wording.get('set_warned').format(consumer['name']),
+					'message': wording.get('set_status').format(consumer['name'], 'warned'),
 					'symbol': color.format_warned(wording.get('cross'))
 				})
 			if consumer['status'] == 'failed':
 				report.append(
 				{
 					'status': 'failed',
-					'message': wording.get('set_failed').format(consumer['name']),
+					'message': wording.get('set_status').format(consumer['name'], 'failed'),
 					'symbol': color.format_failed(wording.get('cross'))
 				})
 	return report
