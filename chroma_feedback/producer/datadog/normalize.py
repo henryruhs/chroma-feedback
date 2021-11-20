@@ -13,10 +13,12 @@ def normalize_data(slug : str, status : str) -> Producer:
 
 
 def normalize_status(status : str) -> Status:
-	status = helper.to_lower_case(status)
+	status = helper.to_lower_case(status).replace(' ', '_')
 
-	if status in ['warn']:
+	if status == 'no_data':
 		return 'errored'
+	if status == 'warn':
+		return 'warned'
 	if status == 'alert':
 		return 'failed'
 	return 'passed'

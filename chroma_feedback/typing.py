@@ -1,6 +1,6 @@
 from typing import Literal, TypedDict, List
 
-Status = Literal['passed', 'started', 'errored', 'failed']
+Status = Literal['passed', 'started', 'errored', 'warned', 'failed']
 
 
 class Producer(TypedDict):

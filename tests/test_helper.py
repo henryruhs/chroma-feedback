@@ -2,8 +2,8 @@ import sys
 from chroma_feedback import helper
 
 
-def test_get_producer_status_started() -> None:
-	assert helper.get_producer_status(
+def test_resolve_producer_status_started() -> None:
+	assert helper.resolve_producer_status(
 	[
 		{
 			'producer': 'github',
@@ -20,8 +20,8 @@ def test_get_producer_status_started() -> None:
 	]) == 'started'
 
 
-def test_get_producer_status_errored() -> None:
-	assert helper.get_producer_status(
+def test_resolve_producer_status_errored() -> None:
+	assert helper.resolve_producer_status(
 	[
 		{
 			'producer': 'github',
@@ -44,14 +44,50 @@ def test_get_producer_status_errored() -> None:
 	]) == 'errored'
 
 
+def test_resolve_producer_status_warned() -> None:
+	assert helper.resolve_producer_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'warned'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'errored'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'started'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'passed'
+		}
+	]) == 'warned'
+
+
 def test_get_producer_status_failed() -> None:
-	assert helper.get_producer_status(
+	assert helper.resolve_producer_status(
 	[
 		{
 			'producer': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
 			'active': True,
 			'status': 'failed'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'active': True,
+			'status': 'warned'
 		},
 		{
 			'producer': 'github',
@@ -75,7 +111,7 @@ def test_get_producer_status_failed() -> None:
 
 
 def test_get_producer_status_passed() -> None:
-	assert helper.get_producer_status(
+	assert helper.resolve_producer_status(
 	[
 		{
 			'producer': 'github',

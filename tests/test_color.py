@@ -6,6 +6,10 @@ def test_format_passed() -> None:
 
 
 def test_format_started() -> None:
+	assert color.format_started('__test__') == '\033[0;34m__test__\033[0m'
+
+
+def test_format_warned() -> None:
 	assert color.format_started('__test__') == '\033[0;33m__test__\033[0m'
 
 
@@ -37,6 +41,17 @@ def test_get_started() -> None:
 
 def test_get_errored() -> None:
 	state = color.get_errored()
+
+	assert 'name' in state
+	assert 'rgb' in state
+	assert 'hue' in state
+	assert 'saturation' in state
+	assert 'brightness' in state
+	assert 'kelvin' in state
+
+
+def test_get_warned() -> None:
+	state = color.get_warned()
 
 	assert 'name' in state
 	assert 'rgb' in state
