@@ -3,8 +3,8 @@ from chroma_feedback import producer
 METADATA =\
 {
 	'name': 'chroma-feedback',
-	'description': 'Turn your RGB powered hardware into an build indicator for continuous integration',
-	'version': '11.0.0',
+	'description': 'Turn your RGB powered hardware into a status indicator for continuous integration, continuous deployment and infrastructure monitoring',
+	'version': '11.0.1',
 	'license': 'MIT',
 	'keywords': ' '.join(producer.__all__),
 	'author': 'Henry Ruhs',

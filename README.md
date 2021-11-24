@@ -1,7 +1,7 @@
 Chroma Feedback
 ===============
 
-> Turn your RGB powered hardware into an build indicator for continuous integration.
+> Turn your RGB powered hardware into a status indicator for continuous integration, continuous deployment and infrastructure monitoring.
 
 [![Build Status](https://img.shields.io/github/workflow/status/redaxmedia/chroma-feedback/ci.svg)](https://github.com/redaxmedia/chroma-feedback/actions?query=workflow:ci)
 [![Coverage Status](https://img.shields.io/coveralls/redaxmedia/chroma-feedback.svg)](https://coveralls.io/r/redaxmedia/chroma-feedback)
