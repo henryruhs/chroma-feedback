@@ -12,9 +12,9 @@ def resolve_producer_status(producer_result : List[Producer]) -> Status:
 
 	for producer in producer_result:
 		if producer['active'] is True:
-			if producer['status'] == 'started' and status not in ['errored', 'warned' ,'failed']:
+			if producer['status'] == 'started' and status not in ['errored', 'warned', 'failed']:
 				status = 'started'
-			if producer['status'] == 'errored' and status not in ['warned' ,'failed']:
+			if producer['status'] == 'errored' and status not in ['warned', 'failed']:
 				status = 'errored'
 			if producer['status'] == 'warned' and status != 'failed':
 				status = 'warned'

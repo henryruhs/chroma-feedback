@@ -45,4 +45,4 @@ def get_builder() -> Any:
 
 		return PilotBuilder
 	except ImportError:
-		return None
+		sys.exit(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))

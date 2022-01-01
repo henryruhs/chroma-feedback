@@ -35,6 +35,7 @@ setup(
 		'chroma_feedback.producer.wercker',
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative_blinkstick',
+		'chroma_feedback.consumer.elgato_streamdeck',
 		'chroma_feedback.consumer.embrava_blynclight',
 		'chroma_feedback.consumer.kuando_busylight',
 		'chroma_feedback.consumer.lifx_light',
@@ -53,10 +54,10 @@ setup(
 	},
 	entry_points =
 	{
-		 'console_scripts':
-		 [
-			  'chroma-feedback = chroma_feedback.core:cli',
-		 ]
+		'console_scripts':
+		[
+			'chroma-feedback = chroma_feedback.core:cli',
+		]
 	},
 	install_requires =
 	[
@@ -69,6 +70,7 @@ setup(
 		'pyqt5==5.15.6',
 		'pywizlight==0.4.12',
 		'requests==2.26.0',
+		'streamdeck==0.8.5 ',
 		'yeelight==0.7.8'
 	]
 )

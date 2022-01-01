@@ -79,17 +79,13 @@ def run(program : ArgumentParser) -> None:
 		reporter.print_report(producer_report)
 		print()
 
-	# process status
-
-	status = helper.resolve_producer_status(producer_result)
-
 	# handle dry run
 
 	if args.dry_run is False:
 
 		# process consumer
 
-		consumer_result = consumer.process(program, status)
+		consumer_result = consumer.process(program, producer_result)
 
 		# report consumer
 
@@ -103,9 +99,9 @@ def run(program : ArgumentParser) -> None:
 
 	if loop.is_created() is True:
 		if systray.is_created() is True:
-			systray.update(status, producer_report)
+			systray.update(producer_result, producer_report)
 		else:
-			systray.create(status, producer_report)
+			systray.create(producer_result, producer_report)
 
 
 def destroy() -> None:
