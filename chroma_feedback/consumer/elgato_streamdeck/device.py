@@ -1,7 +1,7 @@
 from typing import Any, List
 import copy
 from chroma_feedback import color, helper
-from chroma_feedback.typing import Consumer, Producer
+from chroma_feedback.typing import Consumer, Producer, Status
 from .api import get_pil_helper
 
 
@@ -15,7 +15,7 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 
 def process_devices(devices : Any, producer_result : List[Producer]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status = helper.resolve_producer_status(producer_result)
+	status : Status = helper.resolve_producer_status(producer_result)
 
 	# process device
 
