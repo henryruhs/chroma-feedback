@@ -14,8 +14,6 @@ def get_api() -> Any:
 
 
 def api_factory() -> Any:
-	api = None
-
 	try:
 		from lifxlan import LifxLAN, WorkflowException
 

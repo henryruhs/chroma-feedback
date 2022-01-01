@@ -14,8 +14,6 @@ def get_api() -> Any:
 
 
 def api_factory() -> Any:
-	api = None
-
 	try:
 		from busylight.lights import USBLightIOError, USBLightNotFound
 		from busylight.lights.luxafor import Flag

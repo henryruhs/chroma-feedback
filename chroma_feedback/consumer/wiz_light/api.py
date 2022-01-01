@@ -16,8 +16,6 @@ def get_api(ip : str) -> Any:
 
 
 def api_factory(ip : str) -> Any:
-	api = None
-
 	try:
 		from pywizlight import wizlight
 		from pywizlight.exceptions import WizLightConnectionError, WizLightTimeOutError
