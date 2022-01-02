@@ -34,6 +34,7 @@ def process_devices(devices : Any, producer_result : List[Producer]) -> List[Con
 def set_device(device : Any, producer_result : List[Producer]) -> bool:
 	device.open()
 	key_total = device.key_count()
+	producer_index = 0
 
 	# process producer
 
