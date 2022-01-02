@@ -12,13 +12,11 @@ jobs:
     uses: actions/setup-python@v2
     with:
      python-version: 3.9
+  - run: pip install flake8
   - run: pip install mypy
-  - run: pip install pylint
-  - run: pip install pytest
   - run: pip install requests
-  - run: pip install types-mock
   - run: pip install types-requests
-  - run: pylint bin/chroma-feedback chroma_feedback tests
+  - run: flake8 bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
   runs-on: ubuntu-latest
