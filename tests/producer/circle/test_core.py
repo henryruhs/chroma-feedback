@@ -42,4 +42,4 @@ def test_fetch_organization() -> None:
 def test_fetch_invalid() -> None:
 	result = fetch(None, None, None, None, None)
 
-	assert result == []
+	assert not result

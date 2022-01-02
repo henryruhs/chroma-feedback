@@ -33,16 +33,19 @@ def process_devices(devices : Any, producer_result : List[Producer]) -> List[Con
 
 def set_device(device : Any, producer_result : List[Producer]) -> bool:
 	device.open()
+	key_total = device.key_count()
 
 	# process producer
 
 	for producer_index, producer in enumerate(producer_result):
 		color_config = color.get_by_status(producer['status'])
-		device.set_key_image(producer_index, create_icon(device, background = color_config['name']))
+
+		if producer_index < key_total:
+			device.set_key_image(producer_index, create_icon(device, background = color_config['name']))
 
 	# process blank
 
-	for blank_index in range(device.key_count()):
+	for blank_index in range(key_total):
 		if blank_index > producer_index:
 			device.set_key_image(blank_index, create_icon(device))
 
