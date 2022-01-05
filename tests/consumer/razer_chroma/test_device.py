@@ -13,7 +13,15 @@ def test_process_passed() -> None:
 		result = process_devices(
 		{
 			MOCK
-		}, 'passed')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'passed'
+			}
+		])
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'
@@ -28,7 +36,15 @@ def test_process_started() -> None:
 		result = process_devices(
 		{
 			MOCK
-		}, 'started')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'started'
+			}
+		])
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'
@@ -43,7 +59,15 @@ def test_process_errored() -> None:
 		result = process_devices(
 		{
 			MOCK
-		}, 'errored')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'errored'
+			}
+		])
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'
@@ -58,7 +82,15 @@ def test_process_warned() -> None:
 		result = process_devices(
 		{
 			MOCK
-		}, 'warned')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'warned'
+			}
+		])
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'
@@ -73,7 +105,15 @@ def test_process_failed() -> None:
 		result = process_devices(
 		{
 			MOCK
-		}, 'failed')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'failed'
+			}
+		])
 
 		assert result[0]['consumer'] == 'razer_chroma'
 		assert result[0]['type'] == 'device'

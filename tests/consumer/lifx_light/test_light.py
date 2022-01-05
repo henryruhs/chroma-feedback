@@ -13,7 +13,15 @@ def test_process_passed() -> None:
 		result = process_lights(
 		{
 			MOCK
-		}, 'passed')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'passed'
+			}
+		])
 
 		assert result[0]['consumer'] == 'lifx_light'
 		assert result[0]['type'] == 'light'
@@ -28,7 +36,15 @@ def test_process_started() -> None:
 		result = process_lights(
 		{
 			MOCK
-		}, 'started')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'started'
+			}
+		])
 
 		assert result[0]['consumer'] == 'lifx_light'
 		assert result[0]['type'] == 'light'
@@ -43,7 +59,15 @@ def test_process_errored() -> None:
 		result = process_lights(
 		{
 			MOCK
-		}, 'errored')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'errored'
+			}
+		])
 
 		assert result[0]['consumer'] == 'lifx_light'
 		assert result[0]['type'] == 'light'
@@ -58,7 +82,15 @@ def test_process_warned() -> None:
 		result = process_lights(
 		{
 			MOCK
-		}, 'warned')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'warned'
+			}
+		])
 
 		assert result[0]['consumer'] == 'lifx_light'
 		assert result[0]['type'] == 'light'
@@ -73,7 +105,15 @@ def test_process_failed() -> None:
 		result = process_lights(
 		{
 			MOCK
-		}, 'failed')
+		},
+		[
+			{
+				'producer': 'github',
+				'slug': 'redaxmedia/chroma-feedback',
+				'active': True,
+				'status': 'failed'
+			}
+		])
 
 		assert result[0]['consumer'] == 'lifx_light'
 		assert result[0]['type'] == 'light'

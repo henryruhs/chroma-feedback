@@ -9,6 +9,7 @@ jobs:
   - run: pip install flake8
   - run: pip install mypy
   - run: pip install requests
+  - run: pip install types-mock
   - run: pip install types-requests
   - run: flake8 bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
