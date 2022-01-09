@@ -70,7 +70,7 @@ setup(
 		'pyqt5==5.15.6',
 		'pywizlight==0.4.12',
 		'requests==2.26.0',
-		'streamdeck==0.8.5 ',
+		'streamdeck==0.9.0 ',
 		'yeelight==0.7.8'
 	]
 )

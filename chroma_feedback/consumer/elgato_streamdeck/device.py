@@ -33,28 +33,22 @@ def process_devices(devices : Any, producer_result : List[Producer]) -> List[Con
 
 def set_device(device : Any, producer_result : List[Producer]) -> bool:
 	device.open()
-	key_total = device.key_count()
-	producer_index = 0
 
 	# process producer
 
 	for producer_index, producer in enumerate(producer_result):
 		color_config = color.get_by_status(producer['status'])
 
-		if producer_index < key_total:
-			device.set_key_image(producer_index, create_icon(device, background = color_config['name']))
+		if producer_index < device.key_count():
+			device.set_key_image(producer_index, create_image(device, background = color_config['name']))
 
-	# process blank
+	# close device
 
-	for blank_index in range(key_total):
-		if blank_index > producer_index:
-			device.set_key_image(blank_index, create_icon(device))
-
-	device.__del__()
-	return True
+	device.close()
+	return device.is_open() is False
 
 
-def create_icon(device : Any, background : str = None) -> Any:
+def create_image(device : Any, background : str) -> Any:
 	pil_helper = get_pil_helper()
 
 	return pil_helper.to_native_format(device, pil_helper.create_image(device, background = background))
