@@ -14,8 +14,6 @@ def get_api(ip : str) -> Any:
 
 
 def api_factory(ip : str) -> Any:
-	api = None
-
 	try:
 		from magichue import Light
 
@@ -34,4 +32,4 @@ def get_modes() -> Any:
 
 		return modes
 	except ImportError:
-		return None
+		sys.exit(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))

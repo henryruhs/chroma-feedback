@@ -1,7 +1,7 @@
 from typing import List, Any
 import copy
-from chroma_feedback import color
-from chroma_feedback.typing import Status, Consumer, Color
+from chroma_feedback import color, helper
+from chroma_feedback.typing import Color, Consumer, Producer, Status
 from .api import get_api
 
 
@@ -13,8 +13,9 @@ def get_groups(groups : Any, group_names : List[str]) -> Any:
 	return groups
 
 
-def process_groups(groups : Any, status : Status) -> List[Consumer]:
+def process_groups(groups : Any, producer_result : List[Producer]) -> List[Consumer]:
 	result : List[Consumer] = []
+	status: Status = helper.resolve_producer_status(producer_result)
 
 	# process groups
 

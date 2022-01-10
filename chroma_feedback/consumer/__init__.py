@@ -3,6 +3,7 @@ from .core import process
 __all__ =\
 [
 	'agile_innovative_blinkstick',
+	'elgato_streamdeck',
 	'embrava_blynclight',
 	'kuando_busylight',
 	'lifx_light',

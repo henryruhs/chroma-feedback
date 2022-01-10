@@ -10,20 +10,20 @@ ARGS = None
 
 
 def support() -> bool:
-	return helper.is_linux() is True or helper.is_mac() is True
+	return helper.is_linux() is True or helper.is_mac() is True or helper.is_windows() is True
 
 
 def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--thingm-blink1-device', action = 'append')
+		program.add_argument('--elgato-streamdeck-device', action = 'append')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(producer_result : List[Producer]) -> List[Consumer]:
 	api = get_api()
-	devices = get_devices(api.all_lights(), ARGS.thingm_blink1_device)
+	devices = get_devices(api.enumerate(), ARGS.elgato_streamdeck_device)
 
 	if not devices:
 		sys.exit(wording.get('device_not_found') + wording.get('exclamation_mark'))

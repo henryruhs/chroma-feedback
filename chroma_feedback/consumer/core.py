@@ -3,10 +3,10 @@ from typing import Any, List
 from argparse import ArgumentParser
 import importlib
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import Status, Consumer
+from chroma_feedback.typing import Consumer, Producer
 
 
-def process(program : ArgumentParser, status : Status) -> List[Consumer]:
+def process(program : ArgumentParser, producer_result : List[Producer]) -> List[Consumer]:
 	args = helper.get_first(program.parse_known_args())
 	result = []
 
@@ -16,7 +16,7 @@ def process(program : ArgumentParser, status : Status) -> List[Consumer]:
 		if consumer.support() is True:
 			try:
 				consumer.init(program)
-				result.extend(consumer.run(status))
+				result.extend(consumer.run(producer_result))
 			except IOError:
 				sys.exit(wording.get('consumer_crashed').format(consumer_name) + wording.get('exclamation_mark'))
 		else:

@@ -14,8 +14,6 @@ def get_api(ip : str) -> Any:
 
 
 def api_factory(ip : str) -> Any:
-	api = None
-
 	try:
 		from yeelight import Bulb, BulbException
 

@@ -46,4 +46,4 @@ def test_fetch_project_slug(request_mock : Any) -> None:
 def test_fetch_invalid() -> None:
 	result = fetch(None, None, None)
 
-	assert result == []
+	assert not result

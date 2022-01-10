@@ -16,8 +16,6 @@ def get_api(ip : str) -> Any:
 
 
 def api_factory(ip : str) -> Any:
-	api = None
-
 	try:
 		from pywizlight import wizlight
 		from pywizlight.exceptions import WizLightConnectionError, WizLightTimeOutError
@@ -45,4 +43,4 @@ def get_builder() -> Any:
 
 		return PilotBuilder
 	except ImportError:
-		return None
+		sys.exit(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))

@@ -3,7 +3,7 @@ try:
 	from unittest.mock import MagicMock
 except ImportError:
 	from mock import MagicMock
-from chroma_feedback.consumer.luxafor_flag.device import process_devices
+from chroma_feedback.consumer.elgato_streamdeck.device import process_devices
 
 MOCK = MagicMock()
 
@@ -23,7 +23,7 @@ def test_process_passed() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['consumer'] == 'elgato_streamdeck'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'passed'
@@ -46,7 +46,7 @@ def test_process_started() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['consumer'] == 'elgato_streamdeck'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'started'
@@ -69,7 +69,7 @@ def test_process_errored() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['consumer'] == 'elgato_streamdeck'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'errored'
@@ -92,7 +92,7 @@ def test_process_warned() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['consumer'] == 'elgato_streamdeck'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'warned'
@@ -115,7 +115,7 @@ def test_process_failed() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['consumer'] == 'elgato_streamdeck'
 		assert result[0]['type'] == 'device'
 		assert result[0]['name']
 		assert result[0]['status'] == 'failed'

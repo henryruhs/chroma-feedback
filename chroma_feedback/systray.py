@@ -3,26 +3,28 @@ from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
-from chroma_feedback import color, loop, wording
-from chroma_feedback.typing import Status, Report
+from chroma_feedback import color, helper, loop, wording
+from chroma_feedback.typing import Status, Report, Producer
 
 SYSTRAY = None
 MENU = None
 
 
-def create(status : Status, report : List[Report]) -> None:
+def create(producer_result : List[Producer], report : List[Report]) -> None:
 	global SYSTRAY, MENU
 
 	if not SYSTRAY:
 		SYSTRAY = QSystemTrayIcon()
 	if not MENU:
 		MENU = QMenu()
-	update(status, report)
+	update(producer_result, report)
 	SYSTRAY.show()
 
 
-def update(status : Status, report : List[Report]) -> None:
+def update(producer_result : List[Producer], report : List[Report]) -> None:
 	global SYSTRAY, MENU
+
+	status = helper.resolve_producer_status(producer_result)
 
 	update_menu(report)
 	SYSTRAY.setContextMenu(MENU)

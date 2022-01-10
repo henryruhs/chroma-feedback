@@ -1,7 +1,7 @@
 from typing import Any, List
 import copy
-from chroma_feedback import color
-from chroma_feedback.typing import Status, Consumer, Color
+from chroma_feedback import color, helper
+from chroma_feedback.typing import Color, Consumer, Producer, Status
 
 
 def get_devices(devices : Any, device_serials : List[str]) -> Any:
@@ -12,8 +12,9 @@ def get_devices(devices : Any, device_serials : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, status : Status) -> List[Consumer]:
+def process_devices(devices : Any, producer_result : List[Producer]) -> List[Consumer]:
 	result : List[Consumer] = []
+	status: Status = helper.resolve_producer_status(producer_result)
 
 	# process devices
 
@@ -22,7 +23,7 @@ def process_devices(devices : Any, status : Status) -> List[Consumer]:
 		{
 			'consumer': 'thingm_blink1',
 			'type': 'device',
-			'name': device.info['product_string'] + ' (' + device.info['serial_number'] + ')',
+			'name': ' '.join([device.info['product_string'], device.info['serial_number']]),
 			'active': set_device(device, color.get_by_status(status)),
 			'status': status
 		})

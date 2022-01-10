@@ -8,9 +8,9 @@ environment:
 
 install:
 - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+- pip install flake8
 - pip install mock
 - pip install mypy
-- pip install pylint
 - pip install pytest
 - pip install pytest-cov
 - pip install pytest-mock
@@ -19,6 +19,6 @@ install:
 - pip install types-requests
 
 test_script:
-- pylint bin/chroma-feedback chroma_feedback tests
+- flake8 bin/chroma-feedback chroma_feedback tests
 - mypy bin/chroma-feedback chroma_feedback tests
 - pytest tests
