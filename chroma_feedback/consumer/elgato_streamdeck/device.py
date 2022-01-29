@@ -27,8 +27,7 @@ def process_devices(devices : Any, producer_report : List[Report]) -> List[Consu
 			'consumer': 'elgato_streamdeck',
 			'type': 'device',
 			'name': device.id(),
-			'active': set_device(device, producer_report),
-			'status': status
+			'status': set_device(device, producer_report) and status or 'skipped'
 		})
 	return result
 

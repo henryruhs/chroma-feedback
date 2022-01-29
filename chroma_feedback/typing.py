@@ -1,13 +1,12 @@
 from typing import Literal, TypedDict, List
 
-Status = Literal['passed', 'started', 'errored', 'warned', 'failed']
+Status = Literal['skipped', 'passed', 'started', 'errored', 'warned', 'failed']
 
 
 class Producer(TypedDict):
 	producer: str
 	slug: str
 	url: str
-	active: bool
 	status: Status
 
 
@@ -15,7 +14,6 @@ class Consumer(TypedDict):
 	consumer: str
 	type: Literal['light', 'device', 'group']
 	name: str
-	active: bool
 	status: Status
 
 
