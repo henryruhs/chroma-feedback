@@ -3,7 +3,7 @@ import webbrowser
 from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
-from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
+from PyQt5.QtWidgets import QAction, QMenu, QSystemTrayIcon
 
 from chroma_feedback import color, loop, reporter, wording
 from chroma_feedback.typing import Status, Report, Producer
@@ -60,14 +60,13 @@ def update_menu(report : List[Report]) -> None:
 	# handle action
 
 	item_start = MENU.addAction(wording.get('start'))
-	item_start.triggered.connect(action_start)
-	MENU.addAction(item_start)
 	item_stop = MENU.addAction(wording.get('stop'))
-	item_stop.triggered.connect(action_stop)
-	MENU.addAction(item_stop)
 	item_exit = MENU.addAction(wording.get('exit'))
+	item_start.setVisible(loop.get_timer().isActive() is False)
+	item_stop.setVisible(loop.get_timer().isActive() is True)
+	item_start.triggered.connect(lambda : action_start(item_start, item_stop))
+	item_stop.triggered.connect(lambda : action_stop(item_start, item_stop))
 	item_exit.triggered.connect(action_exit)
-	MENU.addAction(item_exit)
 
 
 def create_icon(status : Status) -> QIcon:
@@ -81,11 +80,15 @@ def create_icon(status : Status) -> QIcon:
 	return QIcon(pixmap)
 
 
-def action_start() -> None:
+def action_start(item_start : QAction, item_stop : QAction) -> None:
+	item_start.setVisible(False)
+	item_stop.setVisible(True)
 	loop.get_timer().start()
 
 
-def action_stop() -> None:
+def action_stop(item_start : QAction, item_stop : QAction) -> None:
+	item_start.setVisible(True)
+	item_stop.setVisible(False)
 	loop.get_timer().stop()
 
 

@@ -36,8 +36,8 @@ def init(program : ArgumentParser) -> None:
 		application = loop.get_application()
 		timer = loop.get_timer()
 		timer.setInterval(100)
-		timer.timeout.connect(lambda: background_run(program))
-		timer.singleShot(0, lambda: run(program)) # type: ignore
+		timer.timeout.connect(lambda : background_run(program))
+		timer.singleShot(0, lambda : run(program)) # type: ignore
 		timer.start()
 		sys.exit(application.exec_())
 	else:
