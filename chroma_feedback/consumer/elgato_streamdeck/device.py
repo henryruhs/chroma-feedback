@@ -1,7 +1,9 @@
 from typing import Any, List
 import copy
-from chroma_feedback import color, helper
-from chroma_feedback.typing import Consumer, Producer, Status
+import webbrowser
+
+from chroma_feedback import color, reporter
+from chroma_feedback.typing import Consumer, Report, Status
 from .api import get_pil_helper
 
 
@@ -13,9 +15,9 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, producer_result : List[Producer]) -> List[Consumer]:
+def process_devices(devices : Any, producer_report : List[Report]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status : Status = helper.resolve_producer_status(producer_result)
+	status : Status = reporter.resolve_report_status(producer_report)
 
 	# process device
 
@@ -25,22 +27,24 @@ def process_devices(devices : Any, producer_result : List[Producer]) -> List[Con
 			'consumer': 'elgato_streamdeck',
 			'type': 'device',
 			'name': device.id(),
-			'active': set_device(device, producer_result),
+			'active': set_device(device, producer_report),
 			'status': status
 		})
 	return result
 
 
-def set_device(device : Any, producer_result : List[Producer]) -> bool:
+def set_device(device : Any, producer_report : List[Report]) -> bool:
 	device.open()
 
 	# process producer
 
-	for producer_index, producer in enumerate(producer_result):
-		color_config = color.get_by_status(producer['status'])
+	for index, value in enumerate(producer_report):
+		color_config = color.get_by_status(value['status'])
 
-		if producer_index < device.key_count():
-			device.set_key_image(producer_index, create_image(device, background = color_config['name']))
+		if index < device.key_count():
+			device.set_key_image(index, create_image(device, background = color_config['name']))
+			if 'url' in value:
+				device.set_key_callback(lambda : webbrowser.open(value['url']))
 
 	# close device
 

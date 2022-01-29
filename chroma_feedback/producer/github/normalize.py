@@ -2,11 +2,12 @@ from chroma_feedback import helper
 from chroma_feedback.typing import Status, Producer
 
 
-def normalize_data(slug : str, status : str, result : str) -> Producer:
+def normalize_data(slug : str, url : str, status : str, result : str) -> Producer:
 	return\
 	{
 		'producer': 'github',
 		'slug': slug,
+		'url': url,
 		'active': True,
 		'status': normalize_status(status, result)
 	}
@@ -20,6 +21,8 @@ def normalize_status(status : str, result : str) -> Status:
 		return 'started'
 	if result in ['cancelled', 'timed_out']:
 		return 'errored'
+	if result == 'action_required':
+		return 'warned'
 	if result == 'failure':
 		return 'failed'
 	return 'passed'

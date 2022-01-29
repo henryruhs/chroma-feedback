@@ -1,7 +1,8 @@
 from typing import Any, List
 import copy
-from chroma_feedback import color, helper
-from chroma_feedback.typing import Color, Consumer, Producer, Status
+
+from chroma_feedback import color, reporter
+from chroma_feedback.typing import Color, Consumer, Report, Status
 
 
 def get_devices(devices : Any, device_serials : List[str]) -> Any:
@@ -12,9 +13,9 @@ def get_devices(devices : Any, device_serials : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, producer_result : List[Producer]) -> List[Consumer]:
+def process_devices(devices : Any, producer_report : List[Report]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status: Status = helper.resolve_producer_status(producer_result)
+	status: Status = reporter.resolve_report_status(producer_report)
 
 	# process devices
 

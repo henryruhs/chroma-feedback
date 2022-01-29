@@ -1,6 +1,7 @@
 from typing import Any, List
-from chroma_feedback import color, helper
-from chroma_feedback.typing import Color, Consumer, Producer, Status
+
+from chroma_feedback import color, reporter
+from chroma_feedback.typing import Color, Consumer, Report, Status
 from .api import get_api
 
 
@@ -12,9 +13,9 @@ def get_lights(ips : List[str]) -> Any:
 	return lights
 
 
-def process_lights(lights : Any, producer_result : List[Producer]) -> List[Consumer]:
+def process_lights(lights : Any, producer_report : List[Report]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status: Status = helper.resolve_producer_status(producer_result)
+	status: Status = reporter.resolve_report_status(producer_report)
 
 	# process lights
 

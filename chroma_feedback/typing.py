@@ -6,6 +6,7 @@ Status = Literal['passed', 'started', 'errored', 'warned', 'failed']
 class Producer(TypedDict):
 	producer: str
 	slug: str
+	url: str
 	active: bool
 	status: Status
 
@@ -19,9 +20,10 @@ class Consumer(TypedDict):
 
 
 class Report(TypedDict):
-	status : Status
+	symbol: str
 	message : str
-	symbol : str
+	url : str
+	status : Status
 
 
 class Color(TypedDict):

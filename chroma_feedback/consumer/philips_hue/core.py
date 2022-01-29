@@ -3,7 +3,7 @@ from typing import List
 from argparse import ArgumentParser
 import socket
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import Consumer, Producer
+from chroma_feedback.typing import Consumer, Report
 from .group import get_groups, process_groups
 from .light import get_lights, process_lights
 from .api import get_api
@@ -32,7 +32,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(producer_result : List[Producer]) -> List[Consumer]:
+def run(producer_report : List[Report]) -> List[Consumer]:
 	api = get_api(ARGS.philips_hue_ip)
 
 	# use groups
@@ -42,7 +42,7 @@ def run(producer_result : List[Producer]) -> List[Consumer]:
 
 		if not groups:
 			sys.exit(wording.get('group_not_found') + wording.get('exclamation_mark'))
-		return process_groups(groups, producer_result)
+		return process_groups(groups, producer_report)
 
 	# use lights
 
@@ -50,7 +50,7 @@ def run(producer_result : List[Producer]) -> List[Consumer]:
 
 	if not lights:
 		sys.exit(wording.get('light_not_found') + wording.get('exclamation_mark'))
-	return process_lights(lights, producer_result)
+	return process_lights(lights, producer_report)
 
 
 def discover_ips() -> List[str]:

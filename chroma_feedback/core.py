@@ -85,7 +85,7 @@ def run(program : ArgumentParser) -> None:
 
 		# process consumer
 
-		consumer_result = consumer.process(program, producer_result)
+		consumer_result = consumer.process(program, producer_report)
 
 		# report consumer
 

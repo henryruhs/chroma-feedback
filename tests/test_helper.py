@@ -1,9 +1,11 @@
 import sys
+
+import chroma_feedback.reporter
 from chroma_feedback import helper
 
 
 def test_resolve_producer_status_started() -> None:
-	assert helper.resolve_producer_status(
+	assert chroma_feedback.reporter.resolve_report_status(
 	[
 		{
 			'producer': 'github',
@@ -21,7 +23,7 @@ def test_resolve_producer_status_started() -> None:
 
 
 def test_resolve_producer_status_errored() -> None:
-	assert helper.resolve_producer_status(
+	assert chroma_feedback.reporter.resolve_report_status(
 	[
 		{
 			'producer': 'github',
@@ -45,7 +47,7 @@ def test_resolve_producer_status_errored() -> None:
 
 
 def test_resolve_producer_status_warned() -> None:
-	assert helper.resolve_producer_status(
+	assert chroma_feedback.reporter.resolve_report_status(
 	[
 		{
 			'producer': 'github',
@@ -75,7 +77,7 @@ def test_resolve_producer_status_warned() -> None:
 
 
 def test_get_producer_status_failed() -> None:
-	assert helper.resolve_producer_status(
+	assert chroma_feedback.reporter.resolve_report_status(
 	[
 		{
 			'producer': 'github',
@@ -111,7 +113,7 @@ def test_get_producer_status_failed() -> None:
 
 
 def test_get_producer_status_passed() -> None:
-	assert helper.resolve_producer_status(
+	assert chroma_feedback.reporter.resolve_report_status(
 	[
 		{
 			'producer': 'github',

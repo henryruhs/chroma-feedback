@@ -1,9 +1,11 @@
 import sys
+import webbrowser
 from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
-from chroma_feedback import color, helper, loop, wording
+
+from chroma_feedback import color, loop, reporter, wording
 from chroma_feedback.typing import Status, Report, Producer
 
 SYSTRAY = None
@@ -24,7 +26,7 @@ def create(producer_result : List[Producer], report : List[Report]) -> None:
 def update(producer_result : List[Producer], report : List[Report]) -> None:
 	global SYSTRAY, MENU
 
-	status = helper.resolve_producer_status(producer_result)
+	status = reporter.resolve_report_status(producer_result)
 
 	update_menu(report)
 	SYSTRAY.setContextMenu(MENU)
@@ -48,6 +50,10 @@ def update_menu(report : List[Report]) -> None:
 		item_report = MENU.addAction(value['message'])
 		item_report.setIcon(create_icon(value['status']))
 		item_report.setIconVisibleInMenu(True)
+		if 'url' in value:
+			item_report.triggered.connect(lambda : webbrowser.open(value['url']))
+		else:
+			item_report.setDisabled(True)
 	if report:
 		MENU.addSeparator()
 
