@@ -41,10 +41,10 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if 'repo' in data and 'slug' in data['repo'] and 'active' in data['repo'] and 'last_build_state' in data['repo']:
-			result.append(normalize_data(data['repo']['slug'], data['repo']['active'], data['repo']['last_build_state']))
+		if 'repo' in data and 'slug' in data['repo'] and 'last_build_state' in data['repo'] and 'active' in data['repo']:
+			result.append(normalize_data(data['repo']['slug'], data['repo']['last_build_state'], data['repo']['active']))
 		if 'repos' in data:
 			for repository in data['repos']:
-				if 'slug' in repository and 'active' in repository and 'last_build_state' in repository:
-					result.append(normalize_data(repository['slug'], repository['active'], repository['last_build_state']))
+				if 'slug' in repository and 'last_build_state' in repository and 'active' in repository:
+					result.append(normalize_data(repository['slug'], repository['last_build_state'], repository['active']))
 	return result

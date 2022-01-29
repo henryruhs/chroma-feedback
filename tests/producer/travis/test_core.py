@@ -9,7 +9,7 @@ def test_fetch_slug() -> None:
 
 		assert result[0]['producer'] == 'travis'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
-		assert result[0]['active'] is True
+		assert result[0]['url'] is None
 		assert result[0]['status']
 	else:
 		pytest.skip('TRAVIS_TOKEN is not defined')
@@ -21,7 +21,7 @@ def test_fetch_user() -> None:
 
 		assert result[0]['producer'] == 'travis'
 		assert result[0]['slug']
-		assert result[0]['active'] is True
+		assert result[0]['url'] is None
 		assert result[0]['status']
 	else:
 		pytest.skip('TRAVIS_TOKEN is not defined')

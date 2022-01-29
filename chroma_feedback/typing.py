@@ -1,4 +1,4 @@
-from typing import Literal, TypedDict, List
+from typing import Literal, TypedDict, Optional, List
 
 Status = Literal['skipped', 'passed', 'started', 'errored', 'warned', 'failed']
 
@@ -6,7 +6,7 @@ Status = Literal['skipped', 'passed', 'started', 'errored', 'warned', 'failed']
 class Producer(TypedDict):
 	producer: str
 	slug: str
-	url: str
+	url: Optional[str]
 	status: Status
 
 
@@ -20,7 +20,7 @@ class Consumer(TypedDict):
 class Report(TypedDict):
 	symbol: str
 	message : str
-	url : str
+	url : Optional[str]
 	status : Status
 
 
