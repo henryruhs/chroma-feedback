@@ -16,13 +16,13 @@ def normalize_status(status : str, conclusion : str) -> Status:
 	status = helper.to_lower_case(status)
 	conclusion = helper.to_lower_case(conclusion)
 
-	if conclusion in ['skipped', 'stale']:
+	if conclusion == 'skipped':
 		return 'skipped'
 	if status in ['in_progress', 'queued']:
 		return 'started'
-	if conclusion in ['cancelled', 'timed_out']:
+	if conclusion in ['cancelled', 'stale']:
 		return 'errored'
-	if conclusion == 'action_required':
+	if conclusion in ['action_required', 'timed_out']:
 		return 'warned'
 	if conclusion == 'failure':
 		return 'failed'

@@ -15,7 +15,6 @@ def test_fetch_slug(request_mock : Any) -> None:
 
 	assert result[0]['producer'] == 'jenkins'
 	assert result[0]['slug'] == 'chroma-feedback'
-	assert result[0]['active'] is True
 	assert result[0]['status']
 
 

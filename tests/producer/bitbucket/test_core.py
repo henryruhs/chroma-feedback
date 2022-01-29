@@ -9,7 +9,6 @@ def test_fetch_slug() -> None:
 
 		assert result[0]['producer'] == 'bitbucket'
 		assert result[0]['slug'] == 'redaxmedia/test-dummy'
-		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
 		pytest.skip('BITBUCKET_USERNAME or CODESHIP_PASSWORD is not defined')

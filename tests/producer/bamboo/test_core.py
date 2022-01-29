@@ -15,7 +15,6 @@ def test_fetch_plan_slug(request_mock : Any) -> None:
 
 	assert result[0]['producer'] == 'bamboo'
 	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
-	assert result[0]['active'] is True
 	assert result[0]['status']
 
 
@@ -39,7 +38,6 @@ def test_fetch_project_slug(request_mock : Any) -> None:
 
 	assert result[0]['producer'] == 'bamboo'
 	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
-	assert result[0]['active'] is True
 	assert result[0]['status']
 
 

@@ -9,7 +9,6 @@ def test_fetch_slug() -> None:
 
 		assert result[0]['producer'] == 'circle'
 		assert result[0]['slug'] == 'gh/redaxmedia/chroma-feedback/lint-and-test'
-		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
 		pytest.skip('CIRCLE_TOKEN is not defined')
@@ -21,7 +20,6 @@ def test_fetch_slug_mine() -> None:
 
 		assert result[0]['producer'] == 'circle'
 		assert result[0]['slug'] == 'gh/redaxmedia/chroma-feedback/lint-and-test'
-		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
 		pytest.skip('CIRCLE_TOKEN is not defined')
@@ -33,7 +31,6 @@ def test_fetch_organization() -> None:
 
 		assert result[0]['producer'] == 'circle'
 		assert result[0]['slug']
-		assert result[0]['active'] is True
 		assert result[0]['status']
 	else:
 		pytest.skip('CIRCLE_TOKEN is not defined')

@@ -7,7 +7,7 @@ def normalize_data(slug : str, status : str) -> Producer:
 	{
 		'producer': 'bamboo',
 		'slug': slug,
-		'active': True,
+		'url': None,
 		'status': normalize_status(status)
 	}
 

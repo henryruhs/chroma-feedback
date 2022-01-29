@@ -56,5 +56,5 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 					build = helper.get_first(project['builds']['build'])
 
 					if build and 'buildType' in build and 'projectName' in build['buildType'] and 'paused' in build['buildType'] and 'status' in build and 'running' in build:
-						result.append(normalize_data(build['buildType']['projectName'], build['buildType']['paused'], build['status'], build['running']))
+						result.append(normalize_data(build['buildType']['projectName'], build['status'], build['buildType']['paused'], build['running']))
 	return result

@@ -7,7 +7,7 @@ def normalize_data(slug : str, status : str) -> Producer:
 	{
 		'producer': 'circle',
 		'slug': slug,
-		'active': True,
+		'url': None,
 		'status': normalize_status(status)
 	}
 
@@ -15,10 +15,11 @@ def normalize_data(slug : str, status : str) -> Producer:
 def normalize_status(status : str) -> Status:
 	status = helper.to_lower_case(status)
 
-	if status in ['queued', 'running', 'scheduled']:
+	if status in ['queued', 'retried', 'running', 'scheduled']:
 		return 'started'
-	if status in ['canceled', 'no_tests']:
+	if status in ['canceled', 'timedout']:
 		return 'errored'
-	if status in ['failed', 'failing']:
+	if status in ['failed', 'infrastructure_fail']:
 		return 'failed'
 	return 'passed'
+

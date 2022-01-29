@@ -7,7 +7,7 @@ def normalize_data(slug : str, status : str, result : str) -> Producer:
 	{
 		'producer': 'wercker',
 		'slug': slug,
-		'active': True,
+		'url': None,
 		'status': normalize_status(status, result)
 	}
 
