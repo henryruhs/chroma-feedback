@@ -20,14 +20,14 @@ def process_devices(devices : Any, producer_report : List[Report]) -> List[Consu
 	# process devices
 
 	for device in devices:
-		result.append(
-		{
-			'consumer': 'razer_chroma',
-			'type': 'device',
-			'name': device.name,
-			'active': set_device(device, color.get_by_status(status)),
-			'status': status
-		})
+		if set_device(device, color.get_by_status(status)):
+			result.append(
+			{
+				'consumer': 'razer_chroma',
+				'type': 'device',
+				'name': device.name,
+				'status': status
+			})
 	return result
 
 

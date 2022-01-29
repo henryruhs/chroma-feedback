@@ -21,14 +21,14 @@ def process_groups(groups : Any, producer_report : List[Report]) -> List[Consume
 	# process groups
 
 	for index in groups:
-		result.append(
-		{
-			'consumer': 'philips_hue',
-			'type': 'group',
-			'name': groups[index]['name'],
-			'active': set_group(groups[index]['name'], color.get_by_status(status)),
-			'status': status
-		})
+		if set_group(groups[index]['name'], color.get_by_status(status)):
+			result.append(
+			{
+				'consumer': 'philips_hue',
+				'type': 'group',
+				'name': groups[index]['name'],
+				'status': status
+			})
 	return result
 
 

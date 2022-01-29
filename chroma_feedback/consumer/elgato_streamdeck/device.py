@@ -22,13 +22,14 @@ def process_devices(devices : Any, producer_report : List[Report]) -> List[Consu
 	# process device
 
 	for device in devices:
-		result.append(
-		{
-			'consumer': 'elgato_streamdeck',
-			'type': 'device',
-			'name': device.id(),
-			'status': set_device(device, producer_report) and status or 'skipped'
-		})
+		if set_device(device, producer_report):
+			result.append(
+			{
+				'consumer': 'elgato_streamdeck',
+				'type': 'device',
+				'name': device.id(),
+				'status': status
+			})
 	return result
 
 
@@ -42,7 +43,7 @@ def set_device(device : Any, producer_report : List[Report]) -> bool:
 
 		if index < device.key_count():
 			device.set_key_image(index, create_image(device, background = color_config['name']))
-			if 'url' in value:
+			if 'url' in value and value['url'] is not None:
 				device.set_key_callback(lambda : webbrowser.open(value['url']))
 
 	# close device

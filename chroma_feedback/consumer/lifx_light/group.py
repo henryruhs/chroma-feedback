@@ -27,22 +27,23 @@ def process_groups(groups : Any, producer_report : List[Report]) -> List[Consume
 	# process groups
 
 	for group in groups:
+		set_group(group, color.get_by_status(status))
 		result.append(
 		{
 			'consumer': 'lifx_light',
 			'type': 'group',
 			'name': get_group_name(group),
-			'active': set_group(group, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def set_group(group : Any, color_config : Color) -> bool:
-	return group.set_power('on') is None and group.set_color(
+def set_group(group : Any, color_config : Color) -> None:
+	group.set_power('on')
+	group.set_color(
 	[
 		color_config['hue'],
 		color_config['saturation'][2],
 		color_config['brightness'][2],
 		color_config['kelvin']
-	]) is None
+	])

@@ -20,16 +20,17 @@ def process_devices(devices : Any, producer_report : List[Report]) -> List[Consu
 	# process devices
 
 	for device in devices:
-		result.append(
-		{
-			'consumer': 'agile_innovative_blinkstick',
-			'type': 'device',
-			'name': ' '.join([device.info['product_string'], device.info['serial_number']]),
-			'active': set_device(device, color.get_by_status(status)),
-			'status': status
-		})
+		if set_device(device, color.get_by_status(status)):
+			result.append(
+			{
+				'consumer': 'agile_innovative_blinkstick',
+				'type': 'device',
+				'name': ' '.join([device.info['product_string'], device.info['serial_number']]),
+				'status': status
+			})
 	return result
 
 
 def set_device(device : Any, color_config : Color) -> bool:
-	return device.on(tuple(color_config['rgb'])) is None
+	device.on(tuple(color_config['rgb']))
+	return device.is_on() and device.is_animating()

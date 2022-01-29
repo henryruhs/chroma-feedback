@@ -20,18 +20,18 @@ def process_lights(lights : Any, producer_report : List[Report]) -> List[Consume
 	# process lights
 
 	for light in lights:
+		set_light(light, color.get_by_status(status))
 		result.append(
 		{
 			'consumer': 'magic_hue',
 			'type': 'light',
 			'name': light.name,
-			'active': set_light(light, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def set_light(light : Any, color_config : Color) -> bool:
+def set_light(light : Any, color_config : Color) -> None:
 	modes = get_modes()
 
 	if modes:
@@ -44,4 +44,4 @@ def set_light(light : Any, color_config : Color) -> bool:
 				color_config['rgb']
 			]
 		)
-	return light.update_status() is None
+	return light.update_status()

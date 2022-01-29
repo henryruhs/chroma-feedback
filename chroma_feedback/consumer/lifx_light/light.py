@@ -20,22 +20,23 @@ def process_lights(lights : Any, producer_report : List[Report]) -> List[Consume
 	# process lights
 
 	for light in lights:
+		set_light(light, color.get_by_status(status))
 		result.append(
 		{
 			'consumer': 'lifx_light',
 			'type': 'light',
 			'name': light.get_label(),
-			'active': set_light(light, color.get_by_status(status)),
 			'status': status
 		})
 	return result
 
 
-def set_light(light : Any, color_config : Color) -> bool:
-	return light.set_power('on') is None and light.set_color(
+def set_light(light : Any, color_config : Color) -> None:
+	light.set_power('on')
+	light.set_color(
 	[
 		color_config['hue'],
 		color_config['saturation'][2],
 		color_config['brightness'][2],
 		color_config['kelvin']
-	]) is None
+	])

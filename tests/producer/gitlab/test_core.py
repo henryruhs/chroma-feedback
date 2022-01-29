@@ -9,7 +9,7 @@ def test_fetch_slug() -> None:
 
 		assert result[0]['producer'] == 'gitlab'
 		assert result[0]['slug']
-		assert result[0]['active'] is True
+		assert result[0]['url']
 		assert result[0]['status']
 	else:
 		pytest.skip('GITLAB_TOKEN is not defined')

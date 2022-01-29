@@ -20,14 +20,14 @@ def process_lights(lights : Any, producer_report : List[Report]) -> List[Consume
 	# process lights
 
 	for light in lights:
-		result.append(
-		{
-			'consumer': 'wiz_light',
-			'type': 'light',
-			'name': get_light_name(light),
-			'active': set_light(light, color.get_by_status(status)),
-			'status': status
-		})
+		if set_light(light, color.get_by_status(status)):
+			result.append(
+			{
+				'consumer': 'wiz_light',
+				'type': 'light',
+				'name': get_light_name(light),
+				'status': status
+			})
 	return result
 
 
