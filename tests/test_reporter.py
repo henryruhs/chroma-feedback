@@ -164,3 +164,123 @@ def test_create_consumer_report_failed() -> None:
 	assert consumer_report[0]['symbol']
 	assert consumer_report[0]['message'] == 'Set status of Razer Chroma to failed'
 	assert consumer_report[0]['status'] == 'failed'
+
+
+def test_resolve_report_status_started() -> None:
+	assert reporter.resolve_report_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'started'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'passed'
+		}
+	]) == 'started'
+
+
+def test_resolve_report_status_errored() -> None:
+	assert reporter.resolve_report_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'errored'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'started'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'passed'
+		}
+	]) == 'errored'
+
+
+def test_resolve_report_status_warned() -> None:
+	assert reporter.resolve_report_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'warned'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'errored'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'started'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'passed'
+		}
+	]) == 'warned'
+
+
+def test_get_producer_status_failed() -> None:
+	assert reporter.resolve_report_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'failed'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'warned'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'started'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'errored'
+		},
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'passed'
+		},
+	]) == 'failed'
+
+
+def test_get_producer_status_passed() -> None:
+	assert reporter.resolve_report_status(
+	[
+		{
+			'producer': 'github',
+			'slug': 'redaxmedia/chroma-feedback',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'status': 'passed'
+		}
+	]) == 'passed'
