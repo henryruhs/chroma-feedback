@@ -1,5 +1,6 @@
-from typing import Any
+from typing import Any, get_args
 from unittest.mock import patch
+from chroma_feedback.typing import Status
 from chroma_feedback.producer.teamcity.core import fetch
 
 
@@ -33,7 +34,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 
 	assert result[0]['producer'] == 'teamcity'
 	assert result[0]['slug'] == 'chroma-feedback'
-	assert result[0]['status']
+	assert result[0]['status'] in get_args(Status)
 
 
 def test_fetch_invalid() -> None:

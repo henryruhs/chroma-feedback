@@ -4,7 +4,6 @@ from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QAction, QMenu, QSystemTrayIcon
-
 from chroma_feedback import color, loop, reporter, wording
 from chroma_feedback.typing import Status, Report, Producer
 

@@ -1,5 +1,7 @@
+from typing import get_args
 import os
 import pytest
+from chroma_feedback.typing import Status
 from chroma_feedback.producer.gitlab.core import fetch
 
 
@@ -9,8 +11,8 @@ def test_fetch_slug() -> None:
 
 		assert result[0]['producer'] == 'gitlab'
 		assert result[0]['slug']
-		assert result[0]['url']
-		assert result[0]['status']
+		assert 'https://gitlab.com/redaxmedia/test-dummy' in result[0]['url']
+		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('GITLAB_TOKEN is not defined')
 

@@ -1,6 +1,7 @@
 from typing import Literal, TypedDict, Optional, List
 
 Status = Literal['skipped', 'passed', 'started', 'errored', 'warned', 'failed']
+ConsumerType = Literal['light', 'device', 'group']
 
 
 class Producer(TypedDict):
@@ -12,7 +13,7 @@ class Producer(TypedDict):
 
 class Consumer(TypedDict):
 	consumer: str
-	type: Literal['light', 'device', 'group']
+	type: ConsumerType
 	name: str
 	status: Status
 
