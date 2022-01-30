@@ -21,7 +21,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 			}
 		]
 	}
-	result = fetch('https://dev.azure.com', 'redaxmedia/chroma-feedback', 'token')
+	result = fetch('https://dev.azure.com', 'redaxmedia/chroma-feedback', '__token__')
 
 	assert result[0]['name'] == 'azure'
 	assert result[0]['slug'] == 'chroma-feedback'

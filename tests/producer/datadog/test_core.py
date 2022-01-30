@@ -12,7 +12,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 		'name': 'chroma-feedback',
 		'overall_state': 'OK'
 	}
-	result = fetch('https://api.datadoghq.com', '1', 'api_key', 'application_key')
+	result = fetch('https://api.datadoghq.com', '1', '__api_key__', '__application_key__')
 
 	assert result[0]['name'] == 'datadog'
 	assert result[0]['slug'] == 'chroma-feedback'

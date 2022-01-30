@@ -12,7 +12,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 		{
 			'producer': 'custom',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://localhost/builds/redaxmedia/chroma-feedback/123',
+			'url': 'https://localhost/redaxmedia/chroma-feedback/pipelines/1',
 			'status': 'passed'
 		}
 	]
@@ -20,7 +20,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 
 	assert result[0]['name'] == 'custom'
 	assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
-	assert result[0]['url']
+	assert result[0]['url'] == 'https://localhost/redaxmedia/chroma-feedback/pipelines/1'
 	assert result[0]['status'] in get_args(Status)
 
 

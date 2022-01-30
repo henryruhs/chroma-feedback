@@ -12,7 +12,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 		'building': False,
 		'result': 'SUCCESS'
 	}
-	result = fetch('https://localhost', 'chroma-feedback', 'username', 'password')
+	result = fetch('https://localhost', 'chroma-feedback', '__username__', '__password__')
 
 	assert result[0]['name'] == 'jenkins'
 	assert result[0]['slug'] == 'chroma-feedback'

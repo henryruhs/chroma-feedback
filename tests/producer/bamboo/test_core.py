@@ -12,7 +12,7 @@ def test_fetch_plan_slug(request_mock : Any) -> None:
 		'key': 'redaxmedia-chroma_feedback',
 		'buildState': 'Successful'
 	}
-	result = fetch('http://localhost', 'redaxmedia-chroma_feedback', 'token')
+	result = fetch('http://localhost', 'redaxmedia-chroma_feedback', '__token__')
 
 	assert result[0]['name'] == 'bamboo'
 	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
@@ -35,7 +35,7 @@ def test_fetch_project_slug(request_mock : Any) -> None:
 			]
 		}
 	}
-	result = fetch('http://localhost', 'redaxmedia', 'token')
+	result = fetch('http://localhost', 'redaxmedia', '__token__')
 
 	assert result[0]['name'] == 'bamboo'
 	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'

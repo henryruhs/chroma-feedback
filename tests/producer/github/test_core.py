@@ -11,6 +11,7 @@ def test_fetch_slug() -> None:
 
 		assert result[0]['name'] == 'github'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
+		assert 'https://github.com/redaxmedia/chroma-feedback/actions/runs' in result[0]['url']
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('GITHUB_TOKEN is not defined')
@@ -22,6 +23,7 @@ def test_fetch_user() -> None:
 
 		assert result[0]['name'] == 'github'
 		assert result[0]['slug']
+		assert 'https://github.com/redaxmedia' in result[0]['url']
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('GITHUB_TOKEN is not defined')

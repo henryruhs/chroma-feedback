@@ -172,13 +172,13 @@ def test_resolve_report_status_started() -> None:
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		}
 	]) == 'started'
@@ -190,19 +190,19 @@ def test_resolve_report_status_errored() -> None:
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		}
 	]) == 'errored'
@@ -214,25 +214,25 @@ def test_resolve_report_status_warned() -> None:
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'warned'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		}
 	]) == 'warned'
@@ -244,31 +244,31 @@ def test_get_producer_status_failed() -> None:
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'failed'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'warned'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		},
 	]) == 'failed'
@@ -280,7 +280,7 @@ def test_get_producer_status_passed() -> None:
 		{
 			'name': 'github',
 			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		}
 	]) == 'passed'

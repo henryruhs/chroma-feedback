@@ -15,7 +15,7 @@ def test_process_passed() -> None:
 			{
 				'symbol': None,
 				'message': None,
-				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'passed'
 			}
 		])
@@ -38,7 +38,7 @@ def test_process_started() -> None:
 			{
 				'symbol': None,
 				'message': None,
-				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'started'
 			}
 		])
@@ -61,7 +61,7 @@ def test_process_errored() -> None:
 			{
 				'symbol': None,
 				'message': None,
-				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'errored'
 			}
 		])
@@ -84,7 +84,7 @@ def test_process_warned() -> None:
 			{
 				'symbol': None,
 				'message': None,
-				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'warned'
 			}
 		])
@@ -107,7 +107,7 @@ def test_process_failed() -> None:
 			{
 				'symbol': None,
 				'message': None,
-				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'failed'
 			}
 		])
