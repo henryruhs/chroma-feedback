@@ -65,7 +65,6 @@ setup(
 		'busylight-for-humans==0.13.2',
 		'lifxlan==1.2.7',
 		'nanoleafapi==2.1.1',
-		'pillow==9.0.0',
 		'phue==1.1',
 		'python-magichue==0.2.9.3',
 		'pyqt5==5.15.6',
