@@ -10,7 +10,7 @@ def test_fetch_slug() -> None:
 		result = fetch('https://api.buddy.works', 'redaxmedia/chroma-feedback', os.environ.get('BUDDY_TOKEN'))
 
 		assert result[0]['name'] == 'buddy'
-		assert result[0]['slug'] == 'redaxmedia-clone/chroma-feedback'
+		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('BUDDY_TOKEN is not defined')

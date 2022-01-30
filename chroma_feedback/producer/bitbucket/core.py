@@ -45,8 +45,13 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Produc
 		data = request.parse_json(response)
 
 		if 'values' in data:
-			build = helper.get_first(data['values'])
+			build = helper.get_last(data['values'])
 
-			if build and 'repository' in build and 'full_name' in build['repository'] and 'state' in build and 'result' in build['state'] and 'name' in build['state']['result']:
-				result.append(normalize_data(build['repository']['full_name'], build['state']['result']['name']))
+			print(build['state'])
+
+			if build and 'repository' in build and 'full_name' in build['repository'] and 'state' in build and 'name' in build['state']:
+				if 'result' in build['state'] and 'name' in build['state']['result']:
+					result.append(normalize_data(build['repository']['full_name'], build['state']['name'], build['state']['result']['name']))
+				else:
+					result.append(normalize_data(build['repository']['full_name'], build['state']['name'], None))
 	return result
