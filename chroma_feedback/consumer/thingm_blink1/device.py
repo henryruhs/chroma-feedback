@@ -22,9 +22,9 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 		if set_device(device, color.get_by_status(status)):
 			result.append(
 			{
-				'consumer': 'thingm_blink1',
+				'name': 'thingm_blink1',
 				'type': 'device',
-				'name': ' '.join([device.info['product_string'], device.info['serial_number']]),
+				'description': ' '.join([device.info['product_string'], device.info['serial_number']]),
 				'status': status
 			})
 	return result

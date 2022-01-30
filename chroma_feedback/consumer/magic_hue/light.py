@@ -22,9 +22,9 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		set_light(light, color.get_by_status(status))
 		result.append(
 		{
-			'consumer': 'magic_hue',
+			'name': 'magic_hue',
 			'type': 'light',
-			'name': light.name,
+			'description': light.description,
 			'status': status
 		})
 	return result

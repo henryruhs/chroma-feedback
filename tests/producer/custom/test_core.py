@@ -18,7 +18,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 	]
 	result = fetch('https://localhost', 'redaxmedia/chroma-feedback')
 
-	assert result[0]['producer'] == 'custom'
+	assert result[0]['name'] == 'custom'
 	assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
 	assert result[0]['url']
 	assert result[0]['status'] in get_args(Status)

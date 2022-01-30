@@ -8,7 +8,7 @@ from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 def get_devices(devices : Any, device_names : List[str]) -> Any:
 	if device_names:
 		for device in copy.copy(devices):
-			if device.name not in device_names:
+			if device.description not in device_names:
 				devices.remove(device)
 	return devices
 
@@ -23,9 +23,9 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 		if set_device(device, color.get_by_status(status)):
 			result.append(
 			{
-				'consumer': 'razer_chroma',
+				'name': 'razer_chroma',
 				'type': 'device',
-				'name': device.name,
+				'description': device.description,
 				'status': status
 			})
 	return result

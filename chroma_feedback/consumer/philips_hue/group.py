@@ -24,9 +24,9 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 		if set_group(groups[index]['name'], color.get_by_status(status)):
 			result.append(
 			{
-				'consumer': 'philips_hue',
+				'name': 'philips_hue',
 				'type': 'group',
-				'name': groups[index]['name'],
+				'description': groups[index]['name'],
 				'status': status
 			})
 	return result

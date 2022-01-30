@@ -24,9 +24,9 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 		if set_device(device, producer_report):
 			result.append(
 			{
-				'consumer': 'elgato_streamdeck',
+				'name': 'elgato_streamdeck',
 				'type': 'device',
-				'name': device.id(),
+				'description': device.id(),
 				'status': status
 			})
 	return result

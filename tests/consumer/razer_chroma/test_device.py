@@ -20,9 +20,9 @@ def test_process_passed() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'razer_chroma'
+		assert result[0]['description']== 'razer_chroma'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'passed'
 	except:
 		pytest.skip()
@@ -43,9 +43,9 @@ def test_process_started() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'razer_chroma'
+		assert result[0]['description']== 'razer_chroma'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'started'
 	except:
 		pytest.skip()
@@ -66,9 +66,9 @@ def test_process_errored() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'razer_chroma'
+		assert result[0]['description']== 'razer_chroma'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'errored'
 	except:
 		pytest.skip()
@@ -89,9 +89,9 @@ def test_process_warned() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'razer_chroma'
+		assert result[0]['description']== 'razer_chroma'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'warned'
 	except:
 		pytest.skip()
@@ -112,9 +112,9 @@ def test_process_failed() -> None:
 			}
 		])
 
-		assert result[0]['consumer'] == 'razer_chroma'
+		assert result[0]['description']== 'razer_chroma'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'failed'
 	except:
 		pytest.skip()

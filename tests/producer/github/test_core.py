@@ -9,7 +9,7 @@ def test_fetch_slug() -> None:
 	if os.environ.get('GITHUB_TOKEN'):
 		result = fetch('https://api.github.com', 'redaxmedia/chroma-feedback', os.environ.get('GITHUB_TOKEN'))
 
-		assert result[0]['producer'] == 'github'
+		assert result[0]['name'] == 'github'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
 		assert result[0]['status'] in get_args(Status)
 	else:
@@ -20,7 +20,7 @@ def test_fetch_user() -> None:
 	if os.environ.get('GITHUB_TOKEN'):
 		result = fetch('https://api.github.com', 'redaxmedia', os.environ.get('GITHUB_TOKEN'))
 
-		assert result[0]['producer'] == 'github'
+		assert result[0]['name'] == 'github'
 		assert result[0]['slug']
 		assert result[0]['status'] in get_args(Status)
 	else:

@@ -22,9 +22,9 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 		if set_device(device, color.get_by_status(status)):
 			result.append(
 			{
-				'consumer': 'luxafor_flag',
+				'name': 'luxafor_flag',
 				'type': 'device',
-				'name': device.info['product_string'],
+				'description': device.info['product_string'],
 				'status': status
 			})
 	return result

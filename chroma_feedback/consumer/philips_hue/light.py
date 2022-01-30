@@ -8,7 +8,7 @@ from .api import get_api
 def get_lights(lights : Any, light_names : List[str]) -> Any:
 	if light_names:
 		for light in copy.copy(lights):
-			if light.name not in light_names:
+			if light.description not in light_names:
 				lights.remove(light)
 	return lights
 
@@ -20,12 +20,12 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 	# process lights
 
 	for light in lights:
-		if set_light(light.name, color.get_by_status(status)):
+		if set_light(light.description, color.get_by_status(status)):
 			result.append(
 			{
-				'consumer': 'philips_hue',
+				'name': 'philips_hue',
 				'type': 'light',
-				'name': light.name,
+				'description': light.description,
 				'status': status
 			})
 	return result

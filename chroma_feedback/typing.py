@@ -1,19 +1,67 @@
 from typing import Literal, TypedDict, Optional, List
 
-Status = Literal['skipped', 'passed', 'started', 'errored', 'warned', 'failed']
+Status = Literal\
+[
+	'skipped',
+	'passed',
+	'started',
+	'errored',
+	'warned',
+	'failed'
+]
+ProducerName = Literal\
+[
+	'appveyor',
+	'azure',
+	'bamboo',
+	'bitbucket',
+	'buddy',
+	'circle',
+	'codeship',
+	'custom',
+	'datadog',
+	'github',
+	'gitlab',
+	'jenkins',
+	'teamcity',
+	'travis',
+	'wercker'
+]
+ConsumerName = Literal\
+[
+	'agile_innovative_blinkstick',
+	'elgato_streamdeck',
+	'embrava_blynclight',
+	'kuando_busylight',
+	'lifx_light',
+	'luxafor_flag',
+	'magic_hue',
+	'nanoleaf_light',
+	'philips_hue',
+	'razer_chroma',
+	'thingm_blink1',
+	'wiz_light',
+	'xiaomi_yeelight'
+]
+ConsumerType = Literal\
+[
+	'light',
+	'device',
+	'group'
+]
 
 
 class Producer(TypedDict):
-	producer: str
+	name: ProducerName
 	slug: str
 	url: Optional[str]
 	status: Status
 
 
 class Consumer(TypedDict):
-	consumer: str
-	type: Literal['light', 'device', 'group']
 	name: str
+	type: ConsumerType
+	description: str
 	status: Status
 
 

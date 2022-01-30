@@ -14,7 +14,7 @@ def test_fetch_plan_slug(request_mock : Any) -> None:
 	}
 	result = fetch('http://localhost', 'redaxmedia-chroma_feedback', 'token')
 
-	assert result[0]['producer'] == 'bamboo'
+	assert result[0]['name'] == 'bamboo'
 	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
 	assert result[0]['status'] in get_args(Status)
 
@@ -37,7 +37,7 @@ def test_fetch_project_slug(request_mock : Any) -> None:
 	}
 	result = fetch('http://localhost', 'redaxmedia', 'token')
 
-	assert result[0]['producer'] == 'bamboo'
+	assert result[0]['name'] == 'bamboo'
 	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
 	assert result[0]['status'] in get_args(Status)
 

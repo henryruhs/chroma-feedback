@@ -22,9 +22,9 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		if set_light(light, color.get_by_status(status)):
 			result.append(
 			{
-				'consumer': 'xiaomi_yeelight',
+				'name': 'xiaomi_yeelight',
 				'type': 'light',
-				'name': light.get_properties()['name'],
+				'description': light.get_properties()['name'],
 				'status': status
 			})
 	return result

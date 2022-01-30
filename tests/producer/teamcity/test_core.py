@@ -32,7 +32,7 @@ def test_fetch_slug(request_mock : Any) -> None:
 	}
 	result = fetch('https://localhost', 'chroma-feedback', 'token')
 
-	assert result[0]['producer'] == 'teamcity'
+	assert result[0]['name'] == 'teamcity'
 	assert result[0]['slug'] == 'chroma-feedback'
 	assert result[0]['status'] in get_args(Status)
 

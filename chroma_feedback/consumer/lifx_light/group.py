@@ -29,9 +29,9 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 		set_group(group, color.get_by_status(status))
 		result.append(
 		{
-			'consumer': 'lifx_light',
+			'name': 'lifx_light',
 			'type': 'group',
-			'name': get_group_name(group),
+			'description': get_group_name(group),
 			'status': status
 		})
 	return result

@@ -5,7 +5,7 @@ from chroma_feedback.typing import Status, Producer
 def normalize_data(slug : str, status : str, is_paused : bool, is_running : bool) -> Producer:
 	return\
 	{
-		'producer': 'teamcity',
+		'name': 'teamcity',
 		'slug': slug,
 		'url': None,
 		'status': normalize_status(status, is_paused, is_running)

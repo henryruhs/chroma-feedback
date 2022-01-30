@@ -5,7 +5,7 @@ from chroma_feedback.typing import Status, Producer
 def normalize_data(slug : str, url : str, status : str, conclusion : str) -> Producer:
 	return\
 	{
-		'producer': 'github',
+		'name': 'github',
 		'slug': slug,
 		'url': url,
 		'status': normalize_status(status, conclusion)
