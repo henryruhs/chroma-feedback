@@ -16,7 +16,7 @@ def test_process(mocker : Any) -> None:
 		sys.argv.append('redaxmedia/chroma-feedback')
 		sys.argv.append('--travis-token')
 		sys.argv.append(os.environ.get('TRAVIS_TOKEN'))
-		process = mocker.spy(producer.travis, 'run') # type: ignore
+		process = mocker.spy(producer.travis, 'run')
 		producer.process(program)
 
 		assert process.call_count == 1

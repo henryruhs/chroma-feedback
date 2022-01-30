@@ -1,9 +1,8 @@
 from typing import Any, List
 import copy
 import webbrowser
-
 from chroma_feedback import color, reporter
-from chroma_feedback.typing import Consumer, Report, Status
+from chroma_feedback.typing import Consumer, ProducerReport, Status
 from .api import get_pil_helper
 
 
@@ -15,7 +14,7 @@ def get_devices(devices : Any, device_names : List[str]) -> Any:
 	return devices
 
 
-def process_devices(devices : Any, producer_report : List[Report]) -> List[Consumer]:
+def process_devices(devices : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
@@ -33,7 +32,7 @@ def process_devices(devices : Any, producer_report : List[Report]) -> List[Consu
 	return result
 
 
-def set_device(device : Any, producer_report : List[Report]) -> bool:
+def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	device.open()
 
 	# process producer

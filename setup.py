@@ -73,5 +73,16 @@ setup(
 		'requests==2.27.1',
 		'streamdeck==0.9.0 ',
 		'yeelight==0.7.8'
+	],
+	tests_require =
+	[
+		'flake8==4.0.1 ',
+		'mock==4.0.3 ',
+		'mypy==0.931 ',
+		'pytest==6.2.5 ',
+		'pytest-cov==3.0.0 ',
+		'pytest-mock==3.7.0 ',
+		'types-mock==4.0.9 ',
+		'types-requests==2.27.7'
 	]
 )

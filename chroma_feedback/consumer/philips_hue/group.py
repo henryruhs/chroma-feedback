@@ -2,7 +2,7 @@ from typing import List, Any
 import copy
 
 from chroma_feedback import color, reporter
-from chroma_feedback.typing import Color, Consumer, Report, Status
+from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
 
@@ -14,7 +14,7 @@ def get_groups(groups : Any, group_names : List[str]) -> Any:
 	return groups
 
 
-def process_groups(groups : Any, producer_report : List[Report]) -> List[Consumer]:
+def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
 	status: Status = reporter.resolve_report_status(producer_report)
 

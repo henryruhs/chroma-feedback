@@ -1,7 +1,6 @@
 from typing import Literal, TypedDict, Optional, List
 
 Status = Literal['skipped', 'passed', 'started', 'errored', 'warned', 'failed']
-ConsumerType = Literal['light', 'device', 'group']
 
 
 class Producer(TypedDict):
@@ -13,15 +12,21 @@ class Producer(TypedDict):
 
 class Consumer(TypedDict):
 	consumer: str
-	type: ConsumerType
+	type: Literal['light', 'device', 'group']
 	name: str
 	status: Status
 
 
-class Report(TypedDict):
+class ProducerReport(TypedDict):
 	symbol: str
 	message : str
 	url : Optional[str]
+	status : Status
+
+
+class ConsumerReport(TypedDict):
+	symbol: str
+	message : str
 	status : Status
 
 

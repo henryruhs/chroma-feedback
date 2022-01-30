@@ -1,8 +1,5 @@
 import pytest
-try:
-	from unittest.mock import MagicMock
-except ImportError:
-	from mock import MagicMock
+from unittest.mock import MagicMock
 from chroma_feedback.consumer.kuando_busylight.device import process_devices
 
 MOCK = MagicMock()
@@ -16,8 +13,8 @@ def test_process_passed() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
+				'symbol': None,
+				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
 				'status': 'passed'
 			}
@@ -39,8 +36,8 @@ def test_process_started() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
+				'symbol': None,
+				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
 				'status': 'started'
 			}
@@ -62,8 +59,8 @@ def test_process_errored() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
+				'symbol': None,
+				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
 				'status': 'errored'
 			}
@@ -85,8 +82,8 @@ def test_process_warned() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
+				'symbol': None,
+				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
 				'status': 'warned'
 			}
@@ -108,8 +105,8 @@ def test_process_failed() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
+				'symbol': None,
+				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/12345',
 				'status': 'failed'
 			}

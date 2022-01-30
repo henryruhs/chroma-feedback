@@ -3,10 +3,10 @@ from typing import Any, List
 from argparse import ArgumentParser
 import importlib
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import Consumer, Report
+from chroma_feedback.typing import Consumer, ProducerReport
 
 
-def process(program : ArgumentParser, producer_report : List[Report]) -> List[Consumer]:
+def process(program : ArgumentParser, producer_report : List[ProducerReport]) -> List[Consumer]:
 	args = helper.get_first(program.parse_known_args())
 	result = []
 

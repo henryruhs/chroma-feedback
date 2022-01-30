@@ -1,11 +1,11 @@
 from __future__ import print_function
-from typing import List
+from typing import Any, List
 from chroma_feedback import color, helper, metadata, wording
-from chroma_feedback.typing import Consumer, Producer, Report, Status
+from chroma_feedback.typing import Consumer, ConsumerReport, Producer, ProducerReport, Status
 
 
-def create_producer_report(producer_result : List[Producer]) -> List[Report]:
-	report : List[Report] = []
+def create_producer_report(producer_result : List[Producer]) -> List[ProducerReport]:
+	report : List[ProducerReport] = []
 
 	# process result
 
@@ -37,8 +37,8 @@ def create_producer_report(producer_result : List[Producer]) -> List[Report]:
 	return report
 
 
-def create_consumer_report(consumer_result : List[Consumer]) -> List[Report]:
-	report : List[Report] = []
+def create_consumer_report(consumer_result : List[Consumer]) -> List[ConsumerReport]:
+	report : List[ConsumerReport] = []
 
 	# process result
 
@@ -67,7 +67,7 @@ def create_consumer_report(consumer_result : List[Consumer]) -> List[Report]:
 	return report
 
 
-def resolve_report_status(report : List[Report]) -> Status:
+def resolve_report_status(report : List[Any]) -> Status:
 	status: Status = 'passed'
 
 	# process report
@@ -88,7 +88,7 @@ def print_header() -> None:
 	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
 
 
-def print_report(report : List[Report]) -> None:
+def print_report(report : List[Any]) -> None:
 	for value in report:
 		if helper.is_windows() is False:
 			print(value['symbol'] + ' ' + value['message'])

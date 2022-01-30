@@ -5,13 +5,13 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QAction, QMenu, QSystemTrayIcon
 from chroma_feedback import color, loop, reporter, wording
-from chroma_feedback.typing import Status, Report, Producer
+from chroma_feedback.typing import Status, Producer, ProducerReport
 
 SYSTRAY = None
 MENU = None
 
 
-def create(producer_result : List[Producer], report : List[Report]) -> None:
+def create(producer_result : List[Producer], report : List[ProducerReport]) -> None:
 	global SYSTRAY, MENU
 
 	if not SYSTRAY:
@@ -22,7 +22,7 @@ def create(producer_result : List[Producer], report : List[Report]) -> None:
 	SYSTRAY.show()
 
 
-def update(producer_result : List[Producer], report : List[Report]) -> None:
+def update(producer_result : List[Producer], report : List[ProducerReport]) -> None:
 	global SYSTRAY, MENU
 
 	status = reporter.resolve_report_status(producer_result)
@@ -38,7 +38,7 @@ def is_created() -> bool:
 	return SYSTRAY is not None and MENU is not None
 
 
-def update_menu(report : List[Report]) -> None:
+def update_menu(report : List[ProducerReport]) -> None:
 	global MENU
 
 	MENU.clear()

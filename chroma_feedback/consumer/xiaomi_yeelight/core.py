@@ -3,7 +3,7 @@ from typing import List
 from argparse import ArgumentParser
 import socket
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import Consumer, Report
+from chroma_feedback.typing import Consumer, ProducerReport
 from .light import get_lights, process_lights
 
 ARGS = None
@@ -28,7 +28,7 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(producer_report : List[Report]) -> List[Consumer]:
+def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 	lights = get_lights(ARGS.xiaomi_yeelight_ip)
 
 	if not lights:
