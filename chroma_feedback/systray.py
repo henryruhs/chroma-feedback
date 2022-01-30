@@ -49,8 +49,8 @@ def update_menu(report : List[ProducerReport]) -> None:
 		item_report = MENU.addAction(value['message'])
 		item_report.setIcon(create_icon(value['status']))
 		item_report.setIconVisibleInMenu(True)
-		if 'url' in value and value['url'] is not None:
-			item_report.triggered.connect(lambda : webbrowser.open(value['url']))
+		if 'url' in value and value['url']:
+			item_report.triggered.connect(lambda __checked__, url = value['url'] : webbrowser.open(url))
 		else:
 			item_report.setDisabled(True)
 	if report:

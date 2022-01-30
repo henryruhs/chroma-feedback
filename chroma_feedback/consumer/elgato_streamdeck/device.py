@@ -42,8 +42,8 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 
 		if index < device.key_count():
 			device.set_key_image(index, create_image(device, background = color_config['name']))
-			if 'url' in value and value['url'] is not None:
-				device.set_key_callback(lambda : webbrowser.open(value['url']))
+			if 'url' in value and value['url']:
+				device.set_key_callback(lambda __checked__, url = value['url'] : webbrowser.open(url))
 
 	# close device
 
