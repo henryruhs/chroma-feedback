@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QBrush, QColor, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QAction, QMenu, QSystemTrayIcon
 from chroma_feedback import color, loop, reporter, wording
-from chroma_feedback.typing import Status, Producer, ProducerReport
+from chroma_feedback.typing import Status, ProducerReport
 
 SYSTRAY = None
 MENU = None
