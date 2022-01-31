@@ -11,23 +11,23 @@ SYSTRAY = None
 MENU = None
 
 
-def create(producer_result : List[Producer], report : List[ProducerReport]) -> None:
+def create(producer_report : List[ProducerReport]) -> None:
 	global SYSTRAY, MENU
 
 	if not SYSTRAY:
 		SYSTRAY = QSystemTrayIcon()
 	if not MENU:
 		MENU = QMenu()
-	update(producer_result, report)
+	update(producer_report)
 	SYSTRAY.show()
 
 
-def update(producer_result : List[Producer], report : List[ProducerReport]) -> None:
+def update(producer_report : List[ProducerReport]) -> None:
 	global SYSTRAY, MENU
 
-	status = reporter.resolve_report_status(producer_result)
+	status = reporter.resolve_report_status(producer_report)
 
-	update_menu(report)
+	update_menu(producer_report)
 	SYSTRAY.setContextMenu(MENU)
 	SYSTRAY.setIcon(create_icon(status))
 
@@ -38,22 +38,22 @@ def is_created() -> bool:
 	return SYSTRAY is not None and MENU is not None
 
 
-def update_menu(report : List[ProducerReport]) -> None:
+def update_menu(producer_report : List[ProducerReport]) -> None:
 	global MENU
 
 	MENU.clear()
 
 	# process report
 
-	for value in report:
-		item_report = MENU.addAction(value['message'])
-		item_report.setIcon(create_icon(value['status']))
+	for report in producer_report:
+		item_report = MENU.addAction(report['message'])
+		item_report.setIcon(create_icon(report['status']))
 		item_report.setIconVisibleInMenu(True)
-		if 'url' in value and value['url']:
-			item_report.triggered.connect(lambda __checked__, url = value['url'] : webbrowser.open(url))
+		if 'url' in report and report['url']:
+			item_report.triggered.connect(lambda __checked__, url = report['url'] : webbrowser.open(url))
 		else:
 			item_report.setDisabled(True)
-	if report:
+	if producer_report:
 		MENU.addSeparator()
 
 	# handle action

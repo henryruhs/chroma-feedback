@@ -3,7 +3,7 @@ import copy
 import webbrowser
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, QRect
-from PyQt5.QtGui import QBrush, QColor, QFont, QPainter, QPen, QPixmap, QTransform
+from PyQt5.QtGui import QColor, QFont, QPainter, QPen, QPixmap, QTransform
 from chroma_feedback import color, reporter
 from chroma_feedback.typing import Consumer, ProducerReport, Status
 
@@ -38,13 +38,13 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	device.open()
 	device.reset()
 
-	# process producer
+	# process report
 
-	for index, value in enumerate(producer_report):
+	for index, report in enumerate(producer_report):
 		if index < device.key_count():
-			device.set_key_image(index, create_image(device, value))
-			if 'url' in value and value['url']:
-				device.set_key_callback(lambda __checked__, url = value['url'] : webbrowser.open(url))
+			device.set_key_image(index, create_image(device, report))
+			if 'url' in report and report['url']:
+				device.set_key_callback(lambda __checked__, url = report['url'] : webbrowser.open(url))
 
 	# close device
 
@@ -52,8 +52,8 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	return device.is_open() is False
 
 
-def create_image(device : Any, producer_report_value : ProducerReport) -> Any:
-	color_config = color.get_by_status(producer_report_value['status'])
+def create_image(device : Any, report : ProducerReport) -> Any:
+	color_config = color.get_by_status(report['status'])
 	image_config = device.key_image_format()
 	transform = create_transform(image_config)
 	font_size = image_config['size'][1] / 8
@@ -62,10 +62,10 @@ def create_image(device : Any, producer_report_value : ProducerReport) -> Any:
 	painter = QPainter(pixmap)
 	painter.setFont(create_font(font_size * 2.75))
 	painter.setPen(QPen(QColor(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])))
-	painter.drawText(QRect(0, font_size * 1.25, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, producer_report_value['symbol'])
+	painter.drawText(QRect(0, font_size * 1.25, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, report['symbol'])
 	painter.setFont(create_font(font_size * 0.875))
 	painter.setPen(QPen(Qt.white))
-	painter.drawText(QRect(0, font_size * -2, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, producer_report_value['name'].upper())
+	painter.drawText(QRect(0, font_size * -2, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, report['name'].upper())
 	painter.end()
 	return pixmap_to_bytes(pixmap.transformed(transform), image_config)
 

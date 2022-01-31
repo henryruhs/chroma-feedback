@@ -99,9 +99,9 @@ def run(program : ArgumentParser) -> None:
 
 	if loop.is_created() is True:
 		if systray.is_created() is True:
-			systray.update(producer_result, producer_report)
+			systray.update(producer_report)
 		else:
-			systray.create(producer_result, producer_report)
+			systray.create(producer_report)
 
 
 def destroy() -> None:
