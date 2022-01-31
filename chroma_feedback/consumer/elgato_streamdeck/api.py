@@ -23,12 +23,3 @@ def api_factory() -> Any:
 			sys.exit(wording.get('connection_not_found').format('ELGATO STREAMDECK') + wording.get('exclamation_mark'))
 	except ImportError:
 		sys.exit(wording.get('package_not_found').format('STREAMDECK') + wording.get('exclamation_mark'))
-
-
-def get_pil_helper() -> Any:
-	try:
-		from StreamDeck.ImageHelpers import PILHelper
-
-		return PILHelper
-	except ImportError:
-		sys.exit(wording.get('package_not_found').format('STREAMDECK') + wording.get('exclamation_mark'))

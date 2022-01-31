@@ -1,11 +1,11 @@
 from chroma_feedback.typing import Status, Producer
 
 
-def normalize_data(slug : str, active : bool, status : Status) -> Producer:
+def normalize_data(slug : str, url : str, status : Status) -> Producer:
 	return\
 	{
-		'producer': 'custom',
+		'name': 'custom',
 		'slug': slug,
-		'active': active,
+		'url': url,
 		'status': status
 	}

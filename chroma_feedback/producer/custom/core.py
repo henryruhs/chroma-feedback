@@ -41,6 +41,6 @@ def fetch(host : str, slug : str) -> List[Producer]:
 
 		if data:
 			for build in data:
-				if 'slug' in build and 'active' in build and 'status' in build:
-					result.append(normalize_data(build['slug'], build['active'], build['status']))
+				if 'slug' in build and 'url' in build and 'status' in build:
+					result.append(normalize_data(build['slug'], build['url'], build['status']))
 	return result

@@ -5,9 +5,9 @@ from chroma_feedback.typing import Status, Producer
 def normalize_data(slug : str, status : str) -> Producer:
 	return\
 	{
-		'producer': 'circle',
+		'name': 'circle',
 		'slug': slug,
-		'active': True,
+		'url': None,
 		'status': normalize_status(status)
 	}
 
@@ -15,10 +15,15 @@ def normalize_data(slug : str, status : str) -> Producer:
 def normalize_status(status : str) -> Status:
 	status = helper.to_lower_case(status)
 
-	if status in ['queued', 'running', 'scheduled']:
+	if status == 'no_tests':
+		return 'skipped'
+	if status in ['queued', 'retried', 'running', 'scheduled']:
 		return 'started'
-	if status in ['canceled', 'no_tests']:
+	if status == 'canceled':
 		return 'errored'
-	if status in ['failed', 'failing']:
+	if status == 'timedout':
+		return 'warned'
+	if status in ['failed', 'infrastructure_fail']:
 		return 'failed'
 	return 'passed'
+

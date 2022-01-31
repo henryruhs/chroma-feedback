@@ -1,16 +1,17 @@
 import sys
+import webbrowser
 from typing import List
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QBrush, QIcon, QPainter, QPixmap
-from PyQt5.QtWidgets import QMenu, QSystemTrayIcon
-from chroma_feedback import color, helper, loop, wording
-from chroma_feedback.typing import Status, Report, Producer
+from PyQt5.QtGui import QBrush, QColor, QIcon, QPainter, QPixmap
+from PyQt5.QtWidgets import QAction, QMenu, QSystemTrayIcon
+from chroma_feedback import color, loop, reporter, wording
+from chroma_feedback.typing import Status, Producer, ProducerReport
 
 SYSTRAY = None
 MENU = None
 
 
-def create(producer_result : List[Producer], report : List[Report]) -> None:
+def create(producer_result : List[Producer], report : List[ProducerReport]) -> None:
 	global SYSTRAY, MENU
 
 	if not SYSTRAY:
@@ -21,10 +22,10 @@ def create(producer_result : List[Producer], report : List[Report]) -> None:
 	SYSTRAY.show()
 
 
-def update(producer_result : List[Producer], report : List[Report]) -> None:
+def update(producer_result : List[Producer], report : List[ProducerReport]) -> None:
 	global SYSTRAY, MENU
 
-	status = helper.resolve_producer_status(producer_result)
+	status = reporter.resolve_report_status(producer_result)
 
 	update_menu(report)
 	SYSTRAY.setContextMenu(MENU)
@@ -37,7 +38,7 @@ def is_created() -> bool:
 	return SYSTRAY is not None and MENU is not None
 
 
-def update_menu(report : List[Report]) -> None:
+def update_menu(report : List[ProducerReport]) -> None:
 	global MENU
 
 	MENU.clear()
@@ -48,20 +49,23 @@ def update_menu(report : List[Report]) -> None:
 		item_report = MENU.addAction(value['message'])
 		item_report.setIcon(create_icon(value['status']))
 		item_report.setIconVisibleInMenu(True)
+		if 'url' in value and value['url']:
+			item_report.triggered.connect(lambda __checked__, url = value['url'] : webbrowser.open(url))
+		else:
+			item_report.setDisabled(True)
 	if report:
 		MENU.addSeparator()
 
 	# handle action
 
 	item_start = MENU.addAction(wording.get('start'))
-	item_start.triggered.connect(action_start)
-	MENU.addAction(item_start)
 	item_stop = MENU.addAction(wording.get('stop'))
-	item_stop.triggered.connect(action_stop)
-	MENU.addAction(item_stop)
 	item_exit = MENU.addAction(wording.get('exit'))
+	item_start.setVisible(loop.get_timer().isActive() is False)
+	item_stop.setVisible(loop.get_timer().isActive() is True)
+	item_start.triggered.connect(lambda : action_start(item_start, item_stop))
+	item_stop.triggered.connect(lambda : action_stop(item_start, item_stop))
 	item_exit.triggered.connect(action_exit)
-	MENU.addAction(item_exit)
 
 
 def create_icon(status : Status) -> QIcon:
@@ -75,11 +79,15 @@ def create_icon(status : Status) -> QIcon:
 	return QIcon(pixmap)
 
 
-def action_start() -> None:
+def action_start(item_start : QAction, item_stop : QAction) -> None:
+	item_start.setVisible(False)
+	item_stop.setVisible(True)
 	loop.get_timer().start()
 
 
-def action_stop() -> None:
+def action_stop(item_start : QAction, item_stop : QAction) -> None:
+	item_start.setVisible(True)
+	item_stop.setVisible(False)
 	loop.get_timer().stop()
 
 

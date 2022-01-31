@@ -3,7 +3,7 @@ import sys
 from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, wording
-from chroma_feedback.typing import Consumer, Producer
+from chroma_feedback.typing import Consumer, ProducerReport
 from .light import get_lights, process_lights
 
 ARGS = None
@@ -28,12 +28,12 @@ def init(program : ArgumentParser) -> None:
 	ARGS = helper.get_first(program.parse_known_args())
 
 
-def run(producer_result : List[Producer]) -> List[Consumer]:
+def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 	lights = get_lights(ARGS.magic_hue_ip)
 
 	if not lights:
 		sys.exit(wording.get('light_not_found') + wording.get('exclamation_mark'))
-	return process_lights(lights, producer_result)
+	return process_lights(lights, producer_report)
 
 
 def discover_ips() -> List[str]:

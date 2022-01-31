@@ -1,26 +1,7 @@
 import os
-from typing import Any, Dict, List
+from typing import Any, Dict
 import platform
 import sys
-from chroma_feedback.typing import Status, Producer
-
-
-def resolve_producer_status(producer_result : List[Producer]) -> Status:
-	status: Status = 'passed'
-
-	# process producer
-
-	for producer in producer_result:
-		if producer['active'] is True:
-			if producer['status'] == 'started' and status not in ['errored', 'warned', 'failed']:
-				status = 'started'
-			if producer['status'] == 'errored' and status not in ['warned', 'failed']:
-				status = 'errored'
-			if producer['status'] == 'warned' and status != 'failed':
-				status = 'warned'
-			if producer['status'] == 'failed':
-				status = 'failed'
-	return status
 
 
 def parse_slug(slug : str) -> Dict[str, Any]:

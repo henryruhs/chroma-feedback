@@ -1,5 +1,6 @@
-from typing import Any
+from typing import Any, get_args
 from unittest.mock import patch
+from chroma_feedback.typing import Status
 from chroma_feedback.producer.bamboo.core import fetch
 
 
@@ -11,12 +12,11 @@ def test_fetch_plan_slug(request_mock : Any) -> None:
 		'key': 'redaxmedia-chroma_feedback',
 		'buildState': 'Successful'
 	}
-	result = fetch('http://localhost', 'redaxmedia-chroma_feedback', 'token')
+	result = fetch('http://localhost', 'redaxmedia-chroma_feedback', '__token__')
 
-	assert result[0]['producer'] == 'bamboo'
+	assert result[0]['name'] == 'bamboo'
 	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
-	assert result[0]['active'] is True
-	assert result[0]['status']
+	assert result[0]['status'] in get_args(Status)
 
 
 @patch('requests.get')
@@ -35,12 +35,11 @@ def test_fetch_project_slug(request_mock : Any) -> None:
 			]
 		}
 	}
-	result = fetch('http://localhost', 'redaxmedia', 'token')
+	result = fetch('http://localhost', 'redaxmedia', '__token__')
 
-	assert result[0]['producer'] == 'bamboo'
+	assert result[0]['name'] == 'bamboo'
 	assert result[0]['slug'] == 'redaxmedia-chroma_feedback'
-	assert result[0]['active'] is True
-	assert result[0]['status']
+	assert result[0]['status'] in get_args(Status)
 
 
 def test_fetch_invalid() -> None:

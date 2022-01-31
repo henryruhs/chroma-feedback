@@ -17,3 +17,13 @@ def test_post() -> None:
 	})
 
 	assert response.status_code == 201
+
+
+def test_parse_json() -> None:
+	response = request.post('https://jsonplaceholder.typicode.com/posts', headers =
+	{
+		'Content-Type': 'application/json'
+	})
+	data = request.parse_json(response)
+
+	assert data['id']

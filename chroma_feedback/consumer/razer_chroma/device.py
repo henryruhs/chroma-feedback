@@ -1,32 +1,33 @@
 from typing import Any, List
 import copy
-from chroma_feedback import color, helper
-from chroma_feedback.typing import Color, Consumer, Producer, Status
+
+from chroma_feedback import color, reporter
+from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 
 
 def get_devices(devices : Any, device_names : List[str]) -> Any:
 	if device_names:
 		for device in copy.copy(devices):
-			if device.name not in device_names:
+			if device.description not in device_names:
 				devices.remove(device)
 	return devices
 
 
-def process_devices(devices : Any, producer_result : List[Producer]) -> List[Consumer]:
+def process_devices(devices : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status: Status = helper.resolve_producer_status(producer_result)
+	status: Status = reporter.resolve_report_status(producer_report)
 
 	# process devices
 
 	for device in devices:
-		result.append(
-		{
-			'consumer': 'razer_chroma',
-			'type': 'device',
-			'name': device.name,
-			'active': set_device(device, color.get_by_status(status)),
-			'status': status
-		})
+		if set_device(device, color.get_by_status(status)):
+			result.append(
+			{
+				'name': 'razer_chroma',
+				'type': 'device',
+				'description': device.description,
+				'status': status
+			})
 	return result
 
 

@@ -5,9 +5,9 @@ from chroma_feedback.typing import Status, Producer
 def normalize_data(slug : str, status : str) -> Producer:
 	return\
 	{
-		'producer': 'datadog',
+		'name': 'datadog',
 		'slug': slug,
-		'active': True,
+		'url': None,
 		'status': normalize_status(status)
 	}
 
@@ -15,6 +15,8 @@ def normalize_data(slug : str, status : str) -> Producer:
 def normalize_status(status : str) -> Status:
 	status = helper.to_lower_case(status).replace(' ', '_')
 
+	if status == 'skipped':
+		return 'skipped'
 	if status == 'no_data':
 		return 'errored'
 	if status == 'warn':

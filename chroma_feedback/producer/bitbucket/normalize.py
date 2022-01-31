@@ -2,23 +2,24 @@ from chroma_feedback import helper
 from chroma_feedback.typing import Status, Producer
 
 
-def normalize_data(slug : str, status : str) -> Producer:
+def normalize_data(slug : str, status : str, result : str) -> Producer:
 	return\
 	{
-		'producer': 'bitbucket',
+		'name': 'bitbucket',
 		'slug': slug,
-		'active': True,
-		'status': normalize_status(status)
+		'url': None,
+		'status': normalize_status(status, result)
 	}
 
 
-def normalize_status(status : str) -> Status:
+def normalize_status(status : str, result : str) -> Status:
 	status = helper.to_lower_case(status)
+	result = helper.to_lower_case(result)
 
-	if status == 'inprogress':
+	if status in ['in_progress', 'pending']:
 		return 'started'
-	if status == 'stopped':
+	if result == 'stopped':
 		return 'errored'
-	if status == 'failed':
+	if result == 'failed':
 		return 'failed'
 	return 'passed'

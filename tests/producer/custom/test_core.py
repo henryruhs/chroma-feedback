@@ -1,5 +1,6 @@
-from typing import Any
+from typing import Any, get_args
 from unittest.mock import patch
+from chroma_feedback.typing import Status
 from chroma_feedback.producer.custom.core import fetch
 
 
@@ -11,16 +12,16 @@ def test_fetch_slug(request_mock : Any) -> None:
 		{
 			'producer': 'custom',
 			'slug': 'redaxmedia/chroma-feedback',
-			'active': True,
+			'url': 'https://localhost/redaxmedia/chroma-feedback/pipelines/1',
 			'status': 'passed'
 		}
 	]
 	result = fetch('https://localhost', 'redaxmedia/chroma-feedback')
 
-	assert result[0]['producer'] == 'custom'
+	assert result[0]['name'] == 'custom'
 	assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
-	assert result[0]['active'] is True
-	assert result[0]['status']
+	assert result[0]['url'] == 'https://localhost/redaxmedia/chroma-feedback/pipelines/1'
+	assert result[0]['status'] in get_args(Status)
 
 
 def test_fetch_invalid() -> None:

@@ -2,12 +2,12 @@ from chroma_feedback import helper
 from chroma_feedback.typing import Status, Producer
 
 
-def normalize_data(slug : str, status : str) -> Producer:
+def normalize_data(slug : str, url: str, status : str) -> Producer:
 	return\
 	{
-		'producer': 'gitlab',
+		'name': 'gitlab',
 		'slug': slug,
-		'active': True,
+		'url': url,
 		'status': normalize_status(status)
 	}
 
@@ -15,9 +15,11 @@ def normalize_data(slug : str, status : str) -> Producer:
 def normalize_status(status : str) -> Status:
 	status = helper.to_lower_case(status)
 
+	if status == 'skipped':
+		return 'skipped'
 	if status in ['created', 'running', 'pending']:
 		return 'started'
-	if status in ['canceled', 'skipped']:
+	if status == 'canceled':
 		return 'errored'
 	if status == 'failed':
 		return 'failed'

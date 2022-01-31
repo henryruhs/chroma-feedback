@@ -1,8 +1,5 @@
 import pytest
-try:
-	from unittest.mock import MagicMock
-except ImportError:
-	from mock import MagicMock
+from unittest.mock import MagicMock
 from chroma_feedback.consumer.luxafor_flag.device import process_devices
 
 MOCK = MagicMock()
@@ -16,16 +13,16 @@ def test_process_passed() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
-				'active': True,
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'passed'
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['description']== 'luxafor_flag'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'passed'
 	except:
 		pytest.skip()
@@ -39,16 +36,16 @@ def test_process_started() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
-				'active': True,
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'started'
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['description']== 'luxafor_flag'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'started'
 	except:
 		pytest.skip()
@@ -62,16 +59,16 @@ def test_process_errored() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
-				'active': True,
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'errored'
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['description']== 'luxafor_flag'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'errored'
 	except:
 		pytest.skip()
@@ -85,16 +82,16 @@ def test_process_warned() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
-				'active': True,
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'warned'
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['description']== 'luxafor_flag'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'warned'
 	except:
 		pytest.skip()
@@ -108,16 +105,16 @@ def test_process_failed() -> None:
 		},
 		[
 			{
-				'producer': 'github',
-				'slug': 'redaxmedia/chroma-feedback',
-				'active': True,
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
 				'status': 'failed'
 			}
 		])
 
-		assert result[0]['consumer'] == 'luxafor_flag'
+		assert result[0]['description']== 'luxafor_flag'
 		assert result[0]['type'] == 'device'
-		assert result[0]['name']
+		assert result[0]['description']
 		assert result[0]['status'] == 'failed'
 	except:
 		pytest.skip()

@@ -11,6 +11,17 @@ COLOR =\
 	'end': '\033[0m'
 }
 
+def format_by_status(text : str, status : Status) -> str:
+	if status == 'started':
+		return format_started(text)
+	if status == 'errored':
+		return format_errored(text)
+	if status == 'warned':
+		return format_warned(text)
+	if status == 'failed':
+		return format_failed(text)
+	return format_passed(text)
+
 
 def format_passed(text : str) -> str:
 	if helper.is_windows() is False:

@@ -11,6 +11,8 @@ install:
 - pip install flake8
 - pip install mock
 - pip install mypy
+- pip install pyqt5
+- pip install pyqt5-stubs
 - pip install pytest
 - pip install pytest-cov
 - pip install pytest-mock

@@ -1,6 +1,6 @@
 from typing import Any, List
-from chroma_feedback import color, helper
-from chroma_feedback.typing import Color, Consumer, Producer, Status
+from chroma_feedback import color, reporter
+from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
 
@@ -19,29 +19,30 @@ def get_group_name(group : Any) -> Any:
 		return device.get_group_label()
 
 
-def process_groups(groups : Any, producer_result : List[Producer]) -> List[Consumer]:
+def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status : Status = helper.resolve_producer_status(producer_result)
+	status : Status = reporter.resolve_report_status(producer_report)
 
 	# process groups
 
 	for group in groups:
+		set_group(group, color.get_by_status(status))
 		result.append(
 		{
-			'consumer': 'lifx_light',
+			'name': 'lifx_light',
 			'type': 'group',
-			'name': get_group_name(group),
-			'active': set_group(group, color.get_by_status(status)),
+			'description': get_group_name(group),
 			'status': status
 		})
 	return result
 
 
-def set_group(group : Any, color_config : Color) -> bool:
-	return group.set_power('on') is None and group.set_color(
+def set_group(group : Any, color_config : Color) -> None:
+	group.set_power('on')
+	group.set_color(
 	[
 		color_config['hue'],
 		color_config['saturation'][2],
 		color_config['brightness'][2],
 		color_config['kelvin']
-	]) is None
+	])

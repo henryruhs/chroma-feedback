@@ -5,9 +5,9 @@ from chroma_feedback.typing import Status, Producer
 def normalize_data(slug : str, status : str, result : str) -> Producer:
 	return\
 	{
-		'producer': 'azure',
+		'name': 'azure',
 		'slug': slug,
-		'active': True,
+		'url': None,
 		'status': normalize_status(status, result)
 	}
 
@@ -16,6 +16,8 @@ def normalize_status(status : str, result : str) -> Status:
 	status = helper.to_lower_case(status)
 	result = helper.to_lower_case(result)
 
+	if status == 'postponed':
+		return 'skipped'
 	if status in ['inprogress', 'notstarted']:
 		return 'started'
 	if status == 'cancelling' or result == 'canceled':

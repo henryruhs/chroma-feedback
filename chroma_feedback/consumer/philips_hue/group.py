@@ -1,7 +1,8 @@
 from typing import List, Any
 import copy
-from chroma_feedback import color, helper
-from chroma_feedback.typing import Color, Consumer, Producer, Status
+
+from chroma_feedback import color, reporter
+from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
 
@@ -13,21 +14,21 @@ def get_groups(groups : Any, group_names : List[str]) -> Any:
 	return groups
 
 
-def process_groups(groups : Any, producer_result : List[Producer]) -> List[Consumer]:
+def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status: Status = helper.resolve_producer_status(producer_result)
+	status: Status = reporter.resolve_report_status(producer_report)
 
 	# process groups
 
 	for index in groups:
-		result.append(
-		{
-			'consumer': 'philips_hue',
-			'type': 'group',
-			'name': groups[index]['name'],
-			'active': set_group(groups[index]['name'], color.get_by_status(status)),
-			'status': status
-		})
+		if set_group(groups[index]['name'], color.get_by_status(status)):
+			result.append(
+			{
+				'name': 'philips_hue',
+				'type': 'group',
+				'description': groups[index]['name'],
+				'status': status
+			})
 	return result
 
 
