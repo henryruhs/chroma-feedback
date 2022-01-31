@@ -42,7 +42,7 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 
 	for index, value in enumerate(producer_report):
 		if index < device.key_count():
-			device.set_key_image(index, create_image(device, value['status']))
+			device.set_key_image(index, create_image(device, value))
 			if 'url' in value and value['url']:
 				device.set_key_callback(lambda __checked__, url = value['url'] : webbrowser.open(url))
 
@@ -52,26 +52,20 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	return device.is_open() is False
 
 
-def create_image(device : Any, status : Status) -> Any:
-	color_config = color.get_by_status(status)
+def create_image(device : Any, producer_report_value : ProducerReport) -> Any:
+	color_config = color.get_by_status(producer_report_value['status'])
 	image_config = device.key_image_format()
 	transform = create_transform(image_config)
+	font_size = image_config['size'][1] / 8
 	pixmap = QPixmap(image_config['size'][0], image_config['size'][1])
 	pixmap.fill(Qt.transparent)
-	pen = QPen(Qt.white)
-	font = QFont()
-	font.setPointSize(12)
-	font.setBold(True)
-	ellipse_height = int(image_config['size'][0] * 0.2)
-	ellipse_width = int(image_config['size'][1] * 0.2)
-	ellipse_left = int(image_config['size'][0] / 2 - ellipse_height / 2)
-	ellipse_top = int(image_config['size'][1] / 2 - ellipse_width / 2)
 	painter = QPainter(pixmap)
-	painter.setBrush(QBrush(QColor(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]), Qt.SolidPattern))
-	painter.drawEllipse(ellipse_left, ellipse_top + 20, ellipse_height, ellipse_width)
-	painter.setPen(pen)
-	painter.setFont(font)
-	painter.drawText(QRect(0, -10, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, status.upper())
+	painter.setFont(create_font(font_size * 2.75))
+	painter.setPen(QPen(QColor(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])))
+	painter.drawText(QRect(0, font_size * 1.25, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, producer_report_value['symbol'])
+	painter.setFont(create_font(font_size * 0.875))
+	painter.setPen(QPen(Qt.white))
+	painter.drawText(QRect(0, font_size * -2, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, producer_report_value['name'].upper())
 	painter.end()
 	return pixmap_to_bytes(pixmap.transformed(transform), image_config)
 
@@ -86,6 +80,13 @@ def create_transform(image_config : Any) -> QTransform:
 	if image_config['rotation']:
 		transform.rotate(image_config['rotation'])
 	return transform
+
+
+def create_font(font_size : int) -> QFont:
+	font = QFont()
+	font.setPointSize(font_size)
+	font.setBold(True)
+	return font
 
 
 def pixmap_to_bytes(pixmap : QPixmap, image_config : Any) -> bytes:

@@ -13,7 +13,8 @@ def create_producer_report(producer_result : List[Producer]) -> List[ProducerRep
 		if producer['status'] == 'passed':
 			report.append(
 			{
-				'symbol': color.format_passed(wording.get('tick')),
+				'name': producer['name'],
+				'symbol': wording.get('tick'),
 				'message': wording.get('has_status').format(producer['slug'], producer['name'], 'passed'),
 				'url': producer['url'],
 				'status': producer['status']
@@ -21,7 +22,8 @@ def create_producer_report(producer_result : List[Producer]) -> List[ProducerRep
 		if producer['status'] == 'started':
 			report.append(
 			{
-				'symbol': color.format_started(wording.get('hourglass')),
+				'name': producer['name'],
+				'symbol': wording.get('hourglass'),
 				'message': wording.get('has_status').format(producer['slug'], producer['name'], 'started'),
 				'url': producer['url'],
 				'status': producer['status']
@@ -29,7 +31,8 @@ def create_producer_report(producer_result : List[Producer]) -> List[ProducerRep
 		if producer['status'] in ['errored', 'warned', 'failed']:
 			report.append(
 			{
-				'symbol': color.format_by_status(wording.get('cross'), producer['status']),
+				'name': producer['name'],
+				'symbol': wording.get('cross'),
 				'message': wording.get('has_status').format(producer['slug'], producer['name'], producer['status']),
 				'url': producer['url'],
 				'status': producer['status']
@@ -46,21 +49,24 @@ def create_consumer_report(consumer_result : List[Consumer]) -> List[ConsumerRep
 		if consumer['status'] == 'passed':
 			report.append(
 			{
-				'symbol': color.format_passed(wording.get('tick')),
+				'name': consumer['name'],
+				'symbol': wording.get('tick'),
 				'message': wording.get('set_status').format(consumer['description'], consumer['status']),
 				'status': consumer['status']
 			})
 		if consumer['status'] == 'started':
 			report.append(
 			{
-				'symbol': color.format_started(wording.get('hourglass')),
+				'name': consumer['name'],
+				'symbol': wording.get('hourglass'),
 				'message': wording.get('set_status').format(consumer['description'], consumer['status']),
 				'status': consumer['status']
 			})
 		if consumer['status'] in ['errored', 'warned', 'failed']:
 			report.append(
 			{
-				'symbol': color.format_by_status(wording.get('cross'), consumer['status']),
+				'name': consumer['name'],
+				'symbol': wording.get('cross'),
 				'message': wording.get('set_status').format(consumer['description'], consumer['status']),
 				'status': consumer['status']
 			})
@@ -91,6 +97,6 @@ def print_header() -> None:
 def print_report(report : List[Any]) -> None:
 	for value in report:
 		if helper.is_windows() is False:
-			print(value['symbol'] + ' ' + value['message'])
+			print(color.format_by_status(value['symbol'], value['status']) + ' ' + value['message'])
 		else:
 			print(value['message'])

@@ -13,6 +13,7 @@ def test_process_passed() -> None:
 		},
 		[
 			{
+				'name': 'github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
@@ -20,7 +21,7 @@ def test_process_passed() -> None:
 			}
 		])
 
-		assert result[0]['description']== 'thingm_blink1'
+		assert result[0]['name'] == 'thingm_blink1'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'passed'
@@ -36,6 +37,7 @@ def test_process_started() -> None:
 		},
 		[
 			{
+				'name': 'github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
@@ -43,7 +45,7 @@ def test_process_started() -> None:
 			}
 		])
 
-		assert result[0]['description']== 'thingm_blink1'
+		assert result[0]['name'] == 'thingm_blink1'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'started'
@@ -59,6 +61,7 @@ def test_process_errored() -> None:
 		},
 		[
 			{
+				'name': 'github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
@@ -66,7 +69,7 @@ def test_process_errored() -> None:
 			}
 		])
 
-		assert result[0]['description']== 'thingm_blink1'
+		assert result[0]['name'] == 'thingm_blink1'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'errored'
@@ -82,6 +85,7 @@ def test_process_warned() -> None:
 		},
 		[
 			{
+				'name': 'github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
@@ -89,7 +93,7 @@ def test_process_warned() -> None:
 			}
 		])
 
-		assert result[0]['description']== 'thingm_blink1'
+		assert result[0]['name'] == 'thingm_blink1'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'warned'
@@ -105,6 +109,7 @@ def test_process_failed() -> None:
 		},
 		[
 			{
+				'name': 'github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
@@ -112,7 +117,7 @@ def test_process_failed() -> None:
 			}
 		])
 
-		assert result[0]['description']== 'thingm_blink1'
+		assert result[0]['name'] == 'thingm_blink1'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'failed'

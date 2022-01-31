@@ -59,13 +59,14 @@ class Producer(TypedDict):
 
 
 class Consumer(TypedDict):
-	name: str
+	name: ConsumerName
 	type: ConsumerType
 	description: str
 	status: Status
 
 
 class ProducerReport(TypedDict):
+	name: ProducerName
 	symbol: str
 	message : str
 	url : Optional[str]
@@ -73,6 +74,7 @@ class ProducerReport(TypedDict):
 
 
 class ConsumerReport(TypedDict):
+	name: ConsumerName
 	symbol: str
 	message : str
 	status : Status
