@@ -36,12 +36,17 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	device.open()
-	device.reset()
+	key_total = device.key_count()
+
+	# smooth reset
+
+	for index in range(key_total):
+		device.set_key_image(index, None)
 
 	# process report
 
 	for index, report in enumerate(producer_report):
-		if index < device.key_count():
+		if index < key_total:
 			device.set_key_image(index, create_image(device, report))
 			if 'url' in report and report['url']:
 				device.set_key_callback(lambda __checked__, url = report['url'] : webbrowser.open(url))
