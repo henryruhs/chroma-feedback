@@ -4,7 +4,7 @@ from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QBrush, QColor, QIcon, QPainter, QPixmap
 from PyQt5.QtWidgets import QAction, QMenu, QSystemTrayIcon
-from chroma_feedback import color, loop, reporter, wording
+from chroma_feedback import color, logger, loop, reporter, wording
 from chroma_feedback.typing import Status, ProducerReport
 
 SYSTRAY = None
@@ -92,5 +92,5 @@ def action_stop(item_start : QAction, item_stop : QAction) -> None:
 
 
 def action_exit() -> None:
-	print()
-	sys.exit(wording.get('goodbye') + wording.get('exclamation_mark'))
+	logger.info(wording.get('goodbye') + wording.get('exclamation_mark'))
+	sys.exit()

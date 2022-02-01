@@ -2,7 +2,7 @@ import sys
 from typing import Any, List
 from argparse import ArgumentParser
 import importlib
-from chroma_feedback import helper, wording
+from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 
 
@@ -18,9 +18,11 @@ def process(program : ArgumentParser, producer_report : List[ProducerReport]) ->
 				consumer.init(program)
 				result.extend(consumer.run(producer_report))
 			except IOError:
-				sys.exit(wording.get('consumer_crashed').format(consumer_name) + wording.get('exclamation_mark'))
+				logger.error(wording.get('consumer_crashed').format(consumer_name) + wording.get('exclamation_mark'))
+				sys.exit()
 		else:
-			sys.exit(wording.get('consumer_not_supported').format(consumer_name) + wording.get('exclamation_mark'))
+			logger.error(wording.get('consumer_not_supported').format(consumer_name) + wording.get('exclamation_mark'))
+			sys.exit()
 	return result
 
 
@@ -28,4 +30,5 @@ def load_consumer(consumer_name : str) -> Any:
 	try:
 		return importlib.import_module('chroma_feedback.consumer.' + consumer_name)
 	except ImportError:
-		sys.exit(wording.get('consumer_not_found').format(consumer_name) + wording.get('exclamation_mark'))
+		logger.error(wording.get('consumer_not_found').format(consumer_name) + wording.get('exclamation_mark'))
+		sys.exit()

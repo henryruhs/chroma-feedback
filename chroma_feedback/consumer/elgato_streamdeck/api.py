@@ -1,6 +1,6 @@
 import sys
 from typing import Any
-from chroma_feedback import wording
+from chroma_feedback import logger, wording
 
 API = None
 
@@ -20,6 +20,8 @@ def api_factory() -> Any:
 		try:
 			return DeviceManager()
 		except ProbeError:
-			sys.exit(wording.get('connection_not_found').format('ELGATO STREAMDECK') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('ELGATO STREAMDECK') + wording.get('exclamation_mark'))
+			sys.exit()
 	except ImportError:
-		sys.exit(wording.get('package_not_found').format('STREAMDECK') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('STREAMDECK') + wording.get('exclamation_mark'))
+		sys.exit()

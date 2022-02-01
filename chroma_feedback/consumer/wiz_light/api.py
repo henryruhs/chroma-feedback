@@ -1,7 +1,7 @@
 import asyncio
 import sys
 from typing import Any
-from chroma_feedback import wording
+from chroma_feedback import logger, wording
 
 API = None
 LOOP = None
@@ -23,10 +23,12 @@ def api_factory(ip : str) -> Any:
 		try:
 			api = wizlight(ip, True)
 		except (WizLightConnectionError, WizLightTimeOutError):
-			sys.exit(wording.get('connection_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+			sys.exit()
 		return api
 	except ImportError:
-		sys.exit(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+		sys.exit()
 
 
 def get_loop() -> Any:
@@ -43,4 +45,5 @@ def get_builder() -> Any:
 
 		return PilotBuilder
 	except ImportError:
-		sys.exit(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+		sys.exit()

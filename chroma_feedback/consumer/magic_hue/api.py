@@ -1,6 +1,6 @@
 import sys
 from typing import Any
-from chroma_feedback import wording
+from chroma_feedback import logger, wording
 
 API = None
 
@@ -20,10 +20,12 @@ def api_factory(ip : str) -> Any:
 		try:
 			api = Light(ip)
 		except OSError:
-			sys.exit(wording.get('connection_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+			sys.exit()
 		return api
 	except ImportError:
-		sys.exit(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		sys.exit()
 
 
 def get_modes() -> Any:
@@ -32,4 +34,5 @@ def get_modes() -> Any:
 
 		return modes
 	except ImportError:
-		sys.exit(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		sys.exit()

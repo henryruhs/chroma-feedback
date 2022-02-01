@@ -2,7 +2,7 @@ import sys
 from typing import List
 from argparse import ArgumentParser
 import socket
-from chroma_feedback import helper, wording
+from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 from .group import get_groups, process_groups
 from .light import get_lights, process_lights
@@ -41,7 +41,8 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 		groups = get_groups(api.get_group(), ARGS.philips_hue_group)
 
 		if not groups:
-			sys.exit(wording.get('group_not_found') + wording.get('exclamation_mark'))
+			logger.error(wording.get('group_not_found') + wording.get('exclamation_mark'))
+			sys.exit()
 		return process_groups(groups, producer_report)
 
 	# use lights
@@ -49,7 +50,8 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 	lights = get_lights(api.get_light_objects(), ARGS.philips_hue_light)
 
 	if not lights:
-		sys.exit(wording.get('light_not_found') + wording.get('exclamation_mark'))
+		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))
+		sys.exit()
 	return process_lights(lights, producer_report)
 
 
@@ -68,5 +70,6 @@ def discover_ips() -> List[str]:
 	try:
 		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 	except socket.timeout:
-		sys.exit(wording.get('ip_not_found').format('PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
+		logger.error(wording.get('ip_not_found').format('PHILIPS HUE BRIDGE') + wording.get('exclamation_mark'))
+		sys.exit()
 	return ips

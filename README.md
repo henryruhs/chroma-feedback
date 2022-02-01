@@ -54,6 +54,7 @@ chroma-feedback [options]
 -I, --background-interval <background-interval>
 -B, --background-run
 -D, --dry-run
+-L, --log-level
 -h, --help
 ```
 

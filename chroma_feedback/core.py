@@ -1,8 +1,7 @@
-from __future__ import print_function
 import signal
 import sys
 from argparse import ArgumentParser
-from chroma_feedback import consumer, helper, loop, metadata, producer, systray, reporter, wording
+from chroma_feedback import consumer, helper, logger, loop, metadata, producer, systray, reporter, wording
 
 INTERVAL = 0
 
@@ -16,19 +15,26 @@ def cli() -> None:
 	program.add_argument('-I', '--background-interval', default = 60, type = int)
 	program.add_argument('-B', '--background-run', action = 'store_true')
 	program.add_argument('-D', '--dry-run', action = 'store_true')
+	program.add_argument('-L', '--log-level', default = 'info', choices = logger.get_log_level())
 	init(program)
 
 
 def init(program : ArgumentParser) -> None:
 	args = helper.get_first(program.parse_known_args())
 
+	# init logger
+
+	logger.init(args.log_level)
+
+	# validate version
+
 	if sys.version_info < (3, 8):
-		sys.exit(wording.get('version_not_supported').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
+		logger.error(wording.get('version_not_supported').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
+		sys.exit()
 
 	# report header
 
 	reporter.print_header()
-	print()
 
 	# handle background run
 
@@ -69,7 +75,8 @@ def run(program : ArgumentParser) -> None:
 	# handle exit
 
 	if not producer_result:
-		sys.exit(wording.get('result_not_found') + wording.get('exclamation_mark'))
+		logger.error(wording.get('result_not_found') + wording.get('exclamation_mark'))
+		sys.exit()
 
 	# report producer
 
@@ -77,7 +84,6 @@ def run(program : ArgumentParser) -> None:
 
 	if producer_report:
 		reporter.print_report(producer_report)
-		print()
 
 	# handle dry run
 
@@ -93,7 +99,6 @@ def run(program : ArgumentParser) -> None:
 
 		if consumer_report:
 			reporter.print_report(consumer_report)
-			print()
 
 	# handle systray
 
@@ -105,5 +110,5 @@ def run(program : ArgumentParser) -> None:
 
 
 def destroy() -> None:
-	print()
-	sys.exit(wording.get('goodbye') + wording.get('exclamation_mark'))
+	logger.info(wording.get('goodbye') + wording.get('exclamation_mark'))
+	sys.exit()

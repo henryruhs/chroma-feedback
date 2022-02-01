@@ -1,7 +1,7 @@
 import sys
 from typing import List
 from argparse import ArgumentParser
-from chroma_feedback import helper, wording
+from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 from .api import get_api
 from .group import get_groups, process_groups
@@ -32,7 +32,8 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 		groups = get_groups(ARGS.lifx_light_group)
 
 		if not groups:
-			sys.exit(wording.get('group_not_found') + wording.get('exclamation_mark'))
+			logger.error(wording.get('group_not_found') + wording.get('exclamation_mark'))
+			sys.exit()
 		return process_groups(groups, producer_report)
 
 	# use lights
@@ -40,5 +41,6 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 	lights = get_lights(api.get_lights(), ARGS.lifx_light_light)
 
 	if not lights:
-		sys.exit(wording.get('light_not_found') + wording.get('exclamation_mark'))
+		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))
+		sys.exit()
 	return process_lights(lights, producer_report)

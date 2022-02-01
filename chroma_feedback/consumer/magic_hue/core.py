@@ -2,7 +2,7 @@ import socket
 import sys
 from typing import List
 from argparse import ArgumentParser
-from chroma_feedback import helper, wording
+from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 from .light import get_lights, process_lights
 
@@ -32,7 +32,8 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 	lights = get_lights(ARGS.magic_hue_ip)
 
 	if not lights:
-		sys.exit(wording.get('light_not_found') + wording.get('exclamation_mark'))
+		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))
+		sys.exit()
 	return process_lights(lights, producer_report)
 
 
@@ -50,5 +51,6 @@ def discover_ips() -> List[str]:
 	try:
 		ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 	except OSError:
-		sys.exit(wording.get('ip_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		logger.error(wording.get('ip_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		sys.exit()
 	return ips

@@ -2,7 +2,7 @@ from typing import Any, List
 import sys
 from argparse import ArgumentParser
 import importlib
-from chroma_feedback import helper, wording
+from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Producer
 
 
@@ -16,7 +16,8 @@ def process(program : ArgumentParser) -> List[Producer]:
 			producer.init(program)
 			result.extend(producer.run())
 		except IOError:
-			sys.exit(wording.get('producer_crashed').format(producer_name) + wording.get('exclamation_mark'))
+			logger.error(wording.get('producer_crashed').format(producer_name) + wording.get('exclamation_mark'))
+			sys.exit()
 	return result
 
 
@@ -24,4 +25,5 @@ def load_producer(producer_name : str) -> Any:
 	try:
 		return importlib.import_module('chroma_feedback.producer.' + producer_name)
 	except ImportError:
-		sys.exit(wording.get('producer_not_found').format(producer_name) + wording.get('exclamation_mark'))
+		logger.error(wording.get('producer_not_found').format(producer_name) + wording.get('exclamation_mark'))
+		sys.exit()

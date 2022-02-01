@@ -1,7 +1,7 @@
 import sys
 from typing import List
 from argparse import ArgumentParser
-from chroma_feedback import helper, wording
+from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 from .device import get_devices, process_devices
 from .api import get_api
@@ -26,5 +26,6 @@ def run(producer_report: List[ProducerReport]) -> List[Consumer]:
 	devices = get_devices(api.all_lights(), ARGS.kuando_busylight_device)
 
 	if not devices:
-		sys.exit(wording.get('device_not_found') + wording.get('exclamation_mark'))
+		logger.error(wording.get('device_not_found') + wording.get('exclamation_mark'))
+		sys.exit()
 	return process_devices(devices, producer_report)

@@ -49,7 +49,13 @@ ConsumerType = Literal\
 	'device',
 	'group'
 ]
-
+LogLevel = Literal\
+[
+	'error',
+	'warn',
+	'info',
+	'debug'
+]
 
 class Producer(TypedDict):
 	name: ProducerName

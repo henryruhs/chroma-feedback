@@ -1,6 +1,5 @@
-from __future__ import print_function
 from typing import Any, List
-from chroma_feedback import color, helper, metadata, wording
+from chroma_feedback import color, helper, logger, metadata, wording
 from chroma_feedback.typing import Consumer, ConsumerReport, Producer, ProducerReport, Status
 
 
@@ -91,12 +90,14 @@ def resolve_report_status(producer_report : List[ProducerReport]) -> Status:
 
 
 def print_header() -> None:
-	print(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
+	logger.info(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
+	logger.info()
 
 
 def print_report(report : List[Any]) -> None:
 	for value in report:
 		if helper.is_windows() is False:
-			print(color.format_by_status(value['symbol'], value['status']) + ' ' + value['message'])
+			logger.info(color.format_by_status(value['symbol'], value['status']) + ' ' + value['message'])
 		else:
-			print(value['message'])
+			logger.info(value['message'])
+	logger.info()

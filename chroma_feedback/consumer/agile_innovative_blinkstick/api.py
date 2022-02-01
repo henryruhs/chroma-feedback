@@ -1,6 +1,6 @@
 import sys
 from typing import Any
-from chroma_feedback import wording
+from chroma_feedback import logger, wording
 
 API = None
 
@@ -22,7 +22,9 @@ def api_factory() -> Any:
 			api = BlinkStick
 			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
-			sys.exit(wording.get('connection_not_found').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))
+			sys.exit()
 		return api
 	except ImportError:
-		sys.exit(wording.get('package_not_found').format('BUSYLIGHT FOR HUMANS') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('BUSYLIGHT FOR HUMANS') + wording.get('exclamation_mark'))
+		sys.exit()
