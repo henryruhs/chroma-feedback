@@ -65,10 +65,10 @@ def create_image(device : Any, report : ProducerReport) -> Any:
 	pixmap = QPixmap(image_config['size'][0], image_config['size'][1])
 	pixmap.fill(Qt.transparent)
 	painter = QPainter(pixmap)
-	painter.setFont(create_font(font_size * 2.75))
+	painter.setFont(create_font(font_size * 2.75, QFont.Normal))
 	painter.setPen(QPen(QColor(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])))
 	painter.drawText(QRect(0, font_size * 1.25, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, report['symbol'])
-	painter.setFont(create_font(font_size * 0.875))
+	painter.setFont(create_font(font_size * 0.875, QFont.Bold))
 	painter.setPen(QPen(Qt.white))
 	painter.drawText(QRect(0, font_size * -2, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, report['name'].upper())
 	painter.end()
@@ -87,10 +87,10 @@ def create_transform(image_config : Any) -> QTransform:
 	return transform
 
 
-def create_font(font_size : int) -> QFont:
+def create_font(font_size : int, font_weight : int) -> QFont:
 	font = QFont()
 	font.setPointSize(font_size)
-	font.setBold(True)
+	font.setWeight(font_weight)
 	return font
 
 
