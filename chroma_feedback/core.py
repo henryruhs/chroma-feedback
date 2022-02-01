@@ -36,18 +36,18 @@ def init(program : ArgumentParser) -> None:
 
 	reporter.print_header()
 
-	# handle background run
+	# handle loop
 
+	application = loop.get_application()
+	timer = loop.get_timer()
+	timer.setInterval(100)
 	if args.background_run is True:
-		application = loop.get_application()
-		timer = loop.get_timer()
-		timer.setInterval(100)
 		timer.timeout.connect(lambda : background_run(program))
-		timer.singleShot(0, lambda : run(program)) # type: ignore
-		timer.start()
-		sys.exit(application.exec_())
 	else:
-		run(program)
+		timer.timeout.connect(lambda : sys.exit())
+	timer.singleShot(0, lambda : run(program))
+	timer.start()
+	sys.exit(application.exec_())
 
 
 def background_run(program : ArgumentParser) -> None:
@@ -102,7 +102,7 @@ def run(program : ArgumentParser) -> None:
 
 	# handle systray
 
-	if loop.is_created() is True:
+	if args.background_run is True and loop.is_created() is True:
 		if systray.is_created() is True:
 			systray.update(producer_report)
 		else:
