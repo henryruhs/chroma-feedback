@@ -1,6 +1,5 @@
 from typing import Any, List
 import copy
-import webbrowser
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QColor, QFont, QPainter, QPen, QPixmap, QTransform
@@ -48,8 +47,6 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	for index, report in enumerate(producer_report):
 		if index < key_total:
 			device.set_key_image(index, create_image(device, report))
-			if 'url' in report and report['url']:
-				device.set_key_callback(lambda __checked__, url = report['url'] : webbrowser.open(url))
 
 	# close device
 

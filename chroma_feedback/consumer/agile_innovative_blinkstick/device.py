@@ -24,7 +24,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 			{
 				'name': 'agile_innovative_blinkstick',
 				'type': 'device',
-				'description': ' '.join([device.info['product_string'], device.info['serial_number']]),
+				'description': device.info['product_string'],
 				'status': status
 			})
 	return result
@@ -32,4 +32,4 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 def set_device(device : Any, color_config : Color) -> bool:
 	device.on(tuple(color_config['rgb']))
-	return device.is_on() and device.is_animating()
+	return device.is_on is True
