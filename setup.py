@@ -78,6 +78,7 @@ setup(
 		'flake8==4.0.1 ',
 		'mock==4.0.3 ',
 		'mypy==0.931 ',
+		'pyqt5-stubs==5.15.2.0',
 		'pytest==6.2.5 ',
 		'pytest-cov==3.0.0 ',
 		'pytest-mock==3.7.0 ',
