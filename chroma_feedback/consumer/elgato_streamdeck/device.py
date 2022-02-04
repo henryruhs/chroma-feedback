@@ -27,7 +27,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 			{
 				'name': 'elgato_streamdeck',
 				'type': 'device',
-				'description': device.id(),
+				'description': device.DECK_TYPE,
 				'status': status
 			})
 	return result

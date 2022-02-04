@@ -16,10 +16,9 @@ def get_api() -> Any:
 def api_factory() -> Any:
 	try:
 		from busylight.lights import USBLightIOError, USBLightNotFound
-		from busylight.lights.embrava import Blynclight
+		from busylight.lights.embrava import Blynclight as api
 
 		try:
-			api = Blynclight
 			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
 			logger.error(wording.get('connection_not_found').format('EMBRAVA BLYNCLIGHT') + wording.get('exclamation_mark'))

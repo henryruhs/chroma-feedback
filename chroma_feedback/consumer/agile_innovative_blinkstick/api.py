@@ -16,10 +16,9 @@ def get_api() -> Any:
 def api_factory() -> Any:
 	try:
 		from busylight.lights import USBLightIOError, USBLightNotFound
-		from busylight.lights.agile_innovative import BlinkStick
+		from busylight.lights.agile_innovative import BlinkStick as api
 
 		try:
-			api = BlinkStick
 			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
 			logger.error(wording.get('connection_not_found').format('AGILE INNOVATIVE BLINKSTICK') + wording.get('exclamation_mark'))

@@ -16,10 +16,9 @@ def get_api() -> Any:
 def api_factory() -> Any:
 	try:
 		from busylight.lights import USBLightIOError, USBLightNotFound
-		from busylight.lights.thingm import Blink1
+		from busylight.lights.thingm import Blink1 as api
 
 		try:
-			api = Blink1
 			api.first_light().release()
 		except (USBLightIOError, USBLightNotFound):
 			logger.error(wording.get('connection_not_found').format('THINGM BLINK1') + wording.get('exclamation_mark'))
