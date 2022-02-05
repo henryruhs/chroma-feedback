@@ -3,8 +3,7 @@ from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
-from .light import filter_lights, process_lights
-from .api import get_lights
+from .light import get_lights, filter_lights, process_lights
 
 ARGS = None
 

@@ -30,6 +30,10 @@ def to_lower_case(__string__ : Any) -> str:
 	return str(__string__).lower()
 
 
+def stringify_bytes(__bytes__ : bytes) -> str:
+	return str(__bytes__, sys.stdin.encoding)
+
+
 def has_argument(argument : str) -> bool:
 	return any(argv.startswith(argument) for argv in sys.argv)
 

@@ -3,8 +3,7 @@ from typing import List
 from argparse import ArgumentParser
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
-from .lights import filter_lights, process_lights
-from .api import get_lights
+from .lights import get_lights, filter_lights, process_lights
 
 ARGS = None
 
@@ -17,7 +16,7 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--thingm-blink1-light.serial', action = 'append')
+		program.add_argument('--thingm-blink1-light-serial', action = 'append')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
