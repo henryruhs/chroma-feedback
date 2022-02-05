@@ -5,7 +5,7 @@ from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
 
-def get_lights(lights : Any, light_names : List[str]) -> Any:
+def filter_lights(lights : Any, light_names : List[str]) -> Any:
 	if light_names:
 		for light in copy.copy(lights):
 			if light.description not in light_names:

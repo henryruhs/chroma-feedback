@@ -4,11 +4,11 @@ from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api, get_modes
 
 
-def get_lights(ips : List[str]) -> Any:
+def get_lights(light_ips : List[str]) -> Any:
 	lights = []
 
-	for ip in ips:
-		lights.append(get_api(ip))
+	for light_ip in light_ips:
+		lights.append(get_api(light_ip))
 	return lights
 
 

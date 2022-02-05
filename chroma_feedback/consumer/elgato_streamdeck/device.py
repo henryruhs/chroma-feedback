@@ -7,10 +7,10 @@ from chroma_feedback import color, reporter
 from chroma_feedback.typing import Consumer, ProducerReport, Status
 
 
-def get_devices(devices : Any, device_names : List[str]) -> Any:
-	if device_names:
+def filter_devices(devices : Any, device_ids : List[str]) -> Any:
+	if device_ids:
 		for device in copy.copy(devices):
-			if device.id() not in device_names:
+			if device.id() not in device_ids:
 				devices.remove(device)
 	return devices
 
@@ -27,7 +27,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 			{
 				'name': 'elgato_streamdeck',
 				'type': 'device',
-				'description': device.DECK_TYPE,
+				'description': device.deck_type() + ' [' + device.id() + ']',
 				'status': status
 			})
 	return result
@@ -46,6 +46,7 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 
 	for index, report in enumerate(producer_report):
 		if index < key_total:
+			device.set_brightness(100)
 			device.set_key_image(index, create_image(device, report))
 
 	# close device

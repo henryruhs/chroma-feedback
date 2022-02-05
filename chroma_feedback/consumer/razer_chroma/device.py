@@ -5,7 +5,7 @@ from chroma_feedback import color, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 
 
-def get_devices(devices : Any, device_names : List[str]) -> Any:
+def filter_devices(devices : Any, device_names : List[str]) -> Any:
 	if device_names:
 		for device in copy.copy(devices):
 			if device.description not in device_names:

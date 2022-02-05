@@ -19,7 +19,6 @@ def api_factory() -> Any:
 
 		try:
 			api = DeviceManager()
-			api.sync_effects = True
 		except DaemonNotFound:
 			logger.error(wording.get('daemon_not_found').format('RAZER CHROMA') + wording.get('exclamation_mark'))
 			sys.exit()

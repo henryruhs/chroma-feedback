@@ -10,7 +10,10 @@ def get_groups(group_names : List[str]) -> Any:
 
 	if group_names:
 		for group_name in group_names:
-			groups.append(api.get_devices_by_group(group_name))
+			group = api.get_devices_by_group(group_name)
+
+			if group.get_device_list():
+				groups.append(group)
 	return groups
 
 

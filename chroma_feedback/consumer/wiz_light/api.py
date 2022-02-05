@@ -7,21 +7,21 @@ API = None
 LOOP = None
 
 
-def get_api(ip : str) -> Any:
+def get_api(light_ip : str) -> Any:
 	global API
 
 	if not API:
-		API = api_factory(ip)
+		API = api_factory(light_ip)
 	return API
 
 
-def api_factory(ip : str) -> Any:
+def api_factory(light_ip : str) -> Any:
 	try:
 		from pywizlight import wizlight
 		from pywizlight.exceptions import WizLightConnectionError, WizLightTimeOutError
 
 		try:
-			api = wizlight(ip, True)
+			api = wizlight(light_ip, True)
 		except (WizLightConnectionError, WizLightTimeOutError):
 			logger.error(wording.get('connection_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
 			sys.exit()

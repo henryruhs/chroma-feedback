@@ -5,20 +5,20 @@ from chroma_feedback import logger, wording
 API = None
 
 
-def get_api(ip : str) -> Any:
+def get_api(bridge_ip : str) -> Any:
 	global API
 
 	if not API:
-		API = api_factory(ip)
+		API = api_factory(bridge_ip)
 	return API
 
 
-def api_factory(ip : str) -> Any:
+def api_factory(bridge_ip : str) -> Any:
 	try:
 		from phue import Bridge, PhueRegistrationException, PhueRequestTimeout
 
 		try:
-			api = Bridge(ip)
+			api = Bridge(bridge_ip)
 		except (PhueRequestTimeout, OSError, ValueError):
 			logger.error(wording.get('connection_not_found').format('PHILIPS HUE') + wording.get('exclamation_mark'))
 			sys.exit()

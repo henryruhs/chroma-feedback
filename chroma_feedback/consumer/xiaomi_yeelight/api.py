@@ -5,20 +5,20 @@ from chroma_feedback import logger, wording
 API = None
 
 
-def get_api(ip : str) -> Any:
+def get_api(light_ip : str) -> Any:
 	global API
 
 	if not API:
-		API = api_factory(ip)
+		API = api_factory(light_ip)
 	return API
 
 
-def api_factory(ip : str) -> Any:
+def api_factory(light_ip : str) -> Any:
 	try:
 		from yeelight import Bulb, BulbException
 
 		try:
-			api = Bulb(ip)
+			api = Bulb(light_ip)
 		except BulbException:
 			logger.error(wording.get('connection_not_found').format('XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
 			sys.exit()

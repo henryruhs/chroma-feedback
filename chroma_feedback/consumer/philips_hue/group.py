@@ -6,7 +6,7 @@ from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
 
-def get_groups(groups : Any, group_names : List[str]) -> Any:
+def filter_groups(groups : Any, group_names : List[str]) -> Any:
 	if group_names:
 		for index in copy.copy(groups):
 			if groups[index]['name'] not in group_names:

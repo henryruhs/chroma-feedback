@@ -1,13 +1,13 @@
 import pytest
 from unittest.mock import MagicMock
-from chroma_feedback.consumer.agile_innovative_blinkstick.device import process_devices
+from chroma_feedback.consumer.agile_innovative_blinkstick.light import process_lights
 
 MOCK = MagicMock()
 
 
 def test_process_passed() -> None:
 	try:
-		result = process_devices(
+		result = process_lights(
 		{
 			MOCK
 		},
@@ -31,7 +31,7 @@ def test_process_passed() -> None:
 
 def test_process_started() -> None:
 	try:
-		result = process_devices(
+		result = process_lights(
 		{
 			MOCK
 		},
@@ -55,7 +55,7 @@ def test_process_started() -> None:
 
 def test_process_errored() -> None:
 	try:
-		result = process_devices(
+		result = process_lights(
 		{
 			MOCK
 		},
@@ -79,7 +79,7 @@ def test_process_errored() -> None:
 
 def test_process_warned() -> None:
 	try:
-		result = process_devices(
+		result = process_lights(
 		{
 			MOCK
 		},
@@ -103,7 +103,7 @@ def test_process_warned() -> None:
 
 def test_process_failed() -> None:
 	try:
-		result = process_devices(
+		result = process_lights(
 		{
 			MOCK
 		},
