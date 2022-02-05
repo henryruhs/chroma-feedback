@@ -8,6 +8,10 @@ def init(log_level : LogLevel) -> None:
 	logging.getLogger().setLevel(get_log_level()[log_level])
 
 
+def debug(message : str = '') -> None:
+	logging.debug(message)
+
+
 def info(message : str = '') -> None:
 	logging.info(message)
 
