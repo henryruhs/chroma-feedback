@@ -1,4 +1,4 @@
-from chroma_feedback import color
+from chroma_feedback import color, helper
 
 
 def test_format_by_status() -> None:
@@ -10,23 +10,38 @@ def test_format_by_status() -> None:
 
 
 def test_format_passed() -> None:
-	assert color.format_passed('__test__') == '\033[0;32m__test__\033[0m'
+	if helper.is_windows() is False:
+		assert color.format_passed('__test__') == '\033[0;32m__test__\033[0m'
+	else:
+		assert color.format_passed('__test__') == '__test__'
 
 
 def test_format_started() -> None:
-	assert color.format_started('__test__') == '\033[0;34m__test__\033[0m'
+	if helper.is_windows() is False:
+		assert color.format_started('__test__') == '\033[0;34m__test__\033[0m'
+	else:
+		assert color.format_passed('__test__') == '__test__'
 
 
 def test_format_errored() -> None:
-	assert color.format_errored('__test__') == '\033[0;37m__test__\033[0m'
+	if helper.is_windows() is False:
+		assert color.format_errored('__test__') == '\033[0;37m__test__\033[0m'
+	else:
+		assert color.format_passed('__test__') == '__test__'
 
 
 def test_format_warned() -> None:
-	assert color.format_warned('__test__') == '\033[0;33m__test__\033[0m'
+	if helper.is_windows() is False:
+		assert color.format_warned('__test__') == '\033[0;33m__test__\033[0m'
+	else:
+		assert color.format_passed('__test__') == '__test__'
 
 
 def test_format_failed() -> None:
-	assert color.format_failed('__test__') == '\033[0;31m__test__\033[0m'
+	if helper.is_windows() is False:
+		assert color.format_failed('__test__') == '\033[0;31m__test__\033[0m'
+	else:
+		assert color.format_passed('__test__') == '__test__'
 
 
 def test_get_by_status() -> None:

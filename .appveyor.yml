@@ -7,6 +7,15 @@ environment:
  matrix:
  - TOXENV: py39
 
+build_script:
+- pip install flake8
+- pip install mypy
+- pip install requests
+- pip install types-mock
+- pip install types-requests
+- flake8 bin/chroma-feedback chroma_feedback tests
+- mypy bin/chroma-feedback chroma_feedback tests
+
 test_script:
 - pip install mock
 - pip install pyqt5

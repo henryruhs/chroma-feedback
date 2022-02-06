@@ -20,10 +20,10 @@ def create_description(name : str, selector : str) -> str:
 
 def is_root() -> bool:
 	try:
-		return os.getuid() == 0
+		return os.getuid() == 0 #type:ignore
 	except AttributeError:
 		try:
-			return ctypes.windll.shell32.IsUserAnAdmin() == 1
+			return ctypes.windll.shell32.IsUserAnAdmin() == 1 #type:ignore
 		except AttributeError:
 			return False
 
