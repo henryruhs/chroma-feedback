@@ -71,5 +71,5 @@ def discover_bridge_ips() -> List[str]:
 	try:
 		bridge_ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 	except socket.timeout:
-		logger.warn(wording.get('ip_not_found').format('philips_hue') + wording.get('exclamation_mark'))
+		logger.warn(wording.get('ip_not_found').format('bridge') + wording.get('exclamation_mark'))
 	return bridge_ips
