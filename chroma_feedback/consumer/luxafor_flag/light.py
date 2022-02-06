@@ -1,7 +1,18 @@
-from typing import Any, List
 import copy
+from typing import Any, List
 from chroma_feedback import color, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
+from .api import get_api
+
+LIGHTS = None
+
+
+def get_lights() -> Any:
+	global LIGHTS
+
+	if not LIGHTS:
+		LIGHTS = get_api().all_lights()
+	return LIGHTS
 
 
 def filter_lights(lights : Any, light_ids : List[str]) -> Any:

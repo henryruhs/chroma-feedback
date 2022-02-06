@@ -1,5 +1,5 @@
-from typing import Any, List
 import copy
+from typing import Any, List
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QColor, QFont, QPainter, QPen, QPixmap, QTransform

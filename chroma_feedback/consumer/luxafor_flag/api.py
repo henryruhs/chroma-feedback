@@ -3,7 +3,6 @@ from typing import Any
 from chroma_feedback import logger, wording
 
 API = None
-LIGHTS = None
 
 
 def get_api() -> Any:
@@ -26,13 +25,5 @@ def api_factory() -> Any:
 			sys.exit()
 		return api
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('busylight') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('busylight-for-humans') + wording.get('exclamation_mark'))
 		sys.exit()
-
-
-def get_lights() -> Any:
-	global LIGHTS
-
-	if not LIGHTS:
-		LIGHTS = get_api().all_lights()
-	return LIGHTS
