@@ -10,6 +10,13 @@ def parse_slug(slug : str) -> Dict[str, Any]:
 	return {}
 
 
+def create_description(name : str, selector : str) -> str:
+	if name and selector:
+		return name + ' [' + selector + ']'
+	else:
+		return name or selector
+
+
 def is_root() -> bool:
 	return os.geteuid() == 0
 

@@ -5,7 +5,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QColor, QFont, QPainter, QPen, QPixmap, QTransform
 
-from chroma_feedback import color, reporter
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Consumer, ProducerReport, Status
 
 
@@ -29,7 +29,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 			{
 				'name': 'elgato_streamdeck',
 				'type': 'device',
-				'description': device.deck_type() + ' [' + device.id() + ']',
+				'description': helper.create_description(device.deck_type(), device.id()),
 				'status': status
 			})
 	return result

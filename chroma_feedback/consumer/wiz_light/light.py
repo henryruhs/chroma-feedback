@@ -1,10 +1,10 @@
 from typing import Any, List
 
-from chroma_feedback import color, reporter
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api, get_builder
 
-LIGHTS = []
+LIGHTS : List[Any] = []
 
 
 def get_lights(light_ips : List[str]) -> Any:
@@ -28,7 +28,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		{
 			'name': 'wiz_light',
 			'type': 'light',
-			'description': get_light_name(light) + ' [' + light.ip + ']',
+			'description': helper.create_description(get_light_name(light), light.ip),
 			'status': status
 		})
 	return result

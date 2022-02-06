@@ -1,7 +1,7 @@
 import copy
 from typing import Any, List
 
-from chroma_feedback import color, reporter
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
@@ -36,7 +36,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		{
 			'name': 'philips_hue',
 			'type': 'light',
-			'description': light.name + ' [' + light._get('uniqueid') + ']',
+			'description': helper.create_description(light.name, light._get('uniqueid')),
 			'status': status
 		})
 	return result

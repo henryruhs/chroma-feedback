@@ -1,7 +1,7 @@
 import copy
 from typing import Any, List
 
-from chroma_feedback import color, reporter
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 
 
@@ -25,7 +25,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		{
 			'name': 'lifx_light',
 			'type': 'light',
-			'description': light.get_label() + ' [' + light.get_ip_addr() + ']',
+			'description': helper.create_description(light.get_label(), light.get_ip_addr()),
 			'status': status
 		})
 	return result

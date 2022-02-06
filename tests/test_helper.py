@@ -12,6 +12,12 @@ def test_parse_slug() -> None:
 	assert 'project' not in helper.parse_slug(None)
 
 
+def test_create_description() -> None:
+	assert helper.create_description('name', 'selector') == 'name [selector]'
+	assert helper.create_description('name', None) == 'name'
+	assert helper.create_description(None, 'selector') == 'selector'
+
+
 def test_is_root() -> None:
 	assert helper.is_root() is not None
 

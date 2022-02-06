@@ -1,7 +1,7 @@
 import copy
 from typing import Any, List
 
-from chroma_feedback import color, reporter
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
@@ -36,7 +36,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 			{
 				'name': 'razer_chroma',
 				'type': 'device',
-				'description': device.name + ' [' + device.serial + ']',
+				'description': helper.create_description(device.name, device.serial),
 				'status': status
 			})
 	return result
