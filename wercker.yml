@@ -3,26 +3,23 @@ box: python:3.9
 build:
  steps:
  - script:
-    name: install
+    name: lint
     code: |
      pip install flake8
-     pip install mock
      pip install mypy
-     pip install pyqt5
-     pip install pyqt5-stubs
-     pip install pytest
-     pip install pytest-cov
-     pip install pytest-mock
      pip install requests
      pip install types-mock
      pip install types-requests
-
- - script:
-    name: lint
-    code: |
      flake8 bin/chroma-feedback chroma_feedback tests
      mypy bin/chroma-feedback chroma_feedback tests
 
  - script:
     name: test
-    code: pytest tests
+    code: |
+     pip install mock
+     pip install pyqt5
+     pip install pyqt5-stubs
+     pip install pytest
+     pip install pytest-mock
+     pip install requests
+     pytest tests
