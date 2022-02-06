@@ -1,26 +1,26 @@
 build: false
 
-platform:
-- x64
+image:
+- Visual Studio 2019
 
 environment:
- PYTHON: C:\\Python39-x64
+ matrix:
+ - TOXENV: py39
 
-install:
-- SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+build_script:
 - pip install flake8
-- pip install mock
 - pip install mypy
-- pip install pyqt5
-- pip install pyqt5-stubs
-- pip install pytest
-- pip install pytest-cov
-- pip install pytest-mock
 - pip install requests
 - pip install types-mock
 - pip install types-requests
-
-test_script:
 - flake8 bin/chroma-feedback chroma_feedback tests
 - mypy bin/chroma-feedback chroma_feedback tests
+
+test_script:
+- pip install mock
+- pip install pyqt5
+- pip install pyqt5-stubs
+- pip install pytest
+- pip install pytest-mock
+- pip install requests
 - pytest tests

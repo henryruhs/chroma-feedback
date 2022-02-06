@@ -1,3 +1,4 @@
+import ctypes
 import os
 import platform
 import sys
@@ -18,7 +19,13 @@ def create_description(name : str, selector : str) -> str:
 
 
 def is_root() -> bool:
-	return os.geteuid() == 0
+	try:
+		return os.getuid() == 0 #type:ignore
+	except AttributeError:
+		try:
+			return ctypes.windll.shell32.IsUserAnAdmin() == 1 #type:ignore
+		except AttributeError:
+			return False
 
 
 def is_linux() -> bool:
