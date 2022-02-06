@@ -9,7 +9,7 @@ from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Consumer, ProducerReport, Status
 from .api import get_api
 
-DEVICES = Any
+DEVICES = None
 
 
 def get_devices() -> Any:
@@ -59,7 +59,6 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 
 	for index, report in enumerate(producer_report):
 		if index < key_total:
-			device.set_brightness(100)
 			device.set_key_image(index, create_image(device, report))
 
 	# close device
