@@ -4,8 +4,7 @@ from typing import List
 
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
-from .api import get_api
-from .device import filter_devices, process_devices
+from .device import filter_devices, get_devices, process_devices
 
 ARGS = None
 
@@ -23,7 +22,7 @@ def init(program : ArgumentParser) -> None:
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	devices = filter_devices(get_api().enumerate(), ARGS.elgato_streamdeck_device_id)
+	devices = filter_devices(get_devices(), ARGS.elgato_streamdeck_device_id)
 
 	if not devices:
 		logger.error(wording.get('device_not_found') + wording.get('exclamation_mark'))

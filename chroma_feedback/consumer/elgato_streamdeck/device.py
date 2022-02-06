@@ -7,6 +7,17 @@ from PyQt5.QtGui import QColor, QFont, QPainter, QPen, QPixmap, QTransform
 
 from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Consumer, ProducerReport, Status
+from .api import get_api
+
+DEVICES = Any
+
+
+def get_devices() -> Any:
+	global DEVICES
+
+	if not DEVICES:
+		DEVICES = get_api().enumerate()
+	return DEVICES
 
 
 def filter_devices(devices : Any, device_ids : List[str]) -> Any:
