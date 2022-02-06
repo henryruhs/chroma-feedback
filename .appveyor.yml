@@ -1,7 +1,7 @@
 build: false
 
 image:
-- Visual Studio 2019
+- Ubuntu
 
 environment:
  matrix:
