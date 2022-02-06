@@ -1,5 +1,6 @@
-from typing import List
 from argparse import ArgumentParser
+from typing import List
+
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
 from .normalize import normalize_data, normalize_slug

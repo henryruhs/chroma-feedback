@@ -1,8 +1,9 @@
-from typing import get_args
-import os
 import pytest
-from chroma_feedback.typing import Status
+import os
+from typing import get_args
+
 from chroma_feedback.producer.wercker.core import fetch
+from chroma_feedback.typing import Status
 
 
 def test_fetch_slug() -> None:

@@ -1,13 +1,20 @@
 import os
-from typing import Any, Dict
 import platform
 import sys
+from typing import Any, Dict
 
 
 def parse_slug(slug : str) -> Dict[str, Any]:
 	if slug:
 		return dict(zip(['workspace', 'project'], slug.split('/')))
 	return {}
+
+
+def create_description(name : str, selector : str) -> str:
+	if name and selector:
+		return name + ' [' + selector + ']'
+	else:
+		return name or selector
 
 
 def is_root() -> bool:

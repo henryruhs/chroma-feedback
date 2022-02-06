@@ -1,7 +1,8 @@
 import signal
 import sys
 from argparse import ArgumentParser
-from chroma_feedback import consumer, helper, logger, loop, metadata, producer, systray, reporter, wording
+
+from chroma_feedback import consumer, helper, logger, loop, metadata, producer, reporter, systray, wording
 
 INTERVAL = 0
 

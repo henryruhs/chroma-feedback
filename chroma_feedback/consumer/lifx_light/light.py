@@ -1,13 +1,25 @@
-from typing import Any, List
 import copy
-from chroma_feedback import color, reporter
+from typing import Any, List
+
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
+from .api import get_api
+
+LIGHTS = None
 
 
-def get_lights(lights : Any, light_names : List[str]) -> Any:
-	if light_names:
+def get_lights() -> Any:
+	global LIGHTS
+
+	if not LIGHTS:
+		LIGHTS = get_api().get_lights()
+	return LIGHTS
+
+
+def filter_lights(lights : Any, light_ips : List[str]) -> Any:
+	if light_ips:
 		for light in copy.copy(lights):
-			if light.get_label() not in light_names:
+			if light.get_ip_addr() not in light_ips:
 				lights.remove(light)
 	return lights
 
@@ -24,7 +36,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		{
 			'name': 'lifx_light',
 			'type': 'light',
-			'description': light.get_label(),
+			'description': helper.create_description(light.get_label(), light.get_ip_addr()),
 			'status': status
 		})
 	return result

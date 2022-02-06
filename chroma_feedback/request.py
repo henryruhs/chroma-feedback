@@ -1,7 +1,9 @@
 from time import sleep
 from typing import Any, Dict
+
 import requests
-from requests import Response, RequestException
+from requests import RequestException, Response
+
 from chroma_feedback import logger, wording
 
 

@@ -1,10 +1,10 @@
 import sys
-from typing import List
 from argparse import ArgumentParser
+from typing import List
+
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
-from .device import get_devices, process_devices
-from .api import get_api
+from .light import filter_lights, get_lights, process_lights
 
 ARGS = None
 
@@ -17,15 +17,14 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--embrava-blynclight-device', action = 'append')
+		program.add_argument('--embrava-blynclight-light-id', action = 'append')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	api = get_api()
-	devices = get_devices(api.all_lights(), ARGS.embrava_blynclight_device)
+	lights = filter_lights(get_lights(), ARGS.embrava_blynclight_light_id)
 
-	if not devices:
-		logger.error(wording.get('device_not_found') + wording.get('exclamation_mark'))
+	if not lights:
+		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))
 		sys.exit()
-	return process_devices(devices, producer_report)
+	return process_lights(lights, producer_report)

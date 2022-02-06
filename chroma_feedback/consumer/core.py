@@ -1,7 +1,8 @@
-import sys
-from typing import Any, List
-from argparse import ArgumentParser
 import importlib
+import sys
+from argparse import ArgumentParser
+from typing import Any, List
+
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 
@@ -17,7 +18,7 @@ def process(program : ArgumentParser, producer_report : List[ProducerReport]) ->
 			try:
 				consumer.init(program)
 				result.extend(consumer.run(producer_report))
-			except IOError:
+			except:
 				logger.error(wording.get('consumer_crashed').format(consumer_name) + wording.get('exclamation_mark'))
 				sys.exit()
 		else:

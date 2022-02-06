@@ -1,5 +1,5 @@
 from chroma_feedback import helper
-from chroma_feedback.typing import Status, Color
+from chroma_feedback.typing import Color, Status
 
 COLOR =\
 {

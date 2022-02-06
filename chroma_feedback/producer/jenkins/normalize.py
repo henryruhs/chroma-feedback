@@ -1,5 +1,5 @@
 from chroma_feedback import helper
-from chroma_feedback.typing import Status, Producer
+from chroma_feedback.typing import Producer, Status
 
 
 def normalize_data(slug : str, result : str, is_building : bool) -> Producer:

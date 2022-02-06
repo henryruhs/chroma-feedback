@@ -1,33 +1,34 @@
 import sys
 from typing import Any
+
 from chroma_feedback import logger, wording
 
 API = None
 
 
-def get_api(ip : str) -> Any:
+def get_api(light_ip : str) -> Any:
 	global API
 
 	if not API:
-		API = api_factory(ip)
+		API = api_factory(light_ip)
 	return API
 
 
-def api_factory(ip : str) -> Any:
+def api_factory(light_ip : str) -> Any:
 	try:
 		from yeelight import Bulb, BulbException
 
 		try:
-			api = Bulb(ip)
+			api = Bulb(light_ip)
 		except BulbException:
-			logger.error(wording.get('connection_not_found').format('XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('xiaomi_yeelight') + wording.get('exclamation_mark'))
 			sys.exit()
 		try:
 			api.turn_on()
 		except BulbException:
-			logger.error(wording.get('enable_feature').format('LAN CONTROL', 'XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
+			logger.error(wording.get('enable_feature').format('lan control', 'xiaomi_yeelight') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('yeelight') + wording.get('exclamation_mark'))
 		sys.exit()

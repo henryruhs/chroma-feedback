@@ -1,15 +1,19 @@
 from typing import Any, List
+
 from chroma_feedback import color, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api, get_modes
 
+LIGHTS : List[Any] = []
 
-def get_lights(ips : List[str]) -> Any:
-	lights = []
 
-	for ip in ips:
-		lights.append(get_api(ip))
-	return lights
+def get_lights(light_ips : List[str]) -> List[Any]:
+	global LIGHTS
+
+	if not LIGHTS:
+		for light_ip in light_ips:
+			LIGHTS.append(get_api(light_ip))
+	return LIGHTS
 
 
 def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
@@ -24,7 +28,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		{
 			'name': 'magic_hue',
 			'type': 'light',
-			'description': light.description,
+			'description': light.name,
 			'status': status
 		})
 	return result

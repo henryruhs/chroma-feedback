@@ -1,16 +1,29 @@
-from typing import Any, List
 import copy
+from typing import Any, List
+
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QRect
+from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QColor, QFont, QPainter, QPen, QPixmap, QTransform
-from chroma_feedback import color, reporter
+
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Consumer, ProducerReport, Status
+from .api import get_api
+
+DEVICES = Any
 
 
-def get_devices(devices : Any, device_names : List[str]) -> Any:
-	if device_names:
+def get_devices() -> Any:
+	global DEVICES
+
+	if not DEVICES:
+		DEVICES = get_api().enumerate()
+	return DEVICES
+
+
+def filter_devices(devices : Any, device_ids : List[str]) -> Any:
+	if device_ids:
 		for device in copy.copy(devices):
-			if device.id() not in device_names:
+			if device.id() not in device_ids:
 				devices.remove(device)
 	return devices
 
@@ -19,7 +32,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
-	# process device
+	# process devices
 
 	for device in devices:
 		if set_device(device, producer_report):
@@ -27,7 +40,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 			{
 				'name': 'elgato_streamdeck',
 				'type': 'device',
-				'description': device.DECK_TYPE,
+				'description': helper.create_description(device.deck_type(), device.id()),
 				'status': status
 			})
 	return result
@@ -46,6 +59,7 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 
 	for index, report in enumerate(producer_report):
 		if index < key_total:
+			device.set_brightness(100)
 			device.set_key_image(index, create_image(device, report))
 
 	# close device

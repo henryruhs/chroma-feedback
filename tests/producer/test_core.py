@@ -1,8 +1,9 @@
-from typing import Any
-from argparse import ArgumentParser
-import sys
 import os
 import pytest
+import sys
+from argparse import ArgumentParser
+from typing import Any
+
 from chroma_feedback import producer
 
 

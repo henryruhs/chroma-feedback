@@ -1,30 +1,31 @@
 import sys
 from typing import Any
+
 from chroma_feedback import logger, wording
 
 API = None
 
 
-def get_api(ip : str) -> Any:
+def get_api(light_ip : str) -> Any:
 	global API
 
 	if not API:
-		API = api_factory(ip)
+		API = api_factory(light_ip)
 	return API
 
 
-def api_factory(ip : str) -> Any:
+def api_factory(light_ip : str) -> Any:
 	try:
 		from magichue import Light
 
 		try:
-			api = Light(ip)
+			api = Light(light_ip)
 		except OSError:
-			logger.error(wording.get('connection_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('magic_hue') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('python-magichue') + wording.get('exclamation_mark'))
 		sys.exit()
 
 
@@ -34,5 +35,5 @@ def get_modes() -> Any:
 
 		return modes
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('magic_hue') + wording.get('exclamation_mark'))
 		sys.exit()

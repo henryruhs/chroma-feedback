@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
+
 from chroma_feedback.consumer.philips_hue.light import process_lights
 
 MOCK = MagicMock()

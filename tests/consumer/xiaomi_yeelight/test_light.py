@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
+
 from chroma_feedback.consumer.xiaomi_yeelight.light import process_lights
 
 MOCK = MagicMock()

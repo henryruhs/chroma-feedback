@@ -1,4 +1,5 @@
 from typing import Any, List
+
 from chroma_feedback import color, helper, logger, metadata, wording
 from chroma_feedback.typing import Consumer, ConsumerReport, Producer, ProducerReport, Status
 
@@ -73,7 +74,7 @@ def create_consumer_report(consumer_result : List[Consumer]) -> List[ConsumerRep
 
 
 def resolve_report_status(producer_report : List[ProducerReport]) -> Status:
-	status: Status = 'passed'
+	status : Status = 'passed'
 
 	# process report
 
