@@ -4,9 +4,8 @@ from typing import List
 
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
-from .api import get_api
 from .group import get_groups, process_groups
-from .light import filter_lights, process_lights
+from .light import filter_lights, get_lights, process_lights
 
 ARGS = None
 
@@ -25,8 +24,6 @@ def init(program : ArgumentParser) -> None:
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	api = get_api()
-
 	if ARGS.lifx_light_group_name:
 		groups = get_groups(ARGS.lifx_light_group_name)
 
@@ -37,7 +34,7 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 
 	# fallback as needed
 
-	lights = filter_lights(api.get_lights(), ARGS.lifx_light_light_ip)
+	lights = filter_lights(get_lights(), ARGS.lifx_light_light_ip)
 
 	if not lights:
 		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))

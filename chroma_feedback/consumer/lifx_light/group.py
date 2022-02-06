@@ -4,18 +4,20 @@ from chroma_feedback import color, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
+GROUPS : List[Any] = []
 
-def get_groups(group_names : List[str]) -> Any:
-	api = get_api()
-	groups = []
 
-	if group_names:
-		for group_name in group_names:
-			group = api.get_devices_by_group(group_name)
+def get_groups(group_names : List[str]) -> List[Any]:
+	global GROUPS
 
-			if group.get_device_list():
-				groups.append(group)
-	return groups
+	if not GROUPS:
+		if group_names:
+			for group_name in group_names:
+				group = get_api().get_devices_by_group(group_name)
+
+				if group.get_device_list():
+					GROUPS.append(group)
+	return GROUPS
 
 
 def get_group_name(group : Any) -> Any:
