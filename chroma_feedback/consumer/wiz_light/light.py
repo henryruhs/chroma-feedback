@@ -7,7 +7,7 @@ from .api import get_api, get_builder
 LIGHTS : List[Any] = []
 
 
-def get_lights(light_ips : List[str]) -> Any:
+def get_lights(light_ips : List[str]) -> List[Any]:
 	global LIGHTS
 
 	if not LIGHTS:
