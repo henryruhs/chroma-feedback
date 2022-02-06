@@ -1,11 +1,9 @@
-import asyncio
 import sys
 from typing import Any
 
 from chroma_feedback import logger, wording
 
 API = None
-LOOP = None
 
 
 def get_api(light_ip : str) -> Any:
@@ -30,14 +28,6 @@ def api_factory(light_ip : str) -> Any:
 	except ImportError:
 		logger.error(wording.get('package_not_found').format('pywizlight') + wording.get('exclamation_mark'))
 		sys.exit()
-
-
-def get_loop() -> Any:
-	global LOOP
-
-	if not LOOP:
-		LOOP = asyncio.get_event_loop()
-	return LOOP
 
 
 def get_builder() -> Any:
