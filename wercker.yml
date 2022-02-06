@@ -17,7 +17,7 @@ build:
     name: test
     code: |
      apt-get update
-     apt-get install libgl1
+     apt-get install libgl1-mesa-glx
      pip install mock
      pip install pyqt5
      pip install pyqt5-stubs
