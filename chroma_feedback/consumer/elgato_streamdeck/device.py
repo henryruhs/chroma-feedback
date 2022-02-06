@@ -21,7 +21,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
-	# process device
+	# process devices
 
 	for device in devices:
 		if set_device(device, producer_report):

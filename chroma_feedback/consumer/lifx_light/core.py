@@ -19,15 +19,13 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--lifx-light-light-ip', action = 'append')
 		program.add_argument('--lifx-light-group-name', action = 'append')
+		program.add_argument('--lifx-light-light-ip', action = 'append')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 	api = get_api()
-
-	# use groups
 
 	if ARGS.lifx_light_group_name:
 		groups = get_groups(ARGS.lifx_light_group_name)
@@ -37,7 +35,7 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 			sys.exit()
 		return process_groups(groups, producer_report)
 
-	# use lights
+	# fallback as needed
 
 	lights = filter_lights(api.get_lights(), ARGS.lifx_light_light_ip)
 
