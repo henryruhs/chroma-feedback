@@ -1,6 +1,6 @@
 from typing import Any, List
 import copy
-from chroma_feedback import color, helper, reporter
+from chroma_feedback import color, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
@@ -18,7 +18,7 @@ def get_lights() -> Any:
 def filter_lights(lights : Any, light_ids : List[str]) -> Any:
 	if light_ids:
 		for light in copy.copy(lights):
-			if helper.stringify_bytes(light.path) not in light_ids:
+			if light.path not in light_ids:
 				lights.remove(light)
 	return lights
 
@@ -35,7 +35,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 			{
 				'name': 'embrava_blynclight',
 				'type': 'light',
-				'description': light.info['product_string'] + ' [' + helper.stringify_bytes(light.path) + ']',
+				'description': light.info['product_string'] + ' [' + light.path + ']',
 				'status': status
 			})
 	return result

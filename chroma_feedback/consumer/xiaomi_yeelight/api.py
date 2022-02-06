@@ -20,14 +20,14 @@ def api_factory(light_ip : str) -> Any:
 		try:
 			api = Bulb(light_ip)
 		except BulbException:
-			logger.error(wording.get('connection_not_found').format('XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('xiaomi_yeelight') + wording.get('exclamation_mark'))
 			sys.exit()
 		try:
 			api.turn_on()
 		except BulbException:
-			logger.error(wording.get('enable_feature').format('LAN CONTROL', 'XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
+			logger.error(wording.get('enable_feature').format('lan control', 'xiaomi_yeelight') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('yeelight') + wording.get('exclamation_mark'))
 		sys.exit()

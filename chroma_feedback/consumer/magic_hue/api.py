@@ -20,11 +20,11 @@ def api_factory(light_ip : str) -> Any:
 		try:
 			api = Light(light_ip)
 		except OSError:
-			logger.error(wording.get('connection_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('magic_hue') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('python-magichue') + wording.get('exclamation_mark'))
 		sys.exit()
 
 

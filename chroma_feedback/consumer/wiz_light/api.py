@@ -23,11 +23,11 @@ def api_factory(light_ip : str) -> Any:
 		try:
 			api = wizlight(light_ip, True)
 		except (WizLightConnectionError, WizLightTimeOutError):
-			logger.error(wording.get('connection_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('wiz_light') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('pywizlight') + wording.get('exclamation_mark'))
 		sys.exit()
 
 

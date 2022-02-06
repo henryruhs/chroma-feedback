@@ -21,9 +21,9 @@ def api_factory() -> Any:
 			api = DeviceManager()
 			api.enumerate()
 		except ProbeError:
-			logger.error(wording.get('connection_not_found').format('ELGATO STREAMDECK') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('elgato_streamdeck') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('STREAMDECK') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('streamdeck') + wording.get('exclamation_mark'))
 		sys.exit()

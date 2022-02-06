@@ -20,9 +20,9 @@ def api_factory() -> Any:
 		try:
 			api = LifxLAN()
 		except WorkflowException:
-			logger.error(wording.get('connection_not_found').format('LIFX LIGHT') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('lifx_light') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('LIFX LIGHT') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('lifxlan') + wording.get('exclamation_mark'))
 		sys.exit()
