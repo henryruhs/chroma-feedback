@@ -46,5 +46,5 @@ def get_builder() -> Any:
 
 		return PilotBuilder
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('WIZ LIGHT') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('pywizlight') + wording.get('exclamation_mark'))
 		sys.exit()

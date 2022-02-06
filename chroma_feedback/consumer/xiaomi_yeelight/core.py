@@ -54,5 +54,5 @@ def discover_light_ips() -> List[str]:
 	try:
 		light_ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
 	except socket.timeout:
-		logger.warn(wording.get('ip_not_found').format('XIAOMI YEELIGHT') + wording.get('exclamation_mark'))
+		logger.warn(wording.get('ip_not_found').format('xiaomi_yeelight') + wording.get('exclamation_mark'))
 	return light_ips

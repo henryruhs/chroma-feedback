@@ -35,5 +35,5 @@ def get_modes() -> Any:
 
 		return modes
 	except ImportError:
-		logger.error(wording.get('package_not_found').format('MAGIC HUE') + wording.get('exclamation_mark'))
+		logger.error(wording.get('package_not_found').format('magic_hue') + wording.get('exclamation_mark'))
 		sys.exit()
