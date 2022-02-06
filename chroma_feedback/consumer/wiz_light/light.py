@@ -15,7 +15,7 @@ def get_lights(light_ips : List[str]) -> Any:
 
 def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status: Status = reporter.resolve_report_status(producer_report)
+	status : Status = reporter.resolve_report_status(producer_report)
 
 	# process lights
 
@@ -34,7 +34,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 def get_light_name(light : Any) -> str:
 	loop = get_loop()
 	config = loop.run_until_complete(light.get_bulbtype())
-	return config.description
+	return config.name
 
 
 def set_light(light : Any, color_config : Color) -> bool:

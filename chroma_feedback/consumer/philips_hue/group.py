@@ -16,7 +16,7 @@ def filter_groups(groups : Any, group_names : List[str]) -> Any:
 
 def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status: Status = reporter.resolve_report_status(producer_report)
+	status : Status = reporter.resolve_report_status(producer_report)
 
 	# process groups
 

@@ -15,7 +15,7 @@ def get_lights(light_ips : List[str]) -> Any:
 
 def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
-	status: Status = reporter.resolve_report_status(producer_report)
+	status : Status = reporter.resolve_report_status(producer_report)
 
 	# process lights
 

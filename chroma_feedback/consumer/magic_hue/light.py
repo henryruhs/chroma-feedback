@@ -25,7 +25,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		{
 			'name': 'magic_hue',
 			'type': 'light',
-			'description': light.description,
+			'description': light.name,
 			'status': status
 		})
 	return result

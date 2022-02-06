@@ -74,7 +74,7 @@ def create_consumer_report(consumer_result : List[Consumer]) -> List[ConsumerRep
 
 
 def resolve_report_status(producer_report : List[ProducerReport]) -> Status:
-	status: Status = 'passed'
+	status : Status = 'passed'
 
 	# process report
 

@@ -18,8 +18,6 @@ def process(program : ArgumentParser, producer_report : List[ProducerReport]) ->
 			try:
 				consumer.init(program)
 				result.extend(consumer.run(producer_report))
-			except SystemExit:
-				sys.exit()
 			except:
 				logger.error(wording.get('consumer_crashed').format(consumer_name) + wording.get('exclamation_mark'))
 				sys.exit()
