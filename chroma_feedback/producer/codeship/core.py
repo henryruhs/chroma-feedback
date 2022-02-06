@@ -1,6 +1,7 @@
-from typing import Any, Dict, List
-from argparse import ArgumentParser
 import base64
+from argparse import ArgumentParser
+from typing import Any, Dict, List
+
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
 from .normalize import normalize_data

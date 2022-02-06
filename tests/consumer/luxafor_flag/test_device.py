@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
+
 from chroma_feedback.consumer.luxafor_flag.light import process_lights
 
 MOCK = MagicMock()

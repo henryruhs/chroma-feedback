@@ -1,6 +1,7 @@
 import asyncio
 import sys
 from typing import Any
+
 from chroma_feedback import logger, wording
 
 API = None

@@ -1,7 +1,7 @@
 import os
-from typing import Any, Dict
 import platform
 import sys
+from typing import Any, Dict
 
 
 def parse_slug(slug : str) -> Dict[str, Any]:

@@ -1,5 +1,5 @@
-from typing import List, Any
 import copy
+from typing import Any, List
 
 from chroma_feedback import color, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status

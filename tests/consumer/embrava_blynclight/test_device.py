@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
+
 from chroma_feedback.consumer.embrava_blynclight.light import process_lights
 
 MOCK = MagicMock()

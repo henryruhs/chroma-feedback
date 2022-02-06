@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
+
 from chroma_feedback.consumer.elgato_streamdeck.device import process_devices
 
 MOCK = MagicMock()

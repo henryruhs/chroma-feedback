@@ -1,10 +1,11 @@
 import sys
-from typing import List
 from argparse import ArgumentParser
+from typing import List
+
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
-from .device import filter_devices, process_devices
 from .api import get_api
+from .device import filter_devices, process_devices
 
 ARGS = None
 

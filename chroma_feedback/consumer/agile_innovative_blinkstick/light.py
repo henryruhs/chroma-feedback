@@ -1,5 +1,6 @@
 import copy
 from typing import Any, List
+
 from chroma_feedback import color, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api

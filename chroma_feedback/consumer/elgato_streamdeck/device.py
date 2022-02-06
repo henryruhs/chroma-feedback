@@ -1,8 +1,10 @@
 import copy
 from typing import Any, List
+
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QRect
+from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QColor, QFont, QPainter, QPen, QPixmap, QTransform
+
 from chroma_feedback import color, reporter
 from chroma_feedback.typing import Consumer, ProducerReport, Status
 

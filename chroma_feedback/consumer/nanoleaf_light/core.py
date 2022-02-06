@@ -1,7 +1,8 @@
 import socket
 import sys
-from typing import List
 from argparse import ArgumentParser
+from typing import List
+
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 from .light import get_lights, process_lights
