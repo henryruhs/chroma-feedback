@@ -52,7 +52,7 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	# process report
 
 	for index in range(device.key_count()):
-		if index < len(producer_report):
+		if index < len(producer_report) - 1:
 			device.set_key_image(index, create_image(device, producer_report[index]))
 		else:
 			device.set_key_image(index, None)
