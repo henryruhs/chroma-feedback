@@ -48,14 +48,18 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	device.open()
+	key_total = device.key_count()
 
 	# process report
 
-	for index in range(device.key_count()):
-		if index < len(producer_report) - 1:
-			device.set_key_image(index, create_image(device, producer_report[index]))
-		else:
-			device.set_key_image(index, None)
+	for index, report in enumerate(producer_report):
+		if index < key_total:
+			device.set_key_image(index, create_image(device, report))
+
+	# smooth clear
+
+	for index in range(len(producer_report), key_total):
+		device.set_key_image(index, None)
 
 	# close device
 
