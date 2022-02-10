@@ -42,12 +42,12 @@ jobs:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
      BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
      BITBUCKET_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
-     BUDDY_TOKEN: ${{ secrets.BUDDY_TOKEN }}
      CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
      CODESHIP_USERNAME: ${{ secrets.CODESHIP_USERNAME }}
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
  report:
@@ -72,12 +72,12 @@ jobs:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
      BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
      BITBUCKET_PASSWORD: ${{ secrets.BITBUCKET_PASSWORD }}
-     BUDDY_TOKEN: ${{ secrets.BUDDY_TOKEN }}
      CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
      CODESHIP_USERNAME: ${{ secrets.CODESHIP_USERNAME }}
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
   - run: coveralls --service=github
