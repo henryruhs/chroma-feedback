@@ -14,6 +14,7 @@ __all__ =\
 	'github',
 	'gitlab',
 	'jenkins',
+	'netlify',
 	'teamcity',
 	'travis',
 	'wercker'

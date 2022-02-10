@@ -23,6 +23,7 @@ ProducerName = Literal\
 	'github',
 	'gitlab',
 	'jenkins',
+	'netlify',
 	'teamcity',
 	'travis',
 	'wercker'

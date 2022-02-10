@@ -37,6 +37,7 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Produc
 	if 'organizations' in auth and 'token' in auth:
 		for organization in auth['organizations']:
 			projects = fetch_projects(host, organization['uuid'], auth['token'])
+
 			for project in projects:
 				if not slug or project['name'] in slug:
 					result.extend(fetch_builds(host, organization['uuid'], project['name'], project['uuid'], auth['token']))

@@ -22,9 +22,8 @@ def init(program : ArgumentParser) -> None:
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.datadog_slug:
-		for slug in ARGS.datadog_slug:
-			result.extend(fetch(ARGS.datadog_host, slug, ARGS.datadog_api_key, ARGS.datadog_application_key))
+	for slug in ARGS.datadog_slug:
+		result.extend(fetch(ARGS.datadog_host, slug, ARGS.datadog_api_key, ARGS.datadog_application_key))
 	return result
 
 

@@ -14,7 +14,7 @@ def init(program : ArgumentParser) -> None:
 
 	if not ARGS:
 		program.add_argument('--azure-host', default = 'https://dev.azure.com')
-		program.add_argument('--azure-slug', action = 'append')
+		program.add_argument('--azure-slug', action = 'append', required = True)
 		program.add_argument('--azure-token', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
@@ -22,9 +22,8 @@ def init(program : ArgumentParser) -> None:
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.azure_slug:
-		for slug in ARGS.azure_slug:
-			result.extend(fetch(ARGS.azure_host, slug, ARGS.azure_token))
+	for slug in ARGS.azure_slug:
+		result.extend(fetch(ARGS.azure_host, slug, ARGS.azure_token))
 	return result
 
 

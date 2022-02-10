@@ -30,6 +30,7 @@ setup(
 		'chroma_feedback.producer.github',
 		'chroma_feedback.producer.gitlab',
 		'chroma_feedback.producer.jenkins',
+		'chroma_feedback.producer.netlify',
 		'chroma_feedback.producer.teamcity',
 		'chroma_feedback.producer.travis',
 		'chroma_feedback.producer.wercker',

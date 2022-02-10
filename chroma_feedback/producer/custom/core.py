@@ -40,8 +40,7 @@ def fetch(host : str, slug : str) -> List[Producer]:
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if data:
-			for build in data:
-				if 'slug' in build and 'url' in build and 'status' in build:
-					result.append(normalize_data(build['slug'], build['url'], build['status']))
+		for build in data:
+			if 'slug' in build and 'url' in build and 'status' in build:
+				result.append(normalize_data(build['slug'], build['url'], build['status']))
 	return result

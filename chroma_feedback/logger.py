@@ -30,7 +30,7 @@ def error(message : str = '') -> None:
 
 
 def get_log_level() -> Any:
-	return \
+	return\
 	{
 		'error': ERROR,
 		'warn': WARNING,

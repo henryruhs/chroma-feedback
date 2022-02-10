@@ -14,7 +14,7 @@ def init(program : ArgumentParser) -> None:
 
 	if not ARGS:
 		program.add_argument('--bitbucket-host', default = 'https://api.bitbucket.org')
-		program.add_argument('--bitbucket-slug', action = 'append')
+		program.add_argument('--bitbucket-slug', action = 'append', required = True)
 		program.add_argument('--bitbucket-username', required = True)
 		program.add_argument('--bitbucket-password', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
