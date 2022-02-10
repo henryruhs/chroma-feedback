@@ -67,10 +67,10 @@ setup(
 		'phue==1.1',
 		'python-magichue==0.2.9.3',
 		'pyqt5==5.15.6',
-		'pywizlight==0.5.0',
+		'pywizlight==0.5.5',
 		'requests==2.27.1',
 		'streamdeck==0.9.0 ',
-		'yeelight==0.7.8'
+		'yeelight==0.7.9'
 	],
 	tests_require =
 	[

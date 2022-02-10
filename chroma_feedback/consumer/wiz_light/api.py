@@ -20,7 +20,7 @@ def api_factory(light_ip : str) -> Any:
 		from pywizlight.exceptions import WizLightConnectionError, WizLightTimeOutError
 
 		try:
-			api = wizlight(light_ip, True)
+			api = wizlight(light_ip)
 		except (WizLightConnectionError, WizLightTimeOutError):
 			logger.error(wording.get('connection_not_found').format('wiz_light') + wording.get('exclamation_mark'))
 			sys.exit()
