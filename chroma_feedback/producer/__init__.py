@@ -13,6 +13,7 @@ __all__ =\
 	'datadog',
 	'github',
 	'gitlab',
+	'heroku',
 	'jenkins',
 	'netlify',
 	'teamcity',

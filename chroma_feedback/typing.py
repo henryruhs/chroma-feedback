@@ -22,6 +22,7 @@ ProducerName = Literal\
 	'datadog',
 	'github',
 	'gitlab',
+	'heroku',
 	'jenkins',
 	'netlify',
 	'teamcity',
