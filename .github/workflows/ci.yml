@@ -47,8 +47,10 @@ jobs:
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     HEROKU_TOKEN: ${{ secrets.HEROKU_TOKEN }}
      NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
+     VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
  report:
   needs: test
@@ -77,8 +79,10 @@ jobs:
      CODESHIP_PASSWORD: ${{ secrets.CODESHIP_PASSWORD }}
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+     HEROKU_TOKEN: ${{ secrets.HEROKU_TOKEN }}
      NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
+     VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
   - run: coveralls --service=github
     env:
