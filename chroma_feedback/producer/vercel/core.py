@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
