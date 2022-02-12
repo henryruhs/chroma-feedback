@@ -1,4 +1,6 @@
+import atexit
 import copy
+import webbrowser
 from typing import Any, List
 
 from PyQt5 import QtCore
@@ -54,16 +56,18 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	for index, report in enumerate(producer_report):
 		if index < device.key_count():
 			device.set_key_image(index, create_image(device, report))
+			if 'url' in report and report['url']:
+				device.set_key_callback(lambda __streamdeck__, key, state : state is True and webbrowser.open(producer_report[key]['url']))
 
 	# smooth reset
 
 	for index in range(len(producer_report), device.key_count()):
 		device.set_key_image(index, None)
 
-	# close device
+	# close on destroy
 
-	device.close()
-	return device.is_open() is False
+	atexit.register(lambda : device.close())
+	return device.is_open() is True
 
 
 def create_image(device : Any, report : ProducerReport) -> Any:
