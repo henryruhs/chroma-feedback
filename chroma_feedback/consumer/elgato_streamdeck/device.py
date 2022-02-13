@@ -57,7 +57,7 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 		if index < device.key_count():
 			device.set_key_image(index, create_image(device, report))
 			if 'url' in report and report['url']:
-				device.set_key_callback(lambda __, key, state : state and webbrowser.open(producer_report[key]['url']))
+				device.set_key_callback(lambda __, key, state : state is True and webbrowser.open(producer_report[key]['url']))
 
 	# smooth reset
 
