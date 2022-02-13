@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from typing import List
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.typing import Headers, Producer
 from .normalize import normalize_data
 
 ARGS = None
@@ -32,12 +32,7 @@ def fetch(host : str, slug : str, api_key : str, application_key : str) -> List[
 	response = None
 
 	if host and slug and api_key and application_key:
-		response = request.get(host + '/api/v1/monitor/' + slug, headers =
-		{
-			'Accept': 'application/json',
-			'DD-API-KEY': api_key,
-			'DD-APPLICATION-KEY': application_key
-		})
+		response = request.get(host + '/api/v1/monitor/' + slug, headers = _create_headers(api_key, application_key))
 
 	# process response
 
@@ -47,3 +42,12 @@ def fetch(host : str, slug : str, api_key : str, application_key : str) -> List[
 		if 'name' in data and 'overall_state' in data:
 			result.append(normalize_data(data['name'], data['overall_state']))
 	return result
+
+
+def _create_headers(api_key : str, application_key : str) -> Headers:
+	return \
+	{
+		'Accept': 'application/json',
+		'DD-API-KEY': api_key,
+		'DD-APPLICATION-KEY': application_key
+	}

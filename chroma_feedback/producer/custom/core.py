@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from typing import List
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.typing import Headers, Producer
 from .normalize import normalize_data
 
 ARGS = None
@@ -30,10 +30,7 @@ def fetch(host : str, slug : str) -> List[Producer]:
 	response = None
 
 	if host and slug:
-		response = request.get(host + '/statuses/' + slug, headers =
-		{
-			'Accept': 'application/json'
-		})
+		response = request.get(host + '/statuses/' + slug, headers = _create_headers())
 
 	# process response
 
@@ -44,3 +41,10 @@ def fetch(host : str, slug : str) -> List[Producer]:
 			if 'slug' in build and 'url' in build and 'status' in build:
 				result.append(normalize_data(build['slug'], build['url'], build['status']))
 	return result
+
+
+def _create_headers() -> Headers:
+	return\
+	{
+		'Accept': 'application/json'
+	}

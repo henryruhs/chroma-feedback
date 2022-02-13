@@ -48,11 +48,7 @@ def fetch_projects(host : str, workspace : str, token : str) -> List[Dict[str, A
 	response = None
 
 	if host and workspace and token:
-		response = request.get(host + '/workspaces/' + workspace + '/projects', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/workspaces/' + workspace + '/projects', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 
@@ -70,11 +66,7 @@ def fetch_pipelines(host: str, workspace: str, project : str, token: str) -> Lis
 	response = None
 
 	if host and workspace and project and token:
-		response = request.get(host + '/workspaces/' + workspace + '/projects/' + project + '/pipelines/', headers=
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/workspaces/' + workspace + '/projects/' + project + '/pipelines/', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 

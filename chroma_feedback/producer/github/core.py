@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from typing import Any, Dict, List
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.typing import Headers, Producer
 from .normalize import normalize_data
 
 ARGS = None
@@ -48,11 +48,7 @@ def fetch_repositories(host : str, username : str, token : str) -> List[Dict[str
 	response = None
 
 	if host and username and token:
-		response = request.get(host + '/users/' + username + '/repos', headers =
-		{
-			'Accept': 'application/vnd.github.v3+json',
-			'Authorization': 'Token ' + token
-		})
+		response = request.get(host + '/users/' + username + '/repos', headers = _create_headers(token))
 
 	# process response
 
@@ -69,11 +65,7 @@ def fetch_runs(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/repos/' + slug + '/actions/runs', headers =
-		{
-			'Accept': 'application/vnd.github.v3+json',
-			'Authorization': 'Token ' + token
-		})
+		response = request.get(host + '/repos/' + slug + '/actions/runs', headers = _create_headers(token))
 
 	# process response
 
@@ -86,3 +78,11 @@ def fetch_runs(host : str, slug : str, token : str) -> List[Producer]:
 			if build and 'repository' in build and 'full_name' in build['repository'] and 'html_url' in build and 'status' in build and 'conclusion' in build:
 				result.append(normalize_data(build['repository']['full_name'], build['html_url'], build['status'], build['conclusion']))
 	return result
+
+
+def _create_headers(token : str) -> Headers:
+	return\
+	{
+		'Accept': 'application/vnd.github.v3+json',
+		'Authorization': 'Token ' + token
+	}

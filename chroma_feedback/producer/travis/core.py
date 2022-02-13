@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from typing import List
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.typing import Headers, Producer
 from .normalize import normalize_data
 
 ARGS = None
@@ -31,11 +31,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/repos/' + slug, headers =
-		{
-			'Accept': 'application/vnd.travis-ci.2.1+json',
-			'Authorization': 'Token ' + token
-		})
+		response = request.get(host + '/repos/' + slug, headers = _create_headers(token))
 
 	# process response
 
@@ -49,3 +45,11 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 				if 'slug' in repository and 'last_build_state' in repository and 'active' in repository:
 					result.append(normalize_data(repository['slug'], repository['last_build_state'], repository['active']))
 	return result
+
+
+def _create_headers(token : str) -> Headers:
+	return\
+	{
+		'Accept': 'application/vnd.travis-ci.2.1+json',
+		'Authorization': 'Token ' + token
+	}

@@ -1,4 +1,3 @@
-import base64
 from argparse import ArgumentParser
 from typing import Any, Dict, List
 
@@ -49,12 +48,7 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 	response = None
 
 	if host and username and password:
-		username_password = username + ':' + password
-		response = request.post(host + '/v2/auth', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
-		})
+		response = request.post(host + '/v2/auth', headers = request.create_basic_auth_headers(username, password))
 
 	# process response
 
@@ -72,11 +66,7 @@ def fetch_projects(host : str, organization_id : str, token : str) -> List[Dict[
 	response = None
 
 	if host and organization_id and token:
-		response = request.get(host + '/v2/organizations/' + organization_id + '/projects', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/v2/organizations/' + organization_id + '/projects', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 
@@ -94,11 +84,7 @@ def fetch_builds(host : str, organization_id : str, slug : str, project_id : str
 	response = None
 
 	if host and organization_id and project_id and token:
-		response = request.get(host + '/v2/organizations/' + organization_id + '/projects/' + project_id + '/builds', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/v2/organizations/' + organization_id + '/projects/' + project_id + '/builds', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 

@@ -31,11 +31,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/api/v3/applications/' + slug, headers =
-		{
-			'Accept': 'application/json',
-			'Bearer': token
-		})
+		response = request.get(host + '/api/v3/applications/' + slug, headers = request.create_bearer_auth_headers(token))
 
 	# process response
 
@@ -56,11 +52,7 @@ def fetch_runs(host : str, slug : str, application_id : str, token : str) -> Lis
 	response = None
 
 	if host and slug and application_id and token:
-		response = request.get(host + '/api/v3/runs?applicationId=' + application_id, headers =
-		{
-			'Accept': 'application/json',
-			'Bearer': token
-		})
+		response = request.get(host + '/api/v3/runs?applicationId=' + application_id, headers = request.create_bearer_auth_headers(token))
 
 	# process response
 

@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from typing import List
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.typing import Headers, Producer
 from .normalize import normalize_data
 
 ARGS = None
@@ -31,11 +31,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines', headers =
-		{
-			'Accept': 'application/json',
-			'Private-Token': token
-		})
+		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines', headers = _create_headers(token))
 
 	# process response
 
@@ -55,11 +51,7 @@ def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[P
 	response = None
 
 	if host and slug and pipeline_id and token:
-		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers =
-		{
-			'Accept': 'application/json',
-			'Private-Token': token
-		})
+		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers = _create_headers(token))
 
 	# process response
 
@@ -70,3 +62,11 @@ def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[P
 			if 'name' in build and 'web_url' in build and 'status' in build:
 				result.append(normalize_data(slug + '/' + build['name'], build['web_url'], build['status']))
 	return result
+
+
+def _create_headers(token : str) -> Headers:
+	return\
+	{
+		'Accept': 'application/json',
+		'Private-Token': token
+	}

@@ -47,11 +47,7 @@ def fetch_build(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/api/v1/sites/' + slug + '/deploys', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/api/v1/sites/' + slug + '/deploys', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 
@@ -69,11 +65,7 @@ def fetch_sites(host : str, token : str) -> List[Any]:
 	response = None
 
 	if host and token:
-		response = request.get(host + '/api/v1/sites', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/api/v1/sites', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 

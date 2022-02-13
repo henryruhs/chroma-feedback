@@ -1,4 +1,3 @@
-import base64
 from argparse import ArgumentParser
 from typing import List
 
@@ -32,12 +31,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		token = ':' + token
-		response = request.get(host + '/' + slug + '/_apis/build/builds?api-version=6.0', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
-		})
+		response = request.get(host + '/' + slug + '/_apis/build/builds?api-version=6.0', headers = request.create_basic_auth_headers('', token))
 
 	# process response
 

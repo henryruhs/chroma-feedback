@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
-from typing import Dict, List
+from typing import List
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.typing import Headers, Producer
 from .normalize import normalize_data
 
 ARGS = None
@@ -66,7 +66,7 @@ def fetch_slugs(host : str, token : str) -> List[str]:
 	return result
 
 
-def _create_headers(token : str) -> Dict[str, str]:
+def _create_headers(token : str) -> Headers:
 	return\
 	{
 		'Accept': 'application/vnd.heroku+json;version=3',

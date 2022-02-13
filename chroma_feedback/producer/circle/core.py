@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from typing import List
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.typing import Headers, Producer
 from .normalize import normalize_data
 
 ARGS = None
@@ -36,23 +36,11 @@ def fetch(host : str, organization : str, slug : str, __filter__ : str, token : 
 	response = None
 
 	if host and slug and __filter__ == 'mine' and token:
-		response = request.get(host + '/api/v2/project/' + slug + '/pipeline/mine', headers =
-		{
-			'Accept': 'application/json',
-			'Circle-Token': token
-		})
+		response = request.get(host + '/api/v2/project/' + slug + '/pipeline/mine', headers = _create_headers(token))
 	elif host and slug and token:
-		response = request.get(host + '/api/v2/project/' + slug + '/pipeline', headers =
-		{
-			'Accept': 'application/json',
-			'Circle-Token': token
-		})
+		response = request.get(host + '/api/v2/project/' + slug + '/pipeline', headers = _create_headers(token))
 	elif host and organization and token:
-		response = request.get(host + '/api/v2/pipeline?org-slug=' + organization, headers =
-		{
-			'Accept': 'application/json',
-			'Circle-Token': token
-		})
+		response = request.get(host + '/api/v2/pipeline?org-slug=' + organization, headers = _create_headers(token))
 
 	# process response
 
@@ -72,11 +60,7 @@ def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Producer
 	response = None
 
 	if host and pipeline_id and token:
-		response = request.get(host + '/api/v2/pipeline/' + pipeline_id + '/workflow', headers =
-		{
-			'Accept': 'application/json',
-			'Circle-Token': token
-		})
+		response = request.get(host + '/api/v2/pipeline/' + pipeline_id + '/workflow', headers = _create_headers(token))
 
 	# process response
 
@@ -88,3 +72,11 @@ def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Producer
 				if 'project_slug' in build and 'name' in build and 'status' in build:
 					result.append(normalize_data(build['project_slug'] + '/' + build['name'], build['status']))
 	return result
+
+
+def _create_headers(token : str) -> Headers:
+	return \
+	{
+		'Accept': 'application/json',
+		'Circle-Token': token
+	}
