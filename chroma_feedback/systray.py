@@ -52,7 +52,7 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 		item_report.setIcon(create_icon(report['status']))
 		item_report.setIconVisibleInMenu(True)
 		if 'url' in report and report['url']:
-			item_report.triggered.connect(lambda __checked__, url = report['url'] : webbrowser.open(url))
+			item_report.triggered.connect(lambda __, url = report['url'] : webbrowser.open(url))
 		else:
 			item_report.setDisabled(True)
 	if producer_report:
