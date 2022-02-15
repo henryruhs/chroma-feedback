@@ -22,11 +22,11 @@ def run() -> List[Producer]:
 	result = []
 
 	for slug in ARGS.travis_slug:
-		result.extend(fetch(ARGS.travis_host, slug, ARGS.travis_token))
+		result.extend(fetch_repositories(ARGS.travis_host, slug, ARGS.travis_token))
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List[Producer]:
+def fetch_repositories(host : str, slug : str, token : str) -> List[Producer]:
 	result = []
 	response = None
 
