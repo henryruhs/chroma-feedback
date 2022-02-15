@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import Dict, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
@@ -22,11 +22,14 @@ def run() -> List[Producer]:
 	result = []
 
 	for slug in ARGS.wercker_slug:
-		result.extend(fetch_applications(ARGS.wercker_host, slug, ARGS.wercker_token))
+		applications = fetch_applications(ARGS.wercker_host, slug, ARGS.wercker_token)
+
+		for application in applications:
+			result.extend(fetch_runs(ARGS.wercker_host, slug, application['id'], ARGS.wercker_token))
 	return result
 
 
-def fetch_applications(host : str, slug : str, token : str) -> List[Producer]:
+def fetch_applications(host : str, slug : str, token : str) -> List[Dict[str, str]]:
 	result = []
 	response = None
 
@@ -39,11 +42,11 @@ def fetch_applications(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'id' in data:
-			result.extend(fetch_runs(host, slug, data['id'], token))
+			result.append(data)
 		else:
 			for application in data:
 				if 'id' in application:
-					result.extend(fetch_runs(host, slug, application['id'], token))
+					result.append(application)
 	return result
 
 
