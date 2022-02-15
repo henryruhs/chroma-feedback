@@ -23,13 +23,13 @@ def run() -> List[Producer]:
 
 	if ARGS.vercel_slug:
 		for slug in ARGS.vercel_slug:
-			result.extend(fetch(ARGS.vercel_host, slug, ARGS.vercel_token))
+			result.extend(fetch_projects(ARGS.vercel_host, slug, ARGS.vercel_token))
 	else:
-		result.extend(fetch(ARGS.vercel_host, None, ARGS.vercel_token))
+		result.extend(fetch_projects(ARGS.vercel_host, None, ARGS.vercel_token))
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List[Producer]:
+def fetch_projects(host : str, slug : str, token : str) -> List[Producer]:
 	result : List[Producer] = []
 	response = None
 

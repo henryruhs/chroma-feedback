@@ -29,7 +29,7 @@ def test_run_one() -> None:
 def test_run_many() -> None:
 	if os.environ.get('TRAVIS_TOKEN'):
 		travis.core.ARGS = argparse.Namespace(
-			travis_host ='https://api.travis-ci.com',
+			travis_host = 'https://api.travis-ci.com',
 			travis_slug =
 			[
 				'redaxmedia'
