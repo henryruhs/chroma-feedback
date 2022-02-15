@@ -6,6 +6,7 @@ from typing import get_args
 from chroma_feedback.producer import travis
 from chroma_feedback.typing import Status
 
+
 def test_run_one() -> None:
 	if os.environ.get('TRAVIS_TOKEN'):
 		travis.core.ARGS = argparse.Namespace(

@@ -22,11 +22,11 @@ def run() -> List[Producer]:
 	result = []
 
 	for slug in ARGS.wercker_slug:
-		result.extend(fetch(ARGS.wercker_host, slug, ARGS.wercker_token))
+		result.extend(fetch_applications(ARGS.wercker_host, slug, ARGS.wercker_token))
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List[Producer]:
+def fetch_applications(host : str, slug : str, token : str) -> List[Producer]:
 	result = []
 	response = None
 
