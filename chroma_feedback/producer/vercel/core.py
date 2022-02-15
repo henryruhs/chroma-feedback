@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import Any, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
@@ -44,15 +44,16 @@ def fetch_projects(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'name' in data and 'latestDeployments' in data:
-			deployment = helper.get_first(data['latestDeployments'])
-
-			if 'readyState' in deployment:
-				result.append(normalize_data(data['name'], deployment['readyState']))
+			result.append(_normalize_data(data))
 		else:
 			for project in data:
 				if 'name' in project and 'latestDeployments' in project:
-					deployment = helper.get_first(project['latestDeployments'])
-
-					if 'readyState' in deployment:
-						result.append(normalize_data(project['name'], deployment['readyState']))
+					result.append(_normalize_data(project))
 	return result
+
+
+def _normalize_data(project : Any) -> Producer:
+	deployment = helper.get_first(project['latestDeployments'])
+
+	if 'readyState' in deployment:
+		return normalize_data(project['name'], deployment['readyState'])

@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import Any, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Headers, Producer
@@ -38,13 +38,17 @@ def fetch_repositories(host : str, slug : str, token : str) -> List[Producer]:
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if 'repo' in data and 'slug' in data['repo'] and 'last_build_state' in data['repo'] and 'active' in data['repo']:
-			result.append(normalize_data(data['repo']['slug'], data['repo']['last_build_state'], data['repo']['active']))
-		if 'repos' in data:
+		if 'repo' in data:
+			result.append(_normalize_data(data['repo']))
+		elif 'repos' in data:
 			for repository in data['repos']:
-				if 'slug' in repository and 'last_build_state' in repository and 'active' in repository:
-					result.append(normalize_data(repository['slug'], repository['last_build_state'], repository['active']))
+				result.append(_normalize_data(repository))
 	return result
+
+
+def _normalize_data(repository : Any) -> Producer:
+	if 'slug' in repository and 'last_build_state' in repository and 'active' in repository:
+		return normalize_data(repository['slug'], repository['last_build_state'], repository['active'])
 
 
 def _create_headers(token : str) -> Headers:
