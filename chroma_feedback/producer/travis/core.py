@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import Any, List, Optional
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Headers, Producer
@@ -46,9 +46,10 @@ def fetch_repositories(host : str, slug : str, token : str) -> List[Producer]:
 	return result
 
 
-def _normalize_data(repository : Any) -> Producer:
+def _normalize_data(repository : Any) -> Optional[Producer]:
 	if 'slug' in repository and 'last_build_state' in repository and 'active' in repository:
 		return normalize_data(repository['slug'], repository['last_build_state'], repository['active'])
+	return None
 
 
 def _create_headers(token : str) -> Headers:

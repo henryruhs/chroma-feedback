@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import Any, List, Optional
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
@@ -52,8 +52,9 @@ def fetch_projects(host : str, slug : str, token : str) -> List[Producer]:
 	return result
 
 
-def _normalize_data(project : Any) -> Producer:
+def _normalize_data(project : Any) -> Optional[Producer]:
 	deployment = helper.get_first(project['latestDeployments'])
 
 	if 'readyState' in deployment:
 		return normalize_data(project['name'], deployment['readyState'])
+	return None
