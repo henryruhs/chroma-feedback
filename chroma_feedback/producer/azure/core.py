@@ -41,7 +41,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		if 'value' in data:
 			build = helper.get_first(data['value'])
 
-			if 'project' in build and 'name' in build['project'] and 'status' in build:
+			if build and 'project' in build and 'name' in build['project'] and 'status' in build:
 				if 'result' in build:
 					result.append(normalize_data(build['project']['name'], build['status'], build['result']))
 				else:

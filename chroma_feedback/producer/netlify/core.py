@@ -55,7 +55,7 @@ def fetch_build(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 		build = helper.get_first(data)
 
-		if 'name' in build and 'admin_url' in build and 'state' in build:
+		if build and 'name' in build and 'admin_url' in build and 'state' in build:
 			result.append(normalize_data(build['name'], build['admin_url'], build['state']))
 	return result
 

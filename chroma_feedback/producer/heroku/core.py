@@ -43,7 +43,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 		build = helper.get_last(data)
 
-		if 'app' in build and 'name' in build['app'] and 'status' in build:
+		if build and 'app' in build and 'name' in build['app'] and 'status' in build:
 			result.append(normalize_data(build['app']['name'], build['status']))
 	return result
 
