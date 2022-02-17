@@ -27,8 +27,9 @@ def run() -> List[Producer]:
 	else:
 		sites = fetch_sites(ARGS.netlify_host, ARGS.netlify_token)
 
-		for site in sites:
-			result.extend(fetch_deployments(ARGS.netlify_host, site['id'], ARGS.netlify_token))
+		if sites:
+			for site in sites:
+				result.extend(fetch_deployments(ARGS.netlify_host, site['id'], ARGS.netlify_token))
 	return result
 
 

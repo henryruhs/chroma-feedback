@@ -1,14 +1,23 @@
-import os
 import pytest
+import os
+import argparse
 from typing import get_args
 
-from chroma_feedback.producer.heroku.core import fetch
+from chroma_feedback.producer import heroku
 from chroma_feedback.typing import Status
 
 
-def test_fetch_slug() -> None:
+def test_run_one() -> None:
 	if os.environ.get('HEROKU_TOKEN'):
-		result = fetch('https://api.heroku.com', 'chroma-feedback-test', os.environ.get('HEROKU_TOKEN'))
+		heroku.core.ARGS = argparse.Namespace(
+			heroku_host = 'https://api.heroku.com',
+			heroku_slug =
+			[
+				'chroma-feedback-test'
+			],
+			heroku_token = os.environ.get('HEROKU_TOKEN')
+		)
+		result = heroku.core.run()
 
 		assert result[0]['name'] == 'heroku'
 		assert result[0]['slug'] == 'chroma-feedback-test'
@@ -17,7 +26,17 @@ def test_fetch_slug() -> None:
 		pytest.skip('HEROKU_TOKEN is not defined')
 
 
-def test_fetch_invalid() -> None:
-	result = fetch(None, None, None)
+def test_run_many() -> None:
+	if os.environ.get('HEROKU_TOKEN'):
+		heroku.core.ARGS = argparse.Namespace(
+			heroku_host = 'https://api.heroku.com',
+			heroku_slug = None,
+			heroku_token = os.environ.get('HEROKU_TOKEN')
+		)
+		result = heroku.core.run()
 
-	assert not result
+		assert result[0]['name'] == 'heroku'
+		assert result[0]['slug'] == 'chroma-feedback-test'
+		assert result[0]['status'] in get_args(Status)
+	else:
+		pytest.skip('HEROKU_TOKEN is not defined')

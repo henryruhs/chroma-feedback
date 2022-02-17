@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import Any, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Headers, Producer
@@ -23,14 +23,17 @@ def run() -> List[Producer]:
 
 	if ARGS.heroku_slug:
 		for slug in ARGS.heroku_slug:
-			result.extend(fetch(ARGS.heroku_host, slug, ARGS.heroku_token))
+			result.extend(fetch_releases(ARGS.heroku_host, slug, ARGS.heroku_token))
 	else:
-		for slug in fetch_slugs(ARGS.heroku_host, ARGS.heroku_token):
-			result.extend(fetch(ARGS.heroku_host, slug, ARGS.heroku_token))
+		applications = fetch_applications(ARGS.heroku_host, ARGS.heroku_token)
+
+		if applications:
+			for application in applications:
+				result.extend(fetch_releases(ARGS.heroku_host, application['id'], ARGS.heroku_token))
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List[Producer]:
+def fetch_releases(host : str, slug : str, token : str) -> List[Producer]:
 	result = []
 	response = None
 
@@ -48,7 +51,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	return result
 
 
-def fetch_slugs(host : str, token : str) -> List[str]:
+def fetch_applications(host : str, token : str) -> List[Any]:
 	result = []
 	response = None
 
@@ -61,8 +64,8 @@ def fetch_slugs(host : str, token : str) -> List[str]:
 		data = request.parse_json(response)
 
 		for application in data:
-			if 'name' in application:
-				result.append(application['name'])
+			if 'id' in application:
+				result.append(application)
 	return result
 
 

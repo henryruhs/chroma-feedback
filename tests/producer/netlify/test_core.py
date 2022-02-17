@@ -7,7 +7,7 @@ from chroma_feedback.producer import netlify
 from chroma_feedback.typing import Status
 
 
-def test_core_one() -> None:
+def test_run_one() -> None:
 	if os.environ.get('NETLIFY_TOKEN'):
 		netlify.core.ARGS = argparse.Namespace(
 			netlify_host = 'https://api.netlify.com',
@@ -27,7 +27,7 @@ def test_core_one() -> None:
 		pytest.skip('NETLIFY_TOKEN is not defined')
 
 
-def test_core_many() -> None:
+def test_run_many() -> None:
 	if os.environ.get('NETLIFY_TOKEN'):
 		netlify.core.ARGS = argparse.Namespace(
 			netlify_host = 'https://api.netlify.com',
