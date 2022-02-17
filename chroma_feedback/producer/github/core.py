@@ -43,7 +43,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	return result
 
 
-def fetch_repositories(host : str, username : str, token : str) -> List[Dict[str, Any]]:
+def fetch_repositories(host : str, username : str, token : str) -> List[Any]:
 	result = []
 	response = None
 

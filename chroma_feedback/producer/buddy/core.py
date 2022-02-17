@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, Dict, List
+from typing import Any, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
@@ -43,7 +43,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	return result
 
 
-def fetch_projects(host : str, workspace : str, token : str) -> List[Dict[str, Any]]:
+def fetch_projects(host : str, workspace : str, token : str) -> List[Any]:
 	result = []
 	response = None
 

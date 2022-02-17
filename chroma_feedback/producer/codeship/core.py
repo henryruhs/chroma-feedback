@@ -61,7 +61,7 @@ def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
 	return result
 
 
-def fetch_projects(host : str, organization_id : str, token : str) -> List[Dict[str, Any]]:
+def fetch_projects(host : str, organization_id : str, token : str) -> List[Any]:
 	result = []
 	response = None
 

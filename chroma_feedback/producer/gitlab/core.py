@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import Any, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Headers, Producer
@@ -22,11 +22,15 @@ def run() -> List[Producer]:
 	result = []
 
 	for slug in ARGS.gitlab_slug:
-		result.extend(fetch(ARGS.gitlab_host, slug, ARGS.gitlab_token))
+		pipelines = fetch_pipelines(ARGS.gitlab_host, slug, ARGS.gitlab_token)
+
+		if pipelines:
+			for pipeline in pipelines:
+				result.extend(fetch_jobs(ARGS.gitlab_host, slug, str(pipeline['id']), ARGS.gitlab_token))
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List[Producer]:
+def fetch_pipelines(host : str, slug : str, token : str) -> List[Any]:
 	result = []
 	response = None
 
@@ -40,9 +44,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		pipeline = helper.get_first(data)
 
 		if pipeline and 'id' in pipeline:
-			pipeline_id = str(pipeline['id'])
-
-			result.extend(fetch_jobs(host, slug, pipeline_id, token))
+			result.append(pipeline)
 	return result
 
 
