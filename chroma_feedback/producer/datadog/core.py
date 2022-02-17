@@ -32,7 +32,7 @@ def fetch(host : str, slug : str, api_key : str, application_key : str) -> List[
 	response = None
 
 	if host and slug and api_key and application_key:
-		response = request.get(host + '/api/v1/monitor/' + slug, headers = _create_headers(api_key, application_key))
+		response = request.get(host + '/api/v1/monitor/' + slug, headers = create_headers(api_key, application_key))
 
 	# process response
 
@@ -44,7 +44,7 @@ def fetch(host : str, slug : str, api_key : str, application_key : str) -> List[
 	return result
 
 
-def _create_headers(api_key : str, application_key : str) -> Headers:
+def create_headers(api_key : str, application_key : str) -> Headers:
 	return \
 	{
 		'Accept': 'application/json',

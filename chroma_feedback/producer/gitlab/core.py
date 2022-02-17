@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Headers, Producer
@@ -22,38 +22,20 @@ def run() -> List[Producer]:
 	result = []
 
 	for slug in ARGS.gitlab_slug:
-		pipelines = fetch_pipelines(ARGS.gitlab_host, slug, ARGS.gitlab_token)
+		pipeline_ids = fetch_pipeline_ids(ARGS.gitlab_host, slug, ARGS.gitlab_token)
 
-		if pipelines:
-			for pipeline in pipelines:
-				result.extend(fetch_jobs(ARGS.gitlab_host, slug, str(pipeline['id']), ARGS.gitlab_token))
+		if pipeline_ids:
+			for pipeline_id in pipeline_ids:
+				result.extend(fetch(ARGS.gitlab_host, slug, pipeline_id, ARGS.gitlab_token))
 	return result
 
 
-def fetch_pipelines(host : str, slug : str, token : str) -> List[Any]:
-	result = []
-	response = None
-
-	if host and slug and token:
-		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines', headers = _create_headers(token))
-
-	# process response
-
-	if response and response.status_code == 200:
-		data = request.parse_json(response)
-		pipeline = helper.get_first(data)
-
-		if pipeline and 'id' in pipeline:
-			result.append(pipeline)
-	return result
-
-
-def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[Producer]:
+def fetch(host : str, slug : str, pipeline_id : str, token : str) -> List[Producer]:
 	result = []
 	response = None
 
 	if host and slug and pipeline_id and token:
-		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers = _create_headers(token))
+		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers = create_headers(token))
 
 	# process response
 
@@ -66,7 +48,25 @@ def fetch_jobs(host : str, slug : str, pipeline_id : str, token : str) -> List[P
 	return result
 
 
-def _create_headers(token : str) -> Headers:
+def fetch_pipeline_ids(host : str, slug : str, token : str) -> List[str]:
+	result = []
+	response = None
+
+	if host and slug and token:
+		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines', headers = create_headers(token))
+
+	# process response
+
+	if response and response.status_code == 200:
+		data = request.parse_json(response)
+		pipeline = helper.get_first(data)
+
+		if pipeline and 'id' in pipeline:
+			result.append(str(pipeline['id']))
+	return result
+
+
+def create_headers(token : str) -> Headers:
 	return\
 	{
 		'Accept': 'application/json',

@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Headers, Producer
@@ -23,22 +23,22 @@ def run() -> List[Producer]:
 
 	if ARGS.heroku_slug:
 		for slug in ARGS.heroku_slug:
-			result.extend(fetch_releases(ARGS.heroku_host, slug, ARGS.heroku_token))
+			result.extend(fetch(ARGS.heroku_host, slug, ARGS.heroku_token))
 	else:
-		applications = fetch_applications(ARGS.heroku_host, ARGS.heroku_token)
+		application_ids = fetch_application_ids(ARGS.heroku_host, ARGS.heroku_token)
 
-		if applications:
-			for application in applications:
-				result.extend(fetch_releases(ARGS.heroku_host, application['id'], ARGS.heroku_token))
+		if application_ids:
+			for application_id in application_ids:
+				result.extend(fetch(ARGS.heroku_host, application_id, ARGS.heroku_token))
 	return result
 
 
-def fetch_releases(host : str, slug : str, token : str) -> List[Producer]:
+def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	result = []
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/apps/' + slug + '/releases', headers = _create_headers(token))
+		response = request.get(host + '/apps/' + slug + '/releases', headers = create_headers(token))
 
 	# process response
 
@@ -51,12 +51,12 @@ def fetch_releases(host : str, slug : str, token : str) -> List[Producer]:
 	return result
 
 
-def fetch_applications(host : str, token : str) -> List[Any]:
+def fetch_application_ids(host : str, token : str) -> List[str]:
 	result = []
 	response = None
 
 	if host and token:
-		response = request.get(host + '/apps', headers = _create_headers(token))
+		response = request.get(host + '/apps', headers = create_headers(token))
 
 	# process response
 
@@ -65,11 +65,11 @@ def fetch_applications(host : str, token : str) -> List[Any]:
 
 		for application in data:
 			if 'id' in application:
-				result.append(application)
+				result.append(application['id'])
 	return result
 
 
-def _create_headers(token : str) -> Headers:
+def create_headers(token : str) -> Headers:
 	return\
 	{
 		'Accept': 'application/vnd.heroku+json;version=3',

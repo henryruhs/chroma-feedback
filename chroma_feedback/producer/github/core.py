@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, Dict, List
+from typing import Any, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Headers, Producer
@@ -48,7 +48,7 @@ def fetch_repositories(host : str, username : str, token : str) -> List[Any]:
 	response = None
 
 	if host and username and token:
-		response = request.get(host + '/users/' + username + '/repos', headers = _create_headers(token))
+		response = request.get(host + '/users/' + username + '/repos', headers = create_headers(token))
 
 	# process response
 
@@ -65,7 +65,7 @@ def fetch_runs(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/repos/' + slug + '/actions/runs', headers = _create_headers(token))
+		response = request.get(host + '/repos/' + slug + '/actions/runs', headers = create_headers(token))
 
 	# process response
 
@@ -80,7 +80,7 @@ def fetch_runs(host : str, slug : str, token : str) -> List[Producer]:
 	return result
 
 
-def _create_headers(token : str) -> Headers:
+def create_headers(token : str) -> Headers:
 	return\
 	{
 		'Accept': 'application/vnd.github.v3+json',

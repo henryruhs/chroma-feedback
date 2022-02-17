@@ -30,7 +30,7 @@ def fetch(host : str, slug : str) -> List[Producer]:
 	response = None
 
 	if host and slug:
-		response = request.get(host + '/statuses/' + slug, headers = _create_headers())
+		response = request.get(host + '/statuses/' + slug, headers = create_headers())
 
 	# process response
 
@@ -43,7 +43,7 @@ def fetch(host : str, slug : str) -> List[Producer]:
 	return result
 
 
-def _create_headers() -> Headers:
+def create_headers() -> Headers:
 	return\
 	{
 		'Accept': 'application/json'

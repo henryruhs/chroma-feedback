@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
@@ -23,17 +23,17 @@ def run() -> List[Producer]:
 
 	if ARGS.netlify_slug:
 		for slug in ARGS.netlify_slug:
-			result.extend(fetch_deployments(ARGS.netlify_host, slug, ARGS.netlify_token))
+			result.extend(fetch(ARGS.netlify_host, slug, ARGS.netlify_token))
 	else:
-		sites = fetch_sites(ARGS.netlify_host, ARGS.netlify_token)
+		site_ids = fetch_site_ids(ARGS.netlify_host, ARGS.netlify_token)
 
-		if sites:
-			for site in sites:
-				result.extend(fetch_deployments(ARGS.netlify_host, site['id'], ARGS.netlify_token))
+		if site_ids:
+			for site_id in site_ids:
+				result.extend(fetch(ARGS.netlify_host, site_id, ARGS.netlify_token))
 	return result
 
 
-def fetch_deployments(host : str, slug : str, token : str) -> List[Producer]:
+def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	result : List[Producer] = []
 	response = None
 
@@ -51,7 +51,7 @@ def fetch_deployments(host : str, slug : str, token : str) -> List[Producer]:
 	return result
 
 
-def fetch_sites(host : str, token : str) -> List[Any]:
+def fetch_site_ids(host : str, token : str) -> List[str]:
 	result = []
 	response = None
 
@@ -65,5 +65,5 @@ def fetch_sites(host : str, token : str) -> List[Any]:
 
 		for site in data:
 			if 'id' in site:
-				result.append(site)
+				result.append(site['id'])
 	return result

@@ -36,11 +36,11 @@ def fetch(host : str, organization : str, slug : str, __filter__ : str, token : 
 	response = None
 
 	if host and slug and __filter__ == 'mine' and token:
-		response = request.get(host + '/api/v2/project/' + slug + '/pipeline/mine', headers = _create_headers(token))
+		response = request.get(host + '/api/v2/project/' + slug + '/pipeline/mine', headers = create_headers(token))
 	elif host and slug and token:
-		response = request.get(host + '/api/v2/project/' + slug + '/pipeline', headers = _create_headers(token))
+		response = request.get(host + '/api/v2/project/' + slug + '/pipeline', headers = create_headers(token))
 	elif host and organization and token:
-		response = request.get(host + '/api/v2/pipeline?org-slug=' + organization, headers = _create_headers(token))
+		response = request.get(host + '/api/v2/pipeline?org-slug=' + organization, headers = create_headers(token))
 
 	# process response
 
@@ -60,7 +60,7 @@ def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Producer
 	response = None
 
 	if host and pipeline_id and token:
-		response = request.get(host + '/api/v2/pipeline/' + pipeline_id + '/workflow', headers = _create_headers(token))
+		response = request.get(host + '/api/v2/pipeline/' + pipeline_id + '/workflow', headers = create_headers(token))
 
 	# process response
 
@@ -74,7 +74,7 @@ def fetch_workflows(host : str, pipeline_id : str, token : str) -> List[Producer
 	return result
 
 
-def _create_headers(token : str) -> Headers:
+def create_headers(token : str) -> Headers:
 	return \
 	{
 		'Accept': 'application/json',

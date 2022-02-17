@@ -22,16 +22,16 @@ def run() -> List[Producer]:
 	result = []
 
 	for slug in ARGS.travis_slug:
-		result.extend(fetch_repositories(ARGS.travis_host, slug, ARGS.travis_token))
+		result.extend(fetch(ARGS.travis_host, slug, ARGS.travis_token))
 	return result
 
 
-def fetch_repositories(host : str, slug : str, token : str) -> List[Producer]:
+def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	result = []
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/repos/' + slug, headers = _create_headers(token))
+		response = request.get(host + '/repos/' + slug, headers = create_headers(token))
 
 	# process response
 
@@ -52,7 +52,7 @@ def _normalize_data(repository : Any) -> Optional[Producer]:
 	return None
 
 
-def _create_headers(token : str) -> Headers:
+def create_headers(token : str) -> Headers:
 	return\
 	{
 		'Accept': 'application/vnd.travis-ci.2.1+json',
