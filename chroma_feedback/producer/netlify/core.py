@@ -23,26 +23,16 @@ def run() -> List[Producer]:
 
 	if ARGS.netlify_slug:
 		for slug in ARGS.netlify_slug:
-			result.extend(fetch(ARGS.netlify_host, slug, ARGS.netlify_token))
+			result.extend(fetch_deployments(ARGS.netlify_host, slug, ARGS.netlify_token))
 	else:
-		result.extend(fetch(ARGS.netlify_host, None, ARGS.netlify_token))
-	return result
-
-
-def fetch(host : str, slug : str, token : str) -> List[Producer]:
-	result = []
-
-	if host and slug and token:
-		result.extend(fetch_build(host, slug, token))
-	elif host and token:
-		sites = fetch_sites(host, token)
+		sites = fetch_sites(ARGS.netlify_host, ARGS.netlify_token)
 
 		for site in sites:
-			result.extend(fetch_build(host, site['id'], token))
+			result.extend(fetch_deployments(ARGS.netlify_host, site['id'], ARGS.netlify_token))
 	return result
 
 
-def fetch_build(host : str, slug : str, token : str) -> List[Producer]:
+def fetch_deployments(host : str, slug : str, token : str) -> List[Producer]:
 	result : List[Producer] = []
 	response = None
 
