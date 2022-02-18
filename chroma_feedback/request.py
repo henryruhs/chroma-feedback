@@ -11,7 +11,9 @@ from chroma_feedback.typing import Headers
 
 def get(url : str, headers : Headers = None) -> Response:
 	try:
-		return requests.get(url, headers = headers, timeout = 10)
+		response = requests.get(url, headers = headers, timeout = 10)
+		logger.debug(wording.get('fetch_request').format('GET', response.url, response.status_code))
+		return response
 	except RequestException:
 		logger.warn(wording.get('retry_request').format('GET', 10))
 		sleep(10)
@@ -20,7 +22,9 @@ def get(url : str, headers : Headers = None) -> Response:
 
 def post(url : str, data : Any = None, headers : Headers = None) -> Response:
 	try:
-		return requests.post(url, data, headers = headers, timeout = 10)
+		response = requests.post(url, data, headers = headers, timeout = 10)
+		logger.debug(wording.get('fetch_request').format('POST', response.url, response.status_code))
+		return response
 	except RequestException:
 		logger.warn(wording.get('retry_request').format('POST', 10))
 		sleep(10)

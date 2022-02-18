@@ -14,6 +14,7 @@ WORDING =\
 	'consumer_not_found': 'Consumer {} not found',
 	'consumer_crashed': 'Consumer {} crashed',
 	'result_not_found': 'Result not found',
+	'fetch_request': 'Fetch {} {} {}',
 	'retry_request': 'Retry {} request in {} seconds',
 	'has_status': 'Status of {} on {} is {}',
 	'set_status': 'Set status of {} to {}',
