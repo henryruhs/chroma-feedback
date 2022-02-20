@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Headers, Producer
@@ -22,45 +22,20 @@ def run() -> List[Producer]:
 	result = []
 
 	for slug in ARGS.github_slug:
-		result.extend(fetch(ARGS.github_host, slug, ARGS.github_token))
+		slug_fragment = helper.parse_slug(slug)
+
+		if 'workspace' in slug_fragment and 'project' not in slug_fragment:
+			repository_names = fetch_repository_names(ARGS.github_host, slug_fragment['workspace'], ARGS.github_token)
+
+			if repository_names:
+				for repository_name in repository_names:
+					result.extend(fetch(ARGS.github_host, repository_name, ARGS.github_token))
+		elif 'workspace' in slug_fragment and 'project' in slug_fragment:
+			result.extend(fetch(ARGS.github_host, slug_fragment['workspace'] + '/' + slug_fragment['project'], ARGS.github_token))
 	return result
 
 
 def fetch(host : str, slug : str, token : str) -> List[Producer]:
-	result = []
-	SLUG = helper.parse_slug(slug)
-	repositories = None
-
-	if 'workspace' in SLUG and 'project' not in SLUG:
-		repositories = fetch_repositories(host, SLUG['workspace'], token)
-
-	if repositories:
-		for repository in repositories:
-			if 'full_name' in repository:
-				result.extend(fetch_runs(host, repository['full_name'], token))
-	elif 'workspace' in SLUG and 'project' in SLUG:
-		result.extend(fetch_runs(host, SLUG['workspace'] + '/' + SLUG['project'], token))
-	return result
-
-
-def fetch_repositories(host : str, username : str, token : str) -> List[Any]:
-	result = []
-	response = None
-
-	if host and username and token:
-		response = request.get(host + '/users/' + username + '/repos', headers = create_headers(token))
-
-	# process response
-
-	if response and response.status_code == 200:
-		data = request.parse_json(response)
-
-		for repository in data:
-			result.append(repository)
-	return result
-
-
-def fetch_runs(host : str, slug : str, token : str) -> List[Producer]:
 	result = []
 	response = None
 
@@ -77,6 +52,24 @@ def fetch_runs(host : str, slug : str, token : str) -> List[Producer]:
 
 			if build and 'repository' in build and 'full_name' in build['repository'] and 'html_url' in build and 'status' in build and 'conclusion' in build:
 				result.append(normalize_data(build['repository']['full_name'], build['html_url'], build['status'], build['conclusion']))
+	return result
+
+
+def fetch_repository_names(host : str, username : str, token : str) -> List[str]:
+	result = []
+	response = None
+
+	if host and username and token:
+		response = request.get(host + '/users/' + username + '/repos', headers = create_headers(token))
+
+	# process response
+
+	if response and response.status_code == 200:
+		data = request.parse_json(response)
+
+		for repository in data:
+			if 'full_name' in repository:
+				result.append(repository['full_name'])
 	return result
 
 
