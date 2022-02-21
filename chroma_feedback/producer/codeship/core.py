@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, Dict, List
+from typing import Any, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
@@ -21,29 +21,40 @@ def init(program : ArgumentParser) -> None:
 
 def run() -> List[Producer]:
 	result = []
+	authentication = fetch_authentication(ARGS.codeship_host, ARGS.codeship_username, ARGS.codeship_password)
 
-	if ARGS.codeship_slug:
-		result.extend(fetch(ARGS.codeship_host, ARGS.codeship_slug, ARGS.codeship_username, ARGS.codeship_password))
-	else:
-		result.extend(fetch(ARGS.codeship_host, None, ARGS.codeship_username, ARGS.codeship_password))
+	if 'organizations' in authentication and 'token' in authentication:
+		for organization in authentication['organizations']:
+			projects = fetch_projects(ARGS.codeship_host, organization['uuid'], authentication['token'])
+
+			if projects:
+				for project in projects:
+					if ARGS.codeship_slug is None or project['name'] in ARGS.codeship_slug:
+						result.extend(fetch(ARGS.codeship_host, organization['uuid'], project['name'], project['uuid'], authentication['token']))
 	return result
 
 
-def fetch(host : str, slug : str, username : str, password : str) -> List[Producer]:
+def fetch(host : str, organization_id : str, project_name : str, project_id : str, token : str) -> List[Producer]:
 	result = []
-	auth = fetch_auth(host, username, password)
+	response = None
 
-	if 'organizations' in auth and 'token' in auth:
-		for organization in auth['organizations']:
-			projects = fetch_projects(host, organization['uuid'], auth['token'])
+	if host and organization_id and project_id and token:
+		response = request.get(host + '/v2/organizations/' + organization_id + '/projects/' + project_id + '/builds', headers = request.create_bearer_auth_headers(token))
 
-			for project in projects:
-				if not slug or project['name'] in slug:
-					result.extend(fetch_builds(host, organization['uuid'], project['name'], project['uuid'], auth['token']))
+	# process response
+
+	if response and response.status_code == 200:
+		data = request.parse_json(response)
+
+		if 'builds' in data:
+			build = helper.get_first(data['builds'])
+
+			if build and 'status' in build:
+				result.append(normalize_data(project_name, build['status']))
 	return result
 
 
-def fetch_auth(host : str, username : str, password : str) -> Dict[str, Any]:
+def fetch_authentication(host : str, username : str, password : str) -> Any:
 	result = {}
 	response = None
 
@@ -76,24 +87,4 @@ def fetch_projects(host : str, organization_id : str, token : str) -> List[Any]:
 		if 'projects' in data:
 			for project in data['projects']:
 				result.append(project)
-	return result
-
-
-def fetch_builds(host : str, organization_id : str, slug : str, project_id : str, token : str) -> List[Producer]:
-	result = []
-	response = None
-
-	if host and organization_id and project_id and token:
-		response = request.get(host + '/v2/organizations/' + organization_id + '/projects/' + project_id + '/builds', headers = request.create_bearer_auth_headers(token))
-
-	# process response
-
-	if response and response.status_code == 200:
-		data = request.parse_json(response)
-
-		if 'builds' in data:
-			build = helper.get_first(data['builds'])
-
-			if build and 'status' in build:
-				result.append(normalize_data(slug, build['status']))
 	return result

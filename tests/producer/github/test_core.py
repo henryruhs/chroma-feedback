@@ -7,7 +7,6 @@ from chroma_feedback.producer import github
 from chroma_feedback.typing import Status
 
 
-
 def test_run_one() -> None:
 	if os.environ.get('GITHUB_TOKEN'):
 		github.core.ARGS = argparse.Namespace(
