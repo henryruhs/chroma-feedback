@@ -24,14 +24,15 @@ def run() -> List[Producer]:
 	for slug in ARGS.github_slug:
 		slug_fragment = helper.parse_slug(slug)
 
-		if 'workspace' in slug_fragment and 'project' not in slug_fragment:
-			repository_names = fetch_repository_names(ARGS.github_host, slug_fragment['workspace'], ARGS.github_token)
+		if 'workspace' in slug_fragment:
+			if 'project' in slug_fragment:
+				result.extend(fetch(ARGS.github_host, slug_fragment['workspace'] + '/' + slug_fragment['project'], ARGS.github_token))
+			else:
+				repository_names = fetch_repository_names(ARGS.github_host, slug_fragment['workspace'], ARGS.github_token)
 
-			if repository_names:
-				for repository_name in repository_names:
-					result.extend(fetch(ARGS.github_host, repository_name, ARGS.github_token))
-		elif 'workspace' in slug_fragment and 'project' in slug_fragment:
-			result.extend(fetch(ARGS.github_host, slug_fragment['workspace'] + '/' + slug_fragment['project'], ARGS.github_token))
+				if repository_names:
+					for repository_name in repository_names:
+						result.extend(fetch(ARGS.github_host, repository_name, ARGS.github_token))
 	return result
 
 
