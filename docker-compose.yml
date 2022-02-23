@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
  bamboo-agent:
@@ -9,12 +9,12 @@ services:
  bamboo-server:
   image: 'atlassian/bamboo-server'
   ports:
-  - 8085:8085
+  - '8085:8085'
 
  jenkins:
   image: 'jenkins/jenkins'
   ports:
-  - 8080:8080
+  - '8080:8080'
 
  teamcity-agent:
   image: 'jetbrains/teamcity-agent'
@@ -24,4 +24,4 @@ services:
  teamcity-server:
   image: 'jetbrains/teamcity-server'
   ports:
-  - 8111:8111
+  - '8111:8111'
