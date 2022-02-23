@@ -34,17 +34,9 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName,paused))))&locator=affectedProject:(id:' + slug + ')', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName,paused))))&locator=affectedProject:(id:' + slug + ')', headers = request.create_bearer_auth_headers(token))
 	elif host and token:
-		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName,paused))))', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(running,status,buildType(projectName,paused))))', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 

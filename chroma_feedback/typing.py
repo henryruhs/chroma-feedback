@@ -1,4 +1,4 @@
-from typing import List, Literal, Optional, TypedDict
+from typing import Dict, List, Literal, Optional, TypedDict
 
 Status = Literal\
 [
@@ -22,9 +22,12 @@ ProducerName = Literal\
 	'datadog',
 	'github',
 	'gitlab',
+	'heroku',
 	'jenkins',
+	'netlify',
 	'teamcity',
 	'travis',
+	'vercel',
 	'wercker'
 ]
 ConsumerName = Literal\
@@ -56,6 +59,7 @@ LogLevel = Literal\
 	'info',
 	'debug'
 ]
+Headers = Dict[str, str]
 
 class Producer(TypedDict):
 	name: ProducerName

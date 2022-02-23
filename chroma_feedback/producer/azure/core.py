@@ -1,4 +1,3 @@
-import base64
 from argparse import ArgumentParser
 from typing import List
 
@@ -14,7 +13,7 @@ def init(program : ArgumentParser) -> None:
 
 	if not ARGS:
 		program.add_argument('--azure-host', default = 'https://dev.azure.com')
-		program.add_argument('--azure-slug', action = 'append')
+		program.add_argument('--azure-slug', action = 'append', required = True)
 		program.add_argument('--azure-token', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
@@ -22,9 +21,8 @@ def init(program : ArgumentParser) -> None:
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.azure_slug:
-		for slug in ARGS.azure_slug:
-			result.extend(fetch(ARGS.azure_host, slug, ARGS.azure_token))
+	for slug in ARGS.azure_slug:
+		result.extend(fetch(ARGS.azure_host, slug, ARGS.azure_token))
 	return result
 
 
@@ -33,12 +31,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		token = ':' + token
-		response = request.get(host + '/' + slug + '/_apis/build/builds?api-version=6.0', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(token.encode('utf-8')).decode('ascii')
-		})
+		response = request.get(host + '/' + slug + '/_apis/build/builds?api-version=6.0', headers = request.create_basic_auth_headers('', token))
 
 	# process response
 
@@ -48,7 +41,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		if 'value' in data:
 			build = helper.get_first(data['value'])
 
-			if 'project' in build and 'name' in build['project'] and 'status' in build:
+			if build and 'project' in build and 'name' in build['project'] and 'status' in build:
 				if 'result' in build:
 					result.append(normalize_data(build['project']['name'], build['status'], build['result']))
 				else:

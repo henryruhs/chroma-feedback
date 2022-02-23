@@ -1,4 +1,3 @@
-import base64
 from argparse import ArgumentParser
 from typing import List
 
@@ -14,7 +13,7 @@ def init(program : ArgumentParser) -> None:
 
 	if not ARGS:
 		program.add_argument('--bitbucket-host', default = 'https://api.bitbucket.org')
-		program.add_argument('--bitbucket-slug', action = 'append')
+		program.add_argument('--bitbucket-slug', action = 'append', required = True)
 		program.add_argument('--bitbucket-username', required = True)
 		program.add_argument('--bitbucket-password', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
@@ -33,12 +32,7 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Produc
 	response = None
 
 	if host and slug and username and password:
-		username_password = username + ':' + password
-		response = request.get(host + '/2.0/repositories/' + slug + '/pipelines/', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Basic ' + base64.b64encode(username_password.encode('utf-8')).decode('ascii')
-		})
+		response = request.get(host + '/2.0/repositories/' + slug + '/pipelines/', headers = request.create_basic_auth_headers(username, password))
 
 	# process response
 

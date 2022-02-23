@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import Any, List, Optional
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.typing import Headers, Producer
 from .normalize import normalize_data
 
 ARGS = None
@@ -31,21 +31,30 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/repos/' + slug, headers =
-		{
-			'Accept': 'application/vnd.travis-ci.2.1+json',
-			'Authorization': 'Token ' + token
-		})
+		response = request.get(host + '/repos/' + slug, headers = create_headers(token))
 
 	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if 'repo' in data and 'slug' in data['repo'] and 'last_build_state' in data['repo'] and 'active' in data['repo']:
-			result.append(normalize_data(data['repo']['slug'], data['repo']['last_build_state'], data['repo']['active']))
-		if 'repos' in data:
+		if 'repo' in data:
+			result.append(_normalize_data(data['repo']))
+		elif 'repos' in data:
 			for repository in data['repos']:
-				if 'slug' in repository and 'last_build_state' in repository and 'active' in repository:
-					result.append(normalize_data(repository['slug'], repository['last_build_state'], repository['active']))
+				result.append(_normalize_data(repository))
 	return result
+
+
+def _normalize_data(repository : Any) -> Optional[Producer]:
+	if 'slug' in repository and 'last_build_state' in repository and 'active' in repository:
+		return normalize_data(repository['slug'], repository['last_build_state'], repository['active'])
+	return None
+
+
+def create_headers(token : str) -> Headers:
+	return\
+	{
+		'Accept': 'application/vnd.travis-ci.2.1+json',
+		'Authorization': 'Token ' + token
+	}

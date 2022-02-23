@@ -23,7 +23,7 @@ def run() -> List[Producer]:
 
 	if ARGS.appveyor_slug:
 		for slug in ARGS.appveyor_slug:
-			result.extend(fetch(ARGS.appveyor_host, slug, None))
+			result.extend(fetch(ARGS.appveyor_host, slug, ARGS.appveyor_token))
 	else:
 		result.extend(fetch(ARGS.appveyor_host, None, ARGS.appveyor_token))
 	return result
@@ -34,17 +34,9 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/api/projects/' + slug, headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/api/projects/' + slug, headers = request.create_bearer_auth_headers(token))
 	elif host and token:
-		response = request.get(host + '/api/projects', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/api/projects', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 

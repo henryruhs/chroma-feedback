@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import Any, Dict, List
+from typing import List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
@@ -22,59 +22,26 @@ def run() -> List[Producer]:
 	result = []
 
 	for slug in ARGS.buddy_slug:
-		result.extend(fetch(ARGS.buddy_host, slug, ARGS.buddy_token))
+		slug_fragment = helper.parse_slug(slug)
+
+		if 'workspace' in slug_fragment:
+			if 'project' in slug_fragment:
+				result.extend(fetch(ARGS.buddy_host, slug_fragment['workspace'], slug_fragment['project'], ARGS.buddy_token))
+			else:
+				project_names = fetch_project_names(ARGS.buddy_host, slug_fragment['workspace'], ARGS.buddy_token)
+
+				if project_names:
+					for project_name in project_names:
+						result.extend(fetch(ARGS.buddy_host, slug_fragment['workspace'], project_name, ARGS.buddy_token))
 	return result
 
 
-def fetch(host : str, slug : str, token : str) -> List[Producer]:
-	result = []
-	SLUG = helper.parse_slug(slug)
-	projects = None
-
-	if 'workspace' in SLUG and 'project' not in SLUG:
-		projects = fetch_projects(host, SLUG['workspace'], token)
-
-	if projects:
-		for project in projects:
-			if 'workspace' in SLUG and 'name' in project:
-				result.extend(fetch_pipelines(host, SLUG['workspace'], project['name'], token))
-	elif 'workspace' in SLUG and 'project' in SLUG:
-		result.extend(fetch_pipelines(host, SLUG['workspace'], SLUG['project'], token))
-	return result
-
-
-def fetch_projects(host : str, workspace : str, token : str) -> List[Dict[str, Any]]:
-	result = []
-	response = None
-
-	if host and workspace and token:
-		response = request.get(host + '/workspaces/' + workspace + '/projects', headers =
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
-
-	# process response
-
-	if response and response.status_code == 200:
-		data = request.parse_json(response)
-
-		if 'projects' in data:
-			for project in data['projects']:
-				result.append(project)
-	return result
-
-
-def fetch_pipelines(host: str, workspace: str, project : str, token: str) -> List[Producer]:
+def fetch(host: str, workspace: str, project : str, token: str) -> List[Producer]:
 	result = []
 	response = None
 
 	if host and workspace and project and token:
-		response = request.get(host + '/workspaces/' + workspace + '/projects/' + project + '/pipelines/', headers=
-		{
-			'Accept': 'application/json',
-			'Authorization': 'Bearer ' + token
-		})
+		response = request.get(host + '/workspaces/' + workspace + '/projects/' + project + '/pipelines/', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 
@@ -87,3 +54,23 @@ def fetch_pipelines(host: str, workspace: str, project : str, token: str) -> Lis
 			if pipeline and 'last_execution_status' in pipeline:
 				result.append(normalize_data(workspace + '/' + project, pipeline['last_execution_status']))
 	return result
+
+
+def fetch_project_names(host : str, workspace : str, token : str) -> List[str]:
+	result = []
+	response = None
+
+	if host and workspace and token:
+		response = request.get(host + '/workspaces/' + workspace + '/projects', headers = request.create_bearer_auth_headers(token))
+
+	# process response
+
+	if response and response.status_code == 200:
+		data = request.parse_json(response)
+
+		if 'projects' in data:
+			for project in data['projects']:
+				if 'name' in project:
+					result.append(project['name'])
+	return result
+

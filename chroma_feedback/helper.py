@@ -5,7 +5,7 @@ import sys
 from typing import Any, Dict
 
 
-def parse_slug(slug : str) -> Dict[str, Any]:
+def parse_slug(slug : str) -> Dict[str, str]:
 	if slug:
 		return dict(zip(['workspace', 'project'], slug.split('/')))
 	return {}

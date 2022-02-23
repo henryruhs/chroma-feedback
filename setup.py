@@ -26,12 +26,16 @@ setup(
 		'chroma_feedback.producer.buddy',
 		'chroma_feedback.producer.circle',
 		'chroma_feedback.producer.codeship',
+		'chroma_feedback.producer.custom',
 		'chroma_feedback.producer.datadog',
 		'chroma_feedback.producer.github',
 		'chroma_feedback.producer.gitlab',
+		'chroma_feedback.producer.heroku',
 		'chroma_feedback.producer.jenkins',
+		'chroma_feedback.producer.netlify',
 		'chroma_feedback.producer.teamcity',
 		'chroma_feedback.producer.travis',
+		'chroma_feedback.producer.vercel',
 		'chroma_feedback.producer.wercker',
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative_blinkstick',
@@ -61,16 +65,16 @@ setup(
 	},
 	install_requires =
 	[
-		'busylight-for-humans==0.15.0',
+		'busylight-for-humans==0.15.2',
 		'lifxlan==1.2.7',
 		'nanoleafapi==2.1.1',
 		'phue==1.1',
 		'python-magichue==0.2.9.3',
 		'pyqt5==5.15.6',
-		'pywizlight==0.5.0',
+		'pywizlight==0.5.13',
 		'requests==2.27.1',
 		'streamdeck==0.9.0 ',
-		'yeelight==0.7.8'
+		'yeelight==0.7.9'
 	],
 	tests_require =
 	[
@@ -78,10 +82,10 @@ setup(
 		'mock==4.0.3 ',
 		'mypy==0.931 ',
 		'pyqt5-stubs==5.15.2.0',
-		'pytest==6.2.5 ',
+		'pytest==7.0.1 ',
 		'pytest-cov==3.0.0 ',
 		'pytest-mock==3.7.0 ',
-		'types-mock==4.0.9 ',
+		'types-mock==4.0.11 ',
 		'types-requests==2.27.7'
 	]
 )
