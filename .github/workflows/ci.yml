@@ -50,6 +50,7 @@ jobs:
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
      HEROKU_TOKEN: ${{ secrets.HEROKU_TOKEN }}
      NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+     TEAMCITY_TOKEN: ${{ secrets.TEAMCITY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
@@ -83,6 +84,7 @@ jobs:
      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
      HEROKU_TOKEN: ${{ secrets.HEROKU_TOKEN }}
      NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+     TEAMCITY_TOKEN: ${{ secrets.TEAMCITY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
      WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}

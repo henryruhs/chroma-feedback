@@ -2,12 +2,12 @@ from chroma_feedback import helper
 from chroma_feedback.typing import Producer, Status
 
 
-def normalize_data(slug : str, status : str, is_paused : bool, is_running : bool) -> Producer:
+def normalize_data(slug : str, url : str, status : str, is_paused : bool, is_running : bool) -> Producer:
 	return\
 	{
 		'name': 'teamcity',
 		'slug': slug,
-		'url': None,
+		'url': url,
 		'status': normalize_status(status, is_paused, is_running)
 	}
 
