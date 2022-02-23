@@ -1,23 +1,27 @@
-import os
 import pytest
+import os
+import argparse
 from typing import get_args
 
-from chroma_feedback.producer.bitbucket.core import fetch
+from chroma_feedback.producer import bitbucket
 from chroma_feedback.typing import Status
 
 
-def test_fetch_slug() -> None:
+def test_run_one() -> None:
 	if os.environ.get('BITBUCKET_USERNAME') and os.environ.get('BITBUCKET_PASSWORD'):
-		result = fetch('https://api.bitbucket.org', 'redaxmedia/chroma-feedback-test', os.environ.get('BITBUCKET_USERNAME'), os.environ.get('BITBUCKET_PASSWORD'))
+		bitbucket.core.ARGS = argparse.Namespace(
+			bitbucket_host = 'https://api.bitbucket.org',
+			bitbucket_slug =
+			[
+				'redaxmedia/chroma-feedback-test'
+			],
+			bitbucket_username = os.environ.get('BITBUCKET_USERNAME'),
+			bitbucket_password = os.environ.get('BITBUCKET_PASSWORD')
+		)
+		result = bitbucket.core.run()
 
 		assert result[0]['name'] == 'bitbucket'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback-test'
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('BITBUCKET_USERNAME or BITBUCKET_PASSWORD is not defined')
-
-
-def test_fetch_invalid() -> None:
-	result = fetch(None, None, None, None)
-
-	assert not result

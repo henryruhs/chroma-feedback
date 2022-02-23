@@ -23,7 +23,7 @@ def run() -> List[Producer]:
 
 	if ARGS.appveyor_slug:
 		for slug in ARGS.appveyor_slug:
-			result.extend(fetch(ARGS.appveyor_host, slug, None))
+			result.extend(fetch(ARGS.appveyor_host, slug, ARGS.appveyor_token))
 	else:
 		result.extend(fetch(ARGS.appveyor_host, None, ARGS.appveyor_token))
 	return result

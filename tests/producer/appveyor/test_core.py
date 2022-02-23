@@ -1,14 +1,23 @@
-import os
 import pytest
+import os
+import argparse
 from typing import get_args
 
-from chroma_feedback.producer.appveyor.core import fetch
+from chroma_feedback.producer import appveyor
 from chroma_feedback.typing import Status
 
 
-def test_fetch_slug() -> None:
+def test_run_one() -> None:
 	if os.environ.get('APPVEYOR_TOKEN'):
-		result = fetch('https://ci.appveyor.com', 'redaxmedia/chroma-feedback', os.environ.get('APPVEYOR_TOKEN'))
+		appveyor.core.ARGS = argparse.Namespace(
+			appveyor_host = 'https://ci.appveyor.com',
+			appveyor_slug =
+			[
+				'redaxmedia/chroma-feedback'
+			],
+			appveyor_token = os.environ.get('APPVEYOR_TOKEN')
+		)
+		result = appveyor.core.run()
 
 		assert result[0]['name'] == 'appveyor'
 		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
@@ -17,18 +26,17 @@ def test_fetch_slug() -> None:
 		pytest.skip('APPVEYOR_TOKEN is not defined')
 
 
-def test_fetch_user() -> None:
+def test_run_many() -> None:
 	if os.environ.get('APPVEYOR_TOKEN'):
-		result = fetch('https://ci.appveyor.com', None, os.environ.get('APPVEYOR_TOKEN'))
+		appveyor.core.ARGS = argparse.Namespace(
+			appveyor_host = 'https://ci.appveyor.com',
+			appveyor_slug = None,
+			appveyor_token = os.environ.get('APPVEYOR_TOKEN')
+		)
+		result = appveyor.core.run()
 
 		assert result[0]['name'] == 'appveyor'
 		assert result[0]['slug']
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('APPVEYOR_TOKEN is not defined')
-
-
-def test_fetch_invalid() -> None:
-	result = fetch(None, None, None)
-
-	assert not result
