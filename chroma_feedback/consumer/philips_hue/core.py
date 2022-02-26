@@ -1,9 +1,8 @@
-import socket
 import sys
 from argparse import ArgumentParser
 from typing import List
 
-from chroma_feedback import helper, logger, wording
+from chroma_feedback import helper, logger, ssdp, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 from .group import filter_groups, get_groups, process_groups
 from .light import filter_lights, get_lights, process_lights
@@ -52,19 +51,8 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 
 
 def discover_bridge_ips() -> List[str]:
-	bridge_ips = []
-	message =\
-	[
-		'M-SEARCH * HTTP/1.1',
-		'MAN: "ssdp:discover"'
-	]
-	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
-	discovery.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32)
-	discovery.settimeout(2)
-	discovery.sendto('\r\n'.join(message).encode(), ('239.255.255.250', 1900))
+	bridge_ips = ssdp.discover_ips('239.255.255.250', 1900, 'none')
 
-	try:
-		bridge_ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
-	except socket.timeout:
+	if not bridge_ips:
 		logger.warn(wording.get('ip_not_found').format('bridge') + wording.get('exclamation_mark'))
 	return bridge_ips

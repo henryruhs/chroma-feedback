@@ -1,9 +1,8 @@
-import socket
 import sys
 from argparse import ArgumentParser
 from typing import List
 
-from chroma_feedback import helper, logger, wording
+from chroma_feedback import helper, logger, ssdp, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 from .light import get_lights, process_lights
 
@@ -39,18 +38,8 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 
 
 def discover_light_ips() -> List[str]:
-	light_ips = []
-	message =\
-	[
-		'HF-A11ASSISTHREAD'
-	]
-	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	discovery.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-	discovery.settimeout(2)
-	discovery.sendto('\r\n'.join(message).encode(), ('255.255.255.255', 48899))
+	light_ips = ssdp.discover_ips('255.255.255.255', 48899)
 
-	try:
-		light_ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
-	except OSError:
+	if not light_ips:
 		logger.warn(wording.get('ip_not_found').format('light') + wording.get('exclamation_mark'))
 	return light_ips
