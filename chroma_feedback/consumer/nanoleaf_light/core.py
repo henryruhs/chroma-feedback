@@ -3,7 +3,7 @@ import sys
 from argparse import ArgumentParser
 from typing import List
 
-from chroma_feedback import helper, logger, wording
+from chroma_feedback import helper, logger, ssdp, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 from .light import get_lights, process_lights
 
@@ -39,20 +39,8 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 
 
 def discover_light_ips() -> List[str]:
-	light_ips = []
-	message =\
-	[
-		'M-SEARCH * HTTP/1.1',
-		'MAN: "ssdp:discover"',
-		'ST: nanoleaf:nl29'
-	]
-	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	discovery.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-	discovery.settimeout(2)
-	discovery.sendto('\r\n'.join(message).encode(), ('239.255.255.250', 1900))
+	light_ips = ssdp.discover_ips('239.255.255.250', 1900, 'nanoleaf:nl29')
 
-	try:
-		light_ips.append(helper.get_first(discovery.recvfrom(65507)[1]))
-	except OSError:
+	if light_ips is None:
 		logger.warn(wording.get('ip_not_found').format('light') + wording.get('exclamation_mark'))
 	return light_ips
