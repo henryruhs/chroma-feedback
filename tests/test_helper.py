@@ -67,3 +67,20 @@ def test_get_last() -> None:
 		2,
 		3
 	]) == 3
+
+
+def test_remove_duplicate() -> None:
+	assert helper.remove_duplicate(
+	[
+		1,
+		1,
+		2,
+		2,
+		3,
+		3
+	]) ==\
+	[
+		1,
+		2,
+		3
+	]

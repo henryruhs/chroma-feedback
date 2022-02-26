@@ -54,3 +54,7 @@ def get_first(__list__ : Any) -> Any:
 
 def get_last(__list__ : Any) -> Any:
 	return next(reversed(__list__), None)
+
+
+def remove_duplicate(__list__ : Any) -> Any:
+	return list(dict.fromkeys(__list__))
