@@ -1,7 +1,9 @@
+import os
 import socket
 from typing import List
 
 from chroma_feedback import helper
+
 
 def discover_ips(host : str, port : int, search_target : str = 'ssdp:all') -> List[str]:
 	ips = []
@@ -18,7 +20,7 @@ def discover_ips(host : str, port : int, search_target : str = 'ssdp:all') -> Li
 	discovery.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 	discovery.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 1)
 	discovery.settimeout(2)
-	discovery.sendto('\r\n'.join(message).encode(), (host, port))
+	discovery.sendto(os.linesep.join(message).encode(), (host, port))
 
 	# receive ips
 
