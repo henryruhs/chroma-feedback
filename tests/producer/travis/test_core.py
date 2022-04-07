@@ -13,14 +13,14 @@ def test_run_one() -> None:
 			travis_host = 'https://api.travis-ci.com',
 			travis_slug =
 			[
-				'redaxmedia/chroma-feedback'
+				'henryruhs/chroma-feedback'
 			],
 			travis_token = os.environ.get('TRAVIS_TOKEN')
 		)
 		result = travis.core.run()
 
 		assert result[0]['name'] == 'travis'
-		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
+		assert result[0]['slug'] == 'henryruhs/chroma-feedback'
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('TRAVIS_TOKEN is not defined')
@@ -32,14 +32,14 @@ def test_run_many() -> None:
 			travis_host = 'https://api.travis-ci.com',
 			travis_slug =
 			[
-				'redaxmedia'
+				'henryruhs'
 			],
 			travis_token = os.environ.get('TRAVIS_TOKEN')
 		)
 		result = travis.core.run()
 
 		assert result[0]['name'] == 'travis'
-		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
+		assert result[0]['slug'] == 'henryruhs/chroma-feedback'
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('TRAVIS_TOKEN is not defined')

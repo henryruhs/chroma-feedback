@@ -13,8 +13,8 @@ def test_run_one(request_mock : Any) -> None:
 	[
 		{
 			'producer': 'custom',
-			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'http://localhost/redaxmedia/chroma-feedback/pipelines/1',
+			'slug': 'henryruhs/chroma-feedback',
+			'url': 'http://localhost/henryruhs/chroma-feedback/pipelines/1',
 			'status': 'passed'
 		}
 	]
@@ -22,13 +22,13 @@ def test_run_one(request_mock : Any) -> None:
 		custom_host = 'http://localhost',
 		custom_slug =
 		[
-			'redaxmedia/chroma-feedback'
+			'henryruhs/chroma-feedback'
 		],
 		custom_token = '__token__'
 	)
 	result = custom.core.run()
 
 	assert result[0]['name'] == 'custom'
-	assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
-	assert result[0]['url'] == 'http://localhost/redaxmedia/chroma-feedback/pipelines/1'
+	assert result[0]['slug'] == 'henryruhs/chroma-feedback'
+	assert result[0]['url'] == 'http://localhost/henryruhs/chroma-feedback/pipelines/1'
 	assert result[0]['status'] in get_args(Status)

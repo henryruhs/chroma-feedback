@@ -13,14 +13,14 @@ def test_run_one() -> None:
 			wercker_host = 'https://app.wercker.com',
 			wercker_slug =
 			[
-				'redaxmedia/chroma-feedback'
+				'henryruhs/chroma-feedback'
 			],
 			wercker_token = os.environ.get('WERCKER_TOKEN')
 		)
 		result = wercker.core.run()
 
 		assert result[0]['name'] == 'wercker'
-		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
+		assert result[0]['slug'] == 'henryruhs/chroma-feedback'
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('WERCKER_TOKEN is not defined')
@@ -32,7 +32,7 @@ def test_run_many() -> None:
 			wercker_host = 'https://app.wercker.com',
 			wercker_slug =
 			[
-				'redaxmedia'
+				'henryruhs'
 			],
 			wercker_token = os.environ.get('WERCKER_TOKEN')
 		)

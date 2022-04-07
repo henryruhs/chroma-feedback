@@ -3,8 +3,8 @@ Chroma Feedback
 
 > Turn your RGB powered hardware into a status indicator for continuous integration, continuous deployment and infrastructure monitoring.
 
-[![Build Status](https://img.shields.io/github/workflow/status/redaxmedia/chroma-feedback/ci.svg)](https://github.com/redaxmedia/chroma-feedback/actions?query=workflow:ci)
-[![Coverage Status](https://img.shields.io/coveralls/redaxmedia/chroma-feedback.svg)](https://coveralls.io/r/redaxmedia/chroma-feedback)
+[![Build Status](https://img.shields.io/github/workflow/status/henryruhs/chroma-feedback/ci.svg)](https://github.com/henryruhs/chroma-feedback/actions?query=workflow:ci)
+[![Coverage Status](https://img.shields.io/coveralls/henryruhs/chroma-feedback.svg)](https://coveralls.io/r/henryruhs/chroma-feedback)
 [![PyPI](https://img.shields.io/pypi/v/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
 [![License](https://img.shields.io/pypi/l/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
 
@@ -12,7 +12,7 @@ Chroma Feedback
 Preview
 -------
 
-![Terminal Session](https://raw.githubusercontent.com/redaxmedia/chroma-feedback/master/.github/terminal-session.svg?sanitize=true)
+![Terminal Session](https://raw.githubusercontent.com/henryruhs/chroma-feedback/master/.github/terminal-session.svg?sanitize=true)
 
 
 Installation
@@ -62,4 +62,4 @@ chroma-feedback [options]
 Documentation
 -------------
 
-Read the [documenation](https://redaxmedia.gitbook.io/chroma-feedback) for a deep dive.
+Read the [documenation](https://henryruhs.gitbook.io/chroma-feedback) for a deep dive.

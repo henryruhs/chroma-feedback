@@ -14,7 +14,7 @@ def test_process(mocker : Any) -> None:
 		sys.argv.append('--producer')
 		sys.argv.append('travis')
 		sys.argv.append('--travis-slug')
-		sys.argv.append('redaxmedia/chroma-feedback')
+		sys.argv.append('henryruhs/chroma-feedback')
 		sys.argv.append('--travis-token')
 		sys.argv.append(os.environ.get('TRAVIS_TOKEN'))
 		process = mocker.spy(producer.travis, 'run')

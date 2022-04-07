@@ -14,14 +14,14 @@ def test_run_one() -> None:
 			circle_organization = None,
 			circle_slug =
 			[
-				'github/redaxmedia/chroma-feedback'
+				'github/henryruhs/chroma-feedback'
 			],
 			circle_token = os.environ.get('CIRCLE_TOKEN')
 		)
 		result = circle.core.run()
 
 		assert result[0]['name'] == 'circle'
-		assert result[0]['slug'] == 'gh/redaxmedia/chroma-feedback/lint-and-test'
+		assert result[0]['slug'] == 'gh/henryruhs/chroma-feedback/lint-and-test'
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('CIRCLE_TOKEN is not defined')
@@ -31,7 +31,7 @@ def test_run_many() -> None:
 	if os.environ.get('CIRCLE_TOKEN'):
 		circle.core.ARGS = argparse.Namespace(
 			circle_host = 'https://circleci.com',
-			circle_organization = 'github/redaxmedia',
+			circle_organization = 'github/henryruhs',
 			circle_slug = None,
 			circle_token = os.environ.get('CIRCLE_TOKEN')
 		)
