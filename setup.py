@@ -36,7 +36,6 @@ setup(
 		'chroma_feedback.producer.teamcity',
 		'chroma_feedback.producer.travis',
 		'chroma_feedback.producer.vercel',
-		'chroma_feedback.producer.wercker',
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative_blinkstick',
 		'chroma_feedback.consumer.elgato_streamdeck',

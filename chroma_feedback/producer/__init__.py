@@ -18,6 +18,5 @@ __all__ =\
 	'netlify',
 	'teamcity',
 	'travis',
-	'vercel',
-	'wercker'
+	'vercel'
 ]

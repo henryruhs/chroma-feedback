@@ -53,7 +53,6 @@ jobs:
      TEAMCITY_TOKEN: ${{ secrets.TEAMCITY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-     WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
  report:
   needs: test
   runs-on: ubuntu-latest
@@ -87,7 +86,6 @@ jobs:
      TEAMCITY_TOKEN: ${{ secrets.TEAMCITY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-     WERCKER_TOKEN: ${{ secrets.WERCKER_TOKEN }}
   - run: coveralls --service=github
     env:
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
