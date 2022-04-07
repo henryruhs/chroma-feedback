@@ -13,7 +13,7 @@ def test_run_one() -> None:
 			codeship_host = 'https://api.codeship.com',
 			codeship_slug =
 			[
-				'redaxmedia/chroma-feedback-test'
+				'henryruhs/chroma-feedback-test'
 			],
 			codeship_username = os.environ.get('CODESHIP_USERNAME'),
 			codeship_password = os.environ.get('CODESHIP_PASSWORD')
@@ -21,7 +21,7 @@ def test_run_one() -> None:
 		result = codeship.core.run()
 
 		assert result[0]['name'] == 'codeship'
-		assert result[0]['slug'] == 'redaxmedia/chroma-feedback-test'
+		assert result[0]['slug'] == 'henryruhs/chroma-feedback-test'
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('CODESHIP_USERNAME or CODESHIP_PASSWORD is not defined')
@@ -38,11 +38,11 @@ def test_run_many() -> None:
 		result = codeship.core.run()
 
 		assert result[0]['name'] == 'codeship'
-		assert result[0]['slug'] == 'redaxmedia/chroma-feedback-test'
+		assert result[0]['slug'] == 'henryruhs/chroma-feedback-test'
 		assert result[0]['status'] in get_args(Status)
 
 		assert result[1]['name'] == 'codeship'
-		assert result[1]['slug'] == 'redaxmedia/chroma-feedback-test'
+		assert result[1]['slug'] == 'henryruhs/chroma-feedback-test'
 		assert result[1]['status'] in get_args(Status)
 	else:
 		pytest.skip('CODESHIP_USERNAME or CODESHIP_PASSWORD is not defined')

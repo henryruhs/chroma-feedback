@@ -13,7 +13,7 @@ def test_run_one() -> None:
 			netlify_host = 'https://api.netlify.com',
 			netlify_slug =
 			[
-				'0b9627b8-da58-4dfc-8056-9645c02dcab6'
+				'b31e0317-4398-4545-80fc-811ecc997a6e'
 			],
 			netlify_token = os.environ.get('NETLIFY_TOKEN')
 		)

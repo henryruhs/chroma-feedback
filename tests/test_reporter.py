@@ -6,15 +6,15 @@ def test_create_producer_report_passed() -> None:
 	[
 		{
 			'name': 'github',
-			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback',
+			'slug': 'henryruhs/chroma-feedback',
+			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'passed'
 		}
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is passed'
-	assert producer_report[0]['url'] == 'https://github.com/redaxmedia/chroma-feedback'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is passed'
+	assert producer_report[0]['url'] == 'https://github.com/henryruhs/chroma-feedback'
 	assert producer_report[0]['status'] == 'passed'
 
 
@@ -23,15 +23,15 @@ def test_create_producer_report_started() -> None:
 	[
 		{
 			'name': 'github',
-			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback',
+			'slug': 'henryruhs/chroma-feedback',
+			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'started'
 		}
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is started'
-	assert producer_report[0]['url'] == 'https://github.com/redaxmedia/chroma-feedback'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is started'
+	assert producer_report[0]['url'] == 'https://github.com/henryruhs/chroma-feedback'
 	assert producer_report[0]['status'] == 'started'
 
 
@@ -40,15 +40,15 @@ def test_create_producer_report_errored() -> None:
 	[
 		{
 			'name': 'github',
-			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback',
+			'slug': 'henryruhs/chroma-feedback',
+			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'errored'
 		}
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is errored'
-	assert producer_report[0]['url'] == 'https://github.com/redaxmedia/chroma-feedback'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is errored'
+	assert producer_report[0]['url'] == 'https://github.com/henryruhs/chroma-feedback'
 	assert producer_report[0]['status'] == 'errored'
 
 
@@ -57,15 +57,15 @@ def test_create_producer_report_warned() -> None:
 	[
 		{
 			'name': 'github',
-			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback',
+			'slug': 'henryruhs/chroma-feedback',
+			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'warned'
 		}
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is warned'
-	assert producer_report[0]['url'] == 'https://github.com/redaxmedia/chroma-feedback'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is warned'
+	assert producer_report[0]['url'] == 'https://github.com/henryruhs/chroma-feedback'
 	assert producer_report[0]['status'] == 'warned'
 
 
@@ -74,14 +74,14 @@ def test_create_producer_report_failed() -> None:
 	[
 		{
 			'name': 'github',
-			'slug': 'redaxmedia/chroma-feedback',
-			'url': 'https://github.com/redaxmedia/chroma-feedback',
+			'slug': 'henryruhs/chroma-feedback',
+			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'failed'
 		}
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of redaxmedia/chroma-feedback on github is failed'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is failed'
 	assert producer_report[0]['status'] == 'failed'
 
 
@@ -173,14 +173,14 @@ def test_resolve_report_status_started() -> None:
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		}
 	]) == 'started'
@@ -193,21 +193,21 @@ def test_resolve_report_status_errored() -> None:
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		}
 	]) == 'errored'
@@ -220,28 +220,28 @@ def test_resolve_report_status_warned() -> None:
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'warned'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		}
 	]) == 'warned'
@@ -254,35 +254,35 @@ def test_get_producer_status_failed() -> None:
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'failed'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'warned'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		},
 	]) == 'failed'
@@ -295,7 +295,7 @@ def test_get_producer_status_passed() -> None:
 			'name': 'github',
 			'symbol': None,
 			'message': None,
-			'url': 'https://github.com/redaxmedia/chroma-feedback/actions/runs/1',
+			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'passed'
 		}
 	]) == 'passed'

@@ -27,12 +27,12 @@ def test_run_one(request_mock : Any) -> None:
 		azure_host = 'https://dev.azure.com',
 		azure_slug =
 		[
-			'redaxmedia/chroma-feedback'
+			'henryruhs/chroma-feedback'
 		],
 		azure_token = '__token__'
 	)
 	result = azure.run()
 
-	assert result[0]['name'] == 'azure' 
+	assert result[0]['name'] == 'azure'
 	assert result[0]['slug'] == 'chroma-feedback'
 	assert result[0]['status'] in get_args(Status)

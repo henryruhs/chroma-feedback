@@ -8,7 +8,7 @@ METADATA =\
 	'license': 'MIT',
 	'keywords': ' '.join(producer.__all__),
 	'author': 'Henry Ruhs',
-	'author_email': 'info@redaxmedia.com',
+	'author_email': 'info@henryruhs.com',
 	'url': 'https://chroma-feedback.com'
 }
 

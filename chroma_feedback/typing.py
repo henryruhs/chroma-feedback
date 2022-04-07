@@ -27,8 +27,7 @@ ProducerName = Literal\
 	'netlify',
 	'teamcity',
 	'travis',
-	'vercel',
-	'wercker'
+	'vercel'
 ]
 ConsumerName = Literal\
 [

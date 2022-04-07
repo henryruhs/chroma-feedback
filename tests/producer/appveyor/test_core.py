@@ -13,14 +13,14 @@ def test_run_one() -> None:
 			appveyor_host = 'https://ci.appveyor.com',
 			appveyor_slug =
 			[
-				'redaxmedia/chroma-feedback'
+				'henryruhs/chroma-feedback'
 			],
 			appveyor_token = os.environ.get('APPVEYOR_TOKEN')
 		)
 		result = appveyor.core.run()
 
 		assert result[0]['name'] == 'appveyor'
-		assert result[0]['slug'] == 'redaxmedia/chroma-feedback'
+		assert result[0]['slug'] == 'henryruhs/chroma-feedback'
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('APPVEYOR_TOKEN is not defined')

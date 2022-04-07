@@ -36,7 +36,6 @@ setup(
 		'chroma_feedback.producer.teamcity',
 		'chroma_feedback.producer.travis',
 		'chroma_feedback.producer.vercel',
-		'chroma_feedback.producer.wercker',
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative_blinkstick',
 		'chroma_feedback.consumer.elgato_streamdeck',
@@ -65,7 +64,7 @@ setup(
 	},
 	install_requires =
 	[
-		'busylight-for-humans==0.15.2',
+		'busylight-for-humans==0.15.4',
 		'lifxlan==1.2.7',
 		'nanoleafapi==2.1.1',
 		'phue==1.1',

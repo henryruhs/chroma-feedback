@@ -4,13 +4,13 @@
 	<circle cx="40" cy="20" r="6" class="is-warning "/>
 	<circle cx="60" cy="20" r="6" class="is-success" />
 	<foreignObject x="20" y="50" height="320" width="867">
-		<pre xmlns="http://www.w3.org/1999/xhtml" class="code-terminal-session"><span class="is-success">redaxmedia@local</span>:<span class="is-info">~</span>$ chroma-feedback -P=github --github-slug=redaxmedia -C=philips_hue
+		<pre xmlns="http://www.w3.org/1999/xhtml" class="code-terminal-session"><span class="is-success">user@local</span>:<span class="is-info">~</span>$ chroma-feedback -P=github --github-slug=henryruhs -C=philips_hue
 chroma-feedback 12.2.0 by Henry Ruhs
 
-<span class="is-success">✔</span> Status of redaxmedia/chroma-feedback on github is passed
-<span class="is-success">✔</span> Status of redaxmedia/handpick on github is passed
-<span class="is-success">✔</span> Status of redaxmedia/ncss-linter on github is passed
-<span class="is-success">✔</span> Status of redaxmedia/ngx-crud on github is passed
+<span class="is-success">✔</span> Status of henryruhs/chroma-feedback on github is passed
+<span class="is-success">✔</span> Status of henryruhs/handpick on github is passed
+<span class="is-success">✔</span> Status of henryruhs/ncss-linter on github is passed
+<span class="is-success">✔</span> Status of henryruhs/ngx-crud on github is passed
 
 <span class="is-success">✔</span> Set status of Hue play 1 to passed
 <span class="is-success">✔</span> Set status of Hue play 2 to passed
