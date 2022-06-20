@@ -27,7 +27,7 @@ pip3 install chroma-feedback
 Install the dependencies for Linux:
 
 ```
-apt-get install libusb-1.0-0-dev libudev-dev
+apt-get install libudev-dev libusb-1.0-0-dev libhidapi-libusb0
 ```
 
 ```
