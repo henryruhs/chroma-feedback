@@ -61,16 +61,17 @@ def fetch_repository_names(host : str, username : str, token : str) -> List[str]
 	response = None
 
 	if host and username and token:
-		response = request.get(host + '/users/' + username + '/repos', headers = create_headers(token))
+		response = request.get(host + '/search/repositories?q=user:' + username, headers = create_headers(token))
 
 	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		for repository in data:
-			if 'full_name' in repository:
-				result.append(repository['full_name'])
+		if 'items' in data:
+			for repository in data['items']:
+				if 'full_name' in repository:
+					result.append(repository['full_name'])
 	return result
 
 
