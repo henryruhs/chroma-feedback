@@ -16,10 +16,10 @@ def get_lights() -> Any:
 	return LIGHTS
 
 
-def filter_lights(lights : Any, light_ids : List[str]) -> Any:
-	if light_ids:
+def filter_lights(lights : Any, light_serials : List[str]) -> Any:
+	if light_serials:
 		for light in copy.copy(lights):
-			if light.path not in light_ids:
+			if light.info['serial_number'] not in light_serials:
 				lights.remove(light)
 	return lights
 
@@ -36,7 +36,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 			{
 				'name': 'compulab_fit_statusb',
 				'type': 'light',
-				'description': helper.create_description(light.info['product_string'], light.path),
+				'description': helper.create_description(light.info['product_string'], light.info['serial_number']),
 				'status': status
 			})
 	return result
