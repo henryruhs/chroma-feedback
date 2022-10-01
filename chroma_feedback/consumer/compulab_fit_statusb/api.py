@@ -16,12 +16,12 @@ def get_api() -> Any:
 
 def api_factory() -> Any:
 	try:
-		from busylight.lights import LightUnavailable, LightNotFound
+		from busylight.lights import NoLightsFound, LightUnavailable
 		from busylight.lights.compulap import Fit_StatUSB as api
 
 		try:
-			api.first_light().is_pluggedin()
-		except (LightUnavailable, LightNotFound):
+			api.first_light().acquire()
+		except (NoLightsFound, LightUnavailable):
 			logger.error(wording.get('connection_not_found').format('compulab_fit_statusb') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api

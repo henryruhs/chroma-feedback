@@ -20,7 +20,7 @@ def api_factory() -> Any:
 		from busylight.lights.luxafor import Flag as api
 
 		try:
-			api.first_light().is_pluggedin()
+			api.first_light().acquire()
 		except (LightUnavailable, LightNotFound):
 			logger.error(wording.get('connection_not_found').format('luxafor_flag') + wording.get('exclamation_mark'))
 			sys.exit()
