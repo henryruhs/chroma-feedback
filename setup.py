@@ -38,6 +38,7 @@ setup(
 		'chroma_feedback.producer.vercel',
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative_blinkstick',
+		'chroma_feedback.consumer.compulab_fit_statusb',
 		'chroma_feedback.consumer.elgato_streamdeck',
 		'chroma_feedback.consumer.embrava_blynclight',
 		'chroma_feedback.consumer.kuando_busylight',
@@ -64,15 +65,15 @@ setup(
 	},
 	install_requires =
 	[
-		'busylight-for-humans==0.21.1',
+		'busylight-for-humans==0.22.2',
 		'lifxlan==1.2.7',
-		'nanoleafapi==2.1.1',
+		'nanoleafapi==2.1.2',
 		'phue==1.1',
 		'python-magichue==0.3.2',
 		'pyqt5==5.15.7',
 		'pywizlight==0.5.14',
 		'requests==2.28.1',
-		'streamdeck==0.9.1',
+		'streamdeck==0.9.2',
 		'yeelight==0.7.10'
 	],
 	tests_require =
