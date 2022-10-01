@@ -16,12 +16,12 @@ def get_api() -> Any:
 
 def api_factory() -> Any:
 	try:
-		from busylight.lights import USBLightIOError, USBLightNotFound
+		from busylight.lights import LightUnavailable, LightNotFound
 		from busylight.lights.kuando import Busylight as api
 
 		try:
-			api.first_light().release()
-		except (USBLightIOError, USBLightNotFound):
+			api.first_light().is_pluggedin()
+		except (LightUnavailable, LightNotFound):
 			logger.error(wording.get('connection_not_found').format('kuando_busylight') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
