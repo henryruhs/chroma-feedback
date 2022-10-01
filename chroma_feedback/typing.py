@@ -32,6 +32,7 @@ ProducerName = Literal\
 ConsumerName = Literal\
 [
 	'agile_innovative_blinkstick',
+	'compulab_fit_statusb',
 	'elgato_streamdeck',
 	'embrava_blynclight',
 	'kuando_busylight',
