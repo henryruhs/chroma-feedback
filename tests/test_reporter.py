@@ -13,7 +13,7 @@ def test_create_producer_report_passed() -> None:
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is passed'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on microsoft.github is passed'
 	assert producer_report[0]['url'] == 'https://github.com/henryruhs/chroma-feedback'
 	assert producer_report[0]['status'] == 'passed'
 
@@ -30,7 +30,7 @@ def test_create_producer_report_started() -> None:
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is started'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on microsoft.github is started'
 	assert producer_report[0]['url'] == 'https://github.com/henryruhs/chroma-feedback'
 	assert producer_report[0]['status'] == 'started'
 
@@ -47,7 +47,7 @@ def test_create_producer_report_errored() -> None:
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is errored'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on microsoft.github is errored'
 	assert producer_report[0]['url'] == 'https://github.com/henryruhs/chroma-feedback'
 	assert producer_report[0]['status'] == 'errored'
 
@@ -64,7 +64,7 @@ def test_create_producer_report_warned() -> None:
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is warned'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on microsoft.github is warned'
 	assert producer_report[0]['url'] == 'https://github.com/henryruhs/chroma-feedback'
 	assert producer_report[0]['status'] == 'warned'
 
@@ -81,7 +81,7 @@ def test_create_producer_report_failed() -> None:
 	])
 
 	assert producer_report[0]['symbol']
-	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on github is failed'
+	assert producer_report[0]['message'] == 'Status of henryruhs/chroma-feedback on microsoft.github is failed'
 	assert producer_report[0]['status'] == 'failed'
 
 
