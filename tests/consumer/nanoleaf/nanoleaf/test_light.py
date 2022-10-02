@@ -14,7 +14,7 @@ def test_process_passed() -> None:
 		},
 		[
 			{
-				'name': 'github',
+				'name': 'microsoft.github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
@@ -38,7 +38,7 @@ def test_process_started() -> None:
 		},
 		[
 			{
-				'name': 'github',
+				'name': 'microsoft.github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
@@ -62,7 +62,7 @@ def test_process_errored() -> None:
 		},
 		[
 			{
-				'name': 'github',
+				'name': 'microsoft.github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
@@ -86,7 +86,7 @@ def test_process_warned() -> None:
 		},
 		[
 			{
-				'name': 'github',
+				'name': 'microsoft.github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
@@ -110,7 +110,7 @@ def test_process_failed() -> None:
 		},
 		[
 			{
-				'name': 'github',
+				'name': 'microsoft.github',
 				'symbol': None,
 				'message': None,
 				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
