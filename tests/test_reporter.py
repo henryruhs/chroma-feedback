@@ -89,7 +89,7 @@ def test_create_consumer_report_passed() -> None:
 	consumer_report = reporter.create_consumer_report(
 	[
 		{
-			'name': 'razer_chroma',
+			'name': 'razer.chroma',
 			'type': 'device',
 			'description': 'Razer Huntsman Elite',
 			'status': 'passed'
@@ -106,7 +106,7 @@ def test_create_consumer_report_started() -> None:
 	consumer_report = reporter.create_consumer_report(
 	[
 		{
-			'name': 'razer_chroma',
+			'name': 'razer.chroma',
 			'type': 'device',
 			'description': 'Razer Huntsman Elite',
 			'status': 'started'
@@ -122,7 +122,7 @@ def test_create_consumer_report_errored() -> None:
 	consumer_report = reporter.create_consumer_report(
 	[
 		{
-			'name': 'razer_chroma',
+			'name': 'razer.chroma',
 			'type': 'device',
 			'description': 'Razer Huntsman Elite',
 			'status': 'errored'
@@ -138,7 +138,7 @@ def test_create_consumer_report_warned() -> None:
 	consumer_report = reporter.create_consumer_report(
 	[
 		{
-			'name': 'razer_chroma',
+			'name': 'razer.chroma',
 			'type': 'device',
 			'description': 'Razer Huntsman Elite',
 			'status': 'warned'
@@ -154,7 +154,7 @@ def test_create_consumer_report_failed() -> None:
 	consumer_report = reporter.create_consumer_report(
 	[
 		{
-			'name': 'razer_chroma',
+			'name': 'razer.chroma',
 			'type': 'device',
 			'description': 'Razer Huntsman Elite',
 			'status': 'failed'
