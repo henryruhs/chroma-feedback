@@ -11,7 +11,7 @@ def cli() -> None:
 	signal.signal(signal.SIGINT, lambda signal_number, frame: destroy())
 	program = ArgumentParser()
 	program.add_argument('-V', '--version', action = 'version', version = metadata.get('name') + ' ' + metadata.get('version'))
-	program.add_argument('-P', '--producer', action = 'append', choices = producer.__all__, required = True)
+	program.add_argument('-P', '--producer', action = 'append', choices = producer.ALL, required = True)
 	program.add_argument('-C', '--consumer', action = 'append', choices = consumer.ALL, required = helper.has_argument('--dry-run') is False and helper.has_argument('-D') is False)
 	program.add_argument('-I', '--background-interval', default = 60, type = int)
 	program.add_argument('-B', '--background-run', action = 'store_true')

@@ -5,7 +5,7 @@ def test_create_producer_report_passed() -> None:
 	producer_report = reporter.create_producer_report(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'slug': 'henryruhs/chroma-feedback',
 			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'passed'
@@ -22,7 +22,7 @@ def test_create_producer_report_started() -> None:
 	producer_report = reporter.create_producer_report(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'slug': 'henryruhs/chroma-feedback',
 			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'started'
@@ -39,7 +39,7 @@ def test_create_producer_report_errored() -> None:
 	producer_report = reporter.create_producer_report(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'slug': 'henryruhs/chroma-feedback',
 			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'errored'
@@ -56,7 +56,7 @@ def test_create_producer_report_warned() -> None:
 	producer_report = reporter.create_producer_report(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'slug': 'henryruhs/chroma-feedback',
 			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'warned'
@@ -73,7 +73,7 @@ def test_create_producer_report_failed() -> None:
 	producer_report = reporter.create_producer_report(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'slug': 'henryruhs/chroma-feedback',
 			'url': 'https://github.com/henryruhs/chroma-feedback',
 			'status': 'failed'
@@ -170,14 +170,14 @@ def test_resolve_report_status_started() -> None:
 	assert reporter.resolve_report_status(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
@@ -190,21 +190,21 @@ def test_resolve_report_status_errored() -> None:
 	assert reporter.resolve_report_status(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
@@ -217,28 +217,28 @@ def test_resolve_report_status_warned() -> None:
 	assert reporter.resolve_report_status(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'warned'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
@@ -251,35 +251,35 @@ def test_get_producer_status_failed() -> None:
 	assert reporter.resolve_report_status(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'failed'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'warned'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'started'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
 			'status': 'errored'
 		},
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
@@ -292,7 +292,7 @@ def test_get_producer_status_passed() -> None:
 	assert reporter.resolve_report_status(
 	[
 		{
-			'name': 'github',
+			'name': 'microsoft.github',
 			'symbol': None,
 			'message': None,
 			'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
