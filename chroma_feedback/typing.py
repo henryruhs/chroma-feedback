@@ -31,20 +31,20 @@ ProducerName = Literal\
 ]
 ConsumerName = Literal\
 [
-	'agile_innovative_blinkstick',
-	'compulab_fit_statusb',
-	'elgato_streamdeck',
-	'embrava_blynclight',
-	'kuando_busylight',
-	'lifx_light',
-	'luxafor_flag',
-	'magic_hue',
-	'nanoleaf_light',
-	'philips_hue',
-	'razer_chroma',
+	'agile_innovative.blinkstick',
+	'compulab_fit.statusb',
+	'elgato.streamdeck',
+	'embrava.blynclight',
+	'kuando.busylight',
+	'lifx.lifx',
+	'luxafor.flag',
+	'magic.hue',
+	'nanoleaf.nanoleaf',
+	'philips.hue',
+	'razer.chroma',
+	'signify.wiz',
 	'thingm_blink1',
-	'wiz_light',
-	'xiaomi_yeelight'
+	'xiaomi.yeelight'
 ]
 ConsumerType = Literal\
 [
