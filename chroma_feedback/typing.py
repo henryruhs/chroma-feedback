@@ -12,20 +12,20 @@ Status = Literal\
 ProducerName = Literal\
 [
 	'appveyor',
-	'azure',
-	'bamboo',
-	'bitbucket',
+	'atlassian.bamboo',
+	'atlassian.bitbucket',
 	'buddy',
 	'circle',
-	'codeship',
+	'cloudbees.codeship',
 	'custom',
 	'datadog',
-	'github',
 	'gitlab',
 	'heroku',
 	'jenkins',
+	'jetbrains.teamcity',
+	'microsoft.azure',
+	'microsoft.github',
 	'netlify',
-	'teamcity',
 	'travis',
 	'vercel'
 ]
