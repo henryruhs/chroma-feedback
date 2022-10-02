@@ -19,7 +19,7 @@ def test_run_one() -> None:
 		)
 		result = github.core.run()
 
-		assert result[0]['name'] == 'github'
+		assert result[0]['name'] == 'microsoft.github'
 		assert result[0]['slug'] == 'henryruhs/chroma-feedback'
 		assert 'https://github.com/henryruhs/chroma-feedback/actions/runs' in result[0]['url']
 		assert result[0]['status'] in get_args(Status)
@@ -39,12 +39,12 @@ def test_run_many() -> None:
 		)
 		result = github.core.run()
 
-		assert result[0]['name'] == 'github'
+		assert result[0]['name'] == 'microsoft.github'
 		assert result[0]['slug']
 		assert 'https://github.com/henryruhs' in result[0]['url']
 		assert result[0]['status'] in get_args(Status)
 
-		assert result[1]['name'] == 'github'
+		assert result[1]['name'] == 'microsoft.github'
 		assert result[1]['slug']
 		assert 'https://github.com/henryruhs' in result[1]['url']
 		assert result[1]['status'] in get_args(Status)
