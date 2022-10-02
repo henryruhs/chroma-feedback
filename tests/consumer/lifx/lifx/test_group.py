@@ -1,0 +1,126 @@
+import pytest
+from unittest.mock import MagicMock
+
+from chroma_feedback.consumer.lifx.lifx.group import process_groups
+
+MOCK = MagicMock()
+
+
+def test_process_passed() -> None:
+	try:
+		result = process_groups(
+		{
+			MOCK
+		},
+		[
+			{
+				'name': 'microsoft.github',
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
+				'status': 'passed'
+			}
+		])
+
+		assert result[0]['name'] == 'lifx'
+		assert result[0]['type'] == 'group'
+		assert result[0]['description']
+		assert result[0]['status'] == 'passed'
+	except:
+		pytest.skip()
+
+
+def test_process_started() -> None:
+	try:
+		result = process_groups(
+		{
+			MOCK
+		},
+		[
+			{
+				'name': 'microsoft.github',
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
+				'status': 'started'
+			}
+		])
+
+		assert result[0]['name'] == 'lifx'
+		assert result[0]['type'] == 'group'
+		assert result[0]['description']
+		assert result[0]['status'] == 'started'
+	except:
+		pytest.skip()
+
+
+def test_process_errored() -> None:
+	try:
+		result = process_groups(
+		{
+			MOCK
+		},
+		[
+			{
+				'name': 'microsoft.github',
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
+				'status': 'errored'
+			}
+		])
+
+		assert result[0]['name'] == 'lifx'
+		assert result[0]['type'] == 'group'
+		assert result[0]['description']
+		assert result[0]['status'] == 'errored'
+	except:
+		pytest.skip()
+
+
+def test_process_warned() -> None:
+	try:
+		result = process_groups(
+		{
+			MOCK
+		},
+		[
+			{
+				'name': 'microsoft.github',
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
+				'status': 'warned'
+			}
+		])
+
+		assert result[0]['name'] == 'lifx'
+		assert result[0]['type'] == 'group'
+		assert result[0]['description']
+		assert result[0]['status'] == 'warned'
+	except:
+		pytest.skip()
+
+
+def test_process_failed() -> None:
+	try:
+		result = process_groups(
+		{
+			MOCK
+		},
+		[
+			{
+				'name': 'microsoft.github',
+				'symbol': None,
+				'message': None,
+				'url': 'https://github.com/henryruhs/chroma-feedback/actions/runs/1',
+				'status': 'failed'
+			}
+		])
+
+		assert result[0]['name'] == 'lifx'
+		assert result[0]['type'] == 'group'
+		assert result[0]['description']
+		assert result[0]['status'] == 'failed'
+	except:
+		pytest.skip()

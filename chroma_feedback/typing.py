@@ -12,38 +12,39 @@ Status = Literal\
 ProducerName = Literal\
 [
 	'appveyor',
-	'azure',
-	'bamboo',
-	'bitbucket',
+	'atlassian.bamboo',
+	'atlassian.bitbucket',
 	'buddy',
 	'circle',
-	'codeship',
+	'cloudbees.codeship',
 	'custom',
 	'datadog',
-	'github',
 	'gitlab',
 	'heroku',
 	'jenkins',
+	'jetbrains.teamcity',
+	'microsoft.azure',
+	'microsoft.github',
 	'netlify',
-	'teamcity',
 	'travis',
 	'vercel'
 ]
 ConsumerName = Literal\
 [
-	'agile_innovative_blinkstick',
-	'elgato_streamdeck',
-	'embrava_blynclight',
-	'kuando_busylight',
-	'lifx_light',
-	'luxafor_flag',
-	'magic_hue',
-	'nanoleaf_light',
-	'philips_hue',
-	'razer_chroma',
-	'thingm_blink1',
-	'wiz_light',
-	'xiaomi_yeelight'
+	'agile_innovative.blinkstick',
+	'compulab_fit.statusb',
+	'elgato.streamdeck',
+	'embrava.blynclight',
+	'kuando.busylight',
+	'lifx',
+	'luxafor.flag',
+	'magic.hue',
+	'nanoleaf',
+	'philips.hue',
+	'razer.chroma',
+	'signify.wiz',
+	'thingm.blink1',
+	'xiaomi.yeelight'
 ]
 ConsumerType = Literal\
 [
