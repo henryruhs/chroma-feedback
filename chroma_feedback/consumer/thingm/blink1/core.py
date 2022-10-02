@@ -4,7 +4,7 @@ from typing import List
 
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
-from .lights import filter_lights, get_lights, process_lights
+from .light import filter_lights, get_lights, process_lights
 
 ARGS = None
 

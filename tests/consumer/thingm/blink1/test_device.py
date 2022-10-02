@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import MagicMock
 
-from chroma_feedback.consumer.thingm.blink1.lights import process_lights
+from chroma_feedback.consumer.thingm.blink1.light import process_lights
 
 MOCK = MagicMock()
 

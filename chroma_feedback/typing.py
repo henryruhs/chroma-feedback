@@ -43,7 +43,7 @@ ConsumerName = Literal\
 	'philips.hue',
 	'razer.chroma',
 	'signify.wiz',
-	'thingm_blink1',
+	'thingm.blink1',
 	'xiaomi.yeelight'
 ]
 ConsumerType = Literal\
