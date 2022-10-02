@@ -26,7 +26,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		if set_light(light, color.get_by_status(status)):
 			result.append(
 			{
-				'name': 'nanoleaf.nanoleaf',
+				'name': 'nanoleaf',
 				'type': 'light',
 				'description': helper.create_description(light.get_name(), light.ip),
 				'status': status

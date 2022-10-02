@@ -34,7 +34,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		set_light(light, color.get_by_status(status))
 		result.append(
 		{
-			'name': 'lifx.lifx',
+			'name': 'lifx',
 			'type': 'light',
 			'description': helper.create_description(light.get_label(), light.get_ip_addr()),
 			'status': status

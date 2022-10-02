@@ -22,7 +22,7 @@ def test_process_passed() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'lifx.lifx'
+		assert result[0]['name'] == 'lifx'
 		assert result[0]['type'] == 'group'
 		assert result[0]['description']
 		assert result[0]['status'] == 'passed'
@@ -46,7 +46,7 @@ def test_process_started() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'lifx.lifx'
+		assert result[0]['name'] == 'lifx'
 		assert result[0]['type'] == 'group'
 		assert result[0]['description']
 		assert result[0]['status'] == 'started'
@@ -70,7 +70,7 @@ def test_process_errored() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'lifx.lifx'
+		assert result[0]['name'] == 'lifx'
 		assert result[0]['type'] == 'group'
 		assert result[0]['description']
 		assert result[0]['status'] == 'errored'
@@ -94,7 +94,7 @@ def test_process_warned() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'lifx.lifx'
+		assert result[0]['name'] == 'lifx'
 		assert result[0]['type'] == 'group'
 		assert result[0]['description']
 		assert result[0]['status'] == 'warned'
@@ -118,7 +118,7 @@ def test_process_failed() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'lifx.lifx'
+		assert result[0]['name'] == 'lifx'
 		assert result[0]['type'] == 'group'
 		assert result[0]['description']
 		assert result[0]['status'] == 'failed'

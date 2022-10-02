@@ -1,19 +1,19 @@
 from .core import process
 
-__all__ =\
-[
-	'agile_innovative.blinkstick',
-	'compulab_fit.statusb',
-	'elgato.streamdeck',
-	'embrava.blynclight',
-	'kuando.busylight',
-	'lifx.lifx',
-	'luxafor.flag',
-	'magic.hue',
-	'nanoleaf.nanoleaf',
-	'philips.hue',
-	'razer.chroma',
-	'signify.wiz',
-	'thingm.blink1',
-	'xiaomi.yeelight'
-]
+ALL = \
+{
+	'agile_innovative.blinkstick': 'chroma_feedback.consumer.agile_innovative.blinkstick',
+	'compulab_fit.statusb': 'chroma_feedback.consumer.compulab_fit.statusb',
+	'elgato.streamdeck': 'chroma_feedback.consumer.elgato.streamdeck',
+	'embrava.blynclight': 'chroma_feedback.consumer.embrava.blynclight',
+	'kuando.busylight': 'chroma_feedback.consumer.kuando.busylight',
+	'lifx': 'chroma_feedback.consumer.lifx.lifx',
+	'luxafor.flag': 'chroma_feedback.consumer.luxafor.flag',
+	'magic.hue': 'chroma_feedback.consumer.magic.hue',
+	'nanoleaf': 'chroma_feedback.consumer.nanoleaf.nanoleaf',
+	'philips.hue': 'chroma_feedback.consumer.philips.hue',
+	'razer.chroma': 'chroma_feedback.consumer.razer.chroma',
+	'signify.wiz': 'chroma_feedback.consumer.signify.wiz',
+	'thingm.blink1': 'chroma_feedback.consumer.thingm.blink1',
+	'xiaomi.yeelight': 'chroma_feedback.consumer.xiaomi.yeelight'
+}

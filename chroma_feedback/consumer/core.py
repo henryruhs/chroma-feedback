@@ -3,7 +3,7 @@ import sys
 from argparse import ArgumentParser
 from typing import Any, List
 
-from chroma_feedback import helper, logger, wording
+from chroma_feedback import consumer, helper, logger, wording
 from chroma_feedback.typing import Consumer, ProducerReport
 
 
@@ -29,7 +29,7 @@ def process(program : ArgumentParser, producer_report : List[ProducerReport]) ->
 
 def load_consumer(consumer_name : str) -> Any:
 	try:
-		return importlib.import_module('chroma_feedback.consumer.' + consumer_name)
+		return importlib.import_module(consumer.ALL[consumer_name])
 	except ImportError:
-		logger.error(wording.get('consumer_not_found').format(consumer_name) + wording.get('exclamation_mark'))
+		logger.error(wording.get('consumer_not_found').format(consumer.ALL[consumer_name]) + wording.get('exclamation_mark'))
 		sys.exit()

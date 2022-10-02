@@ -35,7 +35,7 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 		set_group(group, color.get_by_status(status))
 		result.append(
 		{
-			'name': 'lifx.lifx',
+			'name': 'lifx',
 			'type': 'group',
 			'description': get_group_name(group),
 			'status': status
