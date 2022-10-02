@@ -19,17 +19,17 @@ def init(program : ArgumentParser) -> None:
 	if not ARGS:
 		light_ips = None
 
-		if not helper.has_argument('--nanoleaf-light-ip'):
+		if not helper.has_argument('--nanoleaf-nanoleaf-light-ip'):
 			light_ips = discover_light_ips()
 		if light_ips:
-			program.add_argument('--nanoleaf-light-ip', default = light_ips)
+			program.add_argument('--nanoleaf-nanoleaf-light-ip', default = light_ips)
 		else:
-			program.add_argument('--nanoleaf-light-ip', action = 'append', required = True)
+			program.add_argument('--nanoleaf-nanoleaf-light-ip', action = 'append', required = True)
 	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	lights = get_lights(ARGS.nanoleaf_light_ip)
+	lights = get_lights(ARGS.nanoleaf_nanoleaf_light_ip)
 
 	if not lights:
 		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))
