@@ -21,16 +21,16 @@ def init(program : ArgumentParser) -> None:
 
 def run() -> List[Producer]:
 	result = []
-	authentication = fetch_authentication(ARGS.cloudbees_codeship_host, ARGS.cloudbees_codeship_username, ARGS.cloudbees_codeship_password)
+	auth = fetch_auth(ARGS.cloudbees_codeship_host, ARGS.cloudbees_codeship_username, ARGS.cloudbees_codeship_password)
 
-	if 'organizations' in authentication and 'token' in authentication:
-		for organization in authentication['organizations']:
-			projects = fetch_projects(ARGS.cloudbees_codeship_host, organization['uuid'], authentication['token'])
+	if 'access_token' in auth and 'organizations' in auth:
+		for organization in auth['organizations']:
+			projects = fetch_projects(ARGS.cloudbees_codeship_host, organization['uuid'], auth['access_token'])
 
 			if projects:
 				for project in projects:
 					if ARGS.cloudbees_codeship_slug is None or project['name'] in ARGS.cloudbees_codeship_slug:
-						result.extend(fetch(ARGS.cloudbees_codeship_host, organization['uuid'], project['name'], project['uuid'], authentication['token']))
+						result.extend(fetch(ARGS.cloudbees_codeship_host, organization['uuid'], project['name'], project['uuid'], auth['access_token']))
 	return result
 
 
@@ -54,7 +54,7 @@ def fetch(host : str, organization_id : str, project_name : str, project_id : st
 	return result
 
 
-def fetch_authentication(host : str, username : str, password : str) -> Any:
+def fetch_auth(host : str, username : str, password : str) -> Any:
 	result = {}
 	response = None
 

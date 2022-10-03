@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import Any, List
 
 from chroma_feedback import helper, request
 from chroma_feedback.typing import Producer
@@ -21,18 +21,20 @@ def init(program : ArgumentParser) -> None:
 
 def run() -> List[Producer]:
 	result = []
+	auth = fetch_auth(ARGS.atlassian_bitbucket_host, ARGS.atlassian_bitbucket_username, ARGS.atlassian_bitbucket_password)
 
-	for slug in ARGS.atlassian_bitbucket_slug:
-		result.extend(fetch(ARGS.atlassian_bitbucket_host, slug, ARGS.atlassian_bitbucket_username, ARGS.atlassian_bitbucket_password))
+	if 'access_token' in auth:
+		for slug in ARGS.atlassian_bitbucket_slug:
+			result.extend(fetch(ARGS.atlassian_bitbucket_host, slug, auth['access_token']))
 	return result
 
 
-def fetch(host : str, slug : str, username : str, password : str) -> List[Producer]:
+def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	result = []
 	response = None
 
-	if host and slug and username and password:
-		response = request.get(host + '/2.0/repositories/' + slug + '/pipelines/', headers = request.create_basic_auth_headers(username, password))
+	if host and slug and token:
+		response = request.get(host + '/2.0/repositories/' + slug + '/pipelines/', headers = request.create_bearer_auth_headers(token))
 
 	# process response
 
@@ -47,4 +49,24 @@ def fetch(host : str, slug : str, username : str, password : str) -> List[Produc
 					result.append(normalize_data(build['repository']['full_name'], build['state']['name'], build['state']['result']['name']))
 				else:
 					result.append(normalize_data(build['repository']['full_name'], build['state']['name'], None))
+	return result
+
+
+def fetch_auth(host : str, username : str, password : str) -> Any:
+	result = {}
+	response = None
+
+	if host and username and password:
+		response = request.post(host.replace('api.', '') + '/site/oauth2/access_token',
+		{
+			'grant_type': 'client_credentials'
+		}, headers = request.create_basic_auth_headers(username, password))
+
+	# process response
+
+	if response and response.status_code == 200:
+		data = request.parse_json(response)
+
+		if 'access_token' in data:
+			result['access_token'] = data['access_token']
 	return result
