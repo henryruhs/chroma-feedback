@@ -11,6 +11,7 @@ COLOR =\
 	'end': '\033[0m'
 }
 
+
 def format_by_status(text : str, status : Status) -> str:
 	if status == 'started':
 		return format_started(text)
