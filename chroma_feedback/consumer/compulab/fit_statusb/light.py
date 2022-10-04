@@ -34,7 +34,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		if set_light(light, color.get_by_status(status)):
 			result.append(
 			{
-				'name': 'compulab_fit.statusb',
+				'name': 'compulab.fit_statusb',
 				'type': 'light',
 				'description': helper.create_description(light.info['product_string'], light.path),
 				'status': status

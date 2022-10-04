@@ -32,9 +32,11 @@ ProducerName = Literal\
 ConsumerName = Literal\
 [
 	'agile_innovative.blinkstick',
-	'compulab_fit.statusb',
+	'compulab.fit_statusb',
 	'elgato.streamdeck',
 	'embrava.blynclight',
+	'embrava.blynclight_mini',
+	'embrava.blynclight_plus',
 	'kuando.busylight_alpha',
 	'kuando.busylight_omega',
 	'lifx',
@@ -44,6 +46,7 @@ ConsumerName = Literal\
 	'magic.hue',
 	'nanoleaf',
 	'philips.hue',
+	'plantronics.status_indicator',
 	'razer.chroma',
 	'signify.wiz',
 	'thingm.blink1',

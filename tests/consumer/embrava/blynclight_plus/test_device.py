@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import MagicMock
 
-from chroma_feedback.consumer.compulab_fit.statusb.light import process_lights
+from chroma_feedback.consumer.embrava.blynclight_plus.light import process_lights
 
 MOCK = MagicMock()
 
@@ -22,7 +22,7 @@ def test_process_passed() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'compulab_fit.statusb'
+		assert result[0]['name'] == 'embrava.blynclight_plus'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'passed'
@@ -46,7 +46,7 @@ def test_process_started() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'compulab_fit.statusb'
+		assert result[0]['name'] == 'embrava.blynclight_plus'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'started'
@@ -70,7 +70,7 @@ def test_process_errored() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'compulab_fit.statusb'
+		assert result[0]['name'] == 'embrava.blynclight_plus'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'errored'
@@ -94,7 +94,7 @@ def test_process_warned() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'compulab_fit.statusb'
+		assert result[0]['name'] == 'embrava.blynclight_plus'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'warned'
@@ -118,7 +118,7 @@ def test_process_failed() -> None:
 			}
 		])
 
-		assert result[0]['name'] == 'compulab_fit.statusb'
+		assert result[0]['name'] == 'embrava.blynclight_plus'
 		assert result[0]['type'] == 'device'
 		assert result[0]['description']
 		assert result[0]['status'] == 'failed'

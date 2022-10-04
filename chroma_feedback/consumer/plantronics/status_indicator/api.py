@@ -17,12 +17,12 @@ def get_api() -> Any:
 def api_factory() -> Any:
 	try:
 		from busylight.lights import NoLightsFound, LightUnavailable
-		from busylight.lights.compulap import Fit_StatUSB as api
+		from busylight.lights.plantronics import Status_Indicator as api
 
 		try:
 			api.first_light().acquire()
 		except (NoLightsFound, LightUnavailable):
-			logger.error(wording.get('connection_not_found').format('compulab_fit.statusb') + wording.get('exclamation_mark'))
+			logger.error(wording.get('connection_not_found').format('plantronics.status_indicator') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api
 	except ImportError:
