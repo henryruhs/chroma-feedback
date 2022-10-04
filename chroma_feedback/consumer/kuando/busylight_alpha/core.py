@@ -17,12 +17,12 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--kuando-busylight-light-id', action = 'append')
+		program.add_argument('--kuando-busylight-alpha-light-id', action = 'append')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(producer_report: List[ProducerReport]) -> List[Consumer]:
-	lights = filter_lights(get_lights(), ARGS.kuando_busylight_light_id)
+	lights = filter_lights(get_lights(), ARGS.kuando_busylight_alpha_light_id)
 
 	if not lights:
 		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))

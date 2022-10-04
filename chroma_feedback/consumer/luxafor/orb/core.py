@@ -17,12 +17,12 @@ def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--compulab-fit-statusb-light-id', action = 'append')
+		program.add_argument('--luxafor-orb-light-id', action = 'append')
 	ARGS = helper.get_first(program.parse_known_args())
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	light = filter_lights(get_lights(), ARGS.compulab_fit_statusb_light_id)
+	light = filter_lights(get_lights(), ARGS.luxafor_orb_light_id)
 
 	if not light:
 		logger.error(wording.get('device_not_found') + wording.get('exclamation_mark'))

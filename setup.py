@@ -41,9 +41,12 @@ setup(
 		'chroma_feedback.consumer.compulab_fit.statusb',
 		'chroma_feedback.consumer.elgato.streamdeck',
 		'chroma_feedback.consumer.embrava.blynclight',
-		'chroma_feedback.consumer.kuando.busylight',
+		'chroma_feedback.consumer.kuando.busylight_alpha',
+		'chroma_feedback.consumer.kuando.busylight_omega',
 		'chroma_feedback.consumer.lifx.lifx',
 		'chroma_feedback.consumer.luxafor.flag',
+		'chroma_feedback.consumer.luxafor.mute',
+		'chroma_feedback.consumer.luxafor.orb',
 		'chroma_feedback.consumer.magic.hue',
 		'chroma_feedback.consumer.nanoleaf.nanoleaf',
 		'chroma_feedback.consumer.philips.hue',
@@ -65,7 +68,7 @@ setup(
 	},
 	install_requires =
 	[
-		'busylight-for-humans==0.22.2',
+		'busylight-for-humans==0.23.0',
 		'lifxlan==1.2.7',
 		'nanoleafapi==2.1.2',
 		'phue==1.1',

@@ -34,7 +34,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 		if set_light(light, color.get_by_status(status)):
 			result.append(
 			{
-				'name': 'compulab_fit.statusb',
+				'name': 'kuando.busylight_omega',
 				'type': 'light',
 				'description': helper.create_description(light.info['product_string'], light.path),
 				'status': status
@@ -45,4 +45,3 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 def set_light(light : Any, color_config : Color) -> bool:
 	light.on(tuple(color_config['rgb']))
 	return light.is_on is True
-
