@@ -45,7 +45,6 @@ def fetch(host : str, pipeline_id : str, token : str) -> List[Producer]:
 	if host and pipeline_id and token:
 		response = request.get(host + '/api/v2/pipeline/' + pipeline_id + '/workflow', headers = create_headers(token))
 
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
@@ -64,7 +63,6 @@ def fetch_pipeline_ids(host : str, organization : str, slug : str, token : str) 
 		response = request.get(host + '/api/v2/project/' + slug + '/pipeline', headers = create_headers(token))
 	elif host and organization and token:
 		response = request.get(host + '/api/v2/pipeline?org-slug=' + organization, headers = create_headers(token))
-
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

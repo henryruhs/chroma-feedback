@@ -101,7 +101,6 @@ def test_create_consumer_report_passed() -> None:
 	assert consumer_report[0]['status'] == 'passed'
 
 
-
 def test_create_consumer_report_started() -> None:
 	consumer_report = reporter.create_consumer_report(
 	[

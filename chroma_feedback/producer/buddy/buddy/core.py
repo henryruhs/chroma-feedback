@@ -43,7 +43,6 @@ def fetch(host: str, workspace: str, project : str, token: str) -> List[Producer
 	if host and workspace and project and token:
 		response = request.get(host + '/workspaces/' + workspace + '/projects/' + project + '/pipelines/', headers = request.create_bearer_auth_headers(token))
 
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
@@ -61,7 +60,6 @@ def fetch_project_names(host : str, workspace : str, token : str) -> List[str]:
 
 	if host and workspace and token:
 		response = request.get(host + '/workspaces/' + workspace + '/projects', headers = request.create_bearer_auth_headers(token))
-
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

@@ -33,7 +33,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	if host and slug and token:
 		response = request.get(host + '/statuses/' + slug, headers = request.create_bearer_auth_headers(token))
 
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 

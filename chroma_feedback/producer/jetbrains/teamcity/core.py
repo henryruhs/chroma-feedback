@@ -38,7 +38,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	elif host and token:
 		response = request.get(host + '/app/rest/buildTypes/?fields=buildType(builds($locator(running:any),build(webUrl,status,running,buildType(projectName,paused))))', headers = request.create_bearer_auth_headers(token))
 
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 

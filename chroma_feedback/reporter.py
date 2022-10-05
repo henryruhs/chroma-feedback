@@ -7,7 +7,6 @@ from chroma_feedback.typing import Consumer, ConsumerReport, Producer, ProducerR
 def create_producer_report(producer_result : List[Producer]) -> List[ProducerReport]:
 	report : List[ProducerReport] = []
 
-
 	for result in producer_result:
 		if result['status'] == 'passed':
 			report.append(
@@ -41,7 +40,6 @@ def create_producer_report(producer_result : List[Producer]) -> List[ProducerRep
 
 def create_consumer_report(consumer_result : List[Consumer]) -> List[ConsumerReport]:
 	report : List[ConsumerReport] = []
-
 
 	for result in consumer_result:
 		if result['status'] == 'passed':

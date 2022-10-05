@@ -11,12 +11,10 @@ class InstallCommand(install):
 			file.write('SUBSYSTEM=="usb", MODE="0666"')
 			file.close()
 
-
 	@staticmethod
 	def load_rule() -> None:
 		os.system('udevadm control --reload')
 		os.system('udevadm trigger')
-
 
 	def run(self) -> None:
 		install.run(self)

@@ -36,7 +36,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	if host and slug and token:
 		response = request.get(host + '/2.0/repositories/' + slug + '/pipelines/', headers = request.create_bearer_auth_headers(token))
 
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
@@ -60,7 +59,6 @@ def fetch_auth(host : str, username : str, password : str) -> Any:
 		{
 			'grant_type': 'client_credentials'
 		}, headers = request.create_basic_auth_headers(username, password))
-
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

@@ -34,7 +34,6 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Producer]
 	if host and slug and username and token:
 		response = request.get(host + '/job/' + slug + '/lastBuild/api/json', headers = request.create_basic_auth_headers(username, token))
 
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
