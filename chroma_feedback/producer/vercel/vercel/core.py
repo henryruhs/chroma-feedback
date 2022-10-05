@@ -38,8 +38,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	elif host and token:
 		response = request.get(host + '/v1/projects', headers = request.create_bearer_auth_headers(token))
 
-	# process response
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 

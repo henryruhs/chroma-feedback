@@ -40,8 +40,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	if host and slug and token:
 		response = request.get(host + '/apps/' + slug + '/releases', headers = create_headers(token))
 
-	# process response
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 		build = helper.get_last(data)
@@ -57,8 +55,6 @@ def fetch_application_ids(host : str, token : str) -> List[str]:
 
 	if host and token:
 		response = request.get(host + '/apps', headers = create_headers(token))
-
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

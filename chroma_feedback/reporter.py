@@ -7,8 +7,6 @@ from chroma_feedback.typing import Consumer, ConsumerReport, Producer, ProducerR
 def create_producer_report(producer_result : List[Producer]) -> List[ProducerReport]:
 	report : List[ProducerReport] = []
 
-	# process result
-
 	for result in producer_result:
 		if result['status'] == 'passed':
 			report.append(
@@ -43,8 +41,6 @@ def create_producer_report(producer_result : List[Producer]) -> List[ProducerRep
 def create_consumer_report(consumer_result : List[Consumer]) -> List[ConsumerReport]:
 	report : List[ConsumerReport] = []
 
-	# process result
-
 	for result in consumer_result:
 		if result['status'] == 'passed':
 			report.append(
@@ -75,8 +71,6 @@ def create_consumer_report(consumer_result : List[Consumer]) -> List[ConsumerRep
 
 def resolve_report_status(producer_report : List[ProducerReport]) -> Status:
 	status : Status = 'passed'
-
-	# process report
 
 	for report in producer_report:
 		if report['status'] == 'started' and status not in ['errored', 'warned', 'failed']:

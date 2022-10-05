@@ -70,6 +70,7 @@ LogLevel = Literal\
 ]
 Headers = Dict[str, str]
 
+
 class Producer(TypedDict):
 	name: ProducerName
 	slug: str

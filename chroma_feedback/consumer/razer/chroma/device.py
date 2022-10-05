@@ -28,8 +28,6 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
-	# process devices
-
 	for device in devices:
 		if set_device(device, color.get_by_status(status)):
 			result.append(

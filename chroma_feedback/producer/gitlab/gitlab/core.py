@@ -47,8 +47,6 @@ def fetch(host : str, slug : str, pipeline_id : str, token : str) -> List[Produc
 	if host and slug and pipeline_id and token:
 		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines/' + pipeline_id + '/jobs', headers = create_headers(token))
 
-	# process response
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
@@ -65,8 +63,6 @@ def fetch_project_ids(host : str, token : str) -> List[str]:
 	if host and  token:
 		response = request.get(host + '/api/v4/projects?owned=true', headers = create_headers(token))
 
-	# process response
-
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
@@ -82,8 +78,6 @@ def fetch_pipeline_ids(host : str, slug : str, token : str) -> List[str]:
 
 	if host and slug and token:
 		response = request.get(host + '/api/v4/projects/' + slug + '/pipelines', headers = create_headers(token))
-
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

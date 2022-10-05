@@ -34,8 +34,6 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
-	# process devices
-
 	for device in devices:
 		if set_device(device, producer_report):
 			result.append(
@@ -51,20 +49,14 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	device.open()
 
-	# process report
-
 	for index, report in enumerate(producer_report):
 		if index < device.key_count():
 			device.set_key_image(index, create_image(device, report))
 			if 'url' in report and report['url']:
 				device.set_key_callback(lambda __, key, state : state is True and webbrowser.open(producer_report[key]['url']))
 
-	# smooth reset
-
 	for index in range(len(producer_report), device.key_count()):
 		device.set_key_image(index, None)
-
-	# close on destroy
 
 	atexit.register(lambda : device.close())
 	return device.is_open() is True

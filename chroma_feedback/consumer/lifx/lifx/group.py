@@ -29,8 +29,6 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
-	# process groups
-
 	for group in groups:
 		set_group(group, color.get_by_status(status))
 		result.append(
