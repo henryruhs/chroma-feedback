@@ -40,7 +40,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	if host and slug and token:
 		response = request.get(host + '/api/v1/sites/' + slug + '/deploys', headers = request.create_bearer_auth_headers(token))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
@@ -58,7 +57,6 @@ def fetch_site_ids(host : str, token : str) -> List[str]:
 	if host and token:
 		response = request.get(host + '/api/v1/sites', headers = request.create_bearer_auth_headers(token))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

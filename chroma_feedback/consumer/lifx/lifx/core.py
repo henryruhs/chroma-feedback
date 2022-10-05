@@ -32,8 +32,6 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 			sys.exit()
 		return process_groups(groups, producer_report)
 
-	# fallback as needed
-
 	lights = filter_lights(get_lights(), ARGS.lifx_light_ip)
 
 	if not lights:

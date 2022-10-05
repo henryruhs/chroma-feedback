@@ -28,7 +28,6 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
-	# process lights
 
 	for light in lights:
 		if set_light(light, color.get_by_status(status)):

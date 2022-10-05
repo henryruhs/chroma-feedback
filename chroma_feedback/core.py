@@ -22,23 +22,13 @@ def cli() -> None:
 
 def init(program : ArgumentParser) -> None:
 	args = helper.get_first(program.parse_known_args())
-
-	# init logger
-
 	logger.init(args.log_level)
-
-	# validate version
 
 	if sys.version_info < (3, 8):
 		logger.error(wording.get('version_not_supported').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 		sys.exit()
 
-	# report header
-
 	reporter.print_header()
-
-	# handle loop
-
 	application = loop.get_application()
 	timer = loop.get_timer()
 	timer.setInterval(100)
@@ -57,8 +47,6 @@ def background_run(program : ArgumentParser) -> None:
 	args = helper.get_first(program.parse_known_args())
 	timer = loop.get_timer()
 
-	# handle interval
-
 	if INTERVAL == args.background_interval * 1000:
 		run(program)
 		INTERVAL = 0
@@ -68,40 +56,23 @@ def background_run(program : ArgumentParser) -> None:
 
 def run(program : ArgumentParser) -> None:
 	args = helper.get_first(program.parse_known_args())
-
-	# process producer
-
 	producer_result = producer.process(program)
-
-	# handle exit
 
 	if not producer_result:
 		logger.error(wording.get('result_not_found') + wording.get('exclamation_mark'))
 		sys.exit()
-
-	# report producer
 
 	producer_report = reporter.create_producer_report(producer_result)
 
 	if producer_report:
 		reporter.print_report(producer_report)
 
-	# handle dry run
-
 	if args.dry_run is False:
-
-		# process consumer
-
 		consumer_result = consumer.process(program, producer_report)
-
-		# report consumer
-
 		consumer_report = reporter.create_consumer_report(consumer_result)
 
 		if consumer_report:
 			reporter.print_report(consumer_report)
-
-	# handle systray
 
 	if args.background_run is True and loop.is_created() is True:
 		if systray.is_created() is True:

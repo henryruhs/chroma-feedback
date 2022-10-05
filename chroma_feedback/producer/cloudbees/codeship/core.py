@@ -41,7 +41,6 @@ def fetch(host : str, organization_id : str, project_name : str, project_id : st
 	if host and organization_id and project_id and token:
 		response = request.get(host + '/v2/organizations/' + organization_id + '/projects/' + project_id + '/builds', headers = request.create_bearer_auth_headers(token))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
@@ -61,7 +60,6 @@ def fetch_auth(host : str, username : str, password : str) -> Any:
 	if host and username and password:
 		response = request.post(host + '/v2/auth', headers = request.create_basic_auth_headers(username, password))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
@@ -79,7 +77,6 @@ def fetch_projects(host : str, organization_id : str, token : str) -> List[Any]:
 	if host and organization_id and token:
 		response = request.get(host + '/v2/organizations/' + organization_id + '/projects', headers = request.create_bearer_auth_headers(token))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

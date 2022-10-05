@@ -14,15 +14,11 @@ def discover_ips(host : str, port : int, search_target : str = 'ssdp:all') -> Li
 		'ST: ' + search_target
 	]
 
-	# discover ips
-
 	discovery = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 	discovery.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 	discovery.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 1)
 	discovery.settimeout(2)
 	discovery.sendto(os.linesep.join(message).encode(), (host, port))
-
-	# receive ips
 
 	while True:
 		try:

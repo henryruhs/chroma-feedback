@@ -43,7 +43,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	if host and slug and token:
 		response = request.get(host + '/repos/' + slug + '/actions/runs', headers = create_headers(token))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
@@ -63,7 +62,6 @@ def fetch_repository_names(host : str, username : str, token : str) -> List[str]
 	if host and username and token:
 		response = request.get(host + '/search/repositories?q=user:' + username, headers = create_headers(token))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

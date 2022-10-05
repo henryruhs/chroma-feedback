@@ -33,7 +33,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	if host and slug and token:
 		response = request.get(host + '/' + slug + '/_apis/build/builds?api-version=6.0', headers = request.create_basic_auth_headers('', token))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

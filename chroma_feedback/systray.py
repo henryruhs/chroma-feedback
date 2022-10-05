@@ -45,8 +45,6 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 
 	MENU.clear()
 
-	# process report
-
 	for report in producer_report:
 		item_report = MENU.addAction(report['message'])
 		item_report.setIcon(create_icon(report['status']))
@@ -57,8 +55,6 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 			item_report.setDisabled(True)
 	if producer_report:
 		MENU.addSeparator()
-
-	# handle action
 
 	item_start = MENU.addAction(wording.get('start'))
 	item_stop = MENU.addAction(wording.get('stop'))

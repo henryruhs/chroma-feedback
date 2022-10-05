@@ -34,7 +34,6 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		slug = normalize_slug(slug)
 		response = request.get(host + '/rest/api/latest/result/' + slug, headers = request.create_bearer_auth_headers(token))
 
-	# process response
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

@@ -40,8 +40,6 @@ def run(producer_report : List[ProducerReport]) -> List[Consumer]:
 			sys.exit()
 		return process_groups(groups, producer_report)
 
-	# fallback as needed
-
 	lights = filter_lights(get_lights(ARGS.philips_hue_bridge_ip), ARGS.philips_hue_light_id)
 
 	if not lights:
