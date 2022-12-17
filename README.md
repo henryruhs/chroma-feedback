@@ -3,7 +3,7 @@ Chroma Feedback
 
 > Turn your RGB powered hardware into a status indicator for continuous integration, continuous deployment and infrastructure monitoring.
 
-[![Build Status](https://img.shields.io/github/workflow/status/henryruhs/chroma-feedback/ci.svg)](https://github.com/henryruhs/chroma-feedback/actions?query=workflow:ci)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/henryruhs/chroma-feedback/ci.yml.svg?branch=master)](https://github.com/henryruhs/chroma-feedback/actions?query=workflow:ci)
 [![Coverage Status](https://img.shields.io/coveralls/henryruhs/chroma-feedback.svg)](https://coveralls.io/r/henryruhs/chroma-feedback)
 [![PyPI](https://img.shields.io/pypi/v/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
 [![License](https://img.shields.io/pypi/l/chroma-feedback.svg)](https://pypi.org/project/chroma-feedback)
