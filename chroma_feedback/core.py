@@ -10,13 +10,13 @@ INTERVAL = 0
 def cli() -> None:
 	signal.signal(signal.SIGINT, lambda signal_number, frame: destroy())
 	program = ArgumentParser()
-	program.add_argument('-V', '--version', action = 'version', version = metadata.get('name') + ' ' + metadata.get('version'))
-	program.add_argument('-P', '--producer', action = 'append', choices = producer.ALL, required = True)
-	program.add_argument('-C', '--consumer', action = 'append', choices = consumer.ALL, required = helper.has_argument('--dry-run') is False and helper.has_argument('-D') is False)
-	program.add_argument('-I', '--background-interval', default = 60, type = int)
-	program.add_argument('-B', '--background-run', action = 'store_true')
-	program.add_argument('-D', '--dry-run', action = 'store_true')
-	program.add_argument('-L', '--log-level', default = 'info', choices = logger.get_log_level())
+	program.add_argument('-p', '--producer', action = 'append', choices = producer.ALL, required = True)
+	program.add_argument('-c', '--consumer', action = 'append', choices = consumer.ALL, required = helper.has_argument('-d') is False and helper.has_argument('--dry-run') is False)
+	program.add_argument('-b', '--background-run', action = 'store_true')
+	program.add_argument('-i', '--background-interval', default = 60, type = int)
+	program.add_argument('-d', '--dry-run', action = 'store_true')
+	program.add_argument('-l', '--log-level', default = 'info', choices = logger.get_log_level())
+	program.add_argument('-v', '--version', action = 'version', version = metadata.get('name') + ' ' + metadata.get('version'))
 	init(program)
 
 
