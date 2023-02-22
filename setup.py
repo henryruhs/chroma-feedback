@@ -74,28 +74,28 @@ setup(
 	},
 	install_requires =
 	[
-		'busylight-for-humans==0.23.0',
+		'busylight-for-humans==0.25.3',
 		'lifxlan==1.2.7',
 		'nanoleafapi==2.1.2',
 		'phue==1.1',
 		'python-magichue==0.3.2',
-		'pyqt5==5.15.7',
+		'pyqt5==5.15.9',
 		'pywizlight==0.5.14',
-		'requests==2.28.1',
-		'streamdeck==0.9.2',
+		'requests==2.28.2',
+		'streamdeck==0.9.3',
 		'yeelight==0.7.10'
 	],
 	tests_require =
 	[
-		'flake8==5.0.0',
-		'mock==4.0.3',
-		'mypy==0.971',
+		'flake8==6.0.0',
+		'mock==5.0.1',
+		'mypy==1.0.1',
 		'pyqt5-stubs==5.15.6.0',
 		'pytest==7.1.2',
-		'pytest-cov==3.0.0',
+		'pytest-cov==4.0.0',
 		'pytest-dotenv==0.5.2',
-		'pytest-mock==3.8.2',
-		'types-mock==4.0.15',
-		'types-requests==2.28.6'
+		'pytest-mock==3.10.0',
+		'types-mock==5.0.0.5',
+		'types-requests==2.28.11.14'
 	]
 )
