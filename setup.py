@@ -93,6 +93,7 @@ setup(
 		'pyqt5-stubs==5.15.6.0',
 		'pytest==7.1.2',
 		'pytest-cov==3.0.0',
+		'pytest-dotenv==0.5.2',
 		'pytest-mock==3.8.2',
 		'types-mock==4.0.15',
 		'types-requests==2.28.6'

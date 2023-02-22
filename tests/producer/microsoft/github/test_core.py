@@ -8,14 +8,14 @@ from chroma_feedback.typing import Status
 
 
 def test_run_one() -> None:
-	if os.environ.get('GITHUB_TOKEN'):
+	if os.environ.get('MICROSOFT_GITHUB_TOKEN'):
 		github.core.ARGS = argparse.Namespace(
 			microsoft_github_host = 'https://api.github.com',
 			microsoft_github_slug =
 			[
 				'henryruhs/chroma-feedback'
 			],
-			microsoft_github_token = os.environ.get('GITHUB_TOKEN')
+			microsoft_github_token = os.environ.get('MICROSOFT_GITHUB_TOKEN')
 		)
 		result = github.core.run()
 
@@ -24,7 +24,7 @@ def test_run_one() -> None:
 		assert 'https://github.com/henryruhs/chroma-feedback/actions/runs' in result[0]['url']
 		assert result[0]['status'] in get_args(Status)
 	else:
-		pytest.skip('GITHUB_TOKEN is not defined')
+		pytest.skip('MICROSOFT_GITHUB_TOKEN is not defined')
 
 
 def test_run_many() -> None:
