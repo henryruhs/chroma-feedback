@@ -20,7 +20,7 @@ def api_factory() -> Any:
 		from busylight.lights.thingm import Blink1 as api
 
 		try:
-			api.first_light().acquire()
+			api.first_light().release()
 		except (NoLightsFound, LightUnavailable):
 			logger.error(wording.get('connection_not_found').format('thingm.blink1') + wording.get('exclamation_mark'))
 			sys.exit()

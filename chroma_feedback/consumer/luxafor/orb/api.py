@@ -16,12 +16,12 @@ def get_api() -> Any:
 
 def api_factory() -> Any:
 	try:
-		from busylight.lights import LightUnavailable, LightNotFound
+		from busylight.lights import LightUnavailable, NoLightsFound
 		from busylight.lights.luxafor import Orb as api
 
 		try:
-			api.first_light().acquire()
-		except (LightUnavailable, LightNotFound):
+			api.first_light().release()
+		except (LightUnavailable, NoLightsFound):
 			logger.error(wording.get('connection_not_found').format('luxafor.orb') + wording.get('exclamation_mark'))
 			sys.exit()
 		return api

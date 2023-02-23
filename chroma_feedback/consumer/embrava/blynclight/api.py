@@ -20,7 +20,7 @@ def api_factory() -> Any:
 		from busylight.lights.embrava import Blynclight as api
 
 		try:
-			api.first_light().acquire()
+			api.first_light().release()
 		except (NoLightsFound, LightUnavailable):
 			logger.error(wording.get('connection_not_found').format('embrava.blynclight') + wording.get('exclamation_mark'))
 			sys.exit()

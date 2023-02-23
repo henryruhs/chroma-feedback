@@ -1,4 +1,4 @@
-from logging import basicConfig, DEBUG, ERROR, getLogger, INFO, Logger, WARNING
+from logging import basicConfig, getLogger, Logger, DEBUG, INFO, WARNING, ERROR
 from typing import Any
 
 from chroma_feedback.typing import LogLevel

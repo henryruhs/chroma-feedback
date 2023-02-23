@@ -20,7 +20,7 @@ def api_factory() -> Any:
 		from busylight.lights.agile_innovative import BlinkStick as api
 
 		try:
-			api.first_light().acquire()
+			api.first_light()
 		except (NoLightsFound, LightUnavailable):
 			logger.error(wording.get('connection_not_found').format('agile_innovative.blinkstick') + wording.get('exclamation_mark'))
 			sys.exit()
