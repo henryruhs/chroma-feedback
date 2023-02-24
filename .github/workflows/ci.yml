@@ -31,7 +31,6 @@ jobs:
     uses: actions/setup-python@v3
     with:
      python-version: ${{ matrix.python-version }}
-  - run: pip install opencv-python
   - run: pip install mock
   - run: pip install pyqt6
   - run: pip install pytest
@@ -62,7 +61,6 @@ jobs:
     uses: actions/setup-python@v3
     with:
      python-version: 3.9
-  - run: pip install opencv-python
   - run: pip install coveralls
   - run: pip install mock
   - run: pip install pyqt6
