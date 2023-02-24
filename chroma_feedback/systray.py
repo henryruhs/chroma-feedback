@@ -71,7 +71,7 @@ def create_icon(status : Status) -> QIcon:
 	pixmap = QPixmap(100, 100)
 	pixmap.fill(Qt.transparent)
 	painter = QPainter(pixmap)
-	painter.setBrush(QBrush(QColor(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]), Qt.SolidPattern))
+	painter.setBrush(QBrush(QColor(*color_config['rgb']), Qt.SolidPattern))
 	painter.drawEllipse(20, 20, 60, 60)
 	painter.end()
 	return QIcon(pixmap)
