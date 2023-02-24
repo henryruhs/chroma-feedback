@@ -1,3 +1,4 @@
+import atexit
 import copy
 from typing import Any, List
 
@@ -41,6 +42,10 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_light(light_name : str, color_config : Color) -> None:
+	atexit.register(lambda: get_api(None).set_light(light_name,
+	{
+		'on': False
+	}))
 	get_api(None).set_light(light_name,
 	{
 		'hue': color_config['hue'],

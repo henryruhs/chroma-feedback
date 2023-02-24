@@ -1,3 +1,4 @@
+import atexit
 import copy
 from typing import Any, List
 
@@ -41,26 +42,29 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 
 def set_device(device : Any, color_config : Color) -> bool:
+	atexit.register(lambda: device.fx.none())
 	if device.has('brightness'):
 		device.brightness = color_config['brightness'][0]
 	if device.fx.has('static'):
-		return device.fx.static(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])
-	return use_effect(device, color_config, 'static')
+		return device.fx.static(tuple(color_config['rgb']))
+	return use_effect(device, color_config)
 
 
-def use_effect(device : Any, color_config : Color, effect_name : str) -> bool:
-	effect_state = False
+def use_effect(device : Any, color_config : Color) -> bool:
 	parts =\
 	{
 		'logo': 'logo',
 		'scroll': 'scroll_wheel',
 		'left': 'left',
 		'right': 'right',
+		'charging': 'charging',
+		'fast_charging': 'fast_charging',
+		'fully_charged': 'fully_charged',
 		'backlight': 'backlight'
 	}
 
 	for part_key, part_value in parts.items():
-		if device.fx.has(part_key + '_' + effect_name):
-			effect_function = getattr(getattr(device.fx.misc, part_value), effect_name)
-			effect_state = effect_function(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]) or effect_state
-	return effect_state
+		if device.fx.has(part_key + '_static'):
+			effect_function = getattr(getattr(device.fx.misc, part_value), 'static')
+			return effect_function(tuple(color_config['rgb']))
+	return False

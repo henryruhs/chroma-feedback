@@ -1,3 +1,4 @@
+import atexit
 from typing import Any, List
 
 from chroma_feedback import color, reporter
@@ -35,6 +36,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 def set_light(light : Any, color_config : Color) -> None:
 	modes = get_modes()
 
+	atexit.register(lambda: light.turn_off())
 	if modes:
 		light.mode = modes.CustomMode(
 			mode = modes.MODE_GRADUALLY,

@@ -1,3 +1,4 @@
+import atexit
 import copy
 from typing import Any, List
 
@@ -41,6 +42,10 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_group(group_name : str, color_config : Color) -> None:
+	atexit.register(lambda: get_api(None).set_group(group_name,
+	{
+		'on': False
+	}))
 	get_api(None).set_group(group_name,
 	{
 		'hue': color_config['hue'],

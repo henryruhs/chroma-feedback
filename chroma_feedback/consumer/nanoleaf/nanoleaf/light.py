@@ -1,3 +1,4 @@
+import atexit
 from typing import Any, List
 
 from chroma_feedback import color, helper, reporter
@@ -33,4 +34,5 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_light(light : Any, color_config : Color) -> bool:
+	atexit.register(lambda: light.power_off())
 	return light.set_color(color_config['rgb'])

@@ -1,3 +1,4 @@
+import atexit
 from typing import Any, List
 
 from chroma_feedback import color, reporter
@@ -42,6 +43,7 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_group(group : Any, color_config : Color) -> None:
+	atexit.register(lambda: group.set_power('off'))
 	group.set_power('on')
 	group.set_color(
 	[

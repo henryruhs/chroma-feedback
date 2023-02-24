@@ -1,3 +1,4 @@
+import atexit
 from typing import Any, List
 
 from chroma_feedback import color, helper, reporter
@@ -38,4 +39,5 @@ def get_light_name(light : Any) -> str:
 
 def set_light(light : Any, color_config : Color) -> None:
 	builder = get_builder()
+	atexit.register(lambda: light.loop.run_until_complete(light.turn_off()))
 	light.loop.run_until_complete(light.turn_on(builder(rgb = color_config['rgb'])))

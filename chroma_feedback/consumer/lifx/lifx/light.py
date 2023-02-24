@@ -1,3 +1,4 @@
+import atexit
 import copy
 from typing import Any, List
 
@@ -41,6 +42,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_light(light : Any, color_config : Color) -> None:
+	atexit.register(lambda: light.set_power('off'))
 	light.set_power('on')
 	light.set_color(
 	[
