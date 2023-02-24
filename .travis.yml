@@ -20,7 +20,7 @@ jobs:
  - stage: test
    install:
    - pip install mock
-   - pip install pyqt
+   - pip install pyqt6
    - pip install pytest
    - pip install pytest-mock
    - pip install requests
