@@ -36,6 +36,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 	for device in devices:
 		if set_device(device, producer_report):
+			register_reset_device(device)
 			result.append(
 			{
 				'name': 'elgato.streamdeck',
@@ -58,7 +59,6 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	for index in range(len(producer_report), device.key_count()):
 		device.set_key_image(index, None)
 
-	atexit.register(lambda: device.close())
 	return device.is_open() is True
 
 
@@ -71,7 +71,7 @@ def create_image(device : Any, report : ProducerReport) -> Any:
 	pixmap.fill(Qt.transparent)
 	painter = QPainter(pixmap)
 	painter.setFont(create_font(font_size * 2.75, QFont.Normal))
-	painter.setPen(QPen(QColor(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2])))
+	painter.setPen(QPen(QColor(*color_config['rgb'])))
 	painter.drawText(QRect(0, font_size * 1.25, image_config['size'][0], image_config['size'][1]), Qt.AlignCenter, report['symbol'])
 	painter.setFont(create_font(font_size * 0.875, QFont.Bold))
 	painter.setPen(QPen(Qt.white))
@@ -105,3 +105,7 @@ def pixmap_to_bytes(pixmap : QPixmap, image_config : Any) -> bytes:
 	buffer.open(QtCore.QIODevice.WriteOnly)
 	pixmap.save(buffer, image_config['format'])
 	return byte_array.data()
+
+
+def register_reset_device(device : Any) -> None:
+	atexit.register(lambda: device.close())

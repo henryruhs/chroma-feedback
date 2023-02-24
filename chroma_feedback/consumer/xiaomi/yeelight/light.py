@@ -23,6 +23,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 	for light in lights:
 		if set_light(light, color.get_by_status(status)):
+			register_reset_light(light)
 			result.append(
 			{
 				'name': 'xiaomi.yeelight',
@@ -34,5 +35,8 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_light(light : Any, color_config : Color) -> bool:
+	return light.turn_on() == 'ok' and light.set_rgb(*color_config['rgb']) == 'ok'
+
+
+def register_reset_light(light : Any) -> None:
 	atexit.register(lambda: light.turn_off())
-	return light.turn_on() == 'ok' and light.set_rgb(color_config['rgb'][0], color_config['rgb'][1], color_config['rgb'][2]) == 'ok'

@@ -23,6 +23,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 	for light in lights:
 		set_light(light, color.get_by_status(status))
+		register_reset_light(light)
 		result.append(
 		{
 			'name': 'magic.hue',
@@ -36,7 +37,6 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 def set_light(light : Any, color_config : Color) -> None:
 	modes = get_modes()
 
-	atexit.register(lambda: light.turn_off())
 	if modes:
 		light.mode = modes.CustomMode(
 			mode = modes.MODE_GRADUALLY,
@@ -48,3 +48,7 @@ def set_light(light : Any, color_config : Color) -> None:
 			]
 		)
 	return light.update_status()
+
+
+def register_reset_light(light : Any) -> None:
+	atexit.register(lambda: light.turn_off())

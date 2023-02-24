@@ -31,6 +31,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 	for device in devices:
 		if set_device(device, color.get_by_status(status)):
+			register_reset_device(device)
 			result.append(
 			{
 				'name': 'razer.chroma',
@@ -42,15 +43,15 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 
 def set_device(device : Any, color_config : Color) -> bool:
-	atexit.register(lambda: device.fx.none())
 	if device.has('brightness'):
 		device.brightness = color_config['brightness'][0]
 	if device.fx.has('static'):
-		return device.fx.static(tuple(color_config['rgb']))
-	return use_effect(device, color_config)
+		return device.fx.static(*color_config['rgb'])
+	return set_misc(device, color_config)
 
 
-def use_effect(device : Any, color_config : Color) -> bool:
+def set_misc(device : Any, color_config : Color) -> bool:
+	state = False
 	parts =\
 	{
 		'logo': 'logo',
@@ -65,6 +66,10 @@ def use_effect(device : Any, color_config : Color) -> bool:
 
 	for part_key, part_value in parts.items():
 		if device.fx.has(part_key + '_static'):
-			effect_function = getattr(getattr(device.fx.misc, part_value), 'static')
-			return effect_function(tuple(color_config['rgb']))
-	return False
+			function = getattr(getattr(device.fx.misc, part_value), 'static')
+			state = function(*color_config['rgb']) or state
+	return state
+
+
+def register_reset_device(device : Any) -> None:
+	atexit.register(lambda: set_device(device, color.get_reset()))

@@ -23,6 +23,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 	for light in lights:
 		if set_light(light, color.get_by_status(status)):
+			register_reset_light(light)
 			result.append(
 			{
 				'name': 'nanoleaf',
@@ -34,5 +35,8 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_light(light : Any, color_config : Color) -> bool:
-	atexit.register(lambda: light.power_off())
 	return light.set_color(color_config['rgb'])
+
+
+def register_reset_light(light : Any) -> None:
+	atexit.register(lambda: light.power_off())

@@ -31,6 +31,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 	for light in lights:
 		set_light(light, color.get_by_status(status))
+		register_reset_light(light)
 		result.append(
 		{
 			'name': 'lifx',
@@ -42,7 +43,6 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_light(light : Any, color_config : Color) -> None:
-	atexit.register(lambda: light.set_power('off'))
 	light.set_power('on')
 	light.set_color(
 	[
@@ -51,3 +51,7 @@ def set_light(light : Any, color_config : Color) -> None:
 		color_config['brightness'][2],
 		color_config['kelvin']
 	])
+
+
+def register_reset_light(light : Any) -> None:
+	atexit.register(lambda: light.set_power('off'))

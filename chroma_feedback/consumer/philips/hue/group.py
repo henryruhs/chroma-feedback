@@ -30,7 +30,8 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 	status : Status = reporter.resolve_report_status(producer_report)
 
 	for index in groups:
-		set_group(groups[index]['name'], color.get_by_status(status))
+		set_group(groups[index], color.get_by_status(status))
+		register_reset_group(groups[index])
 		result.append(
 		{
 			'name': 'philips.hue',
@@ -41,12 +42,8 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 	return result
 
 
-def set_group(group_name : str, color_config : Color) -> None:
-	atexit.register(lambda: get_api(None).set_group(group_name,
-	{
-		'on': False
-	}))
-	get_api(None).set_group(group_name,
+def set_group(group : Any, color_config : Color) -> None:
+	get_api(None).set_group(group['name'],
 	{
 		'hue': color_config['hue'],
 		'sat': color_config['saturation'][1],
@@ -54,3 +51,10 @@ def set_group(group_name : str, color_config : Color) -> None:
 		'on': True,
 		'alert': 'none'
 	})
+
+
+def register_reset_group(group: Any) -> None:
+	atexit.register(lambda: get_api(None).set_group(group['name'],
+	{
+		'on': False
+	}))

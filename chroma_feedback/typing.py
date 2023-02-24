@@ -101,7 +101,6 @@ class ConsumerReport(TypedDict):
 
 
 class Color(TypedDict):
-	name: str
 	rgb: List[int]
 	hue: int
 	saturation: List[int]

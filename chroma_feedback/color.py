@@ -69,7 +69,6 @@ def get_by_status(status : Status) -> Color:
 def get_passed() -> Color:
 	return\
 	{
-		'name': 'green',
 		'rgb':
 		[
 			0,
@@ -96,7 +95,6 @@ def get_passed() -> Color:
 def get_started() -> Color:
 	return\
 	{
-		'name': 'blue',
 		'rgb':
 		[
 			0,
@@ -123,7 +121,6 @@ def get_started() -> Color:
 def get_errored() -> Color:
 	return\
 	{
-		'name': 'white',
 		'rgb':
 		[
 			255,
@@ -150,7 +147,6 @@ def get_errored() -> Color:
 def get_warned() -> Color:
 	return\
 	{
-		'name': 'yellow',
 		'rgb':
 		[
 			255,
@@ -177,7 +173,6 @@ def get_warned() -> Color:
 def get_failed() -> Color:
 	return\
 	{
-		'name': 'red',
 		'rgb':
 		[
 			255,
@@ -198,4 +193,30 @@ def get_failed() -> Color:
 			65535
 		],
 		'kelvin': 3500
+	}
+
+
+def get_reset() -> Color:
+	return\
+	{
+		'rgb':
+		[
+			0,
+			0,
+			0
+		],
+		'hue': 0,
+		'saturation':
+		[
+			0,
+			0,
+			0
+		],
+		'brightness':
+		[
+			0,
+			0,
+			0
+		],
+		'kelvin': 0
 	}

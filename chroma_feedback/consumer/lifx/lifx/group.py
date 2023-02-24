@@ -32,6 +32,7 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 
 	for group in groups:
 		set_group(group, color.get_by_status(status))
+		register_reset_group(group)
 		result.append(
 		{
 			'name': 'lifx',
@@ -43,7 +44,6 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 
 
 def set_group(group : Any, color_config : Color) -> None:
-	atexit.register(lambda: group.set_power('off'))
 	group.set_power('on')
 	group.set_color(
 	[
@@ -52,3 +52,7 @@ def set_group(group : Any, color_config : Color) -> None:
 		color_config['brightness'][2],
 		color_config['kelvin']
 	])
+
+
+def register_reset_group(group : Any) -> None:
+	atexit.register(lambda: group.set_power('off'))

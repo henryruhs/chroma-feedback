@@ -30,7 +30,8 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 	status : Status = reporter.resolve_report_status(producer_report)
 
 	for light in lights:
-		set_light(light.name, color.get_by_status(status))
+		set_light(light, color.get_by_status(status))
+		register_reset_light(light)
 		result.append(
 		{
 			'name': 'philips.hue',
@@ -41,12 +42,8 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 	return result
 
 
-def set_light(light_name : str, color_config : Color) -> None:
-	atexit.register(lambda: get_api(None).set_light(light_name,
-	{
-		'on': False
-	}))
-	get_api(None).set_light(light_name,
+def set_light(light: Any, color_config : Color) -> None:
+	get_api(None).set_light(light.name,
 	{
 		'hue': color_config['hue'],
 		'sat': color_config['saturation'][1],
@@ -54,3 +51,10 @@ def set_light(light_name : str, color_config : Color) -> None:
 		'on': True,
 		'alert': 'none'
 	})
+
+
+def register_reset_light(light: Any) -> None:
+	atexit.register(lambda: get_api(None).set_light(light.name,
+	{
+		'on': False
+	}))
