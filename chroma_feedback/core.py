@@ -33,10 +33,10 @@ def init(program : ArgumentParser) -> None:
 	timer = loop.get_timer()
 	timer.setInterval(100)
 	if args.background_run is True:
-		timer.timeout.connect(lambda : background_run(program))
+		timer.timeout.connect(lambda: background_run(program))
 	else:
-		timer.timeout.connect(lambda : sys.exit())
-	timer.singleShot(0, lambda : run(program))
+		timer.timeout.connect(lambda: sys.exit())
+	timer.singleShot(0, lambda: run(program))
 	timer.start()
 	sys.exit(application.exec_())
 

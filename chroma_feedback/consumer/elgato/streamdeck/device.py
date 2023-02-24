@@ -58,7 +58,7 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	for index in range(len(producer_report), device.key_count()):
 		device.set_key_image(index, None)
 
-	atexit.register(lambda : device.close())
+	atexit.register(lambda: device.close())
 	return device.is_open() is True
 
 

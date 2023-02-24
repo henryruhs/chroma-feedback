@@ -22,9 +22,9 @@ def init(program : ArgumentParser) -> None:
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	light = filter_lights(get_lights(), ARGS.compulab_fit_statusb_light_id)
+	lights = filter_lights(get_lights(), ARGS.compulab_fit_statusb_light_id)
 
-	if not light:
+	if not lights:
 		logger.error(wording.get('device_not_found') + wording.get('exclamation_mark'))
 		sys.exit()
-	return process_lights(light, producer_report)
+	return process_lights(lights, producer_report)

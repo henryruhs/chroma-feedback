@@ -1,3 +1,4 @@
+import atexit
 import copy
 from typing import Any, List
 
@@ -42,5 +43,6 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 def set_light(light : Any, color_config : Color) -> bool:
 	light.on(tuple(color_config['rgb']))
+	atexit.register(lambda: light.off())
 	return light.is_on is True
 
