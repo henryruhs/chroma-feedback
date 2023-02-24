@@ -19,8 +19,7 @@ jobs:
   steps:
   - checkout
   - run: pip install mock
-  - run: pip install pyqt5
-  - run: pip install pyqt5-stubs
+  - run: pip install pyqt6
   - run: pip install pytest
   - run: pip install pytest-mock
   - run: pip install requests

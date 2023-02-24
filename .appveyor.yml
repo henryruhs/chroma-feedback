@@ -18,8 +18,7 @@ build_script:
 
 test_script:
 - pip install mock
-- pip install pyqt5
-- pip install pyqt5-stubs
+- pip install pyqt6
 - pip install pytest
 - pip install pytest-mock
 - pip install requests
