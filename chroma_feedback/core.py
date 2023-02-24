@@ -38,7 +38,7 @@ def init(program : ArgumentParser) -> None:
 		timer.timeout.connect(lambda: sys.exit())
 	timer.singleShot(0, lambda: run(program))
 	timer.start()
-	sys.exit(application.exec_())
+	sys.exit(application.exec())
 
 
 def background_run(program : ArgumentParser) -> None:

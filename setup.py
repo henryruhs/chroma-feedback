@@ -74,12 +74,12 @@ setup(
 	},
 	install_requires =
 	[
-		'busylight-for-humans==0.25.3',
+		'busylight-for-humans==0.25.5',
 		'lifxlan==1.2.7',
 		'nanoleafapi==2.1.2',
 		'phue==1.1',
 		'python-magichue==0.3.2',
-		'pyqt5==5.15.9',
+		'pyqt6==6.4.2 ',
 		'pywizlight==0.5.14',
 		'requests==2.28.2',
 		'streamdeck==0.9.3',

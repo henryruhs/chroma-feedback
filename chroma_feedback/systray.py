@@ -2,9 +2,9 @@ import sys
 import webbrowser
 from typing import List
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QBrush, QColor, QIcon, QPainter, QPixmap
-from PyQt5.QtWidgets import QAction, QMenu, QSystemTrayIcon
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QAction, QBrush, QColor, QIcon, QPainter, QPixmap
+from PyQt6.QtWidgets import QMenu, QSystemTrayIcon
 
 from chroma_feedback import color, logger, loop, reporter, wording
 from chroma_feedback.typing import ProducerReport, Status
@@ -50,7 +50,7 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 		item_report.setIcon(create_icon(report['status']))
 		item_report.setIconVisibleInMenu(True)
 		if 'url' in report and report['url']:
-			item_report.triggered.connect(lambda __, url = report['url'] : webbrowser.open(url))
+			item_report.triggered.connect(lambda: open_url(report['url']))
 		else:
 			item_report.setDisabled(True)
 	if producer_report:
@@ -66,12 +66,16 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 	item_exit.triggered.connect(action_exit)
 
 
+def open_url(url : str) -> bool:
+	return webbrowser.open(url)
+
+
 def create_icon(status : Status) -> QIcon:
 	color_config = color.get_by_status(status)
 	pixmap = QPixmap(100, 100)
-	pixmap.fill(Qt.transparent)
+	pixmap.fill(Qt.GlobalColor.transparent)
 	painter = QPainter(pixmap)
-	painter.setBrush(QBrush(QColor(*color_config['rgb']), Qt.SolidPattern))
+	painter.setBrush(QBrush(QColor(*color_config['rgb']), Qt.BrushStyle.SolidPattern))
 	painter.drawEllipse(20, 20, 60, 60)
 	painter.end()
 	return QIcon(pixmap)
