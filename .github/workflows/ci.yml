@@ -32,6 +32,7 @@ jobs:
     with:
      python-version: ${{ matrix.python-version }}
   - run: sudo apt-get install libegl1
+  - run: sudo apt-get install libxkbcommon0
   - run: pip install mock
   - run: pip install pyqt6
   - run: pip install pytest
@@ -63,6 +64,7 @@ jobs:
     with:
      python-version: 3.9
   - run: sudo apt-get install libegl1
+  - run: sudo apt-get install libxkbcommon0
   - run: pip install coveralls
   - run: pip install mock
   - run: pip install pyqt6

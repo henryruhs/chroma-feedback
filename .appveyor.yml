@@ -17,6 +17,8 @@ build_script:
 - mypy bin/chroma-feedback chroma_feedback tests
 
 test_script:
+- sudo apt-get install libegl1
+- sudo apt-get install libxkbcommon0
 - pip install mock
 - pip install pyqt6
 - pip install pytest
