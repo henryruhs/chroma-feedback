@@ -38,7 +38,6 @@ jobs:
   - run: pip install requests
 
   - run: sudo apt-get update && sudo apt-get install -y libegl1
-  - run: echo "export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu" >> $GITHUB_ENV
 
   - run: pytest tests
     env:
@@ -74,7 +73,6 @@ jobs:
   - run: pip install requests
 
   - run: sudo apt-get update && sudo apt-get install -y libegl1
-  - run: echo "export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu" >> $GITHUB_ENV
 
   - run: pytest tests --cov=chroma_feedback
     env:
