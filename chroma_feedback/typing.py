@@ -37,6 +37,7 @@ ConsumerName = Literal\
 	'embrava.blynclight',
 	'embrava.blynclight_mini',
 	'embrava.blynclight_plus',
+	'gigabyte.rgb_fusion2',
 	'kuando.busylight_alpha',
 	'kuando.busylight_omega',
 	'lifx',
