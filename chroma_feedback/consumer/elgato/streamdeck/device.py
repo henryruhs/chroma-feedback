@@ -50,10 +50,11 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	device.open()
 
 	for index in range(device.key_count()):
-		if index < len(producer_report):
-			device.set_key_image(index, create_image(device, producer_report[index]))
-		else:
-			device.set_key_image(index, None)
+		if device.KEY_PIXEL_HEIGHT > 0 and device.KEY_PIXEL_WIDTH > 0:
+			if index < len(producer_report):
+				device.set_key_image(index, create_image(device, producer_report[index]))
+			else:
+				device.set_key_image(index, None)
 
 	return device.is_open() is True
 
