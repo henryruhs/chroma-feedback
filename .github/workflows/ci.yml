@@ -36,6 +36,10 @@ jobs:
   - run: pip install pytest
   - run: pip install pytest-mock
   - run: pip install requests
+
+  - run: sudo apt-get update && sudo apt-get install -y libegl1
+  - run: echo "export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu" >> $GITHUB_ENV
+
   - run: pytest tests
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
@@ -68,6 +72,10 @@ jobs:
   - run: pip install pytest-cov
   - run: pip install pytest-mock
   - run: pip install requests
+
+  - run: sudo apt-get update && sudo apt-get install -y libegl1
+  - run: echo "export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu" >> $GITHUB_ENV
+
   - run: pytest tests --cov=chroma_feedback
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
