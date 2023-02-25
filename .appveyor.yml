@@ -13,9 +13,8 @@ build_script:
 - mypy bin/chroma-feedback chroma_feedback tests
 
 test_script:
-- C:\Python311\python.exe -m pip install --upgrade pip
+- conda install pyqt=6
 - pip install mock
-- pip install pyqt6
 - pip install pytest
 - pip install pytest-mock
 - pip install requests
