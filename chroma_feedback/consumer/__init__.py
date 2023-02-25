@@ -8,6 +8,7 @@ ALL = \
 	'embrava.blynclight': 'chroma_feedback.consumer.embrava.blynclight',
 	'embrava.blynclight_mini': 'chroma_feedback.consumer.embrava.blynclight_mini',
 	'embrava.blynclight_plus': 'chroma_feedback.consumer.embrava.blynclight_plus',
+	'gigabyte.rgb_fusion2': 'chroma_feedback.consumer.gigabyte.rgb_fusion2',
 	'kuando.busylight_alpha': 'chroma_feedback.consumer.kuando.busylight_alpha',
 	'kuando.busylight_omega': 'chroma_feedback.consumer.kuando.busylight_omega',
 	'lifx': 'chroma_feedback.consumer.lifx.lifx',

@@ -43,6 +43,7 @@ setup(
 		'chroma_feedback.consumer.embrava.blynclight',
 		'chroma_feedback.consumer.embrava.blynclight_mini',
 		'chroma_feedback.consumer.embrava.blynclight_plus',
+		'chroma_feedback.consumer.gigabyte.rgb_fusion2',
 		'chroma_feedback.consumer.kuando.busylight_alpha',
 		'chroma_feedback.consumer.kuando.busylight_omega',
 		'chroma_feedback.consumer.lifx.lifx',
@@ -76,6 +77,7 @@ setup(
 	[
 		'busylight-for-humans==0.25.5',
 		'lifxlan==1.2.7',
+		'liquidctl==1.12.1',
 		'nanoleafapi==2.1.2',
 		'phue==1.1',
 		'python-magichue==0.3.2',
