@@ -1,7 +1,7 @@
 build: false
 
 image:
-- Visual Studio 2019
+- Visual Studio 2022
 
 build_script:
 - pip install flake8
@@ -13,8 +13,8 @@ build_script:
 - mypy bin/chroma-feedback chroma_feedback tests
 
 test_script:
-- conda install pyqt=6
 - pip install mock
+- pip install pyqt6
 - pip install pytest
 - pip install pytest-mock
 - pip install requests
