@@ -19,6 +19,7 @@ build_script:
 test_script:
 - sudo apt-get install libegl1
 - sudo apt-get install libxkbcommon0
+- sudo apt-get install libdbus-1-3
 - pip install mock
 - pip install pyqt6
 - pip install pytest
