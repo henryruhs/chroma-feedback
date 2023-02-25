@@ -1,7 +1,7 @@
 build: false
 
 image:
-- Qt 6.4.2
+- Visual Studio 2022
 
 build_script:
 - pip install flake8
