@@ -18,6 +18,7 @@ jobs:
   - image: circleci/python:3.9-buster
   steps:
   - checkout
+  - run: sudo apt-get install libegl1
   - run: pip install mock
   - run: pip install pyqt6
   - run: pip install pytest

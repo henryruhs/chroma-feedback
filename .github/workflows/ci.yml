@@ -31,14 +31,12 @@ jobs:
     uses: actions/setup-python@v3
     with:
      python-version: ${{ matrix.python-version }}
+  - run: sudo apt-get install libegl1
   - run: pip install mock
   - run: pip install pyqt6
   - run: pip install pytest
   - run: pip install pytest-mock
   - run: pip install requests
-
-  - run: sudo apt-get update && sudo apt-get install -y libegl1
-
   - run: pytest tests
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
@@ -64,6 +62,7 @@ jobs:
     uses: actions/setup-python@v3
     with:
      python-version: 3.9
+  - run: sudo apt-get install libegl1
   - run: pip install coveralls
   - run: pip install mock
   - run: pip install pyqt6
@@ -71,9 +70,6 @@ jobs:
   - run: pip install pytest-cov
   - run: pip install pytest-mock
   - run: pip install requests
-
-  - run: sudo apt-get update && sudo apt-get install -y libegl1
-
   - run: pytest tests --cov=chroma_feedback
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
