@@ -1,6 +1,7 @@
 import sys
 import webbrowser
 from typing import List
+from functools import partial
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QBrush, QColor, QIcon, QPainter, QPixmap
@@ -50,7 +51,7 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 		item_report.setIcon(create_icon(report['status']))
 		item_report.setIconVisibleInMenu(True)
 		if 'url' in report and report['url']:
-			item_report.triggered.connect(lambda: open_url(report['url']))
+			item_report.triggered.connect(partial(webbrowser.open, report['url']))
 		else:
 			item_report.setDisabled(True)
 	if producer_report:
@@ -64,10 +65,6 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 	item_start.triggered.connect(lambda: action_start(item_start, item_stop))
 	item_stop.triggered.connect(lambda: action_stop(item_start, item_stop))
 	item_exit.triggered.connect(action_exit)
-
-
-def open_url(url : str) -> bool:
-	return webbrowser.open(url)
 
 
 def create_icon(status : Status) -> QIcon:
