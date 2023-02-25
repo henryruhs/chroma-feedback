@@ -49,12 +49,11 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 	device.open()
 
-	for index, report in enumerate(producer_report):
-		if index < device.key_count():
-			device.set_key_image(index, create_image(device, report))
-
-	for index in range(len(producer_report), device.key_count()):
-		device.set_key_image(index, None)
+	for index in range(device.key_count()):
+		if index < len(producer_report):
+			device.set_key_image(index, create_image(device, producer_report[index]))
+		else:
+			device.set_key_image(index, None)
 
 	return device.is_open() is True
 
@@ -63,16 +62,16 @@ def create_image(device : Any, report : ProducerReport) -> bytes:
 	color_config = color.get_by_status(report['status'])
 	image_config = device.key_image_format()
 	transform = create_transform(image_config)
-	font_size = image_config['size'][1] / 8
-	pixmap = QPixmap(image_config['size'][0], image_config['size'][1])
+	font_size = image_config['size'][0] / 8
+	pixmap = QPixmap(*image_config['size'])
 	pixmap.fill(Qt.GlobalColor.transparent)
 	painter = QPainter(pixmap)
-	painter.setFont(create_font(font_size * 2.75, QFont.Weight.Bold))
+	painter.setFont(create_font(int(font_size * 2.75), QFont.Weight.Bold))
 	painter.setPen(QPen(QColor(*color_config['rgb'])))
-	painter.drawText(QRect(0, font_size * 1.25, image_config['size'][0], image_config['size'][1]), Qt.AlignmentFlag.AlignCenter, report['symbol'])
-	painter.setFont(create_font(font_size * 0.875, QFont.Weight.Bold))
+	painter.drawText(QRect(0, int(font_size * 1.5), *image_config['size']), Qt.AlignmentFlag.AlignCenter, report['symbol'])
+	painter.setFont(create_font(int(font_size * 0.875), QFont.Weight.Bold))
 	painter.setPen(QPen(Qt.GlobalColor.white))
-	painter.drawText(QRect(0, font_size * -2, image_config['size'][0], image_config['size'][1]), Qt.AlignmentFlag.AlignCenter, report['name'].upper())
+	painter.drawText(QRect(0, int(font_size * -1.875), *image_config['size']), Qt.AlignmentFlag.AlignCenter, report['name'].split('.')[-1].upper())
 	painter.end()
 	return pixmap_to_bytes(pixmap.transformed(transform), image_config)
 
