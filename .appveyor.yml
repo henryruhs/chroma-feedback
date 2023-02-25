@@ -3,10 +3,6 @@ build: false
 image:
 - Visual Studio 2019
 
-environment:
- matrix:
- - TOXENV: py39
-
 build_script:
 - pip install flake8
 - pip install mypy
@@ -17,7 +13,7 @@ build_script:
 - mypy bin/chroma-feedback chroma_feedback tests
 
 test_script:
-- pip install --upgrade pip
+- C:\Python311\python.exe -m pip install --upgrade pip
 - pip install mock
 - pip install pyqt6
 - pip install pytest
