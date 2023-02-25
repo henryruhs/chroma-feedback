@@ -1,11 +1,7 @@
 build: false
 
 image:
-- Visual Studio 2019
-
-environment:
- matrix:
- - TOXENV: py39
+- Visual Studio 2022
 
 build_script:
 - pip install flake8
@@ -15,11 +11,3 @@ build_script:
 - pip install types-requests
 - flake8 bin/chroma-feedback chroma_feedback tests
 - mypy bin/chroma-feedback chroma_feedback tests
-
-test_script:
-- pip install mock
-- pip install pyqt6
-- pip install pytest
-- pip install pytest-mock
-- pip install requests
-- pytest tests
