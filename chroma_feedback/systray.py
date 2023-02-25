@@ -2,7 +2,6 @@ import sys
 import webbrowser
 from typing import List
 from functools import partial
-
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QBrush, QColor, QIcon, QPainter, QPixmap
 from PyQt6.QtWidgets import QMenu, QSystemTrayIcon
