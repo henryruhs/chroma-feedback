@@ -15,9 +15,9 @@ def normalize_data(slug : str, url : str, status : str, is_paused : bool, is_run
 def normalize_status(status : str, is_paused : bool, is_running : bool) -> Status:
 	status = helper.to_lower_case(status)
 
-	if is_paused is True:
+	if is_paused:
 		return 'skipped'
-	if is_running is True:
+	if is_running:
 		return 'started'
 	if status == 'error':
 		return 'errored'

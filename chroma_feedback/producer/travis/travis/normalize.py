@@ -15,7 +15,7 @@ def normalize_data(slug : str, status : str, is_active : bool) -> Producer:
 def normalize_status(status : str, is_active : bool) -> Status:
 	status = helper.to_lower_case(status)
 
-	if is_active is False:
+	if not is_active:
 		return 'skipped'
 	if status in ['created', 'started']:
 		return 'started'

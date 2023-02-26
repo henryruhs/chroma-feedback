@@ -91,7 +91,7 @@ def print_header() -> None:
 
 def print_report(report : List[Any]) -> None:
 	for value in report:
-		if helper.is_windows() is False:
+		if not helper.is_windows():
 			logger.info(color.format_by_status(value['symbol'], value['status']) + ' ' + value['message'])
 		else:
 			logger.info(value['message'])

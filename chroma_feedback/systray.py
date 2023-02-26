@@ -2,6 +2,7 @@ import sys
 import webbrowser
 from typing import List
 from functools import partial
+
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QBrush, QColor, QIcon, QPainter, QPixmap
 from PyQt6.QtWidgets import QMenu, QSystemTrayIcon
@@ -59,8 +60,8 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 	item_start = MENU.addAction(wording.get('start'))
 	item_stop = MENU.addAction(wording.get('stop'))
 	item_exit = MENU.addAction(wording.get('exit'))
-	item_start.setVisible(loop.get_timer().isActive() is False)
-	item_stop.setVisible(loop.get_timer().isActive() is True)
+	item_start.setVisible(not loop.get_timer().isActive())
+	item_stop.setVisible(loop.get_timer().isActive())
 	item_start.triggered.connect(lambda: action_start(item_start, item_stop))
 	item_stop.triggered.connect(lambda: action_stop(item_start, item_stop))
 	item_exit.triggered.connect(action_exit)

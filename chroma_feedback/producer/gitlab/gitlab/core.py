@@ -60,7 +60,7 @@ def fetch_project_ids(host : str, token : str) -> List[str]:
 	result = []
 	response = None
 
-	if host and  token:
+	if host and token:
 		response = request.get(host + '/api/v4/projects?owned=true', headers = create_headers(token))
 
 	if response and response.status_code == 200:

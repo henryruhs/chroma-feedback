@@ -59,7 +59,7 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 			else:
 				device.set_key_image(index, None)
 
-	return device.is_open() is True
+	return device.is_open()
 
 
 def open_url(self : Any, index : int, state : bool, producer_report : List[ProducerReport]) -> None:
@@ -88,9 +88,9 @@ def create_image(device : Any, report : ProducerReport) -> bytes:
 def create_transform(image_config : Any) -> QTransform:
 	transform = QTransform()
 
-	if image_config['flip'][0] is True:
+	if image_config['flip'][0]:
 		transform.scale(-1, 1)
-	if image_config['flip'][1] is True:
+	if image_config['flip'][1]:
 		transform.scale(1, -1)
 	if image_config['rotation']:
 		transform.rotate(image_config['rotation'])

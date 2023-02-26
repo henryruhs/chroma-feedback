@@ -44,7 +44,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 def set_light(light : Any, color_config : Color) -> bool:
 	light.on(tuple(color_config['rgb']))
-	return light.is_on is True
+	return light.is_on
 
 
 def register_reset_light(light : Any) -> None:

@@ -10,7 +10,7 @@ ARGS = None
 
 
 def support() -> bool:
-	return helper.is_linux() is True
+	return helper.is_linux()
 
 
 def init(program : ArgumentParser) -> None:

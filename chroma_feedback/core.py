@@ -11,7 +11,7 @@ def cli() -> None:
 	signal.signal(signal.SIGINT, lambda signal_number, frame: destroy())
 	program = ArgumentParser()
 	program.add_argument('-p', '--producer', action = 'append', choices = producer.ALL, required = True)
-	program.add_argument('-c', '--consumer', action = 'append', choices = consumer.ALL, required = helper.has_argument('-d') is False and helper.has_argument('--dry-run') is False)
+	program.add_argument('-c', '--consumer', action = 'append', choices = consumer.ALL, required = not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
 	program.add_argument('-b', '--background-run', action = 'store_true')
 	program.add_argument('-i', '--background-interval', default = 60, type = int)
 	program.add_argument('-d', '--dry-run', action = 'store_true')
@@ -32,7 +32,7 @@ def init(program : ArgumentParser) -> None:
 	application = loop.get_application()
 	timer = loop.get_timer()
 	timer.setInterval(100)
-	if args.background_run is True:
+	if args.background_run:
 		timer.timeout.connect(lambda: background_run(program))
 	else:
 		timer.timeout.connect(lambda: sys.exit())
@@ -67,15 +67,15 @@ def run(program : ArgumentParser) -> None:
 	if producer_report:
 		reporter.print_report(producer_report)
 
-	if args.dry_run is False:
+	if not args.dry_run:
 		consumer_result = consumer.process(program, producer_report)
 		consumer_report = reporter.create_consumer_report(consumer_result)
 
 		if consumer_report:
 			reporter.print_report(consumer_report)
 
-	if args.background_run is True and loop.is_created() is True:
-		if systray.is_created() is True:
+	if args.background_run and loop.is_created():
+		if systray.is_created():
 			systray.update(producer_report)
 		else:
 			systray.create(producer_report)

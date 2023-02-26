@@ -15,7 +15,7 @@ def normalize_data(slug : str, result : str, is_building : bool) -> Producer:
 def normalize_status(result : str, is_building: bool) -> Status:
 	result = helper.to_lower_case(result)
 
-	if is_building is True:
+	if is_building:
 		return 'started'
 	if result in ['unstable', 'not_build']:
 		return 'errored'

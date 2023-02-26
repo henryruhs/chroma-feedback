@@ -14,7 +14,7 @@ def process(program : ArgumentParser, producer_report : List[ProducerReport]) ->
 	for consumer_name in args.consumer:
 		consumer = load_consumer(consumer_name)
 
-		if consumer.support() is True:
+		if consumer.support():
 			try:
 				consumer.init(program)
 				result.extend(consumer.run(producer_report))
