@@ -1,7 +1,5 @@
 import atexit
 import copy
-import webbrowser
-from functools import partial
 from typing import Any, List
 
 from PyQt6 import QtCore
@@ -55,16 +53,10 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 		if device.KEY_PIXEL_HEIGHT > 0 and device.KEY_PIXEL_WIDTH > 0:
 			if index < len(producer_report):
 				device.set_key_image(index, create_image(device, producer_report[index]))
-				device.set_key_callback(partial(open_url, producer_report = producer_report))
 			else:
 				device.set_key_image(index, None)
 
 	return device.is_open()
-
-
-def open_url(self : Any, index : int, state : bool, producer_report : List[ProducerReport]) -> None:
-	if state and index < len(producer_report):
-		webbrowser.open(producer_report[index]['url'])
 
 
 def create_image(device : Any, report : ProducerReport) -> bytes:
