@@ -75,7 +75,7 @@ setup(
 	},
 	install_requires =
 	[
-		'busylight-for-humans==0.25.5',
+		'busylight-for-humans==0.26.0',
 		'lifxlan==1.2.7',
 		'liquidctl==1.12.1',
 		'nanoleafapi==2.1.2',
