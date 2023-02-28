@@ -21,16 +21,16 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 	status : Status = reporter.resolve_report_status(producer_report)
 
 	for device in devices:
-		with device.connect():
-			set_device(device, color.get_by_status(status))
-			register_reset_device(device)
-			result.append(
-			{
-				'name': 'gigabyte.rgb_fusion2',
-				'type': 'device',
-				'description': device.description,
-				'status': status
-			})
+		device.connect()
+		set_device(device, color.get_by_status(status))
+		register_reset_device(device)
+		result.append(
+		{
+			'name': 'gigabyte.rgb_fusion2',
+			'type': 'device',
+			'description': device.description,
+			'status': status
+		})
 	return result
 
 

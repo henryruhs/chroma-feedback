@@ -17,7 +17,7 @@ def get_api() -> Any:
 def api_factory() -> Any:
 	try:
 		from busylight.lights import NoLightsFound, LightUnavailable
-		from busylight.lights.kuando import Busylight_Alpha as api
+		from busylight.lights.kuando import Busylight_Omega as api
 
 		try:
 			api.first_light().release()
