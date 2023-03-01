@@ -16,10 +16,10 @@ def get_api(light_ip : str) -> Any:
 
 def api_factory(light_ip : str) -> Any:
 	try:
-		from magichue import Light
+		from magichue import LocalLight
 
 		try:
-			api = Light(light_ip)
+			api = LocalLight(light_ip)
 		except OSError:
 			logger.error(wording.get('connection_not_found').format('magic.hue') + wording.get('exclamation_mark'))
 			sys.exit()
