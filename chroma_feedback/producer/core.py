@@ -18,7 +18,7 @@ def process(program : ArgumentParser) -> List[Producer]:
 			producer.init(program)
 			result.extend(producer.run())
 		except Exception as exception:
-			logger.debug(exception)
+			logger.debug(str(exception))
 			logger.error(wording.get('producer_crashed').format(producer_name) + wording.get('exclamation_mark'))
 			sys.exit()
 	return result
