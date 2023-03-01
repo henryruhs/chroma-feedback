@@ -24,7 +24,7 @@ def init(program : ArgumentParser) -> None:
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	if ARGS.lifx_light_group_name:
+	if ARGS.lifx_group_name:
 		groups = get_groups(ARGS.lifx_group_name)
 
 		if not groups:

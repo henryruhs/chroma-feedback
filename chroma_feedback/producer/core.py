@@ -13,10 +13,12 @@ def process(program : ArgumentParser) -> List[Producer]:
 
 	for producer_name in args.producer:
 		producer = load_producer(producer_name)
+
 		try:
 			producer.init(program)
 			result.extend(producer.run())
-		except:
+		except Exception as exception:
+			logger.debug(exception)
 			logger.error(wording.get('producer_crashed').format(producer_name) + wording.get('exclamation_mark'))
 			sys.exit()
 	return result
