@@ -35,6 +35,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 	for device in devices:
 		if set_device(device, producer_report):
+			register_close_device(device)
 			if helper.has_argument('-b') or helper.has_argument('--background-run'):
 				register_reset_device(device)
 			result.append(
@@ -58,6 +59,14 @@ def set_device(device : Any, producer_report : List[ProducerReport]) -> bool:
 				device.set_key_image(index, None)
 
 	return device.is_open()
+
+
+def register_close_device(device : Any) -> None:
+	atexit.register(lambda: device.close())
+
+
+def register_reset_device(device : Any) -> None:
+	atexit.register(lambda: device.reset())
 
 
 def create_image(device : Any, report : ProducerReport) -> bytes:
@@ -103,7 +112,3 @@ def pixmap_to_bytes(pixmap : QPixmap, image_config : Any) -> bytes:
 	buffer.open(QtCore.QIODevice.OpenModeFlag.WriteOnly)
 	pixmap.save(buffer, image_config['format'])
 	return byte_array.data()
-
-
-def register_reset_device(device : Any) -> None:
-	atexit.register(lambda: device.reset())
