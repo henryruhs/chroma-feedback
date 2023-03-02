@@ -47,8 +47,8 @@ def test_has_argument() -> None:
 
 def test_has_argument_invalid() -> None:
 	sys.argv.clear()
-	sys.argv.append('----invalid')
-	assert helper.has_argument('--invalid') is False
+	sys.argv.append('--invalid')
+	assert helper.has_argument('--valid') is False
 
 
 def test_get_first() -> None:

@@ -22,7 +22,7 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 	for device in devices:
 		set_device(device, color.get_by_status(status))
-		if helper.has_argument('--background-run'):
+		if helper.has_argument('-b') or helper.has_argument('--background-run'):
 			register_reset_device(device)
 		result.append(
 		{

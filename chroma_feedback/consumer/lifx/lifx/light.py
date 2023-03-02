@@ -31,7 +31,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 	for light in lights:
 		set_light(light, color.get_by_status(status))
-		if helper.has_argument('--background-run'):
+		if helper.has_argument('-b') or helper.has_argument('--background-run'):
 			register_reset_light(light)
 		result.append(
 		{

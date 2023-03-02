@@ -31,7 +31,7 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 
 	for index in groups:
 		set_group(groups[index], color.get_by_status(status))
-		if helper.has_argument('--background-run'):
+		if helper.has_argument('-b') or helper.has_argument('--background-run'):
 			register_reset_group(groups[index])
 		result.append(
 		{
