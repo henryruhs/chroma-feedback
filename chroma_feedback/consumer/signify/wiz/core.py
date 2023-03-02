@@ -10,7 +10,7 @@ ARGS = None
 
 
 def support() -> bool:
-	return  helper.is_linux() or helper.is_mac() or helper.is_windows()
+	return helper.is_linux() or helper.is_mac() or helper.is_windows()
 
 
 def init(program : ArgumentParser) -> None:
@@ -19,7 +19,7 @@ def init(program : ArgumentParser) -> None:
 	if not ARGS:
 		light_ips = None
 
-		if not helper.has_argument('--signify-signify-wiz-ip'):
+		if not helper.has_argument('--signify-wiz-light-ip'):
 			light_ips = discover_light_ips()
 		if light_ips:
 			program.add_argument('--signify-wiz-light-ip', default = light_ips)
