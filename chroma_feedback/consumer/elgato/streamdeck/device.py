@@ -106,4 +106,4 @@ def pixmap_to_bytes(pixmap : QPixmap, image_config : Any) -> bytes:
 
 
 def register_reset_device(device : Any) -> None:
-	atexit.register(lambda: device.close())
+	atexit.register(lambda: device.reset())
