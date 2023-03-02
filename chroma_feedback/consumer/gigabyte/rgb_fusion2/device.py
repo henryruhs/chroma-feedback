@@ -1,7 +1,7 @@
 import atexit
 from typing import Any, List
 
-from chroma_feedback import color, reporter
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
@@ -22,7 +22,8 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 
 	for device in devices:
 		set_device(device, color.get_by_status(status))
-		register_reset_device(device)
+		if helper.has_argument('--background-run'):
+			register_reset_device(device)
 		result.append(
 		{
 			'name': 'gigabyte.rgb_fusion2',

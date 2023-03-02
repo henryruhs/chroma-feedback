@@ -1,7 +1,7 @@
 import atexit
 from typing import Any, List
 
-from chroma_feedback import color, reporter
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api, get_modes
 
@@ -23,7 +23,8 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 	for light in lights:
 		set_light(light, color.get_by_status(status))
-		register_reset_light(light)
+		if helper.has_argument('--background-run'):
+			register_reset_light(light)
 		result.append(
 		{
 			'name': 'magic.hue',

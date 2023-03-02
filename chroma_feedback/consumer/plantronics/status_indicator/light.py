@@ -31,7 +31,8 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 
 	for light in lights:
 		if set_light(light, color.get_by_status(status)):
-			register_reset_light(light)
+			if helper.has_argument('--background-run'):
+				register_reset_light(light)
 			result.append(
 			{
 				'name': 'plantronics.status_indicator',

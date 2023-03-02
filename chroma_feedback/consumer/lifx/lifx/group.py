@@ -1,7 +1,7 @@
 import atexit
 from typing import Any, List
 
-from chroma_feedback import color, reporter
+from chroma_feedback import color, helper, reporter
 from chroma_feedback.typing import Color, Consumer, ProducerReport, Status
 from .api import get_api
 
@@ -32,7 +32,8 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 
 	for group in groups:
 		set_group(group, color.get_by_status(status))
-		register_reset_group(group)
+		if helper.has_argument('--background-run'):
+			register_reset_group(group)
 		result.append(
 		{
 			'name': 'lifx',
