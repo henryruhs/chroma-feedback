@@ -1,4 +1,3 @@
-from chroma_feedback import helper
 from chroma_feedback.typing import Producer, Status
 
 
