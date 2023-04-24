@@ -18,5 +18,6 @@ ALL = \
 	'microsoft.github': 'chroma_feedback.producer.microsoft.github',
 	'netlify': 'chroma_feedback.producer.netlify.netlify',
 	'travis': 'chroma_feedback.producer.travis.travis',
+	'uptimerobot': 'chroma_feedback.producer.uptimerobot.uptimerobot',
 	'vercel': 'chroma_feedback.producer.vercel.vercel'
 }
