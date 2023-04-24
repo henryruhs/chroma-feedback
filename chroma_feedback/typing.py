@@ -27,6 +27,7 @@ ProducerName = Literal\
 	'microsoft.github',
 	'netlify',
 	'travis',
+	'uptimerobot',
 	'vercel'
 ]
 ConsumerName = Literal\

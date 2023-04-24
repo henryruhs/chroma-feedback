@@ -35,6 +35,7 @@ setup(
 		'chroma_feedback.producer.microsoft.github',
 		'chroma_feedback.producer.netlify.netlify',
 		'chroma_feedback.producer.travis.travis',
+		'chroma_feedback.producer.uptimerobot.uptimerobot',
 		'chroma_feedback.producer.vercel.vercel',
 		'chroma_feedback.consumer',
 		'chroma_feedback.consumer.agile_innovative.blinkstick',
