@@ -2,4 +2,5 @@
 
 from chroma_feedback import core
 
-core.cli()
+if __name__ == '__main__':
+	core.cli()
