@@ -27,6 +27,6 @@ def process(program : ArgumentParser) -> List[Producer]:
 def load_producer(producer_name : str) -> Any:
 	try:
 		return importlib.import_module(producer.ALL[producer_name])
-	except ImportError:
+	except ModuleNotFoundError:
 		logger.error(wording.get('producer_not_found').format(producer.ALL[producer_name]) + wording.get('exclamation_mark'))
 		sys.exit()

@@ -31,6 +31,6 @@ def process(program : ArgumentParser, producer_report : List[ProducerReport]) ->
 def load_consumer(consumer_name : str) -> Any:
 	try:
 		return importlib.import_module(consumer.ALL[consumer_name])
-	except ImportError:
+	except ModuleNotFoundError:
 		logger.error(wording.get('consumer_not_found').format(consumer.ALL[consumer_name]) + wording.get('exclamation_mark'))
 		sys.exit()
