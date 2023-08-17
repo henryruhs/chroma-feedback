@@ -86,7 +86,7 @@ setup(
 		'pyqt6==6.5.2 ',
 		'pywizlight==0.5.14',
 		'requests==2.31.0',
-		'streamdeck==0.9.4',
+		'streamdeck==0.9.3',
 		'yeelight==0.7.13'
 	],
 	tests_require =
