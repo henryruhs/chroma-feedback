@@ -1,12 +1,12 @@
 from logging import basicConfig, getLogger, Logger, DEBUG, INFO, WARNING, ERROR
-from typing import Any
+from typing import Dict
 
 from chroma_feedback.typing import LogLevel
 
 
 def init(log_level : LogLevel) -> None:
 	basicConfig(format = '')
-	get_package_logger().setLevel(get_log_level()[log_level])
+	get_package_logger().setLevel(get_log_levels()[log_level])
 
 
 def get_package_logger() -> Logger:
@@ -29,7 +29,7 @@ def error(message : str = '') -> None:
 	get_package_logger().error(message)
 
 
-def get_log_level() -> Any:
+def get_log_levels() -> Dict[LogLevel, int]:
 	return\
 	{
 		'error': ERROR,
