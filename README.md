@@ -62,4 +62,4 @@ chroma-feedback [options]
 Documentation
 -------------
 
-Read the [documenation](https://henryruhs.gitbook.io/chroma-feedback) for a deep dive.
+Read the [documentation](https://henryruhs.gitbook.io/chroma-feedback) for a deep dive.
