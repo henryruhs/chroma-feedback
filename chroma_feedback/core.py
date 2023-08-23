@@ -16,7 +16,7 @@ def cli() -> None:
 	program.add_argument('-i', '--background-interval', default = 60, type = int)
 	program.add_argument('-d', '--dry-run', action = 'store_true')
 	program.add_argument('-l', '--log-level', default = 'info', choices = logger.get_log_levels())
-	program.add_argument('-v', '--version', action = 'version', version = metadata.get('name') + ' ' + metadata.get('version'))
+	program.add_argument('-v', '--version', version = metadata.get('name') + ' ' + metadata.get('version'), action = 'version')
 	init(program)
 
 
