@@ -1,4 +1,5 @@
 from typing import Any, List
+import os
 
 from chroma_feedback import color, helper, logger, metadata, wording
 from chroma_feedback.typing import Consumer, ConsumerReport, Producer, ProducerReport, Status
@@ -86,7 +87,7 @@ def resolve_report_status(producer_report : List[ProducerReport]) -> Status:
 
 def print_header() -> None:
 	logger.info(metadata.get('name') + ' ' + metadata.get('version') + ' ' + wording.get('by') + ' ' + metadata.get('author'))
-	logger.info()
+	logger.info(os.linesep)
 
 
 def print_report(report : List[Any]) -> None:
@@ -95,4 +96,4 @@ def print_report(report : List[Any]) -> None:
 			logger.info(color.format_by_status(value['symbol'], value['status']) + ' ' + value['message'])
 		else:
 			logger.info(value['message'])
-	logger.info()
+	logger.info(os.linesep)

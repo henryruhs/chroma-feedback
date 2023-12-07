@@ -5,7 +5,7 @@ from chroma_feedback.typing import LogLevel
 
 
 def init(log_level : LogLevel) -> None:
-	basicConfig(format = '')
+	basicConfig(format = None)
 	get_package_logger().setLevel(get_log_levels()[log_level])
 
 
@@ -13,19 +13,19 @@ def get_package_logger() -> Logger:
 	return getLogger('chroma_feedback')
 
 
-def debug(message : str = '') -> None:
+def debug(message : str) -> None:
 	get_package_logger().debug(message)
 
 
-def info(message : str = '') -> None:
+def info(message : str) -> None:
 	get_package_logger().info(message)
 
 
-def warn(message : str = '') -> None:
+def warn(message : str) -> None:
 	get_package_logger().warning(message)
 
 
-def error(message : str = '') -> None:
+def error(message : str) -> None:
 	get_package_logger().error(message)
 
 
