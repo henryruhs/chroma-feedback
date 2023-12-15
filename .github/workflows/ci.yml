@@ -23,7 +23,7 @@ jobs:
   runs-on: ubuntu-latest
   strategy:
    matrix:
-    python-version: [ '3.8', '3.9', '3.10' ]
+    python-version: [ '3.8', '3.9', '3.10', '3.11' ]
   steps:
   - name: Checkout
     uses: actions/checkout@v2
@@ -74,7 +74,7 @@ jobs:
   - run: pip install pytest-cov
   - run: pip install pytest-mock
   - run: pip install requests
-  - run: pytest tests --cov=chroma_feedback
+  - run: pytest tests --cov chroma_feedback
     env:
      APPVEYOR_TOKEN: ${{ secrets.APPVEYOR_TOKEN }}
      ATLASSIAN_BITBUCKET_USERNAME: ${{ secrets.ATLASSIAN_BITBUCKET_USERNAME }}
@@ -90,6 +90,6 @@ jobs:
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
      UPTIMEROBOT_TOKEN: ${{ secrets.UPTIMEROBOT_TOKEN }}
      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-  - run: coveralls --service=github
+  - run: coveralls --service github
     env:
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
