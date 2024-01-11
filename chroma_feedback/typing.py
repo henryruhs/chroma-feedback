@@ -74,37 +74,37 @@ Headers = Dict[str, str]
 
 
 class Producer(TypedDict):
-	name: ProducerName
-	slug: str
-	url: Optional[str]
-	status: Status
+	name : ProducerName
+	slug : str
+	url : Optional[str]
+	status : Status
 
 
 class Consumer(TypedDict):
-	name: ConsumerName
-	type: ConsumerType
-	description: str
-	status: Status
+	name : ConsumerName
+	type : ConsumerType
+	description : str
+	status : Status
 
 
 class ProducerReport(TypedDict):
-	name: ProducerName
-	symbol: str
+	name : ProducerName
+	symbol : str
 	message : str
 	url : Optional[str]
 	status : Status
 
 
 class ConsumerReport(TypedDict):
-	name: ConsumerName
-	symbol: str
+	name : ConsumerName
+	symbol : str
 	message : str
 	status : Status
 
 
 class Color(TypedDict):
-	rgb: List[int]
-	hue: int
-	saturation: List[int]
-	brightness: List[int]
-	kelvin: int
+	rgb : List[int]
+	hue : int
+	saturation : List[int]
+	brightness : List[int]
+	kelvin : int
