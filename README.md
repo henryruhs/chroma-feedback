@@ -55,7 +55,6 @@ chroma-feedback [options]
 -d, --dry-run
 -l, --log-level
 -v, --version
--h, --help
 ```
 
 

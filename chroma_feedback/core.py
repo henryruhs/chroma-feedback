@@ -9,7 +9,7 @@ INTERVAL = 0
 
 def cli() -> None:
 	signal.signal(signal.SIGINT, lambda signal_number, frame: destroy())
-	program = ArgumentParser()
+	program = ArgumentParser(add_help = False)
 	program.add_argument('-p', '--producer', action = 'append', choices = producer.ALL, required = True)
 	program.add_argument('-c', '--consumer', action = 'append', choices = consumer.ALL, required = not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
 	program.add_argument('-b', '--background-run', action = 'store_true')
