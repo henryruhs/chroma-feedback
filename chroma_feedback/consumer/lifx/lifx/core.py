@@ -11,7 +11,7 @@ ARGS = None
 
 
 def support() -> bool:
-	return helper.is_linux() or helper.is_mac() or helper.is_windows()
+	return helper.is_linux() or helper.is_macos() or helper.is_windows()
 
 
 def init(program : ArgumentParser) -> None:

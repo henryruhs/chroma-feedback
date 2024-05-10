@@ -26,8 +26,8 @@ def test_is_linux() -> None:
 	assert helper.is_linux() is not None
 
 
-def test_is_mac() -> None:
-	assert helper.is_mac() is not None
+def test_is_macos() -> None:
+	assert helper.is_macos() is not None
 
 
 def test_is_windows() -> None:

@@ -31,7 +31,7 @@ def is_linux() -> bool:
 	return to_lower_case(platform.system()) == 'linux'
 
 
-def is_mac() -> bool:
+def is_macos() -> bool:
 	return to_lower_case(platform.system()) == 'darwin'
 
 
