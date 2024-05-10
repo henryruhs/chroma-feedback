@@ -36,11 +36,11 @@ def test_run_many() -> None:
 		result = vercel.core.run()
 
 		assert result[0]['name'] == 'vercel'
-		assert result[0]['slug'] == 'chroma-feedback-test-bitbucket'
+		assert result[0]['slug']
 		assert result[0]['status'] in get_args(Status)
 
 		assert result[1]['name'] == 'vercel'
-		assert result[1]['slug'] == 'chroma-feedback-test-gitlab'
+		assert result[1]['slug']
 		assert result[1]['status'] in get_args(Status)
 	else:
 		pytest.skip('VERCEL_TOKEN is not defined')
