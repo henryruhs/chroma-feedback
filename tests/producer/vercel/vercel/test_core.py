@@ -34,7 +34,6 @@ def test_run_many() -> None:
 			vercel_token = os.environ.get('VERCEL_TOKEN')
 		)
 		result = vercel.core.run()
-		result.reverse()
 
 		assert result[0]['name'] == 'vercel'
 		assert result[0]['slug'] == 'chroma-feedback-test-bitbucket'
