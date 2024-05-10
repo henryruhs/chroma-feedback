@@ -27,7 +27,7 @@ def create_producer_report(producer_result : List[Producer]) -> List[ProducerRep
 				'url': result['url'],
 				'status': result['status']
 			})
-		if result['status'] in ['errored', 'warned', 'failed']:
+		if result['status'] in [ 'errored', 'warned', 'failed' ]:
 			report.append(
 			{
 				'name': result['name'],
@@ -59,7 +59,7 @@ def create_consumer_report(consumer_result : List[Consumer]) -> List[ConsumerRep
 				'message': wording.get('set_status').format(result['description'], result['status']),
 				'status': result['status']
 			})
-		if result['status'] in ['errored', 'warned', 'failed']:
+		if result['status'] in [ 'errored', 'warned', 'failed' ]:
 			report.append(
 			{
 				'name': result['name'],
@@ -74,9 +74,9 @@ def resolve_report_status(producer_report : List[ProducerReport]) -> Status:
 	status : Status = 'passed'
 
 	for report in producer_report:
-		if report['status'] == 'started' and status not in ['errored', 'warned', 'failed']:
+		if report['status'] == 'started' and status not in [ 'errored', 'warned', 'failed' ]:
 			status = 'started'
-		if report['status'] == 'errored' and status not in ['warned', 'failed']:
+		if report['status'] == 'errored' and status not in [ 'warned', 'failed' ]:
 			status = 'errored'
 		if report['status'] == 'warned' and status != 'failed':
 			status = 'warned'

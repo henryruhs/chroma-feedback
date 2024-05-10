@@ -43,7 +43,7 @@ def fetch(host : str, slug : str, api_key : str, application_key : str) -> List[
 
 
 def create_headers(api_key : str, application_key : str) -> Headers:
-	return \
+	return\
 	{
 		'Accept': 'application/json',
 		'DD-API-KEY': api_key,

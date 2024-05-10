@@ -17,9 +17,9 @@ def normalize_status(status : str, is_active : bool) -> Status:
 
 	if not is_active:
 		return 'skipped'
-	if status in ['created', 'started']:
+	if status in [ 'created', 'started' ]:
 		return 'started'
-	if status in ['cancelled', 'errored']:
+	if status in [ 'cancelled', 'errored' ]:
 		return 'errored'
 	if status == 'failed':
 		return 'failed'

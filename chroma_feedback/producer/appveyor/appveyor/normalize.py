@@ -15,9 +15,9 @@ def normalize_data(slug : str, status : str) -> Producer:
 def normalize_status(status : str) -> Status:
 	status = helper.to_lower_case(status)
 
-	if status in ['queued', 'running', 'starting']:
+	if status in [ 'queued', 'running', 'starting' ]:
 		return 'started'
-	if status in ['canceled', 'cancelling']:
+	if status in [ 'canceled', 'cancelling' ]:
 		return 'errored'
 	if status == 'failed':
 		return 'failed'

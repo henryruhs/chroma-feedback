@@ -76,7 +76,7 @@ def fetch_pipeline_ids(host : str, organization : str, slug : str, token : str) 
 
 
 def create_headers(token : str) -> Headers:
-	return \
+	return\
 	{
 		'Accept': 'application/json',
 		'Circle-Token': token

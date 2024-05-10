@@ -16,7 +16,7 @@ def normalize_status(status : str, result : str) -> Status:
 	status = helper.to_lower_case(status)
 	result = helper.to_lower_case(result)
 
-	if status in ['in_progress', 'pending']:
+	if status in [ 'in_progress', 'pending' ]:
 		return 'started'
 	if result == 'stopped':
 		return 'errored'

@@ -17,10 +17,10 @@ def normalize_status(status : str) -> Status:
 
 	if status == 'ignored':
 		return 'skipped'
-	if status in ['initiated', 'testing', 'waiting']:
+	if status in [ 'initiated', 'testing', 'waiting' ]:
 		return 'started'
-	if status in ['error', 'blocked']:
+	if status in [ 'error', 'blocked' ]:
 		return 'errored'
-	if status in ['failed', 'infrastructure_failure']:
+	if status in [ 'failed', 'infrastructure_failure' ]:
 		return 'failed'
 	return 'passed'

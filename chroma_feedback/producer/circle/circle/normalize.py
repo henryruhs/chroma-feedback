@@ -17,13 +17,13 @@ def normalize_status(status : str) -> Status:
 
 	if status == 'no_tests':
 		return 'skipped'
-	if status in ['queued', 'retried', 'running', 'scheduled']:
+	if status in [ 'queued', 'retried', 'running', 'scheduled' ]:
 		return 'started'
 	if status == 'canceled':
 		return 'errored'
 	if status == 'timedout':
 		return 'warned'
-	if status in ['failed', 'infrastructure_fail']:
+	if status in [ 'failed', 'infrastructure_fail' ]:
 		return 'failed'
 	return 'passed'
 

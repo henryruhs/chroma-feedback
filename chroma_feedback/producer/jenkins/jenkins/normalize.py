@@ -17,7 +17,7 @@ def normalize_status(result : str, is_building: bool) -> Status:
 
 	if is_building:
 		return 'started'
-	if result in ['unstable', 'not_build']:
+	if result in [ 'unstable', 'not_build' ]:
 		return 'errored'
 	if result == 'failure':
 		return 'failed'

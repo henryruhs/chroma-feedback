@@ -18,11 +18,11 @@ def normalize_status(status : str, conclusion : str) -> Status:
 
 	if conclusion == 'skipped':
 		return 'skipped'
-	if status in ['in_progress', 'queued']:
+	if status in [ 'in_progress', 'queued' ]:
 		return 'started'
-	if conclusion in ['cancelled', 'stale']:
+	if conclusion in [ 'cancelled', 'stale' ]:
 		return 'errored'
-	if conclusion in ['action_required', 'timed_out']:
+	if conclusion in [ 'action_required', 'timed_out' ]:
 		return 'warned'
 	if conclusion == 'failure':
 		return 'failed'
