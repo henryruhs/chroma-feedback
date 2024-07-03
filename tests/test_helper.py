@@ -42,12 +42,14 @@ def test_to_lower_case() -> None:
 def test_has_argument() -> None:
 	sys.argv.clear()
 	sys.argv.append('--valid')
+
 	assert helper.has_argument('--valid') is True
 
 
 def test_has_argument_invalid() -> None:
 	sys.argv.clear()
 	sys.argv.append('--invalid')
+
 	assert helper.has_argument('--valid') is False
 
 
