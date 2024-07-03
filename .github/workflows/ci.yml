@@ -13,6 +13,7 @@ jobs:
     with:
      python-version: 3.9
   - run: pip install flake8
+  - run: pip install flake8-import-order
   - run: pip install mypy
   - run: pip install requests
   - run: pip install types-mock
@@ -23,7 +24,7 @@ jobs:
   runs-on: ubuntu-latest
   strategy:
    matrix:
-    python-version: [ '3.8', '3.9', '3.10', '3.11' ]
+    python-version: [ '3.9', '3.10', '3.11' ]
   steps:
   - name: Checkout
     uses: actions/checkout@v2

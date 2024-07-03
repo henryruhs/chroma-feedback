@@ -1,7 +1,8 @@
-import pytest
-import os
 import argparse
+import os
 from typing import get_args
+
+import pytest
 
 from chroma_feedback.producer.vercel import vercel
 from chroma_feedback.typing import Status

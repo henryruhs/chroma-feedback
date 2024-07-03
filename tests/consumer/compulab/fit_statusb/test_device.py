@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
 
 from chroma_feedback.consumer.compulab.fit_statusb.light import process_lights
 

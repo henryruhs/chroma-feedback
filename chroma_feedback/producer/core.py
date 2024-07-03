@@ -3,7 +3,7 @@ import sys
 from argparse import ArgumentParser
 from typing import Any, List
 
-from chroma_feedback import producer, helper, logger, wording
+from chroma_feedback import helper, logger, producer, wording
 from chroma_feedback.typing import Producer
 
 

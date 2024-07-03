@@ -1,8 +1,9 @@
 import os
-import pytest
 import sys
 from argparse import ArgumentParser
 from typing import Any
+
+import pytest
 
 from chroma_feedback import producer
 

@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
 
 from chroma_feedback.consumer.thingm.blink1.light import process_lights
 

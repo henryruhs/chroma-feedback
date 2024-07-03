@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
 
 from chroma_feedback.consumer.agile_innovative.blinkstick.light import process_lights
 

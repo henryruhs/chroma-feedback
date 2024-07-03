@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
 
 from chroma_feedback.consumer.muteme.muteme_mini.light import process_lights
 
