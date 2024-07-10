@@ -3,21 +3,6 @@ import sys
 from chroma_feedback import helper
 
 
-def test_parse_slug() -> None:
-	assert 'workspace' in helper.parse_slug('henryruhs')
-	assert 'project' not in helper.parse_slug('henryruhs')
-	assert 'workspace' in helper.parse_slug('henryruhs/chroma-feedback')
-	assert 'project' in helper.parse_slug('henryruhs/chroma-feedback')
-	assert 'workspace' not in helper.parse_slug(None)
-	assert 'project' not in helper.parse_slug(None)
-
-
-def test_create_description() -> None:
-	assert helper.create_description('name', 'selector') == 'name [selector]'
-	assert helper.create_description('name', None) == 'name'
-	assert helper.create_description(None, 'selector') == 'selector'
-
-
 def test_is_root() -> None:
 	assert helper.is_root() is not None
 
@@ -32,6 +17,21 @@ def test_is_macos() -> None:
 
 def test_is_windows() -> None:
 	assert helper.is_linux() is not None
+
+
+def test_parse_slug() -> None:
+	assert 'workspace' in helper.parse_slug('henryruhs')
+	assert 'project' not in helper.parse_slug('henryruhs')
+	assert 'workspace' in helper.parse_slug('henryruhs/chroma-feedback')
+	assert 'project' in helper.parse_slug('henryruhs/chroma-feedback')
+	assert 'workspace' not in helper.parse_slug(None)
+	assert 'project' not in helper.parse_slug(None)
+
+
+def test_create_description() -> None:
+	assert helper.create_description('name', 'selector') == 'name [selector]'
+	assert helper.create_description('name', None) == 'name'
+	assert helper.create_description(None, 'selector') == 'selector'
 
 
 def test_to_lower_case() -> None:

@@ -5,18 +5,6 @@ import sys
 from typing import Any, Dict
 
 
-def parse_slug(slug : str) -> Dict[str, str]:
-	if slug:
-		return dict(zip(['workspace', 'project'], slug.split('/')))
-	return {}
-
-
-def create_description(name : str, selector : str) -> str:
-	if name and selector:
-		return name + ' [' + selector + ']'
-	return name or selector
-
-
 def is_root() -> bool:
 	try:
 		return os.getuid() == 0 #type:ignore
@@ -37,6 +25,18 @@ def is_macos() -> bool:
 
 def is_windows() -> bool:
 	return to_lower_case(platform.system()) == 'windows'
+
+
+def parse_slug(slug : str) -> Dict[str, str]:
+	if slug:
+		return dict(zip(['workspace', 'project'], slug.split('/')))
+	return {}
+
+
+def create_description(name : str, selector : str) -> str:
+	if name and selector:
+		return name + ' [' + selector + ']'
+	return name or selector
 
 
 def to_lower_case(__string__ : Any) -> str:
