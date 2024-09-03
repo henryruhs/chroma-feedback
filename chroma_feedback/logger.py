@@ -5,7 +5,7 @@ from chroma_feedback.typing import LogLevel
 
 
 def init(log_level : LogLevel) -> None:
-	basicConfig(format = None)
+	basicConfig(format = '%(message)s')
 	get_package_logger().setLevel(get_log_levels()[log_level])
 
 
