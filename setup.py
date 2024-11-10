@@ -76,18 +76,17 @@ setup(
 	},
 	install_requires =
 	[
-		'bitstring==3.1.9',
-		'busylight-for-humans==0.26.1',
-		'lifxlan==1.2.7',
+		'busylight-for-humans==0.32.0',
+		'lifxlan==1.2.8',
 		'liquidctl==1.13.0',
 		'nanoleafapi==2.1.2',
 		'phue==1.1',
 		'python-magichue==0.3.2',
-		'pyqt6==6.5.2 ',
+		'pyqt6==6.7.1 ',
 		'pywizlight==0.5.14',
-		'requests==2.31.0',
-		'streamdeck==0.9.3',
-		'yeelight==0.7.13'
+		'requests==2.32.3 ',
+		'streamdeck==0.9.6',
+		'yeelight==0.7.14'
 	],
 	tests_require =
 	[
