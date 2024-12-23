@@ -83,4 +83,5 @@ def run(program : ArgumentParser) -> None:
 
 def destroy() -> None:
 	logger.info(wording.get('goodbye') + wording.get('exclamation_mark'))
+	signal.signal(signal.SIGINT, signal.SIG_IGN)
 	sys.exit()
