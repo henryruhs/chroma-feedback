@@ -1,5 +1,5 @@
 [flake8]
-select = E3, E4, F, I1, I2
+select = E22, E23, E24, E27, E3, E4, E7, F, I1, I2
 per-file-ignores = __init__.py:F401
 plugins = flake8-import-order
 application_import_names = chroma_feedback
