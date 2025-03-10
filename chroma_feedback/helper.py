@@ -29,7 +29,7 @@ def is_windows() -> bool:
 
 def parse_slug(slug : str) -> Dict[str, str]:
 	if slug:
-		return dict(zip(['workspace', 'project'], slug.split('/')))
+		return dict(zip([ 'workspace', 'project' ], slug.split('/')))
 	return {}
 
 
@@ -48,12 +48,18 @@ def has_argument(argument : str) -> bool:
 
 
 def get_first(__list__ : Any) -> Any:
-	return next(iter(__list__), None)
+	if isinstance(__list__, list):
+		return next(iter(__list__), None)
+	return None
 
 
 def get_last(__list__ : Any) -> Any:
-	return next(reversed(__list__), None)
+	if isinstance(__list__, list):
+		return next(reversed(__list__), None)
+	return None
 
 
 def remove_duplicate(__list__ : Any) -> Any:
-	return list(dict.fromkeys(__list__))
+	if isinstance(__list__, list):
+		return list(dict.fromkeys(__list__))
+	return __list__
