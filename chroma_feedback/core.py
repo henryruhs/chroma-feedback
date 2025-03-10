@@ -24,7 +24,7 @@ def init(program : ArgumentParser) -> None:
 	args = helper.get_first(program.parse_known_args())
 	logger.init(args.log_level)
 
-	if sys.version_info < (3, 8):
+	if sys.version_info < (3, 10):
 		logger.error(wording.get('version_not_supported').format(sys.version_info.major, sys.version_info.minor) + wording.get('exclamation_mark'))
 		sys.exit()
 

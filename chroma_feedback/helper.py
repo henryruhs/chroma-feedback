@@ -2,7 +2,7 @@ import ctypes
 import os
 import platform
 import sys
-from typing import Any, Dict
+from typing import Any, Dict, Iterable, Reversible
 
 
 def is_root() -> bool:
@@ -48,18 +48,18 @@ def has_argument(argument : str) -> bool:
 
 
 def get_first(__list__ : Any) -> Any:
-	if isinstance(__list__, list):
+	if isinstance(__list__, Iterable):
 		return next(iter(__list__), None)
 	return None
 
 
 def get_last(__list__ : Any) -> Any:
-	if isinstance(__list__, list):
+	if isinstance(__list__, Reversible):
 		return next(reversed(__list__), None)
 	return None
 
 
 def remove_duplicate(__list__ : Any) -> Any:
-	if isinstance(__list__, list):
+	if isinstance(__list__, Iterable):
 		return list(dict.fromkeys(__list__))
 	return __list__
