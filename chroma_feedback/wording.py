@@ -1,3 +1,5 @@
+from typing import Optional
+
 WORDING =\
 {
 	'version_not_supported': 'Python {}.{} not supported',
@@ -36,5 +38,7 @@ WORDING =\
 }
 
 
-def get(key : str) -> str:
-	return WORDING[key]
+def get(key : str) -> Optional[str]:
+	if key in WORDING:
+		return WORDING.get(key)
+	return None

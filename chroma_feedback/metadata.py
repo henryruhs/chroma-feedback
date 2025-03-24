@@ -1,3 +1,5 @@
+from typing import Optional
+
 from chroma_feedback import producer
 
 METADATA =\
@@ -13,5 +15,7 @@ METADATA =\
 }
 
 
-def get(key : str) -> str:
-	return METADATA[key]
+def get(key : str) -> Optional[str]:
+	if key in METADATA:
+		return METADATA.get(key)
+	return None
