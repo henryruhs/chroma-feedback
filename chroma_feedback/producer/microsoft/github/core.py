@@ -16,7 +16,9 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--microsoft-github-host', default = 'https://api.github.com')
 		program.add_argument('--microsoft-github-slug', action = 'append', required = True)
 		program.add_argument('--microsoft-github-token', required = True)
-	ARGS = helper.get_first(vars(program.parse_known_args()))
+
+	known_args, _ = program.parse_known_args()
+	ARGS = vars(known_args)
 
 
 def run() -> List[Producer]:

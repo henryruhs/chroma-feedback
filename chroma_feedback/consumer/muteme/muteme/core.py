@@ -19,7 +19,9 @@ def init(program : ArgumentParser) -> None:
 
 	if not ARGS:
 		program.add_argument('--muteme-light-id', action = 'append')
-	ARGS = helper.get_first(program.parse_known_args())
+
+	known_args, _ = program.parse_known_args()
+	ARGS = vars(known_args)
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
