@@ -34,12 +34,12 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.post(host + '/v2/getMonitors?api_key=' + token,
+		response = request.post(host + '/v3/getMonitors?api_key=' + token,
 		{
 			'search': slug
 		})
 	elif host and token:
-		response = request.post(host + '/v2/getMonitors?api_key=' + token)
+		response = request.post(host + '/v3/getMonitors?api_key=' + token)
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

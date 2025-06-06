@@ -1,4 +1,4 @@
-from typing import Dict, List, Literal, Optional, TypeVar, TypedDict
+from typing import Dict, List, Literal, Optional, TypedDict
 
 Status = Literal\
 [
