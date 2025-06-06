@@ -4,15 +4,13 @@ import platform
 import sys
 from typing import Any, Dict, Iterable, Optional, Reversible
 
-from chroma_feedback.types import T
-
 
 def is_root() -> bool:
 	try:
 		return os.getuid() == 0
 	except AttributeError:
 		try:
-			return ctypes.windll.shell32.IsUserAnAdmin() == 1
+			return ctypes.windll.shell32.IsUserAnAdmin() == 1 #type:ignore[attr-defined]
 		except AttributeError:
 			return False
 
@@ -49,19 +47,19 @@ def has_argument(argument : str) -> bool:
 	return any(argv == argument for argv in sys.argv)
 
 
-def get_first(__list__ : Iterable[T]) -> Optional[T]:
+def get_first(__list__ : Iterable[Any]) -> Optional[Any]:
 	if isinstance(__list__, Iterable):
 		return next(iter(__list__), None)
 	return None
 
 
-def get_last(__list__ : Reversible[T]) -> Optional[T]:
+def get_last(__list__ : Reversible[Any]) -> Optional[Any]:
 	if isinstance(__list__, Reversible):
 		return next(reversed(__list__), None)
 	return None
 
 
-def remove_duplicate(__list__ : Iterable[T]) -> Optional[T]:
+def remove_duplicate(__list__ : Iterable[Any]) -> Optional[Any]:
 	if isinstance(__list__, Iterable):
 		return list(dict.fromkeys(__list__))
 	return __list__

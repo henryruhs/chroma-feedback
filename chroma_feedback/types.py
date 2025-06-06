@@ -1,7 +1,5 @@
 from typing import Dict, List, Literal, Optional, TypeVar, TypedDict
 
-T = TypeVar('T')
-
 Status = Literal\
 [
 	'skipped',
