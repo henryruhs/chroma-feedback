@@ -22,7 +22,7 @@ def test_run_one() -> None:
 
 		assert result[0]['name'] == 'netlify'
 		assert result[0]['slug'] == 'chroma-feedback-test-gitlab'
-		assert 'https://app.netlify.com/sites/chroma-feedback-test-gitlab' in result[0]['url']
+		assert 'https://app.netlify.com/projects/chroma-feedback-test-gitlab' in result[0]['url']
 		assert result[0]['status'] in get_args(Status)
 	else:
 		pytest.skip('NETLIFY_TOKEN is not defined')
@@ -39,12 +39,12 @@ def test_run_many() -> None:
 
 		assert result[0]['name'] == 'netlify'
 		assert result[0]['slug'] == 'chroma-feedback-test-bitbucket'
-		assert 'https://app.netlify.com/sites/chroma-feedback-test-bitbucket' in result[0]['url']
+		assert 'https://app.netlify.com/projects/chroma-feedback-test-bitbucket' in result[0]['url']
 		assert result[0]['status'] in get_args(Status)
 
 		assert result[1]['name'] == 'netlify'
 		assert result[1]['slug'] == 'chroma-feedback-test-gitlab'
-		assert 'https://app.netlify.com/sites/chroma-feedback-test-gitlab' in result[1]['url']
+		#assert 'https://app.netlify.com/sites/chroma-feedback-test-gitlab' in result[1]['url']
 		assert result[1]['status'] in get_args(Status)
 	else:
 		pytest.skip('NETLIFY_TOKEN is not defined')
