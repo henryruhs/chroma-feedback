@@ -2,17 +2,17 @@ import ctypes
 import os
 import platform
 import sys
-from typing import Any, Dict, Iterable, Reversible, Optional
+from typing import Any, Dict, Iterable, Optional, Reversible
 
 from chroma_feedback.types import T
 
 
 def is_root() -> bool:
 	try:
-		return os.getuid() == 0 #type:ignore
+		return os.getuid() == 0
 	except AttributeError:
 		try:
-			return ctypes.windll.shell32.IsUserAnAdmin() == 1 #type:ignore
+			return ctypes.windll.shell32.IsUserAnAdmin() == 1
 		except AttributeError:
 			return False
 
@@ -59,4 +59,3 @@ def get_last(__list__ : Reversible[T]) -> Optional[T]:
 	if isinstance(__list__, Reversible):
 		return next(reversed(__list__), None)
 	return None
-
