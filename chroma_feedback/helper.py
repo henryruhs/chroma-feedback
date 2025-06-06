@@ -49,12 +49,6 @@ def has_argument(argument : str) -> bool:
 	return any(argv == argument for argv in sys.argv)
 
 
-def get_first(__list__ : Any) -> Any:
-	if isinstance(__list__, Iterable):
-		return next(iter(__list__), None)
-	return None
-
-
 def get_first(__list__ : Iterable[T]) -> Optional[T]:
 	if isinstance(__list__, Iterable):
 		return next(iter(__list__), None)
