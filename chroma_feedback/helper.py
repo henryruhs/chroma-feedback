@@ -2,7 +2,9 @@ import ctypes
 import os
 import platform
 import sys
-from typing import Any, Dict, Iterable, Reversible
+from typing import Any, Dict, Iterable, Reversible, Optional
+
+from chroma_feedback.typing import T
 
 
 def is_root() -> bool:
@@ -53,13 +55,14 @@ def get_first(__list__ : Any) -> Any:
 	return None
 
 
-def get_last(__list__ : Any) -> Any:
+def get_first(__list__ : Iterable[T]) -> Optional[T]:
+	if isinstance(__list__, Iterable):
+		return next(iter(__list__), None)
+	return None
+
+
+def get_last(__list__ : Reversible[T]) -> Optional[T]:
 	if isinstance(__list__, Reversible):
 		return next(reversed(__list__), None)
 	return None
 
-
-def remove_duplicate(__list__ : Any) -> Any:
-	if isinstance(__list__, Iterable):
-		return list(dict.fromkeys(__list__))
-	return __list__
