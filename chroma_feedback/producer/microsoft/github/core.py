@@ -18,7 +18,7 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--microsoft-github-token', required = True)
 
 	known_args, _ = program.parse_known_args()
-	ARGS = vars(known_args)
+	ARGS : GitHubArgs = vars(known_args)
 
 
 def run() -> List[Producer]:

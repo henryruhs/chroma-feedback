@@ -18,7 +18,7 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--microsoft-azure-token', required = True)
 
 	known_args, _ = program.parse_known_args()
-	ARGS = vars(known_args)
+	ARGS : AzureArgs = vars(known_args)
 
 
 def run() -> List[Producer]:
