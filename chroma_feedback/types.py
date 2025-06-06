@@ -1,4 +1,4 @@
-from typing import Dict, List, Literal, Optional, TypedDict
+from typing import Dict, List, Literal, Optional, TypedDict, TypeAlias, Any
 
 Status = Literal\
 [
@@ -70,41 +70,48 @@ LogLevel = Literal\
 	'info',
 	'debug'
 ]
-Headers = Dict[str, str]
+Headers : TypeAlias = Dict[str, str]
 
+Producer = TypedDict('Producer',
+{
+	'name' : ProducerName,
+	'slug' : str,
+	'url' : Optional[str],
+	'status' : Status
+})
 
-class Producer(TypedDict):
-	name : ProducerName
-	slug : str
-	url : Optional[str]
-	status : Status
+Consumer = TypedDict('Consumer',
+{
+	'name' : ConsumerName,
+	'type' : ConsumerType,
+	'description' : str,
+	'status' : Status
+})
 
+ProducerReport = TypedDict('ProducerReport',
+{
+	'name' : ProducerName,
+	'symbol' : str,
+	'message' : str,
+	'url' : Optional[str],
+	'status' : Status
+})
 
-class Consumer(TypedDict):
-	name : ConsumerName
-	type : ConsumerType
-	description : str
-	status : Status
+ConsumerReport = TypedDict('ConsumerReport',
+{
+	'name' : ConsumerName,
+	'symbol' : str,
+	'message' : str,
+	'status' : Status
+})
 
+Color = TypedDict('Color',
+{
+	'rgb' : List[int],
+	'hue' : int,
+	'saturation' : List[int],
+	'brightness' : List[int],
+	'kelvin' : int
+})
 
-class ProducerReport(TypedDict):
-	name : ProducerName
-	symbol : str
-	message : str
-	url : Optional[str]
-	status : Status
-
-
-class ConsumerReport(TypedDict):
-	name : ConsumerName
-	symbol : str
-	message : str
-	status : Status
-
-
-class Color(TypedDict):
-	rgb : List[int]
-	hue : int
-	saturation : List[int]
-	brightness : List[int]
-	kelvin : int
+Light : TypeAlias = Any

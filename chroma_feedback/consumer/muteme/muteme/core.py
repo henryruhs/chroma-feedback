@@ -1,12 +1,13 @@
 import sys
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional
 
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.types import Consumer, ProducerReport
 from .light import filter_lights, get_lights, process_lights
+from chroma_feedback.consumer.muteme.types import MutemeArgs
 
-ARGS = None
+ARGS : Optional[MutemeArgs] = None
 
 
 def support() -> bool:
@@ -22,7 +23,7 @@ def init(program : ArgumentParser) -> None:
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	lights = filter_lights(get_lights(), ARGS.muteme_light_id)
+	lights = filter_lights(get_lights(), ARGS.get('muteme_light_id'))
 
 	if not lights:
 		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))

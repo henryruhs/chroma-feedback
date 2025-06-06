@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Headers, Producer
+from chroma_feedback.producer.microsoft.types import GitHubArgs
 from .normalize import normalize_data
 
-ARGS = None
+ARGS : Optional[GitHubArgs] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -21,18 +22,18 @@ def init(program : ArgumentParser) -> None:
 def run() -> List[Producer]:
 	result = []
 
-	for slug in ARGS.microsoft_github_slug:
+	for slug in ARGS.get('microsoft_github_slug'):
 		slug_fragment = helper.parse_slug(slug)
 
 		if 'workspace' in slug_fragment:
 			if 'project' in slug_fragment:
-				result.extend(fetch(ARGS.microsoft_github_host, slug_fragment['workspace'] + '/' + slug_fragment['project'], ARGS.microsoft_github_token))
+				result.extend(fetch(ARGS.get('microsoft_github_host'), slug_fragment.get('workspace') + '/' + slug_fragment.get('project'), ARGS.get('microsoft_github_token')))
 			else:
-				repository_names = fetch_repository_names(ARGS.microsoft_github_host, slug_fragment['workspace'], ARGS.microsoft_github_token)
+				repository_names = fetch_repository_names(ARGS.get('microsoft_github_host'), slug_fragment.get('workspace'), ARGS.get('microsoft_github_token'))
 
 				if repository_names:
 					for repository_name in repository_names:
-						result.extend(fetch(ARGS.microsoft_github_host, repository_name, ARGS.microsoft_github_token))
+						result.extend(fetch(ARGS.get('microsoft_github_host'), repository_name, ARGS.get('microsoft_github_token')))
 	return result
 
 
