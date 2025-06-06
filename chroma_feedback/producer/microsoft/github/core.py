@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import List, Optional
+from typing import cast, List, Optional
 
 from chroma_feedback import helper, request
 from chroma_feedback.producer.microsoft.types import GitHubArgs
@@ -18,7 +18,7 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--microsoft-github-token', required = True)
 
 	known_args, _ = program.parse_known_args()
-	ARGS : GitHubArgs = vars(known_args)
+	ARGS = cast(GitHubArgs, vars(known_args))
 
 
 def run() -> List[Producer]:

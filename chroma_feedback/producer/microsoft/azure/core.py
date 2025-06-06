@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import List, Optional
+from typing import cast, List, Optional
 
 from chroma_feedback import helper, request
 from chroma_feedback.producer.microsoft.types import AzureArgs
@@ -18,7 +18,7 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--microsoft-azure-token', required = True)
 
 	known_args, _ = program.parse_known_args()
-	ARGS : AzureArgs = vars(known_args)
+	ARGS = cast(AzureArgs, vars(known_args))
 
 
 def run() -> List[Producer]:
@@ -46,5 +46,5 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 				if 'result' in build:
 					result.append(normalize_data(build['project']['name'], build['status'], build['result']))
 				else:
-					result.append(normalize_data(build['project']['name'], build['status']))
+					result.append(normalize_data(build['project']['name'], build['status'], None))
 	return result
