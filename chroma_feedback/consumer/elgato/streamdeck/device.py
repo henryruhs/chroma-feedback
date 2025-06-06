@@ -7,7 +7,7 @@ from PyQt6.QtCore import QRect, Qt
 from PyQt6.QtGui import QColor, QFont, QPainter, QPen, QPixmap, QTransform
 
 from chroma_feedback import color, helper, reporter
-from chroma_feedback.typing import Consumer, ProducerReport, Status
+from chroma_feedback.types import Consumer, ProducerReport, Status
 from .api import get_api
 
 DEVICES = None

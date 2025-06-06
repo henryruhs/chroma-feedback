@@ -1,7 +1,7 @@
 from logging import DEBUG, ERROR, INFO, Logger, WARNING, basicConfig, getLogger
 from typing import Dict
 
-from chroma_feedback.typing import LogLevel
+from chroma_feedback.types import LogLevel
 
 
 def init(log_level : LogLevel) -> None:

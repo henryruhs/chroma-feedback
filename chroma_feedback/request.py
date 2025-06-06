@@ -6,7 +6,7 @@ import requests
 from requests import RequestException, Response
 
 from chroma_feedback import logger, wording
-from chroma_feedback.typing import Headers
+from chroma_feedback.types import Headers
 
 
 def get(url : str, headers : Headers = None) -> Response:

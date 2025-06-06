@@ -5,7 +5,7 @@ from typing import get_args
 import pytest
 
 from chroma_feedback.producer.appveyor import appveyor
-from chroma_feedback.typing import Status
+from chroma_feedback.types import Status
 
 
 def test_run_one() -> None:

@@ -2,7 +2,7 @@ import os
 from typing import Any, List
 
 from chroma_feedback import color, helper, logger, metadata, wording
-from chroma_feedback.typing import Consumer, ConsumerReport, Producer, ProducerReport, Status
+from chroma_feedback.types import Consumer, ConsumerReport, Producer, ProducerReport, Status
 
 
 def create_producer_report(producer_result : List[Producer]) -> List[ProducerReport]:

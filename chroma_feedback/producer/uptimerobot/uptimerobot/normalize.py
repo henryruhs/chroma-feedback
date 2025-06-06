@@ -1,4 +1,4 @@
-from chroma_feedback.typing import Producer, Status
+from chroma_feedback.types import Producer, Status
 
 
 def normalize_data(slug : str, url : str, status : int) -> Producer:

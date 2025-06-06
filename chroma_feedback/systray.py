@@ -8,7 +8,7 @@ from PyQt6.QtGui import QAction, QBrush, QColor, QIcon, QPainter, QPixmap
 from PyQt6.QtWidgets import QMenu, QSystemTrayIcon
 
 from chroma_feedback import color, logger, loop, reporter, wording
-from chroma_feedback.typing import ProducerReport, Status
+from chroma_feedback.types import ProducerReport, Status
 
 SYSTRAY = None
 MENU = None

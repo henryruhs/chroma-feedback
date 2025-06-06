@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 from typing import List
 
 from chroma_feedback import helper, logger, wording
-from chroma_feedback.typing import Consumer, ProducerReport
+from chroma_feedback.types import Consumer, ProducerReport
 from .device import get_devices, process_devices
 
 ARGS = None

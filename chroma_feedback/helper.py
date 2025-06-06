@@ -4,7 +4,7 @@ import platform
 import sys
 from typing import Any, Dict, Iterable, Reversible, Optional
 
-from chroma_feedback.typing import T
+from chroma_feedback.types import T
 
 
 def is_root() -> bool:

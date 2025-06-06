@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 from typing import Any, List
 
 from chroma_feedback import helper, logger, producer, wording
-from chroma_feedback.typing import Producer
+from chroma_feedback.types import Producer
 
 
 def process(program : ArgumentParser) -> List[Producer]:

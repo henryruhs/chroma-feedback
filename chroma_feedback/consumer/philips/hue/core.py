@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 from typing import List
 
 from chroma_feedback import helper, logger, ssdp, wording
-from chroma_feedback.typing import Consumer, ProducerReport
+from chroma_feedback.types import Consumer, ProducerReport
 from .group import filter_groups, get_groups, process_groups
 from .light import filter_lights, get_lights, process_lights
 

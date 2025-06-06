@@ -5,7 +5,7 @@ from typing import get_args
 import pytest
 
 from chroma_feedback.producer.uptimerobot import uptimerobot
-from chroma_feedback.typing import Status
+from chroma_feedback.types import Status
 
 
 def test_run_one() -> None:

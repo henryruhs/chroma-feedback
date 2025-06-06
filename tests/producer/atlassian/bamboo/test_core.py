@@ -3,7 +3,7 @@ from typing import Any, get_args
 from unittest.mock import patch
 
 from chroma_feedback.producer.atlassian import bamboo
-from chroma_feedback.typing import Status
+from chroma_feedback.types import Status
 
 
 @patch('requests.get')

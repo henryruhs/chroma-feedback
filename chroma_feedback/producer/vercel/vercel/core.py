@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from typing import Any, List, Optional
 
 from chroma_feedback import helper, request
-from chroma_feedback.typing import Producer
+from chroma_feedback.types import Producer
 from .normalize import normalize_data
 
 ARGS = None
