@@ -2,8 +2,8 @@ from argparse import ArgumentParser
 from typing import List, Optional
 
 from chroma_feedback import helper, request
-from chroma_feedback.types import Headers, Producer
 from chroma_feedback.producer.microsoft.types import GitHubArgs
+from chroma_feedback.types import Headers, Producer
 from .normalize import normalize_data
 
 ARGS : Optional[GitHubArgs] = None
@@ -16,7 +16,7 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--microsoft-github-host', default = 'https://api.github.com')
 		program.add_argument('--microsoft-github-slug', action = 'append', required = True)
 		program.add_argument('--microsoft-github-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+	ARGS = helper.get_first(vars(program.parse_known_args()))
 
 
 def run() -> List[Producer]:

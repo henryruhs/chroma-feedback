@@ -3,9 +3,9 @@ from argparse import ArgumentParser
 from typing import List, Optional
 
 from chroma_feedback import helper, logger, wording
+from chroma_feedback.consumer.muteme.types import MutemeArgs
 from chroma_feedback.types import Consumer, ProducerReport
 from .light import filter_lights, get_lights, process_lights
-from chroma_feedback.consumer.muteme.types import MutemeArgs
 
 ARGS : Optional[MutemeArgs] = None
 
