@@ -1,4 +1,3 @@
-import argparse
 from typing import Any, get_args
 from unittest.mock import patch
 
@@ -23,14 +22,15 @@ def test_run_one(request_mock : Any) -> None:
 			}
 		]
 	}
-	azure.core.ARGS = argparse.Namespace(
-		microsoft_azure_host = 'https://dev.azure.com',
-		microsoft_azure_slug =
+	azure.core.ARGS =\
+	{
+		'microsoft_azure_host': 'https://dev.azure.com',
+		'microsoft_azure_slug':
 		[
 			'henryruhs/chroma-feedback'
 		],
-		microsoft_azure_token = '__token__'
-	)
+		'microsoft_azure_token': '__token__'
+	}
 	result = azure.run()
 
 	assert result[0]['name'] == 'microsoft.azure'
