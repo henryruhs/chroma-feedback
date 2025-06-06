@@ -3,7 +3,7 @@ import copy
 from typing import List
 
 from chroma_feedback import color, helper, reporter
-from chroma_feedback.types import Color, Consumer, ProducerReport, Status, Light
+from chroma_feedback.types import Color, Consumer, Light, ProducerReport, Status
 from .api import get_api
 
 LIGHTS = None

@@ -1,4 +1,4 @@
-from typing import TypedDict, List
+from typing import List, TypedDict
 
 GitHubArgs = TypedDict('GitHubArgs',
 {
