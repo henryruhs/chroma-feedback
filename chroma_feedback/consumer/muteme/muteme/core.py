@@ -1,6 +1,6 @@
 import sys
 from argparse import ArgumentParser
-from typing import cast, List, Optional
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.consumer.muteme.types import MutemeArgs

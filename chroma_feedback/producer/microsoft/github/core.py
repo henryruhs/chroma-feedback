@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from typing import cast, List, Optional
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.producer.microsoft.types import GitHubArgs
