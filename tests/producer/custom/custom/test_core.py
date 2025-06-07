@@ -1,4 +1,3 @@
-import argparse
 from typing import Any, get_args
 from unittest.mock import patch
 
