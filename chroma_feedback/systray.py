@@ -62,8 +62,8 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 	item_exit = MENU.addAction(wording.get('exit'))
 	item_start.setVisible(not loop.get_timer().isActive())
 	item_stop.setVisible(loop.get_timer().isActive())
-	item_start.triggered.connect(lambda: action_start(item_start, item_stop))
-	item_stop.triggered.connect(lambda: action_stop(item_start, item_stop))
+	item_start.triggered.connect(partial(action_start, item_start, item_stop))
+	item_stop.triggered.connect(partial(action_stop, item_start, item_stop))
 	item_exit.triggered.connect(action_exit)
 
 
@@ -76,7 +76,7 @@ def create_icon(status : Status) -> QIcon:
 	pixmap = QPixmap(100, 100)
 	pixmap.fill(Qt.GlobalColor.transparent)
 	painter = QPainter(pixmap)
-	painter.setBrush(QBrush(QColor(*color_config['rgb']), Qt.BrushStyle.SolidPattern))
+	painter.setBrush(QBrush(QColor(*color_config.get('rgb')), Qt.BrushStyle.SolidPattern))
 	painter.drawEllipse(20, 20, 60, 60)
 	painter.end()
 	return QIcon(pixmap)

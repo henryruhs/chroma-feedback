@@ -3,11 +3,11 @@ from argparse import ArgumentParser
 from typing import List, Optional, cast
 
 from chroma_feedback import helper, logger, wording
-from chroma_feedback.consumer.muteme.types import MutemeArgs
 from chroma_feedback.types import Consumer, ProducerReport
 from .light import filter_lights, get_lights, process_lights
+from .types import Args
 
-ARGS : Optional[MutemeArgs] = None
+ARGS : Optional[Args] = None
 
 
 def support() -> bool:
@@ -20,8 +20,8 @@ def init(program : ArgumentParser) -> None:
 	if not ARGS:
 		program.add_argument('--muteme-light-id', action = 'append')
 
-	known_args, _ = program.parse_known_args()
-	ARGS = cast(MutemeArgs, vars(known_args))
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:

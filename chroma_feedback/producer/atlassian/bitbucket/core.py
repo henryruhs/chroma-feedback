@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import Any, List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -16,16 +17,18 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--atlassian-bitbucket-slug', action = 'append', required = True)
 		program.add_argument('--atlassian-bitbucket-username', required = True)
 		program.add_argument('--atlassian-bitbucket-password', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
-	auth = fetch_auth(ARGS.atlassian_bitbucket_host, ARGS.atlassian_bitbucket_username, ARGS.atlassian_bitbucket_password)
+	auth = fetch_auth(ARGS.get('atlassian_bitbucket_host'), ARGS.get('atlassian_bitbucket_username'), ARGS.get('atlassian_bitbucket_password'))
 
 	if 'access_token' in auth:
-		for slug in ARGS.atlassian_bitbucket_slug:
-			result.extend(fetch(ARGS.atlassian_bitbucket_host, slug, auth['access_token']))
+		for slug in ARGS.get('atlassian_bitbucket_slug'):
+			result.extend(fetch(ARGS.get('atlassian_bitbucket_host'), slug, auth['access_token']))
 	return result
 
 

@@ -1,28 +1,31 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
-from chroma_feedback import helper, request
+from chroma_feedback import request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
 	global ARGS
 
 	if not ARGS:
-		program.add_argument('--custom-host', default = 'http://localhost')
+		program.add_argument('--custom-host', default = '//localhost')
 		program.add_argument('--custom-slug', action = 'append', required = True)
 		program.add_argument('--custom-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	for slug in ARGS.custom_slug:
-		result.extend(fetch(ARGS.custom_host, slug, ARGS.custom_token))
+	for slug in ARGS.get('custom_slug'):
+		result.extend(fetch(ARGS.get('custom_host'), slug, ARGS.get('custom_token')))
 	return result
 
 

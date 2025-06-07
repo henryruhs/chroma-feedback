@@ -1,12 +1,12 @@
 import base64
 from time import sleep
-from typing import Any
+from typing import Optional
 
 import requests
 from requests import RequestException, Response
 
 from chroma_feedback import logger, wording
-from chroma_feedback.types import Headers
+from chroma_feedback.types import Data, Headers, Json
 
 
 def get(url : str, headers : Headers = None) -> Response:
@@ -20,7 +20,7 @@ def get(url : str, headers : Headers = None) -> Response:
 		return get(url, headers)
 
 
-def post(url : str, data : Any = None, headers : Headers = None) -> Response:
+def post(url : str, data : Data = None, headers : Headers = None) -> Response:
 	try:
 		response = requests.post(url, data, headers = headers, timeout = 10)
 		logger.debug(wording.get('fetch_request').format('POST', response.url, response.status_code))
@@ -31,7 +31,7 @@ def post(url : str, data : Any = None, headers : Headers = None) -> Response:
 		return post(url, data, headers)
 
 
-def parse_json(response: Response) -> Any:
+def parse_json(response: Response) -> Optional[Json]:
 	try:
 		return response.json()
 	except ValueError:

@@ -1,14 +1,14 @@
 import atexit
-from typing import Any, List
+from typing import List
 
 from chroma_feedback import color, helper, reporter
-from chroma_feedback.types import Color, Consumer, ProducerReport, Status
+from chroma_feedback.types import ColorConfig, Consumer, Light, ProducerReport, Status
 from .api import get_api, get_modes
 
-LIGHTS : List[Any] = []
+LIGHTS : List[Light] = []
 
 
-def get_lights(light_ips : List[str]) -> List[Any]:
+def get_lights(light_ips : List[str]) -> List[Light]:
 	global LIGHTS
 
 	if not LIGHTS:
@@ -17,7 +17,7 @@ def get_lights(light_ips : List[str]) -> List[Any]:
 	return LIGHTS
 
 
-def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
+def process_lights(lights : List[Light], producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
@@ -35,7 +35,7 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 	return result
 
 
-def set_light(light : Any, color_config : Color) -> None:
+def set_light(light : Light, color_config : ColorConfig) -> None:
 	modes = get_modes()
 
 	if modes:
@@ -44,12 +44,12 @@ def set_light(light : Any, color_config : Color) -> None:
 			speed = 1,
 			colors =\
 			[
-				color_config['rgb'],
-				color_config['rgb']
+				color_config.get('rgb'),
+				color_config.get('rgb')
 			]
 		)
 	return light.update_status()
 
 
-def register_reset_light(light : Any) -> None:
-	atexit.register(lambda: light.turn_off())
+def register_reset_light(light : Light) -> None:
+	atexit.register(light.turn_off)

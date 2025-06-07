@@ -1,12 +1,13 @@
 import sys
-from typing import Any
 
 from chroma_feedback import logger, wording
+from chroma_feedback.consumer.signify.wiz.types import Builder
+from chroma_feedback.types import Api
 
-API = None
+API : Api = None
 
 
-def get_api(light_ip : str) -> Any:
+def get_api(light_ip : str) -> Api:
 	global API
 
 	if not API:
@@ -14,7 +15,7 @@ def get_api(light_ip : str) -> Any:
 	return API
 
 
-def api_factory(light_ip : str) -> Any:
+def api_factory(light_ip : str) -> Api:
 	try:
 		from pywizlight import wizlight
 		from pywizlight.exceptions import WizLightConnectionError, WizLightTimeOutError
@@ -30,7 +31,7 @@ def api_factory(light_ip : str) -> Any:
 		sys.exit()
 
 
-def get_builder() -> Any:
+def get_builder() -> Builder:
 	try:
 		from pywizlight import PilotBuilder
 

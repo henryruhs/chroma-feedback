@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,21 +16,23 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--netlify-host', default = 'https://api.netlify.com')
 		program.add_argument('--netlify-slug', action = 'append')
 		program.add_argument('--netlify-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.netlify_slug:
-		for slug in ARGS.netlify_slug:
-			result.extend(fetch(ARGS.netlify_host, slug, ARGS.netlify_token))
+	if ARGS.get('netlify_slug'):
+		for slug in ARGS.get('netlify_slug'):
+			result.extend(fetch(ARGS.get('netlify_host'), slug, ARGS.get('netlify_token')))
 	else:
-		site_ids = fetch_site_ids(ARGS.netlify_host, ARGS.netlify_token)
+		site_ids = fetch_site_ids(ARGS.get('netlify_host'), ARGS.get('netlify_token'))
 
 		if site_ids:
 			for site_id in site_ids:
-				result.extend(fetch(ARGS.netlify_host, site_id, ARGS.netlify_token))
+				result.extend(fetch(ARGS.get('netlify_host'), site_id, ARGS.get('netlify_token')))
 	return result
 
 

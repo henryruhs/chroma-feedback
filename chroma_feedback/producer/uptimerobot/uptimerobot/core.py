@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
-from chroma_feedback import helper, request
+from chroma_feedback import request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,17 +16,19 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--uptimerobot-host', default = 'https://api.uptimerobot.com')
 		program.add_argument('--uptimerobot-slug', action = 'append')
 		program.add_argument('--uptimerobot-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.uptimerobot_slug:
-		for slug in ARGS.uptimerobot_slug:
-			result.extend(fetch(ARGS.uptimerobot_host, slug, ARGS.uptimerobot_token))
+	if ARGS.get('uptimerobot_slug'):
+		for slug in ARGS.get('uptimerobot_slug'):
+			result.extend(fetch(ARGS.get('uptimerobot_host'), slug, ARGS.get('uptimerobot_token')))
 	else:
-		result.extend(fetch(ARGS.uptimerobot_host, None, ARGS.uptimerobot_token))
+		result.extend(fetch(ARGS.get('uptimerobot_host'), None, ARGS.get('uptimerobot_token')))
 	return result
 
 

@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import Any, List, Optional
+from typing import Any, List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,17 +16,19 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--vercel-host', default = 'https://api.vercel.com')
 		program.add_argument('--vercel-slug', action = 'append')
 		program.add_argument('--vercel-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.vercel_slug:
-		for slug in ARGS.vercel_slug:
-			result.extend(fetch(ARGS.vercel_host, slug, ARGS.vercel_token))
+	if ARGS.get('vercel_slug'):
+		for slug in ARGS.get('vercel_slug'):
+			result.extend(fetch(ARGS.get('vercel_host'), slug, ARGS.get('vercel_token')))
 	else:
-		result.extend(fetch(ARGS.vercel_host, None, ARGS.vercel_token))
+		result.extend(fetch(ARGS.get('vercel_host'), None, ARGS.get('vercel_token')))
 	return result
 
 

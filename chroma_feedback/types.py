@@ -70,6 +70,8 @@ LogLevel = Literal\
 	'info',
 	'debug'
 ]
+Data : TypeAlias = Any
+Json : TypeAlias = Any
 Headers : TypeAlias = Dict[str, str]
 
 Producer = TypedDict('Producer',
@@ -105,7 +107,7 @@ ConsumerReport = TypedDict('ConsumerReport',
 	'status' : Status
 })
 
-Color = TypedDict('Color',
+ColorConfig = TypedDict('ColorConfig',
 {
 	'rgb' : List[int],
 	'hue' : int,
@@ -114,4 +116,7 @@ Color = TypedDict('Color',
 	'kelvin' : int
 })
 
+Api : TypeAlias = Any
 Light : TypeAlias = Any
+Device : TypeAlias = Any
+Group : TypeAlias = Any

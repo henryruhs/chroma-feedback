@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
-from chroma_feedback import helper, request
+from chroma_feedback import request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -16,14 +17,16 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--jenkins-slug', action = 'append', required = True)
 		program.add_argument('--jenkins-username', required = True)
 		program.add_argument('--jenkins-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	for slug in ARGS.jenkins_slug:
-		result.extend(fetch(ARGS.jenkins_host, slug, ARGS.jenkins_username, ARGS.jenkins_token))
+	for slug in ARGS.get('jenkins_slug'):
+		result.extend(fetch(ARGS.get('jenkins_host'), slug, ARGS.get('jenkins_username'), ARGS.get('jenkins_token')))
 	return result
 
 

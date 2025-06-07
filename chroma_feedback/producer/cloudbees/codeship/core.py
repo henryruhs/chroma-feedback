@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import Any, List
+from typing import Any, List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -16,21 +17,23 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--cloudbees-codeship-slug', action = 'append')
 		program.add_argument('--cloudbees-codeship-username', required = True)
 		program.add_argument('--cloudbees-codeship-password', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
-	auth = fetch_auth(ARGS.cloudbees_codeship_host, ARGS.cloudbees_codeship_username, ARGS.cloudbees_codeship_password)
+	auth = fetch_auth(ARGS.get('cloudbees_codeship_host'), ARGS.get('cloudbees_codeship_username'), ARGS.get('cloudbees_codeship_password'))
 
 	if 'access_token' in auth and 'organizations' in auth:
 		for organization in auth['organizations']:
-			projects = fetch_projects(ARGS.cloudbees_codeship_host, organization['uuid'], auth['access_token'])
+			projects = fetch_projects(ARGS.get('cloudbees_codeship_host'), organization['uuid'], auth['access_token'])
 
 			if projects:
 				for project in projects:
-					if ARGS.cloudbees_codeship_slug is None or project['name'] in ARGS.cloudbees_codeship_slug:
-						result.extend(fetch(ARGS.cloudbees_codeship_host, organization['uuid'], project['name'], project['uuid'], auth['access_token']))
+					if ARGS.get('cloudbees_codeship_slug') is None or project['name'] in ARGS.get('cloudbees_codeship_slug'):
+						result.extend(fetch(ARGS.get('cloudbees_codeship_host'), organization['uuid'], project['name'], project['uuid'], auth['access_token']))
 	return result
 
 

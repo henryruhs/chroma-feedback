@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,17 +16,19 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--appveyor-host', default = 'https://ci.appveyor.com')
 		program.add_argument('--appveyor-slug', action = 'append')
 		program.add_argument('--appveyor-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.appveyor_slug:
-		for slug in ARGS.appveyor_slug:
-			result.extend(fetch(ARGS.appveyor_host, slug, ARGS.appveyor_token))
+	if ARGS.get('appveyor_slug'):
+		for slug in ARGS.get('appveyor_slug'):
+			result.extend(fetch(ARGS.get('appveyor_host'), slug, ARGS.get('appveyor_token')))
 	else:
-		result.extend(fetch(ARGS.appveyor_host, None, ARGS.appveyor_token))
+		result.extend(fetch(ARGS.get('appveyor_host'), None, ARGS.get('appveyor_token')))
 	return result
 
 

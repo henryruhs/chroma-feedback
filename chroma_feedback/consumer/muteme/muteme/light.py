@@ -3,10 +3,10 @@ import copy
 from typing import List
 
 from chroma_feedback import color, helper, reporter
-from chroma_feedback.types import Color, Consumer, Light, ProducerReport, Status
+from chroma_feedback.types import ColorConfig, Consumer, Light, ProducerReport, Status
 from .api import get_api
 
-LIGHTS = None
+LIGHTS : List[Light] = []
 
 
 def get_lights() -> List[Light]:
@@ -19,11 +19,9 @@ def get_lights() -> List[Light]:
 
 def filter_lights(lights : List[Light], light_ids : List[str]) -> List[Light]:
 	if light_ids:
-
 		for light in copy.copy(lights):
 			if light.path not in light_ids:
 				lights.remove(light)
-
 	return lights
 
 
@@ -42,11 +40,10 @@ def process_lights(lights : List[Light], producer_report : List[ProducerReport])
 				'description': helper.create_description(light.info['product_string'], light.path),
 				'status': status
 			})
-
 	return result
 
 
-def set_light(light : Light, color_config : Color) -> bool:
+def set_light(light : Light, color_config : ColorConfig) -> bool:
 	light.on(tuple(color_config.get('rgb')))
 	return light.is_on
 

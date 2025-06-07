@@ -1,12 +1,12 @@
 import sys
-from typing import Any
 
 from chroma_feedback import logger, wording
+from chroma_feedback.types import Api
 
-API = None
+API : Api = None
 
 
-def get_api(light_ip : str) -> Any:
+def get_api(light_ip : str) -> Api:
 	global API
 
 	if not API:
@@ -14,7 +14,7 @@ def get_api(light_ip : str) -> Any:
 	return API
 
 
-def api_factory(light_ip : str) -> Any:
+def api_factory(light_ip : str) -> Api:
 	try:
 		from nanoleafapi import Nanoleaf, NanoleafConnectionError, NanoleafRegistrationError
 

@@ -1,6 +1,6 @@
 from typing import List, TypedDict
 
-MutemeArgs = TypedDict('MutemeArgs',
+Args = TypedDict('Args',
 {
 	'muteme_light_id' : List[str]
 })

@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Headers, Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,21 +16,23 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--heroku-host', default = 'https://api.heroku.com')
 		program.add_argument('--heroku-slug', action = 'append')
 		program.add_argument('--heroku-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.heroku_slug:
-		for slug in ARGS.heroku_slug:
-			result.extend(fetch(ARGS.heroku_host, slug, ARGS.heroku_token))
+	if ARGS.get('heroku_slug'):
+		for slug in ARGS.get('heroku_slug'):
+			result.extend(fetch(ARGS.get('heroku_host'), slug, ARGS.get('heroku_token')))
 	else:
-		application_ids = fetch_application_ids(ARGS.heroku_host, ARGS.heroku_token)
+		application_ids = fetch_application_ids(ARGS.get('heroku_host'), ARGS.get('heroku_token'))
 
 		if application_ids:
 			for application_id in application_ids:
-				result.extend(fetch(ARGS.heroku_host, application_id, ARGS.heroku_token))
+				result.extend(fetch(ARGS.get('heroku_host'), application_id, ARGS.get('heroku_token')))
 	return result
 
 

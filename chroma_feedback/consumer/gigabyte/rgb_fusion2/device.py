@@ -1,14 +1,15 @@
 import atexit
-from typing import Any, List
+from functools import partial
+from typing import List
 
 from chroma_feedback import color, helper, reporter
-from chroma_feedback.types import Color, Consumer, ProducerReport, Status
+from chroma_feedback.types import ColorConfig, Consumer, Device, ProducerReport, Status
 from .api import get_api
 
-DEVICES = None
+DEVICES : List[Device] = []
 
 
-def get_devices() -> Any:
+def get_devices() -> List[Device]:
 	global DEVICES
 
 	if not DEVICES:
@@ -16,7 +17,7 @@ def get_devices() -> Any:
 	return DEVICES
 
 
-def process_devices(devices : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
+def process_devices(devices : List[Device], producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
@@ -34,13 +35,13 @@ def process_devices(devices : Any, producer_report : List[ProducerReport]) -> Li
 	return result
 
 
-def set_device(device : Any, color_config : Color) -> None:
+def set_device(device : Device, color_config : ColorConfig) -> None:
 	with device.connect():
 		device.set_color('sync', 'fixed',
 		[
-			tuple(color_config['rgb'])
+			tuple(color_config.get('rgb'))
 		])
 
 
-def register_reset_device(device : Any) -> None:
-	atexit.register(lambda: set_device(device, color.get_reset()))
+def register_reset_device(device : Device) -> None:
+	atexit.register(partial(set_device, device, color.get_reset()))

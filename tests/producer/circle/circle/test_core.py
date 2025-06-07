@@ -1,4 +1,4 @@
-import argparse
+
 import os
 from typing import get_args
 
@@ -10,15 +10,16 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('CIRCLE_TOKEN'):
-		circle.core.ARGS = argparse.Namespace(
-			circle_host = 'https://circleci.com',
-			circle_organization = None,
-			circle_slug =
+		circle.core.ARGS =\
+		{
+			'circle_host': 'https://circleci.com',
+			'circle_organization': None,
+			'circle_slug':
 			[
 				'github/henryruhs/chroma-feedback'
 			],
-			circle_token = os.environ.get('CIRCLE_TOKEN')
-		)
+			'circle_token': os.environ.get('CIRCLE_TOKEN')
+		}
 		result = circle.core.run()
 
 		assert result[0]['name'] == 'circle'
@@ -30,12 +31,13 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('CIRCLE_TOKEN'):
-		circle.core.ARGS = argparse.Namespace(
-			circle_host = 'https://circleci.com',
-			circle_organization = 'github/henryruhs',
-			circle_slug = None,
-			circle_token = os.environ.get('CIRCLE_TOKEN')
-		)
+		circle.core.ARGS =\
+		{
+			'circle_host': 'https://circleci.com',
+			'circle_organization': 'github/henryruhs',
+			'circle_slug': None,
+			'circle_token': os.environ.get('CIRCLE_TOKEN')
+		}
 		result = circle.core.run()
 
 		assert result[0]['name'] == 'circle'

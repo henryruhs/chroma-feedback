@@ -1,14 +1,15 @@
 import atexit
-from typing import Any, List
+from functools import partial
+from typing import List, Optional
 
 from chroma_feedback import color, helper, reporter
-from chroma_feedback.types import Color, Consumer, ProducerReport, Status
+from chroma_feedback.types import ColorConfig, Consumer, Group, ProducerReport, Status
 from .api import get_api
 
-GROUPS : List[Any] = []
+GROUPS : List[Group] = []
 
 
-def get_groups(group_names : List[str]) -> List[Any]:
+def get_groups(group_names : List[str]) -> List[Group]:
 	global GROUPS
 
 	if not GROUPS:
@@ -21,12 +22,13 @@ def get_groups(group_names : List[str]) -> List[Any]:
 	return GROUPS
 
 
-def get_group_name(group : Any) -> Any:
+def get_group_name(group : Group) -> Optional[str]:
 	for device in group.get_device_list():
 		return device.get_group_label()
+	return None
 
 
-def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
+def process_groups(groups : List[Group], producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
@@ -44,16 +46,16 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 	return result
 
 
-def set_group(group : Any, color_config : Color) -> None:
+def set_group(group : Group, color_config : ColorConfig) -> None:
 	group.set_power('on')
 	group.set_color(
 	[
-		color_config['hue'],
-		color_config['saturation'][2],
-		color_config['brightness'][2],
-		color_config['kelvin']
+		color_config.get('hue'),
+		color_config.get('saturation')[2],
+		color_config.get('brightness')[2],
+		color_config.get('kelvin')
 	])
 
 
-def register_reset_group(group : Any) -> None:
-	atexit.register(lambda: group.set_power('off'))
+def register_reset_group(group : Group) -> None:
+	atexit.register(partial(group.set_power, 'off'))

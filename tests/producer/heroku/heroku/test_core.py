@@ -10,14 +10,15 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('HEROKU_TOKEN'):
-		heroku.core.ARGS = argparse.Namespace(
-			heroku_host = 'https://api.heroku.com',
-			heroku_slug =
+		heroku.core.ARGS =\
+		{
+			'heroku_host': 'https://api.heroku.com',
+			'heroku_slug':
 			[
 				'chroma-feedback-test'
 			],
-			heroku_token = os.environ.get('HEROKU_TOKEN')
-		)
+			'heroku_token': os.environ.get('HEROKU_TOKEN')
+		}
 		result = heroku.core.run()
 
 		assert result[0]['name'] == 'heroku'
@@ -29,11 +30,12 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('HEROKU_TOKEN'):
-		heroku.core.ARGS = argparse.Namespace(
-			heroku_host = 'https://api.heroku.com',
-			heroku_slug = None,
-			heroku_token = os.environ.get('HEROKU_TOKEN')
-		)
+		heroku.core.ARGS =\
+		{
+			'heroku_host': 'https://api.heroku.com',
+			'heroku_slug': None,
+			'heroku_token': os.environ.get('HEROKU_TOKEN')
+		}
 		result = heroku.core.run()
 
 		assert result[0]['name'] == 'heroku'
