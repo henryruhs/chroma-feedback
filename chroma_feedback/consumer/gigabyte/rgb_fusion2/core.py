@@ -6,17 +6,13 @@ from chroma_feedback import helper, logger, wording
 from chroma_feedback.types import Consumer, ProducerReport
 from .device import get_devices, process_devices
 
-ARGS = None
-
 
 def support() -> bool:
 	return helper.is_linux() or helper.is_windows()
 
 
 def init(program : ArgumentParser) -> None:
-	global ARGS
-
-	ARGS = helper.get_first(program.parse_known_args())
+	pass
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:

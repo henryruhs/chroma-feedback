@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Headers, Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,28 +16,30 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--gitlab-host', default = 'https://gitlab.com')
 		program.add_argument('--gitlab-slug', action = 'append')
 		program.add_argument('--gitlab-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.gitlab_slug:
-		for slug in ARGS.gitlab_slug:
-			pipeline_ids = fetch_pipeline_ids(ARGS.gitlab_host, slug, ARGS.gitlab_token)
+	if ARGS.get('gitlab_slug'):
+		for slug in ARGS.get('gitlab_slug'):
+			pipeline_ids = fetch_pipeline_ids(ARGS.get('gitlab_host'), slug, ARGS.get('gitlab_token'))
 
 			if pipeline_ids:
 				for pipeline_id in pipeline_ids:
-					result.extend(fetch(ARGS.gitlab_host, slug, pipeline_id, ARGS.gitlab_token))
+					result.extend(fetch(ARGS.get('gitlab_host'), slug, pipeline_id, ARGS.get('gitlab_token')))
 	else:
-		project_ids = fetch_project_ids(ARGS.gitlab_host, ARGS.gitlab_token)
+		project_ids = fetch_project_ids(ARGS.get('gitlab_host'), ARGS.get('gitlab_token'))
 
 		for project_id in project_ids:
-			pipeline_ids = fetch_pipeline_ids(ARGS.gitlab_host, project_id, ARGS.gitlab_token)
+			pipeline_ids = fetch_pipeline_ids(ARGS.get('gitlab_host'), project_id, ARGS.get('gitlab_token'))
 
 			if pipeline_ids:
-			 	for pipeline_id in pipeline_ids:
-			 		result.extend(fetch(ARGS.gitlab_host, project_id, pipeline_id, ARGS.gitlab_token))
+				for pipeline_id in pipeline_ids:
+					result.extend(fetch(ARGS.get('gitlab_host'), project_id, pipeline_id, ARGS.get('gitlab_token')))
 	return result
 
 

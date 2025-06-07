@@ -1,4 +1,3 @@
-import argparse
 import os
 from typing import get_args
 
@@ -10,14 +9,15 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('GITLAB_TOKEN'):
-		gitlab.core.ARGS = argparse.Namespace(
-			gitlab_host = 'https://gitlab.com',
-			gitlab_slug =
+		gitlab.core.ARGS =\
+		{
+			'gitlab_host': 'https://gitlab.com',
+			'gitlab_slug':
 			[
 				'33658238'
 			],
-			gitlab_token = os.environ.get('GITLAB_TOKEN')
-		)
+			'gitlab_token': os.environ.get('GITLAB_TOKEN')
+		}
 		result = gitlab.core.run()
 
 		assert result[0]['name'] == 'gitlab'
@@ -35,11 +35,12 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('GITLAB_TOKEN'):
-		gitlab.core.ARGS = argparse.Namespace(
-			gitlab_host = 'https://gitlab.com',
-			gitlab_slug = None,
-			gitlab_token = os.environ.get('GITLAB_TOKEN')
-		)
+		gitlab.core.ARGS =\
+		{
+			'gitlab_host': 'https://gitlab.com',
+			'gitlab_slug': None,
+			'gitlab_token': os.environ.get('GITLAB_TOKEN')
+		}
 		result = gitlab.core.run()
 
 		assert result[0]['name'] == 'gitlab'

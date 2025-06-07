@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,17 +16,19 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--jetbrains-teamcity-host', default = 'https://teamcity.jetbrains.com')
 		program.add_argument('--jetbrains-teamcity-slug', action = 'append')
 		program.add_argument('--jetbrains-teamcity-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.jetbrains_teamcity_slug:
-		for slug in ARGS.jetbrains_teamcity_slug:
-			result.extend(fetch(ARGS.jetbrains_teamcity_host, slug, ARGS.jetbrains_teamcity_token))
+	if ARGS.get('jetbrains_teamcity_slug'):
+		for slug in ARGS.get('jetbrains_teamcity_slug'):
+			result.extend(fetch(ARGS.get('jetbrains_teamcity_host'), slug, ARGS.get('jetbrains_teamcity_token')))
 	else:
-		result.extend(fetch(ARGS.jetbrains_teamcity_host, None, ARGS.jetbrains_teamcity_token))
+		result.extend(fetch(ARGS.get('jetbrains_teamcity_host'), None, ARGS.get('jetbrains_teamcity_token')))
 	return result
 
 

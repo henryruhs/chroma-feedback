@@ -1,5 +1,5 @@
 from chroma_feedback import helper
-from chroma_feedback.types import Color, Status
+from chroma_feedback.types import ColorConfig, Status
 
 COLOR =\
 {
@@ -54,7 +54,7 @@ def format_failed(text : str) -> str:
 	return text
 
 
-def get_by_status(status : Status) -> Color:
+def get_by_status(status : Status) -> ColorConfig:
 	if status == 'started':
 		return get_started()
 	if status == 'errored':
@@ -66,7 +66,7 @@ def get_by_status(status : Status) -> Color:
 	return get_passed()
 
 
-def get_passed() -> Color:
+def get_passed() -> ColorConfig:
 	return\
 	{
 		'rgb':
@@ -92,7 +92,7 @@ def get_passed() -> Color:
 	}
 
 
-def get_started() -> Color:
+def get_started() -> ColorConfig:
 	return\
 	{
 		'rgb':
@@ -118,7 +118,7 @@ def get_started() -> Color:
 	}
 
 
-def get_errored() -> Color:
+def get_errored() -> ColorConfig:
 	return\
 	{
 		'rgb':
@@ -144,7 +144,7 @@ def get_errored() -> Color:
 	}
 
 
-def get_warned() -> Color:
+def get_warned() -> ColorConfig:
 	return\
 	{
 		'rgb':
@@ -170,7 +170,7 @@ def get_warned() -> Color:
 	}
 
 
-def get_failed() -> Color:
+def get_failed() -> ColorConfig:
 	return\
 	{
 		'rgb':
@@ -196,7 +196,7 @@ def get_failed() -> Color:
 	}
 
 
-def get_reset() -> Color:
+def get_reset() -> ColorConfig:
 	return\
 	{
 		'rgb':

@@ -1,12 +1,13 @@
 import sys
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, logger, wording
 from chroma_feedback.types import Consumer, ProducerReport
 from .light import filter_lights, get_lights, process_lights
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def support() -> bool:
@@ -18,11 +19,13 @@ def init(program : ArgumentParser) -> None:
 
 	if not ARGS:
 		program.add_argument('--luxafor-mute-light-id', action = 'append')
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	lights = filter_lights(get_lights(), ARGS.luxafor_mute_light_id)
+	lights = filter_lights(get_lights(), ARGS.get('luxafor_mute_light_id'))
 
 	if not lights:
 		logger.error(wording.get('device_not_found') + wording.get('exclamation_mark'))

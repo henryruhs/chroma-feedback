@@ -1,6 +1,7 @@
 import signal
 import sys
 from argparse import ArgumentParser
+from functools import partial
 
 from chroma_feedback import consumer, helper, logger, loop, metadata, producer, reporter, systray, wording
 
@@ -8,7 +9,7 @@ INTERVAL = 0
 
 
 def cli() -> None:
-	signal.signal(signal.SIGINT, lambda signal_number, frame: destroy())
+	signal.signal(signal.SIGINT, partial(destroy))
 	program = ArgumentParser(add_help = False)
 	program.add_argument('-p', '--producer', action = 'append', choices = producer.ALL, required = True)
 	program.add_argument('-c', '--consumer', action = 'append', choices = consumer.ALL, required = not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
@@ -21,7 +22,7 @@ def cli() -> None:
 
 
 def init(program : ArgumentParser) -> None:
-	args = helper.get_first(program.parse_known_args())
+	args, _ = program.parse_known_args()
 	logger.init(args.log_level)
 
 	if sys.version_info < (3, 10):
@@ -33,10 +34,10 @@ def init(program : ArgumentParser) -> None:
 	timer = loop.get_timer()
 	timer.setInterval(100)
 	if args.background_run:
-		timer.timeout.connect(lambda: background_run(program))
+		timer.timeout.connect(partial(background_run, program))
 	else:
-		timer.timeout.connect(lambda: sys.exit())
-	timer.singleShot(0, lambda: run(program))
+		timer.timeout.connect(partial(sys.exit))
+	timer.singleShot(0, partial(run, program))
 	timer.start()
 	sys.exit(application.exec())
 
@@ -44,7 +45,7 @@ def init(program : ArgumentParser) -> None:
 def background_run(program : ArgumentParser) -> None:
 	global INTERVAL
 
-	args = helper.get_first(program.parse_known_args())
+	args, _ = program.parse_known_args()
 	timer = loop.get_timer()
 
 	if INTERVAL == args.background_interval * 1000:
@@ -55,7 +56,7 @@ def background_run(program : ArgumentParser) -> None:
 
 
 def run(program : ArgumentParser) -> None:
-	args = helper.get_first(program.parse_known_args())
+	args, _ = program.parse_known_args()
 	producer_result = producer.process(program)
 
 	if not producer_result:

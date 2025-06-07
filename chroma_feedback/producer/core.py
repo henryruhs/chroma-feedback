@@ -1,14 +1,15 @@
 import importlib
 import sys
 from argparse import ArgumentParser
-from typing import Any, List
+from types import ModuleType
+from typing import List
 
-from chroma_feedback import helper, logger, producer, wording
+from chroma_feedback import logger, producer, wording
 from chroma_feedback.types import Producer
 
 
 def process(program : ArgumentParser) -> List[Producer]:
-	args = helper.get_first(program.parse_known_args())
+	args, _ = program.parse_known_args()
 	result = []
 
 	for producer_name in args.producer:
@@ -24,7 +25,7 @@ def process(program : ArgumentParser) -> List[Producer]:
 	return result
 
 
-def load_producer(producer_name : str) -> Any:
+def load_producer(producer_name : str) -> ModuleType:
 	try:
 		return importlib.import_module(producer.ALL[producer_name])
 	except ModuleNotFoundError:

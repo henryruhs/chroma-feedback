@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Headers, Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -16,25 +17,27 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--circle-organization')
 		program.add_argument('--circle-slug', action = 'append')
 		program.add_argument('--circle-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	if ARGS.circle_slug:
-		for slug in ARGS.circle_slug:
-			pipeline_ids = fetch_pipeline_ids(ARGS.circle_host, None, slug, ARGS.circle_token)
+	if ARGS.get('circle_slug'):
+		for slug in ARGS.get('circle_slug'):
+			pipeline_ids = fetch_pipeline_ids(ARGS.get('circle_host'), None, slug, ARGS.get('circle_token'))
 
 			if pipeline_ids:
 				for pipeline_id in pipeline_ids:
-					result.extend(fetch(ARGS.circle_host, pipeline_id, ARGS.circle_token))
-	elif ARGS.circle_organization:
-		pipeline_ids = fetch_pipeline_ids(ARGS.circle_host, ARGS.circle_organization, None, ARGS.circle_token)
+					result.extend(fetch(ARGS.get('circle_host'), pipeline_id, ARGS.get('circle_token')))
+	elif ARGS.get('circle_organization'):
+		pipeline_ids = fetch_pipeline_ids(ARGS.get('circle_host'), ARGS.get('circle_organization'), None, ARGS.get('circle_token'))
 
 		if pipeline_ids:
 			for pipeline_id in pipeline_ids:
-				result.extend(fetch(ARGS.circle_host, pipeline_id, ARGS.circle_token))
+				result.extend(fetch(ARGS.get('circle_host'), pipeline_id, ARGS.get('circle_token')))
 	return result
 
 

@@ -1,4 +1,3 @@
-import argparse
 import os
 from typing import get_args
 
@@ -10,14 +9,15 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('UPTIMEROBOT_TOKEN'):
-		uptimerobot.core.ARGS = argparse.Namespace(
-			uptimerobot_host = 'https://api.uptimerobot.com',
-			uptimerobot_slug =
+		uptimerobot.core.ARGS =\
+		{
+			'uptimerobot_host': 'https://api.uptimerobot.com',
+			'uptimerobot_slug':
 			[
 				'chroma-feedback-test'
 			],
-			uptimerobot_token = os.environ.get('UPTIMEROBOT_TOKEN')
-		)
+			'uptimerobot_token': os.environ.get('UPTIMEROBOT_TOKEN')
+		}
 		result = uptimerobot.core.run()
 
 		assert result[0]['name'] == 'uptimerobot'
@@ -29,11 +29,12 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('UPTIMEROBOT_TOKEN'):
-		uptimerobot.core.ARGS = argparse.Namespace(
-			uptimerobot_host = 'https://api.uptimerobot.com',
-			uptimerobot_slug = None,
-			uptimerobot_token = os.environ.get('UPTIMEROBOT_TOKEN')
-		)
+		uptimerobot.core.ARGS =\
+		{
+			'uptimerobot_host': 'https://api.uptimerobot.com',
+			'uptimerobot_slug': None,
+			'uptimerobot_token': os.environ.get('UPTIMEROBOT_TOKEN')
+		}
 		result = uptimerobot.core.run()
 
 		assert result[0]['name'] == 'uptimerobot'

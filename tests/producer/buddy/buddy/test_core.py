@@ -1,4 +1,3 @@
-import argparse
 import os
 from typing import get_args
 
@@ -10,14 +9,15 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('BUDDY_TOKEN'):
-		buddy.core.ARGS = argparse.Namespace(
-			buddy_host = 'https://api.buddy.works',
-			buddy_slug =
+		buddy.core.ARGS =\
+		{
+			'buddy_host': 'https://api.buddy.works',
+			'buddy_slug':
 			[
 				'henryruhs/chroma-feedback-test-gitlab'
 			],
-			buddy_token = os.environ.get('BUDDY_TOKEN')
-		)
+			'buddy_token': os.environ.get('BUDDY_TOKEN')
+		}
 		result = buddy.core.run()
 
 		assert result[0]['name'] == 'buddy'
@@ -29,14 +29,15 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('BUDDY_TOKEN'):
-		buddy.core.ARGS = argparse.Namespace(
-			buddy_host = 'https://api.buddy.works',
-			buddy_slug =
+		buddy.core.ARGS =\
+		{
+			'buddy_host': 'https://api.buddy.works',
+			'buddy_slug':
 			[
 				'henryruhs'
 			],
-			buddy_token = os.environ.get('BUDDY_TOKEN')
-		)
+			'buddy_token': os.environ.get('BUDDY_TOKEN')
+		}
 		result = buddy.core.run()
 
 		assert result[0]['name'] == 'buddy'

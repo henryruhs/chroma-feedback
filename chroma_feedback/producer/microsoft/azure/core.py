@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,14 +16,16 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--microsoft-azure-host', default = 'https://dev.azure.com')
 		program.add_argument('--microsoft-azure-slug', action = 'append', required = True)
 		program.add_argument('--microsoft-azure-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	for slug in ARGS.microsoft_azure_slug:
-		result.extend(fetch(ARGS.microsoft_azure_host, slug, ARGS.microsoft_azure_token))
+	for slug in ARGS.get('microsoft_azure_slug'):
+		result.extend(fetch(ARGS.get('microsoft_azure_host'), slug, ARGS.get('microsoft_azure_token')))
 	return result
 
 
@@ -31,7 +34,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	response = None
 
 	if host and slug and token:
-		response = request.get(host + '/' + slug + '/_apis/build/builds?api-version=6.0', headers = request.create_basic_auth_headers('', token))
+		response = request.get(host + '/' + slug + '/_apis/build/builds?api-version=7.1', headers = request.create_basic_auth_headers('', token))
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)

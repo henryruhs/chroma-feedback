@@ -1,4 +1,3 @@
-import argparse
 import os
 from typing import get_args
 
@@ -10,15 +9,16 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('CLOUDBEES_CODESHIP_USERNAME') and os.environ.get('CLOUDBEES_CODESHIP_PASSWORD'):
-		codeship.core.ARGS = argparse.Namespace(
-			cloudbees_codeship_host = 'https://api.codeship.com',
-			cloudbees_codeship_slug =
+		codeship.core.ARGS =\
+		{
+			'cloudbees_codeship_host': 'https://api.codeship.com',
+			'cloudbees_codeship_slug':
 			[
 				'henryruhs/chroma-feedback-test'
 			],
-			cloudbees_codeship_username = os.environ.get('CLOUDBEES_CODESHIP_USERNAME'),
-			cloudbees_codeship_password = os.environ.get('CLOUDBEES_CODESHIP_PASSWORD')
-		)
+			'cloudbees_codeship_username': os.environ.get('CLOUDBEES_CODESHIP_USERNAME'),
+			'cloudbees_codeship_password': os.environ.get('CLOUDBEES_CODESHIP_PASSWORD')
+		}
 		result = codeship.core.run()
 
 		assert result[0]['name'] == 'cloudbees.codeship'
@@ -30,12 +30,13 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('CLOUDBEES_CODESHIP_USERNAME') and os.environ.get('CLOUDBEES_CODESHIP_PASSWORD'):
-		codeship.core.ARGS = argparse.Namespace(
-			cloudbees_codeship_host = 'https://api.codeship.com',
-			cloudbees_codeship_slug = None,
-			cloudbees_codeship_username = os.environ.get('CLOUDBEES_CODESHIP_USERNAME'),
-			cloudbees_codeship_password = os.environ.get('CLOUDBEES_CODESHIP_PASSWORD')
-		)
+		codeship.core.ARGS =\
+		{
+			'cloudbees_codeship_host': 'https://api.codeship.com',
+			'cloudbees_codeship_slug': None,
+			'cloudbees_codeship_username': os.environ.get('CLOUDBEES_CODESHIP_USERNAME'),
+			'cloudbees_codeship_password': os.environ.get('CLOUDBEES_CODESHIP_PASSWORD')
+		}
 		result = codeship.core.run()
 
 		assert result[0]['name'] == 'cloudbees.codeship'

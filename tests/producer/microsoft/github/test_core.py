@@ -1,4 +1,3 @@
-import argparse
 import os
 from typing import get_args
 
@@ -10,14 +9,15 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('MICROSOFT_GITHUB_TOKEN'):
-		github.core.ARGS = argparse.Namespace(
-			microsoft_github_host = 'https://api.github.com',
-			microsoft_github_slug =
+		github.core.ARGS =\
+		{
+			'microsoft_github_host': 'https://api.github.com',
+			'microsoft_github_slug':
 			[
 				'henryruhs/chroma-feedback'
 			],
-			microsoft_github_token = os.environ.get('MICROSOFT_GITHUB_TOKEN')
-		)
+			'microsoft_github_token': os.environ.get('MICROSOFT_GITHUB_TOKEN')
+		}
 		result = github.core.run()
 
 		assert result[0]['name'] == 'microsoft.github'
@@ -30,14 +30,15 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('MICROSOFT_GITHUB_TOKEN'):
-		github.core.ARGS = argparse.Namespace(
-			microsoft_github_host = 'https://api.github.com',
-			microsoft_github_slug =
+		github.core.ARGS =\
+		{
+			'microsoft_github_host': 'https://api.github.com',
+			'microsoft_github_slug':
 			[
 				'henryruhs'
 			],
-			microsoft_github_token = os.environ.get('MICROSOFT_GITHUB_TOKEN')
-		)
+			'microsoft_github_token': os.environ.get('MICROSOFT_GITHUB_TOKEN')
+		}
 		result = github.core.run()
 
 		assert result[0]['name'] == 'microsoft.github'

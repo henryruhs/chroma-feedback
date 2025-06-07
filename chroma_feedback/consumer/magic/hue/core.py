@@ -1,12 +1,13 @@
 import sys
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, logger, ssdp, wording
 from chroma_feedback.types import Consumer, ProducerReport
 from .light import get_lights, process_lights
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def support() -> bool:
@@ -25,11 +26,13 @@ def init(program : ArgumentParser) -> None:
 			program.add_argument('--magic-hue-light-ip', default = light_ips)
 		else:
 			program.add_argument('--magic-hue-light-ip', action = 'append', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	lights = get_lights(ARGS.magic_hue_light_ip)
+	lights = get_lights(ARGS.get('magic_hue_light_ip'))
 
 	if not lights:
 		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))

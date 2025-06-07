@@ -1,13 +1,14 @@
 import sys
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, logger, ssdp, wording
 from chroma_feedback.types import Consumer, ProducerReport
 from .group import filter_groups, get_groups, process_groups
 from .light import filter_lights, get_lights, process_lights
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def support() -> bool:
@@ -28,19 +29,21 @@ def init(program : ArgumentParser) -> None:
 			program.add_argument('--philips-hue-bridge-ip', required = True)
 		program.add_argument('--philips-hue-group-name', action = 'append')
 		program.add_argument('--philips-hue-light-id', action = 'append')
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run(producer_report : List[ProducerReport]) -> List[Consumer]:
-	if ARGS.philips_hue_group_name:
-		groups = filter_groups(get_groups(ARGS.philips_hue_bridge_ip), ARGS.philips_hue_group_name)
+	if ARGS.get('philips_hue_group_name'):
+		groups = filter_groups(get_groups(ARGS.get('philips_hue_bridge_ip')), ARGS.get('philips_hue_group_name'))
 
 		if not groups:
 			logger.error(wording.get('group_not_found') + wording.get('exclamation_mark'))
 			sys.exit()
 		return process_groups(groups, producer_report)
 
-	lights = filter_lights(get_lights(ARGS.philips_hue_bridge_ip), ARGS.philips_hue_light_id)
+	lights = filter_lights(get_lights(ARGS.get('philips_hue_bridge_ip')), ARGS.get('philips_hue_light_id'))
 
 	if not lights:
 		logger.error(wording.get('light_not_found') + wording.get('exclamation_mark'))

@@ -1,4 +1,3 @@
-import argparse
 import os
 from typing import get_args
 
@@ -10,14 +9,15 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('JETBRAINS_TEAMCITY_TOKEN'):
-		teamcity.core.ARGS = argparse.Namespace(
-			jetbrains_teamcity_host = 'https://teamcity.jetbrains.com',
-			jetbrains_teamcity_slug =
+		teamcity.core.ARGS =\
+		{
+			'jetbrains_teamcity_host': 'https://teamcity.jetbrains.com',
+			'jetbrains_teamcity_slug':
 			[
 				'IntellijIdeaPlugins_MicroPythonPlugin'
 			],
-			jetbrains_teamcity_token = os.environ.get('JETBRAINS_TEAMCITY_TOKEN')
-		)
+			'jetbrains_teamcity_token': os.environ.get('JETBRAINS_TEAMCITY_TOKEN')
+		}
 		result = teamcity.core.run()
 
 		assert result[0]['name'] == 'jetbrains.teamcity'
@@ -30,11 +30,12 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('JETBRAINS_TEAMCITY_TOKEN'):
-		teamcity.core.ARGS = argparse.Namespace(
-			jetbrains_teamcity_host = 'https://teamcity.jetbrains.com',
-			jetbrains_teamcity_slug = None,
-			jetbrains_teamcity_token = os.environ.get('JETBRAINS_TEAMCITY_TOKEN')
-		)
+		teamcity.core.ARGS =\
+		{
+			'jetbrains_teamcity_host': 'https://teamcity.jetbrains.com',
+			'jetbrains_teamcity_slug': None,
+			'jetbrains_teamcity_token': os.environ.get('JETBRAINS_TEAMCITY_TOKEN')
+		}
 		result = teamcity.core.run()
 
 		assert result[0]['name'] == 'jetbrains.teamcity'

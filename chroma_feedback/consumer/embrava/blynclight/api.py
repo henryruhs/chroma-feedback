@@ -1,12 +1,12 @@
 import sys
-from typing import Any
 
 from chroma_feedback import logger, wording
+from chroma_feedback.types import Api
 
-API = None
+API : Api = None
 
 
-def get_api() -> Any:
+def get_api() -> Api:
 	global API
 
 	if not API:
@@ -14,7 +14,7 @@ def get_api() -> Any:
 	return API
 
 
-def api_factory() -> Any:
+def api_factory() -> Api:
 	try:
 		from busylight.lights import NoLightsFound, LightUnavailable
 		from busylight.lights.embrava import Blynclight as api

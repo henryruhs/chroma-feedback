@@ -1,15 +1,16 @@
 import atexit
 import copy
-from typing import Any, List
+from functools import partial
+from typing import List
 
 from chroma_feedback import color, helper, reporter
-from chroma_feedback.types import Color, Consumer, ProducerReport, Status
+from chroma_feedback.types import ColorConfig, Consumer, Light, ProducerReport, Status
 from .api import get_api
 
-LIGHTS = None
+LIGHTS : List[Light] = []
 
 
-def get_lights() -> Any:
+def get_lights() -> List[Light]:
 	global LIGHTS
 
 	if not LIGHTS:
@@ -17,7 +18,7 @@ def get_lights() -> Any:
 	return LIGHTS
 
 
-def filter_lights(lights : Any, light_ips : List[str]) -> Any:
+def filter_lights(lights : List[Light], light_ips : List[str]) -> List[Light]:
 	if light_ips:
 		for light in copy.copy(lights):
 			if light.get_ip_addr() not in light_ips:
@@ -25,7 +26,7 @@ def filter_lights(lights : Any, light_ips : List[str]) -> Any:
 	return lights
 
 
-def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
+def process_lights(lights : List[Light], producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
@@ -43,16 +44,16 @@ def process_lights(lights : Any, producer_report : List[ProducerReport]) -> List
 	return result
 
 
-def set_light(light : Any, color_config : Color) -> None:
+def set_light(light : Light, color_config : ColorConfig) -> None:
 	light.set_power('on')
 	light.set_color(
 	[
-		color_config['hue'],
-		color_config['saturation'][2],
-		color_config['brightness'][2],
-		color_config['kelvin']
+		color_config.get('hue'),
+		color_config.get('saturation')[2],
+		color_config.get('brightness')[2],
+		color_config.get('kelvin')
 	])
 
 
-def register_reset_light(light : Any) -> None:
-	atexit.register(lambda: light.set_power('off'))
+def register_reset_light(light : Light) -> None:
+	atexit.register(partial(light.set_power, 'off'))

@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import Any, List, Optional
+from typing import Any, List, Optional, cast
 
-from chroma_feedback import helper, request
+from chroma_feedback import request
 from chroma_feedback.types import Headers, Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,14 +16,16 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--travis-host', default = 'https://api.travis-ci.com')
 		program.add_argument('--travis-slug', action = 'append', required = True)
 		program.add_argument('--travis-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	for slug in ARGS.travis_slug:
-		result.extend(fetch(ARGS.travis_host, slug, ARGS.travis_token))
+	for slug in ARGS.get('travis_slug'):
+		result.extend(fetch(ARGS.get('travis_host'), slug, ARGS.get('travis_token')))
 	return result
 
 

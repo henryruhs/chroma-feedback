@@ -1,4 +1,3 @@
-import argparse
 import os
 from typing import get_args
 
@@ -10,14 +9,15 @@ from chroma_feedback.types import Status
 
 def test_run_one() -> None:
 	if os.environ.get('TRAVIS_TOKEN'):
-		travis.core.ARGS = argparse.Namespace(
-			travis_host = 'https://api.travis-ci.com',
-			travis_slug =
+		travis.core.ARGS =\
+		{
+			'travis_host': 'https://api.travis-ci.com',
+			'travis_slug':
 			[
 				'henryruhs/chroma-feedback'
 			],
-			travis_token = os.environ.get('TRAVIS_TOKEN')
-		)
+			'travis_token': os.environ.get('TRAVIS_TOKEN')
+		}
 		result = travis.core.run()
 
 		assert result[0]['name'] == 'travis'
@@ -29,14 +29,15 @@ def test_run_one() -> None:
 
 def test_run_many() -> None:
 	if os.environ.get('TRAVIS_TOKEN'):
-		travis.core.ARGS = argparse.Namespace(
-			travis_host = 'https://api.travis-ci.com',
-			travis_slug =
+		travis.core.ARGS =\
+		{
+			'travis_host': 'https://api.travis-ci.com',
+			'travis_slug':
 			[
 				'henryruhs'
 			],
-			travis_token = os.environ.get('TRAVIS_TOKEN')
-		)
+			'travis_token': os.environ.get('TRAVIS_TOKEN')
+		}
 		result = travis.core.run()
 
 		assert result[0]['name'] == 'travis'

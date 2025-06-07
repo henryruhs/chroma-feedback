@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
-from chroma_feedback import helper, request
+from chroma_feedback import request
 from chroma_feedback.types import Headers, Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -16,14 +17,16 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--datadog-slug', action = 'append', required = True)
 		program.add_argument('--datadog-api-key', required = True)
 		program.add_argument('--datadog-application-key', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	for slug in ARGS.datadog_slug:
-		result.extend(fetch(ARGS.datadog_host, slug, ARGS.datadog_api_key, ARGS.datadog_application_key))
+	for slug in ARGS.get('datadog_slug'):
+		result.extend(fetch(ARGS.get('datadog_host'), slug, ARGS.get('datadog_api_key'), ARGS.get('datadog_application_key')))
 	return result
 
 

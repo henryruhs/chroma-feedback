@@ -1,15 +1,16 @@
 import atexit
 import copy
-from typing import Any, List
+from functools import partial
+from typing import List
 
 from chroma_feedback import color, helper, reporter
-from chroma_feedback.types import Color, Consumer, ProducerReport, Status
+from chroma_feedback.types import ColorConfig, Consumer, Group, ProducerReport, Status
 from .api import get_api
 
-GROUPS = None
+GROUPS : List[Group] = []
 
 
-def get_groups(bridge_ip : str) -> Any:
+def get_groups(bridge_ip : str) -> List[Group]:
 	global GROUPS
 
 	if not GROUPS:
@@ -17,7 +18,7 @@ def get_groups(bridge_ip : str) -> Any:
 	return GROUPS
 
 
-def filter_groups(groups : Any, group_names : List[str]) -> Any:
+def filter_groups(groups : List[Group], group_names : List[str]) -> List[Group]:
 	if group_names:
 		for index in copy.copy(groups):
 			if groups[index]['name'] not in group_names:
@@ -25,7 +26,7 @@ def filter_groups(groups : Any, group_names : List[str]) -> Any:
 	return groups
 
 
-def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List[Consumer]:
+def process_groups(groups : List[Group], producer_report : List[ProducerReport]) -> List[Consumer]:
 	result : List[Consumer] = []
 	status : Status = reporter.resolve_report_status(producer_report)
 
@@ -43,19 +44,19 @@ def process_groups(groups : Any, producer_report : List[ProducerReport]) -> List
 	return result
 
 
-def set_group(group : Any, color_config : Color) -> None:
+def set_group(group : Group, color_config : ColorConfig) -> None:
 	get_api(None).set_group(group['name'],
 	{
-		'hue': color_config['hue'],
-		'sat': color_config['saturation'][1],
-		'bri': color_config['brightness'][1],
+		'hue': color_config.get('hue'),
+		'sat': color_config.get('saturation')[1],
+		'bri': color_config.get('brightness')[1],
 		'on': True,
 		'alert': 'none'
 	})
 
 
-def register_reset_group(group: Any) -> None:
-	atexit.register(lambda: get_api(None).set_group(group['name'],
+def register_reset_group(group : Group) -> None:
+	atexit.register(partial(get_api(None).set_group, group['name'],
 	{
 		'on': False
 	}))

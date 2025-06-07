@@ -10,9 +10,9 @@ MOCK = MagicMock()
 def test_process_passed() -> None:
 	try:
 		result = process_groups(
-		{
+		[
 			MOCK
-		},
+		],
 		[
 			{
 				'name': 'microsoft.github',
@@ -34,9 +34,9 @@ def test_process_passed() -> None:
 def test_process_started() -> None:
 	try:
 		result = process_groups(
-		{
+		[
 			MOCK
-		},
+		],
 		[
 			{
 				'name': 'microsoft.github',
@@ -58,9 +58,9 @@ def test_process_started() -> None:
 def test_process_errored() -> None:
 	try:
 		result = process_groups(
-		{
+		[
 			MOCK
-		},
+		],
 		[
 			{
 				'name': 'microsoft.github',
@@ -82,9 +82,9 @@ def test_process_errored() -> None:
 def test_process_warned() -> None:
 	try:
 		result = process_groups(
-		{
+		[
 			MOCK
-		},
+		],
 		[
 			{
 				'name': 'microsoft.github',
@@ -106,9 +106,9 @@ def test_process_warned() -> None:
 def test_process_failed() -> None:
 	try:
 		result = process_groups(
-		{
+		[
 			MOCK
-		},
+		],
 		[
 			{
 				'name': 'microsoft.github',

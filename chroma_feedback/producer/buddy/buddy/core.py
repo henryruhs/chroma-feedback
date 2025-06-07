@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
 from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,24 +16,26 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--buddy-host', default = 'https://api.buddy.works')
 		program.add_argument('--buddy-slug', action = 'append', required = True)
 		program.add_argument('--buddy-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	for slug in ARGS.buddy_slug:
+	for slug in ARGS.get('buddy_slug'):
 		slug_fragment = helper.parse_slug(slug)
 
 		if 'workspace' in slug_fragment:
 			if 'project' in slug_fragment:
-				result.extend(fetch(ARGS.buddy_host, slug_fragment['workspace'], slug_fragment['project'], ARGS.buddy_token))
+				result.extend(fetch(ARGS.get('buddy_host'), slug_fragment['workspace'], slug_fragment['project'], ARGS.get('buddy_token')))
 			else:
-				project_names = fetch_project_names(ARGS.buddy_host, slug_fragment['workspace'], ARGS.buddy_token)
+				project_names = fetch_project_names(ARGS.get('buddy_host'), slug_fragment['workspace'], ARGS.get('buddy_token'))
 
 				if project_names:
 					for project_name in project_names:
-						result.extend(fetch(ARGS.buddy_host, slug_fragment['workspace'], project_name, ARGS.buddy_token))
+						result.extend(fetch(ARGS.get('buddy_host'), slug_fragment['workspace'], project_name, ARGS.get('buddy_token')))
 	return result
 
 

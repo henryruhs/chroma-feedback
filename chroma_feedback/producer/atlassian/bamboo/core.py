@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
-from typing import List
+from typing import List, Optional, cast
 
-from chroma_feedback import helper, request
+from chroma_feedback import request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data, normalize_slug
+from .types import Args
 
-ARGS = None
+ARGS : Optional[Args] = None
 
 
 def init(program : ArgumentParser) -> None:
@@ -15,14 +16,16 @@ def init(program : ArgumentParser) -> None:
 		program.add_argument('--atlassian-bamboo-host', required = True)
 		program.add_argument('--atlassian-bamboo-slug', action = 'append', required = True)
 		program.add_argument('--atlassian-bamboo-token', required = True)
-	ARGS = helper.get_first(program.parse_known_args())
+
+	args, _ = program.parse_known_args()
+	ARGS = cast(Args, vars(args))
 
 
 def run() -> List[Producer]:
 	result = []
 
-	for slug in ARGS.atlassian_bamboo_slug:
-		result.extend(fetch(ARGS.atlassian_bamboo_host, slug, ARGS.atlassian_bamboo_token))
+	for slug in ARGS.get('atlassian_bamboo_slug'):
+		result.extend(fetch(ARGS.get('atlassian_bamboo_host'), slug, ARGS.get('atlassian_bamboo_token')))
 	return result
 
 

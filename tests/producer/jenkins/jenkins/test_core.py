@@ -1,4 +1,3 @@
-import argparse
 from typing import Any, get_args
 from unittest.mock import patch
 
@@ -14,15 +13,16 @@ def test_run_one(request_mock : Any) -> None:
 		'building': False,
 		'result': 'SUCCESS'
 	}
-	jenkins.core.ARGS = argparse.Namespace(
-		jenkins_host = 'http://localhost',
-		jenkins_slug =
+	jenkins.core.ARGS =\
+	{
+		'jenkins_host': '__host__',
+		'jenkins_slug':
 		[
 			'chroma-feedback'
 		],
-		jenkins_username = '__username__',
-		jenkins_token = '__token__'
-	)
+		'jenkins_username': '__username__',
+		'jenkins_token': '__token__'
+	}
 	result = jenkins.run()
 
 	assert result[0]['name'] == 'jenkins'
