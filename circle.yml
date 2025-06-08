@@ -5,7 +5,7 @@ orbs:
 
 jobs:
  lint:
-  executor: circleci/python
+  executor: python/default
   steps:
   - checkout
   - run: pip install flake8
@@ -16,7 +16,7 @@ jobs:
   - run: flake8 bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
-  executor: circleci/python
+  executor: python/default
   steps:
   - checkout
   - run: sudo apt-get install libegl1
