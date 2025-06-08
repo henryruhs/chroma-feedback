@@ -5,6 +5,7 @@ ALL = \
 	'appveyor': 'chroma_feedback.producer.appveyor.appveyor',
 	'atlassian.bamboo': 'chroma_feedback.producer.atlassian.bamboo',
 	'atlassian.bitbucket': 'chroma_feedback.producer.atlassian.bitbucket',
+	'betterstack': 'chroma_feedback.producer.betterstack.betterstack',
 	'buddy': 'chroma_feedback.producer.buddy.buddy',
 	'circle': 'chroma_feedback.producer.circle.circle',
 	'cloudbees.codeship': 'chroma_feedback.producer.cloudbees.codeship',

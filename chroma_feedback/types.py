@@ -14,6 +14,7 @@ ProducerName = Literal\
 	'appveyor',
 	'atlassian.bamboo',
 	'atlassian.bitbucket',
+	'betterstack',
 	'buddy',
 	'circle',
 	'cloudbees.codeship',

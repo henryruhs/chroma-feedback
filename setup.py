@@ -22,6 +22,7 @@ setup(
 		'chroma_feedback.producer.appveyor.appveyor',
 		'chroma_feedback.producer.atlassian.bamboo',
 		'chroma_feedback.producer.atlassian.bitbucket',
+		'chroma_feedback.producer.betterstack.betterstack'
 		'chroma_feedback.producer.buddy.buddy',
 		'chroma_feedback.producer.circle.circle',
 		'chroma_feedback.producer.cloudbees.codeship',
