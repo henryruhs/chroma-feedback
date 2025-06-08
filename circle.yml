@@ -1,9 +1,11 @@
-version: 2
+version: 2.1
+
+orbs:
+ python: circleci/python@2.0.3
 
 jobs:
  lint:
-  docker:
-  - image: circleci/python:3.9-buster
+  executor: circleci/python
   steps:
   - checkout
   - run: pip install flake8
@@ -14,8 +16,7 @@ jobs:
   - run: flake8 bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
-  docker:
-  - image: circleci/python:3.9-buster
+  executor: circleci/python
   steps:
   - checkout
   - run: sudo apt-get install libegl1
@@ -29,7 +30,6 @@ jobs:
   - run: pytest tests
 
 workflows:
- version: 2
  lint-and-test:
   jobs:
   - lint
