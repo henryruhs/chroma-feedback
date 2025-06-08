@@ -23,7 +23,6 @@ jobs:
    tag: '3.12'
   steps:
   - checkout
-  - run: sudo apt update
   - run: sudo apt install libegl1
   - run: sudo apt install libxkbcommon0
   - run: sudo apt install libdbus-1-3
