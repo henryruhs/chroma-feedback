@@ -27,12 +27,12 @@ pip3 install chroma-feedback
 Install the dependencies for Linux:
 
 ```
-apt-get install libudev-dev libusb-1.0-0-dev libhidapi-libusb0 libxcb-cursor0
+apt install libudev-dev libusb-1.0-0-dev libhidapi-libusb0 libxcb-cursor0
 ```
 
 ```
 add-apt-repository ppa:openrazer/stable
-apt-get update
+apt update
 ```
 
 ```

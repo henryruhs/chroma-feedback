@@ -23,9 +23,10 @@ jobs:
    tag: '3.12'
   steps:
   - checkout
-  - run: sudo apt-get install libegl1
-  - run: sudo apt-get install libxkbcommon0
-  - run: sudo apt-get install libdbus-1-3
+  - run: sudo apt update
+  - run: sudo apt install libegl1
+  - run: sudo apt install libxkbcommon0
+  - run: sudo apt install libdbus-1-3
   - run: pip install mock
   - run: pip install pyqt6
   - run: pip install pytest
