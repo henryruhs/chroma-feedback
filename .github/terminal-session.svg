@@ -5,7 +5,7 @@
 	<circle cx="60" cy="20" r="6" class="is-success" />
 	<foreignObject x="20" y="50" height="320" width="867">
 		<pre xmlns="http://www.w3.org/1999/xhtml" class="code-terminal-session"><span class="is-success">user@local</span>:<span class="is-info">~</span>$ chroma-feedback -p microsoft.github -c philips.hue
-chroma-feedback 13.4.0 by Henry Ruhs
+chroma-feedback 13.5.0 by Henry Ruhs
 
 <span class="is-success">✔</span> Status of henryruhs/chroma-feedback on microsoft.github is passed
 <span class="is-success">✔</span> Status of henryruhs/handpick on microsoft.github is passed
