@@ -20,7 +20,7 @@ def test_run_one() -> None:
 		}
 		result = betterstack.core.run()
 
-		assert result[0]['name'] == 'uptimerobot'
+		assert result[0]['name'] == 'betterstack'
 		assert result[0]['slug'] == 'chroma-feedback-test'
 		assert result[0]['status'] in get_args(Status)
 	else:
@@ -37,7 +37,7 @@ def test_run_many() -> None:
 		}
 		result = betterstack.core.run()
 
-		assert result[0]['name'] == 'uptimerobot'
+		assert result[0]['name'] == 'betterstack'
 		assert result[0]['slug']
 		assert result[0]['status'] in get_args(Status)
 	else:

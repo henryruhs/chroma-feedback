@@ -3,7 +3,7 @@ dist: xenial
 language: python
 
 python:
-- 3.9
+- 3.12
 
 jobs:
  include:
