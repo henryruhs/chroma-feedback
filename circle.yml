@@ -1,13 +1,11 @@
 version: 2.1
 
 orbs:
- python: circleci/python@2.1.1
+ python: circleci/python@3.1.0
 
 jobs:
  lint:
-  executor:
-  - name: python/default
-  - tag: '3.12'
+  executor: python/default
   steps:
   - checkout
   - run: pip install flake8
@@ -18,9 +16,7 @@ jobs:
   - run: flake8 bin/chroma-feedback chroma_feedback tests
   - run: mypy bin/chroma-feedback chroma_feedback tests
  test:
-  executor:
-  - name: python/default
-  - tag: '3.12'
+  executor: python/default
   steps:
   - checkout
   - run: sudo apt-get install libegl1
