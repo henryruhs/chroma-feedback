@@ -83,7 +83,7 @@ def run(program : ArgumentParser) -> None:
 			systray.create(producer_report)
 
 
-def signal_exit(signum : int, frame : FrameType):
+def signal_exit(signum : int, frame : FrameType) -> None:
 	graceful_exit()
 
 
