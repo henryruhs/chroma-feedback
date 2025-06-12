@@ -2,6 +2,7 @@ import signal
 import sys
 from argparse import ArgumentParser
 from functools import partial
+from types import FrameType
 
 from chroma_feedback import consumer, helper, logger, loop, metadata, producer, reporter, systray, wording
 
@@ -9,7 +10,7 @@ INTERVAL = 0
 
 
 def cli() -> None:
-	signal.signal(signal.SIGINT, partial(destroy))
+	signal.signal(signal.SIGINT, signal_exit)
 	program = ArgumentParser(add_help = False)
 	program.add_argument('-p', '--producer', action = 'append', choices = producer.ALL, required = True)
 	program.add_argument('-c', '--consumer', action = 'append', choices = consumer.ALL, required = not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
@@ -82,7 +83,11 @@ def run(program : ArgumentParser) -> None:
 			systray.create(producer_report)
 
 
-def destroy() -> None:
+def signal_exit(signum : int, frame : FrameType):
+	graceful_exit()
+
+
+def graceful_exit() -> None:
 	logger.info(wording.get('goodbye') + wording.get('exclamation_mark'))
 	signal.signal(signal.SIGINT, signal.SIG_IGN)
-	sys.exit()
+	sys.exit(0)
