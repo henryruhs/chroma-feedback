@@ -12,8 +12,8 @@ INTERVAL = 0
 def cli() -> None:
 	signal.signal(signal.SIGINT, signal_exit)
 	program = ArgumentParser(add_help = False)
-	program.add_argument('-p', '--producer', action = 'append', choices = producers.ALL, required = True)
-	program.add_argument('-c', '--consumer', action = 'append', choices = consumers.ALL, required =not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
+	program.add_argument('-p', '--producers', action = 'append', choices = producers.ALL, required = True)
+	program.add_argument('-c', '--consumers', action = 'append', choices = consumers.ALL, required = not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
 	program.add_argument('-b', '--background-run', action = 'store_true')
 	program.add_argument('-i', '--background-interval', default = 60, type = int)
 	program.add_argument('-d', '--dry-run', action = 'store_true')
