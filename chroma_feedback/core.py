@@ -11,9 +11,11 @@ INTERVAL = 0
 
 def cli() -> None:
 	signal.signal(signal.SIGINT, signal_exit)
+	is_dry_run = helper.has_argument('-d') or helper.has_argument('--dry-run')
+
 	program = ArgumentParser(add_help = False)
 	program.add_argument('-p', '--producers', action = 'append', choices = producers.ALL, required = True)
-	program.add_argument('-c', '--consumers', action = 'append', choices = consumers.ALL, required = not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
+	program.add_argument('-c', '--consumers', action = 'append', choices = consumers.ALL, required = not is_dry_run)
 	program.add_argument('-b', '--background-run', action = 'store_true')
 	program.add_argument('-i', '--background-interval', default = 60, type = int)
 	program.add_argument('-d', '--dry-run', action = 'store_true')
@@ -34,10 +36,12 @@ def init(program : ArgumentParser) -> None:
 	application = loop.get_application()
 	timer = loop.get_timer()
 	timer.setInterval(100)
+
 	if args.background_run:
 		timer.timeout.connect(partial(background_run, program))
 	else:
 		timer.timeout.connect(partial(sys.exit))
+
 	timer.singleShot(0, partial(run, program))
 	timer.start()
 	sys.exit(application.exec())
