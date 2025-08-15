@@ -47,11 +47,11 @@ def update_menu(producer_report : List[ProducerReport]) -> None:
 	MENU.clear()
 
 	for report in producer_report:
-		item_report = MENU.addAction(report['message'])
-		item_report.setIcon(create_icon(report['status']))
+		item_report = MENU.addAction(report.get('message'))
+		item_report.setIcon(create_icon(report.get('status')))
 		item_report.setIconVisibleInMenu(True)
-		if 'url' in report and report['url']:
-			item_report.triggered.connect(partial(open_url, report['url']))
+		if report.get('url'):
+			item_report.triggered.connect(partial(open_url, report.get('url')))
 		else:
 			item_report.setDisabled(True)
 	if producer_report:

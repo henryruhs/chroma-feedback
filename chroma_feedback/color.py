@@ -26,31 +26,31 @@ def format_by_status(text : str, status : Status) -> str:
 
 def format_passed(text : str) -> str:
 	if not helper.is_windows():
-		return COLOR['green'] + text + COLOR['end']
+		return COLOR.get('green') + text + COLOR.get('end')
 	return text
 
 
 def format_started(text : str) -> str:
 	if not helper.is_windows():
-		return COLOR['blue'] + text + COLOR['end']
+		return COLOR.get('blue') + text + COLOR.get('end')
 	return text
 
 
 def format_errored(text : str) -> str:
 	if not helper.is_windows():
-		return COLOR['white'] + text + COLOR['end']
+		return COLOR.get('white') + text + COLOR.get('end')
 	return text
 
 
 def format_warned(text : str) -> str:
 	if not helper.is_windows():
-		return COLOR['yellow'] + text + COLOR['end']
+		return COLOR.get('yellow') + text + COLOR.get('end')
 	return text
 
 
 def format_failed(text : str) -> str:
 	if not helper.is_windows():
-		return COLOR['red'] + text + COLOR['end']
+		return COLOR.get('red') + text + COLOR.get('end')
 	return text
 
 

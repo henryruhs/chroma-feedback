@@ -20,6 +20,6 @@ class InstallCommand(install):
 	def run(self) -> None:
 		install.run(self)
 
-		if helper.is_linux() and helper.is_root():
+		if helper.is_linux() and os.getuid() == 0:
 			self.write_rule()
 			self.load_rule()

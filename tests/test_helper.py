@@ -3,10 +3,6 @@ import sys
 from chroma_feedback import helper
 
 
-def test_is_root() -> None:
-	assert helper.is_root() is not None
-
-
 def test_is_linux() -> None:
 	assert helper.is_linux() is not None
 
