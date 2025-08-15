@@ -48,8 +48,8 @@ Combine producers and consumers as needed:
 ```
 chroma-feedback [options]
 
--p, --producer <producer>
--c, --consumer <consumer>
+-p, --producers <producer ...>
+-c, --consumers <consumer ...>
 -i, --background-interval <background-interval>
 -b, --background-run
 -d, --dry-run
