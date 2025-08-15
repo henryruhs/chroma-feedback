@@ -1,4 +1,5 @@
 import os
+import sys
 
 from setuptools.command.install import install
 
@@ -20,6 +21,6 @@ class InstallCommand(install):
 	def run(self) -> None:
 		install.run(self)
 
-		if helper.is_linux() and os.getuid() == 0:
+		if helper.is_linux() and os.getuid() == 0:  # type:ignore[attr-defined]
 			self.write_rule()
 			self.load_rule()
