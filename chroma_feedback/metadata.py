@@ -1,6 +1,6 @@
 from typing import Optional
 
-from chroma_feedback import producer
+from chroma_feedback import producers
 
 METADATA =\
 {
@@ -8,7 +8,7 @@ METADATA =\
 	'description': 'Turn your RGB powered hardware into a status indicator for continuous integration, continuous deployment and infrastructure monitoring',
 	'version': '13.5.1',
 	'license': 'MIT',
-	'keywords': ' '.join(producer.ALL),
+	'keywords': ' '.join(producers.ALL),
 	'author': 'Henry Ruhs',
 	'author_email': 'info@henryruhs.com',
 	'url': 'https://chroma-feedback.com'

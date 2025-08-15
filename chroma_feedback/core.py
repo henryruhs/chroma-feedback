@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 from functools import partial
 from types import FrameType
 
-from chroma_feedback import consumer, helper, logger, loop, metadata, producer, reporter, systray, wording
+from chroma_feedback import consumers, helper, logger, loop, metadata, producers, reporter, systray, wording
 
 INTERVAL = 0
 
@@ -12,8 +12,8 @@ INTERVAL = 0
 def cli() -> None:
 	signal.signal(signal.SIGINT, signal_exit)
 	program = ArgumentParser(add_help = False)
-	program.add_argument('-p', '--producer', action = 'append', choices = producer.ALL, required = True)
-	program.add_argument('-c', '--consumer', action = 'append', choices = consumer.ALL, required = not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
+	program.add_argument('-p', '--producer', action = 'append', choices = producers.ALL, required = True)
+	program.add_argument('-c', '--consumer', action = 'append', choices = consumers.ALL, required =not helper.has_argument('-d') and not helper.has_argument('--dry-run'))
 	program.add_argument('-b', '--background-run', action = 'store_true')
 	program.add_argument('-i', '--background-interval', default = 60, type = int)
 	program.add_argument('-d', '--dry-run', action = 'store_true')
@@ -58,7 +58,7 @@ def background_run(program : ArgumentParser) -> None:
 
 def run(program : ArgumentParser) -> None:
 	args, _ = program.parse_known_args()
-	producer_result = producer.process(program)
+	producer_result = producers.process(program)
 
 	if not producer_result:
 		logger.error(wording.get('result_not_found') + wording.get('exclamation_mark'))
@@ -70,7 +70,7 @@ def run(program : ArgumentParser) -> None:
 		reporter.print_report(producer_report)
 
 	if not args.dry_run:
-		consumer_result = consumer.process(program, producer_report)
+		consumer_result = consumers.process(program, producer_report)
 		consumer_report = reporter.create_consumer_report(consumer_result)
 
 		if consumer_report:
