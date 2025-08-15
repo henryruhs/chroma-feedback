@@ -1,5 +1,4 @@
 import os
-import sys
 
 from setuptools.command.install import install
 
