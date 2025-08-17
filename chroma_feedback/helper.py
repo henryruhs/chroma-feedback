@@ -1,6 +1,8 @@
 import platform
 import sys
-from typing import Any, Dict, Iterable, Optional, Reversible
+from typing import Any, Dict, Iterable, List, Optional, Reversible
+
+from chroma_feedback.types import Data
 
 
 def is_linux() -> bool:
@@ -53,7 +55,7 @@ def remove_duplicate(__list__ : Iterable[Any]) -> Optional[Any]:
 	return __list__
 
 
-def deep_get(data : dict, keys : list) -> Optional[Any]:
+def deep_get(data : Data, keys : List[str]) -> Optional[Any]:
 	if keys:
 		try:
 			return deep_get(data.get(keys[0]), keys[1:])
