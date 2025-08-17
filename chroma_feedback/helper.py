@@ -1,6 +1,5 @@
 import platform
 import sys
-from functools import reduce
 from typing import Any, Dict, Iterable, Optional, Reversible
 
 
