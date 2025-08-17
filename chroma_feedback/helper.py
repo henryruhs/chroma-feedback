@@ -1,5 +1,6 @@
 import platform
 import sys
+from functools import reduce
 from typing import Any, Dict, Iterable, Optional, Reversible
 
 
@@ -51,3 +52,13 @@ def remove_duplicate(__list__ : Iterable[Any]) -> Optional[Any]:
 	if isinstance(__list__, Iterable):
 		return list(dict.fromkeys(__list__))
 	return __list__
+
+
+def deep_get(data : dict, keys : list) -> Optional[Any]:
+	if keys:
+		try:
+			return deep_get(data.get(keys[0]), keys[1:])
+		except AttributeError:
+			return None
+
+	return data

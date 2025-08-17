@@ -71,6 +71,7 @@ LogLevel = Literal\
 	'info',
 	'debug'
 ]
+
 Data : TypeAlias = Any
 Json : TypeAlias = Any
 Headers : TypeAlias = Dict[str, str]
