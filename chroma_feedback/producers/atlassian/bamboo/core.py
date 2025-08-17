@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from typing import List, Optional, cast
 
-from chroma_feedback import request
+from chroma_feedback import helper, request
 from chroma_feedback.types import Producer
 from .normalize import normalize_data, normalize_slug
 from .types import Args
@@ -39,11 +39,19 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
+		data_result = helper.deep_get(data, [ 'results', 'result' ])
 
-		if 'results' in data and 'result' in data['results']:
-			for project in data['results']['result']:
-				if 'key' in project and 'buildState' in project:
-					result.append(normalize_data(project['key'], project['buildState']))
-		elif 'key' in data and 'buildState' in data:
-			result.append(normalize_data(data['key'], data['buildState']))
+		if data_result:
+			for project in data_result:
+				data_slug = project.get('key')
+				data_status = project.get('buildState')
+
+				if data_slug and data_status:
+					result.append(normalize_data(data_slug, data_status))
+		else:
+			data_slug = data.get('key')
+			data_status = data.get('buildState')
+
+			if data_slug and data_status:
+				result.append(normalize_data(data_slug, data_status))
 	return result

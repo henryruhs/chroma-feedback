@@ -43,13 +43,22 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
+		data_account = helper.deep_get(data, [ 'project', 'accountName' ])
+		data_project = helper.deep_get(data, [ 'project', 'slug' ])
+		data_status = helper.deep_get(data, [ 'build', 'status' ])
 
-		if 'project' in data and 'accountName' in data['project'] and 'build' in data and 'status' in data['build']:
-			result.append(normalize_data(data['project']['accountName'] + '/' + data['project']['slug'], data['build']['status']))
-		if 'builds' in helper.get_first(data):
+		if data_account and data_project and data_status:
+			result.append(normalize_data(data_account + '/' + data_project, data_status))
+
+		data_builds = helper.deep_get(helper.get_first(data), [ 'builds' ])
+
+		if data_builds:
 			for project in data:
-				build = helper.get_first(project['builds'])
+				data_account = project.get('accountName')
+				data_project = project.get('slug')
+				data_build = helper.get_first(project.get('builds'))
+				data_status = helper.deep_get(data_build, [ 'status' ])
 
-				if project and 'accountName' in project and 'slug' in project and build and 'status' in build:
-					result.append(normalize_data(project['accountName'] + '/' + project['slug'], build['status']))
+				if data_account and data_project and data_status:
+					result.append(normalize_data(data_account + '/' + data_project, data_status))
 	return result

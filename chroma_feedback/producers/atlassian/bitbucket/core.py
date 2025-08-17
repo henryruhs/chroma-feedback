@@ -43,13 +43,14 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'values' in data:
-			build = helper.get_last(data['values'])
+			data_build = helper.get_last(data['values'])
 
-			if build and 'repository' in build and 'full_name' in build['repository'] and 'state' in build and 'name' in build['state']:
-				if 'result' in build['state'] and 'name' in build['state']['result']:
-					result.append(normalize_data(build['repository']['full_name'], build['state']['name'], build['state']['result']['name']))
-				else:
-					result.append(normalize_data(build['repository']['full_name'], build['state']['name'], None))
+			data_slug = helper.deep_get(data_build, [ 'repository', 'full_name' ])
+			data_status = helper.deep_get(data_build, [ 'state', 'name' ])
+			data_result = helper.deep_get(data_build, [ 'state', 'result', 'name' ])
+
+			if data_slug and data_status and data_result:
+				result.append(normalize_data(data_slug, data_status, data_result))
 	return result
 
 
@@ -65,7 +66,8 @@ def fetch_auth(host : str, username : str, password : str) -> Any:
 
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
+		access_token = data.get('access_token')
 
-		if 'access_token' in data:
-			result['access_token'] = data['access_token']
+		if access_token:
+			result['access_token'] = access_token
 	return result
