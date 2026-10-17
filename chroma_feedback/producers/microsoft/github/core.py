@@ -52,8 +52,13 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		if 'workflow_runs' in data:
 			build = helper.get_first(data['workflow_runs'])
 
-			if build and 'repository' in build and 'full_name' in build['repository'] and 'html_url' in build and 'status' in build and 'conclusion' in build:
-				result.append(normalize_data(build['repository']['full_name'], build['html_url'], build['status'], build['conclusion']))
+			data_slug = helper.deep_get(build, [ 'repository', 'full_name' ])
+			data_url = helper.deep_get(build, [ 'html_url' ])
+			data_status = helper.deep_get(build, [ 'status' ])
+			data_conclusion = helper.deep_get(build, [ 'conclusion' ])
+
+			if build and data_slug and data_url and data_status and 'conclusion' in build:
+				result.append(normalize_data(data_slug, data_url, data_status, data_conclusion))
 	return result
 
 

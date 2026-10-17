@@ -42,9 +42,14 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		if 'value' in data:
 			build = helper.get_first(data['value'])
 
-			if build and 'project' in build and 'name' in build['project'] and 'status' in build:
-				if 'result' in build:
-					result.append(normalize_data(build['project']['name'], build['status'], build['result']))
+			data_project = helper.deep_get(build, [ 'project', 'name' ])
+			data_status = helper.deep_get(build, [ 'status' ])
+
+			if build and data_project and data_status:
+				data_result = helper.deep_get(build, [ 'result' ])
+
+				if data_result:
+					result.append(normalize_data(data_project, data_status, data_result))
 				else:
-					result.append(normalize_data(build['project']['name'], build['status'], None))
+					result.append(normalize_data(data_project, data_status, None))
 	return result
