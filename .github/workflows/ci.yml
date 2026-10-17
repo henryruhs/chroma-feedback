@@ -53,7 +53,6 @@ jobs:
      MICROSOFT_GITHUB_TOKEN: ${{ secrets.MICROSOFT_GITHUB_TOKEN }}
      NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
-     UPTIMEROBOT_TOKEN: ${{ secrets.UPTIMEROBOT_TOKEN }}
      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
  report:
   needs: test
@@ -89,7 +88,6 @@ jobs:
      MICROSOFT_GITHUB_TOKEN: ${{ secrets.MICROSOFT_GITHUB_TOKEN }}
      NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
-     UPTIMEROBOT_TOKEN: ${{ secrets.UPTIMEROBOT_TOKEN }}
      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
   - run: coveralls --service github
     env:
