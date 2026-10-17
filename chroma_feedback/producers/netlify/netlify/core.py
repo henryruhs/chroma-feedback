@@ -48,7 +48,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		build = helper.get_first(data)
 
 		if build and 'name' in build and 'admin_url' in build and 'state' in build:
-			result.append(normalize_data(build['name'], build['admin_url'], build['state']))
+			result.append(normalize_data(build.get('name'), build.get('admin_url'), build.get('state')))
 	return result
 
 
@@ -64,5 +64,5 @@ def fetch_site_ids(host : str, token : str) -> List[str]:
 
 		for site in data:
 			if 'id' in site:
-				result.append(site['id'])
+				result.append(site.get('id'))
 	return result

@@ -41,7 +41,7 @@ def fetch(host : str, slug : str, api_key : str, application_key : str) -> List[
 		data = request.parse_json(response)
 
 		if 'name' in data and 'overall_state' in data:
-			result.append(normalize_data(data['name'], data['overall_state']))
+			result.append(normalize_data(data.get('name'), data.get('overall_state')))
 	return result
 
 

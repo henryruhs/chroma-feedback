@@ -28,7 +28,7 @@ def run() -> List[Producer]:
 
 	if 'access_token' in auth:
 		for slug in ARGS.get('atlassian_bitbucket_slug'):
-			result.extend(fetch(ARGS.get('atlassian_bitbucket_host'), slug, auth['access_token']))
+			result.extend(fetch(ARGS.get('atlassian_bitbucket_host'), slug, auth.get('access_token')))
 	return result
 
 
@@ -43,7 +43,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'values' in data:
-			data_build = helper.get_last(data['values'])
+			data_build = helper.get_last(data.get('values'))
 
 			data_slug = helper.deep_get(data_build, [ 'repository', 'full_name' ])
 			data_status = helper.deep_get(data_build, [ 'state', 'name' ])

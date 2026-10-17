@@ -67,7 +67,7 @@ def fetch_application_ids(host : str, token : str) -> List[str]:
 
 		for application in data:
 			if 'id' in application:
-				result.append(application['id'])
+				result.append(application.get('id'))
 	return result
 
 

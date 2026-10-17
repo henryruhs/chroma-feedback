@@ -27,13 +27,13 @@ def run() -> List[Producer]:
 	auth = fetch_auth(ARGS.get('cloudbees_codeship_host'), ARGS.get('cloudbees_codeship_username'), ARGS.get('cloudbees_codeship_password'))
 
 	if 'access_token' in auth and 'organizations' in auth:
-		for organization in auth['organizations']:
-			projects = fetch_projects(ARGS.get('cloudbees_codeship_host'), organization['uuid'], auth['access_token'])
+		for organization in auth.get('organizations'):
+			projects = fetch_projects(ARGS.get('cloudbees_codeship_host'), organization.get('uuid'), auth.get('access_token'))
 
 			if projects:
 				for project in projects:
-					if ARGS.get('cloudbees_codeship_slug') is None or project['name'] in ARGS.get('cloudbees_codeship_slug'):
-						result.extend(fetch(ARGS.get('cloudbees_codeship_host'), organization['uuid'], project['name'], project['uuid'], auth['access_token']))
+					if ARGS.get('cloudbees_codeship_slug') is None or project.get('name') in ARGS.get('cloudbees_codeship_slug'):
+						result.extend(fetch(ARGS.get('cloudbees_codeship_host'), organization.get('uuid'), project.get('name'), project.get('uuid'), auth.get('access_token')))
 	return result
 
 
@@ -48,10 +48,10 @@ def fetch(host : str, organization_id : str, project_name : str, project_id : st
 		data = request.parse_json(response)
 
 		if 'builds' in data:
-			build = helper.get_first(data['builds'])
+			build = helper.get_first(data.get('builds'))
 
 			if build and 'status' in build:
-				result.append(normalize_data(project_name, build['status']))
+				result.append(normalize_data(project_name, build.get('status')))
 	return result
 
 
@@ -66,8 +66,8 @@ def fetch_auth(host : str, username : str, password : str) -> Any:
 		data = request.parse_json(response)
 
 		if 'access_token' in data and 'organizations' in data:
-			result['token'] = data['access_token']
-			result['organizations'] = data['organizations']
+			result['token'] = data.get('access_token')
+			result['organizations'] = data.get('organizations')
 	return result
 
 
@@ -82,6 +82,6 @@ def fetch_projects(host : str, organization_id : str, token : str) -> List[Any]:
 		data = request.parse_json(response)
 
 		if 'projects' in data:
-			for project in data['projects']:
+			for project in data.get('projects'):
 				result.append(project)
 	return result

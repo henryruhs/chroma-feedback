@@ -50,7 +50,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'workflow_runs' in data:
-			build = helper.get_first(data['workflow_runs'])
+			build = helper.get_first(data.get('workflow_runs'))
 
 			data_slug = helper.deep_get(build, [ 'repository', 'full_name' ])
 			data_url = helper.deep_get(build, [ 'html_url' ])
@@ -73,9 +73,9 @@ def fetch_repository_names(host : str, username : str, token : str) -> List[str]
 		data = request.parse_json(response)
 
 		if 'items' in data:
-			for repository in data['items']:
+			for repository in data.get('items'):
 				if 'full_name' in repository:
-					result.append(repository['full_name'])
+					result.append(repository.get('full_name'))
 	return result
 
 

@@ -41,5 +41,5 @@ def fetch(host : str, slug : str, username : str, token : str) -> List[Producer]
 		data = request.parse_json(response)
 
 		if 'result' in data and 'building' in data:
-			result.append(normalize_data(slug, data['result'], data['building']))
+			result.append(normalize_data(slug, data.get('result'), data.get('building')))
 	return result

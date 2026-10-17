@@ -40,7 +40,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'value' in data:
-			build = helper.get_first(data['value'])
+			build = helper.get_first(data.get('value'))
 
 			data_project = helper.deep_get(build, [ 'project', 'name' ])
 			data_status = helper.deep_get(build, [ 'status' ])

@@ -45,7 +45,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'data' in data:
-			for monitor in data['data']:
+			for monitor in data.get('data'):
 				data_name = helper.deep_get(monitor, [ 'attributes', 'pronounceable_name' ])
 				data_url = helper.deep_get(monitor, [ 'attributes', 'url' ])
 				data_status = helper.deep_get(monitor, [ 'attributes', 'status' ])

@@ -44,8 +44,10 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 	if response and response.status_code == 200:
 		data = request.parse_json(response)
 
-		if 'buildType' in data:
-			for project in data['buildType']:
+		data_build_types = data.get('buildType')
+
+		if data_build_types:
+			for project in data_build_types:
 				data_builds = helper.deep_get(project, [ 'builds', 'build' ])
 
 				if data_builds:

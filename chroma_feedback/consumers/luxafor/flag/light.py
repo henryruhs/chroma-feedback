@@ -37,7 +37,7 @@ def process_lights(lights : List[Light], producer_report : List[ProducerReport])
 			{
 				'name': 'luxafor.flag',
 				'type': 'light',
-				'description': helper.create_description(light.info['product_string'], light.path),
+				'description': helper.create_description(light.info.get('product_string'), light.path),
 				'status': status
 			})
 	return result

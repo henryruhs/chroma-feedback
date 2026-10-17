@@ -40,16 +40,16 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'repo' in data:
-			result.append(_normalize_data(data['repo']))
+			result.append(_normalize_data(data.get('repo')))
 		elif 'repos' in data:
-			for repository in data['repos']:
+			for repository in data.get('repos'):
 				result.append(_normalize_data(repository))
 	return result
 
 
 def _normalize_data(repository : Any) -> Optional[Producer]:
 	if 'slug' in repository and 'last_build_state' in repository and 'active' in repository:
-		return normalize_data(repository['slug'], repository['last_build_state'], repository['active'])
+		return normalize_data(repository.get('slug'), repository.get('last_build_state'), repository.get('active'))
 	return None
 
 
