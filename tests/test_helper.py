@@ -12,7 +12,7 @@ def test_is_macos() -> None:
 
 
 def test_is_windows() -> None:
-	assert helper.is_linux() is not None
+	assert helper.is_windows() is not None
 
 
 def test_parse_slug() -> None:
