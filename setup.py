@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from setuptools import setup
+
 from chroma_feedback import metadata
 from chroma_feedback.install import InstallCommand
 

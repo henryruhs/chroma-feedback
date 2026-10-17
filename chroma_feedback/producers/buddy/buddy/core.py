@@ -29,13 +29,13 @@ def run() -> List[Producer]:
 
 		if 'workspace' in slug_fragment:
 			if 'project' in slug_fragment:
-				result.extend(fetch(ARGS.get('buddy_host'), slug_fragment['workspace'], slug_fragment['project'], ARGS.get('buddy_token')))
+				result.extend(fetch(ARGS.get('buddy_host'), slug_fragment.get('workspace'), slug_fragment.get('project'), ARGS.get('buddy_token')))
 			else:
-				project_names = fetch_project_names(ARGS.get('buddy_host'), slug_fragment['workspace'], ARGS.get('buddy_token'))
+				project_names = fetch_project_names(ARGS.get('buddy_host'), slug_fragment.get('workspace'), ARGS.get('buddy_token'))
 
 				if project_names:
 					for project_name in project_names:
-						result.extend(fetch(ARGS.get('buddy_host'), slug_fragment['workspace'], project_name, ARGS.get('buddy_token')))
+						result.extend(fetch(ARGS.get('buddy_host'), slug_fragment.get('workspace'), project_name, ARGS.get('buddy_token')))
 	return result
 
 
@@ -50,10 +50,10 @@ def fetch(host: str, workspace: str, project : str, token: str) -> List[Producer
 		data = request.parse_json(response)
 
 		if 'pipelines' in data:
-			pipeline = helper.get_first(data['pipelines'])
+			pipeline = helper.get_first(data.get('pipelines'))
 
 			if pipeline and 'last_execution_status' in pipeline:
-				result.append(normalize_data(workspace + '/' + project, pipeline['last_execution_status']))
+				result.append(normalize_data(workspace + '/' + project, pipeline.get('last_execution_status')))
 	return result
 
 
@@ -68,8 +68,8 @@ def fetch_project_names(host : str, workspace : str, token : str) -> List[str]:
 		data = request.parse_json(response)
 
 		if 'projects' in data:
-			for project in data['projects']:
+			for project in data.get('projects'):
 				if 'name' in project:
-					result.append(project['name'])
+					result.append(project.get('name'))
 	return result
 

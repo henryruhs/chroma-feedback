@@ -45,7 +45,7 @@ def process_groups(groups : List[Group], producer_report : List[ProducerReport])
 
 
 def set_group(group : Group, color_config : ColorConfig) -> None:
-	get_api(None).set_group(group['name'],
+	get_api(None).set_group(group.get('name'),
 	{
 		'hue': color_config.get('hue'),
 		'sat': color_config.get('saturation')[1],
@@ -56,7 +56,7 @@ def set_group(group : Group, color_config : ColorConfig) -> None:
 
 
 def register_reset_group(group : Group) -> None:
-	atexit.register(partial(get_api(None).set_group, group['name'],
+	atexit.register(partial(get_api(None).set_group, group.get('name'),
 	{
 		'on': False
 	}))

@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from typing import List, Optional, cast
 
-from chroma_feedback import request
+from chroma_feedback import helper, request
 from chroma_feedback.types import Headers, Producer
 from .normalize import normalize_data
 from .types import Args
@@ -45,9 +45,13 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'data' in data:
-			for monitor in data['data']:
-				if 'attributes' in monitor and 'pronounceable_name' in monitor['attributes'] and 'url' in monitor['attributes'] and 'status' in monitor['attributes']:
-					result.append(normalize_data(monitor['attributes']['pronounceable_name'], monitor['attributes']['url'], monitor['attributes']['status']))
+			for monitor in data.get('data'):
+				data_name = helper.deep_get(monitor, [ 'attributes', 'pronounceable_name' ])
+				data_url = helper.deep_get(monitor, [ 'attributes', 'url' ])
+				data_status = helper.deep_get(monitor, [ 'attributes', 'status' ])
+
+				if data_name and data_url and data_status:
+					result.append(normalize_data(data_name, data_url, data_status))
 	return result
 
 

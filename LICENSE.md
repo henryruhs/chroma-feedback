@@ -1,3 +1,3 @@
 MIT license
 
-Copyright (c) 2025 Henry Ruhs
+Copyright (c) 2026 Henry Ruhs

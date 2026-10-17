@@ -6,6 +6,8 @@ import pytest
 from chroma_feedback.producers.atlassian import bitbucket
 from chroma_feedback.types import Status
 
+pytestmark = pytest.mark.skipif(bool(os.environ.get('CI')), reason = 'external integration test disabled')
+
 
 def test_run_one() -> None:
 	if os.environ.get('ATLASSIAN_BITBUCKET_USERNAME') and os.environ.get('ATLASSIAN_BITBUCKET_PASSWORD'):

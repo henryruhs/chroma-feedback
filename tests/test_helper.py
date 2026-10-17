@@ -82,3 +82,35 @@ def test_remove_duplicate() -> None:
 		2,
 		3
 	]
+
+
+def test_deep_get() -> None:
+	data =\
+	{
+		'one':
+		{
+			'two': 'two',
+			'three':
+			{
+				'four': 'four'
+			}
+		}
+	}
+
+	assert helper.deep_get(data, [ 'one', 'two' ]) == 'two'
+	assert helper.deep_get(data, [ 'one', 'three', 'four' ]) == 'four'
+	assert helper.deep_get(data, [ 'one' ]) ==\
+	{
+		'two': 'two',
+		'three':
+		{
+			'four': 'four'
+		}
+	}
+	assert helper.deep_get(data, [ 'one', 'three' ]) ==\
+	{
+		'four': 'four'
+	}
+	assert helper.deep_get(data, [ 'one', 'three', 'four' ]) == 'four'
+	assert helper.deep_get(data, [ 'one', 'invalid' ]) is None
+	assert helper.deep_get(data, [ 'invalid' ]) is None

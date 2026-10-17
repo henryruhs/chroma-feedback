@@ -20,7 +20,7 @@ def get_lights() -> List[Light]:
 def filter_lights(lights : List[Light], light_serials : List[str]) -> List[Light]:
 	if light_serials:
 		for light in copy.copy(lights):
-			if light.info['serial_number'] not in light_serials:
+			if light.info.get('serial_number') not in light_serials:
 				lights.remove(light)
 	return lights
 
@@ -37,7 +37,7 @@ def process_lights(lights : List[Light], producer_report : List[ProducerReport])
 			{
 				'name': 'thingm.blink1',
 				'type': 'light',
-				'description': helper.create_description(light.info['product_string'], light.info['serial_number']),
+				'description': helper.create_description(light.info.get('product_string'), light.info.get('serial_number')),
 				'status': status
 			})
 	return result

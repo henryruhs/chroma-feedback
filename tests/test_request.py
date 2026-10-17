@@ -26,18 +26,18 @@ def test_parse_json() -> None:
 	})
 	data = request.parse_json(response)
 
-	assert data['id']
+	assert data.get('id')
 
 
 def test_create_basic_auth_headers() -> None:
 	headers = request.create_basic_auth_headers('abc', '12345')
 
-	assert headers['Accept'] == 'application/json'
-	assert headers['Authorization'] == 'Basic YWJjOjEyMzQ1'
+	assert headers.get('Accept') == 'application/json'
+	assert headers.get('Authorization') == 'Basic YWJjOjEyMzQ1'
 
 
 def test_create_bearer_auth_headers() -> None:
 	headers = request.create_bearer_auth_headers('12345')
 
-	assert headers['Accept'] == 'application/json'
-	assert headers['Authorization'] == 'Bearer 12345'
+	assert headers.get('Accept') == 'application/json'
+	assert headers.get('Authorization') == 'Bearer 12345'

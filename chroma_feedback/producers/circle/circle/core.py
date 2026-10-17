@@ -52,9 +52,9 @@ def fetch(host : str, pipeline_id : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'items' in data:
-			for build in data['items']:
+			for build in data.get('items'):
 				if 'project_slug' in build and 'name' in build and 'status' in build:
-					result.append(normalize_data(build['project_slug'] + '/' + build['name'], build['status']))
+					result.append(normalize_data(build.get('project_slug') + '/' + build.get('name'), build.get('status')))
 	return result
 
 
@@ -71,10 +71,10 @@ def fetch_pipeline_ids(host : str, organization : str, slug : str, token : str) 
 		data = request.parse_json(response)
 
 		if 'items' in data:
-			pipeline = helper.get_first(data['items'])
+			pipeline = helper.get_first(data.get('items'))
 
 			if pipeline and 'id' in pipeline:
-				result.append(pipeline['id'])
+				result.append(pipeline.get('id'))
 	return result
 
 

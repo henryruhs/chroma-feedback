@@ -48,7 +48,7 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 
 		if 'monitors' in data:
-			for monitor in data['monitors']:
+			for monitor in data.get('monitors'):
 				if 'friendly_name' in monitor and 'url' in monitor and 'status' in monitor:
-					result.append(normalize_data(monitor['friendly_name'], monitor['url'], monitor['status']))
+					result.append(normalize_data(monitor.get('friendly_name'), monitor.get('url'), monitor.get('status')))
 	return result

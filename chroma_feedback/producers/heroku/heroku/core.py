@@ -47,8 +47,11 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 		data = request.parse_json(response)
 		build = helper.get_last(data)
 
-		if build and 'app' in build and 'name' in build['app'] and 'status' in build:
-			result.append(normalize_data(build['app']['name'], build['status']))
+		data_name = helper.deep_get(build, [ 'app', 'name' ])
+		data_status = helper.deep_get(build, [ 'status' ])
+
+		if build and data_name and data_status:
+			result.append(normalize_data(data_name, data_status))
 	return result
 
 
@@ -64,7 +67,7 @@ def fetch_application_ids(host : str, token : str) -> List[str]:
 
 		for application in data:
 			if 'id' in application:
-				result.append(application['id'])
+				result.append(application.get('id'))
 	return result
 
 

@@ -55,7 +55,7 @@ def fetch(host : str, slug : str, pipeline_id : str, token : str) -> List[Produc
 
 		for build in data:
 			if 'name' in build and 'web_url' in build and 'status' in build:
-				result.append(normalize_data(slug + '/' + build['name'], build['web_url'], build['status']))
+				result.append(normalize_data(slug + '/' + build.get('name'), build.get('web_url'), build.get('status')))
 	return result
 
 
@@ -71,7 +71,7 @@ def fetch_project_ids(host : str, token : str) -> List[str]:
 
 		for project in data:
 			if 'id' in project:
-				result.append(str(project['id']))
+				result.append(str(project.get('id')))
 	return result
 
 
@@ -87,7 +87,7 @@ def fetch_pipeline_ids(host : str, slug : str, token : str) -> List[str]:
 		pipeline = helper.get_first(data)
 
 		if pipeline and 'id' in pipeline:
-			result.append(str(pipeline['id']))
+			result.append(str(pipeline.get('id')))
 	return result
 
 

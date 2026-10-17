@@ -6,6 +6,7 @@ from typing import Any
 import pytest
 
 from chroma_feedback import producers
+from chroma_feedback.producers.travis import travis
 
 
 def test_process(mocker : Any) -> None:
@@ -18,7 +19,7 @@ def test_process(mocker : Any) -> None:
 		sys.argv.append('henryruhs/chroma-feedback')
 		sys.argv.append('--travis-token')
 		sys.argv.append(os.environ.get('TRAVIS_TOKEN'))
-		process = mocker.spy(producers.travis.travis, 'run')
+		process = mocker.spy(travis, 'run')
 		producers.process(program)
 
 		assert process.call_count == 1

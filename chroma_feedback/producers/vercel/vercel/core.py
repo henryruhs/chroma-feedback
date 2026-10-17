@@ -54,8 +54,8 @@ def fetch(host : str, slug : str, token : str) -> List[Producer]:
 
 
 def _normalize_data(project : Any) -> Optional[Producer]:
-	deployment = helper.get_first(project['latestDeployments'])
+	deployment = helper.get_first(project.get('latestDeployments'))
 
 	if 'readyState' in deployment:
-		return normalize_data(project['name'], deployment['readyState'])
+		return normalize_data(project.get('name'), deployment.get('readyState'))
 	return None

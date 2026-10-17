@@ -71,19 +71,19 @@ def register_reset_device(device : Device) -> None:
 
 
 def create_image(device : Device, report : ProducerReport) -> bytes:
-	color_config = color.get_by_status(report['status'])
+	color_config = color.get_by_status(report.get('status'))
 	image_config = device.key_image_format()
 	transform = create_transform(image_config)
-	font_size = image_config['size'][0] / 8
-	pixmap = QPixmap(*image_config['size'])
+	font_size = image_config.get('size')[0] / 8
+	pixmap = QPixmap(*image_config.get('size'))
 	pixmap.fill(Qt.GlobalColor.transparent)
 	painter = QPainter(pixmap)
 	painter.setFont(create_font(int(font_size * 2.75), QFont.Weight.Bold))
 	painter.setPen(QPen(QColor(*color_config.get('rgb'))))
-	painter.drawText(QRect(0, int(font_size * 1.5), *image_config['size']), Qt.AlignmentFlag.AlignCenter, report['symbol'])
+	painter.drawText(QRect(0, int(font_size * 1.5), *image_config.get('size')), Qt.AlignmentFlag.AlignCenter, report.get('symbol'))
 	painter.setFont(create_font(int(font_size * 0.875), QFont.Weight.Bold))
 	painter.setPen(QPen(Qt.GlobalColor.white))
-	painter.drawText(QRect(0, int(font_size * -1.875), *image_config['size']), Qt.AlignmentFlag.AlignCenter, report['name'].split('.')[-1].upper())
+	painter.drawText(QRect(0, int(font_size * -1.875), *image_config.get('size')), Qt.AlignmentFlag.AlignCenter, report.get('name').split('.')[-1].upper())
 	painter.end()
 	return pixmap_to_bytes(pixmap.transformed(transform), image_config)
 
@@ -91,12 +91,12 @@ def create_image(device : Device, report : ProducerReport) -> bytes:
 def create_transform(image_config : ImageConfig) -> QTransform:
 	transform = QTransform()
 
-	if image_config['flip'][0]:
+	if image_config.get('flip')[0]:
 		transform.scale(-1, 1)
-	if image_config['flip'][1]:
+	if image_config.get('flip')[1]:
 		transform.scale(1, -1)
-	if image_config['rotation']:
-		transform.rotate(image_config['rotation'])
+	if image_config.get('rotation'):
+		transform.rotate(image_config.get('rotation'))
 	return transform
 
 
@@ -111,5 +111,5 @@ def pixmap_to_bytes(pixmap : QPixmap, image_config : ImageConfig) -> bytes:
 	byte_array = QtCore.QByteArray()
 	buffer = QtCore.QBuffer(byte_array)
 	buffer.open(QtCore.QIODevice.OpenModeFlag.WriteOnly)
-	pixmap.save(buffer, image_config['format'])
+	pixmap.save(buffer, image_config.get('format'))
 	return byte_array.data()
