@@ -10,8 +10,6 @@ GROUPS : List[Group] = []
 
 
 def get_groups(group_names : List[str]) -> List[Group]:
-	global GROUPS
-
 	if not GROUPS:
 		if group_names:
 			for group_name in group_names:

@@ -9,8 +9,6 @@ LIGHTS : List[Light] = []
 
 
 def get_lights(light_ips : List[str]) -> List[Light]:
-	global LIGHTS
-
 	if not LIGHTS:
 		for light_ip in light_ips:
 			LIGHTS.append(get_api(light_ip))

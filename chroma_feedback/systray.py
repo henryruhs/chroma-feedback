@@ -26,8 +26,6 @@ def create(producer_report : List[ProducerReport]) -> None:
 
 
 def update(producer_report : List[ProducerReport]) -> None:
-	global SYSTRAY, MENU
-
 	status = reporter.resolve_report_status(producer_report)
 
 	update_menu(producer_report)
@@ -36,14 +34,10 @@ def update(producer_report : List[ProducerReport]) -> None:
 
 
 def is_created() -> bool:
-	global SYSTRAY, MENU
-
 	return SYSTRAY is not None and MENU is not None
 
 
 def update_menu(producer_report : List[ProducerReport]) -> None:
-	global MENU
-
 	MENU.clear()
 
 	for report in producer_report:
